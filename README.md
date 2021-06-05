@@ -19,7 +19,7 @@ npm install
 and then you can run the project by,
 
 ```bash
-npm install
+ng serve
 ```  
 You can see the deployed project on
 <https://tutorx-frontend.herokuapp.com/>
