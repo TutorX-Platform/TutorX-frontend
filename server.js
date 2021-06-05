@@ -13,7 +13,7 @@ app.use(requireHTTPS);
 app.use(express.static('./dist/tutor-x-frontend'));
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: 'dist/tutor-x-frontend/'}),
+  res.sendFile('./dist/tutor-x-frontend/index.html'),
 );
 
 app.listen(process.env.PORT || 8080);
