@@ -8,14 +8,16 @@ import {DummyService} from "./services/dummy.service";
 })
 export class AppComponent implements OnInit {
   title = 'tutorX-frontend';
+  test: any;
 
   constructor(private dummyService: DummyService) {
   }
 
   ngOnInit(): void {
     this.dummyService.getTestItems().subscribe(
-        (res: any) => {
-        console.log(res);
+      (res: any) => {
+        console.log(res[0].test)
+        this.test = res[0].test;
       }
     );
   }
