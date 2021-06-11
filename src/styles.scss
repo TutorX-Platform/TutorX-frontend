@@ -1,0 +1,108 @@
+/* Poppins */
+
+@font-face {
+    font-family: Poppins-normal;
+    src: url(assets/fonts/poppins/Poppins-Regular.ttf) format('truetype');
+}
+
+//font weight 600
+@font-face {
+    font-family: Poppins-semiBold;
+    src: url(assets/fonts/poppins/Poppins-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Poppins-bold;
+    src: url(assets/fonts/poppins/Poppins-Bold.ttf) format('truetype');
+}
+
+// Inter
+
+@font-face {
+    font-family: Inter-normal;
+    src: url(assets/fonts/inter/Inter-Regular.ttf) format('truetype');
+}
+
+//font weight 500
+@font-face {
+    font-family: Inter-medium;
+    src: url(assets/fonts/inter/Inter-Medium.ttf) format('truetype');
+}
+
+//font weight 600
+@font-face {
+    font-family: Inter-semiBold;
+    src: url(assets/fonts/inter/Inter-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Inter-bold;
+    src: url(assets/fonts/inter/Inter-Bold.ttf) format('truetype');
+}
+
+h1 {
+    font-family: Poppins-semiBold;
+    font-size: 67px;
+    line-height: 100px;
+}
+
+h2 {
+    font-family: Poppins-bold;
+    font-size: 51px;   
+    line-height: 77px;
+}
+
+h3 {
+    font-family: Poppins-semiBold;
+    font-size: 38px;
+    line-height: 57px;
+}
+
+h3.normal {
+    font-family: Poppins-normal;
+    font-size: 38px;
+    line-height: 57px;
+}
+
+h4 {
+    font-family: Poppins-semiBold;
+    font-size: 28px;
+    line-height: 42px;
+}
+
+h4.normal {
+    font-family: Poppins-normal;
+    font-size: 28px;
+    line-height: 42px;
+}
+
+h5 {
+    font-family: Poppins-semiBold;
+    font-size: 21px;
+    line-height: 32px;
+}
+
+p{
+    font-family: Inter-normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+p.bold{
+    font-family: Inter-bold;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+p.medium{
+    font-family: Inter-semiBold;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+p.italic{
+    font-family: Inter-semiBold;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 24px;
+}
