@@ -1,0 +1,20 @@
+.container{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(51,51,51,0.7);
+    // z-index: 10;
+}
+
+.card{
+    padding: 10px;
+    text-align: center;
+}
+
+.title{
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 64px;
+    text-align: center;
+}

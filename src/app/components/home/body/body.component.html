@@ -1,0 +1,56 @@
+<div fxLayout="column" style="background-color: rgb(255, 255, 255);" style="height: 400px; background: #F2F0FE;" fxLayoutAlign="space-around center" fxShow="true" fxHide.lt-sm="true">
+    <div fxLayout="row" fxLayoutAlign="center strech">
+        <div style="width: 45%;">
+            <h2>Get Instant Help</h2>
+            <h5>for our student comunity</h5>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <button mat-raised-button style="margin-top: 10px; background-color: #27A47E;">
+                Get help
+                <mat-icon class="material-icons-outlined">
+                    supervised_user_circle
+                    </mat-icon>
+            </button>
+        </div>
+        <!-- <div style="width: 45%;">             -->
+            <img src="../../../../assets/images/student2.png" alt="" width="400px" height="200px"> 
+        <!-- </div> -->
+    </div>
+</div>
+
+<div fxLayout="column" style="background-color: rgb(255, 255, 255);" style="height: 600px; background: #F2F0FE;" fxLayoutAlign="space-around center" fxShow="true" fxHide.gt-xs="true">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <img src="../../../../assets/images/student2.png" alt="" width="240px" height="240px">        
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div style="width: 90%;">
+            <h3>Get Instant Help</h3>
+            <h5>for our student comunity</h5>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+        </div>
+    </div>
+</div>
+
+<div fxLayout="column" style="background-color: rgb(255, 255, 255);">
+    <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
+        <div style="text-align: center; width: 50%;" >
+            <h2>Tailor-made features</h2>
+            <h5>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</h5>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.gt-xs="true">
+
+        <div style="text-align: center; width: 90%;" >
+            <h4>Tailor-made features</h4>
+            <p>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="center center">
+        <div fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="33%" *ngFor="let detail of details">
+            <div class="card">                
+                <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
+                <h5>{{detail.title}}</h5>
+                <p>{{detail.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>

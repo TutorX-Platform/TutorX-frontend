@@ -44,60 +44,70 @@ h1 {
     font-family: Poppins-semiBold;
     font-size: 67px;
     line-height: 100px;
+    margin: 0 ;
 }
 
 h2 {
     font-family: Poppins-bold;
     font-size: 51px;   
     line-height: 77px;
+    margin: 0;
 }
 
 h3 {
     font-family: Poppins-semiBold;
     font-size: 38px;
     line-height: 57px;
+    margin: 0 ;
 }
 
 h3.normal {
     font-family: Poppins-normal;
     font-size: 38px;
     line-height: 57px;
+    margin: 0 ;
 }
 
 h4 {
     font-family: Poppins-semiBold;
     font-size: 28px;
     line-height: 42px;
+    margin: 0 ;
 }
 
 h4.normal {
     font-family: Poppins-normal;
     font-size: 28px;
     line-height: 42px;
+    margin: 0 ;
 }
 
 h5 {
     font-family: Poppins-semiBold;
     font-size: 21px;
     line-height: 32px;
+    margin: 0 ;
 }
 
 p{
     font-family: Inter-normal;
     font-size: 16px;
     line-height: 24px;
+    margin: 0 ;
 }
 
 p.bold{
     font-family: Inter-bold;
     font-size: 16px;
     line-height: 24px;
+    margin: 0 ;
 }
 
 p.medium{
     font-family: Inter-semiBold;
     font-size: 16px;
     line-height: 24px;
+    margin: 0 ;
 }
 
 p.italic{
@@ -105,6 +115,7 @@ p.italic{
     font-style: italic;
     font-size: 16px;
     line-height: 24px;
+    margin: 0;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

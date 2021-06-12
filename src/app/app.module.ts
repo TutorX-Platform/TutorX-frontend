@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { BodyComponent } from './components/home/body/body.component';
 
 
 
@@ -23,6 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   declarations: [
     AppComponent,
     NavBarComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
