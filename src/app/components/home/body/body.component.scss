@@ -18,3 +18,59 @@
     line-height: 64px;
     text-align: center;
 }
+
+.banner-web {
+    background-color: rgb(255, 255, 255);
+    background: #F2F0FE;
+
+    .details-container {
+        width: 45%;
+        margin-top: 105px; 
+        margin-bottom: 64.5px;
+    }
+
+    .image-container {
+        margin-top: 110px;
+    }
+
+    .button {
+        margin-top: 10px; 
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+        width: 30%;
+    }
+}
+
+.banner-mobile {
+    background-color: rgb(255, 255, 255);
+    background: #F2F0FE;
+
+    .details-container {
+        width: 90%; 
+        margin-bottom: 20px;
+    }
+
+    .image-container {
+        margin-top: 80px;
+    }
+
+    .button {
+        margin-top: 10px; 
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+        width: 100%;
+    }
+}
+
+.features-container{
+    background-color: #FFFFFF;
+
+    .heading-container-web{
+        margin-top: 60px;
+        text-align: center; width: 50%;
+    }
+
+    .heading-container-mobile{
+        margin-top: 34px;
+        text-align: center; 
+        width: 90%;
+    }
+}

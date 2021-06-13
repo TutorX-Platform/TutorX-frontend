@@ -1,12 +1,24 @@
-.example-icon {
-    padding: 0 14px;
-  }
-    
 .example-spacer {
   flex: 1 1 auto;
 }
-  
-.nav-bar{
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);   
+
+.nav-bar-container{
+  position: fixed;
+  width: 100%;
   z-index: 1;
+
+  .nav-bar{
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);   
+    z-index: 1;
+  }
+}
+
+.button-signUp{
+  border: 1px solid #7F6EF0 !important; 
+  color: #7F6EF0;
+}
+
+.button-login{
+  background-color: #7F6EF0;
+  color: white;
 }
