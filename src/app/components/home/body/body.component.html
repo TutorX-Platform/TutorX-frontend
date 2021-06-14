@@ -41,17 +41,17 @@
 <div fxLayout="column" class="features-container">
     <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
         <div class="heading-container-web" >
-            <h2>Tailor-made features</h2>
+            <h2 class="manrope">Tailor-made features</h2>
             <h5>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</h5>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.gt-xs="true">
+    <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
         <div class="heading-container-mobile">
             <h4>Tailor-made features</h4>
             <p>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="center center">
+    <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="center center" class="card-container">
         <div fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="33%" *ngFor="let detail of details">
             <div class="card">                
                 <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
@@ -61,3 +61,78 @@
         </div>
     </div>
 </div>
+
+<!-- client-web-->
+<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-sm="true">
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
+        <h2 class="manrope">Our clients speak</h2>
+    </div>
+    <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
+            <div class="rectangle">
+                <p>{{feedback[selectedNumber].title1}}</p>
+                <p>{{feedback[selectedNumber].content1}}</p>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
+                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <p>{{feedback[selectedNumber].name1}}</p>
+                    <p>{{feedback[selectedNumber].designation1}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
+            <div class="rectangle">
+                <p>{{feedback[selectedNumber].title2}}</p>
+                <p>{{feedback[selectedNumber].content2}}</p>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
+                <img src="{{feedback[selectedNumber].image2}}" alt="Avatar" class="avatar">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <p>{{feedback[selectedNumber].name2}}</p>
+                    <p>{{feedback[selectedNumber].designation2}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-icon *ngIf="selectedNumber == 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">radio_button_unchecked</mat-icon>
+        <mat-icon *ngIf="selectedNumber == 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">radio_button_unchecked</mat-icon>
+        <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
+    </div>    
+</div>
+
+<!-- client-mobile -->
+<div class="client-container-mobile" fxLayout="column" fxShow="true" fxHide.gt-xs="true">
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
+        <h4>Our clients speak</h4>
+    </div>
+    <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
+            <div class="rectangle">
+                <p>{{feedback[selectedNumber].title1}}</p>
+                <p>{{feedback[selectedNumber].content1}}</p>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
+                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <p>{{feedback[selectedNumber].name1}}</p>
+                    <p>{{feedback[selectedNumber].designation1}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-icon *ngIf="selectedNumber == 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">radio_button_unchecked</mat-icon>
+        <mat-icon *ngIf="selectedNumber == 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">radio_button_unchecked</mat-icon>
+        <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
+        <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
+    </div>    
+</div>
+    
