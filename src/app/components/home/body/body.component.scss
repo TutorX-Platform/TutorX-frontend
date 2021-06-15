@@ -187,3 +187,74 @@
         }
     }
 }
+
+.tutor-feedback{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 20%;
+  padding-right: 20%;
+  background: #F2F0FE;
+
+  .feedback-container{
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+
+    .text-container{
+        padding: 10px;
+    }
+  } 
+  .avatar-container{
+      margin-top: 36px;
+    .avatar {
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        }
+    }
+}
+
+.tutor-feedback-mobile{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 2%;
+    padding-right: 2%;
+    background: #F2F0FE;
+  
+    .feedback-container{
+      background: #FFFFFF;
+      padding: 20px;
+      border-radius: 5px;
+  
+      .text-container{
+          padding: 10px;
+      }
+    } 
+    .avatar-container{
+        margin-top: 36px;
+      .avatar {
+          vertical-align: middle;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          }
+      }
+  }
+
+.get-help{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: #F6F7FB;
+
+    .button {
+        margin-top: 10px; 
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+    }
+}
+
+.footer{
+    background: #222D34;
+    height: 300px;
+}
+
