@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BodyComponent } from './components/home/body/body.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -37,6 +38,7 @@ import { BodyComponent } from './components/home/body/body.component';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
