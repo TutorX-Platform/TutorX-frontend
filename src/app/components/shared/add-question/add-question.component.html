@@ -1,0 +1,103 @@
+<!-- web -->
+<form [formGroup]="loginForm" (submit)="hello()">
+<div fxLayout="column" fxShow="true" fxHide.lt-sm="true" class="form-container">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="title-container">
+        <div fxLayout="column" class="heading-container">
+            <h4>New Question</h4>
+            <div fxLayout=row>
+                <p>Need clarifications</p>                
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px" class="button-container">
+            <button href="#" mat-stroked-button class="button-cancel" >
+                Cancel
+              </button>
+              <button href="#" mat-stroked-button class="button-done" type="submit">
+                Done
+              </button>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center stretch" class="form-field-container">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Question Title
+                  </mat-label>
+                  <input matInput formControlName="questionTitle" required>
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutGap="10px" style="width:150%">
+                  <mat-form-field appearance="outline" style="width: 50%;">
+                    <mat-label> Subject
+                    </mat-label>
+                    <input matInput formControlName="subject" type="password">
+                  </mat-form-field>
+                  <mat-form-field class="form-field" appearance="outline" style="width: 50%;">
+                    <mat-label> Due Date
+                    </mat-label>
+                    <input matInput formControlName="dueDate" required type="date">
+                  </mat-form-field>
+                </div>                
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Tag
+                  </mat-label>
+                  <input matInput formControlName="tag">
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Description
+                  </mat-label>
+                  <input matInput formControlName="tag">
+                </mat-form-field>
+              </div>
+    </div>
+</div>
+</form>
+
+<!-- Mobile -->
+<form [formGroup]="loginForm" (submit)="hello()">
+  <div fxLayout="column" fxHide="true" class="form-container">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="title-container">
+          <div fxLayout="column" class="heading-container">
+              <h4>New Question</h4>
+              <div fxLayout=row>
+                  <p>Need clarifications</p>                
+              </div>
+          </div>
+          <div fxLayout="row" fxLayoutGap="10px" class="button-container">
+              <button href="#" mat-stroked-button class="button-cancel" >
+                  Cancel
+                </button>
+                <button href="#" mat-stroked-button class="button-done" type="submit">
+                  Done
+                </button>
+          </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center stretch" class="form-field-container">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Question Title
+                    </mat-label>
+                    <input matInput formControlName="questionTitle" required>
+                  </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 50%;">
+                      <mat-label> Subject
+                      </mat-label>
+                      <input matInput formControlName="subject" type="password">
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearance="outline">
+                      <mat-label> Due Date
+                      </mat-label>
+                      <input matInput formControlName="dueDate" required type="date">
+                    </mat-form-field>               
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Tag
+                    </mat-label>
+                    <input matInput formControlName="tag">
+                  </mat-form-field>
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Description
+                    </mat-label>
+                    <input matInput formControlName="tag">
+                  </mat-form-field>
+                </div>
+      </div>
+  </div>
+  </form>

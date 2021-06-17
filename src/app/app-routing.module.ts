@@ -3,10 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {SignInComponent} from './components/auth/sign-in/sign-in.component';
 import {BodyComponent} from "./components/home/body/body.component";
 import {DummyComponent} from "./components/test/dummy/dummy.component";
+import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 
 const routes: Routes = [
   {path: '', component: BodyComponent},
   {path: 'sign-in', component: SignInComponent},
+  {path: 'tutor', component: TutorDashboardComponent},
   {path: 'dummy', component: DummyComponent},
 ];
 

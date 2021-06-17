@@ -1,0 +1,26 @@
+.form-container{
+    .title-container{
+        margin-left: 10%;
+        margin-right: 10%;
+        .heading-container{
+
+        }
+        .button-container{
+            .button-cancel{
+                // border: 1px solid #7F6EF0 !important; 
+                // color: #7F6EF0;
+            }
+              
+            .button-done{
+                background-color: #7F6EF0;
+                color: white;
+            }
+        }
+    }
+    .form-field-container{
+        .form-field{
+            width: 150%;
+        }
+
+    }
+}
