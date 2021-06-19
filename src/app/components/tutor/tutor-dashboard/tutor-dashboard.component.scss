@@ -1,0 +1,75 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .nav-bar-container{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+  
+    .nav-bar{
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);   
+      z-index: 1;
+    }
+  }
+  
+  .button-signUp{
+    border: 1px solid #7F6EF0 !important; 
+    color: #7F6EF0;
+  }
+  
+  .button-login{
+    background-color: #7F6EF0;
+    color: white;
+  }
+
+  textarea:focus, input:focus{
+    outline: none;
+}
+
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .avatar {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    }
+
+.icon{
+    color: gray;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.icon-container{    
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    display: table;
+}
