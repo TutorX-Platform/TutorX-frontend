@@ -20,6 +20,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -28,6 +31,7 @@ import {AuthService} from "./services/auth.service";
 import { DummyComponent } from './components/test/dummy/dummy.component';
 import { AddQuestionComponent } from './components/shared/add-question/add-question.component';
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
+import { QuestionCardComponent } from './components/tutor/question-card/question-card.component';
 
 
 @NgModule({
@@ -39,6 +43,7 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
     DummyComponent,
     AddQuestionComponent,
     TutorDashboardComponent,
+    QuestionCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,9 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
     FormsModule, 
     ReactiveFormsModule,
     AppRoutingModule,
