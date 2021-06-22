@@ -19,13 +19,18 @@
         </a>
       </div>
       <span class="example-spacer"></span>
-      <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%" style="margin-right: 3%;">
+      <div *ngIf="authService.userData==null" fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%"
+           style="margin-right: 3%;">
         <a href="#" mat-stroked-button class="button-signUp" (click)="onSignUp()">
           Sign up
         </a>
         <a href="#" mat-stroked-button class="button-login" (click)="onLogin()">
           Login
         </a>
+      </div>
+
+      <div *ngIf="authService.userData">
+          put user profile image
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

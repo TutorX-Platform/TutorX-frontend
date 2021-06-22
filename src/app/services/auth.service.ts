@@ -32,7 +32,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['sign-in']);
+          this.router.navigate(['dummy']);
         });
         this.SetUserData(result.user);
       }).catch((error) => {

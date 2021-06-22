@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
-    private authService: AuthService,
+    public authService: AuthService,
   ) {
   }
 
