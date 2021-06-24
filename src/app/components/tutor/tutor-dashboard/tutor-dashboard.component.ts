@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { Question } from 'src/app/models/question';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tutor-dashboard',
@@ -11,10 +12,26 @@ import { Question } from 'src/app/models/question';
 })
 export class TutorDashboardComponent implements OnInit {
 
+  contactForm!: FormGroup;
+ 
+  countries = [
+    { id: 1, name: "United States" },
+    { id: 2, name: "Australia" },
+    { id: 3, name: "Canada" },
+    { id: 4, name: "Brazil" },
+    { id: 5, name: "England" }
+  ];
+
   questions : Question[] = [];
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private fb:FormBuilder
+    ) { }
   showFiller = false;
   ngOnInit(): void {
+    this.contactForm = this.fb.group({
+      country: [null]
+    });
     this.questions = [
       {
         title: "Question Title",
