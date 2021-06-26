@@ -2,46 +2,36 @@
     <mat-card-title>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <h4>{{title}}</h4>
-            <span *ngIf="status === 'open'" style="padding: 2px 8px 4px;background: #EBECEE; font-size: 12px; border-radius: 4px;">Open</span>
-            <span *ngIf="status === 'inProgress'"
-            style="
-                padding: 2px 8px 4px;
-                width: 82px;
-                height: 24px;background: #FFFFFF;
-                border: 1px solid #3E59B8;
-                box-sizing: border-box;
-                border-radius: 4px;
-                font-size: 12px;
-                color: #3E59B8;
-                ">In Progress</span>
+            <span *ngIf="status === 'open'" class="status-open">Open</span>
+            <span *ngIf="status === 'inProgress'" class="status-inProgress">In Progress</span>
         </div>
         <div fxLayout="row" fxLayoutGap="5px">
             <div *ngFor="let subject of subjects">
-                <span style="padding: 5px;background: #F2F0FE; font-size: 12px; border-radius: 4px; color: #7F6EF0;">{{subject}}</span>
+                <span class="subjects">{{subject}}</span>
             </div>
         </div>
-        <div fxLayout="row" style="color: #5B6469; font-size: 12px; margin-top: 5px;">
+        <div fxLayout="row" class="date">
             Due date &nbsp; {{dueDate}}
         </div>
         <mat-card-content style="margin-top: 10px;">
-            <div style="font-size:16px">{{descriptionTitle}}</div>
-            <div style="font-size:14px; margin-top: 5px; color: #5B6469;">
+            <div class="title">{{descriptionTitle}}</div>
+            <div class="description">
                 {{description}}
             </div>
         </mat-card-content>
         <mat-divider></mat-divider>
-        <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-top: 10px;">
-            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" style="padding-left: 10px;">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="bottom-row">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" class="left-container">
                 <div *ngFor='let image of images'>
                     <img src="{{image}}" alt="Avatar" class="avatar">
                 </div>
-                <div style="font-size: 12px; color: #5B6469;">Viewed By &nbsp; {{viewedByAmount}}+ Tutors</div>
+                <div class="viewed-by">Viewed By &nbsp; {{viewedByAmount}}+ Tutors</div>
             </div>
             <div fxLayoutGap="5px">
-                <button mat-raised-button>
+                <button mat-raised-button class="view-details">
                     View Details
                 </button>
-                <button (click)="onViewChat()" mat-raised-button style="background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);">
+                <button mat-raised-button class="view-chat">
                     View Chat
                 </button>
             </div>
