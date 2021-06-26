@@ -3,8 +3,8 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from "@angular/router";
 import {User} from "../models/user";
-import {ChatMsg} from "../models/chat-msg";
 import {Observable} from "rxjs";
+import * as constants from '../models/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +19,11 @@ export class AuthService {
     this.angularFireAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(<string>localStorage.getItem('user'));
+        localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
+        JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));
       } else {
-        localStorage.setItem('user', '');
-        JSON.parse(<string>localStorage.getItem('user'));
+        localStorage.setItem(constants.localStorageKeys.user, '');
+        JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));
       }
     })
   }
@@ -34,7 +34,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dummy']);
+          this.router.navigate([constants.routes.dummy]);
         });
         this.SetUserData(result.user);
       }).catch((error) => {
@@ -56,7 +56,7 @@ export class AuthService {
 
 
   SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`${constants.collections.users}/${user.uid}`);
     const userData: User = {
       photoUrl: '',
       // photoUrl: user.photoUrl,
@@ -74,15 +74,15 @@ export class AuthService {
     // @ts-ignore
     return this.angularFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate(['dummy']);
+        this.router.navigate([constants.routes.dummy]);
       })
   }
 
   // Sign out
   SignOut() {
     return this.angularFireAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      localStorage.removeItem(constants.localStorageKeys.user);
+      this.router.navigate([constants.routes.sign_in]);
     })
   }
 
@@ -93,8 +93,7 @@ export class AuthService {
   }
 
   getTestData(chatToken: string): Observable<unknown[]> {
-
-    return this.angularFirestoreService.collection('chats').doc(chatToken).collection("chats").valueChanges();
+    return this.angularFirestoreService.collection(constants.collections.chats).doc(chatToken).collection(constants.collections.chats).valueChanges();
   }
 
 }
