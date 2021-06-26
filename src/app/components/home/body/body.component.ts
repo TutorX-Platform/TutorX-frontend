@@ -2,6 +2,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-body',
@@ -21,7 +22,8 @@ import { AddQuestionComponent } from '../../shared/add-question/add-question.com
 })
 export class BodyComponent implements OnInit {
 
-  constructor(    
+  constructor(
+    public authService:AuthService,
     private dialog: MatDialog
   ) { }
 
@@ -58,11 +60,12 @@ export class BodyComponent implements OnInit {
     this.feedBackNum = num;
   }
 
-  addQuestion(){    
+  addQuestion(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
+
 
 }

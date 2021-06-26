@@ -17,12 +17,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -32,6 +33,7 @@ import { DummyComponent } from './components/test/dummy/dummy.component';
 import { AddQuestionComponent } from './components/shared/add-question/add-question.component';
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import { QuestionCardComponent } from './components/tutor/question-card/question-card.component';
+import { TestChatComponent } from './components/test/test-chat/test-chat.component';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { QuestionCardComponent } from './components/tutor/question-card/question
     AddQuestionComponent,
     TutorDashboardComponent,
     QuestionCardComponent,
+    TestChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ import { QuestionCardComponent } from './components/tutor/question-card/question
     MatChipsModule,
     MatCardModule,
     MatDividerModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
   ],

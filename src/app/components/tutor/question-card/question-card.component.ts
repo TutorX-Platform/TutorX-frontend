@@ -1,5 +1,6 @@
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import {Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-question-card',
@@ -17,9 +18,15 @@ export class QuestionCardComponent implements OnInit {
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
+  }
+
+  onViewChat() {
+    console.log("hi")
+    this.router.navigate(['test-chat', "aw9dJW2YjYQUTFx311IkC99JfVH3_a5Odi8aVZgh7kW9CC8KxhuJ6vhG3"]);
   }
 
 }

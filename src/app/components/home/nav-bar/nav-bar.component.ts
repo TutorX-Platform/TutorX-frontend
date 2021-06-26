@@ -44,11 +44,11 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onLogin() {
-    this.authService.SignIn("sandunsameera25@gmail.com", "sandunsameera");
+    this.authService.SignIn("sandun25@gmail.com", "sandunsameera");
   }
 
   onSignUp() {
-    this.authService.SignUp("sandunsameera25@gmail.com", "sandunsameera");
+    this.authService.SignIn("sandunsameera25@gmail.com", "sandunsameera");
   }
 
 }

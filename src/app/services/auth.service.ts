@@ -3,6 +3,8 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from "@angular/router";
 import {User} from "../models/user";
+import {ChatMsg} from "../models/chat-msg";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -85,9 +87,14 @@ export class AuthService {
   }
 
   reloadCurrentUser() {
-    console.log("aaaaaaaaaaaaaaa");
     this.angularFireAuth.auth.currentUser?.reload().catch((res) => {
       console.log(res);
     });
   }
+
+  getTestData(chatToken: string): Observable<unknown[]> {
+
+    return this.angularFirestoreService.collection('chats').doc(chatToken).collection("chats").valueChanges();
+  }
+
 }

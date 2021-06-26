@@ -3,7 +3,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <h4>{{title}}</h4>
             <span *ngIf="status === 'open'" style="padding: 2px 8px 4px;background: #EBECEE; font-size: 12px; border-radius: 4px;">Open</span>
-            <span *ngIf="status === 'inProgress'" 
+            <span *ngIf="status === 'inProgress'"
             style="
                 padding: 2px 8px 4px;
                 width: 82px;
@@ -17,7 +17,7 @@
         </div>
         <div fxLayout="row" fxLayoutGap="5px">
             <div *ngFor="let subject of subjects">
-                <span style="padding: 5px;background: #F2F0FE; font-size: 12px; border-radius: 4px; color: #7F6EF0;">{{subject}}</span>                
+                <span style="padding: 5px;background: #F2F0FE; font-size: 12px; border-radius: 4px; color: #7F6EF0;">{{subject}}</span>
             </div>
         </div>
         <div fxLayout="row" style="color: #5B6469; font-size: 12px; margin-top: 5px;">
@@ -33,7 +33,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-top: 10px;">
             <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" style="padding-left: 10px;">
                 <div *ngFor='let image of images'>
-                    <img src="{{image}}" alt="Avatar" class="avatar">                  
+                    <img src="{{image}}" alt="Avatar" class="avatar">
                 </div>
                 <div style="font-size: 12px; color: #5B6469;">Viewed By &nbsp; {{viewedByAmount}}+ Tutors</div>
             </div>
@@ -41,7 +41,7 @@
                 <button mat-raised-button>
                     View Details
                 </button>
-                <button mat-raised-button style="background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);">
+                <button (click)="onViewChat()" mat-raised-button style="background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);">
                     View Chat
                 </button>
             </div>
