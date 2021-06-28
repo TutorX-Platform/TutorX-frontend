@@ -17,12 +17,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -35,6 +36,8 @@ import { QuestionCardComponent } from './components/shared/question-card/questio
 import { AdminComponent } from './components/admin/admin.component';
 import { QuestionPoolComponent } from './components/shared/question-pool/question-pool.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { TestChatComponent } from './components/test/test-chat/test-chat.component';
+
 
 
 @NgModule({
@@ -50,6 +53,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     AdminComponent,
     QuestionPoolComponent,
     DashboardComponent,
+    TestChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     MatChipsModule,
     MatCardModule,
     MatDividerModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
   ],

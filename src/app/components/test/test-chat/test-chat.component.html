@@ -1,0 +1,21 @@
+<p>test-chat works!</p>
+
+<div>
+  <h1>chatting area</h1>
+  <div>
+    <form [formGroup]="form" class="example-form">
+      <mat-form-field class="mat-width-full" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput formControlName="chatMsg" placeholder="Search">
+      </mat-form-field>
+      <button (click)="onChat()">Chat</button>
+    </form>
+  </div>
+</div>
+
+
+<div *ngFor="let element of chatHistory">
+  <div *ngIf="authService.userData.uid===element.senderId" style="color: green">{{element.message}}</div>
+  <div *ngIf="authService.userData.uid!==element.senderId" style="color: red">{{element.message}}</div>
+
+</div>
