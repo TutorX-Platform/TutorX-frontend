@@ -2,10 +2,12 @@
 @import "components/question-card.component.scss";
 @import "components/admin.component.scss";
 @import "components/question-pool.component.scss";
+@import "components/dashboard.component.scss";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
     @include chip-component($theme);
     @include admin-component($theme);
     @include question-pool-component($theme);
+    @include dashboard-component($theme);
 }
