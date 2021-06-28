@@ -8,7 +8,7 @@
     .main-container{
         width: 100%;
         .left-container{
-            width: 70%;
+            width: 65%;
             padding: 24px 24px;
 
             .top-bar{
@@ -41,6 +41,7 @@
 
                 .chat-info-box-container{
                     margin-top: 12px;
+                    padding-left: 16px;
 
                     .chat-info-box{
                         font: $body-base-medium;
@@ -58,9 +59,16 @@
                         .chat-name{
                             margin-left: 26px;
                         }
-                        .button{
+                        .but{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            padding: 8px 16px;
                             font: $body-caption-bold;
                             color: #FFFFFF;
+                            background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+                            // box-shadow: 0px 22px 40px rgba(46, 163, 65, 0.35);
+                            border-radius: 4px;
                         }
                     }
                     
@@ -75,7 +83,7 @@
         }
     
         .right-container{
-            width: 30%;
+            width: 35%;
             padding: 24px 0px;
 
             .top-bar{
