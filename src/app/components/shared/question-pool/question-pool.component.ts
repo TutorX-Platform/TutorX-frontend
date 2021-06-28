@@ -11,6 +11,8 @@ import { Question } from 'src/app/models/question';
 export class QuestionPoolComponent implements OnInit {
 
   contactForm!: FormGroup;
+
+  selectedStatus = 0;
  
   countries = [
     { id: 1, name: "United States" },
@@ -52,6 +54,10 @@ export class QuestionPoolComponent implements OnInit {
         images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
       }
     ] 
+  }
+
+  selectStatus(num:number){
+    this.selectedStatus = num;
   }
 
 }
