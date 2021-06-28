@@ -36,8 +36,7 @@ export class BodyComponent implements OnInit {
     {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
     {title:"User friendly", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
     {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"User friendly", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"}
+    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"}
   ]
 
   feedback = [

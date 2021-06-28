@@ -1,0 +1,45 @@
+<div fxLayout="row" class="page-title-container"> Public Pool</div>
+<div class="divider"></div>
+<div fxLayout="row" class="main-container">
+    <div fxLayout="column" class="left-container">      
+      <div fxLayout="row" class="card-container" fxLayoutAlign="center center" style="padding-left: 24px;">
+        <div fxLayout="column" class="column-view" fxLayoutGap="24px">
+            <div class="results">
+                {{questions.length}} results found
+              </div>
+          <app-question-card 
+            *ngFor="let q of questions"
+            [title]="q.title"
+            [status]="q.status"
+            [subjects]="q.subjects"
+            [dueDate]="q.dueDate"
+            [descriptionTitle]="q.descriptionTitle"
+            [description]="q.description"
+            [viewedByAmount]="q.viewedByAmount"
+            [images]="q.images"
+          ></app-question-card>
+        </div>  
+      </div> 
+    </div>
+    <!-- <div fxLayout="column" class="right-container" fxShow="true" fxHide.lt-sm="true">
+      <div fxLayout="row" fxLayoutAlign="start center" style="font-family: Manrope-normal;font-size: 12px;">Sort by</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <form [formGroup]="contactForm" class="form"> 
+          <select formControlName="country" class="select">
+            <option [ngValue]="null" disabled>Select Filter</option>
+            <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+          </select>
+        </form>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" class="filter-container">
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <h5>Filter Results</h5>
+          </div>
+          <div fxLayout="row">
+            <div style="font-family: Inter-semiBold; font-size: 16px;">Subjects</div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+</div>

@@ -31,7 +31,10 @@ import {AuthService} from "./services/auth.service";
 import { DummyComponent } from './components/test/dummy/dummy.component';
 import { AddQuestionComponent } from './components/shared/add-question/add-question.component';
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
-import { QuestionCardComponent } from './components/tutor/question-card/question-card.component';
+import { QuestionCardComponent } from './components/shared/question-card/question-card.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { QuestionPoolComponent } from './components/shared/question-pool/question-pool.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import { QuestionCardComponent } from './components/tutor/question-card/question
     AddQuestionComponent,
     TutorDashboardComponent,
     QuestionCardComponent,
+    AdminComponent,
+    QuestionPoolComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

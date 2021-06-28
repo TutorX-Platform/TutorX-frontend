@@ -1,5 +1,4 @@
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-question-card',
@@ -16,7 +15,6 @@ export class QuestionCardComponent implements OnInit {
   @Input() public description: string = '';
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
-
   constructor() { }
 
   ngOnInit(): void {
