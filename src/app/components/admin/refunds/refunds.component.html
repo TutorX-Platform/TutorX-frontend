@@ -1,0 +1,112 @@
+<div class="refunds">
+    <div fxLayout="row" class="page-title-container"> Refunds</div>
+    <div class="divider"></div>
+
+    <div class="main-container" fxLayout="row">
+        <div class="request-container" fxLayout="column" fxLayoutGap="4px">
+            <div *ngFor="let num of numbers">
+                <div fxLayout="row" class="request-card" fxLayoutAlign="space-between center">
+                    <div fxLayout="row">
+                        <div fxLayout="column" fxLayoutAlign="start start">
+                            <input type="checkbox">
+                        </div>
+                        <div class="info" fxLayout="column">
+                            <div class="title">Refund request</div>
+                            <div class="sub-title">Product is out of stock and current available ones are damaged... </div>  
+                            <div class="name-order">
+                                <div>
+                                    <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                                </div>
+                                <div class="by"> By <span style="color:#7F6EF0;"> @Jhone Doe</span></div>
+                            </div>                              
+                        </div> 
+                    </div>
+                    
+                    <div class="actions" fxLayout="row" fxLayoutAlign="center none">
+                        <div class="refund">
+                            <div class="title">Paid Amount</div>
+                            <div class="amount">LKR 3240.00</div>
+                        </div>
+                        <div class="di"></div>
+                        <div class="buttons" fxLayout="column" fxLayoutAlign="center stretch">
+                            <div>
+                                <button mat-raised-button class="button">Message</button>
+                            </div>
+                            <div>
+                                <button mat-raised-button class="button button--white">Approve</button>
+                            </div>
+                        </div>
+                    </div>                 
+                </div>
+                
+            </div>
+        </div>
+        <div class="filter-container" fxLayout="column">
+            <div fxLayout="row" class="filter-title">Filters</div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" class="search-container">  
+                <mat-icon>search</mat-icon>              
+                <input matInput class="search" placeholder="Search">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
+            <div fxLayout="row" fxLayoutAlign="start center">        
+              <form [formGroup]="contactForm" class="form"> 
+                <select formControlName="country" class="select">
+                  <option [ngValue]="null" disabled>Select Filter</option>
+                  <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+                </select>
+              </form>
+            </div> 
+            <div fxLayout="row" fxLayoutAlign="start center" class="label">Tutor</div>
+            <div fxLayout="row" fxLayoutAlign="start center">        
+              <form [formGroup]="contactForm" class="form"> 
+                <select formControlName="country" class="select">
+                  <option [ngValue]="null" disabled>Select Filter</option>
+                  <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+                </select>
+              </form>
+            </div>        
+            <div fxLayout="row" fxLayoutAlign="start center" class="label">Subjects</div>   
+        </div>        
+    </div>
+
+    <!-- <div class="main-container">
+        <div class="request-container">
+            <div class="request-card" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="info">
+                    <div class="title">Refund request</div>
+                    <div class="sub-title">Product is out of stock and current available ones are damaged... </div>  
+                    <div class="name-order">
+                        <div>
+                            <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                        </div>
+                        <div class="by"> By <span style="color:#7F6EF0;"> @Jhone Doe</span></div>
+                    </div>                              
+                </div>
+                <div class="actions">
+                    <div class="refund">
+                        <div class="title">Paid Amount</div>
+                        <div class="amount">LKR 3240.00</div>
+                    </div>
+                    <span class="divider"></span>
+                    <div class="buttons">
+                        <div>
+                            <button mat-raised-button style="margin-bottom: 8px; width: 93px; height: 30px;">Message</button>
+                        </div>
+                        <div>
+                            <button mat-raised-button style="width: 93px; height: 30px; color: white; background: #B72B2B;">Approve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-container" fxLayout="center">
+            <div class="search">
+                <mat-icon>menu</mat-icon>
+                <input type="text" placeholder="search">
+            </div>
+    </div>
+</div> -->
+</div>
+
+
+

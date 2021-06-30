@@ -5,7 +5,8 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    .example-spacer {
+    .admin{
+      .example-spacer {
         flex: 1 1 auto;
       }
     
@@ -124,6 +125,8 @@
           color: #5B6469;
         }
       }
+    }
+    
     
     //   .main-container{
     //     background: #F6F7FB;

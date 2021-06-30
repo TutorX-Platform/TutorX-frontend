@@ -1,90 +1,92 @@
-<div fxLayout="row" class="main-container">
-    <div fxLayout="column" class="left-container">
-        <div fxLayout="row" fxLayoutAlign="space-between center" class="top-bar">
-            <div fxLayout="column" fxLayoutAlign="start">
-                <div class="title">Total Users</div>
-                <div class="number">40k</div>
+<div class="admin-dashboard" style="min-height: 90vh;">
+    <div fxLayout="row" class="main-containery">
+        <div fxLayout="column" class="left-container">
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="top-bar">
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div class="title">Total Users</div>
+                    <div class="number">40k</div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div class="title">Total Questoins</div>
+                    <div class="number">1000</div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div class="title">In progress</div>
+                    <div class="number">1.5k</div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div class="title">Total Completed</div>
+                    <div class="number">1.5k</div>
+                </div>
             </div>
-            <div fxLayout="column" fxLayoutAlign="start">
-                <div class="title">Total Questoins</div>
-                <div class="number">1000</div>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start">
-                <div class="title">In progress</div>
-                <div class="number">1.5k</div>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start">
-                <div class="title">Total Completed</div>
-                <div class="number">1.5k</div>
-            </div>
-        </div>
-        <div class="recent-chats">
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-                <div class="title">Recent Chats</div>
-                <div class="view-all">View All</div>
-            </div>
-            <div fxLayout="column" class="chat-info-box-container" fxLayoutGap="16px">                       
-                <div *ngFor="let num of numbers"> 
-                    <div fxLayout="row" class="chat-info-box" fxLayoutAlign="space-between center">
-                        <div fxLayout="row" fxLayoutGap="14px" fxLayoutAlign="none center">
-                            <div>
-                                <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+            <div class="recent-chats">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="title">Recent Chats</div>
+                    <div class="view-all">View All</div>
+                </div>
+                <div fxLayout="column" class="chat-info-box-container" fxLayoutGap="16px">                       
+                    <div *ngFor="let num of numbers"> 
+                        <div fxLayout="row" class="chat-info-box" fxLayoutAlign="space-between center">
+                            <div fxLayout="row" fxLayoutGap="14px" fxLayoutAlign="none center">
+                                <div>
+                                    <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                                </div>
+                                <div>
+                                    <mat-icon class="material-icons-outlined icon">arrow_forward</mat-icon> 
+                                </div>   
+                                <div>
+                                    <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                                </div>  
+                                <div class="chat-name">
+                                    Principles of Ux Design
+                                </div>              
                             </div>
-                            <div>
-                                <mat-icon class="material-icons-outlined icon">arrow_forward</mat-icon> 
-                            </div>   
-                            <div>
-                                <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
-                            </div>  
-                            <div class="chat-name">
-                                Principles of Ux Design
-                            </div>              
+                            <div fxLayout="row" fxLayoutGap="45px" fxLayoutAlign="none center">
+                                <div class="c-chip c-chip--neutral invert-false">Open</div>  
+                                    <button mat-raised-button color="accent">
+                                        View Chat
+                                        <mat-icon class="material-icons-outlined">
+                                            chat
+                                        </mat-icon>
+                                    </button>                                               
+                            </div>          
                         </div>
-                        <div fxLayout="row" fxLayoutGap="45px" fxLayoutAlign="none center">
-                            <div class="c-chip c-chip--neutral invert-false">Open</div>  
-                                <button mat-raised-button color="accent">
-                                    View Chat
-                                    <mat-icon class="material-icons-outlined">
-                                        chat
-                                    </mat-icon>
-                                </button>                                               
-                        </div>          
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div fxLayout="column" class="right-container">
-        <div fxLayout="row" fxLayoutAlign="start center" class="top-bar">
-            <div fxLayout="column" fxLayoutAlign="start">
-                <div class="title">Total Earings</div>
-                <div class="number">$ 1,520.00</div>
-            </div>
-        </div>
-        <div fxLayout="column" class="recent-payments" fxLayoutAlign="start none" fxLayoutGap="16px">
-            <div fxLayout="row" fxLayoutAlign="start start" class="title">Recent payments</div>
-            <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="8px">
-                <div *ngFor="let num of numbers">
-                        <div class="payments" fxLayoutAlign="space-around center">
-                            <div>
-                                <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar"> 
-                            </div>
-                            <div class="details">
-                                <div class="from">
-                                    Therese Rechards
-                                </div>
-                                <div class="to">
-                                    to James Spayder
-                                </div>
-                            </div> 
-                            <div class="amount">
-                                $ 00.00
-                            </div>                      
-                        </div>
+        <div fxLayout="column" class="right-container">
+            <div fxLayout="row" fxLayoutAlign="start center" class="top-bar">
+                <div fxLayout="column" fxLayoutAlign="start">
+                    <div class="title">Total Earings</div>
+                    <div class="number">$ 1,520.00</div>
                 </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <div class="see-all">See All</div>
+            <div fxLayout="column" class="recent-payments" fxLayoutAlign="start none" fxLayoutGap="16px">
+                <div fxLayout="row" fxLayoutAlign="start start" class="title">Recent payments</div>
+                <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="8px">
+                    <div *ngFor="let num of numbers">
+                            <div class="payments" fxLayoutAlign="space-around center">
+                                <div>
+                                    <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar"> 
+                                </div>
+                                <div class="details">
+                                    <div class="from">
+                                        Therese Rechards
+                                    </div>
+                                    <div class="to">
+                                        to James Spayder
+                                    </div>
+                                </div> 
+                                <div class="amount">
+                                    $ 00.00
+                                </div>                      
+                            </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div class="see-all">See All</div>
+                </div>
             </div>
         </div>
     </div>

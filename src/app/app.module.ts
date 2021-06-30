@@ -37,6 +37,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { QuestionPoolComponent } from './components/shared/question-pool/question-pool.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { TestChatComponent } from './components/test/test-chat/test-chat.component';
+import { RefundsComponent } from './components/admin/refunds/refunds.component';
 
 
 
@@ -54,6 +55,7 @@ import { TestChatComponent } from './components/test/test-chat/test-chat.compone
     QuestionPoolComponent,
     DashboardComponent,
     TestChatComponent,
+    RefundsComponent,
   ],
   imports: [
     BrowserModule,
