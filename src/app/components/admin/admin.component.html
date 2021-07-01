@@ -29,7 +29,7 @@
                 <div [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">Payments</div>
             </a>
             <a mat-list-item (click)="changePage(5)" [ngClass]="selectedPage === 5 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
-                <mat-icon class="material-icons-outlined" [ngClass]="selectedPage === 5 ? 'side-nav-list_selected-color' : 'side-nav-list_normal'">manage_accounts</mat-icon>
+                <mat-icon class="material-icons-outlined" [ngClass]="selectedPage === 5 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal-icon'">manage_accounts</mat-icon>
                 <div [ngClass]="selectedPage === 5 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">Manage Tutors</div>
             </a>
           </mat-nav-list>
@@ -69,6 +69,7 @@
           <app-dashboard *ngIf="selectedPage === 1"></app-dashboard>
           <app-question-pool *ngIf="selectedPage === 2"></app-question-pool>
           <app-refunds *ngIf="selectedPage === 3"></app-refunds>
+          <app-manage-tutors *ngIf="selectedPage === 5"></app-manage-tutors>
           
         
         </mat-sidenav-content>

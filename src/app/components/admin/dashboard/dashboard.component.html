@@ -24,7 +24,7 @@
                     <div class="title">Recent Chats</div>
                     <div class="view-all">View All</div>
                 </div>
-                <div fxLayout="column" class="chat-info-box-container" fxLayoutGap="16px">                       
+                <div fxLayout="column" class="chat-info-box-container" fxLayoutGap="8px">                       
                     <div *ngFor="let num of numbers"> 
                         <div fxLayout="row" class="chat-info-box" fxLayoutAlign="space-between center">
                             <div fxLayout="row" fxLayoutGap="14px" fxLayoutAlign="none center">
@@ -41,16 +41,17 @@
                                     Principles of Ux Design
                                 </div>              
                             </div>
-                            <div fxLayout="row" fxLayoutGap="45px" fxLayoutAlign="none center">
-                                <div class="c-chip c-chip--neutral invert-false">Open</div>  
-                                    <button mat-raised-button color="accent">
-                                        View Chat
-                                        <mat-icon class="material-icons-outlined">
-                                            chat
-                                        </mat-icon>
-                                    </button>                                               
+                            <div fxLayout="row" fxLayoutGap="45px" fxLayoutAlign="end center" fxLayout.lt-lg="column" fxLayoutGap.lt-lg="8px" fxLayoutAlign="center center">
+                                <div class="c-chip c-chip--info invert-false">Open</div>  
+                                <button mat-raised-button color="accent" style="color:white;">
+                                    View Chat
+                                    <mat-icon class="material-icons-outlined">
+                                        chat
+                                    </mat-icon>
+                                </button>                                               
                             </div>          
                         </div>
+                        <mat-divider style="margin-top: 8px;"></mat-divider>
                     </div>
                 </div>
             </div>
