@@ -72,19 +72,20 @@
                                     }
                                 }
                             }
+                            .university{
+                                font: $body-caption-default;
+                                color: #5B6469;
+    
+                                .dot{
+                                    font-size: 12px; line-height: 25px; text-align: center;
+                                }
+                            }
                         }                        
             
-                        .university{
-                            font: $body-caption-default;
-                            color: #5B6469;
-
-                            .dot{
-                                font-size: 12px; line-height: 25px; text-align: center;
-                            }
-                        }
+                        
 
                         .subjects{
-                            margin-top: 24px;
+                            // margin-top: 24px;
                         }
                        
                     }
