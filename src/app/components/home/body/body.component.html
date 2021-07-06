@@ -1,20 +1,20 @@
+<div class="home">
 <app-nav-bar></app-nav-bar>
 <!-- banner componet -->
-<div fxLayout="column" class="banner-web" fxLayoutAlign="center stretch" fxShow="true" fxHide.lt-sm="true">
-    <div fxLayout="row" fxLayoutAlign="center strech">
-        <div class="details-container">
-            <h2 (click)="authService.SignOut()">Get Instant Help</h2>
-            <h5>for our student comunity</h5>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            <button mat-raised-button  (click)="addQuestion()" color="accent">
+<div fxLayout="column" fxLayoutAlign="center" class="banner-web" fxShow="true" fxHide.lt-sm="true">
+    <div class="image-container"></div>
+    <div fxLayout="row" fxLayoutAlign="none center">
+        <div fxLayout="column" fxLayoutGap="16px"  class="details-container">
+            <div class="banner-title">Get Homework Help</div>
+            <div class="banner-sub-title">For university/college, high school and middle school students</div>
+            <div class="banner-details">Talk to our experts 24/7. Pay only for the specific requirement. We assist in your homework !!
+            </div>
+            <button mat-flat-button  (click)="addQuestion()" class="get-help">
                 Get help
                 <mat-icon class="material-icons-outlined">
-                    supervised_user_circle
+                    supervised_user_circle  
                     </mat-icon>
             </button>
-        </div>
-        <div class="image-container">
-            <img src="../../../../assets/images/student2.png" alt="" width="400px" height="200px">
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
             <h3>Get Instant Help</h3>
             <h5>for our student comunity</h5>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            <button mat-raised-button class="button" (click)="addQuestion()">
+            <button mat-flat-button class="get-help" (click)="addQuestion()">
                 Get help
                 <mat-icon class="material-icons-outlined">
                     supervised_user_circle
@@ -42,8 +42,8 @@
 <div fxLayout="column" class="features-container">
     <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
         <div class="heading-container-web" >
-            <h2 class="manrope">Tailor-made features</h2>
-            <h5>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</h5>
+            <div class="features-title">Tailor-made features</div>
+            <div class="features-description">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</div>
         </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
@@ -52,26 +52,27 @@
             <p>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="center center" class="card-container">
-        <div fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="33%" *ngFor="let detail of details">
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center center" class="card-container">
+        <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="100%" fxFlex="33%" *ngFor="let detail of details">
             <div class="card">
-                <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
-                <h5>{{detail.title}}</h5>
-                <p>{{detail.description}}</p>
+                <img src="{{detail.imageUrl}}" alt="" width="30px" height="30px">
+                <div class="card-title">{{detail.title}}</div>
+                <div class="card-description">{{detail.description}}</div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- client-web-->
-<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-sm="true">
+<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-md="true">
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
-        <h2 class="manrope">Our clients speak</h2>
+        <div class="client-title">Our clients speak</div>
     </div>
-    <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
+    <!-- <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
         <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
             <div class="rectangle">
-                <p @carouselAnimation>{{feedback[selectedNumber].title1}}</p>
+                <img src="assets/icons/Card.svg" alt="Snow" style="width:40%;">
+                <div class="text">{{feedback[selectedNumber].title1}}</div>
                 <p>{{feedback[selectedNumber].content1}}</p>
             </div>
             <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
@@ -95,8 +96,42 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center" >
+            <div class="rectangle" style="width:100%;">
+                <img src="assets/icons/Card.svg" style="width:100%;">
+                <div class="feedback-title">{{feedback[selectedNumber].title1}}</div>
+                <div class="feedback-body">{{feedback[selectedNumber].content1}}</div>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                <div>
+                    <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                    <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                    <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center" >
+            <div class="rectangle" style="width:100%;">
+                <img src="assets/icons/Card.svg" alt="Snow" style="width:100%;">
+                <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                <div>
+                    <img src="{{feedback[selectedNumber].image2}}" alt="Avatar" class="avatar">
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                    <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                    <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
         <mat-icon *ngIf="selectedNumber == 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">circle</mat-icon>
         <mat-icon *ngIf="selectedNumber != 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">radio_button_unchecked</mat-icon>
         <mat-icon *ngIf="selectedNumber == 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">circle</mat-icon>
@@ -104,6 +139,11 @@
         <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
         <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
     </div>
+
+    <!-- <div class="rectangle">
+        <img src="assets/icons/Card.svg" alt="Snow" style="width:40%;">        
+        <div class="text">Hi</div>
+    </div> -->
 </div>
 
 <!-- client-mobile -->
@@ -137,9 +177,32 @@
     </div>
 </div>
 
+<!-- Process-web -->
+<div class="process" fxLayout="column" fxLayoutAlign="start center">   
+    <div class="process-title">
+        The process we follow
+    </div>
+    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px grid">
+        <div *ngFor="let num of [1,2,3,4]" fxFlex.md="50%" fxFlex.lg="25%">
+            <div class="step" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="4px">
+                <div>
+                    <img src="../../../../assets/icons/Indication.png">
+                </div>
+                <div class="step-title">
+                    Ideate
+                </div>
+                <div class="step-sub-title">
+                    Turn your idea from concept to MVP
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
 <!-- tutor-feedback-web -->
 <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-    <div class="feedback-container" fxLayout="row">
+    <div class="box feedback-container" fxLayout="row">
         <svg width="100" height="20" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23.584 1.16L23.008 5.264C21.856 5.168 20.92 5.36 20.2 5.84C19.48 6.296 18.976 6.968 18.688 7.856C18.424 8.72 18.376 9.728 18.544 10.88H23.584V20.672H13.792V10.88C13.792 7.424 14.596 4.808 16.204 3.032C17.812 1.256 20.272 0.631999 23.584 1.16ZM10.552 1.16L9.976 5.264C8.824 5.168 7.888 5.36 7.168 5.84C6.448 6.296 5.944 6.968 5.656 7.856C5.392 8.72 5.344 9.728 5.512 10.88H10.552V20.672H0.76V10.88C0.76 7.424 1.564 4.808 3.172 3.032C4.78 1.256 7.24 0.631999 10.552 1.16Z" fill="#2EC5CE"/>
         </svg>
@@ -147,27 +210,28 @@
             We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <div *ngFor="let tutorFeedback of tutorFeedbacks">
-            <div class="avatar-container" fxLayout="row">
+            <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
                 <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
                 <div *ngIf="tutorFeedback == feedBackNum">
                     <div *ngIf="feedBackNum == 1" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">James Cameron</p>
-                        <p>CEO WTF</p>
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div>
                     <div *ngIf="feedBackNum == 2" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Husain Bolt</p>
-                        <p>CEO Athletics</p>
-                    </div><div *ngIf="feedBackNum == 3" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Kim Cardashian</p>
-                        <p>CEO QXR Coop</p>
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
+                    </div>
+                    <div *ngIf="feedBackNum == 3" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div><div *ngIf="feedBackNum == 4" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Jelly Bean</p>
-                        <p>CEO WTF</p>
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div><div *ngIf="feedBackNum == 5" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Osama Billaden</p>
-                        <p>CEO WTF</p>
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div>
                 </div>
             </div>
@@ -214,10 +278,10 @@
     </div>
 </div>
 
-<div class="get-help" fxLayout="row" fxLayoutAlign="space-around center" fxShow="true" fxHide.lt-sm="true">
+<div class="get-help" fxLayout="row" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
     <div fxLayout="column">
-        <h2>Get Instant Help</h2>
-        <h5>for our stdent comunity</h5>
+        <div class="banner-title">Get Instant Help</div>
+        <div class="banner-sub-title">for our stdent comunity</div>
     </div>
     <button mat-raised-button class="button" (click)="addQuestion()">
         Get help
@@ -228,3 +292,4 @@
 </div>
 
 <div class="footer"></div>
+</div>

@@ -1,4 +1,4 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
@@ -9,14 +9,24 @@ import {AuthService} from "../../../services/auth.service";
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss'],
   animations: [
-    trigger('carouselAnimation', [
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 }))
-      ]),
-      transition('* => void', [
-        animate('300ms', style({ opacity: 0 }))
-      ])
+    // trigger('carouselAnimation', [
+    //   transition('void => *', [
+    //     style({ opacity: 0 }),
+    //     animate('300ms', style({ opacity: 1 }))
+    //   ]),
+    //   transition('* => void', [
+    //     animate('300ms', style({ opacity: 0 }))
+    //   ])
+    // ])
+    trigger('hee',[
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      transition('show => hide', animate('400ms ease-out')),
+      transition('hide => show', animate('400ms ease-in'))
     ])
   ]
 })
@@ -29,16 +39,28 @@ export class BodyComponent implements OnInit {
 
   selectedNumber = 0;
   feedBackNum = 3;
+  forward = false;
+  backward = false;
+
+  show = false;
+
+  get stateName() {
+    return this.show ? 'show' : 'hide'
+  }
+
+  changeState(){
+    this.show = true;
+  }
 
   ngOnInit(): void {
   }
 
   details = [
-    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"User friendly", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"},
-    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum"}
+    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/01.svg"},
+    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/02.svg"},
+    {title:"User friendly", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/03.svg"},
+    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/04.svg"},
+    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/05.svg"}
   ]
 
   feedback = [
@@ -52,7 +74,23 @@ export class BodyComponent implements OnInit {
   tutorFeedbacks2 = [1,2,3]
 
   change(num: number){
-    this.selectedNumber = num;
+    console.log(this.forward);
+    this.show = !this.show;
+    if(num > this.selectedNumber){
+      this.forward = true;
+      this.backward = false;
+      // this.sh = true;
+    }else if(num < this.selectedNumber){
+      this.forward = false;
+      this.backward = true;      
+    }else{
+      this.forward = false;
+      this.backward = false;  
+    }
+
+    setTimeout(() =>{
+      this.selectedNumber = num;
+    },400);
   }
 
   select(num:number){

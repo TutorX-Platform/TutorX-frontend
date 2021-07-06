@@ -5,6 +5,7 @@
 @import "components/dashboard.component.scss";
 @import "components/refunds.component.scss";
 @import "components/manage-tutors.component.scss";
+@import "components/home.component.scss";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -14,4 +15,5 @@
     @include dashboard-component($theme);
     @include refunds-component($theme);
     @include manage-tutors-component($theme);
+    @include home-component($theme);
 }
