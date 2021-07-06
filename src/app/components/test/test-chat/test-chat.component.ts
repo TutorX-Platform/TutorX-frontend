@@ -23,8 +23,6 @@ export class TestChatComponent implements OnInit {
     chatMsg: new FormControl('', [Validators.required, Validators.minLength(3)]),
   });
 
-  currentUserId: string = '';
-
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               private chatService: ChatServiceService,
@@ -54,6 +52,7 @@ export class TestChatComponent implements OnInit {
 
   onChat() {
     console.log(this.form.controls['chatMsg'].value);
+    console.log( this.angularFireAuth.auth.currentUser?.uid);
     this.saveChatMsg();
   }
 
