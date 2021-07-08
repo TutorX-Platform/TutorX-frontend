@@ -26,6 +26,7 @@
     "animate.css": "^4.1.1",
     "express": "^4.17.1",
     "firebase": "^7.24.0",
+    "ngx-dropzone": "^3.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "uuid": "^8.3.2",

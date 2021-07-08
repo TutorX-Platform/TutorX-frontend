@@ -9,8 +9,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddQuestionComponent implements OnInit {
 
-  loginForm!: FormGroup;
-  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  addQuestionForm!: FormGroup;
+  status='open';
+  date!: Date;
 
   constructor(
     private formBuilder: FormBuilder,    
@@ -18,17 +19,30 @@ export class AddQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+    this.addQuestionForm = this.formBuilder.group({
       questionTitle: [null, Validators.required],
       subject: [null, Validators.required],
-      dueDate: [null, Validators.required],
-      tag: [null, Validators.required],
-      description: [null, Validators.required]
+      dueDateTime: [null, Validators.required],
+      description: [null, Validators.required],
+      files: [null, Validators.required]
     });
+    this.date = new Date();
   }
 
   hello(){
     console.log("Hi");
   }
+
+  files: File[] = [];
+
+	onSelect(event:any) {
+		console.log(event);
+		this.files.push(...event.addedFiles);
+	}
+
+	onRemove(event:any) {
+		console.log(event);
+		this.files.splice(this.files.indexOf(event), 1);
+	}
 
 }

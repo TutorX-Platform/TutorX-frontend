@@ -68,41 +68,11 @@
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
         <div class="client-title">Our clients speak</div>
     </div>
-    <!-- <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
-        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
-            <div class="rectangle">
-                <img src="assets/icons/Card.svg" alt="Snow" style="width:40%;">
-                <div class="text">{{feedback[selectedNumber].title1}}</div>
-                <p>{{feedback[selectedNumber].content1}}</p>
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
-                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                <div fxLayout="column" fxLayoutAlign="center" style="text-align: left !important;">
-                    <p>{{feedback[selectedNumber].name1}}</p>
-                    <p>{{feedback[selectedNumber].designation1}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
-            <div class="rectangle">
-                <p>{{feedback[selectedNumber].title2}}</p>
-                <p>{{feedback[selectedNumber].content2}}</p>
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
-                <img src="{{feedback[selectedNumber].image2}}" alt="Avatar" class="avatar">
-                <div fxLayout="column" fxLayoutAlign="center" style="text-align: left !important;">
-                    <p>{{feedback[selectedNumber].name2}}</p>
-                    <p>{{feedback[selectedNumber].designation2}}</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center" >
-            <div class="rectangle" style="width:100%;">
-                <img src="assets/icons/Card.svg" style="width:100%;">
-                <div class="feedback-title">{{feedback[selectedNumber].title1}}</div>
-                <div class="feedback-body">{{feedback[selectedNumber].content1}}</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="client-feedback-container">
+        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center">
+            <div class="box-client b4">
+                <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
             </div>
             <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
                 <div>
@@ -115,10 +85,9 @@
             </div>
         </div>
         <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center" >
-            <div class="rectangle" style="width:100%;">
-                <img src="assets/icons/Card.svg" alt="Snow" style="width:100%;">
+            <div class="box-client b4">
                 <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
+                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
             </div>
             <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
                 <div>
@@ -139,11 +108,6 @@
         <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
         <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
     </div>
-
-    <!-- <div class="rectangle">
-        <img src="assets/icons/Card.svg" alt="Snow" style="width:40%;">        
-        <div class="text">Hi</div>
-    </div> -->
 </div>
 
 <!-- client-mobile -->
@@ -183,7 +147,7 @@
         The process we follow
     </div>
     <div class="steps" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px grid">
-        <div *ngFor="let num of [1,2,3,4]" fxFlex.md="50%" fxFlex.lg="25%">
+        <div *ngFor="let num of [1,2,3,4]" fxFlex.lg="25%">
             <div class="step" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="4px">
                 <div>
                     <img src="../../../../assets/icons/Indication.png">
@@ -202,7 +166,7 @@
 
 <!-- tutor-feedback-web -->
 <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-    <div class="box feedback-container" fxLayout="row">
+    <div class="box feedback-container" fxLayout="row" [@hee]="stateName" (@hee.done)="changeState()">
         <svg width="100" height="20" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23.584 1.16L23.008 5.264C21.856 5.168 20.92 5.36 20.2 5.84C19.48 6.296 18.976 6.968 18.688 7.856C18.424 8.72 18.376 9.728 18.544 10.88H23.584V20.672H13.792V10.88C13.792 7.424 14.596 4.808 16.204 3.032C17.812 1.256 20.272 0.631999 23.584 1.16ZM10.552 1.16L9.976 5.264C8.824 5.168 7.888 5.36 7.168 5.84C6.448 6.296 5.944 6.968 5.656 7.856C5.392 8.72 5.344 9.728 5.512 10.88H10.552V20.672H0.76V10.88C0.76 7.424 1.564 4.808 3.172 3.032C4.78 1.256 7.24 0.631999 10.552 1.16Z" fill="#2EC5CE"/>
         </svg>
@@ -215,21 +179,21 @@
             <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
                 <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
                 <div *ngIf="tutorFeedback == feedBackNum">
-                    <div *ngIf="feedBackNum == 1" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 1" [@hee]="stateName"  fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <div *ngIf="feedBackNum == 2" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 2" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <div *ngIf="feedBackNum == 3" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 3" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 4" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    </div><div *ngIf="feedBackNum == 4" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 5" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    </div><div *ngIf="feedBackNum == 5" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>

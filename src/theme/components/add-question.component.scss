@@ -1,0 +1,84 @@
+@mixin add-question-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .add-question{
+        .form-container{
+            .top-container{
+                padding: 21px 5% 16px 5%;
+                .header{
+                    width: 100%;
+                    .header-title{
+                        font: $heading-desktop-h4-light;
+                    }
+                    .button-container{
+                        .button-cancel{
+                        }
+                          
+                        .button-done{
+                            background-color: #7F6EF0;
+                            color: white;
+                        }
+                    }
+                }
+                .status-container{
+                    width: 100%;
+                    .date-container{
+                        font: $body-small-default;
+                        color: #686D74;
+                    }                    
+                }
+            }
+            .bottom-container{
+                padding: 32px 8% 32px 8%;
+                width: 100%;
+                .form-fields{
+                    padding: 0px 5% 40px 5%;
+                    width: 100%;
+
+                    .search-container{
+                        width: 49%;
+                        .search{                        
+                            background: url(../../assets/icons/search.svg) no-repeat scroll;
+                            padding-left:40px;
+                            font:  500 16px/24px Roboto,'Manrope', sans-serif;
+                          }
+                    }
+
+                    .date-container{
+                        width: 49%;
+                        margin-left: 2%;
+                    }
+                    .other{
+                        font:  500 16px/24px Roboto,'Manrope', sans-serif;
+                    }
+
+
+
+                      .select{
+                      }
+              
+                      .label{
+                        font:  400 12px/18px Roboto,'Manrope', sans-serif;     
+                        // margin-top: 16px;     
+                      }
+                }
+                .custom-dropzone {
+                    padding: 40px 0px 40px 0px;
+                    width: 100%;
+                    background: #EBECEE;
+                    border: none;
+                    border-radius: 4px;
+                    color: black;
+
+                    .wording{
+                        font: $body-xsmall-bold;
+                    }
+                }
+            }
+        }
+    }
+}

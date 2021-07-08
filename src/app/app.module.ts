@@ -24,6 +24,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -80,6 +82,7 @@ import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-t
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgxDropzoneModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

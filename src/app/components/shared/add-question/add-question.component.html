@@ -1,103 +1,82 @@
 <!-- web -->
-<form [formGroup]="loginForm" (submit)="hello()">
-<div fxLayout="column" fxShow="true" fxHide.lt-sm="true" class="form-container">
-    <div fxLayout="row" fxLayoutAlign="space-between center" class="title-container">
-        <div fxLayout="column" class="heading-container">
-            <h4>New Question</h4>
-            <div fxLayout=row>
-                <p>Need clarifications</p>                
-            </div>
-        </div>
+<div class="add-question">
+  <form [formGroup]="addQuestionForm" (submit)="hello()" class="form-container">
+    <div fxLayout="column" class="top-container" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+        <div class="header-title">Add Question</div>
         <div fxLayout="row" fxLayoutGap="10px" class="button-container">
-            <button href="#" mat-stroked-button class="button-cancel" >
-                Cancel
-              </button>
-              <button href="#" mat-stroked-button class="button-done" type="submit">
-                Done
-              </button>
+          <button href="#" mat-stroked-button class="button-cancel" >
+              Cancel
+            </button>
+            <button href="#" mat-stroked-button class="button-done" type="submit">
+              Done
+            </button>
         </div>
+      </div> 
+      <div fxLayout="row" class="status-container" fxLayoutGap="8px">
+        <div *ngIf="status === 'open'" class="c-chip c-chip--neutral invert-false">Open</div>
+        <div class="date-container">{{date}}</div>
+      </div>    
     </div>
-    <div fxLayout="row" fxLayoutAlign="center stretch" class="form-field-container">
-            <div fxLayout="column" fxLayoutAlign="center center">
-                <mat-form-field class="form-field" appearance="outline">
-                  <mat-label> Question Title
-                  </mat-label>
-                  <input matInput formControlName="questionTitle" required>
-                </mat-form-field>
-                <div fxLayout="row" fxLayoutGap="10px" style="width:150%">
-                  <mat-form-field appearance="outline" style="width: 50%;">
-                    <mat-label> Subject
-                    </mat-label>
-                    <input matInput formControlName="subject" type="password">
-                  </mat-form-field>
-                  <mat-form-field class="form-field" appearance="outline" style="width: 50%;">
-                    <mat-label> Due Date
-                    </mat-label>
-                    <input matInput formControlName="dueDate" required type="date">
-                  </mat-form-field>
-                </div>                
-                <mat-form-field class="form-field" appearance="outline">
-                  <mat-label> Tag
-                  </mat-label>
-                  <input matInput formControlName="tag">
-                </mat-form-field>
-                <mat-form-field class="form-field" appearance="outline">
-                  <mat-label> Description
-                  </mat-label>
-                  <input matInput formControlName="tag">
-                </mat-form-field>
-              </div>
+    <div fxLayout="column" class="bottom-container">
+      <div fxLayout="column" class="form-fields">         
+          <div class="label">Question Title</div>
+          <mat-form-field appearance="outline">
+            <input matInput type="text" formControlName="questionTitle" class="other">
+          </mat-form-field>
+          <div fxLayout="row">
+            <div fxLayout="column" class="search-container">
+              <div class="label">Subject</div>
+              <mat-form-field appearance="outline">
+                <input matInput type="text" formControlName="subject" class="search">
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" class="date-container">
+              <div class="label">Due date</div>
+              <mat-form-field appearance="outline">
+                <input matInput type="datetime-local" formControlName="dueDateTime" class="other">
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <div class="label">Description</div>
+          <mat-form-field appearance="outline">
+            <input matInput type="text" formControlName="description" class="other">
+          </mat-form-field>
+        <!-- <div fxLayout="row" fxLayout="center center" style="width: 100%;">
+          <div style="width: 49%;"> 
+            <div class="label">Subject</div>           
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" fxShow="true" fxHide.lt-sm="true" class="search-container">  
+              <mat-icon>search</mat-icon>              
+              <input matInput class="search" placeholder="Search">
+            </div>
+          </div>
+          <div style="width: 49%; margin-left: 2%;">  
+            <div class="label">Due date</div>             
+            <input type="datetime-local">
+          </div>
+        </div>
+        <div>
+          <div class="label">Description</div>
+          <input type="text">
+        </div> -->
+      </div>
+      <div style="width: 100%;">
+        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+          <ngx-dropzone-label>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap = "8px">
+              <mat-icon class="material-icons-outlined">
+                file_upload
+              </mat-icon> 
+              <div class="wording">Add Attachment</div>
+            </div>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </div>
+      </div>
+        
     </div>
-</div>
-</form>
-
-<!-- Mobile -->
-<form [formGroup]="loginForm" (submit)="hello()">
-  <div fxLayout="column" fxHide="true" class="form-container">
-      <div fxLayout="row" fxLayoutAlign="space-between center" class="title-container">
-          <div fxLayout="column" class="heading-container">
-              <h4>New Question</h4>
-              <div fxLayout=row>
-                  <p>Need clarifications</p>                
-              </div>
-          </div>
-          <div fxLayout="row" fxLayoutGap="10px" class="button-container">
-              <button href="#" mat-stroked-button class="button-cancel" >
-                  Cancel
-                </button>
-                <button href="#" mat-stroked-button class="button-done" type="submit">
-                  Done
-                </button>
-          </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center stretch" class="form-field-container">
-              <div fxLayout="column" fxLayoutAlign="center center">
-                  <mat-form-field class="form-field" appearance="outline">
-                    <mat-label> Question Title
-                    </mat-label>
-                    <input matInput formControlName="questionTitle" required>
-                  </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 50%;">
-                      <mat-label> Subject
-                      </mat-label>
-                      <input matInput formControlName="subject" type="password">
-                    </mat-form-field>
-                    <mat-form-field class="form-field" appearance="outline">
-                      <mat-label> Due Date
-                      </mat-label>
-                      <input matInput formControlName="dueDate" required type="date">
-                    </mat-form-field>               
-                  <mat-form-field class="form-field" appearance="outline">
-                    <mat-label> Tag
-                    </mat-label>
-                    <input matInput formControlName="tag">
-                  </mat-form-field>
-                  <mat-form-field class="form-field" appearance="outline">
-                    <mat-label> Description
-                    </mat-label>
-                    <input matInput formControlName="tag">
-                  </mat-form-field>
-                </div>
-      </div>
-  </div>
   </form>
+</div>

@@ -94,6 +94,7 @@ export class BodyComponent implements OnInit {
   }
 
   select(num:number){
+    this.show = !this.show;
     this.feedBackNum = num;
   }
 
@@ -101,6 +102,7 @@ export class BodyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
+    dialogConfig.height = "99%";
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
