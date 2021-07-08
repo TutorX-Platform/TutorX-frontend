@@ -41,6 +41,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { TestChatComponent } from './components/test/test-chat/test-chat.component';
 import { RefundsComponent } from './components/admin/refunds/refunds.component';
 import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-tutors.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 
 
 
@@ -60,6 +61,7 @@ import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-t
     TestChatComponent,
     RefundsComponent,
     ManageTutorsComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

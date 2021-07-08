@@ -6,6 +6,7 @@
     $background: map-get($theme, background);
 
     .add-question{
+        overflow: auto;
         .form-container{
             .top-container{
                 padding: 21px 5% 16px 5%;

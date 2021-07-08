@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
+import { SignUpComponent } from '../../auth/sign-up/sign-up.component';
 
 @Component({
   selector: 'app-body',
@@ -18,7 +19,7 @@ import {AuthService} from "../../../services/auth.service";
     //     animate('300ms', style({ opacity: 0 }))
     //   ])
     // ])
-    trigger('hee',[
+    trigger('client',[
       state('show', style({
         opacity: 1
       })),
@@ -27,7 +28,18 @@ import {AuthService} from "../../../services/auth.service";
       })),
       transition('show => hide', animate('400ms ease-out')),
       transition('hide => show', animate('400ms ease-in'))
-    ])
+    ]),
+    trigger('feedback',[
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      transition('show => hide', animate('400ms ease-out')),
+      transition('hide => show', animate('400ms ease-in'))
+    ]),
+
   ]
 })
 export class BodyComponent implements OnInit {
@@ -43,13 +55,22 @@ export class BodyComponent implements OnInit {
   backward = false;
 
   show = false;
+  showFeedback = false;
 
   get stateName() {
     return this.show ? 'show' : 'hide'
   }
 
+  get feedbackStateName() {
+    return this.showFeedback ? 'show' : 'hide'
+  }
+
   changeState(){
     this.show = true;
+  }
+
+  changeStateFeedback(){
+    this.showFeedback = true;
   }
 
   ngOnInit(): void {
@@ -94,7 +115,7 @@ export class BodyComponent implements OnInit {
   }
 
   select(num:number){
-    this.show = !this.show;
+    this.showFeedback = !this.showFeedback;
     this.feedBackNum = num;
   }
 
@@ -102,7 +123,7 @@ export class BodyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
-    dialogConfig.height = "99%";
+    dialogConfig.height = "810px";
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 

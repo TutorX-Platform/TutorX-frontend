@@ -7,6 +7,8 @@
 @import "components/manage-tutors.component.scss";
 @import "components/home.component.scss";
 @import "components/add-question.component.scss";
+@import "components/auth.component.scss";
+@import "components/nav-bar.component.scss";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -18,4 +20,6 @@
     @include manage-tutors-component($theme);
     @include home-component($theme);
     @include add-question-component($theme);
+    @include auth-component($theme);
+    @include nav-bar-component($theme);
 }

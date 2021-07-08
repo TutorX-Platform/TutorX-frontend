@@ -1,0 +1,102 @@
+@mixin auth-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .my-form-field .mat-form-field-wrapper{
+        margin-bottom: -12px;
+    }
+
+    .auth{
+        padding: 40px;
+        width: 100%;
+        .title{
+            font: $heading-desktop-h3;
+        }
+        .note{
+            font: $body-base-default;
+        }
+        .signup-button-container{
+            padding: 24px 0px 0px;
+
+            .button-container{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 16px 24px;
+                border: 1px solid #CBCFD1;
+                box-sizing: border-box;
+                border-radius: 4px;
+                cursor: pointer;
+
+                .button-text{
+                    font: $body-base-medium;
+                    margin: 0px 16px;
+                }
+            }
+        }
+        
+
+        .di{
+            border: 1px solid #9AA2A7; 
+            width: 100%;
+            margin-top: 34px;
+        }
+
+        .form{
+            padding: 16px 0px 0px;
+            margin-top: 26px;
+            width: 100%;
+
+            .other{
+                font:  400 16px/16px Roboto,'Manrope', sans-serif;
+            }
+      
+            .label{
+              font:  400 12px/18px Roboto,'Manrope', sans-serif;        
+            }
+
+            .confirmation{
+                font: $body-base-medium;
+                padding: 0px 0px 16px;
+            }
+
+            .button-reg{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 13px 16px;
+                background: #7F6EF0;
+                
+                box-shadow: 0px 14px 40px -12px rgba(127, 110, 240, 0.35);
+                border-radius: 4px;    
+                
+                font: $body-base-medium; 
+                cursor: pointer;
+                color: white;           
+            }
+
+            .social-media{
+                padding: 16px 0px 0px;
+                .message{
+                    font: $body-caption-default;
+                    color: #5B6469;
+                }
+                .stroke{
+                    border: 1px solid #9AA2A7; 
+                    width: 90px;
+                    height: 0px;
+                }
+                .social-media-icons-container{
+                    width: 100%;
+                    .social-media-icon{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

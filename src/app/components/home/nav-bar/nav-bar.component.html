@@ -1,62 +1,78 @@
-<div class="nav-bar-container">
-  <mat-toolbar class="nav-bar" [style.background-color]="viewPoint ? '#7F6EF0' : 'white'">
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-xs>
-        <mat-icon>menu</mat-icon>
-        <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
-      </button>
-      <span style=" margin-left: 3%; display: flex;" fxShow="true" fxHide.lt-sm="true">
-            <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
-            <span style="font-family: Inter-semiBold;">TutorX</span>
-        </span>
-      <span class="example-spacer"></span>
-      <div fxShow="true" fxHide.lt-sm="true">
-        <a href="#" mat-button>
-          <span style="font-family: Inter-semiBold">Home</span>
-        </a>
-        <a href="#" mat-button>
-          <span style="font-family: Inter-semiBold">About</span>
-        </a>
-      </div>
-      <span class="example-spacer"></span>
-      <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%"
-           style="margin-right: 3%;">
-        <a href="#" mat-stroked-button class="button-signUp" (click)="onSignUp()">
-          Sign up
-        </a>
-        <a href="#" mat-stroked-button class="button-login" (click)="onLogin()">
-          Login
-        </a>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-        <a href="#" mat-list-item>
-          <mat-icon>notifications</mat-icon>
-          Notifications
-        </a>
-        <a href="#" mat-list-item>
-          <mat-icon>message</mat-icon>
-          Messages</a>
-        <a href="#" mat-list-item>
-          <mat-icon>account_box</mat-icon>
-          My Account
-        </a>
-        <a href="#" mat-list-item>
-          <mat-icon>lock</mat-icon>
-          My Account
-        </a>
-        <a (click)="sidenav.toggle()" mat-list-item>
-          <mat-icon>close</mat-icon>
-          Close
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-  </mat-sidenav-container>
+<div class="nav">
+  <div class="nav-bar-container">
+    <mat-toolbar class="nav-bar" [style.background-color]="viewPoint ? '#7F6EF0' : 'white'">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-xs>
+          <mat-icon>menu</mat-icon>
+          <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
+        </button>
+        <div class="logo-container" fxShow="true" fxHide.lt-sm="true" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
+              <img src="../../../../assets/icons/logo-temp.svg">
+              <div class="names" fxLayout="column">
+                <div class="name">TutorX</div>
+                <div class="des">Work smart , Not hard</div>
+              </div>
+            </div>
+        <span class="example-spacer"></span>
+        <div fxShow="true" fxHide.lt-sm="true">
+          <a href="#" mat-button>
+            <div [ngClass]=" true ? 'links links--selected' : 'links'">Home</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">Tutor</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">About</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">FAQ</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">Become a tutor</div>
+          </a>
+        </div>
+        <span class="example-spacer"></span>
+        <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%"
+             style="margin-right: 3%;">
+          <a mat-stroked-button class="button-signUp" (click)="onSignUp()">
+            Sign up
+          </a>
+          <a mat-stroked-button class="button-login" (click)="onLogin()">
+            Login
+          </a>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <mat-sidenav-container fxFlexFill>
+      <mat-sidenav #sidenav>
+        <mat-nav-list>
+          <a href="#" mat-list-item>
+            <mat-icon>notifications</mat-icon>
+            Notifications
+          </a>
+          <a href="#" mat-list-item>
+            <mat-icon>message</mat-icon>
+            Messages</a>
+          <a href="#" mat-list-item>
+            <mat-icon>account_box</mat-icon>
+            My Account
+          </a>
+          <a href="#" mat-list-item>
+            <mat-icon>lock</mat-icon>
+            My Account
+          </a>
+          <a (click)="sidenav.toggle()" mat-list-item>
+            <mat-icon>close</mat-icon>
+            Close
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <app-body></app-body>
+    </mat-sidenav-container>
+  </div>
 </div>
+
 
 
 

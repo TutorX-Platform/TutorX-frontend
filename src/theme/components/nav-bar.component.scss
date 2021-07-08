@@ -1,0 +1,50 @@
+@mixin nav-bar-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .nav{
+        .example-spacer {
+            flex: 1 1 auto;
+          }
+          
+          .nav-bar-container{
+            width: 100%;
+            height: 100%;
+            .logo-container{
+              margin-left: 3%;
+              .names{
+                .name{
+                  font: $body-base-bold;
+                }
+                .des{
+                  font: $body-caption-default;
+                  color: #5B6469;
+                }
+              }
+            }
+            .nav-bar{
+              box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);
+          
+              .links{
+                font: $body-base-bold;
+                &--selected{
+                  color: #644AE7;
+                }
+              }
+            }
+          }
+          
+          .button-signUp{
+            border: 1px solid #7F6EF0 !important; 
+            color: #7F6EF0;
+          }
+          
+          .button-login{
+            background-color: #7F6EF0;
+            color: white;
+          }
+    }
+}

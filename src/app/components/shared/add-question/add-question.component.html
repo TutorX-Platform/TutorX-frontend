@@ -21,45 +21,28 @@
     <div fxLayout="column" class="bottom-container">
       <div fxLayout="column" class="form-fields">         
           <div class="label">Question Title</div>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="text" formControlName="questionTitle" class="other">
           </mat-form-field>
           <div fxLayout="row">
             <div fxLayout="column" class="search-container">
               <div class="label">Subject</div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" class="my-form-field">
                 <input matInput type="text" formControlName="subject" class="search">
               </mat-form-field>
             </div>
             <div fxLayout="column" class="date-container">
               <div class="label">Due date</div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" class="my-form-field">
                 <input matInput type="datetime-local" formControlName="dueDateTime" class="other">
               </mat-form-field>
             </div>
           </div>
           
           <div class="label">Description</div>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="text" formControlName="description" class="other">
           </mat-form-field>
-        <!-- <div fxLayout="row" fxLayout="center center" style="width: 100%;">
-          <div style="width: 49%;"> 
-            <div class="label">Subject</div>           
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" fxShow="true" fxHide.lt-sm="true" class="search-container">  
-              <mat-icon>search</mat-icon>              
-              <input matInput class="search" placeholder="Search">
-            </div>
-          </div>
-          <div style="width: 49%; margin-left: 2%;">  
-            <div class="label">Due date</div>             
-            <input type="datetime-local">
-          </div>
-        </div>
-        <div>
-          <div class="label">Description</div>
-          <input type="text">
-        </div> -->
       </div>
       <div style="width: 100%;">
         <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">

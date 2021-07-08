@@ -1,20 +1,17 @@
 <div class="home">
-<app-nav-bar></app-nav-bar>
 <!-- banner componet -->
 <div fxLayout="column" fxLayoutAlign="center" class="banner-web" fxShow="true" fxHide.lt-sm="true">
     <div class="image-container"></div>
     <div fxLayout="row" fxLayoutAlign="none center">
-        <div fxLayout="column" fxLayoutGap="16px"  class="details-container">
+        <div fxLayout="column" fxLayoutGap="16px"  class="details-container" fxLayout="start start">
             <div class="banner-title">Get Homework Help</div>
             <div class="banner-sub-title">For university/college, high school and middle school students</div>
             <div class="banner-details">Talk to our experts 24/7. Pay only for the specific requirement. We assist in your homework !!
             </div>
-            <button mat-flat-button  (click)="addQuestion()" class="get-help">
+            <div (click)="addQuestion()" class="get-helps" fxLayout="start center">
                 Get help
-                <mat-icon class="material-icons-outlined">
-                    supervised_user_circle  
-                    </mat-icon>
-            </button>
+                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
+            </div>
         </div>
     </div>
 </div>
@@ -64,12 +61,12 @@
 </div>
 
 <!-- client-web-->
-<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-md="true">
+<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-md="true" fxLayoutAlign="start center">
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
         <div class="client-title">Our clients speak</div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="client-feedback-container">
-        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center">
+        <div fxLayout="column" [@client]="stateName" (@client.done)="changeState()" fxLayoutAlign="center center">
             <div class="box-client b4">
                 <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
                 <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
@@ -84,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div fxLayout="column" [@hee]="stateName" (@hee.done)="changeState()" fxLayoutAlign="center center" >
+        <div fxLayout="column" [@client]="stateName" (@client.done)="changeState()" fxLayoutAlign="center center" >
             <div class="box-client b4">
                 <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
                 <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
@@ -166,7 +163,7 @@
 
 <!-- tutor-feedback-web -->
 <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-    <div class="box feedback-container" fxLayout="row" [@hee]="stateName" (@hee.done)="changeState()">
+    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName">
         <svg width="100" height="20" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23.584 1.16L23.008 5.264C21.856 5.168 20.92 5.36 20.2 5.84C19.48 6.296 18.976 6.968 18.688 7.856C18.424 8.72 18.376 9.728 18.544 10.88H23.584V20.672H13.792V10.88C13.792 7.424 14.596 4.808 16.204 3.032C17.812 1.256 20.272 0.631999 23.584 1.16ZM10.552 1.16L9.976 5.264C8.824 5.168 7.888 5.36 7.168 5.84C6.448 6.296 5.944 6.968 5.656 7.856C5.392 8.72 5.344 9.728 5.512 10.88H10.552V20.672H0.76V10.88C0.76 7.424 1.564 4.808 3.172 3.032C4.78 1.256 7.24 0.631999 10.552 1.16Z" fill="#2EC5CE"/>
         </svg>
@@ -179,21 +176,21 @@
             <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
                 <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
                 <div *ngIf="tutorFeedback == feedBackNum">
-                    <div *ngIf="feedBackNum == 1" [@hee]="stateName"  fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <div *ngIf="feedBackNum == 2" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <div *ngIf="feedBackNum == 3" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    <div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 4" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    </div><div *ngIf="feedBackNum == 4" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 5" [@hee]="stateName" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                    </div><div *ngIf="feedBackNum == 5" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
                         <div class="avatar-name">James Cameron</div>
                         <div class="avatar-designation">CEO WTF</div>
                     </div>
@@ -247,12 +244,10 @@
         <div class="banner-title">Get Instant Help</div>
         <div class="banner-sub-title">for our stdent comunity</div>
     </div>
-    <button mat-raised-button class="button" (click)="addQuestion()">
+    <div (click)="addQuestion()" class="get-helps" fxLayout="start center">
         Get help
-        <mat-icon class="material-icons-outlined">
-            supervised_user_circle
-            </mat-icon>
-    </button>
+        <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
+    </div>
 </div>
 
 <div class="footer"></div>

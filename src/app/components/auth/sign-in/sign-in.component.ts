@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import {AuthService} from "../../../services/auth.service";
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,8 +11,11 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class SignInComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,    
+    private dialogRef: MatDialogRef<SignInComponent>,   
+    public authService: AuthService 
+  ) { }
 
   ngOnInit(): void {
   }

@@ -6,6 +6,21 @@
     $background: map-get($theme, background);
 
     .home{
+        .get-helps {
+            background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+            margin-top: 16px;
+            box-shadow: 0px 22px 100px rgba(46, 163, 65, 0.35);
+            border-radius: 8px;
+            padding: 16px 32px;
+            font: $body-base-bold;
+            color: white;
+            cursor: pointer;
+
+            .iconr{
+                margin-left: 8px;
+            }
+        }
+
         .container{
             position: fixed;
             width: 100%;
@@ -53,23 +68,17 @@
     
                 .banner-sub-title{
                     font: $heading-desktop-h5;
-                    color: white;                
+                    color: white; 
+                    margin-top: 16px;               
                 }
     
                 .banner-details{
                     font: $body-base-default;
-                    color: white;                 
+                    color: white; 
+                    margin-top: 16px;                
                 }                
         
-                .get-help {
-                    background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%) !important;
-                    border-radius: 8px;
-                    font: $body-base-bold;
-                    height: 56px;
-                    width: 181px;
-                    padding: 8px;
-                    color: white;
-                }
+                
             }
 
         }
@@ -155,6 +164,7 @@
 
             .client-feedback-container{
                 margin-top: 32px;
+                width: 100%;
                 .box-client {
                     padding: 32px;
                     width: 70%;

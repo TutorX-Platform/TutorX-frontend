@@ -6,9 +6,10 @@ import {BodyComponent} from "./components/home/body/body.component";
 import {DummyComponent} from "./components/test/dummy/dummy.component";
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import {TestChatComponent} from "./components/test/test-chat/test-chat.component";
+import { NavBarComponent } from './components/home/nav-bar/nav-bar.component';
 
 const routes: Routes = [
-  {path: '', component: BodyComponent},
+  {path: '', component: NavBarComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'tutor', component: TutorDashboardComponent},
