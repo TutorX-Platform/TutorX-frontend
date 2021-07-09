@@ -1,11 +1,12 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaObserver, MediaChange} from '@angular/flex-layout';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 import {AuthService} from "../../../services/auth.service";
-import { SignInComponent } from '../../auth/sign-in/sign-in.component';
-import { SignUpComponent } from '../../auth/sign-up/sign-up.component';
-import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
+import {SignInComponent} from '../../auth/sign-in/sign-in.component';
+import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
+import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
+import * as constants from "../../../models/constants";
 
 @Component({
   selector: 'app-nav-bar',
@@ -58,17 +59,23 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  // onSignUp() {
-  //   this.authService.SignIn("sandunsameera25@gmail.com", "sandunsameera");
-  // }
-  
-
-  onSignUp(){
+  onSignUp() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
     dialogConfig.height = "860px";
     this.dialog.open(SignUpComponent, dialogConfig);
+  }
+
+  onSignOut() {
+    console.log("hi");
+    // this.authService.signOut().then(r => {
+    //   this.authService.userData = null;
+    //   localStorage.removeItem(constants.localStorageKeys.user);
+    //   console.log(localStorage.removeItem(constants.localStorageKeys.user));
+    // });
+    // console.log(this.authService.userData);
+
   }
 
 }

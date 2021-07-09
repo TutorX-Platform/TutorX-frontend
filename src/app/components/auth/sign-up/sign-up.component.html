@@ -1,38 +1,41 @@
 <div class="auth" fxLayout="column">
-    <div class="title">Signup</div>
-    <div class="note">And enjoy the most convenient way of Solve your homework</div>
-    <div class="signup-button-container" fxLayout="column" fxLayoutGap="16px">
-        <div class="button-container">
-            <img src="../../../../assets/icons/google.svg" alt="">
-            <div class="button-text">Signup with Google</div>
-        </div>
-        <div class="button-container">
-            <img src="../../../../assets/icons/facebook.svg" alt="">
-            <div class="button-text">Signup with Facebook</div>
-        </div>
+  <div class="title">Signup</div>
+  <div class="note">And enjoy the most convenient way of Solve your homework</div>
+  <div class="signup-button-container" fxLayout="column" fxLayoutGap="16px">
+    <div class="button-container">
+      <img src="../../../../assets/icons/google.svg" alt="">
+      <div class="button-text">Signup with Google</div>
     </div>
-    <div class="di"></div>
+    <div class="button-container">
+      <img src="../../../../assets/icons/facebook.svg" alt="">
+      <div class="button-text">Signup with Facebook</div>
+    </div>
+  </div>
+  <div class="di"></div>
+  <form [formGroup]="signUpForm">
     <div class="form" fxLayout="column">
-        <div class="label">Full name</div>
-        <mat-form-field class="my-form-field" appearance="outline">
-          <input matInput type="text" class="other">
-        </mat-form-field>
-        <div class="label">Email address</div>
-        <mat-form-field class="my-form-field" appearance="outline">   
-          <input matInput type="email" class="other">
-        </mat-form-field>
-        <div class="label">Password</div>
-        <mat-form-field appearance="outline">
-          <input matInput type="password" class="other">
-        </mat-form-field>
-        <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-            <input type="checkbox">
-            <div> 
-                By creating an account, you agree to the <a href="#">Free Membership Agreement</a>  and <a href="#">Privacy Policy</a>
-            </div>
+      <div class="label">Full name</div>
+      <mat-form-field class="my-form-field" appearance="outline">
+        <input formControlName="fullName" matInput type="text" class="other">
+      </mat-form-field>
+      <div class="label">Email address</div>
+      <mat-form-field class="my-form-field" appearance="outline">
+        <input formControlName="email" matInput type="email" class="other">
+      </mat-form-field>
+      <div class="label">Password</div>
+      <mat-form-field appearance="outline">
+        <input formControlName="password" matInput type="password" class="other">
+      </mat-form-field>
+      <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+        <input type="checkbox">
+        <div>
+          By creating an account, you agree to the <a href="#">Free Membership Agreement</a> and <a href="#">Privacy
+          Policy</a>
         </div>
-        <div class="button-reg">
-            Register
-        </div>
+      </div>
+      <div class="button-reg" (click)="onSignUp()">
+        Register
+      </div>
     </div>
+  </form>
 </div>

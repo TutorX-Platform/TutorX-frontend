@@ -6,5 +6,5 @@ export interface Student{
   email:string;
   profileImage:string;
   questions:string[];
-  isVerified:boolean[];
+  isVerified:boolean;
 }
