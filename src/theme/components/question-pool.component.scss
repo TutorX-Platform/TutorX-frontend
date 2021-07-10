@@ -10,6 +10,18 @@
         flex: 1 1 auto;
       }
 
+      
+      .new-question{
+        padding: 8px 16px;
+        color: white !important;
+        background: #7F6EF0;
+        cursor: pointer;
+
+        box-shadow: 0px 14px 40px -12px rgba(127, 110, 240, 0.35);
+        border-radius: 4px;
+        font: $body-caption-bold;
+      }
+
     .page-title-container{
       padding: 0px 0px 12px 24px;
       font: normal 700 32px/44px Roboto,'Manrope', sans-serif;
@@ -50,6 +62,16 @@
             font: $body-caption-default;
             color: #5B6469;
           }
+          .new-question{
+            padding: 8px 16px;
+            color: white !important;
+            background: #7F6EF0;
+            cursor: pointer;
+
+            box-shadow: 0px 14px 40px -12px rgba(127, 110, 240, 0.35);
+            border-radius: 4px;
+            font: $body-caption-bold;
+          }
         }
       }
       .right-container{
@@ -73,6 +95,24 @@
           .search{
             border-width: 0; 
             width: 80%;
+          }
+        }
+
+        .filter-results{
+          font: $heading-desktop-h5;
+          margin-top: 24px;
+
+          .subjects-container{
+            margin-top: 8px;
+            .subjects-title{
+              font: $body-base-bold;
+            }
+            .subject-wrapper{
+              padding-top: 8px;
+              .subjectss{
+                font: $body-small-default;
+              }
+            }
           }
         }
 
@@ -101,5 +141,18 @@
         }
       }
     }
+
+    //no-questions view
+    .no-que-container{  
+      min-height: 90vh;
+      .message{
+        font: $heading-desktop-h5;
+        color: #5B6469;
+      }  
+      .sub-message{
+        font: $body-base-default;
+        color: #5B6469;
+      }    
     }
+  }
 }

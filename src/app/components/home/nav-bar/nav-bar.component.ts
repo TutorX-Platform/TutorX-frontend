@@ -53,7 +53,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
-    dialogConfig.height = "560px";
+    dialogConfig.height = "620px";
     this.dialog.open(SignInComponent, dialogConfig);
 
   }
@@ -67,7 +67,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
-    dialogConfig.height = "860px";
+    dialogConfig.height = "900px";
     this.dialog.open(SignUpComponent, dialogConfig);
   }
 

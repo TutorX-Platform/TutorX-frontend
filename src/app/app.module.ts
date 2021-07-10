@@ -42,6 +42,9 @@ import { TestChatComponent } from './components/test/test-chat/test-chat.compone
 import { RefundsComponent } from './components/admin/refunds/refunds.component';
 import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-tutors.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { StudentComponent } from './components/student/student.component';
+import { StudentQuestionsComponent } from './components/student/student-questions/student-questions.component';
+import { WelcomeComponent } from './components/student/welcome/welcome.component';
 
 
 
@@ -62,6 +65,9 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
     RefundsComponent,
     ManageTutorsComponent,
     SignUpComponent,
+    StudentComponent,
+    StudentQuestionsComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

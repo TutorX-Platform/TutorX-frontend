@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { WelcomeComponent } from '../../student/welcome/welcome.component';
 
 @Component({
   selector: 'app-add-question',
@@ -15,7 +16,8 @@ export class AddQuestionComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,    
-    private dialogRef: MatDialogRef<AddQuestionComponent>,    
+    private dialogRef: MatDialogRef<AddQuestionComponent>,
+    private dialog: MatDialog    
   ) { }
 
   ngOnInit(): void {
@@ -29,8 +31,12 @@ export class AddQuestionComponent implements OnInit {
     this.date = new Date();
   }
 
-  hello(){
-    console.log("Hi");
+  onSubmit(){    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    dialogConfig.height = "520px";
+    this.dialog.open(WelcomeComponent, dialogConfig);
   }
 
   files: File[] = [];

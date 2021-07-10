@@ -7,6 +7,7 @@ import {DummyComponent} from "./components/test/dummy/dummy.component";
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import {TestChatComponent} from "./components/test/test-chat/test-chat.component";
 import { NavBarComponent } from './components/home/nav-bar/nav-bar.component';
+import { StudentComponent } from './components/student/student.component';
 
 const routes: Routes = [
   {path: '', component: NavBarComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'tutor', component: TutorDashboardComponent},
   {path: 'dummy', component: DummyComponent},
   {path: 'test-chat/:chatToken', component: TestChatComponent},
+  {path: 'student', component: StudentComponent},
 ];
 
 @NgModule({

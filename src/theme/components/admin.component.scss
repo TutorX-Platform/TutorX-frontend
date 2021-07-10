@@ -62,6 +62,20 @@
       .side-nav-list_selected-icon{
         color: #57499B; 
       }
+
+      .but-container{
+        width: 100%;
+        .new-quest{
+          margin: 24px 16px 24px 16px;
+          padding: 8px 16px 8px 16px;
+          cursor: pointer;
+          background: #F2F0FE;
+          border-radius: 4px;
+          font: $body-caption-bold;
+          color: #644AE7;
+        }
+      }
+      
     
       .example-spacer {
         flex: 1 1 auto;

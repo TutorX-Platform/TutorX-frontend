@@ -1,14 +1,14 @@
 <!-- web -->
 <div class="add-question">
-  <form [formGroup]="addQuestionForm" (submit)="hello()" class="form-container">
+  <form [formGroup]="addQuestionForm" (submit)="onSubmit()" class="form-container">
     <div fxLayout="column" class="top-container" fxLayoutAlign="center center">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
         <div class="header-title">Add Question</div>
         <div fxLayout="row" fxLayoutGap="10px" class="button-container">
-          <button href="#" mat-stroked-button class="button-cancel" >
+          <button mat-stroked-button class="button-cancel" >
               Cancel
             </button>
-            <button href="#" mat-stroked-button class="button-done" type="submit">
+            <button mat-stroked-button class="button-done" type="submit">
               Done
             </button>
         </div>
