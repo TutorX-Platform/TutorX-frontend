@@ -1,6 +1,7 @@
 export const collections = {
   chats: 'chats',
-  users: 'users',
+  students: 'student',
+  tutors: 'tutor',
   test: 'test',
 }
 

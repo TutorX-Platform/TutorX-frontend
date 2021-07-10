@@ -6,13 +6,14 @@
           <mat-icon>menu</mat-icon>
           <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
         </button>
-        <div class="logo-container" fxShow="true" fxHide.lt-sm="true" fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
-              <img src="../../../../assets/icons/logo-temp.svg">
-              <div class="names" fxLayout="column">
-                <div class="name">TutorX</div>
-                <div class="des">Work smart , Not hard</div>
-              </div>
-            </div>
+        <div class="logo-container" fxShow="true" fxHide.lt-sm="true" fxLayout="row" fxLayoutGap="12px"
+             fxLayoutAlign="center center">
+          <img src="../../../../assets/icons/logo-temp.svg">
+          <div class="names" fxLayout="column">
+            <div class="name">TutorX</div>
+            <div class="des">Work smart , Not hard</div>
+          </div>
+        </div>
         <span class="example-spacer"></span>
         <div fxShow="true" fxHide.lt-sm="true">
           <a href="#" mat-button>
@@ -32,18 +33,24 @@
           </a>
         </div>
         <span class="example-spacer"></span>
-        <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%"
-             style="margin-right: 3%;">
-          <a mat-stroked-button class="button-signUp" (click)="onSignUp()">
-            Sign up
-          </a>
-          <a mat-stroked-button class="button-login" (click)="onLogin()">
-            Login
-          </a>
+        <div *ngIf="!authService.userData">
+          <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%"
+               style="margin-right: 3%;">
+            <a mat-stroked-button class="button-signUp" (click)="onSignUp()">
+              Sign up
+            </a>
+            <a mat-stroked-button class="button-login" (click)="onLogin()">
+              Login
+            </a>
+          </div>
+        </div>
+        <div *ngIf="authService.userData">
+          <div>profile avatar</div>
+          <button (click)="onSignOut">log out</button>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
-  
+
     <mat-sidenav-container fxFlexFill>
       <mat-sidenav #sidenav>
         <mat-nav-list>

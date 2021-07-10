@@ -16,14 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authService.reloadCurrentUser();
-
-    this.dummyService.getTestItems().subscribe(
-      (res: any) => {
-        console.log(res[0].test)
-        this.test = res[0].test;
-      }
-    );
+    // this.authService.reloadCurrentUser();
   }
 }
 

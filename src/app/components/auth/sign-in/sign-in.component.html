@@ -1,21 +1,23 @@
+<script src="sign-in.component.ts"></script>
 <div class="auth" fxLayout="column">
   <div class="title">Welcome back...</div>
-  <div class="form" fxLayout="column">
+  <form [formGroup]="signInForm">
+    <div class="form" fxLayout="column">
       <div class="label">Email address</div>
-      <mat-form-field class="my-form-field" appearance="outline">   
-        <input matInput type="email" class="other">
+      <mat-form-field class="my-form-field" appearance="outline">
+        <input formControlName="email" matInput type="email" class="other">
       </mat-form-field>
       <div class="label">Password</div>
       <mat-form-field appearance="outline">
-        <input matInput type="password" class="other">
+        <input formControlName="password" matInput type="password" class="other">
       </mat-form-field>
       <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-          <div > 
-              <a style="color: #228CCD !important;" href="#">Forgot password</a>
-          </div>
+        <div>
+          <a style="color: #228CCD !important;" href="#">Forgot password</a>
+        </div>
       </div>
-      <div class="button-reg">
-          Sign In
+      <div class="button-reg" (click)="onSignIn()">
+        Sign In
       </div>
       <div class="social-media" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
@@ -23,12 +25,12 @@
           <div class="message">Or continue with</div>
           <div class="stroke"></div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="center center" class="social-media-icons-container" fxLayoutGap="8px"> 
+        <div fxLayout="row" fxLayoutAlign="center center" class="social-media-icons-container" fxLayoutGap="8px">
           <img src="../../../../assets/icons/google-lg.svg" alt="" class="social-media-icon">
           <img src="../../../../assets/icons/facebook-lg.svg" alt="" class="social-media-icon">
         </div>
       </div>
-      
-  </div>
+    </div>
+  </form>
 </div>
 
