@@ -5,7 +5,7 @@
       <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
         <div class="header-title">Add Question</div>
         <div fxLayout="row" fxLayoutGap="10px" class="button-container">
-          <button mat-stroked-button class="button-cancel" >
+          <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
               Cancel
             </button>
             <button mat-stroked-button class="button-done" type="submit">
@@ -45,7 +45,7 @@
           </mat-form-field>
       </div>
       <div style="width: 100%;">
-        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+        <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">
           <ngx-dropzone-label>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap = "8px">
               <mat-icon class="material-icons-outlined">

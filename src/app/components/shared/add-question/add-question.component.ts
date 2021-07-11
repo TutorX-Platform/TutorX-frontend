@@ -31,12 +31,17 @@ export class AddQuestionComponent implements OnInit {
     this.date = new Date();
   }
 
-  onSubmit(){    
+  onSubmit(){
+    this.dialogRef.close();    
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
     dialogConfig.height = "520px";
     this.dialog.open(WelcomeComponent, dialogConfig);
+  }
+
+  onCancel(){
+    this.dialogRef.close();    
   }
 
   files: File[] = [];

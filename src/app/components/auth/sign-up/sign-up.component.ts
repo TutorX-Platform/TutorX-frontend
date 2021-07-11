@@ -36,6 +36,7 @@ export class SignUpComponent implements OnInit {
     // console.log(this.signUpForm.value.email, this.signUpForm.value.password);
     this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, this.signUpForm.value.fullName).then(() => {
       console.log("done");
+      this.dialogRef.close();
     });
   }
 

@@ -1,7 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Question } from 'src/app/models/question';
+import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
 
 @Component({
   selector: 'app-student-questions',
@@ -32,7 +34,8 @@ export class StudentQuestionsComponent implements OnInit {
   questions : Question[] = [];
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private dialog: MatDialog
     ) { }
   showFiller = false;
   ngOnInit(): void {
@@ -40,31 +43,39 @@ export class StudentQuestionsComponent implements OnInit {
       country: [null]
     });
     this.questions = [
-      // {
-      //   title: "Question Title",
-      //   subjects: ['Maths','Computer Science'],
-      //   dueDate: new Date(),
-      //   descriptionTitle: 'Hi Tutors,',
-      //   description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
-      //   status: 'inProgress',
-      //   viewedByAmount: 400,
-      //   images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
-      // },
-      // {
-      //   title: "Question Title",
-      //   subjects: ['Maths','Computer Science'],
-      //   dueDate: new Date(),
-      //   descriptionTitle: 'Hi Tutors,',
-      //   description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
-      //   status: 'open',
-      //   viewedByAmount: 400,
-      //   images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
-      // }
+      {
+        title: "Question Title",
+        subjects: ['Maths','Computer Science'],
+        dueDate: new Date(),
+        descriptionTitle: 'Hi Tutors,',
+        description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
+        status: 'inProgress',
+        viewedByAmount: 400,
+        images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
+      },
+      {
+        title: "Question Title",
+        subjects: ['Maths','Computer Science'],
+        dueDate: new Date(),
+        descriptionTitle: 'Hi Tutors,',
+        description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
+        status: 'open',
+        viewedByAmount: 400,
+        images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
+      }
     ] 
   }
 
   selectStatus(num:number){
     this.selectedStatus = num;
+  }  
+
+  addQuestion(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "100%";
+    dialogConfig.height = "810px";
+    this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
 }

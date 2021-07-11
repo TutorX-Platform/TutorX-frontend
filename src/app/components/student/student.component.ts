@@ -1,7 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AddQuestionComponent } from '../shared/add-question/add-question.component';
 
 @Component({
   selector: 'app-student',
@@ -14,6 +16,7 @@ export class StudentComponent implements OnInit {
   showFiller = false;
   constructor(
     private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -28,4 +31,12 @@ export class StudentComponent implements OnInit {
   changePage(num:number){
     this.selectedPage = num;
   }  
+
+  addQuestion(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "100%";
+    dialogConfig.height = "810px";
+    this.dialog.open(AddQuestionComponent, dialogConfig);
+  }
 }
