@@ -6,10 +6,11 @@ import {NavBarComponent} from './components/home/nav-bar/nav-bar.component';
 import {AngularFireModule} from 'angularfire2'
 import {AngularFirestoreModule} from 'angularfire2/firestore'
 import {AngularFireAuthModule} from 'angularfire2/auth'
+import {AngularFireStorageModule} from 'angularfire2/storage'
 import {environment} from '../environments/environment.prod';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -24,25 +25,24 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
-import { NgxDropzoneModule } from 'ngx-dropzone';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
 import {SignInComponent} from './components/auth/sign-in/sign-in.component';
 import {AuthService} from "./services/auth.service";
-import { DummyComponent } from './components/test/dummy/dummy.component';
-import { AddQuestionComponent } from './components/shared/add-question/add-question.component';
-import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
-import { QuestionCardComponent } from './components/shared/question-card/question-card.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { QuestionPoolComponent } from './components/shared/question-pool/question-pool.component';
-import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
-import { TestChatComponent } from './components/test/test-chat/test-chat.component';
-import { RefundsComponent } from './components/admin/refunds/refunds.component';
-import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-tutors.component';
-import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
-
+import {DummyComponent} from './components/test/dummy/dummy.component';
+import {AddQuestionComponent} from './components/shared/add-question/add-question.component';
+import {TutorDashboardComponent} from './components/tutor/tutor-dashboard/tutor-dashboard.component';
+import {QuestionCardComponent} from './components/shared/question-card/question-card.component';
+import {AdminComponent} from './components/admin/admin.component';
+import {QuestionPoolComponent} from './components/shared/question-pool/question-pool.component';
+import {DashboardComponent} from './components/admin/dashboard/dashboard.component';
+import {TestChatComponent} from './components/test/test-chat/test-chat.component';
+import {RefundsComponent} from './components/admin/refunds/refunds.component';
+import {ManageTutorsComponent} from './components/admin/manage-tutors/manage-tutors.component';
+import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -68,6 +68,7 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatIconModule,

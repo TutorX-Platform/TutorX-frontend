@@ -7,6 +7,8 @@ import {SignInComponent} from '../../auth/sign-in/sign-in.component';
 import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
 import * as constants from "../../../models/constants";
+import {StudentService} from "../../../services/student-service.service";
+import {Student} from "../../../models/student";
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,12 +19,23 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private mediaSub: Subscription | undefined;
   viewPoint = false;
+  currentStudent: Student = {
+    email: "",
+    firstName: "",
+    isVerified: false,
+    lastName: "",
+    profileImage: "",
+    questions: [],
+    uniqueKey: "",
+    userId: ""
+  };
 
   constructor(
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
     public authService: AuthService,
+    private studentService: StudentService,
   ) {
   }
 
@@ -38,6 +51,9 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.viewPoint);
       }
     );
+
+    this.findStudent();
+
   }
 
   ngAfterViewInit(): void {
@@ -76,6 +92,16 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     // });
     // console.log(this.authService.userData);
 
+  }
+
+  findStudent() {
+    this.studentService.findStudentDetails().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.currentStudent = res;
+        console.log(res);
+      }
+    )
   }
 
 }

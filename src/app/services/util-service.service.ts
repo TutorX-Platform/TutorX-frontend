@@ -10,13 +10,16 @@ export class UtilService {
   constructor() {
   }
 
-  generateUniqueKey(userType: string): string {
+  generateUniqueKey(keyType: string): string {
     const uniqueId = uuid.v4();
-    if (userType === constants.userTypes.student) {
+    if (keyType === constants.genKey.student) {
       return constants.uniqueIdPrefix.prefixStudent.concat(uniqueId);
     }
-    if (userType === constants.userTypes.tutor) {
+    if (keyType === constants.genKey.tutor) {
       return constants.uniqueIdPrefix.prefixTutor.concat(uniqueId);
+    }
+    if (keyType === constants.genKey.question) {
+      return constants.uniqueIdPrefix.prefixQuestion.concat(uniqueId);
     }
     return "";
   }

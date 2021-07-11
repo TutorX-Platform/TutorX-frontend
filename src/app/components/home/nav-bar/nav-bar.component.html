@@ -45,7 +45,7 @@
           </div>
         </div>
         <div *ngIf="authService.userData">
-          <div>profile avatar</div>
+          <div>{{currentStudent.firstName}}</div>
           <button (click)="onSignOut">log out</button>
         </div>
       </mat-toolbar-row>

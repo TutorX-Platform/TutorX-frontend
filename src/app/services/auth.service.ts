@@ -23,7 +23,7 @@ export class AuthService {
       if (user) {
         this.userData = user;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
-        JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));
+        `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
       } else {
         localStorage.setItem(constants.localStorageKeys.user, '');
         JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));
@@ -63,7 +63,7 @@ export class AuthService {
     const userData: Student = {
       email: user.email,
       firstName: firstName,
-      isVerified: false,
+      isVerified: true,
       lastName: lastName,
       profileImage: '',
       questions: [],
