@@ -1,0 +1,66 @@
+<div class="admin">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport
+            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+            [mode]="(isHandset$ | async) ? 'over' : 'side'"
+            [opened]="(isHandset$ | async) === false">
+          <div fxLayout="row" fxLayoutAlign="start center" class="name">
+            <img src="../../../assets/images/Logo.png" alt="" width="40px" height="40px">
+            <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="-8px">
+                <div class="log-title">TutorX</div>
+                <div class="log-sub-title">Business project</div>            
+            </div>
+        </div>
+          <div class="but-container" fxLayout="row">
+            <div class="new-quest"  fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" (click)="addQuestion()">
+                <img src="../../../assets/icons/plus.svg" alt="">
+                <div>New question</div> 
+            </div>
+          </div>
+          <mat-nav-list>       
+            <a mat-list-item (click)="changePage(1)" [ngClass]="selectedPage === 1 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+                <mat-icon class="material-icons-outlined" [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">space_dashboard</mat-icon>
+                <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My Questions</div>
+            </a>
+          </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="sidenav-container">
+          <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>       
+            <span class="example-spacer"></span>
+            <div fxLayout="row" fxLayoutGap="17px">
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+                    <div class="icon-container">
+                        <mat-icon class="icon">chat_bubble_outline</mat-icon>
+                    </div><div class="icon-container">
+                        <mat-icon class="icon">notifications</mat-icon>
+                    </div>
+                </div>      
+                
+            <span class="example-spacer"></span>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                    <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
+                        <div class="profile-title">name</div>
+                        <div class="profile-sub-title">name@mail.com</div>
+                    </div>
+                    <mat-icon style="cursor: pointer;">expand_more</mat-icon>
+                </div>    
+            </div>
+          </mat-toolbar>
+    
+          <app-student-questions *ngIf="selectedPage === 1"></app-student-questions>
+          
+        
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+</div>
+
+

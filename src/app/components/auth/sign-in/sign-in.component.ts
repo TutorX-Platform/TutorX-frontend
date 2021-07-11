@@ -34,6 +34,7 @@ export class SignInComponent implements OnInit {
 
   onSignIn() {
     this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password);
+    this.dialogRef.close();
   }
 }
 

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { WelcomeComponent } from '../../student/welcome/welcome.component';
 import {AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference} from 'angularfire2/storage';
 import {Observable} from "rxjs";
 import * as constants from '../../../models/constants';
@@ -36,6 +37,7 @@ export class AddQuestionComponent implements OnInit {
 
 
   constructor(
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddQuestionComponent>,
     private storage: AngularFireStorage,
@@ -68,6 +70,16 @@ export class AddQuestionComponent implements OnInit {
 
   onDone() {
     this.startUpload();
+    this.dialogRef.close();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    dialogConfig.height = "520px";
+    this.dialog.open(WelcomeComponent, dialogConfig);
+  }
+
+  onCancel(){
+    this.dialogRef.close();
   }
 
   files: File[] = [];
