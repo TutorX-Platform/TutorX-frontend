@@ -8,7 +8,8 @@
     .question-pool{
       .example-spacer {
         flex: 1 1 auto;
-      }
+      } 
+      min-height: 90vh;
 
       
       .new-question{
@@ -58,6 +59,9 @@
 
         .card-container{
           padding-left: 24px;
+          .column-view{
+            width: 100%;
+          }
           .results{
             font: $body-caption-default;
             color: #5B6469;
@@ -151,7 +155,7 @@
       }  
       .sub-message{
         font: $body-base-default;
-        color: #5B6469;
+        color: #5B6469; 
       }    
     }
   }
