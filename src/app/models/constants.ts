@@ -34,6 +34,7 @@ export const genKey = {
 export const routes = {
   dummy: 'dummy',
   sign_in: 'sign-in',
+  student_q_pool : 'student',
 }
 
 export const localStorageKeys = {

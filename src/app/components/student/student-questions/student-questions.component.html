@@ -1,72 +1,73 @@
 <div class="question-pool">
   <div fxLayout="row" class="main-containerx" *ngIf="questions.length > 0">
-      <div fxLayout="column" class="left-container">      
-        <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
-          <div fxLayout="column" class="column-view" fxLayoutGap="24px">
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-              <div class="results">
-                {{questions.length}} results found
-              </div>
-              <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()">
-                <img src="../../../assets/icons/plus-white.svg">
-                <div>New question</div>
-              </div>
+    <div fxLayout="column" class="left-container">
+      <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
+        <div fxLayout="column" class="column-view" fxLayoutGap="24px">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="results">
+              {{askedQuestions.length}} results found
             </div>
-            <app-question-card 
-              *ngFor="let q of questions"
-              [title]="q.title"
-              [status]="q.status"
-              [subjects]="q.subjects"
-              [dueDate]="q.dueDate"
-              [descriptionTitle]="q.descriptionTitle"
-              [description]="q.description"
-              [viewedByAmount]="q.viewedByAmount"
-              [images]="q.images"
-            ></app-question-card>
-          </div>  
-        </div> 
-      </div>
-      <div fxLayout="column" class="right-container" fxShow="true" fxHide.lt-sm="true">        
-        <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
-        <div fxLayout="row" fxLayoutAlign="start center">        
-          <form [formGroup]="contactForm" class="form"> 
-            <select formControlName="country" class="select">
-              <option [ngValue]="null" disabled>Select Filter</option>
-              <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
-            </select>
-          </form>
+            <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()">
+              <img src="../../../assets/icons/plus-white.svg">
+              <div>New question</div>
+            </div>
+          </div>
+          <app-question-card
+            *ngFor="let q of askedQuestions"
+            [title]="q.questionTitle"
+            [status]="q.status"
+            [subjects]="questions[0]['subjects']"
+            [dueDate]="q.dueDate"
+            [descriptionTitle]="q.description"
+            [description]="q.description"
+            [viewedByAmount]="500"
+            [images]="q.attachments"
+          ></app-question-card>
         </div>
-        <div class="filter-results">
-          Filter Results 
-          <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
-            <div class="subjects-title">Subjects</div>
-            <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
-              <div fxFlex="50%" *ngFor="let subject of subjects">
-                <div fxLayout="row" fxLayoutGap="8px">
-                  <input type="checkbox">
-                  <div class="subjectss">{{subject}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
-            <div class="subjects-title">Status</div>
-            <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
-              <div fxFlex="50%" *ngFor="let state of states">
-                <div fxLayout="row" fxLayoutGap="8px">
-                  <input type="checkbox">
-                  <div class="subjectss">{{state}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>           
-           
       </div>
+    </div>
+    <div fxLayout="column" class="right-container" fxShow="true" fxHide.lt-sm="true">
+      <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <form [formGroup]="contactForm" class="form">
+          <select formControlName="country" class="select">
+            <option [ngValue]="null" disabled>Select Filter</option>
+            <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+          </select>
+        </form>
+      </div>
+      <div class="filter-results">
+        Filter Results
+        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
+          <div class="subjects-title">Subjects</div>
+          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex="50%" *ngFor="let subject of subjects">
+              <div fxLayout="row" fxLayoutGap="8px">
+                <input type="checkbox">
+                <div class="subjectss">{{subject}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
+          <div class="subjects-title">Status</div>
+          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex="50%" *ngFor="let state of states">
+              <div fxLayout="row" fxLayoutGap="8px">
+                <input type="checkbox">
+                <div class="subjectss">{{state}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- If no questions -->
-  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" class="no-que-container" *ngIf="questions.length == 0">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" class="no-que-container"
+       *ngIf="questions.length == 0">
     <img src="../../../../assets/icons/no-que.svg" alt="">
     <div class="message">
       No questions has been Created
@@ -80,5 +81,4 @@
     </div>
   </div>
 </div>
-  
-  
+

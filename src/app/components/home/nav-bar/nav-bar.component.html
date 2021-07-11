@@ -44,7 +44,7 @@
           </div>
         </div>
         <div *ngIf="authService.userData">
-          <div>{{currentStudent.firstName}}</div>
+          <div>{{studentService.currentStudent.firstName}}</div>
           <button (click)="onSignOut">log out</button>
         </div>
       </mat-toolbar-row>

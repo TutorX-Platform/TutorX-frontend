@@ -1,6 +1,7 @@
 export interface Questions {
   id: string;
   uniqueId: string;
+  studentEmail: string;
   createdDate: Date;
   fee: number;
   studentId: string;
@@ -8,7 +9,7 @@ export interface Questions {
   questionTitle: string;
   subjectCategory: string;
   dueDate: Date;
-  description: Date;
+  description: string;
   attachments: string[];
   isRefundRequested: boolean;
   chatId: string;

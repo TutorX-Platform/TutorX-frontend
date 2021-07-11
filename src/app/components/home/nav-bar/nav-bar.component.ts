@@ -19,23 +19,13 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private mediaSub: Subscription | undefined;
   viewPoint = false;
-  currentStudent: Student = {
-    email: "",
-    firstName: "",
-    isVerified: false,
-    lastName: "",
-    profileImage: "",
-    questions: [],
-    uniqueKey: "",
-    userId: ""
-  };
 
   constructor(
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
     public authService: AuthService,
-    private studentService: StudentService,
+    public studentService: StudentService,
   ) {
   }
 
@@ -98,7 +88,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
         // @ts-ignore
-        this.currentStudent = res;
+        this.studentService.currentStudent = res;
         console.log(res);
       }
     )

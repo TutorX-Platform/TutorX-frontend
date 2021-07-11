@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { WelcomeComponent } from '../../student/welcome/welcome.component';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {WelcomeComponent} from '../../student/welcome/welcome.component';
 import {AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference} from 'angularfire2/storage';
 import {Observable} from "rxjs";
 import * as constants from '../../../models/constants';
@@ -10,6 +10,7 @@ import {Questions} from "../../../models/questions";
 import {UtilService} from "../../../services/util-service.service";
 import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-question',
@@ -34,6 +35,7 @@ export class AddQuestionComponent implements OnInit {
   uploadedFiles: string[] = [];
   askedQuestions = [];
   studentUniqueKey = '';
+  files: File[] = [];
 
 
   constructor(
@@ -44,6 +46,7 @@ export class AddQuestionComponent implements OnInit {
     private questionService: QuestionService,
     private utilService: UtilService,
     private authService: AuthService,
+    public router: Router,
     private studentService: StudentService
   ) {
   }
@@ -54,7 +57,7 @@ export class AddQuestionComponent implements OnInit {
       subject: ['', Validators.required],
       dueDateTime: [null, Validators.required],
       description: ['', Validators.required],
-      files: ['', Validators.required]
+      files: []
     });
     this.date = new Date();
     this.studentService.findStudentDetails().subscribe(
@@ -69,20 +72,25 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onDone() {
-    this.startUpload();
-    this.dialogRef.close();
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "433px";
-    dialogConfig.height = "520px";
-    this.dialog.open(WelcomeComponent, dialogConfig);
+    if (this.authService.userData) {
+      if (this.addQuestionForm.valid) {
+        this.startUpload(this.dialogRef);
+      } else {
+        console.log(this.addQuestionForm.value)
+        alert("form invalid")
+      }
+    } else {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "433px";
+      dialogConfig.height = "520px";
+      this.dialog.open(WelcomeComponent, dialogConfig);
+    }
   }
 
-  onCancel(){
+  onCancel() {
     this.dialogRef.close();
   }
-
-  files: File[] = [];
 
   onSelect(event: any) {
     this.files.push(...event.addedFiles);
@@ -93,7 +101,7 @@ export class AddQuestionComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  startUpload() {
+  startUpload(dialogRef: MatDialogRef<any>) {
     if (this.files.length > 0) {
       const file = this.files[0];
       const time = new Date().getTime();
@@ -108,20 +116,21 @@ export class AddQuestionComponent implements OnInit {
           }, () => {
             console.log("upload error");
           }, () => {
-            this.askQuestion();
+            this.askQuestion(dialogRef);
           }
         )
       });
     } else {
-      this.askQuestion();
+      this.askQuestion(dialogRef);
     }
   }
 
 
-  askQuestion() {
+  askQuestion(dialogRef: MatDialogRef<any>) {
     const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      studentEmail: "",
       attachments: this.uploadedFiles,
       chatId: "",
       createdDate: new Date(),
@@ -134,8 +143,8 @@ export class AddQuestionComponent implements OnInit {
       questionSalt: "not required",
       questionTitle: this.addQuestionForm.value.questionTitle,
       status: constants.questionStatus.open,
-      studentId: this.addQuestionForm.value.subject,
-      subjectCategory: "",
+      studentId: this.studentUniqueKey,
+      subjectCategory: this.addQuestionForm.value.subject,
       tutorId: "",
       uniqueId: questionId,
       uniqueLink: ""
@@ -143,7 +152,12 @@ export class AddQuestionComponent implements OnInit {
     this.questionService.saveQuestion(question, questionId).then((v) => {
       // @ts-ignore
       this.askedQuestions.push(questionId);
-      this.studentService.addQuestion(this.askedQuestions);
+      this.studentService.addQuestion(this.askedQuestions).then(
+        () => {
+          dialogRef.close();
+          this.router.navigate([constants.routes.student_q_pool]);
+        }
+      );
     });
   }
 

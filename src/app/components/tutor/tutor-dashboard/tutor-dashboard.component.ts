@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class TutorDashboardComponent implements OnInit {
 
   contactForm!: FormGroup;
- 
+
   countries = [
     { id: 1, name: "United States" },
     { id: 2, name: "Australia" },
@@ -53,7 +53,7 @@ export class TutorDashboardComponent implements OnInit {
         viewedByAmount: 400,
         images: ['../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg','../../../../assets/images/profile.jpg']
       }
-    ] 
+    ]
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -62,5 +62,5 @@ export class TutorDashboardComponent implements OnInit {
       shareReplay()
     );
 
-   
+
 }

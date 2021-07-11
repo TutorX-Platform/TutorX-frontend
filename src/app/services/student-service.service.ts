@@ -9,6 +9,16 @@ import {Student} from "../models/student";
   providedIn: 'root'
 })
 export class StudentService {
+  currentStudent: Student = {
+    email: "",
+    firstName: "",
+    isVerified: false,
+    lastName: "",
+    profileImage: "",
+    questions: [],
+    uniqueKey: "",
+    userId: ""
+  };
 
   constructor(
     public angularFirestoreService: AngularFirestore,
@@ -22,11 +32,11 @@ export class StudentService {
   }
 
   findStudentDetails() {
-    return this.angularFirestoreService.collection('student').doc(this.getCurrentUserId()).valueChanges();
+    return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
   }
 
   addQuestion(data: any) {
-    return this.angularFirestoreService.collection('student').doc(this.getCurrentUserId()).set({questions: data}, {merge: true});
+    return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).set({questions: data}, {merge: true});
   }
 
 }

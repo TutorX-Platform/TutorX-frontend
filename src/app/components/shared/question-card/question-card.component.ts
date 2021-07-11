@@ -27,8 +27,7 @@ export class QuestionCardComponent implements OnInit {
   }
 
   onViewChat() {
-    console.log("hi")
-    this.router.navigate(['test-chat', "aw9dJW2YjYQUTFx311IkC99JfVH3_a5Odi8aVZgh7kW9CC8KxhuJ6vhG3"]);
+
   }
 
 }
