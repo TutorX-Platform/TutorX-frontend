@@ -46,6 +46,7 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { StudentComponent } from './components/student/student.component';
 import { StudentQuestionsComponent } from './components/student/student-questions/student-questions.component';
 import { WelcomeComponent } from './components/student/welcome/welcome.component';
+import { ProgressDialogComponent } from './components/shared/progress-dialog/progress-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { WelcomeComponent } from './components/student/welcome/welcome.component
     StudentComponent,
     StudentQuestionsComponent,
     WelcomeComponent,
+    ProgressDialogComponent,
   ],
   imports: [
     BrowserModule,

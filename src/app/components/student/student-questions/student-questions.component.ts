@@ -17,7 +17,7 @@ export class StudentQuestionsComponent implements OnInit {
   contactForm!: FormGroup;
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
-
+  uniqueKey = '';
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -89,13 +89,14 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   getQuestions() {
-    this.questionService.getQuestions(this.studentService.currentStudent.uniqueKey).subscribe(
+    this.questionService.getQuestions(this.uniqueKey).valueChanges().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.askedQuestions = res;
-        console.log(this.askedQuestions);
+        console.log(res);
       }
-    )
+    );
   }
 
 }

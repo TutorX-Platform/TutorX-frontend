@@ -7,6 +7,8 @@ import {Observable} from "rxjs";
 import * as constants from '../models/constants';
 import {Student} from "../models/student";
 import {UtilService} from "./util-service.service";
+import {auth} from "firebase";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,7 @@ export class AuthService {
               public ngZone: NgZone) {
     this.angularFireAuth.authState.subscribe(user => {
       if (user) {
+        console.log(user);
         this.userData = user;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
@@ -51,9 +54,26 @@ export class AuthService {
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user, firstName, lastName);
-        console.log(result);
       }).catch((error) => {
         window.alert(error.message)
+      })
+  }
+
+  // Sign in with Google
+  googleAuth(progress: MatDialogRef<any>) {
+    return this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+      .then((result) => {
+        // @ts-ignore
+        const firstName = result.additionalUserInfo?.profile.given_name;
+        // @ts-ignore
+        const lastName = result.additionalUserInfo?.profile.family_name;
+        this.SetUserData(result.user, firstName, lastName).catch((e) => {
+          progress.close();
+        });
+        progress.close();
+      }).catch((error) => {
+        progress.close();
+        alert(error.message);
       })
   }
 
@@ -65,21 +85,22 @@ export class AuthService {
       firstName: firstName,
       isVerified: true,
       lastName: lastName,
-      profileImage: '',
+      profileImage: user.photoURL,
       questions: [],
       uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
       userId: user.uid
     }
+    this.router.navigate([constants.routes.student_q_pool]);
     return userRef.set(userData, {
       merge: true
-    })
+    });
   }
 
   SendVerificationMail() {
     // @ts-ignore
     return this.angularFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate([constants.routes.dummy]);
+        this.router.navigate([constants.routes.student_q_pool]);
       })
   }
 
@@ -90,12 +111,6 @@ export class AuthService {
       this.router.navigate([constants.routes.sign_in]);
     })
   }
-
-  // reloadCurrentUser() {
-  //   this.angularFireAuth.auth.currentUser?.reload().catch((res) => {
-  //     console.log(res);
-  //   });
-  // }
 
   getTestData(chatToken: string): Observable<unknown[]> {
     return this.angularFirestoreService.collection(constants.collections.chats).doc(chatToken).collection(constants.collections.chats).valueChanges();
