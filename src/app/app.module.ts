@@ -6,10 +6,11 @@ import {NavBarComponent} from './components/home/nav-bar/nav-bar.component';
 import {AngularFireModule} from 'angularfire2'
 import {AngularFirestoreModule} from 'angularfire2/firestore'
 import {AngularFireAuthModule} from 'angularfire2/auth'
+import {AngularFireStorageModule} from 'angularfire2/storage'
 import {environment} from '../environments/environment.prod';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -24,7 +25,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
-import { NgxDropzoneModule } from 'ngx-dropzone';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 
 
 import {BodyComponent} from './components/home/body/body.component';
@@ -45,8 +46,6 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { StudentComponent } from './components/student/student.component';
 import { StudentQuestionsComponent } from './components/student/student-questions/student-questions.component';
 import { WelcomeComponent } from './components/student/welcome/welcome.component';
-
-
 
 @NgModule({
   declarations: [
@@ -74,6 +73,7 @@ import { WelcomeComponent } from './components/student/welcome/welcome.component
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatIconModule,

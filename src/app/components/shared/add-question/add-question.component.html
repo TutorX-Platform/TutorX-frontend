@@ -1,6 +1,6 @@
 <!-- web -->
 <div class="add-question">
-  <form [formGroup]="addQuestionForm" (submit)="onSubmit()" class="form-container">
+  <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
     <div fxLayout="column" class="top-container" fxLayoutAlign="center center">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
         <div class="header-title">Add Question</div>
@@ -12,14 +12,14 @@
               Done
             </button>
         </div>
-      </div> 
+      </div>
       <div fxLayout="row" class="status-container" fxLayoutGap="8px">
         <div *ngIf="status === 'open'" class="c-chip c-chip--neutral invert-false">Open</div>
         <div class="date-container">{{date}}</div>
-      </div>    
+      </div>
     </div>
     <div fxLayout="column" class="bottom-container">
-      <div fxLayout="column" class="form-fields">         
+      <div fxLayout="column" class="form-fields">
           <div class="label">Question Title</div>
           <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="text" formControlName="questionTitle" class="other">
@@ -38,7 +38,7 @@
               </mat-form-field>
             </div>
           </div>
-          
+
           <div class="label">Description</div>
           <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="text" formControlName="description" class="other">
@@ -50,7 +50,7 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap = "8px">
               <mat-icon class="material-icons-outlined">
                 file_upload
-              </mat-icon> 
+              </mat-icon>
               <div class="wording">Add Attachment</div>
             </div>
           </ngx-dropzone-label>
@@ -59,7 +59,7 @@
           </ngx-dropzone-image-preview>
         </div>
       </div>
-        
+
     </div>
   </form>
 </div>
