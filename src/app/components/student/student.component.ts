@@ -8,6 +8,9 @@ import {StudentService} from "../../services/student-service.service";
 import {Student} from "../../models/student";
 import {QuestionService} from "../../services/question-service.service";
 import {Questions} from "../../models/questions";
+import {AuthService} from "../../services/auth.service";
+import * as constants from '../../models/constants';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-student',
@@ -19,11 +22,12 @@ export class StudentComponent implements OnInit {
   selectedPage = 1;
   showFiller = false;
   askedQuestions: any[] = [];
+  isLoading = true;
 
   currentStudent: Student = {
     email: "",
     firstName: "",
-    isVerified: false,
+    isVerified: '',
     lastName: "",
     profileImage: "",
     questions: [],
@@ -35,12 +39,11 @@ export class StudentComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
     public studentService: StudentService,
-    private questionService: QuestionService
+    public authService: AuthService,
   ) {
   }
 
   ngOnInit(): void {
-    this.getStudentDetails();
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(['(max-width: 1000px)'])
@@ -61,14 +64,5 @@ export class StudentComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
-  getStudentDetails() {
-    this.studentService.findStudentDetails().subscribe(
-      (res) => {
-        // @ts-ignore
-        this.currentStudent = res;
-        this.studentService.currentStudent = this.currentStudent;
-        console.log(this.currentStudent.uniqueKey)
-      }
-    )
-  }
+
 }

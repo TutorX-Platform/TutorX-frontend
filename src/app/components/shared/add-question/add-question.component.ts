@@ -11,6 +11,7 @@ import {UtilService} from "../../../services/util-service.service";
 import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
 import {Router} from "@angular/router";
+import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
 
 @Component({
   selector: 'app-add-question',
@@ -47,7 +48,6 @@ export class AddQuestionComponent implements OnInit {
     private utilService: UtilService,
     private authService: AuthService,
     public router: Router,
-    private studentService: StudentService
   ) {
   }
 
@@ -60,32 +60,23 @@ export class AddQuestionComponent implements OnInit {
       files: []
     });
     this.date = new Date();
-    this.studentService.findStudentDetails().subscribe(
-      (res) => {
-        // @ts-ignore
-        this.studentUniqueKey = res.uniqueKey;
-        // @ts-ignore
-        this.askedQuestions = res.questions;
-
-      }
-    );
   }
 
   onDone() {
-    if (this.authService.userData) {
-      if (this.addQuestionForm.valid) {
-        this.startUpload(this.dialogRef);
-      } else {
-        console.log(this.addQuestionForm.value)
-        alert("form invalid")
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+
+    progressDialog.afterOpened().subscribe(
+      (res) => {
+        if (this.authService.userData) {
+          if (this.addQuestionForm.valid) {
+            this.startUpload(this.dialogRef, progressDialog);
+          } else {
+            console.log(this.addQuestionForm.value)
+            alert("form invalid")
+          }
+        }
       }
-    } else {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "433px";
-      dialogConfig.height = "520px";
-      this.dialog.open(WelcomeComponent, dialogConfig);
-    }
+    )
   }
 
   onCancel() {
@@ -101,7 +92,7 @@ export class AddQuestionComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  startUpload(dialogRef: MatDialogRef<any>) {
+  startUpload(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
     if (this.files.length > 0) {
       const file = this.files[0];
       const time = new Date().getTime();
@@ -116,20 +107,21 @@ export class AddQuestionComponent implements OnInit {
           }, () => {
             console.log("upload error");
           }, () => {
-            this.askQuestion(dialogRef);
+            this.askQuestion(dialogRef, progressDialog);
           }
         )
       });
     } else {
-      this.askQuestion(dialogRef);
+      this.askQuestion(dialogRef, progressDialog);
     }
   }
 
 
-  askQuestion(dialogRef: MatDialogRef<any>) {
+  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
     const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      studentUniqueKey: this.studentUniqueKey,
       studentEmail: "",
       attachments: this.uploadedFiles,
       chatId: "",
@@ -143,7 +135,7 @@ export class AddQuestionComponent implements OnInit {
       questionSalt: "not required",
       questionTitle: this.addQuestionForm.value.questionTitle,
       status: constants.questionStatus.open,
-      studentId: this.studentUniqueKey,
+      studentId: this.authService.student.userId,
       subjectCategory: this.addQuestionForm.value.subject,
       tutorId: "",
       uniqueId: questionId,
@@ -152,12 +144,8 @@ export class AddQuestionComponent implements OnInit {
     this.questionService.saveQuestion(question, questionId).then((v) => {
       // @ts-ignore
       this.askedQuestions.push(questionId);
-      this.studentService.addQuestion(this.askedQuestions).then(
-        () => {
-          dialogRef.close();
-          this.router.navigate([constants.routes.student_q_pool]);
-        }
-      );
+      dialogRef.close();
+      progressDialog.close();
     });
   }
 

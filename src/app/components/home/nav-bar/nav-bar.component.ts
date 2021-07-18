@@ -5,10 +5,8 @@ import {Subscription} from 'rxjs';
 import {AuthService} from "../../../services/auth.service";
 import {SignInComponent} from '../../auth/sign-in/sign-in.component';
 import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
-import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
-import * as constants from "../../../models/constants";
 import {StudentService} from "../../../services/student-service.service";
-import {Student} from "../../../models/student";
+import * as constants from '../../../models/constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,6 +17,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private mediaSub: Subscription | undefined;
   viewPoint = false;
+  isLoggedIn = false;
 
   constructor(
     private dialog: MatDialog,
@@ -38,12 +37,9 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
           this.viewPoint = false;
         }
-        console.log(this.viewPoint);
       }
     );
-
-    this.findStudent();
-
+    this.getLoggedUser();
   }
 
   ngAfterViewInit(): void {
@@ -56,7 +52,6 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onLogin() {
-    // this.authService.SignIn("sandun25@gmail.com", "sandunsameera");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
@@ -74,24 +69,24 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSignOut() {
-    console.log("hi");
-    // this.authService.signOut().then(r => {
-    //   this.authService.userData = null;
-    //   localStorage.removeItem(constants.localStorageKeys.user);
-    //   console.log(localStorage.removeItem(constants.localStorageKeys.user));
-    // });
-    // console.log(this.authService.userData);
-
+    this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
+    this.authService.onSignOut();
   }
 
-  findStudent() {
+  onGoogleSignIn() {
+    this.authService.googleAuth().then(
+      (r) => {
+        console.log(r);
+      }
+    );
+  }
+
+  getLoggedUser() {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        console.log(res);
       }
     )
   }
-
 }

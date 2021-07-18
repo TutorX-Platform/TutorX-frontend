@@ -9,10 +9,11 @@ import {Student} from "../models/student";
   providedIn: 'root'
 })
 export class StudentService {
+  uid: string = '';
   currentStudent: Student = {
     email: "",
     firstName: "",
-    isVerified: false,
+    isVerified: '',
     lastName: "",
     profileImage: "",
     questions: [],
@@ -22,9 +23,10 @@ export class StudentService {
 
   constructor(
     public angularFirestoreService: AngularFirestore,
-    public angularFireAuth: AngularFireAuth,
-    private authService: AuthService,
-  ) {
+    public angularFireAuth: AngularFireAuth) {
+    if (JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user))) {
+      this.uid = JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user)).uid;
+    }
   }
 
   getCurrentUserId() {
@@ -35,8 +37,7 @@ export class StudentService {
     return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
   }
 
-  addQuestion(data: any) {
-    return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).set({questions: data}, {merge: true});
+  addQuestion() {
   }
 
 }

@@ -55,8 +55,8 @@
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
             <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
             <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
-              <div class="profile-title">{{currentStudent.firstName}}</div>
-              <div class="profile-sub-title">{{currentStudent.email}}</div>
+              <div class="profile-title">{{studentService.currentStudent.firstName}}</div>
+              <div class="profile-sub-title">{{studentService.currentStudent.email}}</div>
             </div>
             <mat-icon style="cursor: pointer;">expand_more</mat-icon>
           </div>

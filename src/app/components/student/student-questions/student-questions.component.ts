@@ -89,14 +89,20 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   getQuestions() {
-    this.questionService.getQuestions(this.uniqueKey).valueChanges().subscribe(
+    this.studentService.findStudentDetails().subscribe(
       (res) => {
-        console.log(res);
         // @ts-ignore
-        this.askedQuestions = res;
-        console.log(res);
+        this.studentService.currentStudent = res;
+        this.questionService.getQuestions(this.studentService.currentStudent.userId).valueChanges().subscribe(
+          (res) => {
+            console.log(res);
+            // @ts-ignore
+            this.askedQuestions = res;
+            console.log(res);
+          }
+        );
       }
-    );
+    )
   }
 
 }

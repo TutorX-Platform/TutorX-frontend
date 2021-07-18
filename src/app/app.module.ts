@@ -24,6 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
 
@@ -32,21 +33,22 @@ import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
 import {SignInComponent} from './components/auth/sign-in/sign-in.component';
 import {AuthService} from "./services/auth.service";
-import { DummyComponent } from './components/test/dummy/dummy.component';
-import { AddQuestionComponent } from './components/shared/add-question/add-question.component';
-import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
-import { QuestionCardComponent } from './components/shared/question-card/question-card.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { QuestionPoolComponent } from './components/shared/question-pool/question-pool.component';
-import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
-import { TestChatComponent } from './components/test/test-chat/test-chat.component';
-import { RefundsComponent } from './components/admin/refunds/refunds.component';
-import { ManageTutorsComponent } from './components/admin/manage-tutors/manage-tutors.component';
-import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
-import { StudentComponent } from './components/student/student.component';
-import { StudentQuestionsComponent } from './components/student/student-questions/student-questions.component';
-import { WelcomeComponent } from './components/student/welcome/welcome.component';
-import { ProgressDialogComponent } from './components/shared/progress-dialog/progress-dialog.component';
+import {DummyComponent} from './components/test/dummy/dummy.component';
+import {AddQuestionComponent} from './components/shared/add-question/add-question.component';
+import {TutorDashboardComponent} from './components/tutor/tutor-dashboard/tutor-dashboard.component';
+import {QuestionCardComponent} from './components/shared/question-card/question-card.component';
+import {AdminComponent} from './components/admin/admin.component';
+import {QuestionPoolComponent} from './components/shared/question-pool/question-pool.component';
+import {DashboardComponent} from './components/admin/dashboard/dashboard.component';
+import {TestChatComponent} from './components/test/test-chat/test-chat.component';
+import {RefundsComponent} from './components/admin/refunds/refunds.component';
+import {ManageTutorsComponent} from './components/admin/manage-tutors/manage-tutors.component';
+import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
+import {StudentComponent} from './components/student/student.component';
+import {StudentQuestionsComponent} from './components/student/student-questions/student-questions.component';
+import {WelcomeComponent} from './components/student/welcome/welcome.component';
+import {ProgressDialogComponent} from './components/shared/progress-dialog/progress-dialog.component';
+import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,7 @@ import { ProgressDialogComponent } from './components/shared/progress-dialog/pro
     MatIconModule,
     MatListModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -94,7 +97,7 @@ import { ProgressDialogComponent } from './components/shared/progress-dialog/pro
     AppRoutingModule,
     NgxDropzoneModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

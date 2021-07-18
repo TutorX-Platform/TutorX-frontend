@@ -32,9 +32,10 @@ export const genKey = {
 }
 
 export const routes = {
+  home: "",
   dummy: 'dummy',
-  sign_in: 'sign-in',
-  student_q_pool : 'student',
+  sign_in: '/sign-in',
+  student_q_pool: '/student',
 }
 
 export const localStorageKeys = {
@@ -47,5 +48,14 @@ export const questionStatus = {
   assigned: 'assigned',
   cancelled: 'cancelled',
   completed: 'completed'
+}
+
+export function getProgressDialogData() {
+  return {
+    width: '200px',
+    // height: '400px',
+    disableClose: true,
+    panelClass: 'loading'
+  };
 }
 

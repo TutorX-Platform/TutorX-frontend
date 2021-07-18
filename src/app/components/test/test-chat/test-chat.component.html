@@ -12,10 +12,3 @@
     </form>
   </div>
 </div>
-
-
-<div *ngFor="let element of chatHistory">
-  <div *ngIf="authService.userData.uid===element.senderId" style="color: green">{{element.message}}</div>
-  <div *ngIf="authService.userData.uid!==element.senderId" style="color: red">{{element.message}}</div>
-
-</div>
