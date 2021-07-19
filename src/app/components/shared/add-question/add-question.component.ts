@@ -38,6 +38,8 @@ export class AddQuestionComponent implements OnInit {
   studentUniqueKey = '';
   files: File[] = [];
 
+  subjectList: string[] = [];
+
 
   constructor(
     private dialog: MatDialog,
@@ -52,6 +54,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subjectList = constants.subjects;
     this.addQuestionForm = this.formBuilder.group({
       questionTitle: ['', Validators.required],
       subject: ['', Validators.required],

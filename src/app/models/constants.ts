@@ -50,6 +50,10 @@ export const questionStatus = {
   completed: 'completed'
 }
 
+export const subjects = [
+  "maths", "science", "geography", "history"
+];
+
 export function getProgressDialogData() {
   return {
     width: '200px',

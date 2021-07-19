@@ -1,12 +1,13 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaObserver, MediaChange} from '@angular/flex-layout';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 import {AuthService} from "../../../services/auth.service";
 import {SignInComponent} from '../../auth/sign-in/sign-in.component';
 import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from '../../../models/constants';
+import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -39,7 +40,12 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     );
-    this.getLoggedUser();
+    const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDailog.afterOpened().subscribe(
+      () => {
+        this.getLoggedUser(progressDailog);
+      }
+    )
   }
 
   ngAfterViewInit(): void {
@@ -81,11 +87,20 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  getLoggedUser() {
+  getLoggedUser(progressDialog: MatDialogRef<any>) {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
-        // @ts-ignore
-        this.studentService.currentStudent = res;
+        console.log(res);
+        if (res) {
+          // @ts-ignore
+          this.studentService.currentStudent = res;
+        }
+
+        progressDialog.close();
+      }, () => {
+        progressDialog.close();
+      }, () => {
+        progressDialog.close();
       }
     )
   }

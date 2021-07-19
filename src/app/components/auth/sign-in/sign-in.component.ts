@@ -50,7 +50,9 @@ export class SignInComponent implements OnInit {
   }
 
   onGoogleSignIn() {
-    // this.authService.googleAuth();
+    this.authService.googleAuth().then(r => {
+      this.dialogRef.close();
+    });
   }
 }
 

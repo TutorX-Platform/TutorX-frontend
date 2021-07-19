@@ -48,12 +48,20 @@ export class SignUpComponent implements OnInit {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(
       () => {
-        console.log(this.signUpForm.value.fullName,'sanjsb');
+        console.log(this.signUpForm.value.fullName, 'sanjsb');
         this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
             this.dialogRef.close();
             this.router.navigate([constants.routes.student_q_pool]);
           }
         )
       });
+  }
+
+  onGoogleAuth() {
+    this.authService.googleAuth().then(
+      (r) => {
+        this.dialogRef.close();
+      }
+    )
   }
 }

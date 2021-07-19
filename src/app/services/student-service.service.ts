@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {AngularFireAuth} from "@angular/fire/auth";
-import {AuthService} from "./auth.service";
 import * as constants from "../models/constants";
 import {Student} from "../models/student";
+import {Observable} from "rxjs";
+import {EmptyObservable} from "rxjs/observable/EmptyObservable";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
   uid: string = '';
+  abc = new Observable();
   currentStudent: Student = {
     email: "",
     firstName: "",
@@ -30,11 +32,20 @@ export class StudentService {
   }
 
   getCurrentUserId() {
-    return JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user)).uid;
+    if (JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user))) {
+      return JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user)).uid;
+    } else {
+      return null;
+    }
   }
 
   findStudentDetails() {
-    return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
+    if (this.getCurrentUserId() != null) {
+      return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
+    } else {
+      return this.angularFirestoreService.collection(constants.collections.students).doc('ehu').valueChanges();
+
+    }
   }
 
   addQuestion() {

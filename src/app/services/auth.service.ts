@@ -62,17 +62,26 @@ export class AuthService {
 
   oAuthLogin(provider: any) {
     return this.angularFireAuth.auth.signInWithPopup(provider).then((credentials => {
-      // @ts-ignore
-      this.updateStudentData(credentials.user);
-      // @ts-ignore
-      this.student.email = credentials.user?.email;
-      // @ts-ignore
-      this.student.firstName = credentials.user?.displayName;
-      // @ts-ignore
-      this.student.profileImage = credentials.user?.photoURL;
-      // @ts-ignore
-      this.student.userId = credentials.user?.uid;
-      this.isStudentSet = true;
+      if (credentials.user) {
+        localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(credentials.user));
+        `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+        this.userData = credentials.user;
+        this.ngZone.run(() => {
+          this.isLoggedIn = true;
+          this.router.navigate([constants.routes.student_q_pool]);
+        });
+        // @ts-ignore
+        this.updateStudentData(credentials.user);
+        // @ts-ignore
+        this.student.email = credentials.user?.email;
+        // @ts-ignore
+        this.student.firstName = credentials.user?.displayName;
+        // @ts-ignore
+        this.student.profileImage = credentials.user?.photoURL;
+        // @ts-ignore
+        this.student.userId = credentials.user?.uid;
+        this.isStudentSet = true;
+      }
       // this.ngZone.run(() => {
       //   this.router.navigate([constants.routes.student_q_pool]);
       // });
@@ -102,12 +111,16 @@ export class AuthService {
   signIn(email: string, password: string, progressDialog: MatDialogRef<any>) {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.userData = result.user;
-        this.ngZone.run(() => {
-          this.isLoggedIn = true;
-          progressDialog.close();
-          this.router.navigate([constants.routes.student_q_pool]);
-        });
+        if (result.user) {
+          localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
+          `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+          this.userData = result.user;
+          this.ngZone.run(() => {
+            this.isLoggedIn = true;
+            progressDialog.close();
+            this.router.navigate([constants.routes.student_q_pool]);
+          });
+        }
         // this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message)

@@ -6,11 +6,7 @@ import {map, shareReplay} from 'rxjs/operators';
 import {AddQuestionComponent} from '../shared/add-question/add-question.component';
 import {StudentService} from "../../services/student-service.service";
 import {Student} from "../../models/student";
-import {QuestionService} from "../../services/question-service.service";
-import {Questions} from "../../models/questions";
 import {AuthService} from "../../services/auth.service";
-import * as constants from '../../models/constants';
-import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-student',
@@ -44,6 +40,7 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.studentService.currentStudent);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(['(max-width: 1000px)'])
