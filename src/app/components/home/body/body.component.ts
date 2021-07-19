@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
 import { SignUpComponent } from '../../auth/sign-up/sign-up.component';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-body',
@@ -127,5 +128,29 @@ export class BodyComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    navSpeed: 700,
+    nav: false,
+    // autoWidth: true,    
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 2
+      }
+    }
+  }
 
 }

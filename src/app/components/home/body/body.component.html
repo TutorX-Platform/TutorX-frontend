@@ -8,10 +8,10 @@
             <div class="banner-sub-title">For university/college, high school and middle school students</div>
             <div class="banner-details">Talk to our experts 24/7. Pay only for the specific requirement. We assist in your homework !!
             </div>
-            <div (click)="addQuestion()" class="get-helps" fxLayout="start center">
+            <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
                 Get help
                 <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-            </div>
+            </button>
         </div>
     </div>
 </div>
@@ -61,54 +61,87 @@
 </div>
 
 <!-- client-web-->
-<div class="client-container-web" fxLayout="column" fxShow="true" fxHide.lt-md="true" fxLayoutAlign="start center">
+<div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
         <div class="client-title">Our clients speak</div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="client-feedback-container">
-        <div fxLayout="column" [@client]="stateName" (@client.done)="changeState()" fxLayoutAlign="center center">
-            <div class="box-client b4">
-                <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                <div>
-                    <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                    <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
-                    <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
-                </div>
-            </div>
-        </div>
-        <div fxLayout="column" [@client]="stateName" (@client.done)="changeState()" fxLayoutAlign="center center" >
-            <div class="box-client b4">
-                <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                <div>
-                    <img src="{{feedback[selectedNumber].image2}}" alt="Avatar" class="avatar">
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                    <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
-                    <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
-        <mat-icon *ngIf="selectedNumber == 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">radio_button_unchecked</mat-icon>
-        <mat-icon *ngIf="selectedNumber == 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">radio_button_unchecked</mat-icon>
-        <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
+    <div class="client-feedback-container" style="margin-bottom: 100px;">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide>
+                <div fxLayout="column"   fxLayoutAlign="center center">
+                    <div class="box-client b4">
+                        <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                        <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
+                    </div>
+                    <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                        <div>
+                            <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                            <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                            <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                        </div>
+                    </div>
+                </div>                
+            </ng-template>  
+            <ng-template carouselSlide>
+                <div fxLayout="column"   fxLayoutAlign="center center">
+                    <div class="box-client b4">
+                        <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                        <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
+                    </div>
+                    <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                        <div>
+                            <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                            <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                            <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                        </div>
+                    </div>
+                </div> 
+            </ng-template>  
+            <ng-template carouselSlide>
+                <div fxLayout="column"   fxLayoutAlign="center center">
+                    <div class="box-client b4">
+                        <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                        <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
+                    </div>
+                    <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                        <div>
+                            <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                            <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                            <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                        </div>
+                    </div>
+                </div> 
+            </ng-template>  
+            <ng-template carouselSlide>
+                <div fxLayout="column"   fxLayoutAlign="center center">
+                    <div class="box-client b4">
+                        <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+                        <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
+                    </div>
+                    <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                        <div>
+                            <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                            <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                            <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                        </div>
+                    </div>
+                </div> 
+            </ng-template>
+          </owl-carousel-o>
+        
     </div>
 </div>
 
 <!-- client-mobile -->
-<div class="client-container-mobile" fxLayout="column" fxShow="true" fxHide.gt-xs="true">
+<!-- <div class="client-container-mobile" fxLayout="column" fxShow="true" fxHide.gt-xs="true">
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
         <h4>Our clients speak</h4>
     </div>
@@ -136,7 +169,7 @@
         <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
         <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
     </div>
-</div>
+</div> -->
 
 <!-- Process-web -->
 <div class="process" fxLayout="column" fxLayoutAlign="start center">   
@@ -244,10 +277,10 @@
         <div class="banner-title">Get Instant Help</div>
         <div class="banner-sub-title">for our stdent comunity</div>
     </div>
-    <div (click)="addQuestion()" class="get-helps" fxLayout="start center">
+    <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
         Get help
         <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-    </div>
+    </button>
 </div>
 
 <div class="footer"></div>

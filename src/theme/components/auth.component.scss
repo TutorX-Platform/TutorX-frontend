@@ -12,15 +12,23 @@
     .auth{
         padding: 40px;
         width: 100%;
-        .title{
-            font: $heading-desktop-h3;
-            .close-icon{
-                cursor: pointer;
+        .sticky-header{
+            position: sticky;
+            position: -webkit-sticky; /* For macOS/iOS Safari */
+            top: 0; /* Sets the sticky toolbar to be on top */
+            z-index: 1000; 
+            background: white;
+            .title{      
+                font: $heading-desktop-h3;   
+                .close-icon{
+                    cursor: pointer;
+                }
+            }
+            .note{
+                font: $body-base-default;
             }
         }
-        .note{
-            font: $body-base-default;
-        }
+        
         .signup-button-container{
             padding: 24px 0px 0px;
 

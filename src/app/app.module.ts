@@ -7,10 +7,11 @@ import {AngularFireModule} from 'angularfire2'
 import {AngularFirestoreModule} from 'angularfire2/firestore'
 import {AngularFireAuthModule} from 'angularfire2/auth'
 import {AngularFireStorageModule} from 'angularfire2/storage'
-import {environment} from '../environments/environment.prod';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+  import {environment} from '../environments/environment.prod';
+  import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -26,7 +27,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -90,7 +91,8 @@ import { WelcomeComponent } from './components/student/welcome/welcome.component
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    CarouselModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
