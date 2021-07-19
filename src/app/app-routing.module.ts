@@ -26,6 +26,8 @@ const routes: Routes = [
   {
     path: 'student',
     component: StudentComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToHome}
   },
 ];
 
