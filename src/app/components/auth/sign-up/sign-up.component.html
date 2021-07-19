@@ -22,7 +22,7 @@
       </mat-form-field>
       <div class="label">Email address</div>
       <mat-form-field class="my-form-field" appearance="outline">
-        <input formControlName="email" matInput type="email" class="other">
+        <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
       </mat-form-field>
       <div class="label">Password</div>
       <mat-form-field appearance="outline">

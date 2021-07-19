@@ -17,6 +17,7 @@ export class SignUpComponent implements OnInit {
   // @ts-ignore
   signUpForm: FormGroup;
   isChecked = false;
+  emailPattern = constants.regexp_patterns.email;
 
   constructor(
     private formBuilder: FormBuilder,

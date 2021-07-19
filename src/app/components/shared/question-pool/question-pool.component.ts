@@ -4,6 +4,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import {Question} from 'src/app/models/question';
 import {QuestionService} from "../../../services/question-service.service";
 import {StudentService} from "../../../services/student-service.service";
+import * as constants from "../../../models/constants";
 
 @Component({
   selector: 'app-question-pool',
@@ -58,9 +59,17 @@ export class QuestionPoolComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.askedQuestions = res;
+        this.askedQuestions = this.sortQuestions()
         console.log(this.askedQuestions);
       }
     )
+  }
+
+  sortQuestions() {
+    return this.askedQuestions.sort(function (a, b) {
+      // @ts-ignore
+      return a.createdDate - b.createdDate;
+    });
   }
 
 }

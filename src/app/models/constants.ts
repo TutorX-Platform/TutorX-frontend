@@ -86,6 +86,11 @@ export const sortingOrders = {
   newestLast: 'reverse',
 }
 
+export const url_sign = {
+  url_separator: '/',
+  underscore: '_',
+}
+
 export function getProgressDialogData() {
   return {
     width: '200px',

@@ -132,12 +132,12 @@ export class StudentQuestionsComponent implements OnInit {
         return this.askedQuestions.sort(function (a, b) {
           // @ts-ignore
           return a.createdDate - b.createdDate;
-        }).reverse();
+        });
       } else {
         return this.askedQuestions.sort(function (a, b) {
           // @ts-ignore
           return a.createdDate - b.createdDate;
-        })
+        }).reverse()
       }
     }
     if (sortingField === constants.sortingFields.dueDate) {
