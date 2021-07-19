@@ -4,7 +4,7 @@
       <mat-toolbar-row>
         <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-xs>
           <mat-icon>menu</mat-icon>
-          <img src="../../../../assets/images/Logo.png" alt="" width="30px" height="30px">
+          <img src="../../../../assets/icons/logo-temp.svg" alt="" width="30px" height="30px">
         </button>
         <div class="logo-container" fxShow="true" fxHide.lt-sm="true" fxLayout="row" fxLayoutGap="12px"
              fxLayoutAlign="center center">
@@ -53,20 +53,32 @@
     <mat-sidenav-container fxFlexFill>
       <mat-sidenav #sidenav>
         <mat-nav-list>
-          <a href="#" mat-list-item>
+          <a (click)="onHome()" (click)="sidenav.toggle()" mat-list-item>
             <mat-icon>notifications</mat-icon>
-            Notifications
+            Home
           </a>
           <a href="#" mat-list-item>
             <mat-icon>message</mat-icon>
-            Messages</a>
+            Tutor</a>
           <a href="#" mat-list-item>
             <mat-icon>account_box</mat-icon>
-            My Account
+            About
           </a>
           <a href="#" mat-list-item>
             <mat-icon>lock</mat-icon>
-            My Account
+            FAQ
+          </a>
+          <a href="#" mat-list-item>
+            <mat-icon>lock</mat-icon>
+            Become a tutor
+          </a>
+          <a (click)="onSignUpMobile()" (click)="sidenav.toggle()" mat-list-item>
+            <mat-icon>lock</mat-icon>
+            Signup
+          </a>
+          <a (click)="onLoginMobile()" (click)="sidenav.toggle()" mat-list-item>
+            <mat-icon>lock</mat-icon>
+            Login
           </a>
           <a (click)="sidenav.toggle()" mat-list-item>
             <mat-icon>close</mat-icon>
@@ -74,7 +86,9 @@
           </a>
         </mat-nav-list>
       </mat-sidenav>
-      <app-body></app-body>
+      <app-body *ngIf="page === 0"></app-body>
+      <app-sign-in-mobile *ngIf="page === 1"></app-sign-in-mobile>
+      <app-sign-up-mobile *ngIf="page === 2"></app-sign-up-mobile>
     </mat-sidenav-container>
   </div>
 </div>

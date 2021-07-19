@@ -1,25 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {WelcomeComponent} from '../../student/welcome/welcome.component';
-import {AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference} from 'angularfire2/storage';
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Questions } from 'src/app/models/questions';
+import { AuthService } from 'src/app/services/auth.service';
+import { QuestionService } from 'src/app/services/question-service.service';
+import { UtilService } from 'src/app/services/util-service.service';
 import * as constants from '../../../models/constants';
-import {QuestionService} from "../../../services/question-service.service";
-import {Questions} from "../../../models/questions";
-import {UtilService} from "../../../services/util-service.service";
-import {AuthService} from "../../../services/auth.service";
-import {StudentService} from "../../../services/student-service.service";
-import {Router} from "@angular/router";
-import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
-import { map, startWith } from 'rxjs/operators';
+import { ProgressDialogComponent } from '../progress-dialog/progress-dialog.component';
 
 @Component({
-  selector: 'app-add-question',
-  templateUrl: './add-question.component.html',
-  styleUrls: ['./add-question.component.scss']
+  selector: 'app-add-question-mobile',
+  templateUrl: './add-question-mobile.component.html',
+  styleUrls: ['./add-question-mobile.component.scss']
 })
-export class AddQuestionComponent implements OnInit {
+export class AddQuestionMobileComponent implements OnInit {
 
   addQuestionForm!: FormGroup;
   status = 'open';
@@ -42,13 +38,10 @@ export class AddQuestionComponent implements OnInit {
   subjectList: string[] = [];
   
   options: string[] = ['Maths', 'Science', 'English'];
-  filteredOptions?: Observable<string[]>;
-
 
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AddQuestionComponent>,
     private storage: AngularFireStorage,
     private questionService: QuestionService,
     private utilService: UtilService,
@@ -67,16 +60,6 @@ export class AddQuestionComponent implements OnInit {
       files: []
     });
     this.date = new Date();
-    this.filteredOptions = this.addQuestionForm.controls['subject'].valueChanges.pipe(
-      startWith(''),
-      map((value:string) => this._filter(value))
-    );
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onDone() {
@@ -86,7 +69,7 @@ export class AddQuestionComponent implements OnInit {
       (res) => {
         if (this.authService.userData) {
           if (this.addQuestionForm.valid) {
-            this.startUpload(this.dialogRef, progressDialog);
+            // this.startUpload(this.dialogRef, progressDialog);
           } else {
             console.log(this.addQuestionForm.value)
             alert("form invalid")
@@ -97,7 +80,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onCancel() {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   onSelect(event: any) {
@@ -119,7 +102,7 @@ export class AddQuestionComponent implements OnInit {
       this.task = this.taskRef.put(file);
       this.task.then(() => {
         this.taskRef.getDownloadURL().subscribe(
-          (res) => {
+          (res: any) => {
             this.uploadedFiles.push(res);
           }, () => {
             console.log("upload error");

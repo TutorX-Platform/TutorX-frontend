@@ -12,11 +12,6 @@
     .auth{
         padding: 40px;
         width: 100%;
-        .sticky-header{
-            position: sticky;
-            position: -webkit-sticky; /* For macOS/iOS Safari */
-            top: 0; /* Sets the sticky toolbar to be on top */
-            z-index: 1000; 
             background: white;
             .title{      
                 font: $heading-desktop-h3;   
@@ -27,7 +22,6 @@
             .note{
                 font: $body-base-default;
             }
-        }
         
         .signup-button-container{
             padding: 24px 0px 0px;

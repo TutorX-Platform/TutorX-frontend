@@ -27,6 +27,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+// import {MatOp} from '@angular/material/autocomplete';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -51,6 +53,9 @@ import {StudentQuestionsComponent} from './components/student/student-questions/
 import {WelcomeComponent} from './components/student/welcome/welcome.component';
 import {ProgressDialogComponent} from './components/shared/progress-dialog/progress-dialog.component';
 import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
+import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-mobile.component';
+import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-mobile.component';
+import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +78,9 @@ import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
     StudentQuestionsComponent,
     WelcomeComponent,
     ProgressDialogComponent,
+    SignInMobileComponent,
+    SignUpMobileComponent,
+    AddQuestionMobileComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +107,8 @@ import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
     AppRoutingModule,
     NgxDropzoneModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
