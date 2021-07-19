@@ -54,6 +54,38 @@ export const subjects = [
   "maths", "science", "geography", "history"
 ];
 
+export const regexp_patterns = {
+  email: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$',
+}
+
+export const service_url = {
+  emailBackend: 'https://ooder-backend.herokuapp.com/api/sendEmail',
+}
+
+export const email_data = {
+  senderEmail: 'innathanak.dev@gmail.com',
+  senderPassword: 'innathanakdevgroup',
+  subject: 'Welcome to TutorX Platform',
+  message: 'This is dummt message replace with given one',
+}
+
+export const sortBy_functions = [
+  {name: "Newest created first", id: 1, code: 'asec'},
+  {name: "Newest created last", id: 2, code: 'desec'},
+  {name: "Due date first", id: 3, code: 'asec'},
+  {name: "Due date last", id: 4, code: 'asec'},
+];
+
+export const sortingFields = {
+  createdDate: 'createdDate',
+  dueDate: 'dueDate',
+}
+
+export const sortingOrders = {
+  newestFirst: 'order',
+  newestLast: 'reverse',
+}
+
 export function getProgressDialogData() {
   return {
     width: '200px',

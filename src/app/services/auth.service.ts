@@ -9,6 +9,7 @@ import {Student} from "../models/student";
 import * as constants from '../models/constants';
 import * as firebase from 'firebase';
 import {MatDialogRef} from "@angular/material/dialog";
+import {MailService} from "./mail.service";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class AuthService {
               public angularFireAuth: AngularFireAuth,
               public router: Router,
               public utilService: UtilService,
+              private mailService: MailService,
               public ngZone: NgZone) {
     this.angularFireAuth.authState.subscribe(user => {
       console.log("auth service");
@@ -56,7 +58,6 @@ export class AuthService {
 
   googleAuth() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    this.isLoggedIn = true;
     return this.oAuthLogin(provider);
   }
 
@@ -66,6 +67,8 @@ export class AuthService {
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(credentials.user));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
         this.userData = credentials.user;
+        // @ts-ignore
+        this.mailService.sendEmail(credentials.user.email).subscribe();
         this.ngZone.run(() => {
           this.isLoggedIn = true;
           this.router.navigate([constants.routes.student_q_pool]);

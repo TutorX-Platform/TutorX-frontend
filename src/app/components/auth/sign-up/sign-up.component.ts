@@ -5,6 +5,7 @@ import {AuthService} from "../../../services/auth.service";
 import * as constants from "../../../models/constants";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+import {MailService} from "../../../services/mail.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +23,8 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private dialogRef: MatDialogRef<SignUpComponent>,
     private dialog: MatDialog,
-    public authService: AuthService
+    public authService: AuthService,
+    private mailService: MailService
   ) {
   }
 
@@ -48,8 +50,12 @@ export class SignUpComponent implements OnInit {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(
       () => {
-        console.log(this.signUpForm.value.fullName, 'sanjsb');
         this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
+            this.mailService.sendEmail(this.signUpForm.value.email).subscribe(
+              (res) => {
+                console.log(res);
+              }
+            );
             this.dialogRef.close();
             this.router.navigate([constants.routes.student_q_pool]);
           }

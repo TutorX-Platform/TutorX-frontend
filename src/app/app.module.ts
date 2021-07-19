@@ -11,6 +11,7 @@ import {environment} from '../environments/environment.prod';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -95,7 +96,8 @@ import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    HttpClientModule,
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
