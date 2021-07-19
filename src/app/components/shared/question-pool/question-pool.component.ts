@@ -49,8 +49,12 @@ export class QuestionPoolComponent implements OnInit {
     this.selectedStatus = num;
   }
 
+  onFilterSelect(event: any) {
+    console.log(event);
+  }
+
   getQuestions() {
-    this.questionService.getQuestions(this.studentService.currentStudent.uniqueKey).subscribe(
+    this.questionService.getQuestions(this.studentService.currentStudent.uniqueKey).valueChanges().subscribe(
       (res) => {
         // @ts-ignore
         this.askedQuestions = res;

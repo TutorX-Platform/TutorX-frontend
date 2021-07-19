@@ -4,13 +4,14 @@ import {UtilService} from "./util-service.service";
 import * as constants from "../models/constants";
 import {Questions} from "../models/questions";
 import {Observable} from "rxjs";
+import {StudentService} from "./student-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
-  constructor(private angularFirestoreService: AngularFirestore) {
+  constructor(private angularFirestoreService: AngularFirestore, private studentService: StudentService) {
   }
 
   saveQuestion(qustion: Questions, questionId: string) {
@@ -20,7 +21,7 @@ export class QuestionService {
 
   getQuestions(studentId: string) {
     // @ts-ignore
-    const questionRef: Observable<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentId', '==', 'Sf6d69825-8271-4f0d-9568-2a7ec5b0bb76')).valueChanges();
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentId', '==', studentId));
     return questionRef;
   }
 }

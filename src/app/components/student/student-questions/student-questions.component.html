@@ -1,5 +1,5 @@
 <div class="question-pool">
-  <div fxLayout="row" class="main-containerx" *ngIf="questions.length > 0">
+  <div fxLayout="row" class="main-containerx" *ngIf="askedQuestions.length > 0">
     <div fxLayout="column" class="left-container">
       <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
         <div fxLayout="column" class="column-view" fxLayoutGap="24px">
@@ -30,9 +30,9 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
       <div fxLayout="row" fxLayoutAlign="start center">
         <form [formGroup]="contactForm" class="form">
-          <select formControlName="country" class="select">
+          <select (change)="onFilterSelect($event)" formControlName="country" class="select">
             <option [ngValue]="null" disabled>Select Filter</option>
-            <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+            <option *ngFor="let sort of sortings" [ngValue]="sort.id">{{sort.name}}</option>
           </select>
         </form>
       </div>
@@ -67,7 +67,7 @@
 
   <!-- If no questions -->
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" class="no-que-container"
-       *ngIf="questions.length == 0">
+       *ngIf="askedQuestions.length == 0">
     <img src="../../../../assets/icons/no-que.svg" alt="">
     <div class="message">
       No questions has been Created

@@ -33,7 +33,7 @@
           </a>
         </div>
         <span class="example-spacer"></span>
-        <div *ngIf="!authService.userData" style="margin-right: 3%;">
+        <div *ngIf="!authService.isLoggedIn" style="margin-right: 3%;">
           <div fxShow="true" fxHide.lt-sm="true" fxLayoutGap="4%">
             <a mat-stroked-button class="button-signUp" (click)="onSignUp()">
               Sign up
@@ -43,9 +43,9 @@
             </a>
           </div>
         </div>
-        <div *ngIf="authService.userData">
+        <div *ngIf="authService.isLoggedIn">
           <div>{{studentService.currentStudent.firstName}}</div>
-          <button (click)="onSignOut">log out</button>
+          <button (click)="onSignOut()">log out</button>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>

@@ -1,12 +1,15 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
 import {QuestionService} from "../../../services/question-service.service";
 import {Questions} from "../../../models/questions";
+import * as constants from '../../../models/constants';
+import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+
 
 @Component({
   selector: 'app-student-questions',
@@ -17,7 +20,7 @@ export class StudentQuestionsComponent implements OnInit {
   contactForm!: FormGroup;
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
-
+  uniqueKey = '';
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -26,13 +29,7 @@ export class StudentQuestionsComponent implements OnInit {
     "Open", "Inprogress", "Assigned", "Cancelled", "Completed"
   ]
 
-  countries = [
-    {id: 1, name: "United States"},
-    {id: 2, name: "Australia"},
-    {id: 3, name: "Canada"},
-    {id: 4, name: "Brazil"},
-    {id: 5, name: "England"}
-  ];
+  sortings = constants.sortBy_functions;
 
   questions = [
     {
@@ -73,11 +70,31 @@ export class StudentQuestionsComponent implements OnInit {
     this.contactForm = this.fb.group({
       country: [null]
     });
-    this.getQuestions();
+
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDialog.afterOpened().subscribe(() => {
+      this.getQuestions(progressDialog);
+
+    })
   }
 
   selectStatus(num: number) {
     this.selectedStatus = num;
+  }
+
+  onFilterSelect(event: any) {
+    if (event.target.value === "1: 1") {
+      this.askedQuestions = this.sortQuestions(constants.sortingOrders.newestFirst, constants.sortingFields.createdDate);
+    }
+    if (event.target.value === "2: 2") {
+      this.askedQuestions = this.sortQuestions(constants.sortingOrders.newestLast, constants.sortingFields.createdDate);
+    }
+    if (event.target.value === "3: 3") {
+      this.askedQuestions = this.sortQuestions(constants.sortingOrders.newestFirst, constants.sortingFields.dueDate);
+    }
+    if (event.target.value === "4: 4") {
+      this.askedQuestions = this.sortQuestions(constants.sortingOrders.newestLast, constants.sortingFields.dueDate);
+    }
   }
 
   addQuestion() {
@@ -88,14 +105,55 @@ export class StudentQuestionsComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
-  getQuestions() {
-    this.questionService.getQuestions(this.studentService.currentStudent.uniqueKey).subscribe(
+  getQuestions(progressDialog: MatDialogRef<any>) {
+    this.studentService.findStudentDetails().subscribe(
       (res) => {
         // @ts-ignore
-        this.askedQuestions = res;
-        console.log(this.askedQuestions);
+        this.studentService.currentStudent = res;
+        this.questionService.getQuestions(this.studentService.currentStudent.userId).valueChanges().subscribe(
+          (res) => {
+            // @ts-ignore
+            this.askedQuestions = res;
+            progressDialog.close();
+          }, () => {
+            progressDialog.close();
+          }, () => {
+            progressDialog.close();
+          }
+        );
       }
     )
+  }
+
+
+  sortQuestions(sortingOrder: string, sortingField: string) {
+    if (sortingField === constants.sortingFields.createdDate) {
+      if (sortingOrder === constants.sortingOrders.newestLast) {
+        return this.askedQuestions.sort(function (a, b) {
+          // @ts-ignore
+          return a.createdDate - b.createdDate;
+        }).reverse();
+      } else {
+        return this.askedQuestions.sort(function (a, b) {
+          // @ts-ignore
+          return a.createdDate - b.createdDate;
+        })
+      }
+    }
+    if (sortingField === constants.sortingFields.dueDate) {
+      if (sortingOrder === constants.sortingOrders.newestLast) {
+        return this.askedQuestions.sort(function (a, b) {
+          // @ts-ignore
+          return a.dueDate - b.dueDate;
+        }).reverse();
+      } else {
+        return this.askedQuestions.sort(function (a, b) {
+          // @ts-ignore
+          return a.dueDate - b.dueDate;
+        })
+      }
+    }
+    return this.askedQuestions;
   }
 
 }

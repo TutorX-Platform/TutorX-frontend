@@ -37,17 +37,6 @@ export class TestChatComponent implements OnInit {
       }
     );
 
-    this.authService.getTestData(
-      "aw9dJW2YjYQUTFx311IkC99JfVH3_a5Odi8aVZgh7kW9CC8KxhuJ6vhG3").subscribe(
-      (res) => {
-        console.log(res);
-        // @ts-ignore
-        this.chatHistory = res;
-      }
-    );
-    this.uid = this.angularFireAuth.auth.currentUser?.uid;
-    this.chatIds = this.chatToken?.split('_');
-    console.log(this.chatIds);
   }
 
   onChat() {
@@ -57,15 +46,7 @@ export class TestChatComponent implements OnInit {
   }
 
   saveChatMsg() {
-    console.log(this.authService.userData.uid);
-    this.chatIds?.splice(this.authService.userData.uid);
-    this.msg.senderId = this.authService.userData.uid;
-    this.msg.receiverId = "a5Odi8aVZgh7kW9CC8KxhuJ6vhG3";
-    this.msg.message = this.form.controls['chatMsg'].value;
-    this.msg.sentBy = this.authService.userData.uid;
-    this.msg.time = Date.now();
 
-    this.chatService.saveMsg(this.msg,"aw9dJW2YjYQUTFx311IkC99JfVH3_a5Odi8aVZgh7kW9CC8KxhuJ6vhG3");
   }
 
 }

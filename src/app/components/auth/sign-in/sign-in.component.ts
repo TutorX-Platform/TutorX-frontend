@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from "../../../services/auth.service";
 import {SignUpComponent} from '../sign-up/sign-up.component';
+import * as constants from '../../../models/constants';
+import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+import {MailService} from "../../../services/mail.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -12,11 +15,14 @@ import {SignUpComponent} from '../sign-up/sign-up.component';
 export class SignInComponent implements OnInit {
   // @ts-ignore
   signInForm: FormGroup;
+  emailPattern = constants.regexp_patterns.email;
 
   constructor(
     private formBuilder: FormBuilder,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<SignInComponent>,
-    public authService: AuthService
+    public authService: AuthService,
+    private mailService: MailService,
   ) {
   }
 
@@ -31,10 +37,28 @@ export class SignInComponent implements OnInit {
     });
   }
 
-
   onSignIn() {
-    this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password);
-    this.dialogRef.close();
+    if (this.signInForm.valid) {
+      const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+      progressDialog.afterOpened().subscribe(
+        () => {
+          this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog).then(
+            (res) => {
+              this.dialogRef.close();
+              console.log(res);
+            }
+          );
+        }
+      )
+    } else {
+      alert("please fill form");
+    }
+  }
+
+  onGoogleSignIn() {
+    this.authService.googleAuth().then(r => {
+      this.dialogRef.close();
+    });
   }
 }
 

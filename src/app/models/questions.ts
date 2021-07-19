@@ -17,4 +17,5 @@ export interface Questions {
   isPaid: boolean;
   uniqueLink: string;
   questionSalt: string;
+  studentUniqueKey: string;
 }
