@@ -38,11 +38,11 @@ export class AddQuestionComponent implements OnInit {
   askedQuestions = [];
   studentUniqueKey = '';
   files: File[] = [];
-
   subjectList: string[] = [];
   
   options: string[] = ['Maths', 'Science', 'English'];
   filteredOptions?: Observable<string[]>;
+  questionId = '';
 
 
   constructor(
@@ -58,6 +58,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     this.subjectList = constants.subjects;
     this.addQuestionForm = this.formBuilder.group({
       questionTitle: ['', Validators.required],
@@ -81,16 +82,13 @@ export class AddQuestionComponent implements OnInit {
 
   onDone() {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-
     progressDialog.afterOpened().subscribe(
       (res) => {
-        if (this.authService.userData) {
-          if (this.addQuestionForm.valid) {
-            this.startUpload(this.dialogRef, progressDialog);
-          } else {
-            console.log(this.addQuestionForm.value)
-            alert("form invalid")
-          }
+        if (this.addQuestionForm.valid) {
+          this.askQuestion(this.dialogRef, progressDialog);
+        } else {
+          progressDialog.close();
+          alert("form invalid")
         }
       }
     )
@@ -101,52 +99,41 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onSelect(event: any) {
-    this.files.push(...event.addedFiles);
-
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDialog.afterOpened().subscribe(() => {
+      if (event.addedFiles.length < 2) {
+        if (this.files.length + event.addedFiles.length > 2) {
+          progressDialog.close();
+          alert("you can upload upto 2 images");
+        } else {
+          this.files.push(event.addedFiles[0]);
+          this.uploadFile(event.addedFiles[0], progressDialog);
+        }
+      } else {
+        progressDialog.close();
+        alert('please upload one by one');
+      }
+    })
   }
 
   onRemove(event: any) {
-    this.files.splice(this.files.indexOf(event), 1);
+    const removeItem = this.files.indexOf(event);
+    this.uploadedFiles.splice(removeItem, 1);
+    this.files.splice(removeItem, 1);
   }
-
-  startUpload(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
-    if (this.files.length > 0) {
-      const file = this.files[0];
-      const time = new Date().getTime();
-      // @ts-ignore
-      const path = constants.storage_collections.question + '/' + time + '_' + file.name;
-      this.taskRef = this.storage.ref(path);
-      this.task = this.taskRef.put(file);
-      this.task.then(() => {
-        this.taskRef.getDownloadURL().subscribe(
-          (res) => {
-            this.uploadedFiles.push(res);
-          }, () => {
-            console.log("upload error");
-          }, () => {
-            this.askQuestion(dialogRef, progressDialog);
-          }
-        )
-      });
-    } else {
-      this.askQuestion(dialogRef, progressDialog);
-    }
-  }
-
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
-    const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
       studentUniqueKey: this.studentUniqueKey,
       studentEmail: "",
       attachments: this.uploadedFiles,
       chatId: "",
-      createdDate: new Date(),
+      createdDate: new Date().getTime(),
       description: this.addQuestionForm.value.description,
       dueDate: this.addQuestionForm.value.dueDateTime,
       fee: 0,
-      id: questionId,
+      id: this.questionId,
       isPaid: false,
       isRefundRequested: false,
       questionSalt: "not required",
@@ -155,14 +142,44 @@ export class AddQuestionComponent implements OnInit {
       studentId: this.authService.student.userId,
       subjectCategory: this.addQuestionForm.value.subject,
       tutorId: "",
-      uniqueId: questionId,
+      uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.saveQuestion(question, questionId).then((v) => {
+    this.questionService.saveQuestion(question, this.questionId).then((v) => {
       // @ts-ignore
-      this.askedQuestions.push(questionId);
+      this.askedQuestions.push(this.questionId);
       dialogRef.close();
       progressDialog.close();
+    });
+  }
+
+  uploadFile(file: File, progressDialog: MatDialogRef<any>) {
+    const time = new Date().getTime();
+    // @ts-ignore
+    const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
+    this.taskRef = this.storage.ref(path);
+    this.task = this.taskRef.put(file);
+    this.task.then(() => {
+      this.taskRef.getDownloadURL().subscribe(
+        (res) => {
+          console.log("added")
+          if (this.uploadedFiles.length === 0) {
+            this.uploadedFiles.push(res);
+          } else {
+            this.uploadedFiles.forEach(link => {
+              if (link !== res) {
+                this.uploadedFiles.push(res);
+              }
+            })
+          }
+        }, () => {
+          console.log("upload error");
+        }, () => {
+          progressDialog.close();
+          console.log('completed')
+          console.log(this.uploadedFiles);
+        }
+      )
     });
   }
 

@@ -2,7 +2,7 @@ export interface Questions {
   id: string;
   uniqueId: string;
   studentEmail: string;
-  createdDate: Date;
+  createdDate: number;
   fee: number;
   studentId: string;
   tutorId: string;

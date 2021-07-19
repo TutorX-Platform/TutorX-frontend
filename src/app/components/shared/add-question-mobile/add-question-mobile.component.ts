@@ -125,7 +125,7 @@ export class AddQuestionMobileComponent implements OnInit {
       studentEmail: "",
       attachments: this.uploadedFiles,
       chatId: "",
-      createdDate: new Date(),
+      createdDate: new Date().getTime(),
       description: this.addQuestionForm.value.description,
       dueDate: this.addQuestionForm.value.dueDateTime,
       fee: 0,
