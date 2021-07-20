@@ -5,6 +5,7 @@ import {Question} from 'src/app/models/question';
 import {QuestionService} from "../../../services/question-service.service";
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from "../../../models/constants";
+import {Questions} from "../../../models/questions";
 
 @Component({
   selector: 'app-question-pool',
@@ -26,7 +27,7 @@ export class QuestionPoolComponent implements OnInit {
     {id: 5, name: "England"}
   ];
 
-  questions: Question[] = [];
+  questions: Questions[] = [];
 
   constructor(
     private questionService: QuestionService,

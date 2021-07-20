@@ -43,11 +43,18 @@ export const localStorageKeys = {
 }
 
 export const questionStatus = {
-  open: 'open',
-  in_progress: 'inProgress',
-  assigned: 'assigned',
-  cancelled: 'cancelled',
-  completed: 'completed'
+  open: 'Open',
+  in_progress: 'Inprogress',
+  assigned: 'Assigned',
+  cancelled: 'Cancelled',
+  completed: 'Completed'
+}
+
+export const subjectCodes = {
+  maths:'Maths',
+  english:'English',
+  science:'Science',
+  cs:'Computer Science',
 }
 
 export const subjects = [

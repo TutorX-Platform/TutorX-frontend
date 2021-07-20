@@ -1,5 +1,5 @@
 <div class="question-pool">
-  <div fxLayout="row" class="main-containerx" *ngIf="askedQuestions.length > 0">
+  <div fxLayout="row" class="main-containerx" *ngIf="allAskedQuestions.length > 0">
     <div fxLayout="column" class="left-container">
       <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
         <div fxLayout="column" class="column-view" fxLayoutGap="24px">
@@ -16,7 +16,7 @@
             *ngFor="let q of askedQuestions"
             [title]="q.questionTitle"
             [status]="q.status"
-            [subjects]="questions[0]['subjects']"
+            [subjects]="q.subjectCategory"
             [dueDate]="q.dueDate"
             [descriptionTitle]="q.description"
             [description]="q.description"
@@ -43,7 +43,7 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex="50%" *ngFor="let subject of subjects">
               <div fxLayout="row" fxLayoutGap="8px">
-                <mat-checkbox color="primary">
+                <mat-checkbox (change)="onSubjectFilter(subject)" color="primary">
                   <div class="subjectss">{{subject}}</div>
                 </mat-checkbox>
               </div>
@@ -55,7 +55,7 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex="50%" *ngFor="let state of states">
               <div fxLayout="row" fxLayoutGap="8px">
-                <mat-checkbox color="primary">
+                <mat-checkbox (change)="onStageFilter(state)" color="primary">
                   <div class="subjectss">{{state}}</div>
                 </mat-checkbox>
               </div>
@@ -69,7 +69,7 @@
 
   <!-- If no questions -->
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" class="no-que-container"
-       *ngIf="askedQuestions.length == 0">
+       *ngIf="allAskedQuestions.length == 0">
     <img src="../../../../assets/icons/no-que.svg" alt="">
     <div class="message">
       No questions has been Created

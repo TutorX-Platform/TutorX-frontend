@@ -27,14 +27,14 @@
           </div>
           <app-question-card
             *ngFor="let q of questions"
-            [title]="q.title"
+            [title]="q.questionTitle"
             [status]="q.status"
-            [subjects]="q.subjects"
+            [subjects]="q.subjectCategory"
             [dueDate]="q.dueDate"
-            [descriptionTitle]="q.descriptionTitle"
+            [descriptionTitle]="q.description"
             [description]="q.description"
-            [viewedByAmount]="q.viewedByAmount"
-            [images]="q.images"
+            [viewedByAmount]=0
+            [images]="q.attachments"
           ></app-question-card>
         </div>
       </div>

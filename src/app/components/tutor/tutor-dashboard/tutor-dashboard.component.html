@@ -27,8 +27,8 @@
           *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" fxShow="true" fxHide.lt-sm="true" class="search-container">  
-            <mat-icon>search</mat-icon>              
+        <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" fxShow="true" fxHide.lt-sm="true" class="search-container">
+            <mat-icon>search</mat-icon>
             <input matInput class="search" placeholder="Search">
         </span>
         <span class="example-spacer"></span>
@@ -39,7 +39,7 @@
                 </span><span class="icon-container">
                     <mat-icon class="icon">notifications</mat-icon>
                 </span>
-            </span>      
+            </span>
             <span fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
                 <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
                 <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-15px">
@@ -47,7 +47,7 @@
                     <span class="profile">name@mail.com</span>
                 </div>
                 <mat-icon style="cursor: pointer;">expand_more</mat-icon>
-            </span>    
+            </span>
         </div>
       </mat-toolbar>
       <div fxLayout="row" class="main-container">
@@ -57,24 +57,24 @@
             </div>
             <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
               <div fxLayout="column" class="column-view" fxLayoutGap="24px">
-                <app-question-card 
+                <app-question-card
                   *ngFor="let q of questions"
                   [title]="q.title"
                   [status]="q.status"
-                  [subjects]="q.subjects"
+                  [subjects]="q.subjects[0]"
                   [dueDate]="q.dueDate"
                   [descriptionTitle]="q.descriptionTitle"
                   [description]="q.description"
                   [viewedByAmount]="q.viewedByAmount"
                   [images]="q.images"
                 ></app-question-card>
-              </div>  
-            </div> 
+              </div>
+            </div>
           </div>
           <div fxLayout="column" class="right-container">
             <div fxLayout="row" fxLayoutAlign="start center" style="font-family: Manrope-normal;font-size: 12px;">Sort by</div>
             <div fxLayout="row" fxLayoutAlign="start center">
-              <form [formGroup]="contactForm" class="form"> 
+              <form [formGroup]="contactForm" class="form">
                 <select formControlName="country" class="select">
                   <option [ngValue]="null" disabled>Select Filter</option>
                   <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
@@ -93,6 +93,6 @@
             </div>
           </div>
       </div>
-           
+
     </mat-sidenav-content>
   </mat-sidenav-container>

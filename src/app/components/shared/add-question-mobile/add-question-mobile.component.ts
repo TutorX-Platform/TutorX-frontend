@@ -36,7 +36,7 @@ export class AddQuestionMobileComponent implements OnInit {
   files: File[] = [];
 
   subjectList: string[] = [];
-  
+
   options: string[] = ['Maths', 'Science', 'English'];
 
   constructor(
@@ -121,6 +121,7 @@ export class AddQuestionMobileComponent implements OnInit {
     const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      studentName: "",
       studentUniqueKey: this.studentUniqueKey,
       studentEmail: "",
       attachments: this.uploadedFiles,
