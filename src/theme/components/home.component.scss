@@ -561,7 +561,15 @@
         
         .footer{
             background: #222D34;
-            height: 300px;
+            padding: 64px 128px;
+            .links{
+                font: $body-base-default;
+                color: #FFFFFF;
+            }
+            .copy-right{
+                font: $body-small-default;
+                color: #FFFFFF;
+            }
         }
 
         .process-web{ 
