@@ -11,6 +11,48 @@
       } 
       min-height: 90vh;
 
+      .mobile-question-container{        
+        padding: 16px 24px;
+        width: 100%;
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-bottom-color: #E3E6E8;
+        .topic{
+          font: $body-base-medium;
+        }
+        .time{
+          font: $body-caption-default;
+          color: #5B6469;
+          padding-right: 16px;
+        }
+        .avatar {
+          vertical-align: middle;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          }
+      }
+      .footer{
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        // width: 100%;
+        text-align: center;
+      }
+      .form{
+        width: 100%; 
+        margin-top: 4px;
+
+        .select{
+          align-items: center;
+          padding: 12px 16px; 
+          width: 100%;
+          border: 1px solid #BDC0C4;
+          box-sizing: border-box;
+          border-radius: 4px;
+          font:  500 16px/24px Roboto,'Manrope', sans-serif;
+        }
+      }
       
       .new-question{
         padding: 8px 16px;

@@ -31,7 +31,7 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-container">
-      <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center">
+      <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-sm fxShow="true">
         <button
           type="button"
           aria-label="Toggle sidenav"
@@ -67,7 +67,17 @@
           </div>
         </div>
       </mat-toolbar>
-
+      <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
+        <div fxLayoutAlign="start center" style="color: white;">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+            <span>Questions</span>
+        </div>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon>circle</mat-icon>
+        </button>
+      </mat-toolbar>
       <app-student-questions *ngIf="selectedPage === 1"></app-student-questions>
 
 

@@ -1,11 +1,13 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import {Question} from 'src/app/models/question';
 import {QuestionService} from "../../../services/question-service.service";
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from "../../../models/constants";
-import {Questions} from "../../../models/questions";
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Questions } from 'src/app/models/questions';
 
 @Component({
   selector: 'app-question-pool',
@@ -17,7 +19,7 @@ export class QuestionPoolComponent implements OnInit {
   contactForm!: FormGroup;
 
   selectedStatus = 0;
-  askedQuestions = [];
+  askedQuestions: Questions[] = [];
 
   countries = [
     {id: 1, name: "United States"},
@@ -27,7 +29,19 @@ export class QuestionPoolComponent implements OnInit {
     {id: 5, name: "England"}
   ];
 
-  questions: Questions[] = [];
+  questions: Question[] = [];
+  subjects = [
+    "Science", "English", "Maths", "Computer Science"
+  ]
+
+  states = [
+    "Open", "Inprogress", "Assigned", "Cancelled", "Completed"
+  ]
+
+  sortings = constants.sortBy_functions;
+  options: string[] = ['Maths', 'Science', 'English'];
+  filteredOptions?: Observable<string[]>;
+  searchControl = new FormControl();
 
   constructor(
     private questionService: QuestionService,
@@ -45,6 +59,16 @@ export class QuestionPoolComponent implements OnInit {
       country: [null]
     });
     this.getQuestions();
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      map((value:string) => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   selectStatus(num: number) {
