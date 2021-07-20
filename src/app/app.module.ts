@@ -28,6 +28,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 // import {MatOp} from '@angular/material/autocomplete';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
@@ -108,7 +109,8 @@ import { AddQuestionMobileComponent } from './components/shared/add-question-mob
     NgxDropzoneModule,
     CarouselModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]

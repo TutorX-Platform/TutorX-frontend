@@ -43,8 +43,9 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex="50%" *ngFor="let subject of subjects">
               <div fxLayout="row" fxLayoutGap="8px">
-                <input type="checkbox">
-                <div class="subjectss">{{subject}}</div>
+                <mat-checkbox color="primary">
+                  <div class="subjectss">{{subject}}</div>
+                </mat-checkbox>
               </div>
             </div>
           </div>
@@ -54,8 +55,9 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex="50%" *ngFor="let state of states">
               <div fxLayout="row" fxLayoutGap="8px">
-                <input type="checkbox">
-                <div class="subjectss">{{state}}</div>
+                <mat-checkbox color="primary">
+                  <div class="subjectss">{{state}}</div>
+                </mat-checkbox>
               </div>
             </div>
           </div>
