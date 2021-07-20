@@ -1,6 +1,6 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
@@ -9,6 +9,8 @@ import {QuestionService} from "../../../services/question-service.service";
 import {Questions} from "../../../models/questions";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -75,7 +77,23 @@ export class StudentQuestionsComponent implements OnInit {
     progressDialog.afterOpened().subscribe(() => {
       this.getQuestions(progressDialog);
 
-    })
+    });
+    //search auto complete
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      map((value:string) => this._filter(value))
+    );
+  }
+
+  //search auto complete
+  options: string[] = ['Maths', 'Science', 'English'];
+  filteredOptions?: Observable<string[]>;
+  searchControl = new FormControl();
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   selectStatus(num: number) {
@@ -103,6 +121,10 @@ export class StudentQuestionsComponent implements OnInit {
     dialogConfig.width = "100%";
     dialogConfig.height = "810px";
     this.dialog.open(AddQuestionComponent, dialogConfig);
+  }
+
+  addQuestionMobile(){
+    
   }
 
   getQuestions(progressDialog: MatDialogRef<any>) {
@@ -155,5 +177,6 @@ export class StudentQuestionsComponent implements OnInit {
     }
     return this.askedQuestions;
   }
+
 
 }

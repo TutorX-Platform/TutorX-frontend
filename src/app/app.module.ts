@@ -40,7 +40,6 @@ import {SignInComponent} from './components/auth/sign-in/sign-in.component';
 import {AuthService} from "./services/auth.service";
 import {DummyComponent} from './components/test/dummy/dummy.component';
 import {AddQuestionComponent} from './components/shared/add-question/add-question.component';
-import {TutorDashboardComponent} from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import {QuestionCardComponent} from './components/shared/question-card/question-card.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {QuestionPoolComponent} from './components/shared/question-pool/question-pool.component';
@@ -57,6 +56,8 @@ import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-mobile.component';
 import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-mobile.component';
 import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
+import { TutorComponent } from './components/tutor/tutor.component';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +67,6 @@ import { AddQuestionMobileComponent } from './components/shared/add-question-mob
     SignInComponent,
     DummyComponent,
     AddQuestionComponent,
-    TutorDashboardComponent,
     QuestionCardComponent,
     AdminComponent,
     QuestionPoolComponent,
@@ -81,7 +81,8 @@ import { AddQuestionMobileComponent } from './components/shared/add-question-mob
     ProgressDialogComponent,
     SignInMobileComponent,
     SignUpMobileComponent,
-    AddQuestionMobileComponent
+    AddQuestionMobileComponent,
+    TutorComponent
   ],
   imports: [
     BrowserModule,
