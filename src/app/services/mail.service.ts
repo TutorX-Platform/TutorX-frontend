@@ -21,5 +21,16 @@ export class MailService {
     return this.http.post(constants.service_url.emailBackend, emailData);
   }
 
+  sendQuestionAcknowledgementEmail(email: string) {
+    const emailData = {
+      'email': email,
+      'subject': constants.email_data.subject,
+      'message': constants.email_data.questionAcknowledgementEmail,
+      'sender': constants.email_data.senderEmail,
+      'senderPassword': constants.email_data.senderPassword,
+    }
+    return this.http.post(constants.service_url.emailBackend, emailData);
+  }
+
 
 }

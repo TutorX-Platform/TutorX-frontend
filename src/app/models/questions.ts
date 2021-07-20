@@ -18,4 +18,5 @@ export interface Questions {
   uniqueLink: string;
   questionSalt: string;
   studentUniqueKey: string;
+  studentName: string;
 }

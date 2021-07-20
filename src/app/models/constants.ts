@@ -67,6 +67,7 @@ export const email_data = {
   senderPassword: 'innathanakdevgroup',
   subject: 'Welcome to TutorX Platform',
   message: 'This is dummt message replace with given one',
+  questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question"
 }
 
 export const sortBy_functions = [
