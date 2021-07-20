@@ -1,28 +1,26 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {AuthService} from "../../../services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { MailService } from 'src/app/services/mail.service';
 import * as constants from "../../../models/constants";
-import {Router} from "@angular/router";
-import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
-import {MailService} from "../../../services/mail.service";
+import { ProgressDialogComponent } from '../../shared/progress-dialog/progress-dialog.component';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-sign-up-mobile',
+  templateUrl: './sign-up-mobile.component.html',
+  styleUrls: ['./sign-up-mobile.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpMobileComponent implements OnInit {
+
   // @ts-ignore
   signUpForm: FormGroup;
   isChecked = false;
-  emailPattern = constants.regexp_patterns.email;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private dialogRef: MatDialogRef<SignUpComponent>,
     private dialog: MatDialog,
     public authService: AuthService,
     private mailService: MailService
@@ -57,7 +55,6 @@ export class SignUpComponent implements OnInit {
                 console.log(res);
               }
             );
-            this.dialogRef.close();
             this.router.navigate([constants.routes.student_q_pool]);
           }
         )
@@ -67,9 +64,8 @@ export class SignUpComponent implements OnInit {
   onGoogleAuth() {
     this.authService.googleAuth().then(
       (r) => {
-        this.dialogRef.close();
       }
     )
   }
-  
+
 }

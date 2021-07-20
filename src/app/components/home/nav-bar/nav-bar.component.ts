@@ -8,6 +8,7 @@ import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,6 +20,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   private mediaSub: Subscription | undefined;
   viewPoint = false;
   isLoggedIn = false;
+  page = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -26,6 +28,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private mediaObserver: MediaObserver,
     public authService: AuthService,
     public studentService: StudentService,
+    public router: Router
   ) {
   }
 
@@ -63,7 +66,10 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     dialogConfig.width = "433px";
     dialogConfig.height = "620px";
     this.dialog.open(SignInComponent, dialogConfig);
+  }
 
+  onLoginMobile() {
+    this.page = 1;
   }
 
   onSignUp() {
@@ -72,6 +78,14 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     dialogConfig.width = "433px";
     dialogConfig.height = "900px";
     this.dialog.open(SignUpComponent, dialogConfig);
+  }
+
+  onSignUpMobile() {
+    this.page = 2;
+  } 
+
+  onHome(){
+    this.page = 0;
   }
 
   onSignOut() {

@@ -12,6 +12,7 @@ import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
+import { map, startWith } from 'rxjs/operators';
 import {parseTemplate} from "@angular/compiler";
 import {MailService} from "../../../services/mail.service";
 
@@ -40,6 +41,9 @@ export class AddQuestionComponent implements OnInit {
   studentUniqueKey = '';
   files: File[] = [];
   subjectList: string[] = [];
+
+  options: string[] = ['Maths', 'Science', 'English'];
+  filteredOptions?: Observable<string[]>;
   questionId = '';
 
 
@@ -68,6 +72,16 @@ export class AddQuestionComponent implements OnInit {
       files: []
     });
     this.date = new Date();
+    this.filteredOptions = this.addQuestionForm.controls['subject'].valueChanges.pipe(
+      startWith(''),
+      map((value:string) => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onDone() {

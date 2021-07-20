@@ -16,27 +16,27 @@
     </div>
 </div>
 
+<!-- banner mobile -->
 <div fxLayout="column" class="banner-mobile" fxLayoutAlign="space-around center" fxShow="true" fxHide.gt-xs="true">
     <div fxLayout="row" class="image-container">
-        <img src="../../../../assets/images/student2.png" alt="" width="240px" height="240px">
+        <img src="../../../../assets/images/student-mobile.svg">
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center">
         <div class="details-container">
-            <h3>Get Instant Help</h3>
-            <h5>for our student comunity</h5>
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            <button mat-flat-button class="get-help" (click)="addQuestion()">
+            <div class="get-help-mobile-title">Get Instant Help</div>
+            <div class="get-help-mobile-subtitle">for our student comunity</div>
+            <div class="get-help-mobile-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
+            <button mat-flat-button class="get-help-mobile-button" (click)="addQuestion()">
                 Get help
-                <mat-icon class="material-icons-outlined">
-                    supervised_user_circle
-                    </mat-icon>
+                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
             </button>
         </div>
     </div>
 </div>
 
 <!-- features component -->
-<div fxLayout="column" class="features-container">
+<div fxLayout="column" [ngClass.gt-xs]="'features-container-web'"
+[ngClass.lt-sm]="{'features-container-mobile': true}" >
     <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
         <div class="heading-container-web" >
             <div class="features-title">Tailor-made features</div>
@@ -45,11 +45,11 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
         <div class="heading-container-mobile">
-            <h4>Tailor-made features</h4>
-            <p>Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
+            <div class="features-mobile-heading-title">Tailor-made features</div>
+            <div class="features-mobile-heading-subtitle">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</div>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center center" class="card-container">
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px" fxLayoutAlign="center center" class="card-container">
         <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="100%" fxFlex="33%" *ngFor="let detail of details">
             <div class="card">
                 <img src="{{detail.imageUrl}}" alt="" width="30px" height="30px">
@@ -62,13 +62,17 @@
 
 <!-- client-web-->
 <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
-    <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
-        <div class="client-title">Our clients speak</div>
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+        <div class="client-title-web">Our clients speak</div>
     </div>
-    <div class="client-feedback-container" style="margin-bottom: 100px;">
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
+        <div class="client-title-mobile">Our clients speak</div>
+    </div>
+    <div [ngClass.gt-xs]="'client-feedback-container-web'"
+    [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
         <owl-carousel-o [options]="customOptions">
             <ng-template carouselSlide>
-                <div fxLayout="column"   fxLayoutAlign="center center">
+                <div fxLayout="column" fxLayoutAlign="center center">
                     <div class="box-client b4">
                         <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
                         <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
@@ -119,7 +123,7 @@
                 </div> 
             </ng-template>  
             <ng-template carouselSlide>
-                <div fxLayout="column"   fxLayoutAlign="center center">
+                <div fxLayout="column" fxLayoutAlign="center center">
                     <div class="box-client b4">
                         <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
                         <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>                
@@ -172,21 +176,27 @@
 </div> -->
 
 <!-- Process-web -->
-<div class="process" fxLayout="column" fxLayoutAlign="start center">   
+<div [ngClass.gt-xs]="'process-web'"
+[ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">   
     <div class="process-title">
         The process we follow
     </div>
-    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px grid">
+    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px">
         <div *ngFor="let num of [1,2,3,4]" fxFlex.lg="25%">
-            <div class="step" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="4px">
-                <div>
+            <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start" fxLayoutGap="4px" fxLayout.lt-sm="row" fxLayoutGap="8px">
+                <div fxHide.lt-sm="true" fxShow="true">
                     <img src="../../../../assets/icons/Indication.png">
                 </div>
-                <div class="step-title">
-                    Ideate
+                <div fxHide.gt-xs="true" fxShow="true">
+                    <img src="../../../../assets/icons/Indication-mobile.svg">
                 </div>
-                <div class="step-sub-title">
-                    Turn your idea from concept to MVP
+                <div>
+                    <div class="step-title">
+                        Ideate
+                    </div>
+                    <div class="step-sub-title">
+                        Turn your idea from concept to MVP
+                    </div>
                 </div>
             </div>
         </div>
@@ -235,7 +245,7 @@
 
 <!-- tutor-feedback-mobile -->
 <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
-    <div class="feedback-container" fxLayout="row">
+    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName">
         <svg width="100" height="20" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23.584 1.16L23.008 5.264C21.856 5.168 20.92 5.36 20.2 5.84C19.48 6.296 18.976 6.968 18.688 7.856C18.424 8.72 18.376 9.728 18.544 10.88H23.584V20.672H13.792V10.88C13.792 7.424 14.596 4.808 16.204 3.032C17.812 1.256 20.272 0.631999 23.584 1.16ZM10.552 1.16L9.976 5.264C8.824 5.168 7.888 5.36 7.168 5.84C6.448 6.296 5.944 6.968 5.656 7.856C5.392 8.72 5.344 9.728 5.512 10.88H10.552V20.672H0.76V10.88C0.76 7.424 1.564 4.808 3.172 3.032C4.78 1.256 7.24 0.631999 10.552 1.16Z" fill="#2EC5CE"/>
         </svg>
@@ -243,29 +253,23 @@
             We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <div *ngFor="let tutorFeedback of tutorFeedbacks2">
             <div class="avatar-container" fxLayout="row">
                 <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
                 <div *ngIf="tutorFeedback == feedBackNum">
-                    <div *ngIf="feedBackNum == 1" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold; font-size: 12px">James Cameron</p>
-                        <p style="font-size: 12px">CEO WTF</p>
+                    <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <div *ngIf="feedBackNum == 2" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold; font-size: 12px">Husain Bolt</p>
-                        <p style="font-size: 12px">CEO Athletics</p>
-                    </div><div *ngIf="feedBackNum == 3" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold; font-size: 12px">Kim Cardashian</p>
-                        <p style="font-size: 12px">CEO QXR Coop</p>
+                    <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
                     </div>
-                    <!-- <div *ngIf="feedBackNum == 4" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Jelly Bean</p>
-                        <p>CEO WTF</p>
-                    </div><div *ngIf="feedBackNum == 5" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <p style="font-weight: bold;">Osama Billaden</p>
-                        <p>CEO WTF</p>
-                    </div> -->
+                    <div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">James Cameron</div>
+                        <div class="avatar-designation">CEO WTF</div>
+                    </div>
                 </div>
             </div>
         </div>

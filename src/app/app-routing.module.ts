@@ -13,15 +13,18 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo
 } from '@angular/fire/auth-guard';
+import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-mobile.component';
+import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
   {path: '', component: NavBarComponent},
-  {path: 'sign-in', component: SignInComponent},
+  {path: 'sign-in', component: SignInMobileComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'tutor', component: TutorDashboardComponent},
   {path: 'dummy', component: DummyComponent},
+  {path: 'add-question', component: AddQuestionMobileComponent},
   {path: 'test-chat/:chatToken', component: TestChatComponent},
   {
     path: 'student',

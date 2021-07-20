@@ -1,5 +1,5 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, OnChanges, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddQuestionComponent } from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
@@ -47,8 +47,8 @@ export class BodyComponent implements OnInit {
 
   constructor(
     public authService:AuthService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+  ) { }  
 
   selectedNumber = 0;
   feedBackNum = 3;
@@ -57,6 +57,10 @@ export class BodyComponent implements OnInit {
 
   show = false;
   showFeedback = false;
+
+  images = ['../../../../assets/images/student3.png','../../../../assets/images/student3.png','../../../../assets/images/student3.png','../../../../assets/images/student3.png'];
+
+  customOptions!: OwlOptions;
 
   get stateName() {
     return this.show ? 'show' : 'hide'
@@ -75,6 +79,30 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.customOptions = {
+      loop: true,
+      mouseDrag: false,
+      touchDrag: false,
+      pullDrag: false,
+      dots: true,
+      navSpeed: 300,
+      nav: false,    
+      autoWidth: false,  
+      responsive: {
+        0: {
+          items: 1
+        },
+        400: {
+          items: 1
+        },
+        740: {
+          items: 2
+        },
+        1024: {
+          items: 2
+        }
+      }
+    }
   }
 
   details = [
@@ -128,29 +156,6 @@ export class BodyComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: true,
-    navSpeed: 700,
-    nav: false,
-    // autoWidth: true,    
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 2
-      }
-    }
-  }
+  
 
 }
