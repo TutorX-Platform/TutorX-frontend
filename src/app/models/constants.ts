@@ -51,14 +51,14 @@ export const questionStatus = {
 }
 
 export const subjectCodes = {
-  maths:'Maths',
-  english:'English',
-  science:'Science',
-  cs:'Computer Science',
+  maths: 'Maths',
+  english: 'English',
+  science: 'Science',
+  cs: 'Computer Science',
 }
 
 export const subjects = [
-  "maths", "science", "geography", "history"
+  subjectCodes.maths, subjectCodes.english, subjectCodes.science, subjectCodes.cs
 ];
 
 export const regexp_patterns = {

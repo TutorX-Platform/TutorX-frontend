@@ -229,8 +229,8 @@ export class StudentQuestionsComponent implements OnInit {
     if (this.isEnglish) {
       filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.english))
     }
-
     if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isScience && !this.isEnglish && !this.isCS && !this.isMaths) {
+      this.askedQuestions = [];
       this.askedQuestions.push(...this.allAskedQuestions);
     } else {
       this.askedQuestions = [];

@@ -42,7 +42,7 @@ export class AddQuestionComponent implements OnInit {
   files: File[] = [];
   subjectList: string[] = [];
 
-  options: string[] = ['Maths', 'Science', 'English'];
+  options = constants.subjects;
   filteredOptions?: Observable<string[]>;
   questionId = '';
 
