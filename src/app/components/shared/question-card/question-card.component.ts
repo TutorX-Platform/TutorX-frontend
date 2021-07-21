@@ -13,7 +13,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public status: string = '';
   @Input() public subjects: string = '';
   @Input() public dueDate: Date = new Date;
-  @Input() public descriptionTitle: string = '';
+  @Input() public descriptionTitle: string = 'Hi Tutors';
   @Input() public description: string = '';
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
