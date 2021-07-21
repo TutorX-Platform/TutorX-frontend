@@ -44,7 +44,7 @@
                 <mat-icon class="icon">notifications</mat-icon>
               </div>
             </div>
-  
+
             <span class="example-spacer"></span>
             <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
               <div *ngIf="authService.student.profileImage !=''">
@@ -72,12 +72,11 @@
             <mat-icon>circle</mat-icon>
           </button>
         </mat-toolbar>
-        <app-tutor-dashboard *ngIf="selectedPage === 1"></app-tutor-dashboard>
-  
-  
+        <app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>
+
+
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
-  
-  
-  
+
+

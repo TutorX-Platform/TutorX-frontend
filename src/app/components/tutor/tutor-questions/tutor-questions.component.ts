@@ -137,7 +137,7 @@ export class TutorQuestionsComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestions(this.studentService.currentStudent.userId).valueChanges().subscribe(
+        this.questionService.getQuestionsTutor().valueChanges().subscribe(
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
