@@ -57,6 +57,7 @@ import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-
 import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-mobile.component';
 import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
 import { TutorComponent } from './components/tutor/tutor.component';
+import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tutor-questions.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { TutorComponent } from './components/tutor/tutor.component';
     SignInMobileComponent,
     SignUpMobileComponent,
     AddQuestionMobileComponent,
-    TutorComponent
+    TutorComponent,
+    TutorQuestionsComponent
   ],
   imports: [
     BrowserModule,

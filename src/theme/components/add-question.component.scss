@@ -7,6 +7,22 @@
 
     .add-question{
         overflow: auto;
+        .submit-footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 8px 24px;
+            background: #F6F7FB;
+            z-index: 100;
+            .submit-button-mobile{
+                padding: 16px 32px;
+                background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+                border-radius: 8px;
+                font: $heading-desktop-h6;
+                color: white;
+            }
+        }
         .form-container{
             .top-container{
                 padding: 21px 5% 16px 5%;
