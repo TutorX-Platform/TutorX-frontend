@@ -207,7 +207,7 @@ export class BodyComponent implements OnInit {
   addQuestion() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "150%";
+    dialogConfig.width = "100%";
     dialogConfig.height = "810px";
     this.dialog.open(AddQuestionComponent, dialogConfig);
 

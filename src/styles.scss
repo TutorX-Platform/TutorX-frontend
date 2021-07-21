@@ -1,3 +1,6 @@
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
 @import '~animate.css/animate.min';
 
 @import '~@angular/material/theming'; //import theme
@@ -5,9 +8,6 @@
 
 @import 'theme/variables.scss';
 @import 'theme/component.collective.scss';
-
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 /* For use in src/lib/core/theming/_palette.scss */
 $md-palletteprimary: (

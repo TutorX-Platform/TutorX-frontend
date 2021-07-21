@@ -55,7 +55,7 @@
           <div class="subjects-title">Status</div>
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">
-              <div fxLayout="row" fxLayoutGap="8px">
+              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
                 <mat-checkbox (change)="onStageFilter(state)"  color="primary">
                 </mat-checkbox>
                 <div class="subjectss">{{state}}</div>

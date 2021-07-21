@@ -11,12 +11,6 @@
             <div class="log-sub-title">Business project</div>
           </div>
         </div>
-        <div class="but-container" fxLayout="row">
-          <div class="new-quest" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" (click)="addQuestion()">
-            <img src="../../../assets/icons/plus.svg" alt="">
-            <div>New question</div>
-          </div>
-        </div>
         <mat-nav-list>
           <a mat-list-item (click)="changePage(1)"
              [ngClass]="selectedPage === 1 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
@@ -25,7 +19,7 @@
               space_dashboard
             </mat-icon>
             <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My
-              Questions
+              Public Pool
             </div>
           </a>
         </mat-nav-list>
@@ -78,7 +72,7 @@
             <mat-icon>circle</mat-icon>
           </button>
         </mat-toolbar>
-        <app-student-questions *ngIf="selectedPage === 1"></app-student-questions>
+        <app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>
   
   
       </mat-sidenav-content>

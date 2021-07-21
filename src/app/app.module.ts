@@ -29,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
 // import {MatOp} from '@angular/material/autocomplete';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
@@ -57,6 +58,7 @@ import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-
 import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-mobile.component';
 import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
 import { TutorComponent } from './components/tutor/tutor.component';
+import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tutor-questions.component';
 
 
 @NgModule({
@@ -82,7 +84,8 @@ import { TutorComponent } from './components/tutor/tutor.component';
     SignInMobileComponent,
     SignUpMobileComponent,
     AddQuestionMobileComponent,
-    TutorComponent
+    TutorComponent,
+    TutorQuestionsComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +114,8 @@ import { TutorComponent } from './components/tutor/tutor.component';
     CarouselModule,
     HttpClientModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
