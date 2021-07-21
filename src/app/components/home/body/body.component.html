@@ -181,9 +181,9 @@
     <div class="process-title">
         The process we follow
     </div>
-    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px">
+    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
         <div *ngFor="let num of process" fxFlex.lg="25%">
-            <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start" fxLayoutGap="4px" fxLayout.lt-sm="row" fxLayoutGap="8px">
+            <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
                 <div fxHide.lt-sm="true" fxShow="true">
                     <img src="../../../../assets/icons/Indication.png">
                 </div>
@@ -201,6 +201,23 @@
             </div>
         </div>
         
+    </div>
+    <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
+        <div *ngFor="let num of process">
+            <div class="step" fxLayout="row" fxLayoutGap="8px">                
+                <div>
+                    <img src="../../../../assets/icons/Indication-mobile.svg">
+                </div>
+                <div>
+                    <div class="step-title">
+                        {{num.title}}
+                    </div>
+                    <div class="step-sub-title">
+                        {{num.subtitle}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

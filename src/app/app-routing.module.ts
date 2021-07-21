@@ -12,9 +12,9 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo
 } from '@angular/fire/auth-guard';
-import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-mobile.component';
-import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
-import { TutorComponent } from './components/tutor/tutor.component';
+import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mobile.component';
+import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
+import {TutorComponent} from './components/tutor/tutor.component';
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -23,7 +23,10 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInMobileComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
-  {path: 'tutor', component: TutorComponent},
+  {
+    path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToHome}
+  },
   {path: 'add-question', component: AddQuestionMobileComponent},
   {path: 'test-chat/:chatToken', component: TestChatComponent},
   {

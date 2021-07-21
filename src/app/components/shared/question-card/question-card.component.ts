@@ -1,4 +1,3 @@
-
 import {Input} from '@angular/core';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
@@ -18,6 +17,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public description: string = '';
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
+  @Input() public isTutorJoined: boolean = false;
 
 
   constructor(private router: Router) {

@@ -9,8 +9,8 @@ import {QuestionService} from "../../../services/question-service.service";
 import {Questions} from "../../../models/questions";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tutor-questions',
@@ -22,7 +22,12 @@ export class TutorQuestionsComponent implements OnInit {
   contactForm!: FormGroup;
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
+  allAskedQuestions: Questions[] = [];
   uniqueKey = '';
+  isScience = false;
+  isMaths = false;
+  isEnglish = false;
+  isCS = false;
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -81,7 +86,7 @@ export class TutorQuestionsComponent implements OnInit {
     //search auto complete
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(''),
-      map((value:string) => this._filter(value))
+      map((value: string) => this._filter(value))
     );
   }
 
@@ -89,7 +94,7 @@ export class TutorQuestionsComponent implements OnInit {
   options: string[] = ['Maths', 'Science', 'English'];
   filteredOptions?: Observable<string[]>;
   searchControl = new FormControl();
-  
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -123,8 +128,8 @@ export class TutorQuestionsComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
-  addQuestionMobile(){
-    
+  addQuestionMobile() {
+
   }
 
   getQuestions(progressDialog: MatDialogRef<any>) {
@@ -136,6 +141,9 @@ export class TutorQuestionsComponent implements OnInit {
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
+            this.askedQuestions = this.sortQuestion();
+            // @ts-ignore
+            this.allAskedQuestions = res;
             progressDialog.close();
           }, () => {
             progressDialog.close();
@@ -145,6 +153,13 @@ export class TutorQuestionsComponent implements OnInit {
         );
       }
     )
+  }
+
+  sortQuestion() {
+    return this.askedQuestions.sort(function (a, b) {
+      // @ts-ignore
+      return a.createdDate - b.createdDate;
+    });
   }
 
 
@@ -176,6 +191,44 @@ export class TutorQuestionsComponent implements OnInit {
       }
     }
     return this.askedQuestions;
+  }
+
+  onSubjectFilter(value: any) {
+    let ask: Questions[] = [];
+    let filteredQuestions: Questions[] = [];
+
+    if (value === constants.subjectCodes.maths) {
+      this.isMaths = !this.isMaths;
+    }
+    if (value === constants.subjectCodes.science) {
+      this.isScience = !this.isScience;
+    }
+    if (value === constants.subjectCodes.english) {
+      this.isEnglish = !this.isEnglish;
+    }
+    if (value === constants.subjectCodes.cs) {
+      this.isCS = !this.isCS;
+    }
+
+    if (this.isMaths) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.maths));
+    }
+    if (this.isScience) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.science))
+    }
+    if (this.isCS) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.cs))
+    }
+    if (this.isEnglish) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.english))
+    }
+
+    if (!this.isScience && !this.isEnglish && !this.isCS && !this.isMaths) {
+      this.askedQuestions.push(...this.allAskedQuestions);
+    } else {
+      this.askedQuestions = [];
+      this.askedQuestions.push(...filteredQuestions);
+    }
   }
 
 
