@@ -12,7 +12,7 @@ import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
-import { map, startWith } from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {parseTemplate} from "@angular/compiler";
 import {MailService} from "../../../services/mail.service";
 
@@ -74,7 +74,7 @@ export class AddQuestionComponent implements OnInit {
     this.date = new Date();
     this.filteredOptions = this.addQuestionForm.controls['subject'].valueChanges.pipe(
       startWith(''),
-      map((value:string) => this._filter(value))
+      map((value: string) => this._filter(value))
     );
   }
 
@@ -195,10 +195,9 @@ export class AddQuestionComponent implements OnInit {
   askEmail(progressDialog: MatDialogRef<any>) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "100%";
-    dialogConfig.height = "810px";
+    dialogConfig.width = "30%";
+    // dialogConfig.height = "810px";
     const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe(
       (result) => {
         this.authService.student.firstName = result.value.name;
@@ -211,6 +210,8 @@ export class AddQuestionComponent implements OnInit {
         this.authService.student.email = '';
       }
     )
+    progressDialog.close();
+
   }
 
   sendAknowledgementEmail(email: string) {
