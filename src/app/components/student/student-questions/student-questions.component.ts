@@ -9,8 +9,8 @@ import {QuestionService} from "../../../services/question-service.service";
 import {Questions} from "../../../models/questions";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -93,7 +93,7 @@ export class StudentQuestionsComponent implements OnInit {
     //search auto complete
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(''),
-      map((value:string) => this._filter(value))
+      map((value: string) => this._filter(value))
     );
   }
 
@@ -135,7 +135,7 @@ export class StudentQuestionsComponent implements OnInit {
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 
-  addQuestionMobile(){
+  addQuestionMobile() {
 
   }
 
@@ -144,10 +144,11 @@ export class StudentQuestionsComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestions(this.studentService.currentStudent.userId).valueChanges().subscribe(
+        this.questionService.getQuestions(this.studentService.currentStudent.email).valueChanges().subscribe(
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
+            this.askedQuestions = this.sortQuestion();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
@@ -159,6 +160,13 @@ export class StudentQuestionsComponent implements OnInit {
         );
       }
     )
+  }
+
+  sortQuestion() {
+    return this.askedQuestions.sort(function (a, b) {
+      // @ts-ignore
+      return a.createdDate - b.createdDate;
+    }).reverse();
   }
 
 

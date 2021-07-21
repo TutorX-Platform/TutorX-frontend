@@ -141,6 +141,7 @@ export class TutorQuestionsComponent implements OnInit {
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
+            this.askedQuestions = this.sortQuestion();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
@@ -152,6 +153,13 @@ export class TutorQuestionsComponent implements OnInit {
         );
       }
     )
+  }
+
+  sortQuestion() {
+    return this.askedQuestions.sort(function (a, b) {
+      // @ts-ignore
+      return a.createdDate - b.createdDate;
+    });
   }
 
 

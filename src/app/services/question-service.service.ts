@@ -19,9 +19,9 @@ export class QuestionService {
     return questionRef.set(qustion);
   }
 
-  getQuestions(studentId: string) {
+  getQuestions(studentEmail: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentId', '==', studentId));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', '==', studentEmail));
     return questionRef;
   }
 
