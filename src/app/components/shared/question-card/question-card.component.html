@@ -30,7 +30,7 @@
       <button mat-button class="view-details">
         View Details
       </button>
-      <button mat-button class="view-chat" style="color: white;">
+      <button [disabled]="!isTutorJoined" mat-button class="view-chat" style="color: white;">
         View Chat
       </button>
     </div>

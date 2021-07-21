@@ -51,8 +51,8 @@
             <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
               <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let subject of subjects">
                 <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                  <mat-checkbox color="primary">
-                  </mat-checkbox>                
+                  <mat-checkbox (change)="onSubjectFilter(subject)"  color="primary">
+                  </mat-checkbox>
                   <div class="subjectss">{{subject}}</div>
                 </div>
               </div>
@@ -63,7 +63,7 @@
             <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
               <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">
                 <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                  <mat-checkbox color="primary">
+                  <mat-checkbox  color="primary">
                   </mat-checkbox>
                   <div class="subjectss">{{state}}</div>
                 </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-  
+
       </div>
     </div>
     <!-- <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
@@ -104,11 +104,10 @@
         </div>
       </div>
     </div> -->
-    
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
