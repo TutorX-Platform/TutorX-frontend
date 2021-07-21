@@ -29,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
 // import {MatOp} from '@angular/material/autocomplete';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
@@ -113,7 +114,8 @@ import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tuto
     CarouselModule,
     HttpClientModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]

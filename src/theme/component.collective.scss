@@ -9,6 +9,7 @@
 @import "components/add-question.component.scss";
 @import "components/auth.component.scss";
 @import "components/nav-bar.component.scss";
+@import "components/drop-down.component.scss";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -22,4 +23,5 @@
     @include add-question-component($theme);
     @include auth-component($theme);
     @include nav-bar-component($theme);
+    @include dashboard-component($theme);
 }

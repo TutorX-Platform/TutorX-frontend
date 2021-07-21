@@ -5,7 +5,7 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    .add-question{
+    // .add-question{
         overflow: auto;
         .submit-footer{
             position: fixed;
@@ -97,5 +97,5 @@
                 }
             }
         }
-    }
+    // }
 }
