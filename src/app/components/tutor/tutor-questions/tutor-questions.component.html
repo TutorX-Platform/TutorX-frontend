@@ -15,7 +15,7 @@
               *ngFor="let q of askedQuestions"
               [title]="q.questionTitle"
               [status]="q.status"
-              [subjects]="questions[0]['subjects']"
+              [subjects]="q.subjectCategory"
               [dueDate]="q.dueDate"
               [descriptionTitle]="q.description"
               [description]="q.description"

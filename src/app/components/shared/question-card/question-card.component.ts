@@ -12,7 +12,7 @@ export class QuestionCardComponent implements OnInit {
 
   @Input() public title: string = '';
   @Input() public status: string = '';
-  @Input() public subjects: string[] = [];
+  @Input() public subjects: string = '';
   @Input() public dueDate: Date = new Date;
   @Input() public descriptionTitle: string = '';
   @Input() public description: string = '';

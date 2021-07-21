@@ -1,40 +1,38 @@
 <mat-card style="padding: 24px;">
-    <mat-card-title fxLayout="column" fxLayoutGap="16px"> 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="question-title">{{title}}</div>
-            <div *ngIf="status === 'open'" class="c-chip c-chip--neutral invert-false">Open</div>
-            <div *ngIf="status === 'inProgress'" class="c-chip c-chip--progress invert-false">In Progress</div>
-        </div>
-        <div fxLayout="row" fxLayoutGap="8px" >
-            <div *ngFor="let subject of subjects">
-                <div class="c-chip c-chip--subjects invert-false">{{subject}}</div>                
-            </div>
-        </div>
-        <div fxLayout="row" class="date">
-            Due date &nbsp; {{dueDate}}
-        </div>
-    </mat-card-title>
-    <mat-card-content>
-        <div fxLayout="row" class="title">{{descriptionTitle}}</div>
-        <div fxLayout="row" class="description">
-            {{description}}
-        </div>
-    </mat-card-content>
-    <div class="divider"></div>
-    <div fxLayout="row" fxLayoutAlign="end center" class="bottom-row">
-        <!-- <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" class="left-container">
-            <div *ngFor='let image of images'>
-                <img src="{{image}}" alt="Avatar" class="avatar">                  
-            </div>
-            <div class="viewed-by">Viewed By &nbsp; {{viewedByAmount}}+ Tutors</div>
-        </div> -->
-        <div fxLayoutGap="8px">
-            <button mat-button class="view-details">
-                View Details
-            </button>
-            <button mat-button class="view-chat" style="color: white;">
-                View Chat
-            </button>
-        </div>
+  <mat-card-title fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="question-title">{{title}}</div>
+      <div *ngIf="status === 'open'" class="c-chip c-chip--neutral invert-false">Open</div>
+      <div *ngIf="status === 'inProgress'" class="c-chip c-chip--progress invert-false">In Progress</div>
     </div>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <div class="c-chip c-chip--subjects invert-false">{{subjects}}</div>
+    </div>
+    <div fxLayout="row" class="date">
+      Due date &nbsp; {{dueDate}}
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" class="title">{{descriptionTitle}}</div>
+    <div fxLayout="row" class="description">
+      {{description}}
+    </div>
+  </mat-card-content>
+  <div class="divider"></div>
+  <div fxLayout="row" fxLayoutAlign="end center" class="bottom-row">
+    <!-- <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" class="left-container">
+        <div *ngFor='let image of images'>
+            <img src="{{image}}" alt="Avatar" class="avatar">
+        </div>
+        <div class="viewed-by">Viewed By &nbsp; {{viewedByAmount}}+ Tutors</div>
+    </div> -->
+    <div fxLayoutGap="8px">
+      <button mat-button class="view-details">
+        View Details
+      </button>
+      <button mat-button class="view-chat" style="color: white;">
+        View Chat
+      </button>
+    </div>
+  </div>
 </mat-card>

@@ -1,6 +1,6 @@
 <!-- web -->
 <div class="question-pool">
-  <div fxLayout="row" class="main-containerx" *ngIf="askedQuestions.length > 0" fxShow="true" fxHide.lt-sm="true">
+  <div fxLayout="row" class="main-containerx" *ngIf="allAskedQuestions.length > 0" fxShow="true" fxHide.lt-sm="true">
     <div fxLayout="column" class="left-container">
       <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
         <div fxLayout="column" class="column-view" fxLayoutGap="24px">
@@ -17,7 +17,7 @@
             *ngFor="let q of askedQuestions"
             [title]="q.questionTitle"
             [status]="q.status"
-            [subjects]="questions[0]['subjects']"
+            [subjects]="q.subjectCategory"
             [dueDate]="q.dueDate"
             [descriptionTitle]="q.description"
             [description]="q.description"
@@ -44,8 +44,8 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let subject of subjects">
               <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                <mat-checkbox color="primary">
-                </mat-checkbox>                
+                <mat-checkbox (change)="onSubjectFilter(subject)" color="primary">
+                </mat-checkbox>
                 <div class="subjectss">{{subject}}</div>
               </div>
             </div>
@@ -56,7 +56,7 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">
               <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                <mat-checkbox color="primary">
+                <mat-checkbox (change)="onStageFilter(state)"  color="primary">
                 </mat-checkbox>
                 <div class="subjectss">{{state}}</div>
               </div>
@@ -99,7 +99,7 @@
   </div>
   <!-- If no questions -->
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" class="no-que-container"
-       *ngIf="askedQuestions.length == 0">
+       *ngIf="allAskedQuestions.length == 0">
     <img src="../../../../assets/icons/no-que.svg" alt="">
     <div class="message">
       No questions has been Created

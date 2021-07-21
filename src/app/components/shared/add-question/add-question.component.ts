@@ -13,6 +13,8 @@ import {StudentService} from "../../../services/student-service.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
 import { map, startWith } from 'rxjs/operators';
+import {parseTemplate} from "@angular/compiler";
+import {MailService} from "../../../services/mail.service";
 
 @Component({
   selector: 'app-add-question',
@@ -39,7 +41,7 @@ export class AddQuestionComponent implements OnInit {
   studentUniqueKey = '';
   files: File[] = [];
   subjectList: string[] = [];
-  
+
   options: string[] = ['Maths', 'Science', 'English'];
   filteredOptions?: Observable<string[]>;
   questionId = '';
@@ -49,11 +51,13 @@ export class AddQuestionComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddQuestionComponent>,
+    private welcomeRef: MatDialogRef<WelcomeComponent>,
     private storage: AngularFireStorage,
     private questionService: QuestionService,
     private utilService: UtilService,
     private authService: AuthService,
     public router: Router,
+    private mailService: MailService,
   ) {
   }
 
@@ -85,7 +89,11 @@ export class AddQuestionComponent implements OnInit {
     progressDialog.afterOpened().subscribe(
       (res) => {
         if (this.addQuestionForm.valid) {
-          this.askQuestion(this.dialogRef, progressDialog);
+          if (this.authService.isLoggedIn) {
+            this.askQuestion(this.dialogRef, progressDialog);
+          } else {
+            this.askEmail(progressDialog);
+          }
         } else {
           progressDialog.close();
           alert("form invalid")
@@ -123,10 +131,10 @@ export class AddQuestionComponent implements OnInit {
   }
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
-    const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      studentName: this.authService.student.firstName,
       studentUniqueKey: this.studentUniqueKey,
-      studentEmail: "",
+      studentEmail: this.authService.student.email,
       attachments: this.uploadedFiles,
       chatId: "",
       createdDate: new Date().getTime(),
@@ -151,6 +159,7 @@ export class AddQuestionComponent implements OnInit {
       dialogRef.close();
       progressDialog.close();
     });
+
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
@@ -181,6 +190,31 @@ export class AddQuestionComponent implements OnInit {
         }
       )
     });
+  }
+
+  askEmail(progressDialog: MatDialogRef<any>) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "100%";
+    dialogConfig.height = "810px";
+    const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      (result) => {
+        this.authService.student.firstName = result.value.name;
+        this.authService.student.email = result.value.email;
+      }, () => {
+      }, () => {
+        this.askQuestion(this.dialogRef, progressDialog);
+        this.sendAknowledgementEmail(this.authService.student.email);
+        this.authService.student.firstName = '';
+        this.authService.student.email = '';
+      }
+    )
+  }
+
+  sendAknowledgementEmail(email: string) {
+    this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
 }

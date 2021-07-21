@@ -22,7 +22,19 @@ export class StudentQuestionsComponent implements OnInit {
   contactForm!: FormGroup;
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
+  allAskedQuestions: Questions[] = [];
   uniqueKey = '';
+  isScience = false;
+  isMaths = false;
+  isEnglish = false;
+  isCS = false;
+
+  isOpen = false;
+  isInprogress = false;
+  isAssigned = false;
+  isCancelled = false;
+  isCompleted = false;
+
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -89,7 +101,7 @@ export class StudentQuestionsComponent implements OnInit {
   options: string[] = ['Maths', 'Science', 'English'];
   filteredOptions?: Observable<string[]>;
   searchControl = new FormControl();
-  
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -124,7 +136,7 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   addQuestionMobile(){
-    
+
   }
 
   getQuestions(progressDialog: MatDialogRef<any>) {
@@ -136,6 +148,8 @@ export class StudentQuestionsComponent implements OnInit {
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
+            // @ts-ignore
+            this.allAskedQuestions = res;
             progressDialog.close();
           }, () => {
             progressDialog.close();
@@ -178,5 +192,47 @@ export class StudentQuestionsComponent implements OnInit {
     return this.askedQuestions;
   }
 
+  onSubjectFilter(value: any) {
+    let ask: Questions[] = [];
+    let filteredQuestions: Questions[] = [];
+
+    if (value === constants.subjectCodes.maths) {
+      this.isMaths = !this.isMaths;
+    }
+    if (value === constants.subjectCodes.science) {
+      this.isScience = !this.isScience;
+    }
+    if (value === constants.subjectCodes.english) {
+      this.isEnglish = !this.isEnglish;
+    }
+    if (value === constants.subjectCodes.cs) {
+      this.isCS = !this.isCS;
+    }
+
+    if (this.isMaths) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.maths));
+    }
+    if (this.isScience) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.science))
+    }
+    if (this.isCS) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.cs))
+    }
+    if (this.isEnglish) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.english))
+    }
+
+    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isScience && !this.isEnglish && !this.isCS && !this.isMaths) {
+      this.askedQuestions.push(...this.allAskedQuestions);
+    } else {
+      this.askedQuestions = [];
+      this.askedQuestions.push(...filteredQuestions);
+    }
+  }
+
+
+  onStageFilter(value: any) {
+    console.log(value);
+  }
 
 }

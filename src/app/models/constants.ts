@@ -43,11 +43,18 @@ export const localStorageKeys = {
 }
 
 export const questionStatus = {
-  open: 'open',
-  in_progress: 'inProgress',
-  assigned: 'assigned',
-  cancelled: 'cancelled',
-  completed: 'completed'
+  open: 'Open',
+  in_progress: 'Inprogress',
+  assigned: 'Assigned',
+  cancelled: 'Cancelled',
+  completed: 'Completed'
+}
+
+export const subjectCodes = {
+  maths:'Maths',
+  english:'English',
+  science:'Science',
+  cs:'Computer Science',
 }
 
 export const subjects = [
@@ -67,6 +74,7 @@ export const email_data = {
   senderPassword: 'innathanakdevgroup',
   subject: 'Welcome to TutorX Platform',
   message: 'This is dummt message replace with given one',
+  questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question"
 }
 
 export const sortBy_functions = [
