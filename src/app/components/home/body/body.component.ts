@@ -58,8 +58,28 @@ export class BodyComponent implements OnInit {
   show = false;
   showFeedback = false;
 
-  images = ['../../../../assets/images/student3.png','../../../../assets/images/student3.png','../../../../assets/images/student3.png','../../../../assets/images/student3.png'];
-
+  process = [
+    {
+      title: "Upload your homework",
+      subtitle: "Turn your idea from concept to MVP"
+    },
+    {
+      title: "Talk to a tutor",
+      subtitle: "Sketch out the product to align the user needs"
+    },
+    {
+      title: "Get a quote",
+      subtitle: "Convert the designs into a live application"
+    },
+    {
+      title: "Make the payment",
+      subtitle: "Launching the application to the market"
+    },
+    {
+      title: "Get the assistance",
+      subtitle: "Launching the application to the market"
+    },
+  ];
   customOptions!: OwlOptions;
 
   get stateName() {
@@ -80,7 +100,7 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
     this.customOptions = {
-      loop: true,
+      loop: false,
       mouseDrag: false,
       touchDrag: false,
       pullDrag: false,
@@ -106,11 +126,11 @@ export class BodyComponent implements OnInit {
   }
 
   details = [
-    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/01.svg"},
-    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/02.svg"},
-    {title:"User friendly", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/03.svg"},
-    {title:"Robust workflow", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/04.svg"},
-    {title:"Flexibility", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat nibh tristique ipsum",imageUrl:"../../../../assets/icons/05.svg"}
+    {title:"User Friendly", description:"Responsive and easy to navigate interfaces",imageUrl:"../../../../assets/icons/02.svg"},
+    {title:"Step by step explanations", description:"We break it down for you",imageUrl:"../../../../assets/icons/03.svg"},
+    {title:"Clean and Correct Answers", description:"We provide accurate and original answers",imageUrl:"../../../../assets/icons/04.svg"},
+    {title:"Fast Response", description:"Instant responses from the tutors 24/7",imageUrl:"../../../../assets/icons/05.svg"},
+    {title:"Affordable Service", description:"Reasonable quotes based on your requirements. ",imageUrl:"../../../../assets/icons/01.svg"}
   ]
 
   feedback = [
@@ -152,7 +172,7 @@ export class BodyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
-    dialogConfig.height = "810px";
+    // dialogConfig.height = "810px";
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 

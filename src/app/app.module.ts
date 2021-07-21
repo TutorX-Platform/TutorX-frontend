@@ -59,6 +59,7 @@ import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-
 import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
 import { TutorComponent } from './components/tutor/tutor.component';
 import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tutor-questions.component';
+import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tuto
     SignUpMobileComponent,
     AddQuestionMobileComponent,
     TutorComponent,
-    TutorQuestionsComponent
+    TutorQuestionsComponent,
+    TutorDashboardComponent
   ],
   imports: [
     BrowserModule,

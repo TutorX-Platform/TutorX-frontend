@@ -10,6 +10,7 @@
 @import "components/auth.component.scss";
 @import "components/nav-bar.component.scss";
 @import "components/drop-down.component.scss";
+@import "components/tutor-dashboard.component.scss";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -24,4 +25,5 @@
     @include auth-component($theme);
     @include nav-bar-component($theme);
     @include dashboard-component($theme);
+    @include tutor-dashboard-component($theme);    
 }

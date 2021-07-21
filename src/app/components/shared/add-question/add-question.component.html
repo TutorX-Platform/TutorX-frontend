@@ -8,7 +8,7 @@
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
               Cancel
             </button>
-            <button mat-stroked-button class="button-done" type="submit">
+            <button mat-flat-button [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" type="submit">
               Done
             </button>
         </div>

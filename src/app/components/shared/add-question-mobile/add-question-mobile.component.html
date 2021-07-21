@@ -1,6 +1,6 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" style="position: fixed; top: 0; z-index: 100;">
     <div fxLayoutAlign="start center">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="..">
           <mat-icon>arrow_back</mat-icon>
         </button>
         <span>Add Question</span>
@@ -9,7 +9,7 @@
       <mat-icon>circle</mat-icon>
     </button>
 </mat-toolbar>
-<div class="add-question">
+<div class="add-question" style="margin-top: 60px;">
     <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">      
       <div fxLayout="column" class="bottom-container"  style="padding: 16px 0px 16px 0px !important;">
         <div fxLayout="column" class="form-fields">

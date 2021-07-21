@@ -42,12 +42,15 @@
         }
         
         .banner-web {
-            background: url(../../assets/images/Rectangle.svg);
-            height: 403px;        
+            background: url(../../assets/images/Rectangle.png);            
+            background-repeat: no-repeat;
+            background-size: 100% 403px;
+            height: 403px;     
+            width: 100%;   
                     
             .image-container {
                 position: absolute;
-                width: 50%;
+                width: 540px;
                 height: 403px; 
                 margin-left: 50%;     
                 background: url(../../assets/images/student5.svg);

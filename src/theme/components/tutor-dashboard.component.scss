@@ -1,0 +1,51 @@
+@mixin tutor-dashboard-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .tutor-dashboard{
+        min-height: 90vh;
+        width: 100%;
+        .main-left{
+            width: 70%;
+            padding: 24px;
+            .hi{
+                font: $heading-desktop-h3;
+            }
+            .stats-container{
+                margin-top: 48px;
+                width: 100%;
+                .stats{
+                    padding: 16px;
+                    background: white;
+                    border-radius: 16px;
+                    color: black;
+                    margin-right: 12px;
+                    &--xx{
+                        background: linear-gradient(270deg, #A32E2E 28.75%, #D13636 100%) !important;
+                        color: white !important;
+                    }
+                }
+                .title-tutor{
+                    font: $body-caption-bold;
+                }
+                .subtitle-tutor{
+                    font: $body-caption-default;
+                    color: #5B6469;
+                    &--xx{
+                        color: white !important;
+                    }
+                }
+                .number-tutor{
+                    font: $heading-desktop-h3-light;
+                    color: #E95766;
+                    &--xx{
+                        color: white !important;
+                    }
+                }
+            }
+        }
+    }
+}
