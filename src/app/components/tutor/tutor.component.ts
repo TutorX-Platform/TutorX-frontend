@@ -1,14 +1,14 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { Question } from 'src/app/models/question';
-import { Student } from 'src/app/models/student';
-import { AuthService } from 'src/app/services/auth.service';
-import { StudentService } from 'src/app/services/student-service.service';
-import { AddQuestionComponent } from '../shared/add-question/add-question.component';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {map, shareReplay} from 'rxjs/operators';
+import {Question} from 'src/app/models/question';
+import {Student} from 'src/app/models/student';
+import {AuthService} from 'src/app/services/auth.service';
+import {StudentService} from 'src/app/services/student-service.service';
+import {AddQuestionComponent} from '../shared/add-question/add-question.component';
 
 @Component({
   selector: 'app-tutor',
@@ -30,7 +30,8 @@ export class TutorComponent implements OnInit {
     profileImage: "",
     questions: [],
     uniqueKey: "",
-    userId: ""
+    userId: "",
+    role: '',
   };
 
   constructor(

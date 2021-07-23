@@ -20,7 +20,8 @@ export class StudentService {
     profileImage: "",
     questions: [],
     uniqueKey: "",
-    userId: ""
+    userId: "",
+    role: ''
   };
 
   constructor(

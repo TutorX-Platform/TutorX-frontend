@@ -26,7 +26,8 @@ export class AuthService {
     profileImage: "",
     questions: [],
     uniqueKey: "",
-    userId: ""
+    userId: "",
+    role: "",
   };
 
   constructor(public angularFirestoreService: AngularFirestore,
@@ -101,7 +102,8 @@ export class AuthService {
       profileImage: '',
       questions: [],
       uniqueKey: this.generateUniqueKey(),
-      userId: user.uid
+      userId: user.uid,
+      role: constants.userTypes.student,
     }
     studentRef.set(student).then(r => console.log(r));
   }
@@ -174,7 +176,8 @@ export class AuthService {
       profileImage: user.photoURL,
       questions: [],
       uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
-      userId: user.uid
+      userId: user.uid,
+      role: constants.userTypes.student
     }
     this.student = userData;
     return userRef.set(userData, {
@@ -217,7 +220,8 @@ export class AuthService {
       profileImage: "",
       questions: [],
       uniqueKey: "",
-      userId: ""
+      userId: "",
+      role: '',
     }
 
     this.student = resetUser;

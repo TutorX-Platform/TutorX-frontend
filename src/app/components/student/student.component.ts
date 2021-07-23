@@ -28,7 +28,8 @@ export class StudentComponent implements OnInit {
     profileImage: "",
     questions: [],
     uniqueKey: "",
-    userId: ""
+    userId: "",
+    role: ''
   };
 
   constructor(

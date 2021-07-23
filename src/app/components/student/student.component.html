@@ -5,7 +5,8 @@
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) === false">
       <div fxLayout="row" fxLayoutAlign="start center" class="name">
-        <img routerLink="/" src="../../../assets/images/Logo.png" alt="" width="40px" height="40px" style="cursor: pointer;">
+        <img routerLink="/" src="../../../assets/images/Logo.png" alt="" width="40px" height="40px"
+             style="cursor: pointer;">
         <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="-8px">
           <div class="log-title">TutorX</div>
           <div class="log-sub-title">Business project</div>
@@ -53,10 +54,10 @@
 
           <span class="example-spacer"></span>
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-            <div *ngIf="authService.student.profileImage !=''">
+            <div *ngIf="authService.student.profileImage">
               <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
             </div>
-            <div *ngIf="authService.student.profileImage==''">
+            <div *ngIf="authService.student.profileImage == null">
               <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
             </div>
             <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
@@ -69,10 +70,10 @@
       </mat-toolbar>
       <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
         <div fxLayoutAlign="start center" style="color: white;">
-            <button routerLink="/" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-              <mat-icon>arrow_back</mat-icon>
-            </button>
-            <span>Questions</span>
+          <button routerLink="/" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <span>Questions</span>
         </div>
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon>circle</mat-icon>
