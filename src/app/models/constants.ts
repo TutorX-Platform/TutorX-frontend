@@ -36,6 +36,7 @@ export const routes = {
   dummy: 'dummy',
   sign_in: '/sign-in',
   student_q_pool: '/student',
+  turor: '/tutor',
 }
 
 export const localStorageKeys = {

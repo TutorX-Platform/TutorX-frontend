@@ -10,6 +10,7 @@ import * as constants from '../models/constants';
 import * as firebase from 'firebase';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
+import {StudentService} from "./student-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,9 @@ export class AuthService {
               public router: Router,
               public utilService: UtilService,
               private mailService: MailService,
+              private studentService: StudentService,
               public ngZone: NgZone) {
     this.angularFireAuth.authState.subscribe(user => {
-      console.log("auth service");
       if (user) {
         // @ts-ignore
         this.student.userId = user?.uid;
@@ -45,7 +46,6 @@ export class AuthService {
         this.student.email = user?.email;
         // @ts-ignore
         this.student.profileImage = user?.photoURL;
-        console.log(this.student);
         this.userData = user;
         this.isLoggedIn = true;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
@@ -105,7 +105,7 @@ export class AuthService {
       userId: user.uid,
       role: constants.userTypes.student,
     }
-    studentRef.set(student).then(r => console.log(r));
+    studentRef.set(student);
   }
 
   generateUniqueKey() {
@@ -120,11 +120,25 @@ export class AuthService {
           localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
           `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
           this.userData = result.user;
-          this.ngZone.run(() => {
-            this.isLoggedIn = true;
-            progressDialog.close();
-            this.router.navigate([constants.routes.student_q_pool]);
-          });
+          this.studentService.findStudentById(result.user.uid).subscribe(
+            (res) => {
+              // @ts-ignore
+              const student: Student = res;
+              if (student.role === constants.userTypes.student) {
+                this.ngZone.run(() => {
+                  this.isLoggedIn = true;
+                  progressDialog.close();
+                  this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+                });
+              } else if (student.role === constants.userTypes.tutor) {
+                this.ngZone.run(() => {
+                  this.isLoggedIn = true;
+                  progressDialog.close();
+                  this.router.navigate([constants.routes.turor], {skipLocationChange: true});
+                });
+              }
+            }
+          )
         }
         // this.SetUserData(result.user);
       }).catch((error) => {
