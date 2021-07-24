@@ -9,14 +9,12 @@
         min-height: 90vh;
         width: 100%;
         .main-left{
-            width: 70%;
             padding: 24px;
             .hi{
                 font: $heading-desktop-h3;
             }
             .stats-container{
                 margin-top: 48px;
-                width: 100%;
                 .stats{
                     padding: 16px;
                     background: white;
@@ -26,6 +24,7 @@
                     &--xx{
                         background: linear-gradient(270deg, #A32E2E 28.75%, #D13636 100%) !important;
                         color: white !important;
+                        margin-right: 0px !important;
                     }
                 }
                 .title-tutor{
@@ -45,6 +44,28 @@
                         color: white !important;
                     }
                 }
+            }
+            .review-container{
+              margin: 48px 0px;
+              .review-card{
+                border-bottom: 1px solid #CBCFD1;
+                padding-bottom: 24px;
+                .review-title{
+                  font: $heading-desktop-h5;
+                }
+                .rating-number{
+                  font: $body-base-medium;
+                  color: #5B6469;
+                }
+                .rated-by{
+                  font: $body-small-bold;
+                  color: #5B6469;
+                }
+                .review-description{
+                  font: $body-base-default;
+                  color: #5B6469;
+                }
+              }
             }
         }
     }

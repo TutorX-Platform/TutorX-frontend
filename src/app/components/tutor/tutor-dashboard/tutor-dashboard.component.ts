@@ -12,4 +12,5 @@ export class TutorDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  rating = 4;
 }

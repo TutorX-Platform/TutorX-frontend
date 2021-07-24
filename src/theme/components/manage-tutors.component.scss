@@ -5,6 +5,15 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
+    .rating{
+      .star{
+        color: #9AA2A7;
+        &--selected{
+          color: #FFAE3D !important;
+        }
+      }
+    }
+
     .manage-tutors{        
         min-height: 90vh;
 

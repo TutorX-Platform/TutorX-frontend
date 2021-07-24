@@ -9,6 +9,15 @@
         font: $heading-desktop-h4-light;
     }
 
+  .divider-card{
+    border: 1px solid #CBCFD1;
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 16px 0px;
+  }
+
 
     .avatar {
         vertical-align: middle;
@@ -42,26 +51,24 @@
         color: #5B6469;
     }
 
-    .divider{
+    .divider-card{
         border: 1px solid #CBCFD1;
 
         flex: none;
-        order: 1;
         align-self: stretch;
         flex-grow: 0;
         margin: 16px 0px;
     }
     
     .bottom-row{
-        padding-top: 10px;
-    
+        //padding-top: 10px;
+
         .left-container{
             padding-left: 10px;
     
             .viewed-by{
-                font-size: 12px; 
                 color: #5B6469;
-                font-family:Inter-normal
+                font: $body-caption-default;
             }
         }
     

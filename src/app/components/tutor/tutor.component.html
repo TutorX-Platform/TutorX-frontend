@@ -12,6 +12,16 @@
           </div>
         </div>
         <mat-nav-list>
+          <a mat-list-item (click)="changePage(2)"
+             [ngClass]="selectedPage === 2 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+            <mat-icon class="material-icons-outlined"
+                      [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+              space_dashboard
+            </mat-icon>
+            <div [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
+              Dashboard
+            </div>
+          </a>
           <a mat-list-item (click)="changePage(1)"
              [ngClass]="selectedPage === 1 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
             <mat-icon class="material-icons-outlined"
@@ -24,6 +34,43 @@
           </a>
         </mat-nav-list>
       </mat-sidenav>
+      <mat-sidenav #drawer2 class="sidenav-right" fixedInViewport position="end"
+                   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                   [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                   [opened]="((isHandset$ | async) === false)"
+                   [opened]="selectedPage === 2">
+        <div class="recent-chats">
+          Recent chats
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+          <div *ngFor="let num of [1,2,3,4,5]">
+            <div class="recent-chats-card" fxLayout="column" fxLayoutGap="24px">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="recent-card-title">Math Assignment ?</div>
+                <div>
+                  <div *ngIf="false" class="c-chip c-chip--neutral invert-false">Open</div>
+                  <div *ngIf="true" class="c-chip c-chip--progress invert-false">In Progress</div>
+                </div>
+              </div>
+              <div class="recent-card-description">
+                Yes,it is dummy question, good job.
+                Cheers. nothing get passed
+              </div>
+              <div class="student" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                <img src="../../../assets/images/profile.jpg" class="student-avatar">
+                <div class="student-name">
+                  Rily Green
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sidenav-footer">
+          <button mat-flat-button class="view-more">
+            View More
+          </button>
+        </div>
+      </mat-sidenav>
       <mat-sidenav-content class="sidenav-container">
         <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-sm fxShow="true">
           <button
@@ -31,6 +78,7 @@
             aria-label="Toggle sidenav"
             mat-icon-button
             (click)="drawer.toggle()"
+            (click)="drawer2.toggle()"
             *ngIf="isHandset$ | async">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
@@ -73,6 +121,7 @@
           </button>
         </mat-toolbar>
         <app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>
+        <app-tutor-dashboard *ngIf="selectedPage === 2"></app-tutor-dashboard>
 
 
       </mat-sidenav-content>
