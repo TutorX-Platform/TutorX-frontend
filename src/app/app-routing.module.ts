@@ -28,7 +28,7 @@ const routes: Routes = [
     data: {authGuardPipe: redirectUnauthorizedToHome}
   },
   {path: 'add-question', component: AddQuestionMobileComponent},
-  {path: 'test-chat/:chatToken', component: TestChatComponent},
+  {path: 'test-chat', component: TestChatComponent},
   {
     path: 'student',
     component: StudentComponent,
