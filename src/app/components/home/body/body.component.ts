@@ -130,6 +130,39 @@ export class BodyComponent implements OnInit {
     }
   }
 
+  slides = [
+    {img: "https://via.placeholder.com/600.png/09f/fff"},
+    {img: "https://via.placeholder.com/600.png/021/fff"},
+    {img: "https://via.placeholder.com/600.png/321/fff"},
+    {img: "https://via.placeholder.com/600.png/422/fff"},
+    {img: "https://via.placeholder.com/600.png/654/fff"}
+  ];
+  slideConfig = {
+    slidesToShow:2,
+    dots: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
+  };
+
   details = [
     {title:"User Friendly", description:"Responsive and easy to navigate interfaces",imageUrl:"../../../../assets/icons/02.svg"},
     {title:"Step by step explanations", description:"We break it down for you",imageUrl:"../../../../assets/icons/03.svg"},

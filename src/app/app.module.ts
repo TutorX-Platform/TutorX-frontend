@@ -62,6 +62,8 @@ import { TutorComponent } from './components/tutor/tutor.component';
 import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tutor-questions.component';
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 @NgModule({
   declarations: [
@@ -120,7 +122,8 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
     MatCheckboxModule,
     MatMenuModule,
     NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule
+    NgxMatTimepickerModule,
+    SlickCarouselModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]

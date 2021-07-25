@@ -70,43 +70,64 @@
     </div>
     <div [ngClass.gt-xs]="'client-feedback-container-web'"
     [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
-        <owl-carousel-o [options]="customOptions">
-            <ng-template carouselSlide>
-                <div fxLayout="column" fxLayoutAlign="center center">
-                    <div class="box-client b4">
-                        <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-                        <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
-                    </div>
-                    <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                        <div>
-                            <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                        </div>
-                        <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                            <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
-                            <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-          <ng-template carouselSlide>
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <div class="box-client b4">
-                <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-                <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
+      <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div class="box-client b4">
+              <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
+              <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+              <div>
+                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
               </div>
-              <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                <div>
-                  <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                  <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
-                  <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
-                </div>
+              <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
+                <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
               </div>
             </div>
-          </ng-template>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+        <!--<owl-carousel-o [options]="customOptions">-->
+            <!--<ng-template carouselSlide>-->
+                <!--<div fxLayout="column" fxLayoutAlign="center center">-->
+                    <!--<div class="box-client b4">-->
+                        <!--<div class="feedback-title">{{feedback[selectedNumber].title2}}</div>-->
+                        <!--<div class="feedback-body">{{feedback[selectedNumber].content2}}</div>-->
+                    <!--</div>-->
+                    <!--<div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">-->
+                        <!--<div>-->
+                            <!--<img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">-->
+                        <!--</div>-->
+                        <!--<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">-->
+                            <!--<div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>-->
+                            <!--<div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</ng-template>-->
+          <!--<ng-template carouselSlide>-->
+            <!--<div fxLayout="column" fxLayoutAlign="center center">-->
+              <!--<div class="box-client b4">-->
+                <!--<div class="feedback-title">{{feedback[selectedNumber].title2}}</div>-->
+                <!--<div class="feedback-body">{{feedback[selectedNumber].content2}}</div>-->
+              <!--</div>-->
+              <!--<div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">-->
+                <!--<div>-->
+                  <!--<img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">-->
+                <!--</div>-->
+                <!--<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">-->
+                  <!--<div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>-->
+                  <!--<div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</ng-template>-->
 
-          </owl-carousel-o>
+          <!--</owl-carousel-o>-->
         
     </div>
 </div>
