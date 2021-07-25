@@ -29,6 +29,58 @@
             margin: 16px 16px 0px 16px;
         }
       }
+
+      .sidenav-right{
+        width: 330px;
+        padding: 24px;
+        .recent-chats{
+          font: $heading-desktop-h5;
+        }
+        .recent-chats-card{
+          padding: 16px;
+          background: #F2F0FE;
+          border: 2px solid #644AE7;
+          box-sizing: border-box;
+          border-radius: 16px;
+          .recent-card-title{
+            font: $body-base-bold;
+          }
+          .recent-card-description{
+            font: $body-small-default;
+            color: #5B6469;
+          }
+          .student{
+            .student-avatar {
+              vertical-align: middle;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+            }
+            .student-name{
+              font: $body-base-default;
+              color: #7F6EF0;
+            }
+          }
+        }
+        .sidenav-footer{
+          padding: 24px;
+          position: fixed;
+          bottom: 0;
+          width: 252px;
+          z-index: 100;
+          background: white;
+          .view-more{
+            padding: 12px 32px;
+            background: #7F6EF0;
+            width: 100%;
+            box-shadow: 0px 14px 40px -12px rgba(127, 110, 240, 0.35);
+            border-radius: 8px;
+            align-self: stretch;
+            font: $body-base-bold;
+            color: white;
+          }
+        }
+      }
       
       .sidenav .mat-toolbar {
         background: inherit;

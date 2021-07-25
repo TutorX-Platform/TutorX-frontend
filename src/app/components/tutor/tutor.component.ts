@@ -17,7 +17,7 @@ import {AddQuestionComponent} from '../shared/add-question/add-question.componen
 })
 export class TutorComponent implements OnInit {
 
-  selectedPage = 1;
+  selectedPage = 2;
   showFiller = false;
   askedQuestions: any[] = [];
   isLoading = true;
