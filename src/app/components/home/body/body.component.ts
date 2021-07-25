@@ -110,7 +110,9 @@ export class BodyComponent implements OnInit {
       dots: true,
       navSpeed: 300,
       nav: false,
-      autoWidth: false,
+      responsiveRefreshRate: 100,
+      autoHeight: true,
+      autoWidth: true,
       responsive: {
         0: {
           items: 1

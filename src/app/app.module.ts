@@ -13,6 +13,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -117,7 +118,9 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
     HttpClientModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]

@@ -9,6 +9,8 @@ import {Student} from 'src/app/models/student';
 import {AuthService} from 'src/app/services/auth.service';
 import {StudentService} from 'src/app/services/student-service.service';
 import {AddQuestionComponent} from '../shared/add-question/add-question.component';
+import * as constants from "../../models/constants";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tutor',
@@ -21,6 +23,7 @@ export class TutorComponent implements OnInit {
   showFiller = false;
   askedQuestions: any[] = [];
   isLoading = true;
+  isLoggedIn = false;
 
   currentStudent: Student = {
     email: "",
@@ -39,6 +42,7 @@ export class TutorComponent implements OnInit {
     private dialog: MatDialog,
     public studentService: StudentService,
     public authService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -56,12 +60,10 @@ export class TutorComponent implements OnInit {
     this.selectedPage = num;
   }
 
-  addQuestion() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "100%";
-    dialogConfig.height = "810px";
-    this.dialog.open(AddQuestionComponent, dialogConfig);
+  onSignOut() {
+    this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
+    this.authService.onSignOut();
+    this.router.navigate(['/']);
   }
 
 }
