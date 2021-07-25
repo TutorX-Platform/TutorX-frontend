@@ -1,3 +1,5 @@
+export const fileUploadLimit = 30000 * 1000;
+
 export const collections = {
   chats: 'chats',
   students: 'student',
@@ -36,6 +38,7 @@ export const routes = {
   dummy: 'dummy',
   sign_in: '/sign-in',
   student_q_pool: '/student',
+  turor: '/tutor',
 }
 
 export const localStorageKeys = {

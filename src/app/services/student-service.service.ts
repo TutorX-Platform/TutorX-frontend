@@ -4,7 +4,6 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import * as constants from "../models/constants";
 import {Student} from "../models/student";
 import {Observable} from "rxjs";
-import {EmptyObservable} from "rxjs/observable/EmptyObservable";
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +44,11 @@ export class StudentService {
       return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
     } else {
       return this.angularFirestoreService.collection(constants.collections.students).doc('ehu').valueChanges();
-
     }
+  }
+
+  findStudentById(uid: string) {
+    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).valueChanges();
   }
 
   addQuestion() {
