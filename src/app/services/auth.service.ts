@@ -8,9 +8,10 @@ import 'rxjs/add/operator/switchMap';
 import {Student} from "../models/student";
 import * as constants from '../models/constants';
 import * as firebase from 'firebase';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
+import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,7 @@ export class AuthService {
               public router: Router,
               public utilService: UtilService,
               private mailService: MailService,
+              private dialog: MatDialog,
               private studentService: StudentService,
               public ngZone: NgZone) {
     this.angularFireAuth.authState.subscribe(user => {
@@ -70,12 +72,8 @@ export class AuthService {
         this.userData = credentials.user;
         // @ts-ignore
         this.mailService.sendEmail(credentials.user.email).subscribe();
-        this.ngZone.run(() => {
-          this.isLoggedIn = true;
-          this.router.navigate([constants.routes.student_q_pool]);
-        });
-        // @ts-ignore
-        this.updateStudentData(credentials.user);
+        const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+        this.roleBasedRouting(credentials.user.uid, progressDialog);
         // @ts-ignore
         this.student.email = credentials.user?.email;
         // @ts-ignore
@@ -86,9 +84,6 @@ export class AuthService {
         this.student.userId = credentials.user?.uid;
         this.isStudentSet = true;
       }
-      // this.ngZone.run(() => {
-      //   this.router.navigate([constants.routes.student_q_pool]);
-      // });
     }))
   }
 
@@ -120,28 +115,10 @@ export class AuthService {
           localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
           `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
           this.userData = result.user;
-          this.studentService.findStudentById(result.user.uid).subscribe(
-            (res) => {
-              // @ts-ignore
-              const student: Student = res;
-              if (student.role === constants.userTypes.student) {
-                this.ngZone.run(() => {
-                  this.isLoggedIn = true;
-                  progressDialog.close();
-                  this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
-                });
-              } else if (student.role === constants.userTypes.tutor) {
-                this.ngZone.run(() => {
-                  this.isLoggedIn = true;
-                  progressDialog.close();
-                  this.router.navigate([constants.routes.turor], {skipLocationChange: true});
-                });
-              }
-            }
-          )
+          this.roleBasedRouting(result.user.uid, progressDialog);
         }
-        // this.SetUserData(result.user);
       }).catch((error) => {
+        progressDialog.close();
         window.alert(error.message)
       })
   }
@@ -239,6 +216,36 @@ export class AuthService {
     }
 
     this.student = resetUser;
+  }
+
+  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>) {
+    this.studentService.findStudentById(uid).subscribe(
+      (res) => {
+        if (res) {
+          // @ts-ignore
+          const student: Student = res;
+          if (student.role === constants.userTypes.student) {
+            this.ngZone.run(() => {
+              this.isLoggedIn = true;
+              if (progressDialog) {
+                progressDialog.close();
+              }
+              this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+            });
+          } else if (student.role === constants.userTypes.tutor) {
+            this.ngZone.run(() => {
+              this.isLoggedIn = true;
+              if (progressDialog) {
+                progressDialog.close();
+              }
+              this.router.navigate([constants.routes.turor], {skipLocationChange: true});
+            });
+          }
+        } else {
+          progressDialog.close();
+        }
+      }
+    )
   }
 
 }
