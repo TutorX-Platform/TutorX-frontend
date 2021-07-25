@@ -1,3 +1,5 @@
+export const fileUploadLimit = 30000 * 1000;
+
 export const collections = {
   chats: 'chats',
   students: 'student',

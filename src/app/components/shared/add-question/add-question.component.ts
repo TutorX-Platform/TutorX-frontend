@@ -45,6 +45,7 @@ export class AddQuestionComponent implements OnInit {
   options = constants.subjects;
   filteredOptions?: Observable<string[]>;
   questionId = '';
+  uploadedSize: number = 0;
 
 
   constructor(
@@ -80,7 +81,6 @@ export class AddQuestionComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
@@ -107,21 +107,26 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onSelect(event: any) {
-    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-    progressDialog.afterOpened().subscribe(() => {
-      if (event.addedFiles.length < 2) {
-        if (this.files.length + event.addedFiles.length > 2) {
-          progressDialog.close();
-          alert("you can upload upto 2 images");
+    this.uploadedSize = this.uploadedSize + event.addedFiles[0].size;
+    if (this.uploadedSize <= constants.fileUploadLimit) {
+      const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+      progressDialog.afterOpened().subscribe(() => {
+        if (event.addedFiles.length < 2) {
+          if (event.addedFiles.length > 2) {
+            progressDialog.close();
+            alert("Please select one at a time");
+          } else {
+            this.files.push(event.addedFiles[0]);
+            this.uploadFile(event.addedFiles[0], progressDialog);
+          }
         } else {
-          this.files.push(event.addedFiles[0]);
-          this.uploadFile(event.addedFiles[0], progressDialog);
+          progressDialog.close();
+          alert('please upload one by one');
         }
-      } else {
-        progressDialog.close();
-        alert('please upload one by one');
-      }
-    })
+      })
+    } else {
+      alert("You can upload upto 30MB !!");
+    }
   }
 
   onRemove(event: any) {
@@ -171,21 +176,11 @@ export class AddQuestionComponent implements OnInit {
     this.task.then(() => {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
-          console.log("added")
-          if (this.uploadedFiles.length === 0) {
-            this.uploadedFiles.push(res);
-          } else {
-            this.uploadedFiles.forEach(link => {
-              if (link !== res) {
-                this.uploadedFiles.push(res);
-              }
-            })
-          }
+          this.uploadedFiles.push(res);
         }, () => {
           console.log("upload error");
         }, () => {
           progressDialog.close();
-          console.log('completed')
           console.log(this.uploadedFiles);
         }
       )

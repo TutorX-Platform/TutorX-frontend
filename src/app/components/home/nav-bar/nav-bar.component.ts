@@ -82,7 +82,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSignUpMobile() {
     this.page = 2;
-  } 
+  }
 
   onHome(){
     this.page = 0;
@@ -109,7 +109,6 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
           // @ts-ignore
           this.studentService.currentStudent = res;
         }
-
         progressDialog.close();
       }, () => {
         progressDialog.close();
