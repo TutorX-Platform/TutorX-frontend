@@ -4,6 +4,8 @@ import {StudentService} from "../../../services/student-service.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import * as constants from "../../../models/constants";
+import {Review} from "../../../models/review";
+import {ReviewService} from "../../../services/review.service";
 
 @Component({
   selector: 'app-tutor-dashboard',
@@ -11,10 +13,13 @@ import * as constants from "../../../models/constants";
   styleUrls: ['./tutor-dashboard.component.scss']
 })
 export class TutorDashboardComponent implements OnInit {
+  rating = 4;
+  reviews: Review[] = [];
 
   constructor(
     public studentService: StudentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private reviewService: ReviewService
   ) {
   }
 
@@ -34,6 +39,7 @@ export class TutorDashboardComponent implements OnInit {
         if (res) {
           // @ts-ignore
           this.studentService.currentStudent = res;
+          this.findReviews();
         }
         progressDialog.close();
       }, () => {
@@ -44,5 +50,13 @@ export class TutorDashboardComponent implements OnInit {
     )
   }
 
-  rating = 4;
+  findReviews() {
+    this.reviewService.findReviews(this.studentService.currentStudent.userId).valueChanges().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.reviews = res;
+      }
+    );
+  }
+
 }

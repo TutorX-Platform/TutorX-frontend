@@ -6,6 +6,7 @@ export const collections = {
   tutors: 'tutor',
   questions: 'question',
   test: 'test',
+  review: 'review'
 }
 
 export const storage_collections = {

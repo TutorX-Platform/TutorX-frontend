@@ -55,27 +55,25 @@
         </div>
       </div>
       <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="24px" style="margin-top: 24px">
-        <div *ngFor="let num of [1,2,3,4]">
+        <div *ngFor="let review of reviews">
           <div class="review-card" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="24px">
             <div fxLayout="row" fxLayoutAlign="space-between start">
               <div fxLayout="column" fxLayoutAlign="start stretch">
                 <div class="review-title">
-                  You only mist it when it’s gone...
+                 {{review.title}}
                 </div>
-                <div class="rated-by">Damiein Darth wader</div>
+                <div class="rated-by">{{review.student}}</div>
               </div>
               <div class="rating" fxLayout="row">
-                <mat-icon [ngClass]="rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="review.rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="review.rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="review.rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="review.rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="review.rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
               </div>
             </div>
             <div class="review-description">
-              In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the
-              visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as
-              a placeholder before final copy is available.
+             {{review.description}}
             </div>
           </div>
         </div>
