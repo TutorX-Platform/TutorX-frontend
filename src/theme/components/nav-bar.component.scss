@@ -10,12 +10,18 @@
             flex: 1 1 auto;
           }
           .profile-title{
-            font: $body-small-default;    
+            max-width: 150px;
+            font: $body-small-bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
       
           .profile-sub-title{
+            max-width: 150px;
             font: $body-small-default;  
             color: #5B6469;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .avatar {
             vertical-align: middle;

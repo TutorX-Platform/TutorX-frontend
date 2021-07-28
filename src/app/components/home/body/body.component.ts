@@ -141,6 +141,8 @@ export class BodyComponent implements OnInit {
     slidesToShow:2,
     dots: true,
     arrows: false,
+    mouseDrag: true,
+    touchDrag: true,
     responsive: [
       {
         breakpoint: 1024,

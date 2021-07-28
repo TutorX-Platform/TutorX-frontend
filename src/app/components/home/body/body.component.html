@@ -63,7 +63,7 @@
 <!-- client-web-->
 <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-        <div class="client-title-web">Our clients speak</div>
+        <div class="client-title-web">Our Students speak</div>
     </div>
     <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
         <div class="client-title-mobile">Our clients speak</div>
@@ -91,44 +91,6 @@
           </div>
         </div>
       </ngx-slick-carousel>
-        <!--<owl-carousel-o [options]="customOptions">-->
-            <!--<ng-template carouselSlide>-->
-                <!--<div fxLayout="column" fxLayoutAlign="center center">-->
-                    <!--<div class="box-client b4">-->
-                        <!--<div class="feedback-title">{{feedback[selectedNumber].title2}}</div>-->
-                        <!--<div class="feedback-body">{{feedback[selectedNumber].content2}}</div>-->
-                    <!--</div>-->
-                    <!--<div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">-->
-                        <!--<div>-->
-                            <!--<img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">-->
-                        <!--</div>-->
-                        <!--<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">-->
-                            <!--<div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>-->
-                            <!--<div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</ng-template>-->
-          <!--<ng-template carouselSlide>-->
-            <!--<div fxLayout="column" fxLayoutAlign="center center">-->
-              <!--<div class="box-client b4">-->
-                <!--<div class="feedback-title">{{feedback[selectedNumber].title2}}</div>-->
-                <!--<div class="feedback-body">{{feedback[selectedNumber].content2}}</div>-->
-              <!--</div>-->
-              <!--<div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">-->
-                <!--<div>-->
-                  <!--<img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">-->
-                <!--</div>-->
-                <!--<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">-->
-                  <!--<div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>-->
-                  <!--<div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</ng-template>-->
-
-          <!--</owl-carousel-o>-->
-        
     </div>
 </div>
 
@@ -163,17 +125,17 @@
     </div>
 </div> -->
 
-<!-- Process-web -->
+ <!--Process-web-->
 <div [ngClass.gt-xs]="'process-web'"
-[ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">   
+[ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
     <div class="process-title">
         The process we follow
     </div>
     <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
-        <div *ngFor="let num of process" fxFlex.lg="25%">
+        <div *ngFor="let num of process" fxFlex="20%">
             <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
                 <div fxHide.lt-sm="true" fxShow="true">
-                    <img src="../../../../assets/icons/Indication.png">
+                    <img src="../../../../assets/icons/Indication.png" width="100%">
                 </div>
                 <div fxHide.gt-xs="true" fxShow="true">
                     <img src="../../../../assets/icons/Indication-mobile.svg">
@@ -188,11 +150,11 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
         <div *ngFor="let num of process">
-            <div class="step" fxLayout="row" fxLayoutGap="8px">                
+            <div class="step" fxLayout="row" fxLayoutGap="8px">
                 <div>
                     <img src="../../../../assets/icons/Indication-mobile.svg">
                 </div>
@@ -209,15 +171,15 @@
     </div>
 </div>
 
-<!-- tutor-feedback-web -->
+ <!--tutor-feedback-web-->
 <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start">
+    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
         <img src="../../../../assets/icons/quoteMark.svg" alt="">
-        <div class="text-container">
+        <div class="text-container" style="text-align: start !important;">
             We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
         </div>
     </div>
-    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutAlign="center center">
         <div *ngFor="let tutorFeedback of tutorFeedbacks">
             <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
                 <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
@@ -248,11 +210,9 @@
 
 <!-- tutor-feedback-mobile -->
 <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
-    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName">
-        <svg width="100" height="20" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M23.584 1.16L23.008 5.264C21.856 5.168 20.92 5.36 20.2 5.84C19.48 6.296 18.976 6.968 18.688 7.856C18.424 8.72 18.376 9.728 18.544 10.88H23.584V20.672H13.792V10.88C13.792 7.424 14.596 4.808 16.204 3.032C17.812 1.256 20.272 0.631999 23.584 1.16ZM10.552 1.16L9.976 5.264C8.824 5.168 7.888 5.36 7.168 5.84C6.448 6.296 5.944 6.968 5.656 7.856C5.392 8.72 5.344 9.728 5.512 10.88H10.552V20.672H0.76V10.88C0.76 7.424 1.564 4.808 3.172 3.032C4.78 1.256 7.24 0.631999 10.552 1.16Z" fill="#2EC5CE"/>
-        </svg>
-        <div class="text-container">
+    <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
+        <img src="../../../../assets/icons/quoteMark.svg" alt="">
+        <div class="text-container" style="text-align: start !important;">
             We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
         </div>
     </div>
@@ -279,7 +239,7 @@
     </div>
 </div>
 
-<div class="get-help" fxLayout="row" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
+<div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
     <div fxLayout="column">
         <div class="banner-title">Get Instant Help</div>
         <div class="banner-sub-title">for our stdent comunity</div>
