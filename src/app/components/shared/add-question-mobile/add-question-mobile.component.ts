@@ -9,6 +9,7 @@ import { QuestionService } from 'src/app/services/question-service.service';
 import { UtilService } from 'src/app/services/util-service.service';
 import * as constants from '../../../models/constants';
 import { ProgressDialogComponent } from '../progress-dialog/progress-dialog.component';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -47,6 +48,7 @@ export class AddQuestionMobileComponent implements OnInit {
     private utilService: UtilService,
     private authService: AuthService,
     public router: Router,
+    private location: Location
   ) {
   }
 
@@ -79,8 +81,8 @@ export class AddQuestionMobileComponent implements OnInit {
     )
   }
 
-  onCancel() {
-    // this.dialogRef.close();
+  onNavigateBack(){
+    this.location.back();
   }
 
   onSelect(event: any) {

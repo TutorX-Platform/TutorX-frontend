@@ -1,0 +1,161 @@
+@mixin form-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .input-type-default{
+    width: 100% !important;
+    &__label-wraper{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__label{
+      font: $body-xsmall-default;
+      color: map-get($foreground, text);
+      margin-bottom: $base-space-xs;
+    }
+    &__addon{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border: 1px solid map-get($foreground, dividers);
+      padding: 0 $base-space-sm;
+      border-top-left-radius: $base-space-xs;
+      border-bottom-left-radius: $base-space-xs;
+      background-color: map-get($background, app-bar);
+      height: 42px;
+      top: 0;
+      .text-content{
+        font: $body-base-medium;
+      }
+    }
+
+    &--addon{
+      .mat-form-field-flex{
+        padding: 0 $base-space-sm 0 0;
+      }
+      .mat-input-element{
+        padding: 0 $base-space-md;
+      }
+    }
+    &--invalid {
+      &.input-type-default--combined .form-item:first-child{
+        border-right: 1px solid red;
+      }
+
+      .input-type-default__label {
+        color: red !important;
+      }
+      .form-wrapper{
+        border:1px solid  red !important;
+      }
+      .mat-select-arrow {
+        color:  red !important;
+      }
+      .mat-form-field {
+        animation: example;
+        animation-duration: 0.3s;
+        .mat-form-field-outline {
+          color:  red !important;
+        }
+      }
+    }
+    &--combined {
+      .form-wrapper{
+        display: flex;
+        border-radius: $base-corner-xs;
+        border:1px solid map-get($foreground, dividers);
+        box-sizing: border-box;
+        height: 42px;
+      }
+      .form-item{
+        display: flex;
+        flex: 1;
+        box-sizing: border-box;
+        flex-shrink: 1;
+        &:first-child{
+          border-right:1px solid map-get($foreground, dividers);
+        }
+      }
+      .mat-form-field-wrapper{
+        padding-bottom: 0 !important;
+        margin: 0  0 !important;
+        border: none;
+        border-radius: 0 !important;
+        width: 100%;
+      }
+      .mat-form-field-outline{
+        border-radius: 0 !important;
+        display: none !important;
+      }
+      .mat-form-field-flex{
+        top: 3px !important;
+      }
+      .mat-form-field-infix{
+        width: 100%  !important;
+      }
+    }
+    &--inline {
+      .mat-form-field-wrapper{
+        padding-bottom: 0 !important;
+      }
+    }
+
+    .required-marker {
+      color: red;
+    }
+    .mat-form-field-disabled{
+      .mat-form-field-outline{
+        background-color: map-get($background, hover);
+
+      }
+      .input-type-default__addon{
+        .text-content{
+          color: map-get($foreground, disabled-text) ;
+        }
+      }
+    }
+    .mat-form-field-invalid{
+      .mat-form-field-wrapper{
+        padding-bottom: 0;
+      }
+      .mat-form-field-subscript-wrapper{
+        position: relative;
+      }
+    }
+    .mat-form-field-prefix, .mat-form-field-suffix{
+      top:0;
+    }
+    .mat-form-field-wrapper{
+      padding-bottom: $base-space-md;
+    }
+    .mat-form-field-infix{
+      border: none;
+      padding: $base-space-xmd 0;
+    }
+    .mat-form-field-flex{
+      display: flex;
+      align-items: center;
+    }
+    .mat-form-field-outline{
+      background-color: map-get($background, card);
+      border-radius: $base-corner-xs;
+      color:map-get($foreground, dividers);
+    }
+
+    .mat-form-field-outline, .mat-form-field-flex{
+      min-height: 42px;
+      top: 0;
+    }
+    .mat-select-arrow-wrapper{
+      transform: translateY(0%);
+    }
+    .mat-form-field-subscript-wrapper {
+      padding: 0 0;
+      margin-top: 0.3em !important;
+    }
+  }
+}

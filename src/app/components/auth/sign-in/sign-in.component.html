@@ -4,6 +4,12 @@
   <mat-dialog-content style="overflow-y: auto !important;">
     <form [formGroup]="signInForm">
       <div class="form" fxLayout="column">
+        <!--<div class="input-type-default">-->
+          <!--<div class="input-type-default__label">Label</div>-->
+          <!--<mat-form-field appearance="outline">-->
+            <!--<input matInput placeholder="Ex. Pizza" value="Sushi">-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
         <div class="label">Email address</div>
         <mat-form-field class="my-form-field" appearance="outline">
           <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">

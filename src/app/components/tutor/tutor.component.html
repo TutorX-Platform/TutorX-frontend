@@ -5,7 +5,7 @@
                    [mode]="(isHandset$ | async) ? 'over' : 'side'"
                    [opened]="(isHandset$ | async) === false">
         <div fxLayout="row" fxLayoutAlign="start center" class="name">
-          <img routerLink="/" src="../../../assets/images/Logo.png" alt="" width="40px" height="40px" style="cursor: pointer">
+          <img  routerLink=".." src="../../../assets/images/Logo.png" alt="" width="40px" height="40px" style="cursor: pointer">
           <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="-8px">
             <div class="log-title">TutorX</div>
             <div class="log-sub-title">Business project</div>
@@ -34,11 +34,7 @@
           </a>
         </mat-nav-list>
       </mat-sidenav>
-      <mat-sidenav #drawer2 class="sidenav-right" fixedInViewport position="end"
-                   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                   [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                   [opened]="((isHandset$ | async) === false)"
-                   [opened]="selectedPage === 2">
+      <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="true" [mode]="'side'">
         <div class="recent-chats">
           Recent chats
         </div>
@@ -78,7 +74,6 @@
             aria-label="Toggle sidenav"
             mat-icon-button
             (click)="drawer.toggle()"
-            (click)="drawer2.toggle()"
             *ngIf="isHandset$ | async">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>

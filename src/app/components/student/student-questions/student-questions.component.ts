@@ -11,6 +11,7 @@ import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -74,7 +75,8 @@ export class StudentQuestionsComponent implements OnInit {
     public studentService: StudentService,
     private breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
   }
 
@@ -136,7 +138,7 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   addQuestionMobile() {
-
+    this.router.navigateByUrl('/add-question');
   }
 
   getQuestions(progressDialog: MatDialogRef<any>) {
