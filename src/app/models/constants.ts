@@ -1,4 +1,11 @@
 export const fileUploadLimit = 30000 * 1000;
+export const backend_url = "https://tutorx-backend.herokuapp.com";
+
+
+export const backend_api_resource = {
+  payment: '/payment',
+  email: '/email'
+}
 
 export const collections = {
   chats: 'chats',
@@ -69,13 +76,8 @@ export const regexp_patterns = {
   email: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$',
 }
 
-export const service_url = {
-  emailBackend: 'https://ooder-backend.herokuapp.com/api/sendEmail',
-}
-
 export const email_data = {
   senderEmail: 'innathanak.dev@gmail.com',
-  senderPassword: 'innathanakdevgroup',
   subject: 'Welcome to TutorX Platform',
   message: 'This is dummt message replace with given one',
   questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question"

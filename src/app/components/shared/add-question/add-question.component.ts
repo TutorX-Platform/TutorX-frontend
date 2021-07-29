@@ -161,6 +161,7 @@ export class AddQuestionComponent implements OnInit {
     this.questionService.saveQuestion(question, this.questionId).then((v) => {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
+      this.sendAknowledgementEmail(this.authService.student.email);
       dialogRef.close();
       progressDialog.close();
     });
