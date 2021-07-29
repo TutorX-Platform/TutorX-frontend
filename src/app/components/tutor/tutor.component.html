@@ -28,13 +28,23 @@
                       [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
               space_dashboard
             </mat-icon>
-            <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My
+            <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
               Public Pool
+            </div>
+          </a>
+          <a mat-list-item (click)="changePage(3)"
+             [ngClass]="selectedPage === 3 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+            <mat-icon class="material-icons-outlined"
+                      [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+              space_dashboard
+            </mat-icon>
+            <div [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My
+              Activities
             </div>
           </a>
         </mat-nav-list>
       </mat-sidenav>
-      <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="true" [mode]="'side'">
+      <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="selectedPage == 2" [mode]="'side'">
         <div class="recent-chats">
           Recent chats
         </div>
@@ -129,6 +139,7 @@
         </mat-toolbar>
         <app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>
         <app-tutor-dashboard *ngIf="selectedPage === 2"></app-tutor-dashboard>
+        <app-tutor-activities *ngIf="selectedPage === 3"></app-tutor-activities>
 
 
       </mat-sidenav-content>
