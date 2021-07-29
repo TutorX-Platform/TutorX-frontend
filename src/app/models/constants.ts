@@ -1,4 +1,12 @@
 export const fileUploadLimit = 30000 * 1000;
+export const backend_url = "https://tutorx-backend.herokuapp.com";
+
+
+export const backend_api_resource = {
+  payment: '/payment',
+  email: '/email'
+}
+
 
 export const collections = {
   chats: 'chats',

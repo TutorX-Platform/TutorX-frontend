@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import {NgxStripeModule} from "ngx-stripe";
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -123,7 +124,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     MatMenuModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    NgxStripeModule.forRoot('pk_test_vpR166dL4d37QOAytynkYmRM00w7dSRPG4')
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
