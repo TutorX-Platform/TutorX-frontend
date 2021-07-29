@@ -12,25 +12,22 @@ export class MailService {
 
   sendEmail(email: string) {
     const emailData = {
-      'email': email,
+      'fromEmail': constants.email_data.senderEmail,
       'subject': constants.email_data.subject,
-      'message': constants.email_data.message,
-      'sender': constants.email_data.senderEmail,
-      'senderPassword': constants.email_data.senderPassword,
+      'text': constants.email_data.message,
+      'toEmail': email,
     }
-    return this.http.post(constants.service_url.emailBackend, emailData);
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
   }
 
   sendQuestionAcknowledgementEmail(email: string) {
     const emailData = {
-      'email': email,
+      'fromEmail': constants.email_data.senderEmail,
       'subject': constants.email_data.subject,
-      'message': constants.email_data.questionAcknowledgementEmail,
-      'sender': constants.email_data.senderEmail,
-      'senderPassword': constants.email_data.senderPassword,
+      'text': constants.email_data.message,
+      'toEmail': email,
     }
-    return this.http.post(constants.service_url.emailBackend, emailData);
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
   }
-
 
 }
