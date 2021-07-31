@@ -12,6 +12,7 @@
 @import "components/drop-down.component.scss";
 @import "components/tutor-dashboard.component.scss";
 @import "components/form.component.scss";
+@import "components/chat.component";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -28,4 +29,5 @@
     @include dashboard-component($theme);
     @include tutor-dashboard-component($theme);
     @include form-component($theme);
+    @include chat-component($theme);
 }
