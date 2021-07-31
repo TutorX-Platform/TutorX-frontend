@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {Elements, Element as StripeElement, ElementsOptions, StripeService} from "ngx-stripe";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DummyService} from "../../../services/dummy.service";
