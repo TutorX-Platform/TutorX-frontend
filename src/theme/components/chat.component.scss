@@ -1,0 +1,16 @@
+@mixin chat-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .chat{
+    .chat-title{
+      font: $heading-desktop-h4-light;
+    }
+    .chat-subtitle{
+      font: $body-small-default;
+      color: #686D74;
+    }
+  }
+}

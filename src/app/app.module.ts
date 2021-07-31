@@ -65,6 +65,7 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TutorActivitiesComponent } from './components/tutor/tutor-activities/tutor-activities.component';
+import { ChatComponent } from './components/shared/chat/chat.component';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { TutorActivitiesComponent } from './components/tutor/tutor-activities/tu
     TutorComponent,
     TutorQuestionsComponent,
     TutorDashboardComponent,
-    TutorActivitiesComponent
+    TutorActivitiesComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
