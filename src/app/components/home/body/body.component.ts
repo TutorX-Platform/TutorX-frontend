@@ -138,7 +138,7 @@ export class BodyComponent implements OnInit {
     {img: "https://via.placeholder.com/600.png/654/fff"}
   ];
   slideConfig = {
-    slidesToShow:2,
+    slidesToShow: 2,
     dots: true,
     arrows: false,
     mouseDrag: true,
@@ -166,11 +166,31 @@ export class BodyComponent implements OnInit {
   };
 
   details = [
-    {title:"User Friendly", description:"Responsive and easy to navigate interfaces",imageUrl:"../../../../assets/icons/02.svg"},
-    {title:"Step by step explanations", description:"We break it down for you",imageUrl:"../../../../assets/icons/03.svg"},
-    {title:"Clean and Correct Answers", description:"We provide accurate and original answers",imageUrl:"../../../../assets/icons/04.svg"},
-    {title:"Fast Response", description:"Instant responses from the tutors 24/7",imageUrl:"../../../../assets/icons/05.svg"},
-    {title:"Affordable Service", description:"Reasonable quotes based on your requirements. ",imageUrl:"../../../../assets/icons/01.svg"}
+    {
+      title: "User Friendly",
+      description: "Responsive and easy to navigate interfaces",
+      imageUrl: "../../../../assets/icons/02.svg"
+    },
+    {
+      title: "Step by step explanations",
+      description: "We break it down for you",
+      imageUrl: "../../../../assets/icons/03.svg"
+    },
+    {
+      title: "Clean and Correct Answers",
+      description: "We provide accurate and original answers",
+      imageUrl: "../../../../assets/icons/04.svg"
+    },
+    {
+      title: "Fast Response",
+      description: "Instant responses from the tutors 24/7",
+      imageUrl: "../../../../assets/icons/05.svg"
+    },
+    {
+      title: "Affordable Service",
+      description: "Reasonable quotes based on your requirements. ",
+      imageUrl: "../../../../assets/icons/01.svg"
+    }
   ]
 
   feedback = [
@@ -246,16 +266,16 @@ export class BodyComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
     // dialogConfig.height = "810px";
-    this.dialog.open(AddQuestionComponent, dialogConfig);
+    const dialogRef = this.dialog.open(AddQuestionComponent, dialogConfig);
 
-    this.dialog.afterAllClosed.subscribe(
-      () => {
-        if (this.authService.isLoggedIn) {
-          this.router.navigate([constants.routes.student_q_pool]);
+    dialogRef.afterClosed().subscribe(
+      (result) => {
+        if (result) {
+          if (this.authService.isLoggedIn) {
+            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+          }
         }
       }
     )
   }
-
-
 }
