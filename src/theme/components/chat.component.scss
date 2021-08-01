@@ -5,12 +5,120 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .chat{
-    .chat-title{
-      font: $heading-desktop-h4-light;
+    //min-height: 89vh;
+    .header-wrap{
+      padding: 0px 32px 16px 32px;
+      .chat-title{
+        font: $heading-desktop-h4-light;
+      }
+      .chat-subtitle{
+        font: $body-small-default;
+        color: #686D74;
+      }
     }
-    .chat-subtitle{
-      font: $body-small-default;
-      color: #686D74;
+    .divider-chat-header{
+      border: 1px solid #BDC0C4;
+      flex: none;
+      flex-grow: 0;
+      margin: 0px 16px 0px 16px;
+    }
+    .chat-main-container{
+      width: 100%;
+      .typing-box{
+      position: absolute;
+      bottom: 24px;
+        left: 24px;
+      width: 68%;
+      //right: 5px;
+      z-index: 100;
+      background: white;
+      .typer{
+        padding: 16px;
+        .message-input{
+          font: $body-small-bold;
+          width: 88%;
+          border: none;
+        }
+        .message-input:focus{
+          outline: none;
+        }
+      }
+      .links{
+        padding: 8px 16px;
+      }
+      .message-divider{
+
+      }
+    }
+      .chat-container{
+        width: 70%;
+        padding: 24px 10px 100px 24px;
+        height: 56vh;
+        overflow-y: auto;
+        .joined-message{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 32px 0px;
+          .user-name{
+            font: $body-small-bold;
+            color: #9AA2A7;
+          }
+          .text{
+            font: $body-small-default;
+            color: #9AA2A7;
+          }
+          .line{
+            border: 1px solid #CBCFD1;
+            flex: none;
+            flex-grow: 1;
+            margin: 0px 16px;
+          }
+        }
+        .message-box{
+          width: 50%;
+          background: #7F6EF0;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 8px 16px;
+          font: $body-small-default;
+          color: #FFFFFF;
+          &--other-user-message{
+            margin: 8px 0px !important;
+            width: 100% !important;
+            background: #E3E6E8 !important;
+            color: black !important;
+          }
+        }
+        .attachment-box{
+          margin: 8px 16px;
+          border-radius: 8px;
+          width: 54%;
+          height: 150px;
+        }
+        .audio-message-box{
+
+        }
+        .other-user{
+          margin: 32px 16px;
+          .avatar-x {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+          }
+          .user-name{
+            font: $body-base-bold;
+          }
+          .joined{
+            font: $body-small-default;
+            color: #222D34;
+          }
+          .time{
+            font: $body-small-default;
+            color: #5B6469;
+          }
+        }
+      }
     }
   }
 }

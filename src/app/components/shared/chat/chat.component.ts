@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
+  message = new FormControl('');
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onSend(){
+    console.log(this.message.value);
+  }
 }
