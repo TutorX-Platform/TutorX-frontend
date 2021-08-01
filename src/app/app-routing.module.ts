@@ -35,7 +35,7 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: redirectUnauthorizedToHome}
   },
-  {path: '**', component: NavBarComponent}
+  // {path: '**', component: NavBarComponent}
 ];
 
 @NgModule({
