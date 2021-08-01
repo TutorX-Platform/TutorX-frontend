@@ -103,7 +103,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onCancel() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onSelect(event: any) {
@@ -162,7 +162,7 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
-      dialogRef.close();
+      dialogRef.close(true);
       progressDialog.close();
     });
 
