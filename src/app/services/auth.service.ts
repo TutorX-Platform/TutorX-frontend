@@ -83,6 +83,8 @@ export class AuthService {
         // @ts-ignore
         this.student.userId = credentials.user?.uid;
         this.isStudentSet = true;
+
+        this.SetUserData(credentials.user, this.student.firstName);
       }
     }))
   }

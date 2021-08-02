@@ -23,4 +23,9 @@ export class UtilService {
     }
     return "";
   }
+
+  generateChatLink(questionId: string) {
+    const baseUrl = constants.env_url.local_url;
+    return baseUrl.concat(questionId);
+  }
 }

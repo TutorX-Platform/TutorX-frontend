@@ -7,6 +7,7 @@ import {ChatMsg} from "../../../models/chat-msg";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {Review} from "../../../models/review";
 import {ReviewService} from "../../../services/review.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-test-chat',
@@ -15,21 +16,15 @@ import {ReviewService} from "../../../services/review.service";
 })
 export class TestChatComponent implements OnInit {
 
-  chatToken: string | null = '';
-  tests: ChatMsg[] = [];
-  msg: ChatMsg = {message: "", receiverId: "", senderId: "", sentBy: "", time: 0};
-  chatHistory: ChatMsg[] = [];
-  uid: any;
-  chatIds: string[] | undefined = [];
-  form = new FormGroup({
-    chatMsg: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
-
   reviewDesc = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."
   reviewTitle = "This is dummy review...";
   reviewer = "Sandun sameera"
   rating = 4.6
   tutorId = "siQVfWgfl2a6GxZyCktojnUWAOj1";
+
+  chatToken: string | null = '';
+  // @ts-ignore
+  chatForm: FormGroup;
 
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -42,21 +37,17 @@ export class TestChatComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(
       map => {
-        this.chatToken = map.get('chatToken');
+        this.chatToken = map.get('id');
       }
     );
 
+    this.chatForm = this.formBuilder.group({
+      message: ['', Validators.required],
+    });
+
+    this.getMessages();
   }
 
-  onChat() {
-    console.log(this.form.controls['chatMsg'].value);
-    console.log(this.angularFireAuth.auth.currentUser?.uid);
-    this.saveChatMsg();
-  }
-
-  saveChatMsg() {
-
-  }
 
   putReview() {
     const review: Review = {
@@ -72,6 +63,19 @@ export class TestChatComponent implements OnInit {
         console.log(v);
       }
     )
+  }
+
+  onSend() {
+    // @ts-ignore
+    this.chatService.sendMessage(this.chatToken, this.chatForm.controls.message.value)
+  }
+
+  getMessages() {
+    this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
+      res => {
+        console.log(res)
+      }
+    );
   }
 
 }

@@ -27,10 +27,10 @@
         <div class="viewed-by">Last assigned to Skrillex</div>
     </div>
     <div fxLayoutGap="8px" fxLayout="row">
-      <button mat-button class="view-details">
+      <button (click)="onViewChat()" mat-button class="view-details">
         View Details
       </button>
-      <button [disabled]="!isTutorJoined" mat-button class="view-chat" style="color: white;">
+      <button  [disabled]="!isTutorJoined" mat-button class="view-chat" style="color: white;">
         View Chat
       </button>
     </div>

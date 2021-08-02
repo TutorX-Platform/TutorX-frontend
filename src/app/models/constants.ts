@@ -1,10 +1,22 @@
 export const fileUploadLimit = 30000 * 1000;
 export const backend_url = "https://tutorx-backend.herokuapp.com";
 
+export const env_url = {
+  heroku_url: 'https://tutorx-frontend.herokuapp.com/',
+  local_url: 'http://localhost:4200/',
+  prod_url: ''
+}
+
 
 export const backend_api_resource = {
   payment: '/payment',
   email: '/email'
+}
+
+export const chat_status = {
+  openForTutors: 'open',
+  ongoing: 'ongoing',
+  closed: 'closed',
 }
 
 export const collections = {
@@ -13,7 +25,8 @@ export const collections = {
   tutors: 'tutor',
   questions: 'question',
   test: 'test',
-  review: 'review'
+  review: 'review',
+  message: 'message',
 }
 
 export const storage_collections = {
@@ -47,6 +60,7 @@ export const routes = {
   sign_in: '/sign-in',
   student_q_pool: '/student',
   turor: '/tutor',
+  testChat: '/test-chat'
 }
 
 export const localStorageKeys = {

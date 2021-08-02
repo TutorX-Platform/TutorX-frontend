@@ -15,6 +15,9 @@ import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.compon
 import {map, startWith} from 'rxjs/operators';
 import {parseTemplate} from "@angular/compiler";
 import {MailService} from "../../../services/mail.service";
+import {ChatServiceService} from "../../../services/chat-service.service";
+import {Chat} from "../../../models/chat";
+import {ChatMsg} from "../../../models/chat-msg";
 
 @Component({
   selector: 'app-add-question',
@@ -59,6 +62,7 @@ export class AddQuestionComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private mailService: MailService,
+    private chatService: ChatServiceService
   ) {
   }
 
@@ -141,7 +145,7 @@ export class AddQuestionComponent implements OnInit {
       studentUniqueKey: this.studentUniqueKey,
       studentEmail: this.authService.student.email,
       attachments: this.uploadedFiles,
-      chatId: "",
+      chatId: this.questionId,
       createdDate: new Date().getTime(),
       description: this.addQuestionForm.value.description,
       dueDate: this.addQuestionForm.value.dueDateTime,
@@ -162,6 +166,7 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
+      this.createChat(this.questionId, this.authService.student.userId);
       dialogRef.close(true);
       progressDialog.close();
     });
@@ -212,6 +217,23 @@ export class AddQuestionComponent implements OnInit {
 
   sendAknowledgementEmail(email: string) {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+  }
+
+  createChat(chatId: string, studentId: string) {
+    const chatLink = this.utilService.generateChatLink(chatId);
+    const msgs: ChatMsg[] = []
+    const data: Chat = {
+      chatLink: chatLink,
+      tutorJoinedTime: new Date(),
+      chatStatus: constants.chat_status.openForTutors,
+      id: chatId,
+      messagesId: chatId,
+      tutorId: "",
+      uniqueId: chatId,
+      studentId: studentId,
+      tutorsCount: 0
+    }
+    this.chatService.createChat(chatId, data);
   }
 
 }

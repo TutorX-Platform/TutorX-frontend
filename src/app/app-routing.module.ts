@@ -28,14 +28,14 @@ const routes: Routes = [
     data: {authGuardPipe: redirectUnauthorizedToHome}
   },
   {path: 'add-question', component: AddQuestionMobileComponent},
-  {path: 'test-chat', component: TestChatComponent},
+  {path: 'test-chat/:id', component: TestChatComponent},
   {
     path: 'student',
     component: StudentComponent,
     canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: redirectUnauthorizedToHome}
   },
-  {path: '**', component: NavBarComponent}
+  // {path: '**', component: NavBarComponent}
 ];
 
 @NgModule({

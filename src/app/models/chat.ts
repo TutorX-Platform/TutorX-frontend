@@ -1,14 +1,13 @@
+import {ChatMsg} from "./chat-msg";
+
 export interface Chat {
   id: string;
   uniqueId: string;
   studentId: string;
-  tutorId:string;
-  tutorJoinedTime:Date;
-  sentBy:string;
-  sentTime:Date;
-  message:string;
-  isAttachment:boolean;
-  chatSaltSecret:string;
-  chatStatus:string;
-  chatLink:string;
+  tutorId: string;
+  tutorJoinedTime: Date;
+  messagesId: string;
+  chatStatus: string;
+  chatLink: string;
+  tutorsCount: number;
 }
