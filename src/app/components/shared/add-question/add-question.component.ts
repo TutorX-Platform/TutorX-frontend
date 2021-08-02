@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {WelcomeComponent} from '../../student/welcome/welcome.component';
 import {AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference} from 'angularfire2/storage';
 import {Observable} from "rxjs";
@@ -49,6 +49,7 @@ export class AddQuestionComponent implements OnInit {
   filteredOptions?: Observable<string[]>;
   questionId = '';
   uploadedSize: number = 0;
+  data = null;
 
 
   constructor(
@@ -62,8 +63,13 @@ export class AddQuestionComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private mailService: MailService,
-    private chatService: ChatServiceService
+    private chatService: ChatServiceService,
+    // @ts-ignore
+    @Inject(MAT_DIALOG_DATA) data
   ) {
+    if(data !== null){
+      this.data = data;
+    }
   }
 
   ngOnInit(): void {
@@ -81,6 +87,28 @@ export class AddQuestionComponent implements OnInit {
       startWith(''),
       map((value: string) => this._filter(value))
     );
+
+    if(this.data !== null){
+      this.patchValues();
+    }
+
+  }
+
+  patchValues(){
+    // @ts-ignore
+    this.questionId = this.data.id;
+    // @ts-ignore
+    this.files.push(this.data.images);
+    this.addQuestionForm.patchValue({
+      // @ts-ignore
+      questionTitle: this.data.title,
+      // @ts-ignore
+      subject:this._filter(this.data.subjects),
+      // @ts-ignore
+      dueDateTime: this.data.dueDate,
+      // @ts-ignore
+      description: this.data.description
+    })
   }
 
   private _filter(value: string): string[] {

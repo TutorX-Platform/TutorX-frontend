@@ -75,7 +75,14 @@
         .view-chat{
             background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
             font-family: $body-caption-bold;
+            color: white !important;
         }
+
+      .dissabled{
+        background: #CBCFD1 !important;
+        color: #222D34 !important;
+        font-family: $body-caption-bold !important;
+      }
     
         .view-details{
             font-family: $body-caption-bold;
