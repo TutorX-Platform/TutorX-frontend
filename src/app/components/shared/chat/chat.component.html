@@ -31,7 +31,7 @@
         <img src="/assets/icons/link.svg">
       </div>
     </div>
-    <div class="chat-container">
+    <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <div class="joined-message">
         <div class="line"></div>
         <div class="user-name">Alexa Daddario &nbsp;</div>
@@ -78,6 +78,13 @@
           </div>
         </div>
         <div class="time">Todat at 9.00 AM</div>
+      </div>
+      <div *ngFor="let message of messages">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="message-box">
+            {{message}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
