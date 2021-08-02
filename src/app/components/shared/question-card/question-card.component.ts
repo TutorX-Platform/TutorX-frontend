@@ -1,6 +1,7 @@
 import {Input} from '@angular/core';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import * as constants from '../../../models/constants';
 
 @Component({
   selector: 'app-question-card',
@@ -27,7 +28,8 @@ export class QuestionCardComponent implements OnInit {
   }
 
   onViewChat() {
-
+    console.log("abc");
+    this.router.navigate([constants.routes.testChat, 'Q26d22030-0520-47bd-8f5a-7fbc5bde2d33'])
   }
 
 }

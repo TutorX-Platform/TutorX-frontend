@@ -1,7 +1,8 @@
 export interface ChatMsg {
   senderId: string;
-  receiverId: string;
+  senderEmail: string;
   message: string;
   time: number;
   sentBy: string;
+  isAttachment: boolean;
 }
