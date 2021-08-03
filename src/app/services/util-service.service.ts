@@ -26,6 +26,6 @@ export class UtilService {
 
   generateChatLink(questionId: string) {
     const baseUrl = constants.env_url.local_url;
-    return baseUrl.concat(questionId);
+    return baseUrl.concat('chat/').concat(questionId);
   }
 }

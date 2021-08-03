@@ -22,12 +22,13 @@ export class ChatServiceService {
 
   sendMessage(messageId: string, message: string) {
     let data: ChatMsg = {
+      isTutorJoinMessage: false,
       isAttachment: false,
       message: message,
       senderEmail: this.auth.student.email,
       senderId: this.auth.student.userId,
       sentBy: this.auth.student.firstName,
-      time: new Date().getTime(),
+      time: new Date().getTime()
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection('chats').add(data);
   }
@@ -53,6 +54,7 @@ export class ChatServiceService {
     const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
     return chatRef;
   }
+
 
 
 }

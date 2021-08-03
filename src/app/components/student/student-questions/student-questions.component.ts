@@ -145,7 +145,7 @@ export class StudentQuestionsComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestions(this.studentService.currentStudent.email).valueChanges().subscribe(
+        this.questionService.getQuestionsForStudent(this.studentService.currentStudent.email).valueChanges().subscribe(
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;

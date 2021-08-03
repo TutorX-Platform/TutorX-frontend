@@ -5,14 +5,15 @@
       <div fxLayout="column" fxLayoutAlign="start start">
         <div class="chat-title">Quesion Title</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <div class="chat-subtitle">RID000001 | Created on {{chat.chatStatus}}</div>
+          <div class="chat-subtitle">{{chat.uniqueId}} | Created
+            on {{questionCreatedDate * 1000 | date:'yyyy/MM/dd h:mm:ss a'}}</div>
           <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
           <div class="c-chip c-chip--progress">In Progress</div>
         </div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-      <button mat-flat-button color="primary" style="color: white">Copy Link</button>
+      <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
       <mat-icon>more_vert</mat-icon>
     </div>
   </div>

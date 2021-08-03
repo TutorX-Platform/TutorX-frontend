@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import * as constants from '../../../models/constants';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddQuestionComponent} from "../add-question/add-question.component";
+import {QuestionService} from "../../../services/question-service.service";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-question-card',
@@ -25,15 +27,16 @@ export class QuestionCardComponent implements OnInit {
 
 
   constructor(private router: Router,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private questionService: QuestionService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
   }
 
   onViewChat() {
-    console.log("abc");
-    this.router.navigate([constants.routes.chat, constants.dummyChatId])
+    this.router.navigate([constants.routes.chat, this.id])
   }
 
   onViewDetails() {
@@ -50,5 +53,10 @@ export class QuestionCardComponent implements OnInit {
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);
+  }
+
+  acceptQuestion() {
+    console.log('abc');
+    this.questionService.joinTutorForQuestion(this.id,this.authService.student.userId);
   }
 }

@@ -8,6 +8,7 @@ import * as constants from "../../../models/constants";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ChatMsg} from "../../../models/chat-msg";
 import {AuthService} from "../../../services/auth.service";
+import {ClipboardService} from "ngx-clipboard";
 
 @Component({
   selector: 'app-chat',
@@ -34,13 +35,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     tutorsCount: 0,
     uniqueId: ""
   };
-
+  questionCreatedDate: number = 0;
   chatMessages: ChatMsg[] = [];
 
   constructor(private chatService: ChatServiceService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               public authService: AuthService,
+              private clipboardApi: ClipboardService,
               public router: Router,
               private dialog: MatDialog,) {
   }
@@ -82,10 +84,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             // @ts-ignore
             this.chat = res;
             this.getMessages(progressDailog);
+          }, () => {
+            progressDailog.close();
           }
         )
       }
     )
+
+    progressDailog.close()
+
   }
 
   getMessages(progressDialog: MatDialogRef<any>) {
@@ -94,6 +101,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         // @ts-ignore
         this.chat = res;
+        // @ts-ignore
+        console.log(res.createdDate['seconds']);
+        // @ts-ignore
+        this.questionCreatedDate = res.createdDate['seconds'];
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
           this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
             res => {
@@ -101,6 +112,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               this.chatMessages = res;
               progressDialog.close();
               console.log(res);
+            }, () => {
+              progressDialog.close();
             }
           );
         } else {
@@ -108,9 +121,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           alert("you dont have permissions to view this chat");
           this.router.navigate([constants.routes.home])
         }
+      }, () => {
+        progressDialog.close();
       }
     )
   }
 
-  findTutor(){}
+  onCopyLink() {
+    this.clipboardApi.copyFromContent(this.chat.chatLink);
+  }
 }

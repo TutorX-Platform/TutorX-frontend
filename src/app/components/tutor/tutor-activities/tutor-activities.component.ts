@@ -80,7 +80,7 @@ export class TutorActivitiesComponent implements OnInit {
 
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(() => {
-      this.getQuestions(progressDialog);
+      this.getQuestionsTutor(progressDialog);
 
     });
     //search auto complete
@@ -129,16 +129,16 @@ export class TutorActivitiesComponent implements OnInit {
   }
 
   changeStatus() {
-
   }
 
-  getQuestions(progressDialog: MatDialogRef<any>) {
+  getQuestionsTutor(progressDialog: MatDialogRef<any>) {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestionsTutor().valueChanges().subscribe(
+        this.questionService.getQuestionsForTutor(this.authService.student.userId).valueChanges().subscribe(
           (res) => {
+            console.log(res);
             // @ts-ignore
             this.askedQuestions = res;
             this.askedQuestions = this.sortQuestion();

@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {NgxStripeModule} from "ngx-stripe";
+import { ClipboardModule } from 'ngx-clipboard';
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -129,6 +130,7 @@ import { ChatComponent } from './components/shared/chat/chat.component';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     SlickCarouselModule,
+    ClipboardModule,
     NgxStripeModule.forRoot('pk_test_vpR166dL4d37QOAytynkYmRM00w7dSRPG4')
   ],
   providers: [AuthService, AngularFireAuthGuard],

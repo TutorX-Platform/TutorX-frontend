@@ -19,7 +19,7 @@ import {Router} from "@angular/router";
 })
 export class TutorComponent implements OnInit {
 
-  selectedPage = 4;
+  selectedPage = 1;
   showFiller = false;
   askedQuestions: any[] = [];
   isLoading = true;
