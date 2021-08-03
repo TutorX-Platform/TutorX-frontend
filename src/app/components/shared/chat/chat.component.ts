@@ -5,10 +5,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Chat} from "../../../models/chat";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
 import * as constants from "../../../models/constants";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {ChatMsg} from "../../../models/chat-msg";
 import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
+import {SignInComponent} from "../../auth/sign-in/sign-in.component";
+import {DummyComponent} from "../../test/dummy/dummy.component";
 
 @Component({
   selector: 'app-chat',
@@ -131,5 +133,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onCopyLink() {
     this.clipboardApi.copyFromContent(this.chat.chatLink);
+  }
+
+
+  onPay() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    // dialogConfig.height = "650px";
+    this.dialog.open(DummyComponent, dialogConfig);
   }
 }

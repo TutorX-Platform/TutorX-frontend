@@ -102,7 +102,6 @@ export class DummyComponent implements OnInit {
         }
       }
     )
-
   }
 
 }
