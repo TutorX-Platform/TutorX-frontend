@@ -15,6 +15,7 @@ import {
 import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mobile.component';
 import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
 import {TutorComponent} from './components/tutor/tutor.component';
+import {ChatComponent} from "./components/shared/chat/chat.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -29,6 +30,7 @@ const routes: Routes = [
   },
   {path: 'add-question', component: AddQuestionMobileComponent},
   {path: 'test-chat/:id', component: TestChatComponent},
+  {path: 'chat/:id', component: ChatComponent},
   {
     path: 'student',
     component: StudentComponent,

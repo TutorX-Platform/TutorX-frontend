@@ -21,7 +21,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public description: string = '';
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
-  @Input() public isTutorJoined: boolean = false;
+  @Input() public isTutorJoined: boolean = true;
 
 
   constructor(private router: Router,
@@ -33,7 +33,7 @@ export class QuestionCardComponent implements OnInit {
 
   onViewChat() {
     console.log("abc");
-    this.router.navigate([constants.routes.testChat, 'Q26d22030-0520-47bd-8f5a-7fbc5bde2d33'])
+    this.router.navigate([constants.routes.chat, 'Q26d22030-0520-47bd-8f5a-7fbc5bde2d33'])
   }
 
   onViewDetails() {

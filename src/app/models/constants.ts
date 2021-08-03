@@ -60,7 +60,8 @@ export const routes = {
   sign_in: '/sign-in',
   student_q_pool: '/student',
   turor: '/tutor',
-  testChat: '/test-chat'
+  testChat: '/test-chat',
+  chat: '/chat'
 }
 
 export const localStorageKeys = {

@@ -1,5 +1,13 @@
 import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ChatServiceService} from "../../../services/chat-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Chat} from "../../../models/chat";
+import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
+import * as constants from "../../../models/constants";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ChatMsg} from "../../../models/chat-msg";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-chat',
@@ -10,24 +18,98 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl('');
-  messages:any = [];
-  constructor() { }
+  messages: any = [];
+  chatToken: string = '';
+  // @ts-ignore
+  chatForm: FormGroup;
+  chat: Chat = {
+    chatLink: "",
+    chatStatus: "",
+    id: "",
+    messagesId: "",
+    studentId: "",
+    tutorId: "",
+    tutorJoinedTime: new Date(),
+    tutorsCount: 0,
+    uniqueId: ""
+  };
+
+  chatMessages: ChatMsg[] = [];
+
+  constructor(private chatService: ChatServiceService,
+              private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              public authService: AuthService,
+              public router: Router,
+              private dialog: MatDialog,) {
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(
+      map => {
+        // @ts-ignore
+        this.chatToken = map.get('id');
+      }
+    );
+
+    this.getChatDetails();
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
 
-  onSend(){
-    this.messages.push(this.message.value);
+  onSend() {
+    // @ts-ignore
+    this.chatService.sendMessage(this.chatToken, this.message.value)
     this.message.reset();
   }
 
   scrollToBottom(): void {
     try {
       this.myScroll.nativeElement.scrollTop = this.myScroll.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) {
+    }
   }
+
+  getChatDetails() {
+    const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDailog.afterOpened().subscribe(
+      (res) => {
+        this.chatService.getChat(this.chatToken).valueChanges().subscribe(
+          (res) => {
+            // @ts-ignore
+            this.chat = res;
+            this.getMessages(progressDailog);
+          }
+        )
+      }
+    )
+  }
+
+  getMessages(progressDialog: MatDialogRef<any>) {
+    // @ts-ignore
+    this.chatService.getChat(this.chatToken).valueChanges().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.chat = res;
+        if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
+          this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
+            res => {
+              // @ts-ignore
+              this.chatMessages = res;
+              progressDialog.close();
+              console.log(res);
+            }
+          );
+        } else {
+          progressDialog.close();
+          alert("you dont have permissions to view this chat");
+          this.router.navigate([constants.routes.home])
+        }
+      }
+    )
+  }
+
+  findTutor(){}
 }

@@ -5,7 +5,7 @@
       <div fxLayout="column" fxLayoutAlign="start start">
         <div class="chat-title">Quesion Title</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <div class="chat-subtitle">RID000001 | Created on 20 August 2020</div>
+          <div class="chat-subtitle">RID000001 | Created on {{chat.chatStatus}}</div>
           <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
           <div class="c-chip c-chip--progress">In Progress</div>
         </div>
@@ -75,16 +75,22 @@
             <div class="message-box message-box--other-user-message">
               Hi how you doing??
             </div>
+
+            <div *ngFor="let message of chatMessages">
+              <div *ngIf="message.senderId === authService.student.userId">
+                <div class="message-box">
+                  {{message.message}}
+                </div>
+              </div>
+              <div *ngIf="message.senderId !== authService.student.userId">
+                <div class="message-box message-box--other-user-message">
+                  {{message.message}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="time">Todat at 9.00 AM</div>
-      </div>
-      <div *ngFor="let message of messages">
-        <div fxLayout="row" fxLayoutAlign="end center">
-          <div class="message-box">
-            {{message}}
-          </div>
-        </div>
       </div>
     </div>
   </div>

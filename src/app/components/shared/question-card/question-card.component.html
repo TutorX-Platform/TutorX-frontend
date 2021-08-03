@@ -30,7 +30,7 @@
       <button (click)="onViewDetails()" mat-button class="view-details">
         View Details
       </button>
-      <button   [class.dissabled]="!isTutorJoined" [disabled]="!isTutorJoined" mat-button class="view-chat">
+      <button (click)="onViewChat()"   [class.dissabled]="!isTutorJoined" [disabled]="!isTutorJoined" mat-button class="view-chat">
         View Chat
       </button>
     </div>
