@@ -5,4 +5,16 @@
   </mat-form-field>
   <br><br>
   <button (click)="onSend()">Send</button>
+  <br><br>
+  <button *ngIf="!hideJoinChat" (click)="onJoinTutor()">Join Tutor</button>
+  {{authService.student.role}}
 </form>
+
+<div>
+  <div>
+    <div *ngFor="let message of messages">
+      <p *ngIf="message.senderId === authService.student.userId" style="color: #2A8D55"> {{message.message}}</p>
+      <p *ngIf="message.senderId !== authService.student.userId" style="color: #8C30F5"> {{message.message}}</p>
+    </div>
+  </div>
+</div>

@@ -133,7 +133,8 @@ export class AuthService {
         this.SendVerificationMail();
         // @ts-ignore
         this.SetUserData(result.user, firstName);
-        progressDialog.close();
+        // @ts-ignore
+        this.roleBasedRouting(result.user.uid, progressDialog);
       }).catch((error) => {
         window.alert(error.message)
         progressDialog.close();
@@ -226,6 +227,7 @@ export class AuthService {
         if (res) {
           // @ts-ignore
           const student: Student = res;
+          this.student = student;
           if (student.role === constants.userTypes.student) {
             this.ngZone.run(() => {
               this.isLoggedIn = true;

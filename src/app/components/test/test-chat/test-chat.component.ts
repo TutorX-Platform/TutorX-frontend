@@ -8,6 +8,7 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {Review} from "../../../models/review";
 import {ReviewService} from "../../../services/review.service";
 import {Observable} from "rxjs";
+import {Chat} from "../../../models/chat";
 
 @Component({
   selector: 'app-test-chat',
@@ -25,6 +26,10 @@ export class TestChatComponent implements OnInit {
   chatToken: string | null = '';
   // @ts-ignore
   chatForm: FormGroup;
+  messages: ChatMsg[] = [];
+  // @ts-ignore
+  chat: Chat;
+  hideJoinChat = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -70,12 +75,36 @@ export class TestChatComponent implements OnInit {
     this.chatService.sendMessage(this.chatToken, this.chatForm.controls.message.value)
   }
 
+  onJoinTutor() {
+    if (this.authService.isLoggedIn) {
+      // @ts-ignore
+      this.chatService.tutorJoinChat(this.chatToken);
+    } else {
+      alert("not logged in")
+    }
+    console.log(this.authService.student.userId)
+  }
+
   getMessages() {
-    this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
-      res => {
-        console.log(res)
+    // @ts-ignore
+    this.chatService.getChat(this.chatToken).valueChanges().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.chat = res;
+        if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
+          this.hideJoinChat = true;
+          this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
+            res => {
+              // @ts-ignore
+              this.messages = res;
+              console.log(res);
+            }
+          );
+        } else {
+          alert("you dont have permissions to view this chat");
+        }
       }
-    );
+    )
   }
 
 }

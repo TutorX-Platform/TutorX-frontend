@@ -48,6 +48,7 @@ export class TutorComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.studentService.currentStudent);
+    console.log(this.authService.student);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(['(max-width: 1000px)'])

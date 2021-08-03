@@ -107,8 +107,8 @@
                 <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
               </div>
               <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
-                <div class="profile-title">{{studentService.currentStudent.firstName}}</div>
-                <div class="profile-sub-title">{{studentService.currentStudent.email}}</div>
+                <div class="profile-title">{{authService.student.firstName}}</div>
+                <div class="profile-sub-title">{{authService.student.email}}</div>
               </div>
               <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
               <mat-menu #menu="matMenu">

@@ -5,7 +5,6 @@ import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
 import {Chat} from "../models/chat";
 import {ChatMsg} from "../models/chat-msg";
-import {Questions} from "../models/questions";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,25 @@ export class ChatServiceService {
 
   getMessages(messageId: string) {
     // @ts-ignore
-    const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection('chats');
+    const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection('chats', ref =>
+      ref.orderBy('time', 'asc'));
     return questionRef;
   }
+
+  tutorJoinChat(chatId: string) {
+    const joinTutor = {
+      chatStatus: constants.chat_status.ongoing,
+      tutorId: this.auth.student.userId,
+      tutorJoinedTime: new Date().getTime(),
+      tutorsCount: 1
+    }
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
+  }
+
+  getChat(chatId: string) {
+    const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
+    return chatRef;
+  }
+
+
 }
