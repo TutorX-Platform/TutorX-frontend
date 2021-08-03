@@ -48,7 +48,7 @@ export class QuestionService {
     }
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.chatService.tutorJoinChat(questionId);
-      this.mailService.sendQuestionAcceptMail(studentEmail);
+      this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
     })
   }
 
