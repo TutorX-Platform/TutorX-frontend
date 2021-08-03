@@ -133,7 +133,6 @@ export class StudentQuestionsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
-    dialogConfig.height = "810px";
     this.dialog.open(AddQuestionComponent, dialogConfig);
   }
 

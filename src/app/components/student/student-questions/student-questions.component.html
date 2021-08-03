@@ -15,6 +15,7 @@
           </div>
           <app-question-card
             *ngFor="let q of askedQuestions"
+            [id] = "q.id"
             [title]="q.questionTitle"
             [status]="q.status"
             [subjects]="q.subjectCategory"
