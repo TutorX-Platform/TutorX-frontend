@@ -1,6 +1,7 @@
 import {ChatMsg} from "./chat-msg";
 
 export interface Chat {
+  createdDate: Date;
   id: string;
   uniqueId: string;
   studentId: string;

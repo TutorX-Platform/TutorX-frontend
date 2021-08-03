@@ -33,7 +33,7 @@ export class QuestionCardComponent implements OnInit {
 
   onViewChat() {
     console.log("abc");
-    this.router.navigate([constants.routes.chat, 'Q26d22030-0520-47bd-8f5a-7fbc5bde2d33'])
+    this.router.navigate([constants.routes.chat, constants.dummyChatId])
   }
 
   onViewDetails() {

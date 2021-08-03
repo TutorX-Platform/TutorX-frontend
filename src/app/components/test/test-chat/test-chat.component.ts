@@ -9,6 +9,8 @@ import {Review} from "../../../models/review";
 import {ReviewService} from "../../../services/review.service";
 import {Observable} from "rxjs";
 import {Chat} from "../../../models/chat";
+import * as constants from '../../../models/constants';
+
 
 @Component({
   selector: 'app-test-chat',
@@ -93,7 +95,7 @@ export class TestChatComponent implements OnInit {
         this.chat = res;
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
           this.hideJoinChat = true;
-          this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
+          this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
             res => {
               // @ts-ignore
               this.messages = res;

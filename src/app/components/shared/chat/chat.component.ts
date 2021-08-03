@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   chatForm: FormGroup;
   chat: Chat = {
+    createdDate: new Date(),
     chatLink: "",
     chatStatus: "",
     id: "",
@@ -94,7 +95,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         // @ts-ignore
         this.chat = res;
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
-          this.chatService.getMessages('Q26d22030-0520-47bd-8f5a-7fbc5bde2d33').valueChanges().subscribe(
+          this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
             res => {
               // @ts-ignore
               this.chatMessages = res;
