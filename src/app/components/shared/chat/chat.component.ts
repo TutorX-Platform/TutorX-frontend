@@ -81,6 +81,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         this.chatService.getChat(this.chatToken).valueChanges().subscribe(
           (res) => {
+            console.log(res);
             // @ts-ignore
             this.chat = res;
             this.getMessages(progressDailog);
@@ -91,7 +92,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     )
 
-    progressDailog.close()
+    // progressDailog.close()
 
   }
 
@@ -99,6 +100,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // @ts-ignore
     this.chatService.getChat(this.chatToken).valueChanges().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.chat = res;
         // @ts-ignore
@@ -106,7 +108,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         // @ts-ignore
         this.questionCreatedDate = res.createdDate['seconds'];
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
-          this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
+          this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
             res => {
               // @ts-ignore
               this.chatMessages = res;

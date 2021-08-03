@@ -6,13 +6,16 @@ import {Questions} from "../models/questions";
 import {Observable} from "rxjs";
 import {StudentService} from "./student-service.service";
 import {ChatServiceService} from "./chat-service.service";
+import {MailService} from "./mail.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
-  constructor(private angularFirestoreService: AngularFirestore, private chatService: ChatServiceService) {
+  constructor(private angularFirestoreService: AngularFirestore,
+              private chatService: ChatServiceService,
+              private mailService: MailService) {
   }
 
   saveQuestion(qustion: Questions, questionId: string) {
@@ -38,14 +41,14 @@ export class QuestionService {
     return questionRef;
   }
 
-  joinTutorForQuestion(questionId: string, tutorId: string) {
+  joinTutorForQuestion(questionId: string, tutorId: string, studentEmail: string) {
     const data = {
       status: constants.questionStatus.in_progress,
       tutorId: tutorId
     }
-
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.chatService.tutorJoinChat(questionId);
+      this.mailService.sendQuestionAcceptMail(studentEmail);
     })
   }
 

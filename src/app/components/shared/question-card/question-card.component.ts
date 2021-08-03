@@ -24,6 +24,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
   @Input() public isTutorJoined: boolean = true;
+  @Input() public studentEmail: string = '';
 
 
   constructor(private router: Router,
@@ -36,6 +37,7 @@ export class QuestionCardComponent implements OnInit {
   }
 
   onViewChat() {
+    console.log(this.id);
     this.router.navigate([constants.routes.chat, this.id])
   }
 
@@ -56,7 +58,7 @@ export class QuestionCardComponent implements OnInit {
   }
 
   acceptQuestion() {
-    console.log('abc');
-    this.questionService.joinTutorForQuestion(this.id,this.authService.student.userId);
+    console.log(this.studentEmail);
+    this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.studentEmail);
   }
 }
