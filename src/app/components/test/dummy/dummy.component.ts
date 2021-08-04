@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 // @ts-ignore
 import {Elements, Element as StripeElement, ElementsOptions, StripeService} from "ngx-stripe";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DummyService} from "../../../services/dummy.service";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-dummy',
@@ -28,6 +29,7 @@ export class DummyComponent implements OnInit {
 
   constructor(private stripeService: StripeService,
               private fb: FormBuilder,
+              private authService: AuthService,
               private dummyService: DummyService) {
   }
 
@@ -77,7 +79,7 @@ export class DummyComponent implements OnInit {
           const product = {
             name: "sandun question",
             price: 1000,
-            email: "sandunsameera25@gmail.com"
+            email: this.authService.student.email,
           }
           this.stripeData['product'] = product;
           this.stripeData['token'] = result.token;
@@ -90,8 +92,10 @@ export class DummyComponent implements OnInit {
                 this.submitted = false;
                 // @ts-ignore
                 this.paymentStatus = res['status'];
+                alert("payment success");
               } else {
                 console.log("err");
+                alert("payment failed");
                 console.log(res);
               }
             }

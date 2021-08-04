@@ -6,6 +6,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddQuestionComponent} from "../add-question/add-question.component";
 import {QuestionService} from "../../../services/question-service.service";
 import {AuthService} from "../../../services/auth.service";
+import {StudentService} from "../../../services/student-service.service";
 
 @Component({
   selector: 'app-question-card',
@@ -26,14 +27,23 @@ export class QuestionCardComponent implements OnInit {
   @Input() public isTutorJoined: boolean = true;
   @Input() public studentEmail: string = '';
 
+  isTutor = false;
+
 
   constructor(private router: Router,
               private dialog: MatDialog,
               private questionService: QuestionService,
+              private studentService: StudentService,
               private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
+    if (this.authService.student.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
   }
 
   onViewChat() {
@@ -58,7 +68,11 @@ export class QuestionCardComponent implements OnInit {
   }
 
   acceptQuestion() {
-    console.log(this.studentEmail);
-    this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.studentEmail);
+    if (this.isTutor) {
+      console.log(this.studentEmail);
+      this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.studentEmail);
+    } else {
+      alert('you are not a tutor');
+    }
   }
 }

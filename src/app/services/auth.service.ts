@@ -52,6 +52,7 @@ export class AuthService {
         this.isLoggedIn = true;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+        this.findUser(this.student.userId);
       } else {
         this.isLoggedIn = false;
         localStorage.removeItem(constants.localStorageKeys.user);
@@ -248,6 +249,16 @@ export class AuthService {
         } else {
           progressDialog.close();
         }
+      }
+    )
+  }
+
+  findUser(userId: string) {
+    this.studentService.findStudentById(userId).subscribe(
+      (res) => {
+        // @ts-ignore
+        this.student = res;
+        console.log(res);
       }
     )
   }

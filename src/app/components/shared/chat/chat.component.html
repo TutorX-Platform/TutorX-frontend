@@ -86,12 +86,18 @@
             </div>
 
             <div *ngFor="let message of chatMessages">
-              <div *ngIf="message.senderId === authService.student.userId">
+              <div *ngIf="message.isTutorJoinMessage" class="joined-message">
+                <div class="line"></div>
+                <div class="user-name">{{message.message}}&nbsp;</div>
+<!--                <div class="text">joined the chat</div>-->
+                <div class="line"></div>
+              </div>
+              <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
                 <div class="message-box">
                   {{message.message}}
                 </div>
               </div>
-              <div *ngIf="message.senderId !== authService.student.userId">
+              <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
                 <div class="message-box message-box--other-user-message">
                   {{message.message}}
                 </div>
