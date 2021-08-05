@@ -95,7 +95,8 @@ export class TestChatComponent implements OnInit {
         this.chat = res;
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
           this.hideJoinChat = true;
-          this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
+          // @ts-ignore
+          this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
             res => {
               // @ts-ignore
               this.messages = res;

@@ -30,4 +30,15 @@ export class MailService {
     return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
   }
 
+  sendQuestionAcceptMail(email: string) {
+    const emailData = {
+      'fromEmail': constants.email_data.senderEmail,
+      'subject': constants.email_data.questionAcceptSubject,
+      'text': constants.email_data.message,
+      'toEmail': email,
+    }
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
+
+  }
+
 }

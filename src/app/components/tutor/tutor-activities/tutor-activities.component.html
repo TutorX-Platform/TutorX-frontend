@@ -3,7 +3,8 @@
   <div fxLayout="row" class="page-title-container">My Activities</div>
   <div class="divider-pool"></div>
   <div fxLayout="row" class="tab-bar" fxLayoutAlign="start stretch" fxLayoutGap="8px">
-    <div [ngClass]="selectedStatus === 0 ? 'button-container button-container--selected' : 'button-container'" (click)="changeStatus()">
+    <div [ngClass]="selectedStatus === 0 ? 'button-container button-container--selected' : 'button-container'"
+         (click)="changeStatus()">
       <div style="margin: 0px 8px 0px 8px;" (click)="selectStatus(0)">All</div>
     </div>
     <div [ngClass]="selectedStatus === 1 ? 'button-container button-container--selected' : 'button-container'">
@@ -30,6 +31,7 @@
           </div>
           <app-question-card
             *ngFor="let q of askedQuestions"
+            [id]="q.id"
             [title]="q.questionTitle"
             [status]="q.status"
             [subjects]="q.subjectCategory"
@@ -47,7 +49,7 @@
         <span matPrefix>
           <mat-icon>search</mat-icon> &nbsp;&nbsp;
         </span>
-        <input matInput type="search" [formControl] ="searchControl" [matAutocomplete]="auto">
+        <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
@@ -70,7 +72,7 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let subject of subjects">
               <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                <mat-checkbox (change)="onSubjectFilter(subject)"  color="primary">
+                <mat-checkbox (change)="onSubjectFilter(subject)" color="primary">
                 </mat-checkbox>
                 <div class="subjectss">{{subject}}</div>
               </div>

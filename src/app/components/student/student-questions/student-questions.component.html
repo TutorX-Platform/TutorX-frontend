@@ -15,7 +15,7 @@
           </div>
           <app-question-card
             *ngFor="let q of askedQuestions"
-            [id] = "q.id"
+            [id]="q.id"
             [title]="q.questionTitle"
             [status]="q.status"
             [subjects]="q.subjectCategory"
@@ -24,6 +24,7 @@
             [description]="q.description"
             [viewedByAmount]="500"
             [images]="q.attachments"
+            [studentEmail]="q.studentEmail"
           ></app-question-card>
         </div>
       </div>
@@ -57,7 +58,7 @@
           <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
             <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">
               <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-                <mat-checkbox (change)="onStageFilter(state)"  color="primary">
+                <mat-checkbox (change)="onStageFilter(state)" color="primary">
                 </mat-checkbox>
                 <div class="subjectss">{{state}}</div>
               </div>
@@ -72,11 +73,11 @@
     <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
       <span matPrefix>
         <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
-      <input matInput type="search" [formControl] ="searchControl" [matAutocomplete]="auto">
+      <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <div fxLayout="column">

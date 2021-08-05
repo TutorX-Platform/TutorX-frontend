@@ -5,13 +5,17 @@ import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
 import {Chat} from "../models/chat";
 import {ChatMsg} from "../models/chat-msg";
+import {StudentService} from "./student-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatServiceService {
 
-  constructor(public angularFirestoreService: AngularFirestore, private auth: AuthService, private router: Router) {
+  constructor(public angularFirestoreService: AngularFirestore,
+              private auth: AuthService,
+              private studentService: StudentService,
+              private router: Router) {
   }
 
   createChat(chatId: string, data: Chat) {
@@ -30,12 +34,12 @@ export class ChatServiceService {
       sentBy: this.auth.student.firstName,
       time: new Date().getTime()
     }
-    this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection('chats').add(data);
+    this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
   }
 
   getMessages(messageId: string) {
     // @ts-ignore
-    const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection('chats', ref =>
+    const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats, ref =>
       ref.orderBy('time', 'asc'));
     return questionRef;
   }
@@ -47,14 +51,24 @@ export class ChatServiceService {
       tutorJoinedTime: new Date().getTime(),
       tutorsCount: 1
     }
+    let data: ChatMsg = {
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} joined the chat`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: new Date().getTime()
+    }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
+
   }
 
   getChat(chatId: string) {
     const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
     return chatRef;
   }
-
 
 
 }

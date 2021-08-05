@@ -82,6 +82,7 @@ export class QuestionPoolComponent implements OnInit {
   getQuestions() {
     this.questionService.getQuestionsForStudent(this.studentService.currentStudent.uniqueKey).valueChanges().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.askedQuestions = res;
         this.askedQuestions = this.sortQuestions()

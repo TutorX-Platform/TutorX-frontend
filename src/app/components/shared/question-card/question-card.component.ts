@@ -25,21 +25,31 @@ export class QuestionCardComponent implements OnInit {
   @Input() public images: string[] = [];
   @Input() public viewedByAmount: number = 0;
   @Input() public isTutorJoined: boolean = true;
+  @Input() public studentEmail: string = '';
+
+  isTutor = false;
 
   role = '';
 
   constructor(private router: Router,
               private dialog: MatDialog,
               private questionService: QuestionService,
-              private authService: AuthService,
-              private studentService: StudentService) {
+              private studentService: StudentService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
+    if (this.authService.student.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
     this.role = this.studentService.currentStudent.role;
   }
 
   onViewChat() {
+    console.log(this.id);
     this.router.navigate([constants.routes.chat, this.id])
   }
 
@@ -61,7 +71,11 @@ export class QuestionCardComponent implements OnInit {
   }
 
   acceptQuestion() {
-    console.log('abc');
-    this.questionService.joinTutorForQuestion(this.id,this.authService.student.userId);
+    if (this.isTutor) {
+      console.log(this.studentEmail);
+      this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.studentEmail);
+    } else {
+      alert('you are not a tutor');
+    }
   }
 }

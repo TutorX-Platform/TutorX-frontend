@@ -92,12 +92,16 @@ export const regexp_patterns = {
   email: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$',
 }
 
+
 export const email_data = {
   senderEmail: 'innathanak.dev@gmail.com',
   subject: 'Welcome to TutorX Platform',
+  questionAcceptSubject: 'Your question is accepted',
   message: 'This is dummt message replace with given one',
-  questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question"
+  questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question",
+  questionAcceptEmail: "Hi, your question is accepted, this is dummy will change as requested"
 }
+
 
 export const sortBy_functions = [
   {name: "Newest created first", id: 1, code: 'asec'},

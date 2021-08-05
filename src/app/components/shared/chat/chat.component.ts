@@ -5,10 +5,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Chat} from "../../../models/chat";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
 import * as constants from "../../../models/constants";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {ChatMsg} from "../../../models/chat-msg";
 import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
+import {SignInComponent} from "../../auth/sign-in/sign-in.component";
+import {DummyComponent} from "../../test/dummy/dummy.component";
 
 @Component({
   selector: 'app-chat',
@@ -81,6 +83,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         this.chatService.getChat(this.chatToken).valueChanges().subscribe(
           (res) => {
+            console.log(res);
             // @ts-ignore
             this.chat = res;
             this.getMessages(progressDailog);
@@ -91,7 +94,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     )
 
-    progressDailog.close()
+    // progressDailog.close()
 
   }
 
@@ -99,6 +102,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // @ts-ignore
     this.chatService.getChat(this.chatToken).valueChanges().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.chat = res;
         // @ts-ignore
@@ -106,7 +110,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         // @ts-ignore
         this.questionCreatedDate = res.createdDate['seconds'];
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
-          this.chatService.getMessages(constants.dummyChatId).valueChanges().subscribe(
+          this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
             res => {
               // @ts-ignore
               this.chatMessages = res;
@@ -129,5 +133,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onCopyLink() {
     this.clipboardApi.copyFromContent(this.chat.chatLink);
+  }
+
+
+  onPay() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    // dialogConfig.height = "650px";
+    this.dialog.open(DummyComponent, dialogConfig);
   }
 }
