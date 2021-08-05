@@ -6,6 +6,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddQuestionComponent} from "../add-question/add-question.component";
 import {QuestionService} from "../../../services/question-service.service";
 import {AuthService} from "../../../services/auth.service";
+import {StudentService} from "../../../services/student-service.service";
 
 @Component({
   selector: 'app-question-card',
@@ -25,14 +26,17 @@ export class QuestionCardComponent implements OnInit {
   @Input() public viewedByAmount: number = 0;
   @Input() public isTutorJoined: boolean = true;
 
+  role = '';
 
   constructor(private router: Router,
               private dialog: MatDialog,
               private questionService: QuestionService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private studentService: StudentService) {
   }
 
   ngOnInit(): void {
+    this.role = this.studentService.currentStudent.role;
   }
 
   onViewChat() {
@@ -49,7 +53,8 @@ export class QuestionCardComponent implements OnInit {
       subjects: this.subjects,
       dueDate: this.dueDate,
       description: this.description,
-      images: this.images
+      images: this.images,
+      role: this.role
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);

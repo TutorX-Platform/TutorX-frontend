@@ -100,10 +100,10 @@
 
             <span class="example-spacer"></span>
             <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-              <div *ngIf="authService.student.profileImage !=''">
+              <div *ngIf="authService.student.profileImage !==null">
                 <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
               </div>
-              <div *ngIf="authService.student.profileImage==''">
+              <div *ngIf="authService.student.profileImage==null">
                 <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
               </div>
               <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">

@@ -3,14 +3,23 @@
   <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
     <div  mat-dialog-title fxLayout="column" class="top-container" fxLayoutAlign="center center">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
-        <div class="header-title">Add Question</div>
-        <div fxLayout="row" fxLayoutGap="10px" class="button-container">
+        <div class="header-title" *ngIf="role !== 'tutor'">Add Question</div>
+        <div class="header-title" *ngIf="role === 'tutor'">{{questionTitle}}</div>
+        <div fxLayout="row" fxLayoutGap="10px" class="button-container" *ngIf="role !== 'tutor'">
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
               Cancel
             </button>
             <button mat-flat-button [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" type="submit">
               Done
             </button>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px" class="button-container" *ngIf="role === 'tutor'">
+          <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
+            Cancel
+          </button>
+          <button mat-flat-button [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" (click)="onAccept()" >
+            Accept
+          </button>
         </div>
       </div>
       <div fxLayout="row" class="status-container" fxLayoutGap="8px">
@@ -23,7 +32,7 @@
         <div fxLayout="column" class="form-fields">
             <div class="label">Question Title</div>
             <mat-form-field appearance="outline" class="my-form-field">
-              <input matInput type="text" formControlName="questionTitle">
+              <input matInput type="text" formControlName="questionTitle" [disabled]="true" >
             </mat-form-field>
             <div fxLayout="row">
               <div fxLayout="column" class="search-container">
@@ -68,7 +77,7 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
-          <button mat-flat-button color="warn">Delete this question</button>
+          <button mat-flat-button color="warn" *ngIf="role !== 'tutor'">Delete this question</button>
         </div>
   
       </div>

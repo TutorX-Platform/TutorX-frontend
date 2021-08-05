@@ -50,6 +50,9 @@ export class AddQuestionComponent implements OnInit {
   questionId = '';
   uploadedSize: number = 0;
   data = null;
+  role = '';
+  questionTitle = '';
+  isFormDisabled = false;
 
 
   constructor(
@@ -69,6 +72,7 @@ export class AddQuestionComponent implements OnInit {
   ) {
     if(data !== null){
       this.data = data;
+      this.isFormDisabled = true;
     }
   }
 
@@ -76,10 +80,10 @@ export class AddQuestionComponent implements OnInit {
     this.questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     this.subjectList = constants.subjects;
     this.addQuestionForm = this.formBuilder.group({
-      questionTitle: ['', Validators.required],
-      subject: ['', Validators.required],
-      dueDateTime: [null, Validators.required],
-      description: ['', Validators.required],
+      questionTitle: [{value:'', disabled: this.isFormDisabled}, Validators.required],
+      subject: [{value:'', disabled: this.isFormDisabled}, Validators.required],
+      dueDateTime: [{value:null, disabled: this.isFormDisabled}, Validators.required],
+      description: [{value:'', disabled: this.isFormDisabled}, Validators.required],
       files: []
     });
     this.date = new Date();
@@ -89,6 +93,10 @@ export class AddQuestionComponent implements OnInit {
     );
 
     if(this.data !== null){
+      // @ts-ignore
+      this.role = this.data.role;
+      // @ts-ignore
+      this.questionTitle = this.data.title;
       this.patchValues();
     }
 
@@ -98,7 +106,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
-    this.files.push(this.data.images);
+    // this.files.push(this.data.images);
     this.addQuestionForm.patchValue({
       // @ts-ignore
       questionTitle: this.data.title,
@@ -263,6 +271,10 @@ export class AddQuestionComponent implements OnInit {
       tutorsCount: 0
     }
     this.chatService.createChat(chatId, data);
+  }
+
+  onAccept(){
+
   }
 
 }
