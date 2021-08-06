@@ -5,9 +5,136 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    .my-form-field .mat-form-field-wrapper{
-        margin-bottom: -12px;
+    //.my-form-field .mat-form-field-wrapper{
+    //    margin-bottom: -12px;
+    //    height: 35px;
+    //}
+//    mat-form-field .mat-form-field-flex{
+//    }
+//kljd
+//    mat-form-field{
+//      height: 35px;
+//      top: 0!important;
+//    }
+//    mat-form-field .mat-form-field-outline{
+//      height: 35px;
+//      top: 0;
+//    }
+//
+//    mat-form-field .mat-focused .mat-form-field-outline, .ie-edge-date-pick .mat-form-field-invalid .mat-form-field-outline{
+//      top: -25px !important;
+//    }
+//
+//  mat-form-field .mat-form-field-prefix, .ie-edge-date-pick .mat-form-field-suffix{
+//    height: 35px;
+//    top: 0;
+//  }
+  /* ----------------- MAT-FORM-FIELD ----------------- */
+  .my-form-field .mat-form-field-infix {
+    border-top: .54375em solid transparent;
+  }
+
+  .my-form-field .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .my-form-field .mat-form-field-label-wrapper {
+    top: -1.3em;
+    padding-top: 1.1em;
+  }
+
+  .my-form-field .mat-form-field-label {
+    color: #000000;
+    font-weight: bold !important;
+  }
+
+  .my-form-field .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #ced4da;
+  }
+
+  .my-form-field.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.5em 0;
+  }
+
+  input.mat-input-element {
+    line-height: 10px;
+  }
+
+  //.my-form-field.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  //  color: #4680ff;
+  //  background-color: #ffffff;
+  //}
+
+  .my-form-field.mat-alert .mat-form-field-wrapper .mat-form-field-outline-thick, .mat-alert .mat-form-field-outline {
+    color: green !important;
+  }
+
+  .my-form-field.mat-alert .mat-form-field-outline .mat-form-field-outline-start, .mat-alert .mat-form-field-outline .mat-form-field-outline-gap, .mat-alert .mat-form-field-outline .mat-form-field-outline-end {
+    border-width: 2px !important;
+  }
+
+  .my-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+
+  .my-form-field.mat-form-field-disabled .mat-form-field-wrapper {
+    background-color: #fcfcfc;
+    border-radius: 5px;
+  }
+
+  .my-form-field.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-label {
+    color: #757575;
+  }
+
+  .my-form-field.mat-input-element:disabled {
+    color: #757575;
+  }
+
+  .my-form-field.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: black; /*used in login page*/
+  }
+
+  .my-form-field.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    color: #4177f6;
+    margin-top: 4px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="datetime-local"] {
+    -moz-appearance: textfield;
+  }
+
+  input.mat-pw {
+    /*-webkit-text-security: disc;*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .mat-pw {
+    font-family: dotsfont !important;
+    font-size: 28px !important;
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .mat-pw {
+      font-size: 8px !important;
+      padding-bottom: 4px !important;
+      height: 22px;
     }
+  }
 
     .auth{
         padding: 24px;

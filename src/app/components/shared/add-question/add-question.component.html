@@ -17,7 +17,7 @@
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
             Cancel
           </button>
-          <button mat-flat-button [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" (click)="onAccept()" >
+          <button mat-flat-button [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" (click)="onAccept()"type="button" >
             Accept
           </button>
         </div>
@@ -32,7 +32,7 @@
         <div fxLayout="column" class="form-fields">
             <div class="label">Question Title</div>
             <mat-form-field appearance="outline" class="my-form-field">
-              <input matInput type="text" formControlName="questionTitle" [disabled]="true" >
+              <input matInput type="text" formControlName="questionTitle">
             </mat-form-field>
             <div fxLayout="row">
               <div fxLayout="column" class="search-container">

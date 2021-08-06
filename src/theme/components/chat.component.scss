@@ -5,7 +5,8 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .chat{
-    //min-height: 89vh;
+    min-height: 100vh;
+    background: #F6F7FB;
     .header-wrap{
       padding: 0px 32px 16px 32px;
       .chat-title{
@@ -28,7 +29,7 @@
       position: absolute;
       bottom: 24px;
         left: 24px;
-      width: 68%;
+      width: 62%;
       //right: 5px;
       z-index: 100;
       background: white;
@@ -51,9 +52,9 @@
       }
     }
       .chat-container{
-        width: 70%;
+        width: 65%;
         padding: 24px 10px 140px 24px;
-        height: 50vh;
+        height: 57vh;
         overflow-y: auto;
         .joined-message{
           display: flex;
@@ -116,6 +117,94 @@
           .time{
             font: $body-small-default;
             color: #5B6469;
+          }
+        }
+      }
+      .chat-details-container{
+        width: 35%;
+        padding: 24px 40px 0px 10px;
+        .cover-box{
+          padding: 16px;
+          background: white;
+        }
+        .label{
+          font:  400 12px/18px Roboto,'Manrope', sans-serif;
+        }
+        .remaining-days{
+          font: $body-base-default;
+          color: #5B6469;
+        }
+        .quote{
+          font: $body-base-medium;
+        }
+        .request-refund{
+          background: linear-gradient(276.39deg, #D72F2F 0.4%, #B92E2E 58.12%, #CB2F2F 112.35%);
+          padding: 8px 16px;
+          border-radius: 4px;
+          color: white;
+          font: $body-caption-default;
+        }
+        .pay-now{
+          background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+          padding: 8px 16px;
+          border-radius: 4px;
+          color: white;
+          font: $body-caption-default;
+        }
+        .amount{
+          font: $body-small-bold;
+          color: #2EA341;
+        }
+        .assigned-to{
+          font: $body-caption-bold;
+          color: #9AA2A7;
+        }
+        .prof{
+          .avatar-x {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+          .active{
+            padding-top: 20px;
+          }
+          .bio-box{
+            .head{
+              font: $body-base-bold;
+            }
+            .sub{
+              font: $body-base-default;
+              color: #5B6469;
+            }
+          }
+        }
+        .other-details-container{
+          width: 100%;
+          .other-details{
+            .head{
+              font: $body-small-default;
+              color: #222D34;
+            }
+            .sub{
+              font: $body-small-bold;
+              color: #5B6469;
+            }
+          }
+          .divider-details{
+            border: 1px solid #BDC0C4;
+            flex: none;
+            flex-grow: 0;
+          }
+        }
+        .attachments-container{
+          padding: 14px 0px 24px 0px;
+          .attachment-title{
+            font: $body-small-bold;
+            color: #5B6469;
+          }
+          .attachment{
+            width: 97px;
+            height: 97px;
           }
         }
       }
