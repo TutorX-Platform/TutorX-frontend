@@ -2,7 +2,7 @@
   <mat-card-title fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div class="question-title">{{title}}</div>
-      <div (click)="acceptQuestion()" *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
+      <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
       <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px">

@@ -65,18 +65,11 @@ export class QuestionCardComponent implements OnInit {
       dueDate: this.dueDate,
       description: this.description,
       images: this.images,
-      role: this.role
+      role: this.role,
+      isTutor: true,
+      studentEmail:this.studentEmail
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);
-  }
-
-  acceptQuestion() {
-    if (this.isTutor) {
-      console.log(this.studentEmail);
-      this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.studentEmail);
-    } else {
-      alert('you are not a tutor');
-    }
   }
 }

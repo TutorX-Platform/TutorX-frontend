@@ -59,7 +59,6 @@ export class AddQuestionComponent implements OnInit {
   description = '';
 
 
-
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -75,7 +74,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    if(data !== null){
+    if (data !== null) {
       this.data = data;
       // this.isFormDisabled = true;
     }
@@ -85,10 +84,10 @@ export class AddQuestionComponent implements OnInit {
     this.questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     this.subjectList = constants.subjects;
     this.addQuestionForm = this.formBuilder.group({
-      questionTitle: [{value:'', disabled: this.isFormDisabled}, Validators.required],
-      subject: [{value:'', disabled: this.isFormDisabled}, Validators.required],
-      dueDateTime: [{value:null, disabled: this.isFormDisabled}, Validators.required],
-      description: [{value:'', disabled: this.isFormDisabled}, Validators.required],
+      questionTitle: [{value: '', disabled: this.isFormDisabled}, Validators.required],
+      subject: [{value: '', disabled: this.isFormDisabled}, Validators.required],
+      dueDateTime: [{value: null, disabled: this.isFormDisabled}, Validators.required],
+      description: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       files: []
     });
     this.date = new Date();
@@ -97,23 +96,23 @@ export class AddQuestionComponent implements OnInit {
       map((value: string) => this._filter(value))
     );
 
-    if(this.data !== null){
+    if (this.data !== null) {
       // @ts-ignore
       this.role = this.data.role;
       // @ts-ignore
       this.questionTitle = this.data.title;
       // @ts-ignore
       this.status = this.data.status;
-      if(this.role === 'tutor'){
+      if (this.role === 'tutor') {
         this.patchValues()
-      }else{
+      } else {
         this.patchValuesToForm();
       }
     }
 
   }
 
-  patchValues(){
+  patchValues() {
     // @ts-ignore
     this.subject = this.data.subjects[0];
     // @ts-ignore
@@ -123,7 +122,7 @@ export class AddQuestionComponent implements OnInit {
 
   }
 
-  patchValuesToForm(){
+  patchValuesToForm() {
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
@@ -132,7 +131,7 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       questionTitle: this.data.title,
       // @ts-ignore
-      subject:this._filter(this.data.subjects[0]),
+      subject: this._filter(this.data.subjects[0]),
       // @ts-ignore
       dueDateTime: this.data.dueDate,
       // @ts-ignore
@@ -294,8 +293,19 @@ export class AddQuestionComponent implements OnInit {
     this.chatService.createChat(chatId, data);
   }
 
-  onAccept(){
+  onAccept() {
 
+    this.acceptQuestion();
+  }
+
+  acceptQuestion() {
+    // @ts-ignore
+    if (this.data.isTutor) {
+      // @ts-ignore
+      this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.data.studentEmail);
+    } else {
+      alert('you are not a tutor');
+    }
   }
 
 }
