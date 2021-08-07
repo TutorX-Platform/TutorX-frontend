@@ -14,6 +14,7 @@ import {DummyComponent} from "../../test/dummy/dummy.component";
 import {Location} from "@angular/common";
 import {QuestionService} from "../../../services/question-service.service";
 import {Question} from "../../../models/question";
+import {StudentService} from "../../../services/student-service.service";
 
 @Component({
   selector: 'app-chat',
@@ -45,6 +46,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   question: Question;
 
+  isTutor = false;
+
   constructor(private chatService: ChatServiceService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -53,7 +56,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               public questionService: QuestionService,
               public router: Router,
               private dialog: MatDialog,
-              private location: Location) {
+              private location: Location,
+              private studentService: StudentService) {
   }
 
   ngOnInit(): void {
@@ -64,6 +68,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     );
 
+    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
     this.getChatDetails();
   }
 

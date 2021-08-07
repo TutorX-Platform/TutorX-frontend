@@ -37,56 +37,56 @@
     </div>
     <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <!--Joined Message-->
-      <div class="joined-message">
-        <div class="line"></div>
-        <div class="user-name">Alexa Daddario &nbsp;</div>
-        <div class="text">joined the chat</div>
-        <div class="line"></div>
-      </div>
-      <!--Joined Avatar-->
-      <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-          <img src="/assets/images/profile.jpg" class="avatar-x">
-          <div fxLayout="column" fxLayoutAlign="start start">
-            <div class="user-name">
-              Alexa Daddario
-            </div>
-            <div class="joined">
-              joined
-            </div>
-          </div>
-        </div>
-        <div class="time">Todat at 9.00 AM</div>
-      </div>
-      <!--Sender message-->
-      <div fxLayout="row" fxLayoutAlign="end center">
-        <div class="message-box">
-          Hi there niiiiiiiiii
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="end center">
-        <div class="message-box">
-          Attachment 1
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="end center">
-        <img src="/assets/images/profile.jpg" class="attachment-box">
-      </div>
-      <!--reciever message-->
-      <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
-          <img src="/assets/images/profile.jpg" class="avatar-x">
-          <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
-            <div class="user-name">
-              Alexa Daddario
-            </div>
-            <div class="message-box message-box--other-user-message">
-              Hi how you doing??
-            </div>
-          </div>
-        </div>
-        <div class="time">Todat at 9.00 AM</div>
-      </div>
+      <!--<div class="joined-message">-->
+        <!--<div class="line"></div>-->
+        <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
+        <!--<div class="text">joined the chat</div>-->
+        <!--<div class="line"></div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
+      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
+          <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+          <!--<div fxLayout="column" fxLayoutAlign="start start">-->
+            <!--<div class="user-name">-->
+              <!--Alexa Daddario-->
+            <!--</div>-->
+            <!--<div class="joined">-->
+              <!--joined-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;Sender message&ndash;&gt;-->
+      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+          <!--Hi there niiiiiiiiii-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+          <!--Attachment 1-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
+      <!--</div>-->
+      <!--&lt;!&ndash;reciever message&ndash;&gt;-->
+      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
+          <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+          <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
+            <!--<div class="user-name">-->
+              <!--Alexa Daddario-->
+            <!--</div>-->
+            <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
+              <!--Hi how you doing??-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+      <!--</div>-->
       <div *ngFor="let message of chatMessages">
         <div *ngIf="message.isTutorJoinMessage" class="joined-message">
           <div class="line"></div>
@@ -140,7 +140,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -155,7 +155,7 @@
           Request refund
         </button>
       </div>
-      <div *ngIf="!questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="!questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -169,7 +169,7 @@
           Pay now
         </button>
       </div>
-      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px">
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor">
         <div class="assigned-to">
           Assigned to
         </div>
@@ -187,7 +187,7 @@
             </div>
           </div>
         </div>
-        <div class="other-details-container" fxLayout="column" fxLayoutGap="16px">
+        <div class="other-details-container" fxLayout="column" fxLayoutGap="16px" *ngIf="!isTutor">
           <div class="other-details" fxLayout="row" fxLayoutAlign="space-between center">
             <div class="head">
               Location
@@ -220,7 +220,7 @@
         <div class="attachment-title">
           Attchments
         </div>
-        <div fxLayout="row" fxLayoutGap="8px">
+        <div fxLayout="row wrap" fxLayoutGap="8px">
           <img src="../../../../assets/images/profile.jpg" class="attachment">
           <img src="../../../../assets/images/profile.jpg" class="attachment">
           <img src="../../../../assets/images/profile.jpg" class="attachment">
