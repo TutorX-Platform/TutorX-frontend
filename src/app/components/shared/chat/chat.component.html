@@ -1,4 +1,4 @@
-<div *ngIf="questionService.question !==undefined" class="chat">
+<div *ngIf="questionService.question !==undefined"  class="chat" fxHide.lt-sm fxShow="true">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="header-wrap">
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
       <mat-icon>arrow_back</mat-icon>
@@ -90,7 +90,8 @@
       <div *ngFor="let message of chatMessages">
         <div *ngIf="message.isTutorJoinMessage" class="joined-message">
           <div class="line"></div>
-          <div class="user-name">{{message.message}}&nbsp;</div>
+          <div class="user-name">{{authService.student.firstName}} &nbsp;</div>
+          <div class="text">joined the chat</div>
           <div class="line"></div>
         </div>
         <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
@@ -229,4 +230,57 @@
 
 <div *ngIf="questionService.question === undefined">
 
+</div>
+
+<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" style="position: fixed; top: 0; z-index: 100000000; color: white">
+    <div fxLayoutAlign="start center">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="onNavigateBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="toolbar-avatar"></div>
+      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start">
+        <div class="q-title-toolbar">Question Title</div>
+        <div class="last-seen">Last Seen 24h ago</div>
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="chat-main-container">
+    <div class="chat-container">
+      <div *ngFor="let message of chatMessages">
+        <div *ngIf="message.isTutorJoinMessage" class="joined-message">
+          <div class="line"></div>
+          <div class="user-name">{{authService.student.firstName}} &nbsp;</div>
+          <div class="text">joined the chat</div>
+          <div class="line"></div>
+        </div>
+        <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <div class="message-box">
+              {{message.message}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+              <img src="/assets/images/profile.jpg" class="avatar-x">
+              <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
+                <div class="user-name">
+                  Alexa Daddario
+                </div>
+                <div class="message-box message-box--other-user-message">
+                  {{message.message}}
+                </div>
+              </div>
+            </div>
+            <div class="time">Todat at 9.00 AM</div>
+          </div>
+          <div class="message-box message-box--other-user-message">
+            {{message.message}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

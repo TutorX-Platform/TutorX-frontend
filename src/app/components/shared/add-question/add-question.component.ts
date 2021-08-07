@@ -54,6 +54,10 @@ export class AddQuestionComponent implements OnInit {
   questionTitle = '';
   isFormDisabled = false;
 
+  subject = '';
+  dueDateTime = '';
+  description = '';
+
 
   constructor(
     private dialog: MatDialog,
@@ -97,12 +101,28 @@ export class AddQuestionComponent implements OnInit {
       this.role = this.data.role;
       // @ts-ignore
       this.questionTitle = this.data.title;
-      this.patchValues();
+      // @ts-ignore
+      this.status = this.data.status;
+      if(this.role === 'tutor'){
+        this.patchValues()
+      }else{
+        this.patchValuesToForm();
+      }
     }
 
   }
 
   patchValues(){
+    // @ts-ignore
+    this.subject = this.data.subjects[0];
+    // @ts-ignore
+    this.dueDateTime = this.data.dueDate;
+    // @ts-ignore
+    this.description = this.data.description;
+
+  }
+
+  patchValuesToForm(){
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
@@ -111,7 +131,7 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       questionTitle: this.data.title,
       // @ts-ignore
-      subject:this._filter(this.data.subjects),
+      subject:this._filter(this.data.subjects[0]),
       // @ts-ignore
       dueDateTime: this.data.dueDate,
       // @ts-ignore

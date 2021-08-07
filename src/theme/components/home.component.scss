@@ -50,12 +50,23 @@
                     
             .image-container {
                 position: absolute;
+              background: url(../../assets/images/student5.svg);
+              background-repeat: no-repeat;
+              background-size: 100% 403px;
                 width: 50%;
-                height: 403px;
+                height: 403px !important;
                 margin-left: 50%;
-                background: url(../../assets/images/student5.svg);
             }
 
+          .image-container-small {
+            position: absolute;
+            background: url(../../assets/images/student5.svg);
+            //background-repeat: no-repeat;
+            //background-size: 100% 403px;
+            width: 50%;
+            height: 403px !important;
+            margin-left: 50%;
+          }
             .details-container{   
                 padding-left: 128px !important;
                 // padding-right: 128px !important;

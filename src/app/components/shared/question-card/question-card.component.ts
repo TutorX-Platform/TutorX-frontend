@@ -26,6 +26,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public viewedByAmount: number = 0;
   @Input() public isTutorJoined: boolean = true;
   @Input() public studentEmail: string = '';
+  @Input() public isPublicPool: boolean = false;
 
   isTutor = false;
 

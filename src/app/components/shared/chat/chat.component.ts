@@ -11,6 +11,7 @@ import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
 import {SignInComponent} from "../../auth/sign-in/sign-in.component";
 import {DummyComponent} from "../../test/dummy/dummy.component";
+import {Location} from "@angular/common";
 import {QuestionService} from "../../../services/question-service.service";
 import {Question} from "../../../models/question";
 
@@ -51,7 +52,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private clipboardApi: ClipboardService,
               public questionService: QuestionService,
               public router: Router,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -165,5 +167,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         console.log(res);
       }
     )
+  }
+
+  onNavigateBack(){
+    this.location.back();
   }
 }
