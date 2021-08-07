@@ -11,6 +11,7 @@ import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
 import {SignInComponent} from "../../auth/sign-in/sign-in.component";
 import {DummyComponent} from "../../test/dummy/dummy.component";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-chat',
@@ -46,7 +47,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               public authService: AuthService,
               private clipboardApi: ClipboardService,
               public router: Router,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -142,5 +144,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     dialogConfig.width = "433px";
     // dialogConfig.height = "650px";
     this.dialog.open(DummyComponent, dialogConfig);
+  }
+
+  onNavigateBack(){
+    this.location.back();
   }
 }

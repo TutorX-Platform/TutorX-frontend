@@ -85,9 +85,29 @@
               
                       .label{
                         font:  400 12px/18px Roboto,'Manrope', sans-serif;     
-                        // margin-top: 16px;     
+                         margin-top: 16px;
+                      }
+
+                      .tutor-view-container{
+                        margin-top: 4px;
+                        padding: 12px 16px;
+                        width: 100%;
+                        background: #FFFFFF;
+                        border: 1px solid #BDC0C4;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        font: 500 16px/24px Roboto,'Manrope', sans-serif;
                       }
                 }
+
+
+              .attachment-viewer{
+                width: 100%;
+                .attachemnt-size{
+                  width: 200px;
+                  height: 212px
+                }
+              }
                 .custom-dropzone {
                     padding: 40px 0px 40px 0px;
                     width: 100%;

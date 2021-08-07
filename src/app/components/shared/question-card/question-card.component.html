@@ -3,13 +3,13 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div class="question-title">{{title}}</div>
       <div (click)="acceptQuestion()" *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
-      <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress invert-false">In Progress</div>
+      <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px">
       <div class="c-chip c-chip--subjects invert-false">{{subjects}}</div>
     </div>
     <div fxLayout="row" class="date">
-      Due date &nbsp; {{dueDate}}
+      Due date &nbsp; {{dueDate | date:'yyyy/MM/dd h:mm:ss a'}}
     </div>
   </mat-card-title>
   <mat-card-content>
@@ -30,7 +30,7 @@
       <button (click)="onViewDetails()" mat-button class="view-details">
         View Details
       </button>
-      <button (click)="onViewChat()" [class.dissabled]="!isTutorJoined" [disabled]="!isTutorJoined" mat-button class="view-chat">
+      <button *ngIf="!isPublicPool" (click)="onViewChat()" [class.dissabled]="!isTutorJoined" [disabled]="!isTutorJoined" mat-button class="view-chat">
         View Chat
       </button>
     </div>
