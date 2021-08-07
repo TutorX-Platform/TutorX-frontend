@@ -12,6 +12,7 @@ import {ClipboardService} from "ngx-clipboard";
 import {SignInComponent} from "../../auth/sign-in/sign-in.component";
 import {DummyComponent} from "../../test/dummy/dummy.component";
 import {Location} from "@angular/common";
+import {StudentService} from "../../../services/student-service.service";
 
 @Component({
   selector: 'app-chat',
@@ -41,6 +42,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   questionCreatedDate: number = 0;
   chatMessages: ChatMsg[] = [];
 
+  isTutor = false;
+
   constructor(private chatService: ChatServiceService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -48,7 +51,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private clipboardApi: ClipboardService,
               public router: Router,
               private dialog: MatDialog,
-              private location: Location) {
+              private location: Location,
+              private studentService: StudentService) {
   }
 
   ngOnInit(): void {
@@ -59,6 +63,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     );
 
+    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
     this.getChatDetails();
   }
 

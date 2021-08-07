@@ -76,7 +76,7 @@ export class AddQuestionComponent implements OnInit {
   ) {
     if(data !== null){
       this.data = data;
-      this.isFormDisabled = true;
+      // this.isFormDisabled = true;
     }
   }
 
