@@ -258,6 +258,8 @@ export class AuthService {
       (res) => {
         // @ts-ignore
         this.student = res;
+        // @ts-ignore
+        this.studentService.currentStudent = res;
         console.log(res);
       }
     )

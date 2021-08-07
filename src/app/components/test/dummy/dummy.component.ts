@@ -4,6 +4,8 @@ import {Elements, Element as StripeElement, ElementsOptions, StripeService} from
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DummyService} from "../../../services/dummy.service";
 import {AuthService} from "../../../services/auth.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {QuestionService} from "../../../services/question-service.service";
 
 @Component({
   selector: 'app-dummy',
@@ -29,11 +31,15 @@ export class DummyComponent implements OnInit {
 
   constructor(private stripeService: StripeService,
               private fb: FormBuilder,
+              private dialogRef: MatDialogRef<DummyComponent>,
               private authService: AuthService,
-              private dummyService: DummyService) {
+              private dummyService: DummyService,
+              private questionService: QuestionService,
+              @Inject(MAT_DIALOG_DATA) public data: string) {
   }
 
   ngOnInit(): void {
+
     this.loading = false;
     this.createForm();
 
@@ -88,24 +94,38 @@ export class DummyComponent implements OnInit {
               console.log(res);
               // @ts-ignore
               if (res['status'] === 200) {
+                this.updateQuestionAsPaid();
                 this.loading = false;
                 this.submitted = false;
                 // @ts-ignore
                 this.paymentStatus = res['status'];
                 alert("payment success");
+                this.dialogRef.close("payment success");
+
               } else {
                 console.log("err");
                 alert("payment failed");
                 console.log(res);
+                this.dialogRef.close("payment failed");
               }
             }
           )
         } else {
+          // @ts-ignore
+          alert(result.error?.message)
           console.log(result);
           console.log('result.token err');
         }
       }
     )
+  }
+
+
+  updateQuestionAsPaid() {
+    const data = {
+      isPaid: true,
+    }
+    this.questionService.updateQuestion(this.data, data);
   }
 
 }
