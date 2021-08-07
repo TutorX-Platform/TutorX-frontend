@@ -26,6 +26,8 @@ export class ChatServiceService {
 
   sendMessage(messageId: string, message: string) {
     let data: ChatMsg = {
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: false,
       isAttachment: false,
       message: message,
@@ -52,6 +54,8 @@ export class ChatServiceService {
       tutorsCount: 1
     }
     let data: ChatMsg = {
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
       isAttachment: false,
       message: `${this.studentService.currentStudent.firstName} joined the chat`,

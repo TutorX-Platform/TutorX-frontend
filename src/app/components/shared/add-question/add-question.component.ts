@@ -59,6 +59,7 @@ export class AddQuestionComponent implements OnInit {
   description = '';
 
 
+
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -76,7 +77,7 @@ export class AddQuestionComponent implements OnInit {
   ) {
     if(data !== null){
       this.data = data;
-      this.isFormDisabled = true;
+      // this.isFormDisabled = true;
     }
   }
 

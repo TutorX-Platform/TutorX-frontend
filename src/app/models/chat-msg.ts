@@ -1,5 +1,7 @@
 export interface ChatMsg {
   isTutorJoinMessage:boolean;
+  senderName:string;
+  senderAvatar:string,
   senderId: string;
   senderEmail: string;
   message: string;
