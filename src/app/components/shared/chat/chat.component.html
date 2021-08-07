@@ -140,7 +140,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center"  *ngIf="!isTutor">
+      <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -155,7 +155,7 @@
           Request refund
         </button>
       </div>
-      <div *ngIf="!questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!isTutor">
+      <div *ngIf="!questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
