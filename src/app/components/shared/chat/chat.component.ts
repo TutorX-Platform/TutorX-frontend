@@ -11,6 +11,8 @@ import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
 import {SignInComponent} from "../../auth/sign-in/sign-in.component";
 import {DummyComponent} from "../../test/dummy/dummy.component";
+import {QuestionService} from "../../../services/question-service.service";
+import {Question} from "../../../models/question";
 
 @Component({
   selector: 'app-chat',
@@ -39,12 +41,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   };
   questionCreatedDate: number = 0;
   chatMessages: ChatMsg[] = [];
+  // @ts-ignore
+  question: Question;
 
   constructor(private chatService: ChatServiceService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               public authService: AuthService,
               private clipboardApi: ClipboardService,
+              public questionService: QuestionService,
               public router: Router,
               private dialog: MatDialog,) {
   }
@@ -87,6 +92,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             // @ts-ignore
             this.chat = res;
             this.getMessages(progressDailog);
+            this.getQuestion(this.chatToken);
           }, () => {
             progressDailog.close();
           }
@@ -140,7 +146,24 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
+    dialogConfig.data = this.chatToken;
     // dialogConfig.height = "650px";
     this.dialog.open(DummyComponent, dialogConfig);
+
+    this.dialog.afterAllClosed.subscribe(
+      (res) => {
+        console.log(res);
+      }
+    )
+  }
+
+  getQuestion(id: string) {
+    this.questionService.getQuestionById(id).valueChanges().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.questionService.question = res;
+        console.log(res);
+      }
+    )
   }
 }

@@ -131,7 +131,7 @@ import { ChatComponent } from './components/shared/chat/chat.component';
     NgxMatTimepickerModule,
     SlickCarouselModule,
     ClipboardModule,
-    NgxStripeModule.forRoot('pk_test_vpR166dL4d37QOAytynkYmRM00w7dSRPG4')
+    NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],
   providers: [AuthService, AngularFireAuthGuard],
   bootstrap: [AppComponent]

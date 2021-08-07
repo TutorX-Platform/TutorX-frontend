@@ -7,15 +7,26 @@ import {Observable} from "rxjs";
 import {StudentService} from "./student-service.service";
 import {ChatServiceService} from "./chat-service.service";
 import {MailService} from "./mail.service";
+import {Question} from "../models/question";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
+  // @ts-ignore
+  question: Questions;
+
   constructor(private angularFirestoreService: AngularFirestore,
               private chatService: ChatServiceService,
               private mailService: MailService) {
+  }
+
+  getQuestionById(questionId: string) {
+    // @ts-ignore
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId);
+    return questionRef;
+
   }
 
   saveQuestion(qustion: Questions, questionId: string) {
@@ -49,6 +60,12 @@ export class QuestionService {
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.chatService.tutorJoinChat(questionId);
       this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
+    })
+  }
+
+  updateQuestion(questionId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
+      console.log(v);
     })
   }
 

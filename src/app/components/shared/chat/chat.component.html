@@ -1,14 +1,16 @@
-<div class="chat">
+<div *ngIf="questionService.question !==undefined" class="chat">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="header-wrap">
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
       <mat-icon>arrow_back</mat-icon>
       <div fxLayout="column" fxLayoutAlign="start start">
-        <div class="chat-title">Quesion Title</div>
+        <div *ngIf="questionService.question !== undefined"
+             class="chat-title">{{questionService.question.questionTitle}}</div>
+        <div *ngIf="questionService.question === undefined" class="chat-title">Loading</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <div class="chat-subtitle">{{chat.uniqueId}} | Created
             on {{questionCreatedDate * 1000 | date:'yyyy/MM/dd h:mm:ss a'}}</div>
           <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
-          <div class="c-chip c-chip--progress">In Progress</div>
+          <div class="c-chip c-chip--progress">{{questionService.question.status}}</div>
         </div>
       </div>
     </div>
@@ -17,13 +19,6 @@
       <mat-icon>more_vert</mat-icon>
     </div>
   </div>
-
-  <!--  pay button remove -->
-  <div>
-    <button (click)="onPay()"> pay</button>
-  </div>
-  <!--  pay button remove -->
-
 
   <div class="divider-chat-header"></div>
   <div class="chat-main-container" fxLayout="row">
@@ -100,10 +95,10 @@
         </div>
         <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="end center">
-          <div class="message-box">
-            {{message.message}}
+            <div class="message-box">
+              {{message.message}}
+            </div>
           </div>
-        </div>
         </div>
         <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
@@ -120,9 +115,9 @@
             </div>
             <div class="time">Todat at 9.00 AM</div>
           </div>
-          <div class="message-box message-box--other-user-message">
-            {{message.message}}
-          </div>
+<!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+<!--            {{message.message}}-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -142,7 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -157,7 +152,7 @@
           Request refund
         </button>
       </div>
-      <div class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="!questionService.question.isPaid" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -167,7 +162,7 @@
             $ 20.00
           </div>
         </div>
-        <button mat-flat-button class="pay-now">
+        <button (click)="onPay()" mat-flat-button class="pay-now">
           Pay now
         </button>
       </div>
@@ -181,12 +176,12 @@
             <img src="../../../../assets/icons/active.svg" class="active">
           </div>
           <div class="bio-box">
-              <div class="head">
-                Joey Tribbiani
-              </div>
-              <div class="sub">
-                Senior Front-end Developer
-              </div>
+            <div class="head">
+              Joey Tribbiani
+            </div>
+            <div class="sub">
+              Senior Front-end Developer
+            </div>
           </div>
         </div>
         <div class="other-details-container" fxLayout="column" fxLayoutGap="16px">
@@ -230,4 +225,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="questionService.question === undefined">
+
 </div>
