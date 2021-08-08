@@ -19,4 +19,6 @@ export interface Questions {
   questionSalt: string;
   studentUniqueKey: string;
   studentName: string;
+  tutorName: string;
+  tutorImage: string;
 }

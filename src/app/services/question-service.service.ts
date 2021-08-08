@@ -8,6 +8,7 @@ import {StudentService} from "./student-service.service";
 import {ChatServiceService} from "./chat-service.service";
 import {MailService} from "./mail.service";
 import {Question} from "../models/question";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -48,18 +49,21 @@ export class QuestionService {
 
   getQuestionsForTutor(tutorId: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', '==', constants.questionStatus.in_progress));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', '==', constants.questionStatus.assigned));
     return questionRef;
   }
 
-  joinTutorForQuestion(questionId: string, tutorId: string, studentEmail: string) {
+  joinTutorForQuestion(questionId: string, tutorId: string, studentEmail: string, dialogRef: MatDialogRef<any>, tutorName: string, tutorImage: string) {
     const data = {
-      status: constants.questionStatus.in_progress,
-      tutorId: tutorId
+      status: constants.questionStatus.assigned,
+      tutorId: tutorId,
+      tutorName: tutorName,
+      tutorImage: tutorImage
     }
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.chatService.tutorJoinChat(questionId);
       this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
+      dialogRef.close();
     })
   }
 

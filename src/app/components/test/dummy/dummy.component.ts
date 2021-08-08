@@ -6,6 +6,7 @@ import {DummyService} from "../../../services/dummy.service";
 import {AuthService} from "../../../services/auth.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {QuestionService} from "../../../services/question-service.service";
+import * as constants from '../../../models/constants';
 
 @Component({
   selector: 'app-dummy',
@@ -124,6 +125,7 @@ export class DummyComponent implements OnInit {
   updateQuestionAsPaid() {
     const data = {
       isPaid: true,
+      status: constants.questionStatus.in_progress,
     }
     this.questionService.updateQuestion(this.data, data);
   }

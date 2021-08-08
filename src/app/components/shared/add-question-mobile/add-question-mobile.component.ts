@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { Questions } from 'src/app/models/questions';
-import { AuthService } from 'src/app/services/auth.service';
-import { QuestionService } from 'src/app/services/question-service.service';
-import { UtilService } from 'src/app/services/util-service.service';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {AngularFireStorage} from 'angularfire2/storage';
+import {Questions} from 'src/app/models/questions';
+import {AuthService} from 'src/app/services/auth.service';
+import {QuestionService} from 'src/app/services/question-service.service';
+import {UtilService} from 'src/app/services/util-service.service';
 import * as constants from '../../../models/constants';
-import { ProgressDialogComponent } from '../progress-dialog/progress-dialog.component';
+import {ProgressDialogComponent} from '../progress-dialog/progress-dialog.component';
 import {Location} from "@angular/common";
 
 @Component({
@@ -81,7 +81,7 @@ export class AddQuestionMobileComponent implements OnInit {
     )
   }
 
-  onNavigateBack(){
+  onNavigateBack() {
     this.location.back();
   }
 
@@ -123,12 +123,14 @@ export class AddQuestionMobileComponent implements OnInit {
     const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      tutorImage: '',
+      tutorName: '',
       studentName: "",
       studentUniqueKey: this.studentUniqueKey,
       studentEmail: "",
       attachments: this.uploadedFiles,
       chatId: "",
-      createdDate: new Date().getTime(),
+      createdDate: Date.now(),
       description: this.addQuestionForm.value.description,
       dueDate: this.addQuestionForm.value.dueDateTime,
       fee: 0,

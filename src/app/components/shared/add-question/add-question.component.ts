@@ -9,11 +9,9 @@ import {QuestionService} from "../../../services/question-service.service";
 import {Questions} from "../../../models/questions";
 import {UtilService} from "../../../services/util-service.service";
 import {AuthService} from "../../../services/auth.service";
-import {StudentService} from "../../../services/student-service.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
 import {map, startWith} from 'rxjs/operators';
-import {parseTemplate} from "@angular/compiler";
 import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
@@ -110,6 +108,7 @@ export class AddQuestionComponent implements OnInit {
       }
     }
 
+
   }
 
   patchValues() {
@@ -197,6 +196,8 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
     const question: Questions = {
+      tutorImage: "",
+      tutorName: "",
       studentName: this.authService.student.firstName,
       studentUniqueKey: this.studentUniqueKey,
       studentEmail: this.authService.student.email,
@@ -294,7 +295,6 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onAccept() {
-
     this.acceptQuestion();
   }
 
@@ -302,7 +302,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     if (this.data.isTutor) {
       // @ts-ignore
-      this.questionService.joinTutorForQuestion(this.id, this.authService.student.userId, this.data.studentEmail);
+      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
     } else {
       alert('you are not a tutor');
     }

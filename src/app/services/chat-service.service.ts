@@ -34,7 +34,7 @@ export class ChatServiceService {
       senderEmail: this.auth.student.email,
       senderId: this.auth.student.userId,
       sentBy: this.auth.student.firstName,
-      time: new Date().getTime()
+      time: Date.now(),
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
   }
@@ -50,7 +50,7 @@ export class ChatServiceService {
     const joinTutor = {
       chatStatus: constants.chat_status.ongoing,
       tutorId: this.auth.student.userId,
-      tutorJoinedTime: new Date().getTime(),
+      tutorJoinedTime: Date.now(),
       tutorsCount: 1
     }
     let data: ChatMsg = {
@@ -62,7 +62,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: new Date().getTime()
+      time: Date.now()
     }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);

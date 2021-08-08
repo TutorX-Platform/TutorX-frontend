@@ -44,9 +44,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   questionCreatedDate: number = 0;
   chatMessages: ChatMsg[] = [];
   // @ts-ignore
-  question: Question;
+  question: Questions;
 
   isTutor = false;
+  deadLine = new Date();
 
   constructor(private chatService: ChatServiceService,
               private activatedRoute: ActivatedRoute,

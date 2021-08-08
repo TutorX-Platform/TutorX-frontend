@@ -17,7 +17,8 @@
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
             Cancel
           </button>
-          <button mat-flat-button *ngIf="status !== 'Inprogress'" [class.dissabled]="!addQuestionForm.invalid" [disabled]="addQuestionForm.invalid" class="button-done" (click)="onAccept()"type="button" >
+<!--          [disabled]="addQuestionForm.invalid"-->
+          <button mat-flat-button *ngIf="status !== 'Inprogress'" [class.dissabled]="addQuestionForm.invalid"  class="button-done" (click)="onAccept()"type="button" >
             Accept
           </button>
         </div>

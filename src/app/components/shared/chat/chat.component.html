@@ -1,4 +1,4 @@
-<div *ngIf="questionService.question !==undefined"  class="chat" fxHide.lt-sm fxShow="true">
+<div *ngIf="questionService.question !==undefined" class="chat" fxHide.lt-sm fxShow="true">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="header-wrap">
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
       <mat-icon>arrow_back</mat-icon>
@@ -38,60 +38,60 @@
     <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <!--Joined Message-->
       <!--<div class="joined-message">-->
-        <!--<div class="line"></div>-->
-        <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
-        <!--<div class="text">joined the chat</div>-->
-        <!--<div class="line"></div>-->
+      <!--<div class="line"></div>-->
+      <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
+      <!--<div class="text">joined the chat</div>-->
+      <!--<div class="line"></div>-->
       <!--</div>-->
       <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
       <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
-          <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-          <!--<div fxLayout="column" fxLayoutAlign="start start">-->
-            <!--<div class="user-name">-->
-              <!--Alexa Daddario-->
-            <!--</div>-->
-            <!--<div class="joined">-->
-              <!--joined-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="time">Todat at 9.00 AM</div>-->
+      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
+      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+      <!--<div fxLayout="column" fxLayoutAlign="start start">-->
+      <!--<div class="user-name">-->
+      <!--Alexa Daddario-->
+      <!--</div>-->
+      <!--<div class="joined">-->
+      <!--joined-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="time">Todat at 9.00 AM</div>-->
       <!--</div>-->
       <!--&lt;!&ndash;Sender message&ndash;&gt;-->
       <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-        <!--<div class="message-box">-->
-          <!--Hi there niiiiiiiiii-->
-        <!--</div>-->
+      <!--<div class="message-box">-->
+      <!--Hi there niiiiiiiiii-->
+      <!--</div>-->
       <!--</div>-->
       <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-        <!--<div class="message-box">-->
-          <!--Attachment 1-->
-        <!--</div>-->
+      <!--<div class="message-box">-->
+      <!--Attachment 1-->
+      <!--</div>-->
       <!--</div>-->
       <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-        <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
+      <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
       <!--</div>-->
       <!--&lt;!&ndash;reciever message&ndash;&gt;-->
       <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
-          <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-          <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
-            <!--<div class="user-name">-->
-              <!--Alexa Daddario-->
-            <!--</div>-->
-            <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
-              <!--Hi how you doing??-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="time">Todat at 9.00 AM</div>-->
+      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
+      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+      <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
+      <!--<div class="user-name">-->
+      <!--Alexa Daddario-->
+      <!--</div>-->
+      <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
+      <!--Hi how you doing??-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="time">Todat at 9.00 AM</div>-->
       <!--</div>-->
       <div *ngFor="let message of chatMessages">
         <div *ngIf="message.isTutorJoinMessage" class="joined-message">
           <div class="line"></div>
           <div class="user-name">{{message.message}} &nbsp;</div>
-<!--          <div class="text">joined the chat</div>-->
+          <!--          <div class="text">joined the chat</div>-->
           <div class="line"></div>
         </div>
         <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
@@ -104,7 +104,8 @@
         <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
-              <div *ngIf="message.senderAvatar !== '' || message.senderAvatar !== undefined">
+              <div
+                *ngIf="message.senderAvatar !== '' || message.senderAvatar !== undefined || message.senderAvatar !== null">
                 <img [src]="message.senderAvatar" class="avatar-x">
               </div>
               <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
@@ -118,9 +119,9 @@
             </div>
             <div class="time">Todat at 9.00 AM</div>
           </div>
-<!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
-<!--            {{message.message}}-->
-<!--          </div>-->
+          <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+          <!--            {{message.message}}-->
+          <!--          </div>-->
         </div>
       </div>
     </div>
@@ -140,7 +141,8 @@
           </div>
         </div>
       </div>
-      <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -155,7 +157,8 @@
           Request refund
         </button>
       </div>
-      <div *ngIf="!questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="!questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <img src="../../../../assets/icons/nervo.svg">
           <div class="quote">
@@ -174,13 +177,17 @@
           Assigned to
         </div>
         <div class="prof" fxLayout="row" fxLayoutGap="16px">
-          <div fxLayout="row" fxLayoutGap="-15px">
+          <div *ngIf="questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
+            <img [src]="questionService.question.tutorImage" class="avatar-x">
+            <!--            <img src="../../../../assets/icons/active.svg" class="active">-->
+          </div>
+          <div *ngIf="!questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
             <img src="../../../../assets/images/profile.jpg" class="avatar-x">
             <img src="../../../../assets/icons/active.svg" class="active">
           </div>
           <div class="bio-box">
             <div class="head">
-              Joey Tribbiani
+              {{questionService.question.tutorName}}
             </div>
             <div class="sub">
               Senior Front-end Developer
@@ -235,9 +242,11 @@
 </div>
 
 <div class="chat-mobile" fxShow="true" fxHide.gt-xs="true">
-  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" style="position: fixed; top: 0; z-index: 100000000; color: white">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center"
+               style="position: fixed; top: 0; z-index: 100000000; color: white">
     <div fxLayoutAlign="start center">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="onNavigateBack()">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+              (click)="onNavigateBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
       <div class="toolbar-avatar"></div>
