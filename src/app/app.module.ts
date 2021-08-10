@@ -67,6 +67,8 @@ import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tuto
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TutorActivitiesComponent } from './components/tutor/tutor-activities/tutor-activities.component';
 import { ChatComponent } from './components/shared/chat/chat.component';
+import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
+import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
 
 
 @NgModule({
@@ -96,7 +98,9 @@ import { ChatComponent } from './components/shared/chat/chat.component';
     TutorQuestionsComponent,
     TutorDashboardComponent,
     TutorActivitiesComponent,
-    ChatComponent
+    ChatComponent,
+    DeleteDialogComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,

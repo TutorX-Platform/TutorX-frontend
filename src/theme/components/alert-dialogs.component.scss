@@ -1,0 +1,54 @@
+@mixin alert-dialogs-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .alert-dialogs{
+    .dialog-title{
+      font: $body-base-medium;
+    }
+    .dialog-message{
+      font: $body-base-default;
+      color: #5F738C;
+    }
+    .dialog-button{
+      padding: 12px 140px;
+      border-radius: 6px;
+      font: $body-base-medium;
+      &--danger{
+        color: white !important;
+        background: #D13636 !important;
+        &.invert{
+          color: #D13636 !important;
+          background: white !important;
+        }
+      }
+      &--success{
+        color: white !important;
+        background: #00A991 !important;
+        &.invert{
+          color: #00A991 !important;
+          background: white !important;
+        }
+      }
+      &--warning{
+        color: white !important;
+        background: #EA9C30 !important;
+        &.invert{
+          color: #EA9C30 !important;
+          background: white !important;
+        }
+      }
+      &--info{
+        color: white !important;
+        background: #644AE7 !important;
+        &.invert{
+          color: #644AE7 !important;
+          background: white !important;
+        }
+      }
+
+    }
+  }
+}
