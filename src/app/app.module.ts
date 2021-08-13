@@ -69,6 +69,7 @@ import { TutorActivitiesComponent } from './components/tutor/tutor-activities/tu
 import { ChatComponent } from './components/shared/chat/chat.component';
 import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
 import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
+import { CustomDropzonePreviewComponent } from './components/test/custom-dropzone-preview/custom-dropzone-preview.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { MessageDialogComponent } from './components/shared/message-dialog/messa
     TutorActivitiesComponent,
     ChatComponent,
     DeleteDialogComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    CustomDropzonePreviewComponent
   ],
   imports: [
     BrowserModule,
