@@ -15,6 +15,9 @@ import {Location} from "@angular/common";
 import {QuestionService} from "../../../services/question-service.service";
 import {Question} from "../../../models/question";
 import {StudentService} from "../../../services/student-service.service";
+import {UtilService} from "../../../services/util-service.service";
+import {TimeApi} from "../../../models/time-api";
+import {Questions} from "../../../models/questions";
 
 @Component({
   selector: 'app-chat',
@@ -48,8 +51,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   isTutor = false;
   deadLine = new Date();
+  // @ts-ignore
+  timeApi: TimeApi;
 
   constructor(private chatService: ChatServiceService,
+              private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               public authService: AuthService,
@@ -73,6 +79,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isTutor = true;
     }
     this.getChatDetails();
+
+    this.utilService.getTimeFromTimeAPI().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.timeApi = res;
+        console.log(this.timeApi)
+      }
+    )
   }
 
   ngAfterViewChecked() {
@@ -177,7 +191,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     )
   }
 
-  onNavigateBack(){
+  onNavigateBack() {
     this.location.back();
   }
 }

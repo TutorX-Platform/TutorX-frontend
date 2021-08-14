@@ -61,7 +61,7 @@ export class QuestionService {
       tutorImage: tutorImage
     }
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
-      this.chatService.tutorJoinChat(questionId);
+      this.chatService.tutorJoinChat(questionId, 0);
       this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
       dialogRef.close();
     })
