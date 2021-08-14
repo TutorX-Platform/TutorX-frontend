@@ -1,0 +1,28 @@
+@mixin drop-zone-preview($theme){
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .drop-zone{
+    font: $body-caption-default;
+    color: #5B6469;
+    width: 121px;
+    border: 1px solid #5B6469;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    .icon-image{
+      margin-top: 16px;
+    }
+
+    .file-name{
+      overflow: hidden;
+      max-height: 20px;
+      text-overflow: ellipsis;
+      padding: 22px 16px 16px 16px;
+    }
+  }
+
+}

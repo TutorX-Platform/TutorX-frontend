@@ -14,9 +14,16 @@ export class DeleteDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<DeleteDialogComponent>,
     // @ts-ignore
     @Inject(MAT_DIALOG_DATA) data
-    ) { }
+    ) {
+    this.title = data.title;
+    this.message = data.message;
+  }
 
   ngOnInit(): void {
+  }
+
+  onButtonAction(action: string){
+    this.dialogRef.close(action === 'yes');
   }
 
 }
