@@ -28,6 +28,8 @@ export class TutorQuestionsComponent implements OnInit {
   isMaths = false;
   isEnglish = false;
   isCS = false;
+
+  isAutoOpen = false;
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]

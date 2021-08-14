@@ -50,6 +50,19 @@
                   </mat-autocomplete>
                 </mat-form-field>
               </div>
+              <div fxLayout="column" class="search-container" style="margin-left: 1%">
+                <div class="label">Sub-category</div>
+                <mat-form-field appearance="outline" class="my-form-field">
+                  <span matPrefix>
+                  <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
+                  <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
               <div fxLayout="column" class="date-container">
                 <div class="label">Due date</div>
                 <mat-form-field appearance="outline" class="my-form-field">
