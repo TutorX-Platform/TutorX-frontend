@@ -16,9 +16,17 @@ export class MessageDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<MessageDialogComponent>,
     // @ts-ignore
     @Inject(MAT_DIALOG_DATA) data
-  ) { }
+  ) {
+    this.type = data.type;
+    this.title = data.title;
+    this.message = data.message;
+  }
 
   ngOnInit(): void {
+  }
+
+  onButtonAction(action: string){
+    this.dialogRef.close(action === 'yes');
   }
 
 }

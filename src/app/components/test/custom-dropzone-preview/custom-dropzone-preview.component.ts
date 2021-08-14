@@ -4,12 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'custom-dropzone-preview',
-  template: `
-    <div>Preview here!</div>
-    <ng-content select="ngx-dropzone-label"></ng-content>
-    <ngx-dropzone-remove-badge *ngIf="removable" (click)="_remove($event)">
-    </ngx-dropzone-remove-badge>
-	`,
+  templateUrl: './custom-dropzone-preview.component.html',
   styleUrls: ['./custom-dropzone-preview.component.scss'],
   providers: [
     {

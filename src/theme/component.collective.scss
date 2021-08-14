@@ -14,6 +14,7 @@
 @import "components/form.component.scss";
 @import "components/chat.component";
 @import "components/alert-dialogs.component";
+@import "components/drop-zone-preview.component";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -32,4 +33,5 @@
     @include form-component($theme);
     @include chat-component($theme);
     @include alert-dialogs-component($theme);
+    @include drop-zone-preview($theme);
 }
