@@ -42,7 +42,7 @@ export class ChatServiceService {
   getMessages(messageId: string) {
     // @ts-ignore
     const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats, ref =>
-      ref.orderBy('time', 'asc'));
+      ref.orderBy('time', 'desc'));
     return questionRef;
   }
 

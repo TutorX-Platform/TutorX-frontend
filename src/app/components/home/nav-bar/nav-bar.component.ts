@@ -49,6 +49,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getLoggedUser(progressDailog);
       }
     )
+    console.log(new Date().getUTCDate())
   }
 
   ngAfterViewInit(): void {

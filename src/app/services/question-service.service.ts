@@ -49,7 +49,7 @@ export class QuestionService {
 
   getQuestionsForTutor(tutorId: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', '==', constants.questionStatus.assigned));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId));
     return questionRef;
   }
 
