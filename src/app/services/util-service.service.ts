@@ -31,6 +31,8 @@ export class UtilService {
   }
 
   getTimeFromTimeAPI() {
-    return this.http.post(constants.time_url, {});
+    const urlParams: any = {};
+    const httpOptions = {};
+    return this.http.post(constants.time_url, httpOptions);
   }
 }

@@ -87,6 +87,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     this.utilService.getTimeFromTimeAPI().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.timeApi = res;
         console.log(this.timeApi)
@@ -99,9 +100,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onSend() {
-    console.log(this.message.value);
     // @ts-ignore
-    this.chatService.sendMessage(this.chatToken, this.message.value);
+    this.chatService.sendMessage(this.chatToken, this.message.value, 0)
     this.message.reset();
     this.isSendButtonDissabled = true;
   }
@@ -117,7 +117,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDailog.afterOpened().subscribe(
       (res) => {
-        console.log("hello get chat");
         this.chatService.getChat(this.chatToken).valueChanges().subscribe(
           (res) => {
             // @ts-ignore
@@ -128,7 +127,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             progressDailog.close();
           }
         )
-
       }
     )
 
@@ -194,7 +192,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         // @ts-ignore
         this.questionService.question = res;
-        console.log(res, " testkjfbsdjfn");
+        console.log(res);
       }
     )
   }
@@ -203,10 +201,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.location.back();
   }
 
-  onType(){
-    if(this.message.value !== ''){
+  onType() {
+    if (this.message.value !== '') {
       this.isSendButtonDissabled = false;
-    }else{
+    } else {
       this.isSendButtonDissabled = true;
     }
   }

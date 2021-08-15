@@ -44,6 +44,7 @@ export class AddQuestionComponent implements OnInit {
   subjectList: string[] = [];
 
   options = constants.subjects;
+  subCategoryList: string[] = [];
   filteredOptions?: Observable<string[]>;
   questionId = '';
   uploadedSize: number = 0;
@@ -122,6 +123,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   patchValuesToForm() {
+    console.log("ann")
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
