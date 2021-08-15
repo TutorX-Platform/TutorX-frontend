@@ -123,6 +123,7 @@ export class AddQuestionMobileComponent implements OnInit {
     const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
     const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
     const question: Questions = {
+      subCategory: this.addQuestionForm.value.subCategory,
       tutorImage: '',
       tutorName: '',
       studentName: "",
