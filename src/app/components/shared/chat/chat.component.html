@@ -244,87 +244,50 @@
 
 </div>
 
-<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true">
-  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center"
-               style="position: fixed; top: 0; z-index: 100000000; color: white;">
-    <div fxLayoutAlign="start center">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
-              (click)="onNavigateBack()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <div class="toolbar-avatar"></div>
-      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start">
-        <div class="q-title-toolbar">Question Title</div>
-        <div class="last-seen">Last Seen 24h ago</div>
+<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 1">
+  <mat-toolbar color="primary"
+               style="position: fixed; top: 0; z-index: 100000000; color: white;" *ngIf="!isDetailedView">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" >
+      <div fxLayoutAlign="start center">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="onNavigateBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <img src="../../assets/images/box.svg">
+        <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer" (click)="onDetailedView(true)">
+          <div class="q-title-toolbar">Question Title</div>
+          <div class="last-seen">Last Seen 24h ago</div>
+        </div>
       </div>
-    </div>
+    </mat-toolbar-row>
   </mat-toolbar>
+  <div fxLayout="row" fxLayoutAlign="space-between start" style="padding: 16px;position: fixed; width: 100%; top: 0;color: white;background: #7F6EF0" *ngIf="isDetailedView">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
+      <img src="../../assets/images/box.svg">
+      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="start start" style="padding-left: 0 !important;">
+        <div class="q-title-toolbar">Question Title</div>
+        <div class="last-seen">Description</div>
+      </div>
+      <button mat-flat-button (click)="onShowDetails(2)">View Details</button>
+    </div>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+            (click)="onDetailedView(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <div class="chat-main-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div class="chat-container">
-      <!--<div class="typing-box">-->
-      <!--<div fxLayout="row" fxLayoutAlign="space-between center" class="typer">-->
-      <!--<textarea matInput type="text" placeholder="Reply" oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"' class="message-input" [formControl]="message" (input)="onType()"></textarea>-->
-      <!--<button mat-flat-button color="primary" style="color: white" (click)="onSend()" [disabled]="isSendButtonDissabled">Send</button>-->
-      <!--</div>-->
-      <!--<mat-divider></mat-divider>-->
-      <!--<div fxLayout="row" fxLayoutGap="8px" class="links">-->
-      <!--<img src="/assets/icons/text.svg">-->
-      <!--<img src="/assets/icons/imoji.svg">-->
-      <!--<img src="/assets/icons/attach.svg" style="cursor: pointer">-->
-      <!--<img src="/assets/icons/link.svg">-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--Joined Message-->
-      <!--<div class="joined-message">-->
-      <!--<div class="line"></div>-->
-      <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
-      <!--<div class="text">joined the chat</div>-->
-      <!--<div class="line"></div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
-      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-      <!--<div fxLayout="column" fxLayoutAlign="start start">-->
-      <!--<div class="user-name">-->
-      <!--Alexa Daddario-->
-      <!--</div>-->
-      <!--<div class="joined">-->
-      <!--joined-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="time">Todat at 9.00 AM</div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;Sender message&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<div class="message-box">-->
-      <!--Hi there niiiiiiiiii-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<div class="message-box">-->
-      <!--Attachment 1-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
-      <!--</div>-->
-      <!--&lt;!&ndash;reciever message&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
-      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-      <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
-      <!--<div class="user-name">-->
-      <!--Alexa Daddario-->
-      <!--</div>-->
-      <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
-      <!--Hi how you doing??-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="time">Todat at 9.00 AM</div>-->
-      <!--</div>-->
+      <div class="typing-box">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="typer">
+        <button mat-flat-button style="background: #E3E6E8">
+          <img src="/assets/icons/attach.svg" style="cursor: pointer">
+        </button>
+      <textarea rows="1" matInput type="text" placeholder="Reply" oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"' class="message-input" [formControl]="message" (input)="onType()"></textarea>
+      <button mat-flat-button color="primary" style="color: white" (click)="onSend()" [disabled]="isSendButtonDissabled">
+        <mat-icon class="material-icons-outlined">send</mat-icon>
+      </button>
+      </div>
+      </div>
       <div *ngFor="let message of chatMessages">
         <div *ngIf="message.isTutorJoinMessage" class="joined-message">
           <div class="line"></div>
@@ -350,7 +313,7 @@
                 <img [src]="dummyProfPic" class="avatar-x">
               </ng-template>
             </div>
-            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0px" style="width: 100%; margin-left: 8px">
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0px" style="width: 100%; margin-left: 8px; margin-right: 8px">
               <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%">
                 <div class="user-name">
                   {{message.senderName}}
@@ -369,4 +332,85 @@
       </div>
     </div>
   </div>
+
 </div>
+
+<!--other-->
+<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 2">
+  <mat-toolbar color="primary"
+               style="position: fixed; top: 0; z-index: 100000000; color: white;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" >
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="onShowDetails(1)">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer" (click)="onDetailedView(true)">
+          <div class="q-title-toolbar">Done</div>
+        </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="chat-main-container" >
+    <div class="chat-details-container" fxLayout="column" fxLayoutGap="4px">
+      <div class="cover-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+        <img src="../../../../assets/icons/flag.svg">
+        <div style="width: 100%; overflow: hidden">
+          <div class="label">Due date</div>
+          <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
+            <input matInput type="datetime-local">
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <img src="../../../../assets/icons/info.svg">
+            <div class="remaining-days">
+              Remaining 2d 4h 3m 40s
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            $ 20.00
+          </div>
+          <div class="c-chip c-chip--progress">Fully paid</div>
+        </div>
+        <button mat-flat-button class="request-refund">
+          Request refund
+        </button>
+      </div>
+      <div class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            $ 20.00
+          </div>
+        </div>
+        <button (click)="onPay()" mat-flat-button class="pay-now">
+          Pay now
+        </button>
+      </div>
+
+      <div class="attachments-container" fxLayout="column" fxLayoutGap="12px">
+        <div class="attachment-title">
+          Attchments
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

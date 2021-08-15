@@ -226,31 +226,33 @@
       }
     }
     .toolbar-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: white;
+      //width: 50px;
+      //height: 50px;
+      //border-radius: 50%;
+      background: url("../../assets/images/box.svg");
     }
     .chat-main-container{
       padding: 50px 8px 16px;
-      height: 100vh;
+      height: 80vh;
       overflow-y: auto;
-
+      background: #F6F7FB;
       .chat-container{
         .typing-box{
-          position: absolute;
-          bottom: 24px;
-          left: 24px;
-          width: 62%;
-          //right: 5px;
+          position: fixed;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
           z-index: 100;
           background: white;
           .typer{
             padding: 16px;
             .message-input{
               font: $body-small-bold;
-              width: 88%;
+              width: 100%;
               border: none;
+              background: #F6F7FB;
+              border-radius: 4px;
+              padding: 8px 16px;
             }
             .message-input:focus{
               outline: none;
@@ -325,6 +327,96 @@
             font: $body-small-default;
             color: #5B6469;
           }
+        }
+      }
+    }
+    .chat-details-container{
+      width: 100%;
+      padding: 26px 0px 16px;
+      .cover-box{
+        padding: 16px;
+        background: white;
+      }
+      .label{
+        font:  400 12px/18px Roboto,'Manrope', sans-serif;
+      }
+      .remaining-days{
+        font: $body-base-default;
+        color: #5B6469;
+      }
+      .quote{
+        font: $body-base-medium;
+      }
+      .request-refund{
+        background: linear-gradient(276.39deg, #D72F2F 0.4%, #B92E2E 58.12%, #CB2F2F 112.35%);
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        font: $body-caption-default;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .pay-now{
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        font: $body-caption-default;
+      }
+      .amount{
+        font: $body-small-bold;
+        color: #2EA341;
+      }
+      .assigned-to{
+        font: $body-caption-bold;
+        color: #9AA2A7;
+      }
+      .prof{
+        .avatar-x {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .active{
+          padding-top: 20px;
+        }
+        .bio-box{
+          .head{
+            font: $body-base-bold;
+          }
+          .sub{
+            font: $body-base-default;
+            color: #5B6469;
+          }
+        }
+      }
+      .other-details-container{
+        width: 100%;
+        .other-details{
+          .head{
+            font: $body-small-default;
+            color: #222D34;
+          }
+          .sub{
+            font: $body-small-bold;
+            color: #5B6469;
+          }
+        }
+        .divider-details{
+          border: 1px solid #BDC0C4;
+          flex: none;
+          flex-grow: 0;
+        }
+      }
+      .attachments-container{
+        padding: 14px 0px 24px 0px;
+        .attachment-title{
+          font: $body-small-bold;
+          color: #5B6469;
+        }
+        .attachment{
+          width: 97px;
+          height: 97px;
         }
       }
     }

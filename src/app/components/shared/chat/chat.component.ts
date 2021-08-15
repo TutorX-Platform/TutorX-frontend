@@ -56,6 +56,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   timeApi: TimeApi;
 
   dummyProfPic = constants.dummy_profile_picture;
+  isDetailedView = false;
+  selectedPage = 1;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -97,8 +99,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onSend() {
+    console.log(this.message.value);
     // @ts-ignore
-    this.chatService.sendMessage(this.chatToken, this.message.value)
+    this.chatService.sendMessage(this.chatToken, this.message.value);
     this.message.reset();
     this.isSendButtonDissabled = true;
   }
@@ -114,9 +117,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDailog.afterOpened().subscribe(
       (res) => {
+        console.log("hello get chat");
         this.chatService.getChat(this.chatToken).valueChanges().subscribe(
           (res) => {
-            console.log(res);
             // @ts-ignore
             this.chat = res;
             this.getMessages(progressDailog);
@@ -125,6 +128,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             progressDailog.close();
           }
         )
+
       }
     )
 
@@ -190,7 +194,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         // @ts-ignore
         this.questionService.question = res;
-        console.log(res);
+        console.log(res, " testkjfbsdjfn");
       }
     )
   }
@@ -205,5 +209,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }else{
       this.isSendButtonDissabled = true;
     }
+  }
+
+  onDetailedView(bool: boolean){
+    this.isDetailedView = bool;
+  }
+
+  onShowDetails(num: number){
+    this.selectedPage = num;
   }
 }

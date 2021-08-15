@@ -245,4 +245,9 @@ export class StudentQuestionsComponent implements OnInit {
     console.log(value);
   }
 
+  onViewChat(id: any) {
+    console.log(id);
+    this.router.navigate([constants.routes.chat, id])
+  }
+
 }

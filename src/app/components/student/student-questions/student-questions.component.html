@@ -82,7 +82,7 @@
     </mat-form-field>
     <div fxLayout="column">
       <div *ngFor="let q of askedQuestions">
-        <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center" (click)="onViewChat(q.id)">
           <div class="topic">
             {{q.questionTitle}}
           </div>
