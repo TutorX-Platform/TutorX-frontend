@@ -33,6 +33,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion'
 // import {MatOp} from '@angular/material/autocomplete';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
@@ -137,6 +138,7 @@ import { CustomDropzonePreviewComponent } from './components/test/custom-dropzon
     NgxMatTimepickerModule,
     SlickCarouselModule,
     ClipboardModule,
+    MatExpansionModule,
     NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],
   providers: [AuthService, AngularFireAuthGuard],

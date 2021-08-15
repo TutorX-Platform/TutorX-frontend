@@ -9,6 +9,8 @@ export const env_url = {
 
 export const dummyChatId = 'Q936d4c46-3a30-4f17-b2ce-aa53d8c3af37';
 
+export const dummy_profile_picture = 'assets/images/default_profile.png';
+
 export const backend_api_resource = {
   payment: '/payment',
   email: '/email'
