@@ -18,6 +18,7 @@ import {StudentService} from "../../../services/student-service.service";
 import {UtilService} from "../../../services/util-service.service";
 import {TimeApi} from "../../../models/time-api";
 import {Questions} from "../../../models/questions";
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from "angularfire2/storage";
 
 @Component({
   selector: 'app-chat',
@@ -32,8 +33,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   messages: any = [];
   chatToken: string = '';
   // @ts-ignore
+  taskRef: AngularFireStorageReference;
+  // @ts-ignore
   chatForm: FormGroup;
+  // @ts-ignore
+  task: AngularFireUploadTask;
+  attachments: string[] = [];
   chat: Chat = {
+    attachments: [],
     createdDate: new Date(),
     chatLink: "",
     chatStatus: "",
@@ -59,12 +66,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   isDetailedView = false;
   selectedPage = 1;
   fileToUpload: File | null = null;
+  uploadReady = false;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               public authService: AuthService,
+              private storage: AngularFireStorage,
               private clipboardApi: ClipboardService,
               public questionService: QuestionService,
               public router: Router,
@@ -210,17 +219,49 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  onDetailedView(bool: boolean){
+  onDetailedView(bool: boolean) {
     this.isDetailedView = bool;
   }
 
-  onShowDetails(num: number){
+  onShowDetails(num: number) {
     this.selectedPage = num;
   }
 
   handleFileInput(event: any) {
     console.log(event.target.files[0]);
+    if (event.target.files.length > 0) {
+      this.uploadReady = true;
+    }
     this.fileToUpload = event.target.files[0];
+  }
+
+  uploadAttachment() {
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDialog.afterOpened().subscribe(() => {
+      // @ts-ignore
+      this.uploadFile(this.fileToUpload, progressDialog)
+    });
+  }
+
+  uploadFile(file: File, progressDialog: MatDialogRef<any>) {
+    const time = new Date().getTime();
+    // @ts-ignore
+    const path = constants.storage_collections.chat + constants.url_sign.url_separator + this.chatToken + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
+    this.taskRef = this.storage.ref(path);
+    this.task = this.taskRef.put(file);
+    this.task.then(() => {
+      this.taskRef.getDownloadURL().subscribe(
+        (res) => {
+          this.uploadReady = false;
+          this.chat.attachments.push(res);
+          this.chatService.createChat(this.chatToken, this.chat);
+        }, () => {
+          console.log("upload error");
+        }, () => {
+          progressDialog.close();
+        }
+      )
+    });
   }
 
 }
