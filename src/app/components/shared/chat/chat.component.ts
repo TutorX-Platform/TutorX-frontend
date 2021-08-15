@@ -28,6 +28,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl('');
+  isSendButtonDissabled = true;
   messages: any = [];
   chatToken: string = '';
   // @ts-ignore
@@ -53,6 +54,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   deadLine = new Date();
   // @ts-ignore
   timeApi: TimeApi;
+
+  dummyProfPic = constants.dummy_profile_picture;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -98,6 +101,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // @ts-ignore
     this.chatService.sendMessage(this.chatToken, this.message.value)
     this.message.reset();
+    this.isSendButtonDissabled = true;
   }
 
   scrollToBottom(): void {
@@ -194,5 +198,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onNavigateBack() {
     this.location.back();
+  }
+
+  onType(){
+    if(this.message.value !== ''){
+      this.isSendButtonDissabled = false;
+    }else{
+      this.isSendButtonDissabled = true;
+    }
   }
 }

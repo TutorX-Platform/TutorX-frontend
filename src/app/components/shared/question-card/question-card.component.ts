@@ -27,6 +27,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public isTutorJoined: boolean = true;
   @Input() public studentEmail: string = '';
   @Input() public isPublicPool: boolean = false;
+  @Input() public isAutoOpen: boolean = false;
 
   isTutor = false;
 
@@ -47,6 +48,9 @@ export class QuestionCardComponent implements OnInit {
       this.isTutor = true;
     }
     this.role = this.studentService.currentStudent.role;
+    if(this.isAutoOpen){
+      this.onViewDetails();
+    }
   }
 
   onViewChat() {

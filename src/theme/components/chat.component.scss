@@ -25,37 +25,37 @@
     }
     .chat-main-container{
       width: 100%;
-      .typing-box{
-      position: absolute;
-      bottom: 24px;
-        left: 24px;
-      width: 62%;
-      //right: 5px;
-      z-index: 100;
-      background: white;
-      .typer{
-        padding: 16px;
-        .message-input{
-          font: $body-small-bold;
-          width: 88%;
-          border: none;
-        }
-        .message-input:focus{
-          outline: none;
-        }
-      }
-      .links{
-        padding: 8px 16px;
-      }
-      .message-divider{
 
-      }
-    }
       .chat-container{
         width: 65%;
         padding: 24px 10px 140px 24px;
         height: 57vh;
         overflow-y: auto;
+        .typing-box{
+          position: fixed;
+          bottom: 24px;
+          left: 24px;
+          right: 37%;
+          z-index: 100;
+          background: white;
+          .typer{
+            padding: 16px;
+            .message-input{
+              font: $body-small-bold;
+              width: 88%;
+              border: none;
+            }
+            .message-input:focus{
+              outline: none;
+            }
+          }
+          .links{
+            padding: 8px 16px;
+          }
+          .message-divider{
+
+          }
+        }
         .joined-message{
           display: flex;
           flex-direction: row;
@@ -143,6 +143,8 @@
           border-radius: 4px;
           color: white;
           font: $body-caption-default;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .pay-now{
           background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
@@ -230,38 +232,37 @@
       background: white;
     }
     .chat-main-container{
-      padding: 26px 8px 16px;
-      .typing-box{
-        position: absolute;
-        bottom: 24px;
-        left: 24px;
-        width: 62%;
-        //right: 5px;
-        z-index: 100;
-        background: white;
-        .typer{
-          padding: 16px;
-          .message-input{
-            font: $body-small-bold;
-            width: 88%;
-            border: none;
-          }
-          .message-input:focus{
-            outline: none;
-          }
-        }
-        .links{
-          padding: 8px 16px;
-        }
-        .message-divider{
+      padding: 50px 8px 16px;
+      height: 100vh;
+      overflow-y: auto;
 
-        }
-      }
       .chat-container{
-        //width: 65%;
-        //padding: 24px 10px 140px 24px;
-        //height: 57vh;
-        //overflow-y: auto;
+        .typing-box{
+          position: absolute;
+          bottom: 24px;
+          left: 24px;
+          width: 62%;
+          //right: 5px;
+          z-index: 100;
+          background: white;
+          .typer{
+            padding: 16px;
+            .message-input{
+              font: $body-small-bold;
+              width: 88%;
+              border: none;
+            }
+            .message-input:focus{
+              outline: none;
+            }
+          }
+          .links{
+            padding: 8px 16px;
+          }
+          .message-divider{
+
+          }
+        }
         .joined-message{
           display: flex;
           flex-direction: row;
@@ -292,7 +293,7 @@
           color: #FFFFFF;
           &--other-user-message{
             margin: 8px 0px !important;
-            width: 100% !important;
+            width: 90% !important;
             background: #E3E6E8 !important;
             color: black !important;
           }
