@@ -18,7 +18,8 @@
       <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onReleaseQuestion()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+        <button mat-menu-item (click)="onReleaseQuestion()" class="drop-down" fxLayout="row"
+                fxLayoutAlign="start center"
                 fxLayoutGap="8px">
           <mat-icon class="material-icons-outlined">logout</mat-icon>
           <div>Release Question</div>
@@ -151,7 +152,8 @@
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">
             <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
-              Remaining <app-count-down [date]="test"></app-count-down>
+              Remaining
+              <app-count-down [date]="test"></app-count-down>
             </div>
           </div>
         </div>
@@ -240,7 +242,7 @@
       </div>
       <div class="attachments-container" fxLayout="column" fxLayoutGap="12px">
         <div class="attachment-title">
-          Attchments
+          Attachments
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
           <div fxLayout="column" class="drop-zone">
@@ -252,20 +254,20 @@
                 <!--{{this.file.name}}-->
                 attachment.pdf
               </div>
-
             </div>
           </div>
 
-          <div fxLayout="column" class="drop-zone">
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <img src="assets/icons/jpeg.svg" class="icon-image">
-            </div>
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <div class="file-name">
-                <!--{{this.file.name}}-->
-                attachment2.jpg
+          <div *ngFor="let attachment of chat.attachments">
+            <div fxLayout="column" class="drop-zone">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/jpeg.svg" class="icon-image">
               </div>
-
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <div class="file-name">
+                  <!--{{this.file.name}}-->
+                  attachment2.jpg
+                </div>
+              </div>
             </div>
           </div>
           <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
