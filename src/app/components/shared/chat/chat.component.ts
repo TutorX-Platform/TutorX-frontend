@@ -25,7 +25,7 @@ import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} 
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewChecked{
   // @ts-ignore
   @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl('');
@@ -68,6 +68,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   fileToUpload: File | null = null;
   uploadReady = false;
 
+  test = new Date('Sep 01 2021 00:00:00');
+
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
@@ -90,11 +92,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     );
 
+    this.getChatDetails();
+
+    console.log(this.studentService.currentStudent)
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
-    this.getChatDetails();
 
+    this.scrollToBottom();
     this.utilService.getTimeFromTimeAPI().subscribe(
       (res) => {
         console.log(res);
@@ -105,9 +110,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     )
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
+
 
   onSend() {
     // @ts-ignore
@@ -235,6 +238,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.fileToUpload = event.target.files[0];
   }
 
+  onReleaseQuestion(){
+
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+      this.isTutor = true;
+    }
+  }
   uploadAttachment() {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(() => {

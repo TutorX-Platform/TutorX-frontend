@@ -4,6 +4,8 @@
       <div class="question-title">{{title}}</div>
       <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
       <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
+      <div *ngIf="status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
+      <div *ngIf="status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px">
       <div class="c-chip c-chip--subjects invert-false">{{subjects}}</div>

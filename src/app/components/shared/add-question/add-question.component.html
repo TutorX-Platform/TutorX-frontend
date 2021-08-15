@@ -126,7 +126,18 @@
         </div>
         <div class="attachment-viewer" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="24px grid">
           <div *ngFor="let attachment of [1,2,3,4,5,6]">
-            <img src="../../../../assets/images/profile.jpg" class="attachemnt-size">
+            <div fxLayout="column" class="drop-zone">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/pdf.svg" class="icon-image">
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <div class="file-name">
+                  <!--{{this.file.name}}-->
+                  attachment.pdf
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
