@@ -44,8 +44,11 @@ export class AddQuestionComponent implements OnInit {
   subjectList: string[] = [];
 
   options = constants.subjects;
+  subOptions: string[] = [];
+  selectedSubject: string = '';
   subCategoryList: string[] = [];
   filteredOptions?: Observable<string[]>;
+  filteredSubOptions?: Observable<string[]>;
   questionId = '';
   uploadedSize: number = 0;
   data = null;
@@ -85,6 +88,7 @@ export class AddQuestionComponent implements OnInit {
     this.addQuestionForm = this.formBuilder.group({
       questionTitle: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       subject: [{value: '', disabled: this.isFormDisabled}, Validators.required],
+      subCategory: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       dueDateTime: [{value: null, disabled: this.isFormDisabled}, Validators.required],
       description: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       files: []
@@ -94,6 +98,12 @@ export class AddQuestionComponent implements OnInit {
       startWith(''),
       map((value: string) => this._filter(value))
     );
+
+    this.filteredSubOptions = this.addQuestionForm.controls['subCategory'].valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this._subfilter(value))
+    );
+
 
     if (this.data !== null) {
       // @ts-ignore
@@ -123,7 +133,6 @@ export class AddQuestionComponent implements OnInit {
   }
 
   patchValuesToForm() {
-    console.log("ann")
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
@@ -142,7 +151,32 @@ export class AddQuestionComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
+    if (this.options.filter(option => option.toLowerCase().includes(filterValue)).length === 1) {
+      this.selectedSubject = this.options.filter(option => option.toLowerCase().includes(filterValue))[0];
+      if (this.selectedSubject === constants.subjectCodes.mathematics) {
+        this.subOptions.push(...constants.mathsSubjects)
+      }
+      if (this.selectedSubject === constants.subjectCodes.management) {
+        this.subOptions = constants.managementSubjects;
+      }
+      if (this.selectedSubject === constants.subjectCodes.physics) {
+        this.subOptions = constants.physicsSubjects;
+      }
+      if (this.selectedSubject === constants.subjectCodes.computer_science) {
+        console.log('hi');
+        this.subOptions = constants.csSubjects;
+        console.log(this.subOptions);
+      }
+    }
+    console.log(this.subOptions);
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private _subfilter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(this.subOptions);
+    console.log(this.subOptions.filter(option => option.toLowerCase().includes(filterValue)));
+    return this.subOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onDone() {
@@ -198,6 +232,7 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
     const question: Questions = {
+      subCategory: this.addQuestionForm.value.subCategory,
       tutorImage: "",
       tutorName: "",
       studentName: this.authService.student.firstName,

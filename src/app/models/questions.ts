@@ -8,6 +8,7 @@ export interface Questions {
   tutorId: string;
   questionTitle: string;
   subjectCategory: string;
+  subCategory: string;
   dueDate: Date;
   description: string;
   attachments: string[];
