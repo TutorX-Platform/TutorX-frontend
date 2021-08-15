@@ -1,7 +1,7 @@
 <div *ngIf="questionService.question !==undefined" class="chat" fxHide.lt-sm fxShow="true">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="header-wrap">
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
-      <mat-icon>arrow_back</mat-icon>
+      <mat-icon style="cursor: pointer" (click)="onNavigateBack()">arrow_back</mat-icon>
       <div fxLayout="column" fxLayoutAlign="start start">
         <div *ngIf="questionService.question !== undefined"
              class="chat-title">{{questionService.question.questionTitle}}</div>
@@ -16,7 +16,14 @@
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
       <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onReleaseQuestion()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                fxLayoutGap="8px">
+          <mat-icon class="material-icons-outlined">logout</mat-icon>
+          <div>Release Question</div>
+        </button>
+      </mat-menu>
     </div>
   </div>
 
@@ -128,7 +135,7 @@
         </div>
       </div>
     </div>
-    <div class="chat-details-container" fxLayout="column" fxLayoutGap="4px">
+    <div class="chat-details-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="4px">
       <div class="cover-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
         <img src="../../../../assets/icons/flag.svg">
         <div style="width: 100%; overflow: hidden">
@@ -138,8 +145,8 @@
           </mat-form-field>
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">
-            <div class="remaining-days">
-              Remaining 2d 4h 3m 40s
+            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
+              Remaining <app-count-down [date]="test"></app-count-down>
             </div>
           </div>
         </div>
@@ -230,10 +237,35 @@
         <div class="attachment-title">
           Attchments
         </div>
-        <div fxLayout="row wrap" fxLayoutGap="8px grid">
-          <img src="../../../../assets/images/profile.jpg" class="attachment">
-          <img src="../../../../assets/images/profile.jpg" class="attachment">
-          <img src="../../../../assets/images/profile.jpg" class="attachment">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <div fxLayout="column" class="drop-zone">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <img src="assets/icons/pdf.svg" class="icon-image">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <div class="file-name">
+                <!--{{this.file.name}}-->
+                attachment.pdf
+              </div>
+
+            </div>
+          </div>
+
+          <div fxLayout="column" class="drop-zone">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <img src="assets/icons/jpeg.svg" class="icon-image">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <div class="file-name">
+                <!--{{this.file.name}}-->
+                attachment2.jpg
+              </div>
+
+            </div>
+          </div>
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
         </div>
       </div>
     </div>

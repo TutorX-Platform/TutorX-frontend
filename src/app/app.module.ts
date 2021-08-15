@@ -71,6 +71,7 @@ import { ChatComponent } from './components/shared/chat/chat.component';
 import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
 import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
 import { CustomDropzonePreviewComponent } from './components/test/custom-dropzone-preview/custom-dropzone-preview.component';
+import { CountDownComponent } from './components/shared/count-down/count-down.component';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import { CustomDropzonePreviewComponent } from './components/test/custom-dropzon
     ChatComponent,
     DeleteDialogComponent,
     MessageDialogComponent,
-    CustomDropzonePreviewComponent
+    CustomDropzonePreviewComponent,
+    CountDownComponent
   ],
   imports: [
     BrowserModule,
