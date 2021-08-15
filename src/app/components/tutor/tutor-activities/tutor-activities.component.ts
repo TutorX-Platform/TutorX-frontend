@@ -23,6 +23,10 @@ export class TutorActivitiesComponent implements OnInit {
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
   allAskedQuestions: Questions[] = [];
+  assignedQuestions: Questions[] = [];
+  inProgressQuestions: Questions[] = [];
+  completedQuestions: Questions[] = [];
+  cancelledQuestions: Questions[] = [];
   uniqueKey = '';
   isScience = false;
   isMaths = false;
@@ -103,6 +107,31 @@ export class TutorActivitiesComponent implements OnInit {
 
   selectStatus(num: number) {
     this.selectedStatus = num;
+    this.askedQuestions = this.allAskedQuestions;
+    if (num === 0) {
+      this.askedQuestions = this.allAskedQuestions;
+    }
+    if (num === 1) {
+      this.assignedQuestions = [];
+      this.assignedQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.assigned))
+      this.askedQuestions = this.assignedQuestions;
+    }
+    if (num === 2) {
+      this.inProgressQuestions = [];
+      this.inProgressQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.in_progress))
+      console.log(this.inProgressQuestions.length)
+      this.askedQuestions = this.inProgressQuestions;
+    }
+    if (num === 3) {
+      this.completedQuestions = [];
+      this.completedQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.completed));
+      this.askedQuestions = this.completedQuestions;
+    }
+    if (num === 4) {
+      this.cancelledQuestions = [];
+      this.cancelledQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.cancelled));
+      this.askedQuestions = this.cancelledQuestions;
+    }
   }
 
   onFilterSelect(event: any) {

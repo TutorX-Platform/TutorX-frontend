@@ -82,6 +82,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     this.utilService.getTimeFromTimeAPI().subscribe(
       (res) => {
+        console.log(res);
         // @ts-ignore
         this.timeApi = res;
         console.log(this.timeApi)

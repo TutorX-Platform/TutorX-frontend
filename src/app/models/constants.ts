@@ -1,6 +1,6 @@
 export const fileUploadLimit = 30000 * 1000;
 export const backend_url = "https://tutorx-backend.herokuapp.com";
-export const time_url = "https://www.timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam";
+export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
 
 export const env_url = {
   heroku_url: 'https://tutorx-frontend.herokuapp.com/',
