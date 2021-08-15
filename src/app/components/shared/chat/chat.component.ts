@@ -58,6 +58,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   dummyProfPic = constants.dummy_profile_picture;
   isDetailedView = false;
   selectedPage = 1;
+  fileToUpload: File | null = null;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -216,4 +217,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onShowDetails(num: number){
     this.selectedPage = num;
   }
+
+  handleFileInput(event: any) {
+    console.log(event.target.files[0]);
+    this.fileToUpload = event.target.files[0];
+  }
+
 }

@@ -70,16 +70,17 @@
     </div>
   </div>
   <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
-    <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
+    <div style="width: 100%; padding: 8px 16px;" fxLayout="row" fxLayoutAlign="start center">
       <span matPrefix>
-        <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
-      <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-icon>search</mat-icon> &nbsp;&nbsp;
+      </span>
+      <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto" class="mobile-input" placeholder="Search">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}}
         </mat-option>
       </mat-autocomplete>
-    </mat-form-field>
+    </div>
     <div fxLayout="column">
       <div *ngFor="let q of askedQuestions">
         <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center" (click)="onViewChat(q.id)">

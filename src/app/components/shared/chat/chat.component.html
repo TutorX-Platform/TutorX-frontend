@@ -30,10 +30,10 @@
         </div>
         <mat-divider></mat-divider>
         <div fxLayout="row" fxLayoutGap="8px" class="links">
-          <img src="/assets/icons/text.svg">
-          <img src="/assets/icons/imoji.svg">
           <img src="/assets/icons/attach.svg" style="cursor: pointer">
-          <img src="/assets/icons/link.svg">
+          <div>
+            <input type="file" id="file" (change)="handleFileInput($event)">
+          </div>
         </div>
       </div>
       <!--Joined Message-->

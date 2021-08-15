@@ -10,7 +10,15 @@
         flex: 1 1 auto;
       } 
       min-height: 89vh;
-
+      .mobile-input{
+        width: 85%;
+        font: $body-base-default;
+        border: none;
+        background: #F6F7FB;
+      }
+      .mobile-input:focus{
+        outline: none;
+      };
       .mobile-question-container{        
         padding: 16px 24px;
         width: 100%;
