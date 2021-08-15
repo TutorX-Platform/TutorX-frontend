@@ -25,9 +25,9 @@ export class StudentQuestionsComponent implements OnInit {
   askedQuestions: Questions[] = [];
   allAskedQuestions: Questions[] = [];
   uniqueKey = '';
-  isScience = false;
+  isPhysics = false;
   isMaths = false;
-  isEnglish = false;
+  isManagement = false;
   isCS = false;
 
   isOpen = false;
@@ -206,32 +206,32 @@ export class StudentQuestionsComponent implements OnInit {
     let ask: Questions[] = [];
     let filteredQuestions: Questions[] = [];
 
-    if (value === constants.subjectCodes.maths) {
+    if (value === constants.subjectCodes.mathematics) {
       this.isMaths = !this.isMaths;
     }
-    if (value === constants.subjectCodes.science) {
-      this.isScience = !this.isScience;
+    if (value === constants.subjectCodes.physics) {
+      this.isPhysics = !this.isPhysics;
     }
-    if (value === constants.subjectCodes.english) {
-      this.isEnglish = !this.isEnglish;
+    if (value === constants.subjectCodes.management) {
+      this.isManagement = !this.isManagement;
     }
-    if (value === constants.subjectCodes.cs) {
+    if (value === constants.subjectCodes.computer_science) {
       this.isCS = !this.isCS;
     }
 
     if (this.isMaths) {
-      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.maths));
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.mathematics));
     }
-    if (this.isScience) {
-      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.science))
+    if (this.isPhysics) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.physics))
     }
     if (this.isCS) {
-      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.cs))
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.computer_science))
     }
-    if (this.isEnglish) {
-      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.english))
+    if (this.isManagement) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.management))
     }
-    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isScience && !this.isEnglish && !this.isCS && !this.isMaths) {
+    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isPhysics && !this.isManagement && !this.isCS && !this.isMaths) {
       this.askedQuestions = [];
       this.askedQuestions.push(...this.allAskedQuestions);
     } else {

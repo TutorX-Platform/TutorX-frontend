@@ -99,7 +99,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onSend() {
     // @ts-ignore
-    this.chatService.sendMessage(this.chatToken, this.message.value)
+    this.chatService.sendMessage(this.chatToken, this.message.value, 0)
     this.message.reset();
     this.isSendButtonDissabled = true;
   }
@@ -200,10 +200,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.location.back();
   }
 
-  onType(){
-    if(this.message.value !== ''){
+  onType() {
+    if (this.message.value !== '') {
       this.isSendButtonDissabled = false;
-    }else{
+    } else {
       this.isSendButtonDissabled = true;
     }
   }

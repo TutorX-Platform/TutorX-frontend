@@ -10,6 +10,7 @@ import {UtilService} from 'src/app/services/util-service.service';
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from '../progress-dialog/progress-dialog.component';
 import {Location} from "@angular/common";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -37,7 +38,6 @@ export class AddQuestionMobileComponent implements OnInit {
   files: File[] = [];
 
   subjectList: string[] = [];
-
   options: string[] = ['Maths', 'Science', 'English'];
 
   constructor(
