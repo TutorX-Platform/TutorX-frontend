@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Chat} from "../models/chat";
 import {ChatMsg} from "../models/chat-msg";
 import {StudentService} from "./student-service.service";
+import {UtilService} from "./util-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ChatServiceService {
   constructor(public angularFirestoreService: AngularFirestore,
               private auth: AuthService,
               private studentService: StudentService,
+              private utilService: UtilService,
               private router: Router) {
   }
 
@@ -24,8 +26,9 @@ export class ChatServiceService {
     })
   }
 
-  sendMessage(messageId: string, message: string) {
+  sendMessage(messageId: string, message: string, sortTime: number) {
     let data: ChatMsg = {
+      sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: false,
@@ -34,7 +37,7 @@ export class ChatServiceService {
       senderEmail: this.auth.student.email,
       senderId: this.auth.student.userId,
       sentBy: this.auth.student.firstName,
-      time: Date.now(),
+      time: Date.now()
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
   }
@@ -42,11 +45,11 @@ export class ChatServiceService {
   getMessages(messageId: string) {
     // @ts-ignore
     const questionRef = this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats, ref =>
-      ref.orderBy('time', 'desc'));
+      ref.orderBy('time', 'asc'));
     return questionRef;
   }
 
-  tutorJoinChat(chatId: string) {
+  tutorJoinChat(chatId: string, sortTime: number) {
     const joinTutor = {
       chatStatus: constants.chat_status.ongoing,
       tutorId: this.auth.student.userId,
@@ -54,6 +57,7 @@ export class ChatServiceService {
       tutorsCount: 1
     }
     let data: ChatMsg = {
+      sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
