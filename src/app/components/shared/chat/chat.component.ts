@@ -25,7 +25,7 @@ import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} 
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked{
+export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl('');
@@ -59,8 +59,7 @@ export class ChatComponent implements OnInit, AfterViewChecked{
 
   isTutor = false;
   deadLine = new Date();
-  // @ts-ignore
-  timeApi: TimeApi;
+  time: TimeApi = {status: "", time: 0};
 
   dummyProfPic = constants.dummy_profile_picture;
   isDetailedView = false;
@@ -100,23 +99,18 @@ export class ChatComponent implements OnInit, AfterViewChecked{
     }
 
     this.scrollToBottom();
-    this.utilService.getTimeFromTimeAPI().subscribe(
-      (res) => {
-        console.log(res);
-        // @ts-ignore
-        this.timeApi = res;
-        console.log(this.timeApi)
-      }
-    )
   }
 
 
-
   onSend() {
-    // @ts-ignore
-    this.chatService.sendMessage(this.chatToken, this.message.value, 0)
-    this.message.reset();
-    this.isSendButtonDissabled = true;
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+      // @ts-ignore
+      this.time = res;
+      // @ts-ignore
+      this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time);
+      this.message.reset();
+      this.isSendButtonDissabled = true;
+    });
   }
 
   scrollToBottom(): void {
@@ -238,7 +232,7 @@ export class ChatComponent implements OnInit, AfterViewChecked{
     this.fileToUpload = event.target.files[0];
   }
 
-  onReleaseQuestion(){
+  onReleaseQuestion() {
 
   }
 
@@ -247,6 +241,7 @@ export class ChatComponent implements OnInit, AfterViewChecked{
       this.isTutor = true;
     }
   }
+
   uploadAttachment() {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(() => {

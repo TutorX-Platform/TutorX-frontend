@@ -16,6 +16,7 @@ import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
 import {ChatMsg} from "../../../models/chat-msg";
+import {TimeApi} from "../../../models/time-api";
 
 @Component({
   selector: 'app-add-question',
@@ -59,6 +60,7 @@ export class AddQuestionComponent implements OnInit {
   subject = '';
   dueDateTime = '';
   description = '';
+  time: TimeApi = {status: "", time: 0};
 
 
   constructor(
@@ -185,7 +187,11 @@ export class AddQuestionComponent implements OnInit {
       (res) => {
         if (this.addQuestionForm.valid) {
           if (this.authService.isLoggedIn) {
-            this.askQuestion(this.dialogRef, progressDialog);
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.time = res;
+              this.askQuestion(this.dialogRef, progressDialog, this.time.time);
+            })
           } else {
             this.askEmail(progressDialog);
           }
@@ -230,7 +236,7 @@ export class AddQuestionComponent implements OnInit {
     this.files.splice(removeItem, 1);
   }
 
-  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
+  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number) {
     const question: Questions = {
       subCategory: this.addQuestionForm.value.subCategory,
       tutorImage: "",
@@ -240,7 +246,7 @@ export class AddQuestionComponent implements OnInit {
       studentEmail: this.authService.student.email,
       attachments: this.uploadedFiles,
       chatId: this.questionId,
-      createdDate: new Date().getTime(),
+      createdDate: time,
       description: this.addQuestionForm.value.description,
       dueDate: this.addQuestionForm.value.dueDateTime,
       fee: 0,
@@ -299,7 +305,14 @@ export class AddQuestionComponent implements OnInit {
         this.authService.student.email = result.value.email;
       }, () => {
       }, () => {
-        this.askQuestion(this.dialogRef, progressDialog);
+        this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+
+        })
+        this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+          // @ts-ignore
+          this.time = res;
+          this.askQuestion(this.dialogRef, progressDialog, this.time.time);
+        })
         this.sendAknowledgementEmail(this.authService.student.email);
         this.authService.student.firstName = '';
         this.authService.student.email = '';
