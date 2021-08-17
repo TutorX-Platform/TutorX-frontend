@@ -80,7 +80,7 @@ export class TestChatComponent implements OnInit {
   onJoinTutor() {
     if (this.authService.isLoggedIn) {
       // @ts-ignore
-      this.chatService.tutorJoinChat(this.chatToken);
+      // this.chatService.tutorJoinChat(this.chatToken);
     } else {
       alert("not logged in")
     }

@@ -165,8 +165,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           );
         } else {
           progressDialog.close();
-          alert("you dont have permissions to view this chat");
-          this.router.navigate([constants.routes.home])
+          // alert("you dont have permissions to view this chat");
+          // this.router.navigate([constants.routes.home])
         }
       }, () => {
         progressDialog.close();
@@ -233,6 +233,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onReleaseQuestion() {
+    const data = {
+      tutorName: "",
+      tutorImage: null,
+      tutorId: "",
+      status: constants.questionStatus.open,
+    }
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+      // @ts-ignore
+      this.time = res;
+      this.chatService.tutorLeftChat(this.chatToken, this.time.time);
+      this.questionService.releaseQuestionByTutor(this.chatToken, data);
+    })
 
   }
 
