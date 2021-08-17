@@ -37,7 +37,7 @@ export class ChatServiceService {
       senderEmail: this.auth.student.email,
       senderId: this.auth.student.userId,
       sentBy: this.auth.student.firstName,
-      time: Date.now()
+      time: sortTime
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
   }
