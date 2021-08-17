@@ -5,6 +5,14 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .chat{
+    input[type="file"]{
+      display: none;
+    }
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
     min-height: 100vh;
     background: #F6F7FB;
     .header-wrap{
@@ -237,6 +245,7 @@
       overflow-y: auto;
       background: #F6F7FB;
       .chat-container{
+
         .typing-box{
           position: fixed;
           bottom: 0px;
