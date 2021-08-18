@@ -66,7 +66,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: Date.now()
+      time: sortTime,
     }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
@@ -76,6 +76,36 @@ export class ChatServiceService {
   getChat(chatId: string) {
     const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
     return chatRef;
+  }
+
+  tutorLeftChat(chatId: string, time: number) {
+    let data: ChatMsg = {
+      sort: time,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} left the chat`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time,
+    }
+
+    const leaveTutor = {
+      chatStatus: constants.chat_status.openForTutors,
+      tutorId: '',
+      tutorJoinedTime: time,
+      tutorsCount: 1
+    }
+
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(leaveTutor);
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data).then(
+      (v) => {
+        this.router.navigate([constants.routes.turor], {skipLocationChange: true})
+      }
+    );
+
   }
 
 

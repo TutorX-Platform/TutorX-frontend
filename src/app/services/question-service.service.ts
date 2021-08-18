@@ -9,6 +9,7 @@ import {ChatServiceService} from "./chat-service.service";
 import {MailService} from "./mail.service";
 import {Question} from "../models/question";
 import {MatDialogRef} from "@angular/material/dialog";
+import {TimeApi} from "../models/time-api";
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,11 @@ export class QuestionService {
 
   // @ts-ignore
   question: Questions;
+  time: TimeApi = {status: "", time: 0}
 
   constructor(private angularFirestoreService: AngularFirestore,
               private chatService: ChatServiceService,
+              private utilService: UtilService,
               private mailService: MailService) {
   }
 
@@ -61,7 +64,11 @@ export class QuestionService {
       tutorImage: tutorImage
     }
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
-      this.chatService.tutorJoinChat(questionId, 0);
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        // @ts-ignore
+        this.time = res;
+        this.chatService.tutorJoinChat(questionId, this.time.time);
+      })
       this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
       dialogRef.close();
     })
@@ -71,6 +78,10 @@ export class QuestionService {
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       console.log(v);
     })
+  }
+
+  releaseQuestionByTutor(questionId: string, data: any) {
+    this.updateQuestion(questionId, data);
   }
 
 }

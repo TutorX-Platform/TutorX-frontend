@@ -48,14 +48,14 @@ export class QuestionCardComponent implements OnInit {
       this.isTutor = true;
     }
     this.role = this.studentService.currentStudent.role;
-    if(this.isAutoOpen){
+    if (this.isAutoOpen) {
       this.onViewDetails();
     }
   }
 
   onViewChat() {
     console.log(this.id);
-    this.router.navigate([constants.routes.chat, this.id])
+    this.router.navigate([constants.routes.chat, this.id], {skipLocationChange: true})
   }
 
   onViewDetails() {
@@ -71,7 +71,7 @@ export class QuestionCardComponent implements OnInit {
       images: this.images,
       role: this.role,
       isTutor: true,
-      studentEmail:this.studentEmail
+      studentEmail: this.studentEmail
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);
