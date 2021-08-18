@@ -74,19 +74,19 @@
       <ngx-slick-carousel class="carousel"
                           #slickModal="slick-carousel"
                           [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+        <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
           <div fxLayout="column" fxLayoutAlign="center center">
             <div class="box-client b4">
-              <div class="feedback-title">{{feedback[selectedNumber].title2}}</div>
-              <div class="feedback-body">{{feedback[selectedNumber].content2}}</div>
+              <div class="feedback-title">{{feedback.title}}</div>
+              <div class="feedback-body">{{feedback.content}}</div>
             </div>
             <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
               <div>
-                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
+                <img [src]="feedback.image" alt="Avatar" class="avatar">
               </div>
               <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                <div class="profile-details-name">{{feedback[selectedNumber].name1}}</div>
-                <div class="profile-details-designation">{{feedback[selectedNumber].designation1}}</div>
+                <div class="profile-details-name">{{feedback.name}}</div>
+                <div class="profile-details-designation">{{feedback.designation}}</div>
               </div>
             </div>
           </div>
@@ -94,37 +94,6 @@
       </ngx-slick-carousel>
     </div>
 </div>
-
-<!-- client-mobile -->
-<!-- <div class="client-container-mobile" fxLayout="column" fxShow="true" fxHide.gt-xs="true">
-    <div class="title-container" fxLayout="row" fxLayoutAlign="center center">
-        <h4>Our clients speak</h4>
-    </div>
-    <div class="feedback-container" fxLayout="row" fxLayoutAlign="center center">
-        <div class="containerx" fxLayout="column" fxLayoutAlign="center center">
-            <div class="rectangle">
-                <p>{{feedback[selectedNumber].title1}}</p>
-                <p>{{feedback[selectedNumber].content1}}</p>
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px">
-                <img src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                <div fxLayout="column" fxLayoutAlign="center center">
-                    <p>{{feedback[selectedNumber].name1}}</p>
-                    <p>{{feedback[selectedNumber].designation1}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="button-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <mat-icon *ngIf="selectedNumber == 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 0" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(0)">radio_button_unchecked</mat-icon>
-        <mat-icon *ngIf="selectedNumber == 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 1" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(1)">radio_button_unchecked</mat-icon>
-        <mat-icon *ngIf="selectedNumber == 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">circle</mat-icon>
-        <mat-icon *ngIf="selectedNumber != 2" aria-hidden="false" aria-label="Example home icon" class="icon" (click)="change(2)">radio_button_unchecked</mat-icon>
-    </div>
-</div> -->
 
  <!--Process-web-->
 <div [ngClass.gt-xs]="'process-web'"
@@ -176,32 +145,32 @@
 <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
     <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
         <img src="../../../../assets/icons/quoteMark.svg" alt="">
-        <div class="text-container" style="text-align: start !important;">
-            We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
+        <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
+          {{tutorFeedbacks[feedBackNum].description}}
         </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">
-        <div *ngFor="let tutorFeedback of tutorFeedbacks">
+        <div *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
             <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
-                <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                <div *ngIf="tutorFeedback == feedBackNum">
+                <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+                <div *ngIf="i == feedBackNum">
+                    <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                        <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+                    </div>
                     <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
+                      <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
                     </div>
                     <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div>
-                    <div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 4" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div><div *ngIf="feedBackNum == 5" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
+                      <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
+                    </div><div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                       <div class="avatar-name">{{tutorFeedbacks[3].name}}</div>
+                       <div class="avatar-designation">{{tutorFeedbacks[3].subject}}</div>
+                    </div><div *ngIf="feedBackNum == 4" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                      <div class="avatar-name">{{tutorFeedbacks[4].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[4].subject}}</div>
                     </div>
                 </div>
             </div>
@@ -213,28 +182,28 @@
 <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
     <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
         <img src="../../../../assets/icons/quoteMark.svg" alt="">
-        <div class="text-container" style="text-align: start !important;">
-            We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the product concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.
-        </div>
+      <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
+        {{tutorFeedbacks[feedBackNum].description}}
+      </div>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-        <div *ngFor="let tutorFeedback of tutorFeedbacks2">
+        <div *ngFor="let tutorFeedback of tutorFeedbacks2; let i = index">
             <div class="avatar-container" fxLayout="row">
-                <img (click)="select(tutorFeedback)" src="{{feedback[selectedNumber].image1}}" alt="Avatar" class="avatar">
-                <div *ngIf="tutorFeedback == feedBackNum">
-                    <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div>
-                    <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div>
-                    <div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">James Cameron</div>
-                        <div class="avatar-designation">CEO WTF</div>
-                    </div>
+              <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+              <div *ngIf="i == feedBackNum">
+                <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
                 </div>
+                <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
+                </div>
+                <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
+                </div>
+              </div>
             </div>
         </div>
     </div>

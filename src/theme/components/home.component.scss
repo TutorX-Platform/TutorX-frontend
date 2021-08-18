@@ -492,7 +492,8 @@
             }
 
             .avatar-designation{
-                font: $body-base-default;               
+                font: $body-base-default;
+              color: #5B6469;
             }
            }
             
@@ -531,6 +532,7 @@
               } 
               .avatar-container{
                 margin-top: 16px;
+                cursor: pointer;
                 // margin-left: 60px;
               .avatar {
                   vertical-align: middle;

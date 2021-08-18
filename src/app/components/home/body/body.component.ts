@@ -12,15 +12,6 @@ import * as constants from '../../../models/constants';
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss'],
   animations: [
-    // trigger('carouselAnimation', [
-    //   transition('void => *', [
-    //     style({ opacity: 0 }),
-    //     animate('300ms', style({ opacity: 1 }))
-    //   ]),
-    //   transition('* => void', [
-    //     animate('300ms', style({ opacity: 0 }))
-    //   ])
-    // ])
     trigger('client', [
       state('show', style({
         opacity: 1
@@ -38,8 +29,8 @@ import * as constants from '../../../models/constants';
       state('hide', style({
         opacity: 0
       })),
-      transition('show => hide', animate('400ms ease-out')),
-      transition('hide => show', animate('400ms ease-in'))
+      transition('show => hide', animate('500ms ease-out')),
+      transition('hide => show', animate('500ms ease-in'))
     ]),
 
   ]
@@ -54,7 +45,7 @@ export class BodyComponent implements OnInit {
   }
 
   selectedNumber = 0;
-  feedBackNum = 3;
+  feedBackNum = 2;
   forward = false;
   backward = false;
 
@@ -130,13 +121,6 @@ export class BodyComponent implements OnInit {
     }
   }
 
-  slides = [
-    {img: "https://via.placeholder.com/600.png/09f/fff"},
-    {img: "https://via.placeholder.com/600.png/021/fff"},
-    {img: "https://via.placeholder.com/600.png/321/fff"},
-    {img: "https://via.placeholder.com/600.png/422/fff"},
-    {img: "https://via.placeholder.com/600.png/654/fff"}
-  ];
   slideConfig = {
     slidesToShow: 2,
     dots: true,
@@ -193,48 +177,104 @@ export class BodyComponent implements OnInit {
     }
   ]
 
-  feedback = [
+  feedbacks = [
     {
-      title1: "Incredible Experience",
-      title2: "Dependable, Responsive, Professional Partner",
-      content1: "We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.",
-      content2: "Fermin Apps has collaborated with Landify team for several projects such as Photo Sharing Apps and Custom Social Networking Apps. The experience has been pleasant, professional and exceeding our expectations. The team is always thinking beyond the current tasks & helps us formulate a vision and possibilities for future.",
-      name1: "Jane Cooper",
-      name2: "Jane Cooper",
-      designation1: "CEO, ABC Corporation",
-      designation2: "CEO, ABC Corporation",
-      image1: "../../../../assets/images/profile.jpg",
-      image2: "../../../../assets/images/profile.jpg"
+      title: "Incredible Experience",
+      content: "I'm really impressed and grateful to \"tutetory.com\" for helping me to score higher for my python assignment series. These tutors have a good subject mastery and are responsive for my texts anytime",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
     },
     {
-      title1: "Very Helpfull",
-      title2: "Highly Appreceated",
-      content1: "We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.",
-      content2: "Fermin Apps has collaborated with Landify team for several projects such as Photo Sharing Apps and Custom Social Networking Apps. The experience has been pleasant, professional and exceeding our expectations. The team is always thinking beyond the current tasks & helps us formulate a vision and possibilities for future.",
-      name1: "Jane Cooper",
-      name2: "Jane Cooper",
-      designation1: "CEO, ABC Corporation",
-      designation2: "CEO, ABC Corporation",
-      image1: "../../../../assets/images/profile.jpg",
-      image2: "../../../../assets/images/profile.jpg"
+      title: "Incredible Experience",
+      content: "One of the most outstanding tutoring sites I had worked with. Genius tutors with perfect answers.So excited to get connected again.",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
     },
     {
-      title1: "Incredible Experience",
-      title2: "Dependable, Responsive, Professional Partner",
-      content1: "We had an incredible experience working with Landify and were impressed they made such a big difference in only three weeks. Our team is so grateful for the wonderful improvements they made and their ability to get familiar with the concept so quickly. It acted as a catalyst to take our design to the next level and get more eyes on our product.",
-      content2: "Fermin Apps has collaborated with Landify team for several projects such as Photo Sharing Apps and Custom Social Networking Apps. The experience has been pleasant, professional and exceeding our expectations. The team is always thinking beyond the current tasks & helps us formulate a vision and possibilities for future.",
-      name1: "Jane Cooper",
-      name2: "Jane Cooper",
-      designation1: "CEO, ABC Corporation",
-      designation2: "CEO, ABC Corporation",
-      image1: "../../../../assets/images/profile.jpg",
-      image2: "../../../../assets/images/profile.jpg"
-    }
+      title: "Incredible Experience",
+      content: "[Tutor name]  is  a true genius.. He always finished the work far earlier than the deadline. Could complete my semester with flying colours",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
+    },
+    {
+      title: "Incredible Experience",
+      content: "I was originally skeptical because my deadline was coming up and the codes were not working, but this tutor will go above and beyond to make sure the assignment specifications are met",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
+    },
+    {
+      title: "Incredible Experience",
+      content: "Recommend  tutetory.com to anyone who is struggling for Matlab problems. They have a genius group of tutors. I could get the help of few and all are world-class. Never hesitate to come back . Cheers!",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
+    },
+    {
+      title: "Incredible Experience",
+      content: "Best tutoring site I came across. I worked with A and X. Both were highly concerning about timely submissions.I could get all clarifications whenever i asked .No any cost ,they were always available .Really appreciate the hard work. Most trusted tutoring  site",
+      name: "Jane Cooper",
+      designation: "CEO, ABC Corporation",
+      image: "../../../../assets/images/profile.jpg",
+    },
   ]
 
-  tutorFeedbacks = [1, 2, 3, 4, 5]
+  tutorFeedbacks = [
+    {
+      description: "A computer science PhD candidate and a former software engineer specialized in Databases, Algorithms, Blockchain and Machine Learning and programming languages like Python, Java, C and JavaScript",
+      image: "assets/images/profile.jpg",
+      name: "ExpertCSTutor",
+      subject: "Computer Science"
+    },
+    {
+      description: "BSc. Electronic and Electrical Engineering degree holder having 8+ experience in the telecommunication space. An expert in Mathematics, Physics, IP networking, Digital Electronics and Telecommunication",
+      image: "assets/images/profile.jpg",
+      name: "Captain",
+      subject: "Computer Science"
+    },
+    {
+      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow",
+      image: "assets/images/profile.jpg",
+      name: "Mechanic",
+      subject: "Mechanical Engineering"
+    },
+    {
+      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow",
+      image: "assets/images/profile.jpg",
+      name: "Mechanic",
+      subject: "Mechanical Engineering"
+    },
+    {
+      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow",
+      image: "assets/images/profile.jpg",
+      name: "Mechanic",
+      subject: "Mechanical Engineering"
+    },
+  ]
 
-  tutorFeedbacks2 = [1, 2, 3]
+  tutorFeedbacks2 = [
+    {
+      description: "A computer science PhD candidate and a former software engineer specialized in Databases, Algorithms, Blockchain and Machine Learning and programming languages like Python, Java, C and JavaScript",
+      image: "assets/images/profile.jpg",
+      name: "ExpertCSTutor",
+      subject: "Computer Science"
+    },
+    {
+      description: "BSc. Electronic and Electrical Engineering degree holder having 8+ experience in the telecommunication space. An expert in Mathematics, Physics, IP networking, Digital Electronics and Telecommunication",
+      image: "assets/images/profile.jpg",
+      name: "Captain",
+      subject: "Computer Science"
+    },
+    {
+      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow",
+      image: "assets/images/profile.jpg",
+      name: "Mechanic",
+      subject: "Mechanical Engineering"
+    }
+  ]
 
   change(num: number) {
     console.log(this.forward);
