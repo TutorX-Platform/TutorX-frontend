@@ -42,10 +42,13 @@
         </div>
         <mat-divider></mat-divider>
         <div fxLayout="row" fxLayoutGap="8px" class="links">
-          <img src="/assets/icons/attach.svg" style="cursor: pointer">
           <div>
-            <input *ngIf="!uploadReady" type="file" id="file" (change)="handleFileInput($event)">
-            <button *ngIf="uploadReady" (click)="uploadAttachment()">Upload</button>
+            <label class="custom-file-upload">
+              <img src="/assets/icons/attach.svg" style="cursor: pointer">
+              <input *ngIf="!uploadReady" type="file" id="file" (change)="handleFileInput($event)">
+              <button *ngIf="uploadReady" (click)="uploadAttachment()">Upload</button>
+            </label>
+
           </div>
         </div>
       </div>
@@ -118,7 +121,7 @@
           <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
               <div
-                *ngIf="message.senderAvatar !== '' || message.senderAvatar !== undefined || message.senderAvatar !== null; else else_container">
+                *ngIf="message.senderAvatar !== null; else else_container">
                 <img [src]="message.senderAvatar" class="avatar-x">
               </div>
               <ng-template #else_container>
