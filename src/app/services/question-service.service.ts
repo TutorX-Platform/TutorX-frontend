@@ -84,4 +84,9 @@ export class QuestionService {
     this.updateQuestion(questionId, data);
   }
 
+  deleteQuestionByStudent(questionId: string) {
+    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).delete();
+    this.angularFirestoreService.collection(constants.collections.chats).doc(questionId).delete();
+  }
+
 }

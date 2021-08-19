@@ -92,7 +92,7 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
-          <button mat-flat-button color="warn" *ngIf="role !== 'tutor'">Delete this question</button>
+          <button mat-flat-button color="warn" *ngIf="role !== 'tutor'" (click)="onDeleteQuestion()">Delete this question</button>
         </div>
 
       </div>

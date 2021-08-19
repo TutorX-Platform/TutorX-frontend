@@ -18,6 +18,14 @@ export const backend_api_resource = {
   time: '/time/',
 }
 
+export const messageTypes = {
+  success: "success",
+  confirmation: "confirmation",
+  warningInfo: "warning-info",
+  info: "info",
+  warning: "warning",
+}
+
 export const chat_status = {
   openForTutors: 'open',
   ongoing: 'ongoing',

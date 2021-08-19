@@ -17,6 +17,9 @@ import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
 import {ChatMsg} from "../../../models/chat-msg";
 import {TimeApi} from "../../../models/time-api";
+import construct = Reflect.construct;
+import {MessageDialogComponent} from "../message-dialog/message-dialog.component";
+import * as systemMessages from '../../../models/system-messages';
 
 @Component({
   selector: 'app-add-question',
@@ -120,8 +123,6 @@ export class AddQuestionComponent implements OnInit {
         this.patchValuesToForm();
       }
     }
-
-
   }
 
   patchValues() {
@@ -165,7 +166,6 @@ export class AddQuestionComponent implements OnInit {
         this.subOptions = constants.physicsSubjects;
       }
       if (this.selectedSubject === constants.subjectCodes.computer_science) {
-        console.log('hi');
         this.subOptions = constants.csSubjects;
         console.log(this.subOptions);
       }
@@ -197,7 +197,6 @@ export class AddQuestionComponent implements OnInit {
           }
         } else {
           progressDialog.close();
-          alert("form invalid")
         }
       }
     )
@@ -215,18 +214,31 @@ export class AddQuestionComponent implements OnInit {
         if (event.addedFiles.length < 2) {
           if (event.addedFiles.length > 2) {
             progressDialog.close();
-            alert("Please select one at a time");
+            // alert("Please select one at a time");
+            this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
+              (res) => {
+                console.log(res);
+              }
+            )
           } else {
             this.files.push(event.addedFiles[0]);
             this.uploadFile(event.addedFiles[0], progressDialog);
           }
         } else {
           progressDialog.close();
-          alert('please upload one by one');
+          this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
+            (res) => {
+              console.log(res);
+            }
+          )
         }
       })
     } else {
-      alert("You can upload upto 30MB !!");
+      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe(
+        (res) => {
+          console.log(res);
+        }
+      )
     }
   }
 
@@ -269,6 +281,11 @@ export class AddQuestionComponent implements OnInit {
       this.createChat(this.questionId, this.authService.student.userId);
       dialogRef.close(true);
       progressDialog.close();
+      this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
+        (option) => {
+          console.log(option);
+        }
+      )
     });
 
   }
@@ -284,9 +301,18 @@ export class AddQuestionComponent implements OnInit {
         (res) => {
           this.uploadedFiles.push(res);
         }, () => {
-          console.log("upload error");
+          this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
+            (res) => {
+              console.log(res);
+            }
+          )
         }, () => {
           progressDialog.close();
+          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
+            (res) => {
+              console.log(res);
+            }
+          )
           console.log(this.uploadedFiles);
         }
       )
@@ -356,6 +382,22 @@ export class AddQuestionComponent implements OnInit {
       this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
     } else {
       alert('you are not a tutor');
+    }
+  }
+
+  onDeleteQuestion() {
+    // @ts-ignore
+    console.log(this.data.status);
+    // @ts-ignore
+    if (this.data.status === constants.questionStatus.open) {
+      this.utilService.openDialog(systemMessages.questionMessages.deleteConfirmation, systemMessages.questionMessages.deleteConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+        (res) => {
+          if(res === true){
+            this.dialogRef.close();
+            this.questionService.deleteQuestionByStudent(this.questionId);
+          }
+        }
+      )
     }
   }
 
