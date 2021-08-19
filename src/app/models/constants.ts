@@ -1,9 +1,9 @@
 export const fileUploadLimit = 30000 * 1000;
-export const backend_url = "http://167.71.24.227";
+export const backend_url = "https://sandunapi.tk";
 export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
 
 export const env_url = {
-  heroku_url: 'http://167.71.24.227/',
+  heroku_url: 'https://sandunapi.tk/',
   local_url: 'http://localhost:4200/',
   prod_url: ''
 }
@@ -13,9 +13,9 @@ export const dummyChatId = 'Q936d4c46-3a30-4f17-b2ce-aa53d8c3af37';
 export const dummy_profile_picture = 'assets/images/default_profile.png';
 
 export const backend_api_resource = {
-  payment: '/payment',
-  email: '/email',
-  time: '/time',
+  payment: '/payment/',
+  email: '/email/',
+  time: '/time/',
 }
 
 export const chat_status = {
