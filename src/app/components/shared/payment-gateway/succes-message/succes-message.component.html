@@ -1,0 +1,69 @@
+<div class="success-message" fxLayout="column" fxLayoutAlign="start center">
+  <div *ngIf="isSuccess" class="message">
+    Payment Successfull
+  </div>
+  <div *ngIf="!isSuccess" class="message">
+    Payment Unsuccessfull
+  </div>
+  <div [ngClass.gt-sm]="'success-details'" [ngClass.lt-md]="{'success-details success-details--mobile': true}" *ngIf="isSuccess">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="42px">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <img src="assets/icons/printer.svg">
+        <div class="reciept">
+          Print this reciept
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <img src="assets/icons/envelope.svg">
+        <div class="reciept">
+          Print this reciept
+        </div>
+      </div>
+    </div>
+    <div class="received-container">
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="24px">
+          <img src="assets/icons/success.svg">
+          <div fxLayout="column" fxLayoutAlign="start start" class="received" fxLayoutGap="2px">
+            <div class="received-text">
+              Payment Received
+            </div>
+            <div class="received-number">
+              #212123131311212
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <img src="assets/icons/visa.svg">
+              <div class="visa">
+                Paid by VISA
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="amount">
+          LKR 1,980.00
+        </div>
+      </div>
+    </div>
+    <div class="payment-details" fxLayout="column" fxLayoutAlign="start start">
+      <div class="title">
+        Payment Details
+      </div>
+      <div class="address-name">
+        Jonas Jr. Smith
+      </div>
+      <div class="address">
+        No 3/5, 8th Lane, Kalapaluwawa
+      </div>
+      <div class="address">
+        Rajagiriya
+      </div>
+      <div class="address">
+        jonas@gmail.com
+      </div>
+      <div class="address">
+        +94 0 72 0000 000 000
+      </div>
+    </div>
+  </div>
+  <button [ngClass.gt-sm]="'go-to-chat'" [ngClass.lt-md]="{'go-to-chat go-to-chat--mobile': true}" mat-flat-button>Go to chat</button>
+</div>

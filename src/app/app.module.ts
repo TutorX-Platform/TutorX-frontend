@@ -72,6 +72,9 @@ import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-
 import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
 import { CustomDropzonePreviewComponent } from './components/test/custom-dropzone-preview/custom-dropzone-preview.component';
 import { CountDownComponent } from './components/shared/count-down/count-down.component';
+import { SelectMethodComponent } from './components/shared/payment-gateway/select-method/select-method.component';
+import { CardDetailsComponent } from './components/shared/payment-gateway/card-details/card-details.component';
+import { SuccesMessageComponent } from './components/shared/payment-gateway/succes-message/succes-message.component';
 
 
 @NgModule({
@@ -105,7 +108,10 @@ import { CountDownComponent } from './components/shared/count-down/count-down.co
     DeleteDialogComponent,
     MessageDialogComponent,
     CustomDropzonePreviewComponent,
-    CountDownComponent
+    CountDownComponent,
+    SelectMethodComponent,
+    CardDetailsComponent,
+    SuccesMessageComponent
   ],
   imports: [
     BrowserModule,
