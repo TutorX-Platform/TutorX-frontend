@@ -16,6 +16,8 @@ import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mo
 import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
 import {TutorComponent} from './components/tutor/tutor.component';
 import {ChatComponent} from "./components/shared/chat/chat.component";
+import {CardDetailsComponent} from "./components/shared/payment-gateway/card-details/card-details.component";
+import {SuccesMessageComponent} from "./components/shared/payment-gateway/succes-message/succes-message.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInMobileComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
+  {path: 'temp', component: SuccesMessageComponent},
   {
     path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: redirectUnauthorizedToHome}
