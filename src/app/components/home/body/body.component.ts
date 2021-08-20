@@ -54,24 +54,24 @@ export class BodyComponent implements OnInit {
 
   process = [
     {
-      title: "Upload your homework",
-      subtitle: "Turn your idea from concept to MVP"
+      title: "Upload your problem",
+      subtitle: "Get help in more than 30 subjects"
     },
     {
       title: "Talk to a tutor",
-      subtitle: "Sketch out the product to align the user needs"
+      subtitle: "Chat with one of the expert in the field"
     },
     {
       title: "Get a quote",
-      subtitle: "Convert the designs into a live application"
+      subtitle: "Negotiate and decide the payment"
     },
     {
       title: "Make the payment",
-      subtitle: "Launching the application to the market"
+      subtitle: "Using your preffered payment method"
     },
     {
       title: "Get the assistance",
-      subtitle: "Launching the application to the market"
+      subtitle: "Get your work done and explanations"
     },
   ];
   customOptions!: OwlOptions;
@@ -194,7 +194,7 @@ export class BodyComponent implements OnInit {
     },
     {
       title: "Fast Delivery",
-      content: "Captain is a true genius. He always finished the work far earlier than the deadline. Could complete my semester with flying colours. I never leave any feedback, but this is going to be the only exception.  The tutor literary saved my life. ",
+      content: "Tutor MathMind is a true genius. He always finished the work far earlier than the deadline. Could complete my semester with flying colours. I never leave any feedback, but this is going to be the only exception.  The tutor literary saved my life. ",
       name: "Flynn S.",
       designation: "Belfast",
       image: "../../../../assets/images/default_profile.png",
@@ -237,8 +237,8 @@ export class BodyComponent implements OnInit {
     },
     {
       description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having a sound academic knowledge. Currently I am working as a IP Core Network Engineer in a leading telecommunication company. I provide tutoring on subjects such as IP Networking, Electrical and Power, Telecommunications, Digital Electronics, Mathematics and Physics.",
-      image: "assets/images/captain.jpg",
-      name: "Captain",
+      image: "assets/images/mathmind.jpg",
+      name: "MathMind",
       subject: "Electronic Engineering"
     },
     {
@@ -263,15 +263,15 @@ export class BodyComponent implements OnInit {
       subject: "Computer Science"
     },
     {
-      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow",
-      image: "assets/images/profile.jpg",
+      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow.................................................................",
+      image: "assets/images/mechanic.jpg",
       name: "Mechanic",
       subject: "Mechanical Engineering"
     },
     {
       description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having a sound academic knowledge. Currently I am working as a IP Core Network Engineer in a leading telecommunication company. I provide tutoring on subjects such as IP Networking, Electrical and Power, Telecommunications, Digital Electronics, Mathematics and Physics.",
-      image: "assets/images/captain.jpg",
-      name: "Captain",
+      image: "assets/images/mathmind.jpg",
+      name: "MathMind",
       subject: "Electronic Engineering"
     }
   ]
