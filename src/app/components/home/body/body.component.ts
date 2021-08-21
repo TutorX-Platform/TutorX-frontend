@@ -151,6 +151,11 @@ export class BodyComponent implements OnInit {
 
   details = [
     {
+      title: "Expert Tutors",
+      description: "With highest academic qualifications",
+      imageUrl: "../../../../assets/icons/04.svg"
+    },
+    {
       title: "User Friendly",
       description: "Responsive and easy to navigate interfaces",
       imageUrl: "../../../../assets/icons/02.svg"
@@ -160,11 +165,7 @@ export class BodyComponent implements OnInit {
       description: "We break it down for you",
       imageUrl: "../../../../assets/icons/03.svg"
     },
-    {
-      title: "Clean and Correct Answers",
-      description: "We provide accurate and original answers",
-      imageUrl: "../../../../assets/icons/04.svg"
-    },
+
     {
       title: "Fast Response",
       description: "Instant responses from the tutors 24/7",
