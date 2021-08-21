@@ -71,7 +71,7 @@ export class StudentComponent implements OnInit {
   onSignOut() {
     this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
     this.authService.onSignOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['/'],{skipLocationChange: true});
   }
 
 

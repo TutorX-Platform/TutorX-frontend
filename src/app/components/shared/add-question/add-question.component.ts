@@ -250,6 +250,7 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number) {
     const question: Questions = {
+      sort: this.time.time,
       subCategory: this.addQuestionForm.value.subCategory,
       tutorImage: "",
       tutorName: "",
@@ -372,7 +373,14 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onAccept() {
-    this.acceptQuestion();
+    this.utilService.openDialog(systemMessages.questionTitles.acceptChatConfirmation, systemMessages.questionMessages.acceptChatConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res === true) {
+          this.acceptQuestion();
+          this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
+        }
+      }
+    )
   }
 
   acceptQuestion() {
@@ -392,9 +400,17 @@ export class AddQuestionComponent implements OnInit {
     if (this.data.status === constants.questionStatus.open) {
       this.utilService.openDialog(systemMessages.questionMessages.deleteConfirmation, systemMessages.questionMessages.deleteConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
         (res) => {
-          if(res === true){
+          if (res === true) {
             this.dialogRef.close();
             this.questionService.deleteQuestionByStudent(this.questionId);
+          }
+        }
+      )
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.deleteFail, systemMessages.questionMessages.deleteFail, constants.messageTypes.warning).afterClosed().subscribe(
+        (res) => {
+          if (res === true) {
+            this.dialogRef.close();
           }
         }
       )

@@ -147,7 +147,7 @@ export class AuthService {
     // @ts-ignore
     return this.angularFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate([constants.routes.student_q_pool]);
+        this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
       })
   }
 
@@ -156,7 +156,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut().then(() => {
       this.isLoggedIn = false;
       localStorage.removeItem(constants.localStorageKeys.user);
-      this.router.navigate([constants.routes.sign_in]);
+      this.router.navigate([constants.routes.sign_in],{skipLocationChange: true});
     })
   }
 

@@ -76,7 +76,9 @@ export const routes = {
   student_q_pool: '/student',
   turor: '/tutor',
   testChat: '/test-chat',
-  chat: '/chat'
+  chat: '/chat',
+  pay: '/pay',
+  paySuccess:'/pay-success'
 }
 
 export const localStorageKeys = {

@@ -247,7 +247,7 @@ export class StudentQuestionsComponent implements OnInit {
 
   onViewChat(id: any)   {
     console.log(id);
-    this.router.navigate([constants.routes.chat, id])
+    this.router.navigate([constants.routes.chat, id],{skipLocationChange: true})
   }
 
 }

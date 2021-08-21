@@ -11,6 +11,7 @@ import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from '../progress-dialog/progress-dialog.component';
 import {Location} from "@angular/common";
 import {Observable} from "rxjs";
+import {TimeApi} from "../../../models/time-api";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -36,6 +37,8 @@ export class AddQuestionMobileComponent implements OnInit {
   askedQuestions = [];
   studentUniqueKey = '';
   files: File[] = [];
+  // @ts-ignore
+  time: TimeApi;
 
   subjectList: string[] = [];
   options: string[] = ['Maths', 'Science', 'English'];
@@ -120,38 +123,43 @@ export class AddQuestionMobileComponent implements OnInit {
 
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
-    const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
-    const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
-    const question: Questions = {
-      subCategory: this.addQuestionForm.value.subCategory,
-      tutorImage: '',
-      tutorName: '',
-      studentName: "",
-      studentUniqueKey: this.studentUniqueKey,
-      studentEmail: "",
-      attachments: this.uploadedFiles,
-      chatId: "",
-      createdDate: Date.now(),
-      description: this.addQuestionForm.value.description,
-      dueDate: this.addQuestionForm.value.dueDateTime,
-      fee: 0,
-      id: questionId,
-      isPaid: false,
-      isRefundRequested: false,
-      questionSalt: "not required",
-      questionTitle: this.addQuestionForm.value.questionTitle,
-      status: constants.questionStatus.open,
-      studentId: this.authService.student.userId,
-      subjectCategory: this.addQuestionForm.value.subject,
-      tutorId: "",
-      uniqueId: questionId,
-      uniqueLink: ""
-    }
-    this.questionService.saveQuestion(question, questionId).then((v) => {
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
-      this.askedQuestions.push(questionId);
-      dialogRef.close();
-      progressDialog.close();
+      this.time = res;
+      const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
+      const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
+      const question: Questions = {
+        sort: this.time.time,
+        subCategory: this.addQuestionForm.value.subCategory,
+        tutorImage: '',
+        tutorName: '',
+        studentName: "",
+        studentUniqueKey: this.studentUniqueKey,
+        studentEmail: "",
+        attachments: this.uploadedFiles,
+        chatId: "",
+        createdDate: this.time.time,
+        description: this.addQuestionForm.value.description,
+        dueDate: this.addQuestionForm.value.dueDateTime,
+        fee: 0,
+        id: questionId,
+        isPaid: false,
+        isRefundRequested: false,
+        questionSalt: "not required",
+        questionTitle: this.addQuestionForm.value.questionTitle,
+        status: constants.questionStatus.open,
+        studentId: this.authService.student.userId,
+        subjectCategory: this.addQuestionForm.value.subject,
+        tutorId: "",
+        uniqueId: questionId,
+        uniqueLink: ""
+      }
+      this.questionService.saveQuestion(question, questionId).then((v) => {
+        // @ts-ignore
+        this.askedQuestions.push(questionId);
+        dialogRef.close();
+        progressDialog.close();
+      });
     });
   }
 

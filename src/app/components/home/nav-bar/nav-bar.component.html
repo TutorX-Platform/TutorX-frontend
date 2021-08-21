@@ -10,8 +10,8 @@
              fxLayoutAlign="center center">
           <img src="../../../../assets/icons/logo-temp.svg">
           <div class="names" fxLayout="column">
-            <div class="name">TutorX</div>
-            <div class="des">Work smart , Not hard</div>
+            <div class="name">Tutetory</div>
+            <div class="des">Work smart, Not hard</div>
           </div>
         </div>
         <span class="example-spacer"></span>
@@ -20,15 +20,18 @@
             <div [ngClass]=" true ? 'links links--selected' : 'links'">Home</div>
           </a>
           <a href="#" mat-button>
-            <div [ngClass]=" false ? 'links links--selected' : 'links'">Tutor</div>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">Features</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">Testimonial</div>
+          </a>
+          <a href="#" mat-button>
+            <div [ngClass]=" false ? 'links links--selected' : 'links'">Tutors</div>
           </a>
           <a href="#" mat-button>
             <div [ngClass]=" false ? 'links links--selected' : 'links'">About</div>
           </a>
-          <a href="#" mat-button>
-            <div [ngClass]=" false ? 'links links--selected' : 'links'">FAQ</div>
-          </a>
-          <a href="#" mat-button>
+          <a href="https://forms.gle/8UxTEDquQt675PZU9" target="_blank" mat-button>
             <div [ngClass]=" false ? 'links links--selected' : 'links'">Become a tutor</div>
           </a>
         </div>
@@ -59,12 +62,13 @@
             </div>
             <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item routerLink="/student" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+              <button (click)="onProfile()" mat-menu-item routerLink="/student" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
                       fxLayoutGap="8px">
                 <mat-icon class="material-icons-outlined">account_circle</mat-icon>
                 <div>View Profile</div>
               </button>
-              <button mat-menu-item routerLink="/tutor" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+              <button (click)="onTutor()" *ngIf=" studentService.isTutor" mat-menu-item routerLink="/tutor"
+                      class="drop-down" fxLayout="row" fxLayoutAlign="start center"
                       fxLayoutGap="8px">
                 <mat-icon class="material-icons-outlined">account_circle</mat-icon>
                 <div>Go to Tutor</div>

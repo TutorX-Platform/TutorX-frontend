@@ -25,7 +25,7 @@
     <div fxLayout="row" fxLayoutAlign="space-around center">
         <div class="details-container">
             <div class="get-help-mobile-title">Get Instant Help</div>
-            <div class="get-help-mobile-subtitle">for our student comunity</div>
+            <div class="get-help-mobile-subtitle">For university/college, high school and middle school students</div>
             <div class="get-help-mobile-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
             <button mat-flat-button class="get-help-mobile-button" routerLink="/add-question">
                 Get help
@@ -40,14 +40,14 @@
 [ngClass.lt-sm]="{'features-container-mobile': true}" >
     <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
         <div class="heading-container-web" >
-            <div class="features-title">Expert Tutors</div>
-            <div class="features-description">Our tutors are with the highest academic qualifications across a wide range of disciplines. Will provide professional guidance and feedback on subject matters.</div>
+            <div class="features-title">Why Tutetory ?</div>
+            <div class="features-description">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
         </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
         <div class="heading-container-mobile">
-            <div class="features-mobile-heading-title">Expert Tutors</div>
-            <div class="features-mobile-heading-subtitle">Our tutors are with the highest academic qualifications across a wide range of disciplines. Will provide professional guidance and feedback on subject matters.</div>
+            <div class="features-mobile-heading-title">Why Tutetory ?</div>
+            <div class="features-mobile-heading-subtitle">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px" fxLayoutAlign="center start" class="card-container">
@@ -99,7 +99,7 @@
 <div [ngClass.gt-xs]="'process-web'"
 [ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
     <div class="process-title">
-        The process we follow
+        How we roll?
     </div>
     <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
         <div *ngFor="let num of process" fxFlex="20%">
@@ -212,7 +212,7 @@
 <div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
     <div fxLayout="column">
         <div class="banner-title">Get Instant Help</div>
-        <div class="banner-sub-title">For our student community</div>
+        <div class="banner-sub-title">For university/college, high school and middle school students</div>
     </div>
     <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
         Get help
@@ -232,7 +232,7 @@
         <div class="links">FAQ</div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
-        <div class="copy-right">© 2020 . All rights reserved</div>
+        <div class="copy-right">© 2021 . All rights reserved</div>
     </div>
 </div>
 </div>

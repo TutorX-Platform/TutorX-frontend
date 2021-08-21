@@ -11,6 +11,7 @@ import {Observable} from "rxjs";
 export class StudentService {
   uid: string = '';
   abc = new Observable();
+  isTutor = false;
   currentStudent: Student = {
     email: "",
     firstName: "",

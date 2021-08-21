@@ -143,7 +143,7 @@ export class TutorQuestionsComponent implements OnInit {
           (res) => {
             // @ts-ignore
             this.askedQuestions = res;
-            this.askedQuestions = this.sortQuestion();
+            this.askedQuestions = this.sortQuestion().reverse();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
@@ -160,7 +160,7 @@ export class TutorQuestionsComponent implements OnInit {
   sortQuestion() {
     return this.askedQuestions.sort(function (a, b) {
       // @ts-ignore
-      return a.createdDate - b.createdDate;
+      return a.sort - b.sort;
     });
   }
 

@@ -65,5 +65,5 @@
       </div>
     </div>
   </div>
-  <button [ngClass.gt-sm]="'go-to-chat'" [ngClass.lt-md]="{'go-to-chat go-to-chat--mobile': true}" mat-flat-button>Go to chat</button>
+  <button (click)="onChat()" [ngClass.gt-sm]="'go-to-chat'" [ngClass.lt-md]="{'go-to-chat go-to-chat--mobile': true}" mat-flat-button>Go to chat</button>
 </div>
