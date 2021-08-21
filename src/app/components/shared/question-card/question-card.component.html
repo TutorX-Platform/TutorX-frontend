@@ -11,7 +11,7 @@
       <div class="c-chip c-chip--subjects invert-false">{{subjects}}</div>
     </div>
     <div fxLayout="row" class="date">
-      Due date &nbsp; {{dueDate | date:'yyyy/MM/dd h:mm:ss a'}}
+      Due date &nbsp; {{dueDate.toDate() | date:'yyyy-MM-dd h:mm:ss'}}
     </div>
   </mat-card-title>
   <mat-card-content>

@@ -18,6 +18,7 @@ import {TutorComponent} from './components/tutor/tutor.component';
 import {ChatComponent} from "./components/shared/chat/chat.component";
 import {CardDetailsComponent} from "./components/shared/payment-gateway/card-details/card-details.component";
 import {SuccesMessageComponent} from "./components/shared/payment-gateway/succes-message/succes-message.component";
+import {StudentQuestionsComponent} from "./components/student/student-questions/student-questions.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -38,7 +39,22 @@ const routes: Routes = [
     path: 'student',
     component: StudentComponent,
     canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToHome}
+    data: {authGuardPipe: redirectUnauthorizedToHome},
+    children: [
+      {
+        path: 'questions',
+        component: StudentQuestionsComponent
+      },
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      },
+      {
+        path: '',
+        redirectTo: 'student/questions',
+        pathMatch: 'full'
+      }
+    ]
   },
   {path: '**', component: NavBarComponent}
 ];

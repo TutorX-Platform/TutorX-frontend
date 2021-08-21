@@ -13,7 +13,7 @@
       padding: 6px 12px;
       cursor: pointer;
     }
-    min-height: 100vh;
+    min-height: 89.7vh;
     background: #F6F7FB;
     .header-wrap{
       padding: 0px 32px 16px 32px;
@@ -33,18 +33,18 @@
     }
     .chat-main-container{
       width: 100%;
-
       .chat-container{
         width: 65%;
-        padding: 24px 10px 140px 24px;
-        height: 57vh;
-        overflow-y: auto;
+        height: 72.5vh;
+        padding: 24px 10px 0px 24px;
+        .chat-message-area{
+          height: 50vh;
+          overflow-y: auto;
+        }
         .typing-box{
-          position: fixed;
-          bottom: 24px;
-          left: 24px;
-          right: 37%;
-          z-index: 100;
+          position: relative;
+          margin-bottom: 24px;
+          width: 100%;
           background: white;
           .typer{
             padding: 16px;
@@ -85,7 +85,7 @@
           }
         }
         .message-box{
-          width: 50%;
+          max-width: 50%;
           background: #7F6EF0;
           border-radius: 8px;
           padding: 16px;
@@ -160,6 +160,9 @@
           border-radius: 4px;
           color: white;
           font: $body-caption-default;
+          &--dissabled{
+            background: #9AA2A7;
+          }
         }
         .amount{
           font: $body-small-bold;
