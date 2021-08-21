@@ -19,6 +19,7 @@ import {UtilService} from "../../../services/util-service.service";
 import {TimeApi} from "../../../models/time-api";
 import {Questions} from "../../../models/questions";
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from "angularfire2/storage";
+import {CardDetailsComponent} from "../payment-gateway/card-details/card-details.component";
 
 @Component({
   selector: 'app-chat',
@@ -90,9 +91,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.chatToken = map.get('id');
       }
     );
-
     this.getChatDetails();
-
     console.log(this.studentService.currentStudent)
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
@@ -180,12 +179,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
   onPay() {
+    // this.router.navigate([constants.routes.pay, this.chatToken, "100"], {skipLocationChange: true})
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "433px";
+    dialogConfig.width = "80%";
     dialogConfig.data = this.chatToken;
     // dialogConfig.height = "650px";
-    this.dialog.open(DummyComponent, dialogConfig);
+    this.dialog.open(CardDetailsComponent, dialogConfig);
 
     this.dialog.afterAllClosed.subscribe(
       (res) => {

@@ -22,4 +22,5 @@ export interface Questions {
   studentName: string;
   tutorName: string;
   tutorImage: string;
+  sort: number;
 }

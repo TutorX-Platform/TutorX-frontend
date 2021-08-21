@@ -40,13 +40,10 @@ export class DummyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.loading = false;
     this.createForm();
-
     this.stripeService.elements(this.elementsOptions).subscribe(element => {
       this.elements = element;
-
       if (!this.card) {
         this.card = this.elements.create('card', {
           iconStyle: 'solid',

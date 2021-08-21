@@ -1,7 +1,19 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import * as constants from "../../../../models/constants";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {filter} from "rxjs/operators";
+import {ActivatedRoute, Router} from "@angular/router";
+import {QuestionService} from "../../../../services/question-service.service";
+import {Questions} from "../../../../models/questions";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {DummyComponent} from "../../../test/dummy/dummy.component";
+// @ts-ignore
+import {Elements, Element as StripeElement, ElementsOptions, StripeService} from "ngx-stripe";
+import {AuthService} from "../../../../services/auth.service";
+import {DummyService} from "../../../../services/dummy.service";
+import {ProgressDialogComponent} from "../../progress-dialog/progress-dialog.component";
+import {UtilService} from "../../../../services/util-service.service";
+import * as systemMessage from '../../../../models/system-messages';
 
 @Component({
   selector: 'app-card-details',
@@ -13,6 +25,12 @@ export class CardDetailsComponent implements OnInit {
   logo = constants.logo;
   //@ts-ignore
   form: FormGroup;
+  // @ts-ignore
+  questionId: string;
+  // @ts-ignore
+  amount: string;
+  // @ts-ignore
+  question: Questions;
 
   //@ts-ignore
   @ViewChild("first") firstElement: ElementRef;
@@ -26,10 +44,36 @@ export class CardDetailsComponent implements OnInit {
   @ViewChild("cvv") cvvElement: ElementRef;
   //@ts-ignore
   @ViewChild("expiry") expiryElement: ElementRef;
+  elementsOptions: ElementsOptions = {
+    locale: 'en'
+  }
+  // @ts-ignore
+  elements: Elements;
+  // @ts-ignore
+  card: StripeElement;
+  paymentStatus: any;
+  stripeData: any;
+  submitted: any;
+  loading: any;
+  // @ts-ignore
+  stripeForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private questionService: QuestionService,
+              private authService: AuthService,
+              private dummyService: DummyService,
+              private dialog: MatDialog,
+              private stripeService: StripeService,
+              public router: Router,
+              private utilService: UtilService,
+              private dialogRef: MatDialogRef<CardDetailsComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: string
+  ) {
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.createForm();
     this.form = this.fb.group({
       first: ["", [Validators.required, Validators.maxLength(4)]],
       second: ["", [Validators.required, Validators.maxLength(4)]],
@@ -67,6 +111,126 @@ export class CardDetailsComponent implements OnInit {
     // this.form.get('expiry').valueChanges
     //   .pipe(filter((value: number) => value.toString().length === 4))
     //   .subscribe(() => this.expiryElement.nativeElement.blur());
+
+    this.questionService.getQuestionById(this.data).valueChanges().subscribe(
+      (res) => {
+        if (res) {
+          this.question = res;
+        }
+      }
+    )
+
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDialog.afterOpened().subscribe(
+      (res) => {
+        this.stripeService.elements(this.elementsOptions).subscribe(element => {
+          this.elements = element;
+          if (!this.card) {
+            this.card = this.elements.create('card', {
+              hidePostalCode: true,
+              iconStyle: 'solid',
+              style: {
+                base: {
+                  iconColor: '#666EE8',
+                  color: '#31325F',
+                  lineHeight: '40px',
+                  fontWeight: 300,
+                  fontSize: '18px',
+                  '::placeholder': {
+                    color: '#CFD7E0'
+                  }
+                }
+              }
+            });
+            this.card.mount('#card-element');
+          }
+          progressDialog.close();
+        })
+      }
+    )
+  }
+
+  getCardToken() {
+    (<any>window).stripe.card.createToken({
+      number: 424242424242,
+      exp_month: 22,
+      exp_year: 2026,
+      cvc: 444
+    }, (status: number, response: any) => {
+      console.log(response)
+    })
+  }
+
+  createForm() {
+    this.stripeForm = this.fb.group({
+      name: [''],
+      amount: [''],
+    })
+  }
+
+  payNow() {
+    console.log(this.card.StripeElement);
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDialog.afterOpened().subscribe(
+      (res) => {
+        this.submitted = true;
+        this.loading = true;
+        this.stripeData = this.stripeForm.value;
+        this.stripeService.createToken(this.card, this.stripeForm.value.name).subscribe(
+          (result) => {
+            if (result.token) {
+              const product = {
+                name: "sandun question",
+                price: 1000,
+                email: this.authService.student.email,
+              }
+              this.stripeData['product'] = product;
+              this.stripeData['token'] = result.token;
+              this.dummyService.pay(this.stripeData).subscribe(
+                (res) => {
+                  console.log(res);
+                  // @ts-ignore
+                  if (res['status'] === 200) {
+                    this.updateQuestionAsPaid();
+                    this.loading = false;
+                    this.submitted = false;
+                    // @ts-ignore
+                    this.paymentStatus = res['status'];
+                    progressDialog.close();
+                    this.dialogRef.close();
+                    this.router.navigate([constants.routes.paySuccess], {skipLocationChange: true});
+                  } else {
+                    console.log("err");
+                    this.dialog.closeAll();
+                    this.dialogRef.close();
+                    this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
+                    console.log(res);
+                  }
+                }
+              )
+            } else {
+              this.dialogRef.close();
+              progressDialog.close();
+              // @ts-ignore
+              this.utilService.openDialog(result.error?.message, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
+              console.log('result.token err');
+            }
+          }
+        )
+      }
+    );
+  }
+
+  updateQuestionAsPaid() {
+    const data = {
+      isPaid: true,
+      status: constants.questionStatus.in_progress,
+    }
+    this.questionService.updateQuestion(this.data, data);
+  }
+
+  onCancel() {
+    // this.getCardToken();
   }
 
 }

@@ -55,7 +55,7 @@ export class SignUpMobileComponent implements OnInit {
                 console.log(res);
               }
             );
-            this.router.navigate([constants.routes.student_q_pool]);
+            this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
           }
         )
       });

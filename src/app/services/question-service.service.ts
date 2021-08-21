@@ -28,7 +28,7 @@ export class QuestionService {
 
   getQuestionById(questionId: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId);
+    const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId);
     return questionRef;
 
   }

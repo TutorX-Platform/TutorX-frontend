@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
               }
             );
             this.dialogRef.close();
-            this.router.navigate([constants.routes.student_q_pool]);
+            this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
           }
         )
       });
@@ -71,5 +71,5 @@ export class SignUpComponent implements OnInit {
       }
     )
   }
-  
+
 }

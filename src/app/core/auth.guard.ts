@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     console.log(this.authService.getAuthenticated());
     if (this.authService.getAuthenticated() === null) {
       console.log("fal")
-      this.router.navigate(['/home'])
+      this.router.navigate(['/home'],{skipLocationChange: true})
       return false;
     } else {
       return true;

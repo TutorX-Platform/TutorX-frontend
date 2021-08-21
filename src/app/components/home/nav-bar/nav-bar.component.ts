@@ -8,7 +8,7 @@ import {SignUpComponent} from '../../auth/sign-up/sign-up.component';
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -49,7 +49,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getLoggedUser(progressDailog);
       }
     )
-    console.log(new Date().getUTCDate())
+    console.log(this.authService.student);
   }
 
   ngAfterViewInit(): void {
@@ -85,7 +85,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.page = 2;
   }
 
-  onHome(){
+  onHome() {
     this.page = 0;
   }
 
@@ -102,6 +102,15 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  onTutor() {
+    this.router.navigate([constants.routes.turor], {skipLocationChange: true})
+  }
+
+  onProfile() {
+    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
+
+  }
+
   getLoggedUser(progressDialog: MatDialogRef<any>) {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
@@ -109,6 +118,10 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         if (res) {
           // @ts-ignore
           this.studentService.currentStudent = res;
+          if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+            console.log('2222222222222222222');
+            this.studentService.isTutor = true;
+          }
         }
         progressDialog.close();
       }, () => {

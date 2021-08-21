@@ -1,5 +1,6 @@
 <div class="card-details" fxLayout="column" fxLayoutAlign="center center">
-  <form [formGroup]="form" [ngClass.gt-sm]="'input-card'" [ngClass.lt-md]="{'input-card input-card--mobile': true}" fxLayout="column">
+  <form [formGroup]="form" [ngClass.gt-sm]="'input-card'" [ngClass.lt-md]="{'input-card input-card--mobile': true}"
+        fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <img [src]="logo">
       <div fxLayout="column" fxLayoutAlign="center end" class="header">
@@ -7,53 +8,65 @@
         <div class="amount">$ 1,200.00</div>
       </div>
     </div>
-    <div class="input-container" fxLayout="column" fxLayoutGap="16px">
-      <div>
-        <div class="lable">
-          Card Number
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">
-            <input matInput type="number" placeholder="1111" formControlName="first" onKeyPress="if(this.value.length==4) return false;" #first>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">
-            <input matInput type="number" placeholder="2222" formControlName="second" onKeyPress="if(this.value.length==4) return false;" #second>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">
-            <input matInput type="number" placeholder="2222" formControlName="third" onKeyPress="if(this.value.length==4) return false;" #third>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">
-            <input matInput type="number" placeholder="2222" formControlName="fourth" onKeyPress="if(this.value.length==4) return false;" #fourth>
-          </mat-form-field>
-        </div>
-      </div>
-      <div>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="field-container">
-            <div class="lable">
-              CVV
-            </div>
-            <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
-              <input matInput type="number" placeholder="123" formControlName="cvv" onKeyPress="if(this.value.length==3) return false;" #cvv>
-            </mat-form-field>
-          </div>
-          <div class="field-container">
-            <div class="lable">
-              Card Expiry
-            </div>
-            <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
-              <input matInput type="number" placeholder="12/22" onKeyPress="if(this.value.length==4) return false;" #expiry>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <!--    TODO please add some space here-->
+    <div id="card-element"></div>
+
+    <!--    <div class="input-container" fxLayout="column" fxLayoutGap="16px">-->
+    <!--      <div>-->
+    <!--        <div class="lable">-->
+    <!--          Card Number-->
+    <!--        </div>-->
+    <!--        <div fxLayout="row" fxLayoutAlign="space-between center">-->
+    <!--          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">-->
+    <!--            <input matInput type="number" placeholder="1111" formControlName="first"-->
+    <!--                   onKeyPress="if(this.value.length==4) return false;" #first>-->
+    <!--          </mat-form-field>-->
+    <!--          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">-->
+    <!--            <input matInput type="number" placeholder="2222" formControlName="second"-->
+    <!--                   onKeyPress="if(this.value.length==4) return false;" #second>-->
+    <!--          </mat-form-field>-->
+    <!--          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">-->
+    <!--            <input matInput type="number" placeholder="2222" formControlName="third"-->
+    <!--                   onKeyPress="if(this.value.length==4) return false;" #third>-->
+    <!--          </mat-form-field>-->
+    <!--          <mat-form-field appearance="outline" class="my-form-field" style="width: 23%;">-->
+    <!--            <input matInput type="number" placeholder="2222" formControlName="fourth"-->
+    <!--                   onKeyPress="if(this.value.length==4) return false;" #fourth>-->
+    <!--          </mat-form-field>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div>-->
+    <!--        <div fxLayout="row" fxLayoutAlign="space-between center">-->
+    <!--          <div class="field-container">-->
+    <!--            <div class="lable">-->
+    <!--              CVV-->
+    <!--            </div>-->
+    <!--            <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">-->
+    <!--              <input matInput type="number" placeholder="123" formControlName="cvv"-->
+    <!--                     onKeyPress="if(this.value.length==3) return false;" #cvv>-->
+    <!--            </mat-form-field>-->
+    <!--          </div>-->
+    <!--          <div class="field-container">-->
+    <!--            <div class="lable">-->
+    <!--              Card Expiry-->
+    <!--            </div>-->
+    <!--            <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">-->
+    <!--              <input matInput type="number" placeholder="12/22" onKeyPress="if(this.value.length==4) return false;"-->
+    <!--                     #expiry>-->
+    <!--            </mat-form-field>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="divi"></div>
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <button mat-stroked-button [ngClass.gt-sm]="'buttonz'" [ngClass.lt-md]="{'buttonz-mobile': true}">
+      <button (click)="onCancel()" mat-stroked-button [ngClass.gt-sm]="'buttonz'"
+              [ngClass.lt-md]="{'buttonz-mobile': true}">
         Cancel
       </button>
-      <button mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'" [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">
+      <button (click)="payNow()" mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'"
+              [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">
         Pay now
       </button>
     </div>
