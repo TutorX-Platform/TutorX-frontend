@@ -33,11 +33,38 @@
     <div class="chat-container">
       <div class="chat-message-area">
         <div *ngFor="let message of chatMessages">
-          <div *ngIf="message.isAttachment">
-            <div class="message-box">
-              {{message.message}}
+          <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div class="message-box">
+                {{message.message}}
+              </div>
             </div>
           </div>
+          <div *ngIf="message.isAttachment && message.senderId !== authService.student.userId">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+              <div
+                *ngIf="message.senderAvatar !== null; else else_container">
+                <img [src]="message.senderAvatar" class="avatar-x">
+              </div>
+              <ng-template #else_container>
+                <img [src]="dummyProfPic" class="avatar-x">
+              </ng-template>
+              <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
+                <div class="user-name">
+                  {{message.senderName}}
+                </div>
+                <div class="message-box message-box--other-user-message">
+                  {{message.message}}
+                </div>
+              </div>
+            </div>
+            <!--            <div class="time">Todat at 9.00 AM</div>-->
+          </div>
+          <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+          <!--            {{message.message}}-->
+          <!--          </div>-->
+        </div>
           <div *ngIf=" !message.isAttachment &&message.isTutorJoinMessage" class="joined-message">
             <div class="line"></div>
             <div class="user-name">{{message.message}} &nbsp;</div>
