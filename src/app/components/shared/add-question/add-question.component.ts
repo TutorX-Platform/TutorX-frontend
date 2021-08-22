@@ -61,8 +61,10 @@ export class AddQuestionComponent implements OnInit {
   isFormDisabled = false;
 
   subject = '';
+  subjects = '';
   dueDateTime = '';
   description = '';
+  subCategory = '';
   time: TimeApi = {status: "", time: 0};
 
   attachments: File[] = [];
@@ -131,13 +133,15 @@ export class AddQuestionComponent implements OnInit {
 
   patchValues() {
     // @ts-ignore
-    this.subject = this.data.subjects;
+    this.subjects = this.data.subjects;
     // @ts-ignore
     this.dueDateTime = this.data.dueDate.toDate();
     // @ts-ignore
     this.description = this.data.description;
     // @ts-ignore
     this.attachments = this.data.images;
+    // @ts-ignore
+    this.subCategory = this.data.subCategory;
   }
 
   patchValuesToForm() {
@@ -150,6 +154,8 @@ export class AddQuestionComponent implements OnInit {
       questionTitle: this.data.title,
       // @ts-ignore
       subject: this._filter(this.data.subjects),
+      // @ts-ignore
+      subCategory: this._subfilter(this.data.subCategory),
       // @ts-ignore
       dueDateTime: this.data.dueDate.toDate(),
       // @ts-ignore

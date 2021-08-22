@@ -19,6 +19,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public title: string = '';
   @Input() public status: string = '';
   @Input() public subjects: string = '';
+  @Input() public subCategory: string = '';
   @Input() public dueDate: any = new Date;
   @Input() public descriptionTitle: string = 'Hi Tutors';
   @Input() public description: string = '';
@@ -72,6 +73,7 @@ export class QuestionCardComponent implements OnInit {
       title: this.title,
       status: this.status,
       subjects: this.subjects,
+      subCategory: this.subCategory,
       dueDate: this.dueDate,
       description: this.description,
       images: this.images,

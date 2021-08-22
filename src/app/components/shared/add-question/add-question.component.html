@@ -3,7 +3,8 @@
   <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
     <div  mat-dialog-title fxLayout="column" class="top-container" fxLayoutAlign="center center">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
-        <div class="header-title" *ngIf="role !== 'tutor'">Add Question</div>
+        <div class="header-title" *ngIf="role !== 'tutor' && subjects===''">Add Question</div>
+        <div class="header-title" *ngIf="role !== 'tutor' && subjects!==''">Edit/View Question</div>
         <div class="header-title" *ngIf="role === 'tutor'">{{questionTitle}}</div>
         <div fxLayout="row" fxLayoutGap="10px" class="button-container" *ngIf="role !== 'tutor'">
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
@@ -113,13 +114,13 @@
             <div fxLayout="column" class="search-container">
               <div class="label">Subject</div>
               <div class="tutor-view-container">
-                {{subject}}
+                {{subjects}}
               </div>
             </div>
             <div fxLayout="column" class="date-container">
               <div class="label">Subject</div>
               <div class="tutor-view-container">
-                {{subject}}
+                {{subCategory}}
               </div>
             </div>
             <div fxLayout="column" class="date-container">
