@@ -65,6 +65,8 @@ export class AddQuestionComponent implements OnInit {
   description = '';
   time: TimeApi = {status: "", time: 0};
 
+  attachments: File[] = [];
+
 
   constructor(
     private dialog: MatDialog,
@@ -129,31 +131,35 @@ export class AddQuestionComponent implements OnInit {
 
   patchValues() {
     // @ts-ignore
-    this.subject = this.data.subjects[0];
+    this.subject = this.data.subjects;
     // @ts-ignore
     this.dueDateTime = this.data.dueDate.toDate();
     // @ts-ignore
     this.description = this.data.description;
-
+    // @ts-ignore
+    this.attachments = this.data.images;
   }
 
   patchValuesToForm() {
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
-    // this.files.push(this.data.images);
+    this.files = this.data.images;
     this.addQuestionForm.patchValue({
       // @ts-ignore
       questionTitle: this.data.title,
       // @ts-ignore
-      subject: this._filter(this.data.subjects[0]),
+      subject: this._filter(this.data.subjects),
       // @ts-ignore
-      dueDateTime: this.data.dueDate,
+      dueDateTime: this.data.dueDate.toDate(),
       // @ts-ignore
-      description: this.data.description
+      description: this.data.description,
     })
   }
 
+  onOpen(name: string){
+
+  }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     if (this.options.filter(option => option.toLowerCase().includes(filterValue)).length === 1) {

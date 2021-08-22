@@ -19,6 +19,9 @@ import {ChatComponent} from "./components/shared/chat/chat.component";
 import {CardDetailsComponent} from "./components/shared/payment-gateway/card-details/card-details.component";
 import {SuccesMessageComponent} from "./components/shared/payment-gateway/succes-message/succes-message.component";
 import {StudentQuestionsComponent} from "./components/student/student-questions/student-questions.component";
+import {TutorQuestionsComponent} from "./components/tutor/tutor-questions/tutor-questions.component";
+import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
+import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tutor-activities.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -32,7 +35,31 @@ const routes: Routes = [
   {path: 'pay-success', component: SuccesMessageComponent},
   {
     path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToHome}
+    data: {authGuardPipe: redirectUnauthorizedToHome},
+    children: [
+      {
+        path: 'dashboard',
+        component: TutorDashboardComponent
+      },
+      {
+        path: 'questions',
+        component: TutorQuestionsComponent
+      },
+
+      {
+        path: 'activities',
+        component: TutorActivitiesComponent
+      },
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      },
+      {
+        path: '',
+        redirectTo: 'tutor/dashboard',
+        pathMatch: 'full'
+      }
+    ]
   },
   {path: 'add-question', component: AddQuestionMobileComponent},
   {path: 'test-chat/:id', component: TestChatComponent},

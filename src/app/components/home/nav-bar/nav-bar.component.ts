@@ -103,12 +103,11 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onTutor() {
-    this.router.navigate([constants.routes.turor], {skipLocationChange: true})
+    this.router.navigate([constants.routes.turor.concat(constants.routes.questions)], {skipLocationChange: true})
   }
 
   onProfile() {
     this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
-
   }
 
   getLoggedUser(progressDialog: MatDialogRef<any>) {

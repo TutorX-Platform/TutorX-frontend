@@ -57,7 +57,7 @@ export class StudentComponent implements OnInit {
 
   changePage(num: number) {
     this.selectedPage = num;
-    this.router.navigate(['/questions'])
+    this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
   }
 
   addQuestion() {

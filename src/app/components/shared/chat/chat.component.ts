@@ -185,7 +185,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // this.router.navigate([constants.routes.pay, this.chatToken, "100"], {skipLocationChange: true})
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "80%";
+    dialogConfig.width = "70%";
     dialogConfig.data = this.chatToken;
     // dialogConfig.height = "650px";
     this.dialog.open(CardDetailsComponent, dialogConfig);
@@ -208,7 +208,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onNavigateBack() {
-    this.location.back();
+    if(this.isTutor){
+      this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
+    }else{
+      this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+    }
   }
 
   onType() {

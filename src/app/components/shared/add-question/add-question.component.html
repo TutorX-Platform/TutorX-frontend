@@ -41,7 +41,7 @@
                 <div class="label">Subject</div>
                 <mat-form-field appearance="outline" class="my-form-field">
                   <span matPrefix>
-                  <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
+                  <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
                   <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
                   <mat-autocomplete #auto="matAutocomplete">
                       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -54,7 +54,7 @@
                 <div class="label">Sub-category</div>
                 <mat-form-field appearance="outline" class="my-form-field">
                   <span matPrefix>
-                  <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
+                  <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
                   <input matInput type="text-12" formControlName="subCategory" [matAutocomplete]="auto1">
                   <mat-autocomplete #auto1="matAutocomplete">
                     <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
@@ -117,6 +117,12 @@
               </div>
             </div>
             <div fxLayout="column" class="date-container">
+              <div class="label">Subject</div>
+              <div class="tutor-view-container">
+                {{subject}}
+              </div>
+            </div>
+            <div fxLayout="column" class="date-container">
               <div class="label">Due date</div>
               <div class="tutor-view-container">
                 {{dueDateTime | date:'yyyy/MM/dd h:mm:ss a' }}
@@ -130,19 +136,18 @@
           </div>
         </div>
         <div class="attachment-viewer" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="24px grid">
-          <div *ngFor="let attachment of [1,2,3,4,5,6]">
-            <div fxLayout="column" class="drop-zone">
+          <div *ngFor="let attachment of attachments; let i = index" >
+            <a fxLayout="column" class="drop-zone" href="{{attachment.toString()}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
-                <img src="assets/icons/pdf.svg" class="icon-image">
+                <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.toString().includes('pdf')">
+                <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="!attachment.toString().includes('pdf')">
               </div>
               <div fxLayout="row" fxLayoutAlign="center center">
-                <div class="file-name">
-                  <!--{{this.file.name}}-->
-                  attachment.pdf
+                <div class="file-name" >
+                  attachmet{{i+1}}
                 </div>
-
               </div>
-            </div>
+            </a>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
