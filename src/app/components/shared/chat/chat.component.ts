@@ -59,6 +59,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   isTutor = false;
   deadLine = new Date();
+  dueDateTime = new Date();
+  dueDateTimeControll = new FormControl('');
   time: TimeApi = {status: "", time: 0};
 
   dummyProfPic = constants.dummy_profile_picture;
@@ -211,6 +213,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       (res) => {
         // @ts-ignore
         this.questionService.question = res;
+        // @ts-ignore
+        this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         console.log(res);
       }
     )
