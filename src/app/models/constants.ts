@@ -73,12 +73,13 @@ export const routes = {
   home: "",
   dummy: 'dummy',
   sign_in: '/sign-in',
-  student_q_pool: '/student',
+  student_q_pool: '/student/questions',
+  student: '/student/',
   turor: '/tutor',
   testChat: '/test-chat',
   chat: '/chat',
   pay: '/pay',
-  paySuccess:'/pay-success'
+  paySuccess: '/pay-success'
 }
 
 export const localStorageKeys = {
