@@ -33,17 +33,24 @@
     <div class="chat-container">
       <div class="chat-message-area">
         <div *ngFor="let message of chatMessages">
-          <div *ngIf="message.isTutorJoinMessage" class="joined-message">
+          <div *ngIf="message.isAttachment">
+            <div class="message-box">
+              {{message.message}}
+            </div>
+          </div>
+          <div *ngIf=" !message.isAttachment &&message.isTutorJoinMessage" class="joined-message">
             <div class="line"></div>
             <div class="user-name">{{message.message}} &nbsp;</div>
             <!--          <div class="text">joined the chat</div>-->
             <div class="line"></div>
           </div>
-          <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+          <div
+            *ngIf=" !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
             <div fxLayout="row" fxLayoutAlign="end center">
               <div class="message-box">
                 {{message.message}}
               </div>
+
             </div>
           </div>
           <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
@@ -140,7 +147,6 @@
             <label class="custom-file-upload">
               <img src="/assets/icons/attach.svg" style="cursor: pointer">
               <input *ngIf="!uploadReady" type="file" id="file" (change)="handleFileInput($event)">
-              <button *ngIf="uploadReady" (click)="uploadAttachment()">Upload</button>
             </label>
 
           </div>
@@ -187,7 +193,9 @@
       </button>
 
       <!--      if quote is not accepted by student yet-->
-      <button (click)="onApproveQuote()" *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend" mat-flat-button
+      <button (click)="onApproveQuote()"
+              *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"
+              mat-flat-button
               [ngClass]=" 'pay-now'">
         Approve Quote of {{questionService.question.fee}} USD
       </button>
@@ -219,7 +227,7 @@
             Quote
           </div>
           <div class="amount">
-            $ 20.00
+            {{questionService.question.fee}} USD
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
@@ -236,7 +244,7 @@
             Quote
           </div>
           <div class="amount">
-            $ 20.00
+            {{questionService.question.fee}} USD
           </div>
         </div>
         <button (click)="onPay()" mat-flat-button class="pay-now">
