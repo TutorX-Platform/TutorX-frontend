@@ -23,10 +23,11 @@
   <div class="divider-card"></div>
   <div fxLayout="row" fxLayoutAlign="space-between center" class="bottom-row">
     <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" class="left-container">
-      <div *ngFor='let image of images'>
-        <img src="{{image}}" alt="Avatar" class="avatar">
-      </div>
-      <div class="viewed-by">Last assigned to Skrillex</div>
+      <img *ngIf="lastAssignedTutorImage"
+           [src]="lastAssignedTutorImage" alt="Avatar" class="avatar">
+      <img *ngIf="lastAssignedTutorImage ===null || lastAssignedTutorImage ===undefined || lastAssignedTutorImage ===''"
+           src="{{defaultTutorAvatar}}" alt="Avatar" class="avatar">
+      <div class="viewed-by">Last assigned to {{lastAssignedTutorName}}</div>
     </div>
     <div fxLayoutGap="8px" fxLayout="row">
       <button (click)="onViewDetails()" mat-button class="view-details">

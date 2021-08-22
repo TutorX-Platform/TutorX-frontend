@@ -9,6 +9,10 @@ export const questionTitles = {
   acceptChatConfirmation: "Are you sure?",
   acceptQuestionSuccess: "Success !!",
   paymentFailed: "Payment failed",
+  chatLinkCopy: "Chat link copied",
+  studentQuoteApproved: "Approve success",
+  tutorSendQuote: "Send Success",
+  tutorReleaseQuestionError: "Can't release the question"
 }
 
 export const questionMessages = {
@@ -22,4 +26,8 @@ export const questionMessages = {
   acceptChatConfirmation: "Are you sure to accept this question?",
   acceptQuestionSuccess: " Question is added to your activities",
   paymentFailed: "Payment was not success and money is not deducted from your card",
+  chatLinkCopy: "Chat link copied to your clipboard",
+  studentQuoteApproved: "Quote is approved successfully",
+  tutorSendQuote: "Sent the quote successfully",
+  tutorReleaseQuestionError: "Student have paid the question so you can't leave the question"
 }

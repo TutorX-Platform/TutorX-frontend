@@ -180,8 +180,8 @@ export class CardDetailsComponent implements OnInit {
           (result) => {
             if (result.token) {
               const product = {
-                name: "sandun question",
-                price: 1000,
+                name: this.questionService.question.questionTitle,
+                price: this.questionService.question.fee,
                 email: this.authService.student.email,
               }
               this.stripeData['product'] = product;
@@ -198,7 +198,7 @@ export class CardDetailsComponent implements OnInit {
                     this.paymentStatus = res['status'];
                     progressDialog.close();
                     this.dialogRef.close();
-                    this.router.navigate([constants.routes.paySuccess], {skipLocationChange: true});
+                    this.router.navigate([constants.routes.paySuccess,this.questionService.question.fee], {skipLocationChange: true});
                   } else {
                     console.log("err");
                     this.dialog.closeAll();

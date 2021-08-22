@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'dummy', component: DummyComponent},
   {path: 'temp', component: SuccesMessageComponent},
   {path: 'pay/:id/:amount', component: CardDetailsComponent},
-  {path: 'pay-success', component: SuccesMessageComponent},
+  {path: 'pay-success/:amount', component: SuccesMessageComponent},
   {
     path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: redirectUnauthorizedToHome}

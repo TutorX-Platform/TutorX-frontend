@@ -25,6 +25,8 @@
             [viewedByAmount]="500"
             [images]="q.attachments"
             [studentEmail]="q.studentEmail"
+            [lastAssignedTutorName]="q.lastAssignedTutorName"
+            [lastAssignedTutorImage]="q.lastAssignedTutorImage"
           ></app-question-card>
         </div>
       </div>
@@ -74,7 +76,8 @@
       <span matPrefix>
         <mat-icon>search</mat-icon> &nbsp;&nbsp;
       </span>
-      <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto" class="mobile-input" placeholder="Search">
+      <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto" class="mobile-input"
+             placeholder="Search">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}}
@@ -83,7 +86,8 @@
     </div>
     <div fxLayout="column">
       <div *ngFor="let q of askedQuestions">
-        <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center" (click)="onViewChat(q.id)">
+        <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center"
+             (click)="onViewChat(q.id)">
           <div class="topic">
             {{q.questionTitle}}
           </div>

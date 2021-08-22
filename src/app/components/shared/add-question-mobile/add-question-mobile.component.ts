@@ -129,6 +129,10 @@ export class AddQuestionMobileComponent implements OnInit {
       const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
       const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
       const question: Questions = {
+        isQuoteApproved: false,
+        isQuoteSend: false,
+        lastAssignedTutorImage: "",
+        lastAssignedTutorName: "",
         sort: this.time.time,
         subCategory: this.addQuestionForm.value.subCategory,
         tutorImage: '',

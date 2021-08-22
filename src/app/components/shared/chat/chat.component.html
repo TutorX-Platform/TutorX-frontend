@@ -71,58 +71,58 @@
             <!--            {{message.message}}-->
             <!--          </div>-->
           </div>
-      </div>
-      <!--Joined Message-->
-      <!--<div class="joined-message">-->
-      <!--<div class="line"></div>-->
-      <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
-      <!--<div class="text">joined the chat</div>-->
-      <!--<div class="line"></div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
-      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-      <!--<div fxLayout="column" fxLayoutAlign="start start">-->
-      <!--<div class="user-name">-->
-      <!--Alexa Daddario-->
-      <!--</div>-->
-      <!--<div class="joined">-->
-      <!--joined-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="time">Todat at 9.00 AM</div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;Sender message&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<div class="message-box">-->
-      <!--Hi there niiiiiiiiii-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<div class="message-box">-->
-      <!--Attachment 1-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div fxLayout="row" fxLayoutAlign="end center">-->
-      <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
-      <!--</div>-->
-      <!--&lt;!&ndash;reciever message&ndash;&gt;-->
-      <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
-      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
-      <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
-      <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
-      <!--<div class="user-name">-->
-      <!--Alexa Daddario-->
-      <!--</div>-->
-      <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
-      <!--Hi how you doing??-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="time">Todat at 9.00 AM</div>-->
-      <!--</div>-->
+        </div>
+        <!--Joined Message-->
+        <!--<div class="joined-message">-->
+        <!--<div class="line"></div>-->
+        <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
+        <!--<div class="text">joined the chat</div>-->
+        <!--<div class="line"></div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
+        <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+        <!--<div fxLayout="column" fxLayoutAlign="start start">-->
+        <!--<div class="user-name">-->
+        <!--Alexa Daddario-->
+        <!--</div>-->
+        <!--<div class="joined">-->
+        <!--joined-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Sender message&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+        <!--Hi there niiiiiiiiii-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+        <!--Attachment 1-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
+        <!--</div>-->
+        <!--&lt;!&ndash;reciever message&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
+        <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+        <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
+        <!--<div class="user-name">-->
+        <!--Alexa Daddario-->
+        <!--</div>-->
+        <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
+        <!--Hi how you doing??-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+        <!--</div>-->
 
       </div>
       <div class="typing-box">
@@ -164,7 +164,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isTutor" class="cover-box" fxLayout="row wrap"
+      <div *ngIf="isTutor && !questionService.question.isQuoteSend" class="cover-box" fxLayout="row wrap"
            fxLayoutAlign="space-between center">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
           <img src="../../../../assets/icons/nervo.svg">
@@ -172,10 +172,45 @@
             <input matInput type="number" [formControl]="quote" (input)="onTypeQuote()">
           </mat-form-field>
         </div>
-        <button mat-flat-button [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'" [disabled]="isSendQuoteDissabled">
+        <button (click)="onSendQuote()" mat-flat-button
+                [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'"
+                [disabled]="isSendQuoteDissabled">
           Send Quote
         </button>
       </div>
+
+      <!--      if quote is not accepted by student yet-->
+      <button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"
+              mat-flat-button
+              [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'">
+        Quote Not accepted yet
+      </button>
+
+      <!--      if quote is not accepted by student yet-->
+      <button (click)="onApproveQuote()" *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend" mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Approve Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is accepted by student-->
+      <button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"
+              mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Approved Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is accepted by student-->
+      <button *ngIf="questionService.question.isPaid && isTutor" mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Paid Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is not sent by tutor-->
+      <button *ngIf="!questionService.question.isQuoteSend && !isTutor" mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Yet to recieve quote
+      </button>
+
       <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row"
            fxLayoutAlign="space-between center">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
@@ -192,7 +227,8 @@
           Request refund
         </button>
       </div>
-      <div *ngIf="!questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row"
+      <div *ngIf="!questionService.question.isPaid && !isTutor && questionService.question.isQuoteApproved"
+           class="cover-box" fxLayout="row"
            fxLayoutAlign="space-between center">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
           <img src="../../../../assets/icons/nervo.svg">
@@ -264,15 +300,15 @@
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
           <!--<div fxLayout="column" class="drop-zone">-->
-            <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-              <!--<img src="assets/icons/pdf.svg" class="icon-image">-->
-            <!--</div>-->
-            <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-              <!--<div class="file-name">-->
-                <!--&lt;!&ndash;{{this.file.name}}&ndash;&gt;-->
-                <!--attachment.pdf-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+          <!--<img src="assets/icons/pdf.svg" class="icon-image">-->
+          <!--</div>-->
+          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+          <!--<div class="file-name">-->
+          <!--&lt;!&ndash;{{this.file.name}}&ndash;&gt;-->
+          <!--attachment.pdf-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
 
           <div *ngFor="let attachment of chat.attachments">
