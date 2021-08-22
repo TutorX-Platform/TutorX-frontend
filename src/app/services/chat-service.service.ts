@@ -26,13 +26,13 @@ export class ChatServiceService {
     })
   }
 
-  sendMessage(messageId: string, message: string, sortTime: number) {
+  sendMessage(messageId: string, message: string, sortTime: number,isAttachment:boolean) {
     let data: ChatMsg = {
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: false,
-      isAttachment: false,
+      isAttachment: isAttachment,
       message: message,
       senderEmail: this.auth.student.email,
       senderId: this.auth.student.userId,

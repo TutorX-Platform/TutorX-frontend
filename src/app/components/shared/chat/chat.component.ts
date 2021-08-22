@@ -68,6 +68,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   uploadReady = false;
 
   isSendQuoteDissabled = true;
+  attachementPicked = false;
 
   test = new Date('Sep 01 2021 00:00:00');
 
@@ -106,8 +107,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
       this.time = res;
-      // @ts-ignore
-      this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time);
+      if (!this.attachementPicked) {
+        // @ts-ignore
+        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
+      } else {
+        // @ts-ignore
+        this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
+        this.uploadAttachment();
+      }
       this.message.reset();
       this.isSendButtonDissabled = true;
     });
@@ -210,9 +217,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onNavigateBack() {
-    if(this.isTutor){
+    if (this.isTutor) {
+      // @ts-ignore
       this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
-    }else{
+    } else {
       this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
     }
   }
@@ -247,6 +255,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.uploadReady = true;
     }
     this.fileToUpload = event.target.files[0];
+    this.message.setValue(this.fileToUpload?.name);
+    this.attachementPicked = true;
+    this.isSendButtonDissabled = false;
   }
 
   onReleaseQuestion() {
@@ -295,7 +306,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.uploadReady = false;
           this.chat.attachments.push(res);
           this.chatService.createChat(this.chatToken, this.chat);
+          this.isSendButtonDissabled = true;
+          this.attachementPicked = false;
+          this.uploadReady = true;
         }, () => {
+          this.isSendButtonDissabled = true;
+          this.attachementPicked = false;
+          this.uploadReady = true;
+
           console.log("upload error");
         }, () => {
           progressDialog.close();
