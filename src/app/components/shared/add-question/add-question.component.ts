@@ -123,6 +123,8 @@ export class AddQuestionComponent implements OnInit {
         this.patchValuesToForm();
       }
     }
+
+    console.log(this.data,"daaaaaaaaaaaaaaata")
   }
 
   patchValues() {
@@ -309,7 +311,7 @@ export class AddQuestionComponent implements OnInit {
           )
         }, () => {
           progressDialog.close();
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
+          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.fileUploadSuccess, constants.messageTypes.success).afterOpened().subscribe(
             (res) => {
               console.log(res);
             }

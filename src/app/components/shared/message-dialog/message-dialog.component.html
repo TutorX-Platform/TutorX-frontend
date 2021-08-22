@@ -4,8 +4,8 @@
     <div class="dialog-message">{{message}}</div>
   </div>
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'success'">
-<!--    <button mat-flat-button class="dialog-button dialog-button&#45;&#45;success" (click)="onButtonAction('yes')">Delete</button>-->
-    <button mat-flat-button class="dialog-button dialog-button--success invert" (click)="onButtonAction('yes')">OK</button>
+    <button mat-flat-button class="dialog-button dialog-button--success" (click)="onButtonAction('yes')">OK</button>
+<!--    <button mat-flat-button class="dialog-button dialog-button&#45;&#45;success invert" (click)="onButtonAction('yes')">OK</button>-->
   </div>
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'warning-info'">
     <button mat-flat-button class="dialog-button dialog-button--danger" (click)="onButtonAction('yes')">OK</button>

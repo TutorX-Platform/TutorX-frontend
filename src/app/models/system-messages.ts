@@ -22,6 +22,4 @@ export const questionMessages = {
   acceptChatConfirmation: "Are you sure to accept this question?",
   acceptQuestionSuccess: " Question is added to your activities",
   paymentFailed: "Payment was not success and money is not deducted from your card",
-
-
 }
