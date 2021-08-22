@@ -26,7 +26,7 @@ export class ChatServiceService {
     })
   }
 
-  sendMessage(messageId: string, message: string, sortTime: number,isAttachment:boolean) {
+  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean) {
     let data: ChatMsg = {
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
@@ -105,6 +105,22 @@ export class ChatServiceService {
         this.router.navigate([constants.routes.turor], {skipLocationChange: true})
       }
     );
+  }
+
+  sendQuoteMessage(chatId: string, time: number,amount:number) {
+    let data: ChatMsg = {
+      sort: time,
+      senderAvatar: '',
+      senderName: '',
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} sent the quote of ${amount} USD`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time,
+    }
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
 
   }
 

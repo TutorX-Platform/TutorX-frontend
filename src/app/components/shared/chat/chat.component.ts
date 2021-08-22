@@ -328,6 +328,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       fee: this.quote.value
     }
     this.questionService.tutorSendQuote(this.chatToken, data);
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+      // @ts-ignore
+      this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value);
+    })
+
   }
 
   onApproveQuote() {
