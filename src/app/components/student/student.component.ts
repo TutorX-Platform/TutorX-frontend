@@ -57,6 +57,7 @@ export class StudentComponent implements OnInit {
 
   changePage(num: number) {
     this.selectedPage = num;
+    this.router.navigate(['/questions'])
   }
 
   addQuestion() {

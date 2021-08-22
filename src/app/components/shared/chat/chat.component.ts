@@ -29,7 +29,8 @@ import {CardDetailsComponent} from "../payment-gateway/card-details/card-details
 export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   @ViewChild('scrollMe') private myScroll: ElementRef;
-  message = new FormControl('');
+  message = new FormControl(null);
+  quote = new FormControl('');
   isSendButtonDissabled = true;
   messages: any = [];
   chatToken: string = '';
@@ -67,6 +68,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   selectedPage = 1;
   fileToUpload: File | null = null;
   uploadReady = false;
+
+  isSendQuoteDissabled=true;
 
   test = new Date('Sep 01 2021 00:00:00');
 
@@ -213,6 +216,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isSendButtonDissabled = false;
     } else {
       this.isSendButtonDissabled = true;
+    }
+  }
+
+  onTypeQuote() {
+    if (this.quote.value !== null) {
+      this.isSendQuoteDissabled = false;
+    } else {
+      this.isSendQuoteDissabled = true;
     }
   }
 

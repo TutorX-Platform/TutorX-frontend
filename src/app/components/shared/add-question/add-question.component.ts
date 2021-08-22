@@ -129,7 +129,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     this.subject = this.data.subjects[0];
     // @ts-ignore
-    this.dueDateTime = this.data.dueDate;
+    this.dueDateTime = this.data.dueDate.toDate();
     // @ts-ignore
     this.description = this.data.description;
 

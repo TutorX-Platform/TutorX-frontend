@@ -19,7 +19,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public title: string = '';
   @Input() public status: string = '';
   @Input() public subjects: string = '';
-  @Input() public dueDate: Date = new Date;
+  @Input() public dueDate: any = new Date;
   @Input() public descriptionTitle: string = 'Hi Tutors';
   @Input() public description: string = '';
   @Input() public images: string[] = [];
@@ -55,7 +55,7 @@ export class QuestionCardComponent implements OnInit {
 
   onViewChat() {
     console.log(this.id);
-    this.router.navigate([constants.routes.chat, this.id], {skipLocationChange: true})
+    this.router.navigate([constants.routes.student_q_pool + constants.routes.chat, this.id], {skipLocationChange: true})
   }
 
   onViewDetails() {
