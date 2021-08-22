@@ -9,17 +9,15 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog
 import {ChatMsg} from "../../../models/chat-msg";
 import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
-import {SignInComponent} from "../../auth/sign-in/sign-in.component";
-import {DummyComponent} from "../../test/dummy/dummy.component";
 import {Location} from "@angular/common";
 import {QuestionService} from "../../../services/question-service.service";
-import {Question} from "../../../models/question";
 import {StudentService} from "../../../services/student-service.service";
 import {UtilService} from "../../../services/util-service.service";
 import {TimeApi} from "../../../models/time-api";
 import {Questions} from "../../../models/questions";
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from "angularfire2/storage";
 import {CardDetailsComponent} from "../payment-gateway/card-details/card-details.component";
+import * as systemMessages from '../../../models/system-messages'
 
 @Component({
   selector: 'app-chat',
@@ -69,7 +67,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   fileToUpload: File | null = null;
   uploadReady = false;
 
-  isSendQuoteDissabled=true;
+  isSendQuoteDissabled = true;
 
   test = new Date('Sep 01 2021 00:00:00');
 
@@ -177,7 +175,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onCopyLink() {
-    this.clipboardApi.copyFromContent(this.chat.chatLink);
+    this.utilService.openDialog(systemMessages.questionTitles.chatLinkCopy, systemMessages.questionMessages.chatLinkCopy, constants.messageTypes.success).afterOpened().subscribe(
+      (res) => {
+        this.clipboardApi.copyFromContent(this.chat.chatLink);
+      }
+    )
   }
 
 
@@ -248,18 +250,22 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onReleaseQuestion() {
-    const data = {
-      tutorName: "",
-      tutorImage: null,
-      tutorId: "",
-      status: constants.questionStatus.open,
+    if (this.questionService.question.status === constants.questionStatus.open) {
+      const data = {
+        tutorName: "",
+        tutorImage: null,
+        tutorId: "",
+        status: constants.questionStatus.open,
+      }
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        // @ts-ignore
+        this.time = res;
+        this.chatService.tutorLeftChat(this.chatToken, this.time.time);
+        this.questionService.releaseQuestionByTutor(this.chatToken, data);
+      })
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
     }
-    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-      // @ts-ignore
-      this.time = res;
-      this.chatService.tutorLeftChat(this.chatToken, this.time.time);
-      this.questionService.releaseQuestionByTutor(this.chatToken, data);
-    })
 
   }
 
@@ -296,6 +302,21 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       )
     });
+  }
+
+  onSendQuote() {
+    const data = {
+      isQuoteSend: true,
+      fee: this.quote.value
+    }
+    this.questionService.tutorSendQuote(this.chatToken, data);
+  }
+
+  onApproveQuote() {
+    const data = {
+      isQuoteApproved: true
+    }
+    this.questionService.studentApproveQuote(this.chatToken, data);
   }
 
 }

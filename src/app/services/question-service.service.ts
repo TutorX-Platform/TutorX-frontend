@@ -3,13 +3,11 @@ import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestor
 import {UtilService} from "./util-service.service";
 import * as constants from "../models/constants";
 import {Questions} from "../models/questions";
-import {Observable} from "rxjs";
-import {StudentService} from "./student-service.service";
 import {ChatServiceService} from "./chat-service.service";
 import {MailService} from "./mail.service";
-import {Question} from "../models/question";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TimeApi} from "../models/time-api";
+import * as systemMessage from '../models/system-messages'
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +58,8 @@ export class QuestionService {
     const data = {
       status: constants.questionStatus.assigned,
       tutorId: tutorId,
+      lastAssignedTutorName: tutorName,
+      lastAssignedTutorImage: tutorImage,
       tutorName: tutorName,
       tutorImage: tutorImage
     }
@@ -87,6 +87,18 @@ export class QuestionService {
   deleteQuestionByStudent(questionId: string) {
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).delete();
     this.angularFirestoreService.collection(constants.collections.chats).doc(questionId).delete();
+  }
+
+  tutorSendQuote(questionId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
+      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved,systemMessage.questionMessages.questionSavedSuccessfully,constants.messageTypes.success).afterOpened().subscribe()
+    })
+  }
+
+  studentApproveQuote(questionId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
+      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved,systemMessage.questionMessages.questionSavedSuccessfully,constants.messageTypes.success).afterOpened().subscribe()
+    })
   }
 
 }

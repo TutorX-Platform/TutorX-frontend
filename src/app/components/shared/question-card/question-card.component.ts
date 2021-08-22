@@ -28,10 +28,13 @@ export class QuestionCardComponent implements OnInit {
   @Input() public studentEmail: string = '';
   @Input() public isPublicPool: boolean = false;
   @Input() public isAutoOpen: boolean = false;
+  @Input() public lastAssignedTutorName: string = '';
+  @Input() public lastAssignedTutorImage: string = '';
 
   isTutor = false;
 
   role = '';
+  defaultTutorAvatar = constants.dummy_profile_picture;
 
   constructor(private router: Router,
               private dialog: MatDialog,
@@ -54,7 +57,6 @@ export class QuestionCardComponent implements OnInit {
   }
 
   onViewChat() {
-    console.log(this.id);
     if(this.isTutor){
       this.router.navigate([constants.routes.turor + constants.routes.chat, this.id], {skipLocationChange: true});
     } else{
@@ -75,7 +77,9 @@ export class QuestionCardComponent implements OnInit {
       images: this.images,
       role: this.role,
       isTutor: true,
-      studentEmail: this.studentEmail
+      studentEmail: this.studentEmail,
+      lastAssignedTutorName: this.lastAssignedTutorName,
+      lastAssignedTutorImage: this.lastAssignedTutorImage,
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);

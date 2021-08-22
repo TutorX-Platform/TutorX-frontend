@@ -126,7 +126,7 @@ export class AddQuestionComponent implements OnInit {
       }
     }
 
-    console.log(this.data,"daaaaaaaaaaaaaaata")
+    console.log(this.data, "daaaaaaaaaaaaaaata")
   }
 
   patchValues() {
@@ -258,6 +258,10 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number) {
     const question: Questions = {
+      isQuoteApproved: false,
+      isQuoteSend: false,
+      lastAssignedTutorImage: "",
+      lastAssignedTutorName: "",
       sort: this.time.time,
       subCategory: this.addQuestionForm.value.subCategory,
       tutorImage: "",
