@@ -23,8 +23,9 @@ export interface Questions {
   tutorName: string;
   tutorImage: string;
   sort: number;
-  lastAssignedTutorName:string;
-  lastAssignedTutorImage:string;
-  isQuoteSend:boolean;
-  isQuoteApproved:boolean;
+  lastAssignedTutorName: string;
+  lastAssignedTutorImage: string;
+  isQuoteSend: boolean;
+  isQuoteApproved: boolean;
+  byLoggedUser: boolean;
 }

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
 import {AngularFireAuth} from "@angular/fire/auth";
 import * as constants from "../models/constants";
 import {Student} from "../models/student";
 import {Observable} from "rxjs";
+import {Questions} from "../models/questions";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,10 @@ export class StudentService {
     return this.angularFirestoreService.collection(constants.collections.students).doc(uid).valueChanges();
   }
 
-  addQuestion() {
+  findStudentByEmail(email: string) {
+    // @ts-ignore
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students, ref => ref.where('email', '==', email));
+    return userRef;
   }
 
 }

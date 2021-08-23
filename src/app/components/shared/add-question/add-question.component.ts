@@ -17,9 +17,8 @@ import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
 import {ChatMsg} from "../../../models/chat-msg";
 import {TimeApi} from "../../../models/time-api";
-import construct = Reflect.construct;
-import {MessageDialogComponent} from "../message-dialog/message-dialog.component";
 import * as systemMessages from '../../../models/system-messages';
+import {StudentService} from "../../../services/student-service.service";
 
 @Component({
   selector: 'app-add-question',
@@ -79,6 +78,7 @@ export class AddQuestionComponent implements OnInit {
     private questionService: QuestionService,
     private utilService: UtilService,
     private authService: AuthService,
+    private studentService: StudentService,
     public router: Router,
     private mailService: MailService,
     private chatService: ChatServiceService,
@@ -112,7 +112,6 @@ export class AddQuestionComponent implements OnInit {
       startWith(''),
       map((value: string) => this._subfilter(value))
     );
-
 
     if (this.data !== null) {
       // @ts-ignore
@@ -163,9 +162,10 @@ export class AddQuestionComponent implements OnInit {
     })
   }
 
-  onOpen(name: string){
+  onOpen(name: string) {
 
   }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     if (this.options.filter(option => option.toLowerCase().includes(filterValue)).length === 1) {
@@ -204,7 +204,7 @@ export class AddQuestionComponent implements OnInit {
             this.utilService.getTimeFromTimeAPI().subscribe((res) => {
               // @ts-ignore
               this.time = res;
-              this.askQuestion(this.dialogRef, progressDialog, this.time.time);
+              this.askQuestion(this.dialogRef, progressDialog, this.time.time, true);
             })
           } else {
             this.askEmail(progressDialog);
@@ -262,8 +262,9 @@ export class AddQuestionComponent implements OnInit {
     this.files.splice(removeItem, 1);
   }
 
-  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number) {
+  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
       isQuoteSend: false,
       lastAssignedTutorImage: "",
@@ -346,25 +347,33 @@ export class AddQuestionComponent implements OnInit {
     const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (result) => {
-        this.authService.student.firstName = result.value.name;
-        this.authService.student.email = result.value.email;
-      }, () => {
-      }, () => {
-        this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+        progressDialog.afterOpened().subscribe(
+          () => {
+            this.authService.student.firstName = result.value.name;
+            this.authService.student.email = result.value.email;
 
-        })
-        this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-          // @ts-ignore
-          this.time = res;
-          this.askQuestion(this.dialogRef, progressDialog, this.time.time);
-        })
-        this.sendAknowledgementEmail(this.authService.student.email);
-        this.authService.student.firstName = '';
-        this.authService.student.email = '';
+            this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
+              (res) => {
+                if (res.length > 0) {
+                  progressDialog.close();
+                  this.utilService.openDialog(systemMessages.questionTitles.notLoggedUserWithLoggedCredentials, systemMessages.questionMessages.notLoggedUserWithLoggedCredentials, constants.messageTypes.warning).afterOpened().subscribe();
+                } else {
+                  this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                    // @ts-ignore
+                    this.time = res;
+                    this.askQuestion(this.dialogRef, progressDialog, this.time.time, false);
+                    this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
+                  })
+                  this.sendAknowledgementEmail(this.authService.student.email);
+                }
+              }
+            );
+          }
+        )
       }
     )
     progressDialog.close();
-
   }
 
   sendAknowledgementEmail(email: string) {
@@ -372,12 +381,15 @@ export class AddQuestionComponent implements OnInit {
   }
 
   createChat(chatId: string, studentId: string) {
-    const chatLink = this.utilService.generateChatLink(chatId);
+    const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
+    const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      tutorChatLink: tutorChatLink,
+      studentEmail: this.authService.student.email,
       attachments: [],
       createdDate: new Date(),
-      chatLink: chatLink,
+      studentChatLink: chatLink,
       tutorJoinedTime: new Date(),
       chatStatus: constants.chat_status.openForTutors,
       id: chatId,
@@ -406,6 +418,17 @@ export class AddQuestionComponent implements OnInit {
     if (this.data.isTutor) {
       // @ts-ignore
       this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
+      // @ts-ignore
+      if (!this.data.byLoggedUser) {
+        // @ts-ignore
+        this.chatService.getChat(this.data.id).valueChanges().subscribe(
+          (res) => {
+            console.log(res);
+            // @ts-ignore
+            this.mailService.tutorJoinedFor(this.data.studentEmail, res.studentChatLink).subscribe()
+          }
+        )
+      }
     } else {
       alert('you are not a tutor');
     }

@@ -5,7 +5,7 @@
       <img [src]="logo">
       <div fxLayout="column" fxLayoutAlign="center end" class="header">
         <div class="payment">Total Payment</div>
-        <div class="amount">{{question.fee}} USD</div>
+        <div *ngIf="question" class="amount">{{question.fee}} USD</div>
       </div>
     </div>
 

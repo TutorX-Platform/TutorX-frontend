@@ -31,6 +31,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public isAutoOpen: boolean = false;
   @Input() public lastAssignedTutorName: string = '';
   @Input() public lastAssignedTutorImage: string = '';
+  @Input() public byLoggedUser: boolean = false;
 
   isTutor = false;
 
@@ -58,9 +59,9 @@ export class QuestionCardComponent implements OnInit {
   }
 
   onViewChat() {
-    if(this.isTutor){
+    if (this.isTutor) {
       this.router.navigate([constants.routes.turor + constants.routes.chat, this.id], {skipLocationChange: true});
-    } else{
+    } else {
       this.router.navigate([constants.routes.student + constants.routes.chat, this.id], {skipLocationChange: true});
     }
   }
@@ -82,6 +83,7 @@ export class QuestionCardComponent implements OnInit {
       studentEmail: this.studentEmail,
       lastAssignedTutorName: this.lastAssignedTutorName,
       lastAssignedTutorImage: this.lastAssignedTutorImage,
+      byLoggedUser: this.byLoggedUser
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);

@@ -7,6 +7,7 @@ import {Chat} from "../models/chat";
 import {ChatMsg} from "../models/chat-msg";
 import {StudentService} from "./student-service.service";
 import {UtilService} from "./util-service.service";
+import {MailService} from "./mail.service";
 
 @Injectable({
   providedIn: 'root'
@@ -107,7 +108,7 @@ export class ChatServiceService {
     );
   }
 
-  sendQuoteMessage(chatId: string, time: number,amount:number) {
+  sendQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
       sort: time,
       senderAvatar: '',
@@ -121,7 +122,38 @@ export class ChatServiceService {
       time: time,
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
+  }
 
+  sendApproveQuoteMessage(chatId: string, time: number, amount: number) {
+    let data: ChatMsg = {
+      sort: time,
+      senderAvatar: '',
+      senderName: '',
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} approved quote of ${amount} USD`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time,
+    }
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
+  }
+
+  sendPaidQuoteMessage(chatId: string, time: number, amount: number) {
+    let data: ChatMsg = {
+      sort: time,
+      senderAvatar: '',
+      senderName: '',
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} Paid quote ${amount} USD`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time,
+    }
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
 

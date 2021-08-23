@@ -6,6 +6,8 @@ import * as constants from '../models/constants';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DummyService {
 
   testObject: any;
@@ -20,6 +22,10 @@ export class DummyService {
 
   pay(body: any) {
     return this.http.post(constants.backend_url.concat(constants.backend_api_resource.payment), body);
+  }
+
+  requestSesstion(priceId: string) {
+
   }
 
 }

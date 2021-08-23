@@ -2,6 +2,7 @@ import {ChatMsg} from "./chat-msg";
 
 export interface Chat {
   attachments: string[];
+  studentEmail: string;
   createdDate: Date;
   id: string;
   uniqueId: string;
@@ -10,6 +11,7 @@ export interface Chat {
   tutorJoinedTime: Date;
   messagesId: string;
   chatStatus: string;
-  chatLink: string;
+  studentChatLink: string;
+  tutorChatLink: string;
   tutorsCount: number;
 }

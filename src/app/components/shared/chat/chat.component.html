@@ -80,7 +80,7 @@
 
             </div>
           </div>
-          <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+          <div *ngIf="!message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
             <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
               <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
                 <div

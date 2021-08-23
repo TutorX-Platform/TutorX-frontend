@@ -28,9 +28,15 @@ export class UtilService {
     return "";
   }
 
-  generateChatLink(questionId: string) {
-    const baseUrl = constants.env_url.local_url;
-    return baseUrl.concat('chat/').concat(questionId);
+  generateChatLink(questionId: string, user: string) {
+    const baseUrl = constants.env_url.prod_url;
+    if (user === constants.userTypes.tutor) {
+      return baseUrl.concat('/tutor/chat/').concat(questionId);
+    } else if (user === constants.userTypes.student) {
+      return baseUrl.concat('/student/chat/').concat(questionId);
+    } else {
+      return '';
+    }
   }
 
   getTimeFromTimeAPI() {
@@ -49,4 +55,5 @@ export class UtilService {
     }
     return this.dialog.open(MessageDialogComponent, dialogConfig);
   }
+
 }

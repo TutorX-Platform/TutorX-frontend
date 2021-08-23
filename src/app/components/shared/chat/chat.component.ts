@@ -18,6 +18,7 @@ import {Questions} from "../../../models/questions";
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from "angularfire2/storage";
 import {CardDetailsComponent} from "../payment-gateway/card-details/card-details.component";
 import * as systemMessages from '../../../models/system-messages'
+import {MailService} from "../../../services/mail.service";
 
 @Component({
   selector: 'app-chat',
@@ -40,9 +41,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   task: AngularFireUploadTask;
   attachments: string[] = [];
   chat: Chat = {
+    tutorChatLink: "",
+    studentEmail: "",
     attachments: [],
     createdDate: new Date(),
-    chatLink: "",
+    studentChatLink: "",
     chatStatus: "",
     id: "",
     messagesId: "",
@@ -71,6 +74,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   isSendQuoteDissabled = true;
   attachementPicked = false;
+  isNotLoggedUser = false;
+  notLoggedUserEmail = 'sandunsameera25@gmail.com';
 
   test = new Date('Sep 01 2021 00:00:00');
 
@@ -85,6 +90,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               public router: Router,
               private dialog: MatDialog,
               private location: Location,
+              private mailService: MailService,
               private studentService: StudentService) {
   }
 
@@ -93,6 +99,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       map => {
         // @ts-ignore
         this.chatToken = map.get('id');
+        if (map.get('email')) {
+          this.isNotLoggedUser = true;
+          // @ts-ignore
+          this.notLoggedUserEmail = map.get('email');
+        }
       }
     );
     this.getChatDetails();
@@ -137,6 +148,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           (res) => {
             // @ts-ignore
             this.chat = res;
+            console.log(this.chat);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
           }, () => {
@@ -161,7 +173,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         console.log(res.createdDate['seconds']);
         // @ts-ignore
         this.questionCreatedDate = res.createdDate['seconds'];
-        if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId) {
+        if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId || this.chat.studentEmail === this.notLoggedUserEmail) {
           this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
             res => {
               // @ts-ignore
@@ -186,26 +198,33 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onCopyLink() {
     this.utilService.openDialog(systemMessages.questionTitles.chatLinkCopy, systemMessages.questionMessages.chatLinkCopy, constants.messageTypes.success).afterOpened().subscribe(
       (res) => {
-        this.clipboardApi.copyFromContent(this.chat.chatLink);
+        if (this.isTutor) {
+          this.clipboardApi.copyFromContent(this.chat.tutorChatLink);
+        } else {
+          this.clipboardApi.copyFromContent(this.chat.studentChatLink);
+        }
       }
     )
   }
 
 
   onPay() {
-    // this.router.navigate([constants.routes.pay, this.chatToken, "100"], {skipLocationChange: true})
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "70%";
-    dialogConfig.data = this.chatToken;
-    // dialogConfig.height = "650px";
-    this.dialog.open(CardDetailsComponent, dialogConfig);
+    if (this.authService.isLoggedIn) {
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "70%";
+      dialogConfig.data = this.chatToken;
+      // dialogConfig.height = "650px";
+      this.dialog.open(CardDetailsComponent, dialogConfig);
 
-    this.dialog.afterAllClosed.subscribe(
-      (res) => {
-        console.log(res);
-      }
-    )
+      this.dialog.afterAllClosed.subscribe(
+        (res) => {
+          console.log(res);
+        }
+      )
+    } else {
+      alert("please login ");
+    }
   }
 
   getQuestion(id: string) {
@@ -265,7 +284,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onReleaseQuestion() {
-    if (this.questionService.question.status === constants.questionStatus.open) {
+    if (this.questionService.question.status === constants.questionStatus.open || this.questionService.question.status === constants.questionStatus.assigned) {
       const data = {
         tutorName: "",
         tutorImage: null,
@@ -335,6 +354,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
       this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value);
+      this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
+
     })
 
   }
@@ -343,6 +364,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const data = {
       isQuoteApproved: true
     }
+    this.studentService.findStudentById(this.chat.tutorId).subscribe(
+      (res) => {
+        // @ts-ignore
+        this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
+      }
+    )
+
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+      // @ts-ignore
+      this.chatService.sendApproveQuoteMessage(this.chatToken, res.time, this.quote.value);
+
+    })
     this.questionService.studentApproveQuote(this.chatToken, data);
   }
 

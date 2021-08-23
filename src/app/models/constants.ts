@@ -5,7 +5,7 @@ export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/
 export const env_url = {
   heroku_url: 'https://sandunapi.tk/',
   local_url: 'http://localhost:4200/',
-  prod_url: ''
+  prod_url: 'https://tutetory.com'
 }
 
 export const dummyChatId = 'Q936d4c46-3a30-4f17-b2ce-aa53d8c3af37';
@@ -202,7 +202,20 @@ export const email_data = {
   questionAcceptSubject: 'Your question is accepted',
   message: 'This is dummt message replace with given one',
   questionAcknowledgementEmail: "Hi, We received your question successfully, We will send a link to join to the chat room once tutor accept your question",
-  questionAcceptEmail: "Hi, your question is accepted, this is dummy will change as requested"
+  questionAcceptEmail: "Hi, your question is accepted, this is dummy will change as requested",
+  tutorSendQuote: "Hi, Tutor has sent a quote for you",
+  tutorSendQuoteMessage: "Hello student, Tutor has sent a quote for you please approve that quote so you two can carry work",
+  quoteApprovalMailToTutorSubject: "Quote approval",
+  quoteApprovalMailToTutorMessage: "Hello tutor, A student have approved your quote",
+  paymentSuccessMailSubjectToTutor: "You got a payment",
+  paymentSuccessMailMessageToTutor: "Hello tutor, You got a new payment",
+  paymentSuccessMailSubjectToStudent: "Payment Success",
+  paymentSuccessMailMessageToStudent: "Your payment is successfull",
+  failedSuccessMailSubjectToStudent: "Payment Failed",
+  failedSuccessMailMessageToStudent: "Your payment was failed due to some reasons, Money is not deducted",
+  questionAddMailNotLoggedUser: "Hi your questions is added to system, We will send you a link to join chat once tutor joined",
+
+
 }
 
 

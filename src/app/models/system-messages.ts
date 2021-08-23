@@ -12,7 +12,8 @@ export const questionTitles = {
   chatLinkCopy: "Chat link copied",
   studentQuoteApproved: "Approve success",
   tutorSendQuote: "Send Success",
-  tutorReleaseQuestionError: "Can't release the question"
+  tutorReleaseQuestionError: "Can't release the question",
+  notLoggedUserWithLoggedCredentials:"Your email already have an account"
 }
 
 export const questionMessages = {
@@ -29,5 +30,7 @@ export const questionMessages = {
   chatLinkCopy: "Chat link copied to your clipboard",
   studentQuoteApproved: "Quote is approved successfully",
   tutorSendQuote: "Sent the quote successfully",
-  tutorReleaseQuestionError: "Student have paid the question so you can't leave the question"
+  tutorReleaseQuestionError: "Student have paid the question so you can't leave the question",
+  notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first"
+
 }

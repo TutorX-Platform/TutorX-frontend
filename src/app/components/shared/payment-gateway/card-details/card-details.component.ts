@@ -14,6 +14,9 @@ import {DummyService} from "../../../../services/dummy.service";
 import {ProgressDialogComponent} from "../../progress-dialog/progress-dialog.component";
 import {UtilService} from "../../../../services/util-service.service";
 import * as systemMessage from '../../../../models/system-messages';
+import {MailService} from "../../../../services/mail.service";
+import {StudentService} from "../../../../services/student-service.service";
+import {ChatServiceService} from "../../../../services/chat-service.service";
 
 @Component({
   selector: 'app-card-details',
@@ -65,7 +68,10 @@ export class CardDetailsComponent implements OnInit {
               private dummyService: DummyService,
               private dialog: MatDialog,
               private stripeService: StripeService,
+              private mailService: MailService,
               public router: Router,
+              private studentService: StudentService,
+              private chatService: ChatServiceService,
               private utilService: UtilService,
               private dialogRef: MatDialogRef<CardDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: string
@@ -196,19 +202,34 @@ export class CardDetailsComponent implements OnInit {
                     this.submitted = false;
                     // @ts-ignore
                     this.paymentStatus = res['status'];
-                    progressDialog.close();
                     this.dialogRef.close();
-                    this.router.navigate([constants.routes.paySuccess,this.questionService.question.fee], {skipLocationChange: true});
+                    this.mailService.paymentSuccessMailToStudent(this.questionService.question.studentEmail).subscribe();
+                    this.studentService.findStudentById(this.questionService.question.tutorId).subscribe(
+                      (res) => {
+                        // @ts-ignore
+                        this.mailService.paymentSuccessMailToTutor(res.email).subscribe();
+                      }
+                    )
+                    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                      console.log("duuuuuck");
+                      // @ts-ignore
+                      this.chatService.sendPaidQuoteMessage(this.question.id, res.time, this.question.fee);
+                      this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
+                      progressDialog.close();
+                    })
+
                   } else {
                     console.log("err");
                     this.dialog.closeAll();
                     this.dialogRef.close();
+                    this.mailService.paymentFailedMailToStudent(this.questionService.question.studentEmail);
                     this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
                     console.log(res);
                   }
                 }
               )
             } else {
+              this.mailService.paymentSuccessMailToStudent(this.questionService.question.studentEmail);
               this.dialogRef.close();
               progressDialog.close();
               // @ts-ignore
