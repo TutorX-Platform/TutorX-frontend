@@ -62,7 +62,7 @@ export class AddQuestionComponent implements OnInit {
   subject = '';
   subjects = '';
   dueDateTime = '';
-  description = '';
+  description = ' ';
   subCategory = '';
   time: TimeApi = {status: "", time: 0};
 
@@ -99,7 +99,7 @@ export class AddQuestionComponent implements OnInit {
       subject: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       subCategory: [{value: '', disabled: this.isFormDisabled}, Validators.required],
       dueDateTime: [{value: null, disabled: this.isFormDisabled}, Validators.required],
-      description: [{value: '', disabled: this.isFormDisabled}, Validators.required],
+      description: [{value: '', disabled: this.isFormDisabled}],
       files: []
     });
     this.date = new Date();

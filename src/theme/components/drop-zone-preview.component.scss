@@ -7,21 +7,24 @@
 
   .drop-zone{
     font: $body-caption-default;
+    font-size: 0.625rem !important;
     color: #5B6469;
-    width: 121px;
+    width: 60px;
     border: 1px solid #5B6469;
     box-sizing: border-box;
     border-radius: 8px;
 
     .icon-image{
-      margin-top: 16px;
+      margin-top: 4px;
+      width: 40px;
+      //height: 60px;
     }
 
     .file-name{
       overflow: hidden;
       max-height: 20px;
       text-overflow: ellipsis;
-      padding: 22px 16px 16px 16px;
+      padding: 4px 2px 4px 2px;
     }
   }
 

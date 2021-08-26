@@ -89,7 +89,7 @@
                 <div class="wording">Add Attachment</div>
               </div>
             </ngx-dropzone-label>
-            <div fxLayout="row" fxLayoutGap="-80px">
+            <div fxLayout="row" fxLayoutGap="-150px">
               <custom-dropzone-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                 <!--<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>-->
               </custom-dropzone-preview>
