@@ -27,7 +27,7 @@ import {MailService} from "../../../services/mail.service";
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
-  @ViewChild('scrollMe') private myScroll: ElementRef;
+  // @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl(null);
   quote = new FormControl('');
   isSendButtonDissabled = true;
@@ -111,8 +111,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
-
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
 
@@ -136,12 +135,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  scrollToBottom(): void {
-    try {
-      this.myScroll.nativeElement.scrollTop = this.myScroll.nativeElement.scrollHeight;
-    } catch (err) {
-    }
-  }
+  // scrollToBottom(): void {
+  //   try {
+  //     this.myScroll.nativeElement.scrollTop = this.myScroll.nativeElement.scrollHeight;
+  //   } catch (err) {
+  //   }
+  // }
 
   getChatDetails() {
     const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());

@@ -10,7 +10,11 @@
           <div class="chat-subtitle">{{chat.uniqueId}} | Created
             on {{questionCreatedDate * 1000 | date:'yyyy/MM/dd h:mm:ss a'}}</div>
           <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
-          <div class="c-chip c-chip--progress">{{questionService.question.status}}</div>
+          <div *ngIf="questionService.question.status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
+          <div *ngIf="questionService.question.status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
+          <div *ngIf="questionService.question.status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
+          <div *ngIf="questionService.question.status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
+          <!--<div class="c-chip c-chip&#45;&#45;progress">{{questionService.question.status}}</div>-->
         </div>
       </div>
     </div>
@@ -31,7 +35,7 @@
   <div class="divider-chat-header"></div>
   <div class="chat-main-container" fxLayout="row" fxLayoutAlign="start start">
     <div class="chat-container">
-      <div class="chat-message-area">
+      <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
         <div *ngFor="let message of chatMessages">
           <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
             <div fxLayout="row" fxLayoutAlign="end center">
@@ -50,7 +54,7 @@
               <ng-template #else_container>
                 <img [src]="dummyProfPic" class="avatar-x">
               </ng-template>
-              <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
+              <div fxLayout="column" fxLayoutAlign="start start">
                 <div class="user-name">
                   {{message.senderName}}
                 </div>
@@ -90,7 +94,7 @@
                 <ng-template #else_container>
                   <img [src]="dummyProfPic" class="avatar-x">
                 </ng-template>
-                <div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">
+                <div fxLayout="column" fxLayoutAlign="start start">
                   <div class="user-name">
                     {{message.senderName}}
                   </div>
@@ -348,7 +352,7 @@
           <!--</div>-->
 
           <div *ngFor="let attachment of chat.attachments">
-            <div fxLayout="column" class="drop-zone">
+            <a fxLayout="column" class="drop-zone" href="{{attachment.toString()}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
                 <img src="assets/icons/jpeg.svg" class="icon-image">
               </div>
@@ -358,7 +362,7 @@
                   attachment2.jpg
                 </div>
               </div>
-            </div>
+            </a>
           </div>
           <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
           <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
