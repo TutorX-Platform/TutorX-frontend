@@ -123,6 +123,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       if (!this.attachementPicked) {
         // @ts-ignore
         this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
+        if (this.message.value.includes('email') || this.message.value.includes('gmail')) {
+          this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, 'email').subscribe();
+        }
       } else {
         // @ts-ignore
         this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
