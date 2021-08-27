@@ -32,6 +32,7 @@ export class TutorActivitiesComponent implements OnInit {
   isMaths = false;
   isManagement = false;
   isCS = false;
+  attachments: string[] = [];
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -92,6 +93,12 @@ export class TutorActivitiesComponent implements OnInit {
       startWith(''),
       map((value: string) => this._filter(value))
     );
+
+    this.askedQuestions.forEach(question => {
+      question.attachments.forEach(attachment => {
+        this.attachments.push(attachment.downloadUrl);
+      })
+    })
   }
 
   //search auto complete

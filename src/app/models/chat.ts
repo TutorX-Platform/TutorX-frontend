@@ -1,7 +1,8 @@
 import {ChatMsg} from "./chat-msg";
+import {Attachment} from "./Attachment";
 
 export interface Chat {
-  attachments: string[];
+  attachments: Attachment[];
   studentEmail: string;
   createdDate: Date;
   id: string;

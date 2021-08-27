@@ -5,9 +5,9 @@ import {Question} from 'src/app/models/question';
 import {QuestionService} from "../../../services/question-service.service";
 import {StudentService} from "../../../services/student-service.service";
 import * as constants from "../../../models/constants";
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { Questions } from 'src/app/models/questions';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {Questions} from 'src/app/models/questions';
 
 @Component({
   selector: 'app-question-pool',
@@ -20,6 +20,7 @@ export class QuestionPoolComponent implements OnInit {
 
   selectedStatus = 0;
   askedQuestions: Questions[] = [];
+  attachments: string[] = [];
 
   countries = [
     {id: 1, name: "United States"},
@@ -61,8 +62,14 @@ export class QuestionPoolComponent implements OnInit {
     this.getQuestions();
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(''),
-      map((value:string) => this._filter(value))
+      map((value: string) => this._filter(value))
     );
+
+    this.askedQuestions.forEach(question => {
+      question.attachments.forEach(attachment => {
+        this.attachments.push(attachment.downloadUrl);
+      })
+    })
   }
 
   private _filter(value: string): string[] {

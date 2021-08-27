@@ -19,6 +19,7 @@ import {ChatMsg} from "../../../models/chat-msg";
 import {TimeApi} from "../../../models/time-api";
 import * as systemMessages from '../../../models/system-messages';
 import {StudentService} from "../../../services/student-service.service";
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-add-question',
@@ -40,7 +41,7 @@ export class AddQuestionComponent implements OnInit {
   taskRef: AngularFireStorageReference;
   // @ts-ignore
   downloadUrl: Observable<string>;
-  uploadedFiles: string[] = [];
+  uploadedFiles: Attachment[] = [];
   askedQuestions = [];
   studentUniqueKey = '';
   files: File[] = [];
@@ -319,7 +320,8 @@ export class AddQuestionComponent implements OnInit {
     this.task.then(() => {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
-          this.uploadedFiles.push(res);
+          let attachment:Attachment = {downloadUrl: res, fileName: file.name}
+          this.uploadedFiles.push(attachment);
         }, () => {
           this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
             (res) => {

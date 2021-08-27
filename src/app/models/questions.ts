@@ -1,3 +1,5 @@
+import {Attachment} from "./Attachment";
+
 export interface Questions {
   id: string;
   uniqueId: string;
@@ -11,7 +13,7 @@ export interface Questions {
   subCategory: string;
   dueDate: Date;
   description: string;
-  attachments: string[];
+  attachments: Attachment[];
   isRefundRequested: boolean;
   chatId: string;
   status: string;

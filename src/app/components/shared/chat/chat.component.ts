@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -19,6 +19,7 @@ import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} 
 import {CardDetailsComponent} from "../payment-gateway/card-details/card-details.component";
 import * as systemMessages from '../../../models/system-messages'
 import {MailService} from "../../../services/mail.service";
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-chat',
@@ -107,7 +108,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     );
     this.getChatDetails();
-    console.log(this.studentService.currentStudent)
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
@@ -122,9 +122,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       if (!this.attachementPicked) {
         // @ts-ignore
         this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
-        if (this.message.value.includes('email') || this.message.value.includes('gmail')) {
-          this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, 'email').subscribe();
-        }
+        this.onUnAuthorizedMessageSent(this.message.value);
       } else {
         // @ts-ignore
         this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
@@ -329,7 +327,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
           this.uploadReady = false;
-          this.chat.attachments.push(res);
+          let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+          this.chat.attachments.push(attachment);
+          attachment = {
+            downloadUrl: "",
+            fileName: "",
+          }
           this.chatService.createChat(this.chatToken, this.chat);
           this.isSendButtonDissabled = true;
           this.attachementPicked = false;
@@ -379,6 +382,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     })
     this.questionService.studentApproveQuote(this.chatToken, data);
+  }
+
+  onUnAuthorizedMessageSent(message: string) {
+    constants.unAuthorizedKeywords.forEach(keyword => {
+      if (message.includes(keyword)) {
+        this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, keyword).subscribe();
+      }
+    })
   }
 
 }

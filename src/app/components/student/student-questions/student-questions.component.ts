@@ -35,6 +35,7 @@ export class StudentQuestionsComponent implements OnInit {
   isAssigned = false;
   isCancelled = false;
   isCompleted = false;
+  attachments: string[] = [];
 
   subjects = [
     "Science", "English", "Maths", "Computer Science"
@@ -97,6 +98,12 @@ export class StudentQuestionsComponent implements OnInit {
       startWith(''),
       map((value: string) => this._filter(value))
     );
+
+    this.askedQuestions.forEach(question => {
+      question.attachments.forEach(attachment => {
+        this.attachments.push(attachment.downloadUrl);
+      })
+    })
   }
 
   //search auto complete
@@ -245,9 +252,9 @@ export class StudentQuestionsComponent implements OnInit {
     console.log(value);
   }
 
-  onViewChat(id: any)   {
+  onViewChat(id: any) {
     console.log(id);
-    this.router.navigate([constants.routes.chat, id],{skipLocationChange: true})
+    this.router.navigate([constants.routes.chat, id], {skipLocationChange: true})
   }
 
 }

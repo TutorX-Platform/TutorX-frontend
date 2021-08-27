@@ -241,6 +241,10 @@ export const url_sign = {
   underscore: '_',
 }
 
+export const unAuthorizedKeywords = [
+  'email', 'gmail'
+];
+
 export function getProgressDialogData() {
   return {
     width: '200px',
