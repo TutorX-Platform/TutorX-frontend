@@ -300,7 +300,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
     }
+  }
 
+  onRequestNewTutor() {
+    this.utilService.openDialog("need to clarify what to do", "problem", constants.messageTypes.warning).afterOpened().subscribe();
   }
 
   ngAfterViewChecked(): void {
