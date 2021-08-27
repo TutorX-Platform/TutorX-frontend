@@ -1,0 +1,64 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" style="position: fixed; top: 0; z-index: 100000000; color: white">
+    <div fxLayoutAlign="start center">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="onNavigateBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span>Add Question</span>
+    </div>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>circle</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="add-question" style="margin-top: 60px;">
+    <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">      
+      <div fxLayout="column" class="bottom-container"  style="padding: 16px 0px 16px 0px !important;">
+        <div fxLayout="column" class="form-fields">
+            <div class="label">Question Title</div>
+            <mat-form-field appearance="outline" class="my-form-field">
+              <input matInput type="text" formControlName="questionTitle" class="other">
+            </mat-form-field>
+            <div fxLayout="column" class="search-container" style="width: 100% !important;">
+              <div class="label">Subject</div>
+              <mat-form-field appearance="outline" class="my-form-field">
+                <input matInput type="search" formControlName="subject" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column">
+              <div class="label">Due date</div>
+              <mat-form-field appearance="outline" class="my-form-field">
+                <input matInput type="datetime-local" formControlName="dueDateTime" class="other">
+              </mat-form-field>
+            </div>
+  
+            <div class="label">Description</div>
+            <mat-form-field appearance="outline" class="my-form-field">
+              <input matInput type="text" formControlName="description" class="other">
+            </mat-form-field>
+        </div>
+        <div style="width: 100%;">
+          <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">
+            <ngx-dropzone-label>
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap = "8px">
+                <mat-icon class="material-icons-outlined">
+                  file_upload
+                </mat-icon>
+                <div class="wording">Add Attachment</div>
+              </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+          </div>
+        </div>
+  
+      </div>
+      <div class="submit-footer" fxLayout="column">
+        <button mat-flat-button class="submit-button-mobile">Submit</button>
+      </div> 
+    </form>
+  </div>

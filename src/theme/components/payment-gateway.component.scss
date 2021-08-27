@@ -1,0 +1,152 @@
+@mixin payment-gateway-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .select-method{
+    min-height: 100vh;
+    width: 100%;
+  }
+  .card-details{
+    .input-card{
+      //width: 500px;
+      .header{
+        .payment{
+          font: $body-caption-default;
+          color: #222D34;
+        }
+        .amount{
+          font: $heading-desktop-h5;
+          color: #222D34;
+        }
+      }
+      .input-container{
+        margin-top: 40px;
+        .lable{
+          font: $body-xsmall-default;
+          color: #222D34;
+        }
+        .field-container{
+          width: 48.5%
+        }
+      }
+      .divi{
+        border: 1px solid #CBCFD1;
+        margin: 24px 0px;
+      }
+      .buttonz{
+        padding: 16px 32px 16px 32px;
+        width: 40%;
+        font-size: 20px;
+        line-height: 24px;
+        &--primary{
+          color: white !important;
+          width: 58% !important;
+        }
+      }
+      .buttonz-mobile{
+        padding-top: 16px;
+        padding-bottom: 16px;
+        text-align: center;
+        width: 49%;
+        font-size: 20px;
+        line-height: 24px;
+        &--primary{
+          color: white !important;
+          width: 49% !important;
+        }
+      }
+      &--mobile{
+        //width: 90% !important;
+      }
+    }
+  }
+
+  .success-message{
+    min-height: 100vh;
+    width: 100%;
+    background: #E5E5E5;
+    .message{
+      font: $heading-desktop-h2;
+      margin-top: 15px;
+      color: #222D34;
+      text-align: center;
+    }
+    .success-details{
+      margin-top: 50px;
+      width: 40%;
+      .reciept{
+        margin-left: 16px;
+        font: $body-base-medium;
+        color: #222D34;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .received-container{
+        padding: 16px 24px;
+        margin: 16px 0px;
+        background: #D6FBE0;
+        border: 1px solid #2EA341;
+        box-sizing: border-box;
+        border-radius: 4px;
+
+        .received{
+          width: 80%;
+          .received-text{
+            font: $body-base-medium;
+            color: #207833;
+          }
+          .received-number{
+            font: $body-caption-default;
+            color: #207833;
+          }
+          .divi{
+            border: 1px solid #BAE6C5;
+            margin: 0px 0px;
+          }
+          .visa{
+            font: $body-caption-bold;
+            color: #222D34;
+          }
+        }
+        .amount{
+          font: $heading-desktop-h5;
+          color: #222D34;
+        }
+      }
+      .payment-details{
+        background: #FFFFFF;
+        padding: 24px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+        border-radius: 4px;
+        .title{
+          font: $body-small-bold;
+          color: #222D34;
+        }
+        .address-name{
+          margin-top: 24px;
+          font: $body-small-bold;
+          color: #222D34;
+        }
+        .address{
+          font: $body-caption-default;
+          color: #5B6469;
+        }
+      }
+      &--mobile{
+        width: 90%;
+      }
+    }
+    .go-to-chat{
+      margin-top: 16px;
+      width: 40%;
+      padding: 13px 0px;
+      font: $body-small-medium;
+      &--mobile{
+        width: 90%;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,67 @@
+<div fxLayout="column" class="drop-zone" *ngIf="this.file.type === 'application/pdf'">
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <mat-icon (click)="_remove($event)">
+      close
+    </mat-icon>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/icons/pdf.svg" class="icon-image">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="file-name">
+      {{this.file.name}}
+    </div>
+
+  </div>
+</div>
+
+<div fxLayout="column" class="drop-zone" *ngIf="this.file.type.toString().includes('image')">
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <mat-icon (click)="_remove($event)">
+      close
+    </mat-icon>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/icons/jpeg.svg" class="icon-image">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="file-name">
+      {{this.file.name}}
+    </div>
+
+  </div>
+</div>
+
+<div fxLayout="column" class="drop-zone" *ngIf="this.file.type.toString().includes('.document')">
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <mat-icon (click)="_remove($event)">
+      close
+    </mat-icon>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/icons/word.png" class="icon-image">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="file-name">
+      {{this.file.name}}
+    </div>
+
+  </div>
+</div>
+
+<div fxLayout="column" class="drop-zone" *ngIf="this.file.type.toString().includes('.sheet')">
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <mat-icon (click)="_remove($event)">
+      close
+    </mat-icon>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/icons/excel2.png" class="icon-image">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="file-name">
+      {{this.file.name}}
+    </div>
+
+  </div>
+</div>

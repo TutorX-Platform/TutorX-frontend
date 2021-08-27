@@ -1,0 +1,238 @@
+<div class="home">
+<!-- banner componet -->
+<div fxLayout="column" fxLayoutAlign="center" class="banner-web" fxShow="true" fxHide.lt-sm="true">
+    <div class="image-container" fxHide.lt-xl fxShow="true"></div>
+    <div class="image-container-small" fxHide.gt-lg fxShow="true"></div>
+    <div fxLayout="row" fxLayoutAlign="none center">
+        <div fxLayout="column" fxLayoutGap="16px"  class="details-container" fxLayout="start start">
+            <div class="banner-title">Get Homework Help</div>
+            <div class="banner-sub-title">For university/college, high school and middle school students</div>
+            <div class="banner-details">Talk to our experts 24/7. Pay only for the specific requirement. We assist in your homework !!
+            </div>
+            <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
+                Get help
+                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- banner mobile -->
+<div fxLayout="column" class="banner-mobile" fxLayoutAlign="space-around center" fxShow="true" fxHide.gt-xs="true">
+    <div fxLayout="row" class="image-container">
+        <img src="../../../../assets/images/student-mobile.svg">
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div class="details-container">
+            <div class="get-help-mobile-title">Get Instant Help</div>
+            <div class="get-help-mobile-subtitle">For university/college, high school and middle school students</div>
+            <div class="get-help-mobile-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
+            <button mat-flat-button class="get-help-mobile-button" routerLink="/add-question">
+                Get help
+                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- features component -->
+<div fxLayout="column" [ngClass.gt-xs]="'features-container-web'"
+[ngClass.lt-sm]="{'features-container-mobile': true}" >
+    <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
+        <div class="heading-container-web" >
+            <div class="features-title">Why Tutetory ?</div>
+            <div class="features-description">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
+        <div class="heading-container-mobile">
+            <div class="features-mobile-heading-title">Why Tutetory ?</div>
+            <div class="features-mobile-heading-subtitle">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px" fxLayoutAlign="center start" class="card-container">
+        <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="100%" fxFlex="33%" *ngFor="let detail of details">
+            <div class="card">
+                <img src="{{detail.imageUrl}}" alt="" width="30px" height="30px">
+                <div class="card-title">{{detail.title}}</div>
+                <div class="card-description">{{detail.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- client-web-->
+<div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+        <div class="client-title-web">Our Students speak</div>
+    </div>
+    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
+        <div class="client-title-mobile">Our clients speak</div>
+    </div>
+    <div [ngClass.gt-xs]="'client-feedback-container-web'"
+    [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
+      <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div class="box-client b4">
+              <div class="feedback-title">{{feedback.title}}</div>
+              <div class="feedback-body">{{feedback.content}}</div>
+            </div>
+            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+              <div>
+                <img [src]="feedback.image" alt="Avatar" class="avatar">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                <div class="profile-details-name">{{feedback.name}}</div>
+                <div class="profile-details-designation">{{feedback.designation}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+</div>
+
+ <!--Process-web-->
+<div [ngClass.gt-xs]="'process-web'"
+[ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
+    <div class="process-title">
+        How we roll?
+    </div>
+    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
+        <div *ngFor="let num of process" fxFlex="20%">
+            <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
+                <div fxHide.lt-sm="true" fxShow="true">
+                    <img src="../../../../assets/icons/Indication.png" width="100%">
+                </div>
+                <div fxHide.gt-xs="true" fxShow="true">
+                    <img src="../../../../assets/icons/Indication-mobile.svg">
+                </div>
+                <div>
+                    <div class="step-title">
+                        {{num.title}}
+                    </div>
+                    <div class="step-sub-title">
+                        {{num.subtitle}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
+        <div *ngFor="let num of process">
+            <div class="step" fxLayout="row" fxLayoutGap="8px">
+                <div>
+                    <img src="../../../../assets/icons/Indication-mobile.svg">
+                </div>
+                <div>
+                    <div class="step-title">
+                        {{num.title}}
+                    </div>
+                    <div class="step-sub-title">
+                        {{num.subtitle}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!--tutor-feedback-web-->
+<div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
+        <img src="../../../../assets/icons/quoteMark.svg" alt="">
+        <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
+          {{tutorFeedbacks[feedBackNum].description}}
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
+            <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
+                <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+                <div *ngIf="i == feedBackNum">
+                    <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                        <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                        <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+                    </div>
+                    <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                      <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
+                    </div>
+                    <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                      <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
+                    </div><div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                       <div class="avatar-name">{{tutorFeedbacks[3].name}}</div>
+                       <div class="avatar-designation">{{tutorFeedbacks[3].subject}}</div>
+                    </div><div *ngIf="feedBackNum == 4" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                      <div class="avatar-name">{{tutorFeedbacks[4].name}}</div>
+                      <div class="avatar-designation">{{tutorFeedbacks[4].subject}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- tutor-feedback-mobile -->
+<div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
+    <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
+        <img src="../../../../assets/icons/quoteMark.svg" alt="">
+      <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
+        {{tutorFeedbacks[feedBackNum].description}}
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <div *ngFor="let tutorFeedback of tutorFeedbacks2; let i = index">
+            <div class="avatar-container" fxLayout="row">
+              <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+              <div *ngIf="i == feedBackNum">
+                <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+                </div>
+                <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
+                </div>
+                <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                  <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                  <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
+    <div fxLayout="column">
+        <div class="banner-title">Get Instant Help</div>
+        <div class="banner-sub-title">For university/college, high school and middle school students</div>
+    </div>
+    <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
+        Get help
+        <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
+    </button>
+</div>
+
+<div class="footer" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px">
+    <img src="../../../../assets/icons/logo-temp.svg" alt="">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+        <div class="links">Download Now</div>
+        <div class="links">License</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+        <div class="links">About</div>
+        <div class="links">Tutors</div>
+        <div class="links">FAQ</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+        <div class="copy-right">© 2021 . All rights reserved</div>
+    </div>
+</div>
+</div>

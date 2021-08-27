@@ -1,0 +1,81 @@
+<div class="question-pool">
+  <div fxLayout="row" class="page-title-container"> Public Pool</div>
+  <div class="divider"></div>
+  <div fxLayout="row" class="tab-bar" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <div [ngClass]="selectedStatus === 0 ? 'button-container button-container--selected' : 'button-container'">
+      <div style="margin: 0px 8px 0px 8px;" (click)="selectStatus(0)">All</div>
+    </div>
+    <div [ngClass]="selectedStatus === 1 ? 'button-container button-container--selected' : 'button-container'">
+      <div (click)="selectStatus(1)">Assigned</div>
+    </div>
+    <div [ngClass]="selectedStatus === 2 ? 'button-container button-container--selected' : 'button-container'">
+      <div (click)="selectStatus(2)">Inprogress</div>
+    </div>
+    <div [ngClass]="selectedStatus === 3 ? 'button-container button-container--selected' : 'button-container'">
+      <div (click)="selectStatus(3)">Completed</div>
+    </div>
+    <div [ngClass]="selectedStatus === 4 ? 'button-container button-container--selected' : 'button-container'">
+      <div (click)="selectStatus(4)">Cancelled</div>
+    </div>
+  </div>
+  <div fxLayout="row" class="main-containerx">
+    <div fxLayout="column" class="left-container">
+      <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
+        <div fxLayout="column" class="column-view" fxLayoutGap="24px">
+          <div class="results" style="padding-top: 8px !important;">
+            {{askedQuestions.length}} results found
+          </div>
+          <app-question-card
+            *ngFor="let q of askedQuestions"
+            [title]="q.questionTitle"
+            [status]="q.status"
+            [subjects]="q.subjectCategory"
+            [dueDate]="q.dueDate"
+            [descriptionTitle]="q.description"
+            [description]="q.description"
+            [viewedByAmount]="500"
+            [images]="q.attachments"
+          ></app-question-card>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" class="right-container" style="margin-top: 0 !important;" fxShow="true" fxHide.lt-sm="true">
+      <mat-form-field appearance="outline" class="my-form-field">
+        <span matPrefix>
+          <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
+        <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start center" class="label" style="margin-top: 0px !important;">Sort by</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <form [formGroup]="contactForm" class="form">
+          <select (change)="onFilterSelect($event)" formControlName="country" class="select">
+            <option [ngValue]="null" disabled>Select Filter</option>
+            <option *ngFor="let sort of sortings" [ngValue]="sort.id">{{sort.name}}</option>
+          </select>
+        </form>
+      </div>
+      <div class="filter-results">
+        Filter Results
+        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
+          <div class="subjects-title">Subjects</div>
+          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let subject of subjects">
+              <div fxLayout="row" fxLayoutGap="8px">
+                <mat-checkbox color="primary">
+                </mat-checkbox>
+                <div class="subjectss">{{subject}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,39 @@
+@import "components/chip.component.scss";
+@import "components/question-card.component.scss";
+@import "components/admin.component.scss";
+@import "components/question-pool.component.scss";
+@import "components/dashboard.component.scss";
+@import "components/refunds.component.scss";
+@import "components/manage-tutors.component.scss";
+@import "components/home.component.scss";
+@import "components/add-question.component.scss";
+@import "components/auth.component.scss";
+@import "components/nav-bar.component.scss";
+@import "components/drop-down.component.scss";
+@import "components/tutor-dashboard.component.scss";
+@import "components/form.component.scss";
+@import "components/chat.component";
+@import "components/alert-dialogs.component";
+@import "components/drop-zone-preview.component";
+@import "components/payment-gateway.component";
+
+@mixin app-components($theme) {
+    @include question-card-component($theme);
+    @include chip-component($theme);
+    @include admin-component($theme);
+    @include question-pool-component($theme);
+    @include dashboard-component($theme);
+    @include refunds-component($theme);
+    @include manage-tutors-component($theme);
+    @include home-component($theme);
+    @include add-question-component($theme);
+    @include auth-component($theme);
+    @include nav-bar-component($theme);
+    @include dashboard-component($theme);
+    @include tutor-dashboard-component($theme);
+    @include form-component($theme);
+    @include chat-component($theme);
+    @include alert-dialogs-component($theme);
+    @include drop-zone-preview($theme);
+    @include payment-gateway-component($theme);
+}

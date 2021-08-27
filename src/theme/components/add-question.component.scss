@@ -1,0 +1,126 @@
+@mixin add-question-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    // .add-question{
+        overflow: auto;
+        .submit-footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 8px 24px;
+            background: #F6F7FB;
+            z-index: 100;
+            .submit-button-mobile{
+                padding: 16px 32px;
+                background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+                border-radius: 8px;
+                font: $heading-desktop-h6;
+                color: white;
+            }
+        }
+        .form-container{
+            .top-container{
+                padding: 21px 5% 16px 5%;
+                .header{
+                    width: 100%;
+                    .header-title{
+                        font: $heading-desktop-h4-light;
+                    }
+                    .button-container{
+                        .button-cancel{
+                        }
+                          
+                        .button-done{
+                            background-color: #7F6EF0;
+                            color: white;
+                        }
+
+                        .dissabled{
+                            background-color: #CBCFD1;
+                            color: #222D34;
+                        }
+                    }
+                }
+                .status-container{
+                    width: 100%;
+                    .date-container{
+                        font: $body-small-default;
+                        color: #686D74;
+                    }                    
+                }
+            }
+            .bottom-container{
+                padding: 32px 8% 32px 8%;
+                width: 100%;
+                .form-fields{
+                    padding: 0px 5% 40px 5%;
+                    width: 100%;
+
+                    .search-container{
+                        width: 33%;
+                        .search{                        
+                            background: url(../../assets/icons/search.svg) no-repeat scroll;
+                            padding-left:40px;
+                            font:  500 16px/24px Roboto,'Manrope', sans-serif;
+                          }
+                    }
+
+                    .date-container{
+                        width: 33%;
+                        margin-left: 1%;
+                    }
+                    .other{
+                        font:  500 16px/24px Roboto,'Manrope', sans-serif;
+                    }
+
+
+
+                      .select{
+                      }
+              
+                      .label{
+                        font:  400 12px/18px Roboto,'Manrope', sans-serif;     
+                         margin-top: 16px;
+                      }
+
+                      .tutor-view-container{
+                        margin-top: 4px;
+                        padding: 12px 16px;
+                        width: 100%;
+                        background: #FFFFFF;
+                        border: 1px solid #BDC0C4;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        font: 500 16px/24px Roboto,'Manrope', sans-serif;
+                      }
+                }
+
+
+              .attachment-viewer{
+                width: 100%;
+                .attachemnt-size{
+                  width: 200px;
+                  height: 212px
+                }
+              }
+                .custom-dropzone {
+                    padding: 40px 0px 40px 0px;
+                    width: 100%;
+                    background: #EBECEE;
+                    border: none;
+                    border-radius: 4px;
+                    color: black;
+
+                    .wording{
+                        font: $body-xsmall-bold;
+                    }
+                }
+            }
+        }
+    // }
+}

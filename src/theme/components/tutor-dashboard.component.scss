@@ -1,0 +1,72 @@
+@mixin tutor-dashboard-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .tutor-dashboard{
+        min-height: 90vh;
+        width: 100%;
+        .main-left{
+            padding: 24px;
+            .hi{
+                font: $heading-desktop-h3;
+            }
+            .stats-container{
+                margin-top: 48px;
+                .stats{
+                    padding: 16px;
+                    background: white;
+                    border-radius: 16px;
+                    color: black;
+                    margin-right: 12px;
+                    &--xx{
+                        background: linear-gradient(270deg, #A32E2E 28.75%, #D13636 100%) !important;
+                        color: white !important;
+                        margin-right: 0px !important;
+                    }
+                }
+                .title-tutor{
+                    font: $body-caption-bold;
+                }
+                .subtitle-tutor{
+                    font: $body-caption-default;
+                    color: #5B6469;
+                    &--xx{
+                        color: white !important;
+                    }
+                }
+                .number-tutor{
+                    font: $heading-desktop-h3-light;
+                    color: #E95766;
+                    &--xx{
+                        color: white !important;
+                    }
+                }
+            }
+            .review-container{
+              margin: 48px 0px;
+              .review-card{
+                border-bottom: 1px solid #CBCFD1;
+                padding-bottom: 24px;
+                .review-title{
+                  font: $heading-desktop-h5;
+                }
+                .rating-number{
+                  font: $body-base-medium;
+                  color: #5B6469;
+                }
+                .rated-by{
+                  font: $body-small-bold;
+                  color: #5B6469;
+                }
+                .review-description{
+                  font: $body-base-default;
+                  color: #5B6469;
+                }
+              }
+            }
+        }
+    }
+}

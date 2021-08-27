@@ -1,0 +1,46 @@
+<div class="auth" fxLayout="column">
+  <div mat-dialog-title>
+    <div class="title">Signup</div>
+    <div class="note">And enjoy the most convenient way of Solve your homework</div>
+  </div>
+  <mat-dialog-content style="overflow-y: auto !important;">
+    <div class="signup-button-container" fxLayout="column" fxLayoutGap="16px">
+      <div class="button-container">
+        <img src="../../../../assets/icons/google.svg" alt="">
+        <div class="button-text" (click)="onGoogleAuth()">Signup with Google</div>
+      </div>
+      <div class="button-container">
+        <img src="../../../../assets/icons/facebook.svg" alt="">
+        <div class="button-text">Signup with Facebook</div>
+      </div>
+    </div>
+    <div class="di"></div>
+    <form [formGroup]="signUpForm">
+      <div class="form" fxLayout="column">
+        <div class="label">Full name</div>
+        <mat-form-field class="my-form-field" appearance="outline">
+          <input formControlName="fullName" matInput type="text" class="other">
+        </mat-form-field>
+        <div class="label">Email address</div>
+        <mat-form-field class="my-form-field" appearance="outline">
+          <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
+        </mat-form-field>
+        <div class="label">Password</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input formControlName="password" matInput type="password" class="other">
+        </mat-form-field>
+        <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+          <mat-checkbox color="primary"></mat-checkbox>
+          <div>
+            By creating an account, you agree to the <a href="#">Free Membership Agreement</a> and <a href="#">Privacy
+            Policy</a>
+          </div>
+        </div>
+        
+        <button mat-flat-button class="button-reg" (click)="onSignUp()">
+          Register
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>  
+</div>

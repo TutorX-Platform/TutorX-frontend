@@ -1,0 +1,558 @@
+<div *ngIf="questionService.question !==undefined" class="chat" fxHide.lt-sm fxShow="true">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-wrap">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
+      <mat-icon style="cursor: pointer" (click)="onNavigateBack()">arrow_back</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div *ngIf="questionService.question !== undefined"
+             class="chat-title">{{questionService.question.questionTitle}}</div>
+        <div *ngIf="questionService.question === undefined" class="chat-title">Loading</div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <div class="chat-subtitle">{{chat.uniqueId}} | Created
+            on {{questionCreatedDate * 1000 | date:'yyyy/MM/dd h:mm:ss a'}}</div>
+          <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
+          <div *ngIf="questionService.question.status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
+          <div *ngIf="questionService.question.status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
+          <div *ngIf="questionService.question.status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
+          <div *ngIf="questionService.question.status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
+          <!--<div class="c-chip c-chip&#45;&#45;progress">{{questionService.question.status}}</div>-->
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+      <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
+      <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onReleaseQuestion()" class="drop-down" fxLayout="row"
+                fxLayoutAlign="start center"
+                fxLayoutGap="8px">
+          <mat-icon class="material-icons-outlined">logout</mat-icon>
+          <div>Release Question</div>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="divider-chat-header"></div>
+  <div class="chat-main-container" fxLayout="row" fxLayoutAlign="start start">
+    <div class="chat-container">
+      <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div *ngFor="let message of chatMessages">
+          <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div class="message-box">
+                {{message.message}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="message.isAttachment && message.senderId !== authService.student.userId">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+              <div
+                *ngIf="message.senderAvatar !== null; else else_container">
+                <img [src]="message.senderAvatar" class="avatar-x">
+              </div>
+              <ng-template #else_container>
+                <img [src]="dummyProfPic" class="avatar-x">
+              </ng-template>
+              <div fxLayout="column" fxLayoutAlign="start start">
+                <div class="user-name">
+                  {{message.senderName}}
+                </div>
+                <div class="message-box message-box--other-user-message">
+                  {{message.message}}
+                </div>
+              </div>
+            </div>
+            <!--            <div class="time">Todat at 9.00 AM</div>-->
+          </div>
+          <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+          <!--            {{message.message}}-->
+          <!--          </div>-->
+        </div>
+          <div *ngIf=" !message.isAttachment &&message.isTutorJoinMessage" class="joined-message">
+            <div class="line"></div>
+            <div class="user-name">{{message.message}} &nbsp;</div>
+            <!--          <div class="text">joined the chat</div>-->
+            <div class="line"></div>
+          </div>
+          <div
+            *ngIf=" !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div class="message-box">
+                {{message.message}}
+              </div>
+
+            </div>
+          </div>
+          <div *ngIf="!message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+                <div
+                  *ngIf="message.senderAvatar !== null; else else_container">
+                  <img [src]="message.senderAvatar" class="avatar-x">
+                </div>
+                <ng-template #else_container>
+                  <img [src]="dummyProfPic" class="avatar-x">
+                </ng-template>
+                <div fxLayout="column" fxLayoutAlign="start start">
+                  <div class="user-name">
+                    {{message.senderName}}
+                  </div>
+                  <div class="message-box message-box--other-user-message">
+                    {{message.message}}
+                  </div>
+                </div>
+              </div>
+              <!--            <div class="time">Todat at 9.00 AM</div>-->
+            </div>
+            <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+            <!--            {{message.message}}-->
+            <!--          </div>-->
+          </div>
+        </div>
+        <!--Joined Message-->
+        <!--<div class="joined-message">-->
+        <!--<div class="line"></div>-->
+        <!--<div class="user-name">Alexa Daddario &nbsp;</div>-->
+        <!--<div class="text">joined the chat</div>-->
+        <!--<div class="line"></div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Joined Avatar&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">-->
+        <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+        <!--<div fxLayout="column" fxLayoutAlign="start start">-->
+        <!--<div class="user-name">-->
+        <!--Alexa Daddario-->
+        <!--</div>-->
+        <!--<div class="joined">-->
+        <!--joined-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Sender message&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+        <!--Hi there niiiiiiiiii-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<div class="message-box">-->
+        <!--Attachment 1-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div fxLayout="row" fxLayoutAlign="end center">-->
+        <!--<img src="/assets/images/profile.jpg" class="attachment-box">-->
+        <!--</div>-->
+        <!--&lt;!&ndash;reciever message&ndash;&gt;-->
+        <!--<div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">-->
+        <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">-->
+        <!--<img src="/assets/images/profile.jpg" class="avatar-x">-->
+        <!--<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 60%">-->
+        <!--<div class="user-name">-->
+        <!--Alexa Daddario-->
+        <!--</div>-->
+        <!--<div class="message-box message-box&#45;&#45;other-user-message">-->
+        <!--Hi how you doing??-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="time">Todat at 9.00 AM</div>-->
+        <!--</div>-->
+
+      </div>
+      <div class="typing-box">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="typer">
+          <textarea matInput type="text" placeholder="Reply"
+                    oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'
+                    class="message-input" [formControl]="message" (input)="onType()"></textarea>
+          <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
+                  [disabled]="isSendButtonDissabled">Send
+          </button>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" fxLayoutGap="8px" class="links">
+          <div>
+            <label class="custom-file-upload">
+              <img src="/assets/icons/attach.svg" style="cursor: pointer">
+              <input type="file" id="file" (change)="handleFileInput($event)">
+            </label>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-details-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="4px">
+      <div class="cover-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+        <img src="../../../../assets/icons/flag.svg">
+        <div style="width: 100%; overflow: hidden">
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time" [formControl]="dueDateTimeControll">
+            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <img src="../../../../assets/icons/info.svg">
+            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
+              Remaining
+              <app-count-down [date]="test"></app-count-down>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isTutor && !questionService.question.isQuoteSend" class="cover-box" fxLayout="row wrap"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="number" [formControl]="quote" (input)="onTypeQuote()">
+          </mat-form-field>
+        </div>
+        <button (click)="onSendQuote()" mat-flat-button
+                [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'"
+                [disabled]="isSendQuoteDissabled">
+          Send Quote
+        </button>
+      </div>
+
+      <!--      if quote is not accepted by student yet-->
+      <button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"
+              mat-flat-button
+              [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'">
+        Quote Not accepted yet
+      </button>
+
+      <!--      if quote is not accepted by student yet-->
+      <button (click)="onApproveQuote()"
+              *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"
+              mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Approve Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is accepted by student-->
+      <button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"
+              mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Approved Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is accepted by student-->
+      <button *ngIf="questionService.question.isPaid && isTutor" mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Paid Quote of {{questionService.question.fee}} USD
+      </button>
+
+      <!--      if quote is not sent by tutor-->
+      <button *ngIf="!questionService.question.isQuoteSend && !isTutor" mat-flat-button
+              [ngClass]=" 'pay-now'">
+        Yet to recieve quote
+      </button>
+
+      <div *ngIf="questionService.question.isPaid && !isTutor" class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            {{questionService.question.fee}} USD
+          </div>
+          <div class="c-chip c-chip--progress">Fully paid</div>
+        </div>
+        <button mat-flat-button class="request-refund">
+          Request refund
+        </button>
+      </div>
+      <div *ngIf="!questionService.question.isPaid && !isTutor && questionService.question.isQuoteApproved"
+           class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            {{questionService.question.fee}} USD
+          </div>
+        </div>
+        <button (click)="onPay()" mat-flat-button class="pay-now">
+          Pay now
+        </button>
+      </div>
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor">
+        <div class="assigned-to">
+          Assigned to
+        </div>
+        <div class="prof" fxLayout="row" fxLayoutGap="16px">
+          <div *ngIf="questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
+            <img [src]="questionService.question.tutorImage" class="avatar-x">
+            <!--            <img src="../../../../assets/icons/active.svg" class="active">-->
+          </div>
+          <div *ngIf="!questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
+            <img src="../../../../assets/images/profile.jpg" class="avatar-x">
+            <img src="../../../../assets/icons/active.svg" class="active">
+          </div>
+          <div class="bio-box">
+            <div class="head">
+              {{questionService.question.tutorName}}
+            </div>
+            <div class="sub">
+              Senior Front-end Developer
+            </div>
+          </div>
+        </div>
+        <!--<div class="other-details-container" fxLayout="column" fxLayoutGap="16px" *ngIf="!isTutor">-->
+        <!--<div class="other-details" fxLayout="row" fxLayoutAlign="space-between center">-->
+        <!--<div class="head">-->
+        <!--Location-->
+        <!--</div>-->
+        <!--<div class="sub">-->
+        <!--Colombo, Sri Lanka-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="divider-details"></div>-->
+        <!--<div class="other-details" fxLayout="row" fxLayoutAlign="space-between center">-->
+        <!--<div class="head">-->
+        <!--TimeZone-->
+        <!--</div>-->
+        <!--<div class="sub">-->
+        <!--PST UTC-8-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="divider-details"></div>-->
+        <!--<div class="other-details" fxLayout="row" fxLayoutAlign="space-between center">-->
+        <!--<div class="head">-->
+        <!--Skills-->
+        <!--</div>-->
+        <!--<div class="sub">-->
+        <!--HTML, PHP, & javaScripts-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+      <div class="attachments-container" fxLayout="column" fxLayoutGap="12px">
+        <div class="attachment-title">
+          Attachments
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <!--<div fxLayout="column" class="drop-zone">-->
+          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+          <!--<img src="assets/icons/pdf.svg" class="icon-image">-->
+          <!--</div>-->
+          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+          <!--<div class="file-name">-->
+          <!--&lt;!&ndash;{{this.file.name}}&ndash;&gt;-->
+          <!--attachment.pdf-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+
+          <div *ngFor="let attachment of chat.attachments">
+            <a fxLayout="column" class="drop-zone" href="{{attachment.toString()}}" target="_blank">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/icons/jpeg.svg" class="icon-image">
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <div class="file-name">
+                  <!--{{this.file.name}}-->
+                  attachment2.jpg
+                </div>
+              </div>
+            </a>
+          </div>
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
+          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="questionService.question === undefined">
+
+</div>
+
+<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 1">
+  <mat-toolbar color="primary"
+               style="position: fixed; top: 0; z-index: 100000000; color: white;" *ngIf="!isDetailedView">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayoutAlign="start center">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="onNavigateBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <img src="../../assets/images/box.svg">
+        <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer"
+             (click)="onDetailedView(true)">
+          <div class="q-title-toolbar">Question Title</div>
+          <div class="last-seen">Last Seen 24h ago</div>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxLayout="row" fxLayoutAlign="space-between start"
+       style="padding: 16px;position: fixed; width: 100%; top: 0;color: white;background: #7F6EF0"
+       *ngIf="isDetailedView">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
+      <img src="../../assets/images/box.svg">
+      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="start start"
+           style="padding-left: 0 !important;">
+        <div class="q-title-toolbar">Question Title</div>
+        <div class="last-seen">Description</div>
+      </div>
+      <button mat-flat-button (click)="onShowDetails(2)">View Details</button>
+    </div>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+            (click)="onDetailedView(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="chat-main-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="chat-container">
+      <div class="typing-box">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="typer">
+          <button mat-flat-button style="background: #E3E6E8">
+            <img src="/assets/icons/attach.svg" style="cursor: pointer">
+          </button>
+          <textarea rows="1" matInput type="text" placeholder="Reply"
+                    oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'
+                    class="message-input" [formControl]="message" (input)="onType()"></textarea>
+          <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
+                  [disabled]="isSendButtonDissabled">
+            <mat-icon class="material-icons-outlined">send</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div *ngFor="let message of chatMessages">
+        <div *ngIf="message.isTutorJoinMessage" class="joined-message">
+          <div class="line"></div>
+          <div class="user-name">{{message.message}} &nbsp;</div>
+          <!--          <div class="text">joined the chat</div>-->
+          <div class="line"></div>
+        </div>
+        <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <div class="message-box">
+              {{message.message}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+          <div fxLayout="row" fxLayoutAlign="start start" class="other-user">
+            <div>
+              <div
+                *ngIf="message.senderAvatar !== '' || message.senderAvatar !== undefined || message.senderAvatar !== null; else else_container">
+                <img [src]="message.senderAvatar" class="avatar-x">
+              </div>
+              <ng-template #else_container>
+                <img [src]="dummyProfPic" class="avatar-x">
+              </ng-template>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0px"
+                 style="width: 100%; margin-left: 8px; margin-right: 8px">
+              <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%">
+                <div class="user-name">
+                  {{message.senderName}}
+                </div>
+                <div class="time">Todat at 9.00 AM</div>
+              </div>
+              <div class="message-box message-box--other-user-message">
+                {{message.message}}
+              </div>
+            </div>
+          </div>
+          <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
+          <!--            {{message.message}}-->
+          <!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--other-->
+<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 2">
+  <mat-toolbar color="primary"
+               style="position: fixed; top: 0; z-index: 100000000; color: white;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+              (click)="onShowDetails(1)">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer"
+           (click)="onDetailedView(true)">
+        <div class="q-title-toolbar">Done</div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="chat-main-container">
+    <div class="chat-details-container" fxLayout="column" fxLayoutGap="4px">
+      <div class="cover-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+        <img src="../../../../assets/icons/flag.svg">
+        <div style="width: 100%; overflow: hidden">
+          <div class="label">Due date</div>
+          <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
+            <input matInput type="datetime-local">
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <img src="../../../../assets/icons/info.svg">
+            <div class="remaining-days">
+              Remaining 2d 4h 3m 40s
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            $ 20.00
+          </div>
+          <div class="c-chip c-chip--progress">Fully paid</div>
+        </div>
+        <button mat-flat-button class="request-refund">
+          Request refund
+        </button>
+      </div>
+      <div class="cover-box" fxLayout="row"
+           fxLayoutAlign="space-between center">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+          <img src="../../../../assets/icons/nervo.svg">
+          <div class="quote">
+            Quote
+          </div>
+          <div class="amount">
+            $ 20.00
+          </div>
+        </div>
+        <button (click)="onPay()" mat-flat-button class="pay-now">
+          Pay now
+        </button>
+      </div>
+
+      <div class="attachments-container" fxLayout="column" fxLayoutGap="12px">
+        <div class="attachment-title">
+          Attchments
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+          <img src="../../../../assets/images/profile.jpg" class="attachment">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

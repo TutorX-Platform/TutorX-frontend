@@ -1,0 +1,95 @@
+@mixin question-card-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .question-title{
+        font: $heading-desktop-h4-light;
+    }
+
+  .divider-card{
+    border: 1px solid #CBCFD1;
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 16px 0px;
+  }
+
+
+    .avatar {
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-left: -15px;
+        }
+    
+    .subjects{
+        padding: 5px;
+        background: #F2F0FE; 
+        font-size: 12px; 
+        border-radius: 4px; 
+        color: #7F6EF0;
+        font-family: Manrope-bold;
+    }
+    
+    .date{
+        color: #5B6469;
+        font: $body-caption-default; 
+    }
+    
+    .title{
+        font: $body-base-default;
+    }
+    
+    .description{
+        font: $body-small-default;
+        margin-top: 8px; 
+        color: #5B6469;
+    }
+
+    .divider-card{
+        border: 1px solid #CBCFD1;
+
+        flex: none;
+        align-self: stretch;
+        flex-grow: 0;
+        margin: 16px 0px;
+    }
+    
+    .bottom-row{
+        //padding-top: 10px;
+
+        .left-container{
+            padding-left: 10px;
+    
+            .viewed-by{
+                color: #5B6469;
+                font: $body-caption-default;
+            }
+        }
+    
+        .view-chat{
+            background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+            font-family: $body-caption-bold;
+            color: white !important;
+        }
+
+      .dissabled{
+        background: #CBCFD1 !important;
+        color: #222D34 !important;
+        font-family: $body-caption-bold !important;
+      }
+    
+        .view-details{
+            font-family: $body-caption-bold;
+            border: 1px solid #9AA2A7;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+    
+    }
+}

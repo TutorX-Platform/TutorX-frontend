@@ -1,0 +1,436 @@
+@mixin chat-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .chat{
+    input[type="file"]{
+      display: none;
+    }
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    min-height: 89.7vh;
+    background: #F6F7FB;
+    .header-wrap{
+      padding: 0px 32px 16px 32px;
+      .chat-title{
+        font: $heading-desktop-h4-light;
+      }
+      .chat-subtitle{
+        font: $body-small-default;
+        color: #686D74;
+      }
+    }
+    .divider-chat-header{
+      border: 1px solid #BDC0C4;
+      flex: none;
+      flex-grow: 0;
+      margin: 0px 16px 0px 16px;
+    }
+    .chat-main-container{
+      width: 100%;
+      .chat-container{
+        width: 65%;
+        height: 72.5vh;
+        padding: 24px 10px 0px 24px;
+        .chat-message-area{
+          height: 50vh;
+          overflow-y: auto;
+        }
+        .typing-box{
+          position: relative;
+          margin-bottom: 24px;
+          width: 100%;
+          background: white;
+          .typer{
+            padding: 16px;
+            .message-input{
+              font: $body-small-bold;
+              width: 88%;
+              border: none;
+            }
+            .message-input:focus{
+              outline: none;
+            }
+          }
+          .links{
+            padding: 8px 16px;
+          }
+          .message-divider{
+
+          }
+        }
+        .joined-message{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 16px 0px;
+          .user-name{
+            font: $body-small-bold;
+            color: #9AA2A7;
+          }
+          .text{
+            font: $body-small-default;
+            color: #9AA2A7;
+          }
+          .line{
+            border: 1px solid #CBCFD1;
+            flex: none;
+            flex-grow: 1;
+            margin: 0px 16px;
+          }
+        }
+        .message-box{
+          max-width: 50%;
+          background: #7F6EF0;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 8px 16px;
+          font: $body-small-default;
+          color: #FFFFFF;
+          &--other-user-message{
+            margin: 8px 0px !important;
+            //width: 100% !important;
+            background: #E3E6E8 !important;
+            color: black !important;
+          }
+        }
+        .attachment-box{
+          margin: 8px 16px;
+          border-radius: 8px;
+          width: 54%;
+          height: 150px;
+        }
+        .audio-message-box{
+
+        }
+        .other-user{
+          margin: 16px 16px;
+          .avatar-x {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+          }
+          .user-name{
+            font: $body-base-bold;
+          }
+          .joined{
+            font: $body-small-default;
+            color: #222D34;
+          }
+          .time{
+            font: $body-small-default;
+            color: #5B6469;
+          }
+        }
+      }
+      .chat-details-container{
+        width: 35%;
+        padding: 24px 40px 0px 10px;
+        .cover-box{
+          padding: 16px;
+          background: white;
+        }
+        .label{
+          font:  400 12px/18px Roboto,'Manrope', sans-serif;
+        }
+        .remaining-days{
+          font: $body-base-default;
+          color: #5B6469;
+        }
+        .quote{
+          font: $body-base-medium;
+        }
+        .request-refund{
+          background: linear-gradient(276.39deg, #D72F2F 0.4%, #B92E2E 58.12%, #CB2F2F 112.35%);
+          padding: 8px 16px;
+          border-radius: 4px;
+          color: white;
+          font: $body-caption-default;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .pay-now{
+          background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+          padding: 8px 16px;
+          border-radius: 4px;
+          color: white;
+          font: $body-caption-default;
+          &--dissabled{
+            background: #9AA2A7;
+          }
+        }
+        .amount{
+          font: $body-small-bold;
+          color: #2EA341;
+        }
+        .assigned-to{
+          font: $body-caption-bold;
+          color: #9AA2A7;
+        }
+        .prof{
+          .avatar-x {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+          .active{
+            padding-top: 20px;
+          }
+          .bio-box{
+            .head{
+              font: $body-base-bold;
+            }
+            .sub{
+              font: $body-base-default;
+              color: #5B6469;
+            }
+          }
+        }
+        .other-details-container{
+          width: 100%;
+          .other-details{
+            .head{
+              font: $body-small-default;
+              color: #222D34;
+            }
+            .sub{
+              font: $body-small-bold;
+              color: #5B6469;
+            }
+          }
+          .divider-details{
+            border: 1px solid #BDC0C4;
+            flex: none;
+            flex-grow: 0;
+          }
+        }
+        .attachments-container{
+          padding: 14px 0px 24px 0px;
+          .attachment-title{
+            font: $body-small-bold;
+            color: #5B6469;
+          }
+          .attachment{
+            width: 97px;
+            height: 97px;
+          }
+        }
+      }
+    }
+  }
+
+  .chat-mobile{
+    .toolbar-q-container{
+      padding-left: 8px;
+      .last-seen{
+        font: $body-caption-default;
+        color: white;
+      }
+      .q-title-toolbar{
+        font: $body-small-bold;
+        color: white;
+      }
+    }
+    .toolbar-avatar {
+      //width: 50px;
+      //height: 50px;
+      //border-radius: 50%;
+      background: url("../../assets/images/box.svg");
+    }
+    .chat-main-container{
+      padding: 50px 8px 16px;
+      height: 80vh;
+      overflow-y: auto;
+      background: #F6F7FB;
+      .chat-container{
+
+        .typing-box{
+          position: fixed;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+          z-index: 100;
+          background: white;
+          .typer{
+            padding: 16px;
+            .message-input{
+              font: $body-small-bold;
+              width: 100%;
+              border: none;
+              background: #F6F7FB;
+              border-radius: 4px;
+              padding: 8px 16px;
+            }
+            .message-input:focus{
+              outline: none;
+            }
+          }
+          .links{
+            padding: 8px 16px;
+          }
+          .message-divider{
+
+          }
+        }
+        .joined-message{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 32px 0px;
+          .user-name{
+            font: $body-small-bold;
+            color: #9AA2A7;
+          }
+          .text{
+            font: $body-small-default;
+            color: #9AA2A7;
+          }
+          .line{
+            border: 1px solid #CBCFD1;
+            flex: none;
+            flex-grow: 1;
+            margin: 0px 16px;
+          }
+        }
+        .message-box{
+          width: 50%;
+          background: #7F6EF0;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 8px 16px;
+          font: $body-small-default;
+          color: #FFFFFF;
+          &--other-user-message{
+            margin: 8px 0px !important;
+            width: 90% !important;
+            background: #E3E6E8 !important;
+            color: black !important;
+          }
+        }
+        .attachment-box{
+          margin: 8px 16px;
+          border-radius: 8px;
+          width: 54%;
+          height: 150px;
+        }
+        .audio-message-box{
+
+        }
+        .other-user{
+          margin: 32px 16px;
+          .avatar-x {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+          }
+          .user-name{
+            font: $body-base-bold;
+          }
+          .joined{
+            font: $body-small-default;
+            color: #222D34;
+          }
+          .time{
+            font: $body-small-default;
+            color: #5B6469;
+          }
+        }
+      }
+    }
+    .chat-details-container{
+      width: 100%;
+      padding: 26px 0px 16px;
+      .cover-box{
+        padding: 16px;
+        background: white;
+      }
+      .label{
+        font:  400 12px/18px Roboto,'Manrope', sans-serif;
+      }
+      .remaining-days{
+        font: $body-base-default;
+        color: #5B6469;
+      }
+      .quote{
+        font: $body-base-medium;
+      }
+      .request-refund{
+        background: linear-gradient(276.39deg, #D72F2F 0.4%, #B92E2E 58.12%, #CB2F2F 112.35%);
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        font: $body-caption-default;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .pay-now{
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        font: $body-caption-default;
+      }
+      .amount{
+        font: $body-small-bold;
+        color: #2EA341;
+      }
+      .assigned-to{
+        font: $body-caption-bold;
+        color: #9AA2A7;
+      }
+      .prof{
+        .avatar-x {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .active{
+          padding-top: 20px;
+        }
+        .bio-box{
+          .head{
+            font: $body-base-bold;
+          }
+          .sub{
+            font: $body-base-default;
+            color: #5B6469;
+          }
+        }
+      }
+      .other-details-container{
+        width: 100%;
+        .other-details{
+          .head{
+            font: $body-small-default;
+            color: #222D34;
+          }
+          .sub{
+            font: $body-small-bold;
+            color: #5B6469;
+          }
+        }
+        .divider-details{
+          border: 1px solid #BDC0C4;
+          flex: none;
+          flex-grow: 0;
+        }
+      }
+      .attachments-container{
+        padding: 14px 0px 24px 0px;
+        .attachment-title{
+          font: $body-small-bold;
+          color: #5B6469;
+        }
+        .attachment{
+          width: 97px;
+          height: 97px;
+        }
+      }
+    }
+  }
+}

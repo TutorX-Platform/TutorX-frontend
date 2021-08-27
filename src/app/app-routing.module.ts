@@ -1,0 +1,96 @@
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AdminComponent} from './components/admin/admin.component';
+import {SignInComponent} from './components/auth/sign-in/sign-in.component';
+import {DummyComponent} from "./components/test/dummy/dummy.component";
+import {TestChatComponent} from "./components/test/test-chat/test-chat.component";
+import {NavBarComponent} from './components/home/nav-bar/nav-bar.component';
+import {StudentComponent} from './components/student/student.component';
+import {
+  AngularFireAuthGuard,
+  hasCustomClaim,
+  redirectUnauthorizedTo,
+  redirectLoggedInTo
+} from '@angular/fire/auth-guard';
+import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mobile.component';
+import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
+import {TutorComponent} from './components/tutor/tutor.component';
+import {ChatComponent} from "./components/shared/chat/chat.component";
+import {CardDetailsComponent} from "./components/shared/payment-gateway/card-details/card-details.component";
+import {SuccesMessageComponent} from "./components/shared/payment-gateway/succes-message/succes-message.component";
+import {StudentQuestionsComponent} from "./components/student/student-questions/student-questions.component";
+import {TutorQuestionsComponent} from "./components/tutor/tutor-questions/tutor-questions.component";
+import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
+import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tutor-activities.component";
+
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
+
+const routes: Routes = [
+  {path: '', component: NavBarComponent},
+  {path: 'sign-in', component: SignInMobileComponent},
+  {path: 'admin', component: AdminComponent},
+  {path: 'dummy', component: DummyComponent},
+  {path: 'temp', component: SuccesMessageComponent},
+  {path: 'pay/:id/:amount', component: CardDetailsComponent},
+  {path: 'pay-success/:amount', component: SuccesMessageComponent},
+  {
+    path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToHome},
+    children: [
+      {
+        path: 'dashboard',
+        component: TutorDashboardComponent
+      },
+      {
+        path: 'questions',
+        component: TutorQuestionsComponent
+      },
+
+      {
+        path: 'activities',
+        component: TutorActivitiesComponent
+      },
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      },
+      {
+        path: '',
+        redirectTo: 'tutor/dashboard',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {path: 'add-question', component: AddQuestionMobileComponent},
+  {path: 'test-chat/:id', component: TestChatComponent},
+  {path: 'chat/:id', component: ChatComponent},
+  {
+    path: 'student',
+    component: StudentComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToHome},
+    children: [
+      {
+        path: 'questions',
+        component: StudentQuestionsComponent
+      },
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      },
+      {
+        path: '',
+        redirectTo: 'student/questions',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {path: '**', component: NavBarComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
