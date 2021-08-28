@@ -39,6 +39,7 @@ import {
   NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -79,6 +80,7 @@ import { CountDownComponent } from './components/shared/count-down/count-down.co
 import { SelectMethodComponent } from './components/shared/payment-gateway/select-method/select-method.component';
 import { CardDetailsComponent } from './components/shared/payment-gateway/card-details/card-details.component';
 import { SuccesMessageComponent } from './components/shared/payment-gateway/succes-message/succes-message.component';
+import { TutorProfileComponent } from './components/tutor/tutor-profile/tutor-profile.component';
 
 
 @NgModule({
@@ -115,7 +117,8 @@ import { SuccesMessageComponent } from './components/shared/payment-gateway/succ
     CountDownComponent,
     SelectMethodComponent,
     CardDetailsComponent,
-    SuccesMessageComponent
+    SuccesMessageComponent,
+    TutorProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -152,6 +155,7 @@ import { SuccesMessageComponent } from './components/shared/payment-gateway/succ
     ClipboardModule,
     MatExpansionModule,
     NgxMatNativeDateModule,
+    MatSelectModule,
     MatDatepickerModule,
     NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],

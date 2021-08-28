@@ -22,6 +22,7 @@ import {StudentQuestionsComponent} from "./components/student/student-questions/
 import {TutorQuestionsComponent} from "./components/tutor/tutor-questions/tutor-questions.component";
 import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
 import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tutor-activities.component";
+import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-profile.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'chat/:id',
         component: ChatComponent
+      },
+      {
+        path: 'profile',
+        component: TutorProfileComponent
       },
       {
         path: '',

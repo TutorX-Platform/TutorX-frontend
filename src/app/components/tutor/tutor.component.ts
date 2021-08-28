@@ -74,4 +74,8 @@ export class TutorComponent implements OnInit {
     this.router.navigate(['/'],{skipLocationChange: true});
   }
 
+  onViewProfile(){
+    this.router.navigate(['/tutor/profile'],{skipLocationChange: true});
+  }
+
 }
