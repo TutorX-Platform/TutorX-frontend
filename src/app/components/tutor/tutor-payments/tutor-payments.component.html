@@ -1,0 +1,82 @@
+<div class="tutor-payment">
+  <div class="page-title">
+    Payments
+  </div>
+  <div class="divi"></div>
+  <div class="main-container" fxLayout="row">
+    <div class="left-container" fxLayout="column" fxLayoutGap="8px">
+      <div *ngFor="let num of [1,2,3,4]">
+        <div class="payment-details-card" fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
+            <div fxLayout="column" fxLayoutAlign="start start">
+              <div class="bold-text">
+                #001
+              </div>
+              <div class="normal-text">
+                20 Aug, 2021
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                <img src="assets/images/profile.jpg" class="avatarx">
+                <div class="normal-text">
+                  Amir de Sousa Reise Filho
+                </div>
+              </div>
+              <div class="bold-text">
+                #QES1234
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="24px">
+            <div class="bold-text">
+              $10.00
+            </div>
+            <button mat-flat-button class="more-button">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-container" fxLayout="column">
+      <div class="filters">
+        Filters
+      </div>
+      <mat-form-field appearance="outline" class="my-form-field">
+        <span matPrefix>
+          <mat-icon>search</mat-icon> &nbsp;&nbsp;
+        </span>
+        <input matInput type="search" placeholder="Search">
+      </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="label">Month</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <mat-select>
+            <mat-option *ngFor="let month of months" [value]="month.code">
+              {{month.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="label">Sort</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <mat-select>
+            <mat-option *ngFor="let month of months" [value]="month.code">
+              {{month.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div class="label">Order date from</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput [ngxMatDatetimePicker]="picker" [max]="now" placeholder="DD/MM/YYYY">
+          <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker [hideTime]="true" #picker></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

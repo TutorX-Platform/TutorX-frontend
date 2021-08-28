@@ -79,6 +79,8 @@ export const routes = {
   questions: '/questions',
   dashboard: '/dashboard',
   activities: '/activities',
+  profile: '/profile',
+  payments: '/payments',
   testChat: '/test-chat',
   chat: '/chat',
   pay: '/pay',

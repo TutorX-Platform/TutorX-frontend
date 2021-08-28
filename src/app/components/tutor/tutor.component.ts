@@ -65,6 +65,8 @@ export class TutorComponent implements OnInit {
       this.router.navigate([constants.routes.turor + constants.routes.dashboard],{skipLocationChange: true});
     }else if(num === 3){
       this.router.navigate([constants.routes.turor + constants.routes.activities],{skipLocationChange: true});
+    }else {
+      this.router.navigate([constants.routes.turor + constants.routes.payments],{skipLocationChange: true});
     }
   }
 

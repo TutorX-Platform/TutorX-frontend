@@ -81,6 +81,7 @@ import { SelectMethodComponent } from './components/shared/payment-gateway/selec
 import { CardDetailsComponent } from './components/shared/payment-gateway/card-details/card-details.component';
 import { SuccesMessageComponent } from './components/shared/payment-gateway/succes-message/succes-message.component';
 import { TutorProfileComponent } from './components/tutor/tutor-profile/tutor-profile.component';
+import { TutorPaymentsComponent } from './components/tutor/tutor-payments/tutor-payments.component';
 
 
 @NgModule({
@@ -118,7 +119,8 @@ import { TutorProfileComponent } from './components/tutor/tutor-profile/tutor-pr
     SelectMethodComponent,
     CardDetailsComponent,
     SuccesMessageComponent,
-    TutorProfileComponent
+    TutorProfileComponent,
+    TutorPaymentsComponent
   ],
   imports: [
     BrowserModule,

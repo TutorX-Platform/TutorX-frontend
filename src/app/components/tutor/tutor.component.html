@@ -42,6 +42,16 @@
               Activities
             </div>
           </a>
+          <a mat-list-item (click)="changePage(4)"
+             [ngClass]="selectedPage === 4 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+            <mat-icon class="material-icons-outlined"
+                      [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+              space_dashboard
+            </mat-icon>
+            <div [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
+              Payments
+            </div>
+          </a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="selectedPage == 2" [mode]="'side'">

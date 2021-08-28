@@ -23,6 +23,7 @@ import {TutorQuestionsComponent} from "./components/tutor/tutor-questions/tutor-
 import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
 import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tutor-activities.component";
 import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-profile.component";
+import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-payments.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: TutorProfileComponent
+      },
+      {
+        path: 'payments',
+        component: TutorPaymentsComponent
       },
       {
         path: '',
