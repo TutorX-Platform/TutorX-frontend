@@ -7,6 +7,7 @@ import {UtilService} from "./util-service.service";
 import 'rxjs/add/operator/switchMap';
 import {Student} from "../models/student";
 import * as constants from '../models/constants';
+import * as systemMessages from '../models/system-messages';
 import * as firebase from 'firebase';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
@@ -89,10 +90,14 @@ export class AuthService {
         // @ts-ignore
         this.student.userId = credentials.user?.uid;
         this.isStudentSet = true;
-
         this.SetUserData(credentials.user, this.student.firstName);
+      } else {
+        console.log(credentials);
+        this.utilService.openDialog(systemMessages.signInTitles.signInFailed, systemMessages.signInTitles.signInFailed, constants.messageTypes.warning).afterOpened().subscribe();
       }
-    }))
+    })).catch((v) => {
+      console.log(v);
+    })
   }
 
   updateStudentData(user: User) {
@@ -152,7 +157,7 @@ export class AuthService {
     // @ts-ignore
     return this.angularFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
+        this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
       })
   }
 
@@ -161,7 +166,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut().then(() => {
       this.isLoggedIn = false;
       localStorage.removeItem(constants.localStorageKeys.user);
-      this.router.navigate([constants.routes.sign_in],{skipLocationChange: true});
+      this.router.navigate([constants.routes.sign_in], {skipLocationChange: true});
     })
   }
 
@@ -248,7 +253,7 @@ export class AuthService {
               if (progressDialog) {
                 progressDialog.close();
               }
-              this.router.navigate([constants.routes.turor+'/questions'], {skipLocationChange: true});
+              this.router.navigate([constants.routes.turor + '/questions'], {skipLocationChange: true});
             });
           }
         } else {
