@@ -21,6 +21,7 @@ export class TutorProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

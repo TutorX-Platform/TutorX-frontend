@@ -17,6 +17,8 @@ import * as systemMessage from '../../../../models/system-messages';
 import {MailService} from "../../../../services/mail.service";
 import {StudentService} from "../../../../services/student-service.service";
 import {ChatServiceService} from "../../../../services/chat-service.service";
+import {PaymentService} from "../../../../services/payment.service";
+import {Payment} from "../../../../models/payment";
 
 @Component({
   selector: 'app-card-details',
@@ -70,6 +72,7 @@ export class CardDetailsComponent implements OnInit {
               private stripeService: StripeService,
               private mailService: MailService,
               public router: Router,
+              private paymentService: PaymentService,
               private studentService: StudentService,
               private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -211,7 +214,8 @@ export class CardDetailsComponent implements OnInit {
                       }
                     )
                     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-                      console.log("duuuuuck");
+                      // @ts-ignore
+                      this.recordPayment(res.time);
                       // @ts-ignore
                       this.chatService.sendPaidQuoteMessage(this.question.id, res.time, this.question.fee);
                       this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
@@ -226,6 +230,8 @@ export class CardDetailsComponent implements OnInit {
                     this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
                     console.log(res);
                   }
+                }, () => {
+                  this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionTitles.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe()
                 }
               )
             } else {
@@ -252,6 +258,25 @@ export class CardDetailsComponent implements OnInit {
 
   onCancel() {
     // this.getCardToken();
+  }
+
+  recordPayment(time: number) {
+    const payment: Payment = {
+      questionTitle: this.question.questionTitle,
+      studentImage: this.question.studentImage,
+      studentName: this.question.studentName,
+      fee: this.question.fee,
+      paidBy: this.question.studentId,
+      paidCurrency: constants.usedCurrency,
+      paidTime: time,
+      payRefNo: "",
+      payStatus: constants.payStatus.success,
+      questionId: this.question.uniqueId,
+      tutorId: this.question.tutorId
+    }
+    this.paymentService.recordPayment(payment).then((v) => {
+      console.log(v);
+    })
   }
 
 }

@@ -22,6 +22,7 @@ export interface Questions {
   questionSalt: string;
   studentUniqueKey: string;
   studentName: string;
+  studentImage: string;
   tutorName: string;
   tutorImage: string;
   sort: number;

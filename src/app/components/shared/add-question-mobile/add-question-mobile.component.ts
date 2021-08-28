@@ -131,6 +131,7 @@ export class AddQuestionMobileComponent implements OnInit {
       const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
       const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
       const question: Questions = {
+        studentImage: this.authService.student.profileImage,
         byLoggedUser: false,
         isQuoteApproved: false,
         isQuoteSend: false,

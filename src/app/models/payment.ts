@@ -1,11 +1,13 @@
 export interface Payment {
-  id: string;
+  questionTitle: string;
   payRefNo: string;
   payStatus: string;
   questionId: string;
   fee: number;
   paidBy: string;
-  paidTime: Date;
+  paidTime: number;
   paidCurrency: string;
   tutorId: string;
+  studentName: string;
+  studentImage: string;
 }
