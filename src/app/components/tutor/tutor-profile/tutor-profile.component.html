@@ -1,0 +1,128 @@
+<div class="common-profile" fxLayout="column">
+  <div class="hi">Hi! Jhon</div>
+  <div class="ratings-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <div class="rating" fxLayout="row">
+      <mat-icon [ngClass]="rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
+      <mat-icon [ngClass]="rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
+      <mat-icon [ngClass]="rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
+      <mat-icon [ngClass]="rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
+      <mat-icon [ngClass]="rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <div>
+        24 Taks Completions
+      </div>
+      <img src="assets/icons/dot.svg">
+      <div>
+        English teacher,  University of Hamburg
+      </div>
+    </div>
+  </div>
+  <div class="divi"></div>
+  <div class="prof-picture-container" fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start center">
+    <img src="assets/images/profile.jpg" class="prof-pic">
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+      <button mat-flat-button class="upload-new" color="primary">
+        Upload new image
+      </button>
+      <button mat-flat-button class="delete">
+        Delete
+      </button>
+    </div>
+  </div>
+  <form class="forms" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Name</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Name">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Email</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Email">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r">
+        <div class="label">Address</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Address">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Street</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Street">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">City</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <mat-select>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Postal Code</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Postal Code">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Contact Number</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Contact Number">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <form class="forms" fxLayout="column">
+    <div class="payment-information">
+      Payment Information
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Payment Method</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <mat-select>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Acount Number</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Acount Number">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Bank Name</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Bank Name">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+        <div class="label">Branch Name</div>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <input matInput type="text" placeholder="Branch Name">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

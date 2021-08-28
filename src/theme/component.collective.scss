@@ -16,6 +16,8 @@
 @import "components/alert-dialogs.component";
 @import "components/drop-zone-preview.component";
 @import "components/payment-gateway.component";
+@import "components/profile.component";
+@import "components/tutor-payments.components";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -36,4 +38,6 @@
     @include alert-dialogs-component($theme);
     @include drop-zone-preview($theme);
     @include payment-gateway-component($theme);
+    @include profile-component($theme);
+    @include tutor-payment-component($theme)
 }

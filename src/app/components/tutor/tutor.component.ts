@@ -65,6 +65,8 @@ export class TutorComponent implements OnInit {
       this.router.navigate([constants.routes.turor + constants.routes.dashboard],{skipLocationChange: true});
     }else if(num === 3){
       this.router.navigate([constants.routes.turor + constants.routes.activities],{skipLocationChange: true});
+    }else {
+      this.router.navigate([constants.routes.turor + constants.routes.payments],{skipLocationChange: true});
     }
   }
 
@@ -72,6 +74,10 @@ export class TutorComponent implements OnInit {
     this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
     this.authService.onSignOut();
     this.router.navigate(['/'],{skipLocationChange: true});
+  }
+
+  onViewProfile(){
+    this.router.navigate(['/tutor/profile'],{skipLocationChange: true});
   }
 
 }
