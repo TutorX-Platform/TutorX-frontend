@@ -28,6 +28,7 @@ export class TutorQuestionsComponent implements OnInit {
   isMaths = false;
   isManagement = false;
   isCS = false;
+  attachments = [];
 
   isAutoOpen = false;
   subjects = [
@@ -90,6 +91,16 @@ export class TutorQuestionsComponent implements OnInit {
       startWith(''),
       map((value: string) => this._filter(value))
     );
+
+    this.askedQuestions.forEach(question => {
+      question.attachments.forEach(
+        attachment => {
+          // @ts-ignore
+          this.attachments.push(attachment.downloadUrl);
+        }
+      )
+    })
+
   }
 
   //search auto complete

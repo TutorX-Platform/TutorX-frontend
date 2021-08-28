@@ -10,6 +10,10 @@ export class MailService {
   constructor(private http: HttpClient) {
   }
 
+  if() {
+
+  }
+
   sendEmail(email: string) {
     const emailData = {
       'fromEmail': constants.email_data.senderEmail,
@@ -110,6 +114,16 @@ export class MailService {
       'subject': constants.email_data.subject,
       'text': constants.email_data.questionAcceptEmail + ' use below link to join chat ' + `${chatLink}`,
       'toEmail': email,
+    }
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
+  }
+
+  chatWarningEmail(questionId: string, sender: string, keyword: string) {
+    const emailData = {
+      'fromEmail': constants.email_data.senderEmail,
+      'subject': 'UnAuthorized chats shared in chat',
+      'text': `${sender} sheared ${keyword} which is an unauthorized keyword. Please put some attention on ${questionId} question chat `,
+      'toEmail': 'tharindu.prf@gmail.com',
     }
     return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
   }

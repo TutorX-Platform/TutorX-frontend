@@ -12,6 +12,7 @@ import {ProgressDialogComponent} from '../progress-dialog/progress-dialog.compon
 import {Location} from "@angular/common";
 import {Observable} from "rxjs";
 import {TimeApi} from "../../../models/time-api";
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -33,7 +34,7 @@ export class AddQuestionMobileComponent implements OnInit {
   taskRef: AngularFireStorageReference;
   // @ts-ignore
   downloadUrl: Observable<string>;
-  uploadedFiles: string[] = [];
+  uploadedFiles: Attachment[] = [];
   askedQuestions = [];
   studentUniqueKey = '';
   files: File[] = [];
@@ -108,7 +109,8 @@ export class AddQuestionMobileComponent implements OnInit {
       this.task.then(() => {
         this.taskRef.getDownloadURL().subscribe(
           (res: any) => {
-            this.uploadedFiles.push(res);
+            let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+            this.uploadedFiles.push(attachment);
           }, () => {
             console.log("upload error");
           }, () => {
