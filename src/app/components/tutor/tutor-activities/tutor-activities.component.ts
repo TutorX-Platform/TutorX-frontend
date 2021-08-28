@@ -86,7 +86,6 @@ export class TutorActivitiesComponent implements OnInit {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(() => {
       this.getQuestionsTutor(progressDialog);
-
     });
     //search auto complete
     this.filteredOptions = this.searchControl.valueChanges.pipe(
@@ -177,7 +176,7 @@ export class TutorActivitiesComponent implements OnInit {
             console.log(res);
             // @ts-ignore
             this.askedQuestions = res;
-            this.askedQuestions = this.sortQuestion();
+            this.askedQuestions = this.sortQuestion().reverse();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
