@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { MailService } from 'src/app/services/mail.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {AuthService} from 'src/app/services/auth.service';
+import {MailService} from 'src/app/services/mail.service';
 import * as constants from "../../../models/constants";
-import { ProgressDialogComponent } from '../../shared/progress-dialog/progress-dialog.component';
+import {ProgressDialogComponent} from '../../shared/progress-dialog/progress-dialog.component';
 
 @Component({
   selector: 'app-sign-up-mobile',
   templateUrl: './sign-up-mobile.component.html',
   styleUrls: ['./sign-up-mobile.component.scss']
 })
+
 export class SignUpMobileComponent implements OnInit {
 
   // @ts-ignore
@@ -55,7 +56,7 @@ export class SignUpMobileComponent implements OnInit {
                 console.log(res);
               }
             );
-            this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
+            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
           }
         )
       });
@@ -63,6 +64,14 @@ export class SignUpMobileComponent implements OnInit {
 
   onGoogleAuth() {
     this.authService.googleAuth().then(
+      (r) => {
+      }
+    )
+  }
+
+  onFacebookAuth() {
+    console.log("hi")
+    this.authService.facebookAuth().then(
       (r) => {
       }
     )

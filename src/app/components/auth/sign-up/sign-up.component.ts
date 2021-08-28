@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
               }
             );
             this.dialogRef.close();
-            this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
+            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
           }
         )
       });
@@ -66,6 +66,14 @@ export class SignUpComponent implements OnInit {
 
   onGoogleAuth() {
     this.authService.googleAuth().then(
+      (r) => {
+        this.dialogRef.close();
+      }
+    )
+  }
+
+  onFacebookAuth() {
+    this.authService.facebookAuth().then(
       (r) => {
         this.dialogRef.close();
       }

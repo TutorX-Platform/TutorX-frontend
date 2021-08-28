@@ -65,6 +65,11 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  facebookAuth() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
   oAuthLogin(provider: any) {
     return this.angularFireAuth.auth.signInWithPopup(provider).then((credentials => {
       if (credentials.user) {
@@ -243,7 +248,7 @@ export class AuthService {
               if (progressDialog) {
                 progressDialog.close();
               }
-              this.router.navigate([constants.routes.turor], {skipLocationChange: true});
+              this.router.navigate([constants.routes.turor+'/questions'], {skipLocationChange: true});
             });
           }
         } else {
