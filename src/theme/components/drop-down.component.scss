@@ -1,4 +1,4 @@
-@mixin dashboard-component($theme){
+@mixin drop-down-component($theme){
     $primary: map-get($theme, primary);
     $secondary: map-get($theme, accent);
     $tertiary: map-get($theme, warn);
