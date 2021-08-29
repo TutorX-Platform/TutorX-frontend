@@ -300,7 +300,7 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId);
+      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
       dialogRef.close(true);
       progressDialog.close();
       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
@@ -321,7 +321,7 @@ export class AddQuestionComponent implements OnInit {
     this.task.then(() => {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
-          let attachment:Attachment = {downloadUrl: res, fileName: file.name}
+          let attachment: Attachment = {downloadUrl: res, fileName: file.name}
           this.uploadedFiles.push(attachment);
         }, () => {
           this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
@@ -383,11 +383,14 @@ export class AddQuestionComponent implements OnInit {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionTitle: questionTitle,
+      studentProfile: this.authService.student.profileImage,
+      tutorProfile: "",
       tutorChatLink: tutorChatLink,
       studentEmail: this.authService.student.email,
       attachments: [],

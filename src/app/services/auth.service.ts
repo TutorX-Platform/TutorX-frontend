@@ -13,6 +13,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
+import {firestore} from "firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -91,14 +92,8 @@ export class AuthService {
         this.student.userId = credentials.user?.uid;
         this.isStudentSet = true;
         this.SetUserData(credentials.user, this.student.firstName);
-      } else {
-        console.log(credentials);
-        this.utilService.openDialog(systemMessages.signInTitles.signInFailed, systemMessages.signInTitles.signInFailed, constants.messageTypes.warning).afterOpened().subscribe();
       }
-    })).catch((v) => {
-      this.utilService.openDialog(systemMessages.signInTitles.signInFailed, systemMessages.signInTitles.signInFailed, constants.messageTypes.warning).afterOpened().subscribe();
-      console.log(v);
-    })
+    }));
   }
 
   updateStudentData(user: User) {

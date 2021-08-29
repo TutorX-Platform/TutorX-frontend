@@ -254,6 +254,7 @@ export class CardDetailsComponent implements OnInit {
       status: constants.questionStatus.in_progress,
     }
     this.questionService.updateQuestion(this.data, data);
+    this.questionService.incrementInProgressQuestionCount();
   }
 
   onCancel() {
@@ -262,6 +263,7 @@ export class CardDetailsComponent implements OnInit {
 
   recordPayment(time: number) {
     const payment: Payment = {
+      tutorName: this.questionService.question.tutorName,
       questionTitle: this.question.questionTitle,
       studentImage: this.question.studentImage,
       studentName: this.question.studentName,
