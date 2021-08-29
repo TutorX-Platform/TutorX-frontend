@@ -11,7 +11,7 @@
       </div>
       <div class="button-container">
         <img src="../../../../assets/icons/facebook.svg" alt="">
-        <div class="button-text">Signup with Facebook</div>
+        <div class="button-text" (click)="onFacebookAuth()">Signup with Facebook</div>
       </div>
     </div>
     <div class="di"></div>
@@ -36,11 +36,11 @@
             Policy</a>
           </div>
         </div>
-        
+
         <button mat-flat-button class="button-reg" (click)="onSignUp()">
           Register
         </button>
       </div>
     </form>
-  </mat-dialog-content>  
+  </mat-dialog-content>
 </div>

@@ -95,7 +95,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path: '**', component: NavBarComponent}
+  // {path: '**', component: NavBarComponent}
 ];
 
 @NgModule({

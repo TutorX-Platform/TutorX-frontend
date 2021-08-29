@@ -55,7 +55,8 @@ export class ChatServiceService {
       chatStatus: constants.chat_status.ongoing,
       tutorId: this.auth.student.userId,
       tutorJoinedTime: Date.now(),
-      tutorsCount: 1
+      tutorsCount: 1,
+      tutorProfile: this.auth.student.profileImage
     }
     let data: ChatMsg = {
       sort: sortTime,

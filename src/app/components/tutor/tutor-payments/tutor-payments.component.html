@@ -5,7 +5,7 @@
   <div class="divi"></div>
   <div class="main-container" fxLayout="row">
     <div class="left-container" fxLayout="column" fxLayoutGap="8px">
-      <div *ngFor="let num of [1,2,3,4]">
+      <div *ngFor="let payment of payments">
         <div class="payment-details-card" fxLayout="row" fxLayoutAlign="space-between center">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
             <div fxLayout="column" fxLayoutAlign="start start">
@@ -13,24 +13,27 @@
                 #001
               </div>
               <div class="normal-text">
-                20 Aug, 2021
+                {{payment.paidTime | date:'dd/MM/yyyy'}}
               </div>
             </div>
             <div fxLayout="column" fxLayoutAlign="start start">
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-                <img src="assets/images/profile.jpg" class="avatarx">
+                <img *ngIf="payment.studentImage !== '' || payment.studentImage !== null" [src]=payment.studentImage
+                     class="avatarx">
+                <img *ngIf="payment.studentImage === '' || payment.studentImage === null" [src]=dummyAvatar
+                     class="avatarx">
                 <div class="normal-text">
-                  Amir de Sousa Reise Filho
+                  {{payment.questionTitle}}
                 </div>
               </div>
               <div class="bold-text">
-                #QES1234
+                {{payment.questionId}}
               </div>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="24px">
             <div class="bold-text">
-              $10.00
+              {{payment.fee}} USD
             </div>
             <button mat-flat-button class="more-button">
               <mat-icon>more_vert</mat-icon>

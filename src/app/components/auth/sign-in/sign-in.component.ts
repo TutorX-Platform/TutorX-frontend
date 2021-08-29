@@ -60,6 +60,12 @@ export class SignInComponent implements OnInit {
       this.dialogRef.close();
     });
   }
+
+  onFacebookSignIn() {
+    this.authService.facebookAuth().then(r => {
+      this.dialogRef.close();
+    });
+  }
 }
 
 

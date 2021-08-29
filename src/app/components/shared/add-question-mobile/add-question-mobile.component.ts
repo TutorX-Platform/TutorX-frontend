@@ -208,144 +208,77 @@ export class AddQuestionMobileComponent implements OnInit {
     this.files.splice(removeItem, 1);
   }
 
-  askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
-    const question: Questions = {
-      byLoggedUser: isLoggedIn,
-      isQuoteApproved: false,
-      isQuoteSend: false,
-      lastAssignedTutorImage: "",
-      lastAssignedTutorName: "",
-      sort: this.time.time,
-      subCategory: this.addQuestionForm.value.subCategory,
-      tutorImage: "",
-      tutorName: "",
-      studentName: this.authService.student.firstName,
-      studentUniqueKey: this.studentUniqueKey,
-      studentEmail: this.authService.student.email,
-      attachments: this.uploadedFiles,
-      chatId: this.questionId,
-      createdDate: time,
-      description: this.addQuestionForm.value.description,
-      dueDate: this.addQuestionForm.value.dueDateTime,
-      fee: 0,
-      id: this.questionId,
-      isPaid: false,
-      isRefundRequested: false,
-      questionSalt: "not required",
-      questionTitle: this.addQuestionForm.value.questionTitle,
-      status: constants.questionStatus.open,
-      studentId: this.authService.student.userId,
-      subjectCategory: this.addQuestionForm.value.subject,
-      tutorId: "",
-      uniqueId: this.questionId,
-      uniqueLink: ""
-    }
-    this.questionService.saveQuestion(question, this.questionId).then((v) => {
+  startUpload(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
+    if (this.files.length > 0) {
+      const file = this.files[0];
+      const time = new Date().getTime();
       // @ts-ignore
-      this.askedQuestions.push(this.questionId);
-      this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId);
-      progressDialog.close();
-      this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
-        (option) => {
-          console.log(option);
-        }
-      )
-    });
-
-  }
-
-  uploadFile(file: File, progressDialog: MatDialogRef<any>) {
-    const time = new Date().getTime();
-    // @ts-ignore
-    const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
-    this.taskRef = this.storage.ref(path);
-    this.task = this.taskRef.put(file);
-    this.task.then(() => {
-      this.taskRef.getDownloadURL().subscribe(
-        (res) => {
-          let attachment:Attachment = {downloadUrl: res, fileName: file.name}
-          this.uploadedFiles.push(attachment);
-        }, () => {
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-        }, () => {
-          progressDialog.close();
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.fileUploadSuccess, constants.messageTypes.success).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-          console.log(this.uploadedFiles);
-        }
-      )
-    });
-  }
-
-  askEmail(progressDialog: MatDialogRef<any>) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "30%";
-    // dialogConfig.height = "810px";
-    const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      (result) => {
-        const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-        progressDialog.afterOpened().subscribe(
-          () => {
-            this.authService.student.firstName = result.value.name;
-            this.authService.student.email = result.value.email;
-
-            this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
-              (res) => {
-                if (res.length > 0) {
-                  progressDialog.close();
-                  this.utilService.openDialog(systemMessages.questionTitles.notLoggedUserWithLoggedCredentials, systemMessages.questionMessages.notLoggedUserWithLoggedCredentials, constants.messageTypes.warning).afterOpened().subscribe();
-                } else {
-                  this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-                    // @ts-ignore
-                    this.time = res;
-                    this.askQuestion(progressDialog, this.time.time, false);
-                    this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
-                  })
-                  this.sendAknowledgementEmail(this.authService.student.email);
-                }
-              }
-            );
+      const path = constants.storage_collections.question + '/' + time + '_' + file.name;
+      this.taskRef = this.storage.ref(path);
+      this.task = this.taskRef.put(file);
+      this.task.then(() => {
+        this.taskRef.getDownloadURL().subscribe(
+          (res: any) => {
+            let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+            this.uploadedFiles.push(attachment);
+          }, () => {
+            console.log("upload error");
+          }, () => {
+            this.askQuestion(dialogRef, progressDialog);
           }
         )
-      }
-    )
-    progressDialog.close();
-  }
-
-  sendAknowledgementEmail(email: string) {
-    this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
-  }
-
-  createChat(chatId: string, studentId: string) {
-    const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
-    const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
-    const msgs: ChatMsg[] = []
-    const data: Chat = {
-      tutorChatLink: tutorChatLink,
-      studentEmail: this.authService.student.email,
-      attachments: [],
-      createdDate: new Date(),
-      studentChatLink: chatLink,
-      tutorJoinedTime: new Date(),
-      chatStatus: constants.chat_status.openForTutors,
-      id: chatId,
-      messagesId: chatId,
-      tutorId: "",
-      uniqueId: chatId,
-      studentId: studentId,
-      tutorsCount: 0
+      });
+    } else {
+      this.askQuestion(dialogRef, progressDialog);
     }
-    this.chatService.createChat(chatId, data);
+  }
+
+
+  askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>) {
+    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+      // @ts-ignore
+      this.time = res;
+      const questionId = this.utilService.generateUniqueKey(constants.genKey.question);
+      const questionLink = this.utilService.generateUniqueKey(constants.genKey.question);
+      const question: Questions = {
+        studentImage: this.authService.student.profileImage,
+        byLoggedUser: false,
+        isQuoteApproved: false,
+        isQuoteSend: false,
+        lastAssignedTutorImage: "",
+        lastAssignedTutorName: "",
+        sort: this.time.time,
+        subCategory: this.addQuestionForm.value.subCategory,
+        tutorImage: '',
+        tutorName: '',
+        studentName: "",
+        studentUniqueKey: this.studentUniqueKey,
+        studentEmail: "",
+        attachments: this.uploadedFiles,
+        chatId: "",
+        createdDate: this.time.time,
+        description: this.addQuestionForm.value.description,
+        dueDate: this.addQuestionForm.value.dueDateTime,
+        fee: 0,
+        id: questionId,
+        isPaid: false,
+        isRefundRequested: false,
+        questionSalt: "not required",
+        questionTitle: this.addQuestionForm.value.questionTitle,
+        status: constants.questionStatus.open,
+        studentId: this.authService.student.userId,
+        subjectCategory: this.addQuestionForm.value.subject,
+        tutorId: "",
+        uniqueId: questionId,
+        uniqueLink: ""
+      }
+      this.questionService.saveQuestion(question, questionId).then((v) => {
+        // @ts-ignore
+        this.askedQuestions.push(questionId);
+        dialogRef.close();
+        progressDialog.close();
+      });
+    });
   }
 
 }

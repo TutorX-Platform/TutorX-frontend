@@ -50,10 +50,10 @@
           <!-- <div>{{studentService.currentStudent.firstName}}</div>
           <button (click)="onSignOut()">log out</button> -->
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxHide.lt-sm fxShow="true">
-            <div *ngIf="authService.student.profileImage !==null">
+            <div *ngIf="authService.student.profileImage !==null && authService.student !== undefined">
               <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
             </div>
-            <div *ngIf="authService.student.profileImage==null">
+            <div *ngIf="authService.student==undefined">
               <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
             </div>
             <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px" fxHide.lt-sm fxShow="true">
@@ -62,7 +62,8 @@
             </div>
             <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
             <mat-menu #menu="matMenu">
-              <button (click)="onProfile()" mat-menu-item routerLink="/student" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+              <button (click)="onProfile()" mat-menu-item routerLink="/student" class="drop-down" fxLayout="row"
+                      fxLayoutAlign="start center"
                       fxLayoutGap="8px">
                 <mat-icon class="material-icons-outlined">account_circle</mat-icon>
                 <div>View Profile</div>

@@ -15,4 +15,8 @@ export interface Chat {
   studentChatLink: string;
   tutorChatLink: string;
   tutorsCount: number;
+  studentProfile: string;
+  tutorProfile: string;
+  questionTitle: string;
+
 }

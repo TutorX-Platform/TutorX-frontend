@@ -204,7 +204,7 @@
         <div style="width: 100%; overflow: hidden">
           <mat-form-field appearance="outline" class="my-form-field">
             <input matInput [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"
-                   [formControl]="dueDateTimeControll">
+                   [formControl]="dueDateTimeControll" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
           </mat-form-field>
@@ -298,7 +298,7 @@
           Pay now
         </button>
       </div>
-      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor">
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor && questionService.question.status !== 'Open'">
         <div class="assigned-to">
           Assigned to
         </div>

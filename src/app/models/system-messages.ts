@@ -32,5 +32,12 @@ export const questionMessages = {
   tutorSendQuote: "Sent the quote successfully",
   tutorReleaseQuestionError: "Student have paid the question so you can't leave the question",
   notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first"
-
 }
+
+export const signInTitles = {
+  signInFailed: "Sign In Failed",
+}
+
+export const signInMessages = {
+}
+

@@ -8,6 +8,10 @@ import {MailService} from "./mail.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TimeApi} from "../models/time-api";
 import * as systemMessage from '../models/system-messages'
+import * as firebase from 'firebase';
+import increment = firebase.database.ServerValue.increment;
+import FieldValue = firebase.firestore.FieldValue;
+import {firestore} from "firebase/app";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +35,29 @@ export class QuestionService {
 
   }
 
+  incrementQuestionCount() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const increment = firestore.FieldValue.increment(1);
+    statRef.update({'count': increment});
+  }
+
+  incrementInProgressQuestionCount() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const increment = firestore.FieldValue.increment(1);
+    statRef.update({'inProgress': increment});
+  }
+
+  incrementCompletedQuestionCount() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const increment = firestore.FieldValue.increment(1);
+    statRef.update({'completed': increment});
+  }
+
   saveQuestion(qustion: Questions, questionId: string) {
+    this.incrementQuestionCount();
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.doc(`${constants.collections.questions}/${questionId}`);
     return questionRef.set(qustion);
   }
@@ -91,13 +117,13 @@ export class QuestionService {
 
   tutorSendQuote(questionId: string, data: any) {
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
-      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved,systemMessage.questionMessages.questionSavedSuccessfully,constants.messageTypes.success).afterOpened().subscribe()
+      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved, systemMessage.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
     })
   }
 
   studentApproveQuote(questionId: string, data: any) {
     this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
-      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved,systemMessage.questionMessages.questionSavedSuccessfully,constants.messageTypes.success).afterOpened().subscribe()
+      this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved, systemMessage.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
     })
   }
 
