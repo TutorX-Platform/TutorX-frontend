@@ -31,7 +31,7 @@
     @include add-question-component($theme);
     @include auth-component($theme);
     @include nav-bar-component($theme);
-    @include dashboard-component($theme);
+    @include drop-down-component($theme);
     @include tutor-dashboard-component($theme);
     @include form-component($theme);
     @include chat-component($theme);

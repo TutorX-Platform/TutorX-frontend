@@ -6,6 +6,7 @@
     $background: map-get($theme, background);
 
     .admin-dashboard{
+      min-height: 90vh;
         .main-containery{
             width: 100%;
             .left-container{
