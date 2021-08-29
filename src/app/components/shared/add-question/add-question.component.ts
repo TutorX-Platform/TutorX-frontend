@@ -321,7 +321,7 @@ export class AddQuestionComponent implements OnInit {
     this.task.then(() => {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
-          let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+          let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
           this.uploadedFiles.push(attachment);
         }, () => {
           this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(

@@ -154,6 +154,15 @@
           overflow: hidden;
           text-overflow: ellipsis;
         }
+        .requested-refund{
+          background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+          padding: 8px 16px;
+          border-radius: 4px;
+          color: white;
+          font: $body-caption-default;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         .pay-now{
           background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
           padding: 8px 16px;
@@ -361,6 +370,15 @@
       }
       .request-refund{
         background: linear-gradient(276.39deg, #D72F2F 0.4%, #B92E2E 58.12%, #CB2F2F 112.35%);
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        font: $body-caption-default;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .requested-refund{
+        background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
         padding: 8px 16px;
         border-radius: 4px;
         color: white;

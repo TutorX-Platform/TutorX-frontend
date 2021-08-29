@@ -279,8 +279,11 @@
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
-        <button mat-flat-button class="request-refund">
+        <button *ngIf="!questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button class="request-refund">
           Request refund
+        </button>
+        <button *ngIf="questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button class="requested-refund">
+          Requested refund
         </button>
       </div>
       <div *ngIf="!questionService.question.isPaid && !isTutor && questionService.question.isQuoteApproved"
@@ -299,7 +302,8 @@
           Pay now
         </button>
       </div>
-      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor && questionService.question.status !== 'Open'">
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px"
+           *ngIf="!isTutor && questionService.question.status !== 'Open'">
         <div class="assigned-to">
           Assigned to
         </div>
@@ -536,7 +540,7 @@
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
-        <button mat-flat-button class="request-refund">
+        <button (click)="onRequestRefund()" mat-flat-button class="request-refund">
           Request refund
         </button>
       </div>

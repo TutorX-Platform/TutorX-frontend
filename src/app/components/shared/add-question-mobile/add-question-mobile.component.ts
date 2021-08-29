@@ -109,7 +109,7 @@ export class AddQuestionMobileComponent implements OnInit {
       this.task.then(() => {
         this.taskRef.getDownloadURL().subscribe(
           (res: any) => {
-            let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+            let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
             this.uploadedFiles.push(attachment);
           }, () => {
             console.log("upload error");
