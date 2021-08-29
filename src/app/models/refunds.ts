@@ -1,11 +1,13 @@
 export interface Refund {
   id: string;
   studentId: string;
+  studentName:string;
+  tutorName:string;
   tutorId: string;
   title: string;
   message: string;
   questionId: string;
-  chatId: string;
-  refundStatus: string;
-  refundAmount: string;
+  refundAmount: number;
+  isApproved:false;
+  isRefunded:false;
 }

@@ -20,6 +20,7 @@ import {CardDetailsComponent} from "../payment-gateway/card-details/card-details
 import * as systemMessages from '../../../models/system-messages'
 import {MailService} from "../../../services/mail.service";
 import {Attachment} from "../../../models/Attachment";
+import {PaymentService} from "../../../services/payment.service";
 
 @Component({
   selector: 'app-chat',
@@ -95,6 +96,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private dialog: MatDialog,
               private location: Location,
               private mailService: MailService,
+              private paymentService: PaymentService,
               private studentService: StudentService) {
   }
 
@@ -236,6 +238,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         // @ts-ignore
         this.questionService.question = res;
         // @ts-ignore
+        this.question = res;
+        // @ts-ignore
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         console.log(res);
       }
@@ -333,11 +337,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
           this.uploadReady = false;
-          let attachment: Attachment = {downloadUrl: res, fileName: file.name}
+          let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
           this.chat.attachments.push(attachment);
           attachment = {
             downloadUrl: "",
             fileName: "",
+            extension: ''
           }
           this.chatService.createChat(this.chatToken, this.chat);
           this.isSendButtonDissabled = true;
@@ -396,6 +401,21 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, keyword).subscribe();
       }
     })
+  }
+
+  onRequestRefund() {
+    this.utilService.openDialog(systemMessages.questionTitles.requestRefund, systemMessages.questionMessages.requestRefund, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle);
+          const data = {
+            isRefundRequested: true
+          }
+          this.questionService.updateQuestion(this.chatToken, data);
+          this.utilService.openDialog(systemMessages.questionTitles.requestRefund, systemMessages.questionMessages.requestRefundSuccess, constants.messageTypes.warning).afterClosed().subscribe()
+        }
+      }
+    )
   }
 
 }

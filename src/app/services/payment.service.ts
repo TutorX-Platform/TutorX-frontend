@@ -3,6 +3,7 @@ import * as constants from "../models/constants";
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Payment} from "../models/payment";
 import {AngularFirestoreCollection} from 'angularfire2/firestore';
+import {Refund} from "../models/refunds";
 
 
 @Injectable({
@@ -23,5 +24,25 @@ export class PaymentService {
     // @ts-ignore
     const paymentRef: AngularFirestoreDocument<Payment> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", '==', tutorId));
     return paymentRef;
+  }
+
+  requestRefund(questionId: string, amount: number, studentId: string, studentName: string, tutorId: string, tutorName: string, questionTitle: string) {
+    const refund: Refund = {
+      id: questionId,
+      isApproved: false,
+      isRefunded: false,
+      message: constants.refundMessages.dummy,
+      questionId: questionId,
+      refundAmount: amount,
+      studentId: studentId,
+      studentName: studentName,
+      title: questionTitle,
+      tutorId: tutorId,
+      tutorName: tutorName
+
+    }
+    // @ts-ignore
+    const paymentRef: AngularFirestoreDocument<Refund> = this.angularFirestoreService.collection(constants.collections.refund).doc(questionId);
+    return paymentRef.set(refund);
   }
 }
