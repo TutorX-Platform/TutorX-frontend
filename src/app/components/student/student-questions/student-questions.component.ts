@@ -37,6 +37,8 @@ export class StudentQuestionsComponent implements OnInit {
   isCompleted = false;
   attachments: string[] = [];
 
+  dummyProfPic = constants.dummy_profile_picture;
+
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -71,7 +73,7 @@ export class StudentQuestionsComponent implements OnInit {
   ]
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private questionService: QuestionService,
     public studentService: StudentService,
     private breakpointObserver: BreakpointObserver,

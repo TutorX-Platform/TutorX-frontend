@@ -58,7 +58,7 @@
               <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
             </div>
             <div *ngIf="authService.student.profileImage == null">
-              <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+              <img [src]="dummyProfPic" alt="Avatar" class="avatar">
             </div>
             <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
               <div class="profile-title">{{studentService.currentStudent.firstName}}</div>
@@ -87,11 +87,13 @@
           </button>
           <span>Questions</span>
         </div>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>circle</mat-icon>
-        </button>
+        <div *ngIf="authService.student.profileImage">
+          <img [src]="authService.student.profileImage" alt="Avatar" class="avatar-mobile">
+        </div>
+        <div *ngIf="authService.student.profileImage === null">
+          <img [src]="dummyProfPic" alt="Avatar" class="avatar-mobile">
+        </div>
       </mat-toolbar>
-      <!--<app-student-questions *ngIf="selectedPage === 1"></app-student-questions>-->
       <router-outlet></router-outlet>
 
     </mat-sidenav-content>

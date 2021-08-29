@@ -94,8 +94,12 @@
             {{q.questionTitle}}
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
-            <div class="time">2 days ago</div>
-            <img src="../../../../assets/images/profile.jpg" class="avatar">
+            <div *ngIf="authService.student.profileImage">
+              <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
+            </div>
+            <div *ngIf="authService.student.profileImage === null">
+              <img [src]="dummyProfPic" alt="Avatar" class="avatar">
+            </div>
           </div>
         </div>
       </div>

@@ -36,6 +36,8 @@ export class StudentComponent implements OnInit {
     role: ''
   };
 
+  dummyProfPic = constants.dummy_profile_picture;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
