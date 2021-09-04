@@ -1,0 +1,49 @@
+$grid-breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 1024px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+$breakpoints: (
+  'x-small': 375px,
+  'small': 540px,
+  'medium': 720px,
+  'large': 992px,
+  'x-large': 1200px
+) !default;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);
+$variable-prefix: er- !default;
+$enable-grid-classes: true !default;
+$grid-columns: 12;
+$grid-gutter-width: 16px;
+//320px — 480px: Mobile devices
+//481px — 768px: iPads, Tablets
+//769px — 1024px: Small screens, laptops
+//1025px — 1200px: Desktops, large screens
+//1201px and more —  Extra large screens, TV
+$grid-breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 1024px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+$breakpoints: (
+  'x-small': 375px,
+  'small': 540px,
+  'medium': 720px,
+  'large': 992px,
+  'x-large': 1200px
+) !default;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);

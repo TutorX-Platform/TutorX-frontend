@@ -1,0 +1,185 @@
+.top-bar {
+  position: relative;
+  padding: 0 0 !important;
+  display: flex;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+  justify-content: space-between;
+  &__wrap {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+  }
+  &__nav-icon {
+    display: none;
+    @include for-size(phone-only) {
+      display: block !important;
+    }
+    @include for-size(tablet-portrait-up) {
+      display: block !important;
+    }
+    @include for-size(tablet-landscape-up) {
+      display: none !important;
+    }
+    @include for-size(desktop-up) {
+      display: none !important;
+    }
+    @include for-size(big-desktop-up) {
+      display: none !important;
+    }
+  }
+  &__logo{
+    height: 3.2rem;
+  }
+  &__title-container {
+    flex:1;
+    padding: 0 var(--space--msm);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    @include for-size(phone-only) {
+      display: none !important;
+    }
+    @include for-size(tablet-portrait-up) {
+      display: none !important;
+    }
+    @include for-size(tablet-landscape-up) {
+      display: flex !important;
+    }
+    @include for-size(desktop-up) {
+      display: flex !important;
+    }
+    @include for-size(big-desktop-up) {
+      display: flex !important;
+    }
+  }
+  &__contents {
+    z-index: 10;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  &__search-wrapper {
+    display: flex;
+    flex: 1 1 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    max-width: none;
+    padding: 0 var(--space--lg);
+  }
+  &__user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__actions{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__user-details {
+    padding: 0 var(--space--msm);
+    text-align: right;
+    @include for-size(phone-only) {
+      display: none !important;
+    }
+    @include for-size(tablet-portrait-up) {
+      display: none !important;
+    }
+    @include for-size(tablet-landscape-up) {
+      display: block !important;
+    }
+    @include for-size(desktop-up) {
+      display: block !important;
+    }
+    @include for-size(big-desktop-up) {
+      display: block !important;
+    }
+  }
+  &__user-name{
+    font: var(--desktop---body-default);
+    color: var(--text---default);
+  }
+  &__user-detail{
+    font: var(--desktop---caption);
+    color: var(--text---subdued);
+  }
+  &__search {
+    max-width: 960px;
+    width: 100%;
+    border-radius: var(--corner--xs);
+    .mat-form-field-wrapper {
+      background: var(--surface--neutral---default);
+      font: var( --desktop---body-default);
+      border-radius: var(--corner--xs);
+      padding: 0;
+      color: var( --text---default);
+    }
+    .mat-form-field-infix {
+      padding: 0;
+      border: none;
+    }
+    .mat-input-element {
+      padding: 12px var(  --space--md) 12px var( --space--sm);
+    }
+    .mat-form-field-outline,
+    .mat-form-field-suffix {
+      top: 0 !important;
+      color: transparent;
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+    .mat-form-field-flex {
+      align-items: center;
+      margin-top: 0 !important;
+    }
+    .mat-form-field-prefix {
+      padding: 0 var( --space--sm);
+      display: flex;
+      align-items: center;
+    }
+    .mat-form-field-label-wrapper {
+      display: flex;
+      align-items: center;
+    }
+    .mat-form-field-label {
+      top: var(--space--lg);
+      padding: 0 var( --space--sm);
+    }
+  }
+  &__drop-list {
+    border-radius: var(--corner--xs);
+    margin: var( --space--sm) 0;
+  }
+  &__drop-list-item {
+    font: var(--desktop---caption);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .mat-option-text {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .mat-option-text {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__drop-list-item-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__drop-list-item-icon {
+    margin-top: 0 !important;
+    margin-right: var(  --space--md) !important;
+  }
+}
+

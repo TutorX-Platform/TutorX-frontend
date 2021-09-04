@@ -1,0 +1,60 @@
+$heading-desktop-h1:normal 600 6rem/6.25rem Roboto, 'Poppins', sans-serif;
+$heading-desktop-h2:normal 700 4rem/4.813rem Roboto, 'Poppins', sans-serif;
+$heading-desktop-h3:normal 700 2.375rem/3.563rem Roboto,'Poppins', sans-serif;
+$heading-desktop-h3-light:normal 400 2.375rem/3.563rem Roboto,'Poppins', sans-serif;
+$heading-desktop-h4:normal 600 1.75rem/2.625rem Roboto,'Poppins', sans-serif;
+$heading-desktop-h4-light:normal 400 1.75rem/2.625rem Roboto,'Poppins', sans-serif;
+$heading-desktop-h5:normal 600 1.313rem/2rem Roboto,'Poppins', sans-serif;
+$heading-desktop-h6:normal 600 1.125rem/1.537rem Roboto,'Inter', sans-serif;
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0 !important;
+}
+h2{
+  font: normal 400 4rem/4.813rem Roboto, 'Poppins', sans-serif;
+}
+h3{
+  font:normal 700 2.375rem/3.563rem Roboto,'Poppins', sans-serif;
+}
+h4{
+  font: normal 400 1.75rem/2.625rem Roboto,'Poppins', sans-serif;
+}
+
+p{
+  font: var( --desktop---body-default);
+}
+.brd-display-x-large{
+  font: var(--desktop---display-x-large) !important;
+  line-height: 44px;
+  font-weight: 700;
+}
+
+.brd-display-medium{
+  font: var(--desktop---display-medium)!important;
+}
+.brd-display-small{
+  font: var(--desktop---display-small)!important;
+}
+.brd-display-page-heading{
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.brd-heading{
+  font: var(--desktop---heading)!important;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+.brd-subheading{
+  font: var(--desktop---subheading)!important;
+}
+.brd-button{
+  font: var(--desktop---button)!important;
+}
+.brd-body{
+  font: var(--desktop---body-default)!important;
+}
+.brd-caption{
+  font: var(--desktop---caption)!important;
+}
+
