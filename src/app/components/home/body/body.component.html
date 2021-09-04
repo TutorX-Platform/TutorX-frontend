@@ -1,65 +1,128 @@
+<mat-toolbar  class="top-bar__wrap">
+  <div class="container">
+    <mat-toolbar-row class="top-bar ">
+      <button
+        class="top-bar__nav-icon"
+        mat-icon-button
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="top-bar__title-container">
+        <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
+      </div>
+      <div class="top-bar__actions">
+        <button class="c-button  " mat-button>Sign in</button>
+        <button class="c-button c-flat-button c-button-secondary" mat-flat-button>Create an account</button>
+      </div>
+
+    </mat-toolbar-row>
+  </div>
+
+</mat-toolbar>
+
+<section class="">
+  <div class="container ">
+    <div class="s-hero">
+      <div class="s-hero__title-wrapper">
+        <h2  class="s-hero__title">A <span style="color: var(--action--primary---default)">Smarter</span> way to Student</h2>
+        <h4 class="s-hero__subtitle">Everything is figureoutable</h4>
+        <div class="">
+          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary">Find a tutor form me<mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </div>
+      <img class="s-hero__image" src="assets/images/hero_image.png" alt="logo"/>
+    </div>
+  </div>
+
+</section>
+<section class="">
+  <div class="container ">
+    <div class="s-features">
+<!--      <h2>Services we provide</h2>-->
+<!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+      <div class="row s-features__items">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
+          <div class="s-features__item">
+            <div class="s-features__media">
+              <mat-icon>home</mat-icon>
+            </div>
+            <div class="s-features__content">
+              <span class="s-features__title">{{detail.title}}</span>
+              <span class="s-features__description">{{detail.description}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="s-flow">
+  <div class="container ">
+    <div class="s-flow__wrapper">
+      <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
+      <div class="s-flow__content">
+        <h2>Services we provide</h2>
+        <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>
+        <div class="l-iteration">
+          <div class="l-iteration__item">
+            <div class="l-iteration__border-wrap">
+              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+              <div class="l-iteration__border"></div>
+            </div>
+            <div class="l-iteration__content">
+              <div class="l-iteration__title">Upload your problem</div>
+              <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+            </div>
+          </div>
+          <div class="l-iteration__item">
+            <div class="l-iteration__border-wrap">
+              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+              <div class="l-iteration__border"></div>
+            </div>
+            <div class="l-iteration__content">
+              <div class="l-iteration__title">Talk to a tutor</div>
+              <div class="l-iteration__subtitle">Chat with one of the expert in the field</div>
+            </div>
+          </div>
+          <div class="l-iteration__item">
+            <div class="l-iteration__border-wrap">
+              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+              <div class="l-iteration__border"></div>
+            </div>
+            <div class="l-iteration__content">
+              <div class="l-iteration__title">Get a quote</div>
+              <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+            </div>
+          </div>
+          <div class="l-iteration__item">
+            <div class="l-iteration__border-wrap">
+              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+              <div class="l-iteration__border"></div>
+            </div>
+            <div class="l-iteration__content">
+              <div class="l-iteration__title">Make the payment</div>
+              <div class="l-iteration__subtitle">Using your preffered payment method</div>
+            </div>
+          </div>
+          <div class="l-iteration__item">
+            <div class="l-iteration__border-wrap">
+              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+              <div class="l-iteration__border"></div>
+            </div>
+            <div class="l-iteration__content">
+              <div class="l-iteration__title">Get the assistance</div>
+              <div class="l-iteration__subtitle">Get your work done and explanations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <div class="home">
-<!-- banner componet -->
-<div fxLayout="column" fxLayoutAlign="center" class="banner-web" fxShow="true" fxHide.lt-sm="true">
-    <div class="image-container" fxHide.lt-xl fxShow="true"></div>
-    <div class="image-container-small" fxHide.gt-lg fxShow="true"></div>
-    <div fxLayout="row" fxLayoutAlign="none center">
-        <div fxLayout="column" fxLayoutGap="16px"  class="details-container" fxLayout="start start">
-            <div class="banner-title">Get Homework Help</div>
-            <div class="banner-sub-title">For university/college, high school and middle school students</div>
-            <div class="banner-details">Talk to our experts 24/7. Pay only for the specific requirement. We assist in your homework !!
-            </div>
-            <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
-                Get help
-                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-            </button>
-        </div>
-    </div>
-</div>
 
-<!-- banner mobile -->
-<div fxLayout="column" class="banner-mobile" fxLayoutAlign="space-around center" fxShow="true" fxHide.gt-xs="true">
-    <div fxLayout="row" class="image-container">
-        <img src="../../../../assets/images/student-mobile.svg">
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-        <div class="details-container">
-            <div class="get-help-mobile-title">Get Instant Help</div>
-            <div class="get-help-mobile-subtitle">For university/college, high school and middle school students</div>
-            <div class="get-help-mobile-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
-            <button mat-flat-button class="get-help-mobile-button" routerLink="/add-question">
-                Get help
-                <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- features component -->
-<div fxLayout="column" [ngClass.gt-xs]="'features-container-web'"
-[ngClass.lt-sm]="{'features-container-mobile': true}" >
-    <div fxLayout="row" fxLayoutAlign="center " fxShow="true" fxHide.lt-sm="true">
-        <div class="heading-container-web" >
-            <div class="features-title">Why Tutetory ?</div>
-            <div class="features-description">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
-        </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
-        <div class="heading-container-mobile">
-            <div class="features-mobile-heading-title">Why Tutetory ?</div>
-            <div class="features-mobile-heading-subtitle">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</div>
-        </div>
-    </div>
-    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutGap.lt-sm="0px" fxLayoutAlign="center start" class="card-container">
-        <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="100%" fxFlex="33%" *ngFor="let detail of details">
-            <div class="card">
-                <img src="{{detail.imageUrl}}" alt="" width="30px" height="30px">
-                <div class="card-title">{{detail.title}}</div>
-                <div class="card-description">{{detail.description}}</div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- client-web-->
 <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">

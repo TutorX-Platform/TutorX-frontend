@@ -24,11 +24,12 @@ import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-
 import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tutor-activities.component";
 import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-profile.component";
 import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-payments.component";
+import {BodyComponent} from './components/home/body/body.component';
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
-  {path: '', component: NavBarComponent},
+  {path: '', component: BodyComponent},
   {path: 'sign-in', component: SignInMobileComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
