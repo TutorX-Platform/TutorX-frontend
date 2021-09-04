@@ -5,7 +5,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .dialog-container-custom .mat-dialog-container {
-    padding: 0;
-    background-color: var(--background);
+    background: rgba(0, 0, 0, 0.0) !important;
+    box-shadow: none !important;
   }
 }
