@@ -111,7 +111,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   }
 
-  onNavigateBack(){
+  onNavigateBack() {
     this.location.back();
   }
 
@@ -217,6 +217,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      questionNumber: "sljahk",
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -248,19 +249,46 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
+
     this.questionService.saveQuestion(question, this.questionId).then((v) => {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
       this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
-      // dialogRef.close(true);
       progressDialog.close();
       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
         (option) => {
-          console.log(option);
+          this.questionService.incrementQuestionNumber();
+          this.questionService.incrementQuestionCount();
         }
       )
     });
+    // this.questionService.findQuestionNumber().subscribe(
+    //   (res) => {
+    //     console.log('hiiiiiiiiiiiiiii');
+    //     console.log(res);
+    //     // @ts-ignore
+    //     this.questionService.saveQuestion(question, this.questionId, 'constants.uniqueIdPrefix.prefixQuestionNumber + res.number').then((v) => {
+    //       // @ts-ignore
+    //       this.askedQuestions.push(this.questionId);
+    //       this.sendAknowledgementEmail(this.authService.student.email);
+    //       this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+    //       progressDialog.close();
+    //       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
+    //         (option) => {
+    //           this.questionService.incrementQuestionNumber();
+    //           this.questionService.incrementQuestionCount();
+    //         }
+    //       )
+    //     });
+    //   }, () => {
+    //     console.log('hiiiiiiiiiiiiiii err');
+    //
+    //   }, () => {
+    //     console.log('hiiiiiiiiiiiiiii cmp');
+    //
+    //   }
+    // )
 
   }
 

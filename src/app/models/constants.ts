@@ -68,6 +68,7 @@ export const uniqueIdPrefix = {
   prefixStudent: 'S',
   prefixTutor: 'T',
   prefixQuestion: 'Q',
+  prefixQuestionNumber: 'QN',
 }
 
 export const userTypes = {

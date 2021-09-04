@@ -42,6 +42,19 @@ export class QuestionService {
     statRef.update({'count': increment});
   }
 
+  incrementQuestionNumber() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const increment = firestore.FieldValue.increment(1);
+    statRef.update({'number': increment});
+  }
+
+  findQuestionNumber() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count").valueChanges();
+    return statRef;
+  }
+
   incrementInProgressQuestionCount() {
     // @ts-ignore
     const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
@@ -57,7 +70,7 @@ export class QuestionService {
   }
 
   saveQuestion(qustion: Questions, questionId: string) {
-    this.incrementQuestionCount();
+    // qustion.questionNumber = questionNumber;
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.doc(`${constants.collections.questions}/${questionId}`);
     return questionRef.set(qustion);
   }

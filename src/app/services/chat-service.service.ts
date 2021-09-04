@@ -22,9 +22,7 @@ export class ChatServiceService {
   }
 
   createChat(chatId: string, data: Chat) {
-    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).set(data).then(v => {
-      console.log(v);
-    })
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).set(data).then();
   }
 
   sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean) {

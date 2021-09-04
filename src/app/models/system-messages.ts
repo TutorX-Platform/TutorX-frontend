@@ -18,7 +18,7 @@ export const questionTitles = {
 }
 
 export const questionMessages = {
-  questionSavedSuccessfully: "Question saved successfully",
+  questionSavedSuccessfully: "Your question has been successfully submitted",
   fileUploadError: "File is not uploaded",
   fileUploadSuccess: "File Upload Successfully",
   uploadOneFileAtATime: "Please upload one file at a time",
@@ -35,7 +35,6 @@ export const questionMessages = {
   notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first",
   requestRefund:"Are you sure to request a refund for this question",
   requestRefundSuccess:"Refund request success, Our admins will contact you soon !!",
-
 }
 
 export const signInTitles = {
