@@ -7,6 +7,7 @@ import {AddQuestionComponent} from "../add-question/add-question.component";
 import {QuestionService} from "../../../services/question-service.service";
 import {AuthService} from "../../../services/auth.service";
 import {StudentService} from "../../../services/student-service.service";
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-question-card',
@@ -23,7 +24,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public dueDate: any = new Date;
   @Input() public descriptionTitle: string = 'Hi Tutors';
   @Input() public description: string = '';
-  @Input() public images: string[] = [];
+  @Input() public attachments: Attachment[] = [];
   @Input() public viewedByAmount: number = 0;
   @Input() public isTutorJoined: boolean = true;
   @Input() public studentEmail: string = '';
@@ -77,7 +78,7 @@ export class QuestionCardComponent implements OnInit {
       subCategory: this.subCategory,
       dueDate: this.dueDate,
       description: this.description,
-      images: this.images,
+      attachments: this.attachments,
       role: this.role,
       isTutor: true,
       studentEmail: this.studentEmail,

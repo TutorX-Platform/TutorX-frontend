@@ -262,10 +262,10 @@ export const unAuthorizedKeywords = [
 
 export function getProgressDialogData() {
   return {
-    width: '200px',
-    // height: '400px',
+    // width: '200px',
     disableClose: true,
-    panelClass: 'loading'
+    hasBackdrop: false,
+    panelClass: 'dialog-container-custom'
   };
 }
 
