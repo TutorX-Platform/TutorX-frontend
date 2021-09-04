@@ -1,125 +1,38 @@
+@use '~@angular/material' as mat;
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 @import '~animate.css/animate.min';
 
-@import '~@angular/material/theming'; //import theme
-@include mat-core();
 
 @import 'theme/variables.scss';
 @import 'theme/component.collective.scss';
 
 /* For use in src/lib/core/theming/_palette.scss */
-$md-palletteprimary: (
-    50 : #f0eefd,
-    100 : #d9d4fb,
-    200 : #bfb7f8,
-    300 : #a59af5,
-    400 : #9284f2,
-    500 : #7f6ef0,
-    600 : #7766ee,
-    700 : #6c5bec,
-    800 : #6251e9,
-    900 : #4f3fe5,
-    A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #d2ceff,
-    A700 : #bbb4ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-$md-palletteteritory: (
-    50 : #ffedee,
-    100 : #ffd1d6,
-    200 : #ffb2ba,
-    300 : #ff939e,
-    400 : #ff7c8a,
-    500 : #ff6575,
-    600 : #ff5d6d,
-    700 : #ff5362,
-    800 : #ff4958,
-    900 : #ff3745,
-    A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #ffe1e3,
-    A700 : #ffc8cb,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$md-palettesecondary: (
-    50 : #e7f9f1,
-    100 : #c3f1db,
-    200 : #9be8c3,
-    300 : #72dfab,
-    400 : #54d899,
-    500 : #36d187,
-    600 : #30cc7f,
-    700 : #29c674,
-    800 : #22c06a,
-    900 : #16b557,
-    A100 : #e7fff0,
-    A200 : #b4ffd0,
-    A400 : #81ffb0,
-    A700 : #68ffa0,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-$palatte-primary: mat-palette($md-palletteprimary);
-$palatte-secondary: mat-palette($md-palettesecondary);
-$palatte-tertiary: mat-palette($md-palletteteritory);
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: mat.define-palette(mat.$red-palette);
 //theme
-$app-theme: mat-light-theme($palatte-primary,$palatte-secondary,$palatte-tertiary);
-
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
 .theme-default{
-    @include angular-material-theme($app-theme);
-    @include app-components($app-theme);
+    @include mat.all-component-themes($my-theme);
+    @include app-components($my-theme);
 }
-
-html, body { height: 100%; }
+@import "theme/main";
+html, body {
+  height: 100%;
+  background-color: var(--background---default);
+  font-family: Roboto, "Poppins", sans-serif;
+  color: var(--text---default);
+}
 body { margin: 0;}
 
 

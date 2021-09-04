@@ -1,0 +1,204 @@
+:root{
+  font-size: 10px;
+  /* Text-size styles */
+  /* base size: desktop---body (14px) */
+  //font-style font-weight font-size/line-height font-family,
+  --desktop---display-x-large: normal 800 4.2rem/4.4rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-large: normal 500 2.8rem/3.2rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-medium: normal 400 2.6rem/3.2rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-small: normal 400 2rem/2.8rem Roboto, 'Poppins', sans-serif;
+  --desktop---heading: normal 600 1.6rem/2.4rem Roboto, 'Poppins', sans-serif;
+  --desktop---subheading: normal 600 1.2rem/1.6rem Roboto, 'Poppins', sans-serif;
+  --desktop---caption: normal 400 1.2rem/1.6rem Roboto, 'Poppins', sans-serif;
+  --desktop---button: normal 500 1.4rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-default: normal 400 1.6rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-medium: normal 500 1.6rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-bold: normal 600 1.6rem/2rem Roboto, 'Poppins', sans-serif;
+
+
+  --mobile---display-x-large: 1.93rem;
+  --mobile---display-large: 1.71rem;
+  --mobile---display-medium: 1.5rem;
+  --mobile---display-small: 1.14rem;
+  --mobile---heading: 1.21rem;
+  --mobile---subheading: 0.93rem;
+  --mobile---body: 1.07rem;
+  --mobile---caption: 0.93rem;
+  --mobile---button: 1.07rem;
+
+
+  /* Color styles */
+  --border-shadow: #AEB4B9;
+  --backdrop: #000000;
+  --overlay: #FFFFFF;
+  --divider: #E1E3E5;
+
+  --background---default: #F7F7F7;
+  --background---hovered: #F1F2F3;
+  --background---pressed: #EDEEEF;
+  --background---selected: #EDEEEF;
+
+  --surface---default: #FFFFFF;
+  --surface---subdued: #FAFBFB;
+  --surface---hovered: #F6F6F7;
+  --surface---pressed: #F1F2F3;
+  --surface---depressed: #EDEEEF;
+  --surface---disabled: #FAFBFB;
+
+  --surface--selected---default: #F2F7FE;
+  --surface--selected---hovered: #EDF4FE;
+  --surface--selected---pressed: #E5EFFD;
+
+  --surface--warning---default: #FFD79D;
+  --surface--warning---subdued: #FFF5EA;
+  --surface--warning---subdued-hovered: #FFF2E2;
+  --surface--warning---subdued--pressed: #FFEBD3;
+
+  --surface--critical---default: #FED3D1;
+  --surface--critical---subdued: #FFF4F4;
+  --surface--critical---subdued-hovered: #FFF0F0;
+  --surface--critical---subdued-pressed: #FFE9E8;
+  --surface--critical---subdued-depressed: #FEBCB9;
+
+  --surface--success---default: #AEE9D1;
+  --surface--success---subdued: #F1F8F5;
+  --surface--success---subdued-hovered: #ECF6F1;
+  --surface--success---subdued-pressed: #E2F1EA;
+
+  --surface--highlight---default: #A4E8F2;
+  --surface--highlight---subdued: #EBF9FC;
+  --surface--highlight---subdued-hovered: #E4F7FA;
+  --surface--highlight---subdued-pressed: #D5F3F8;
+
+  --surface--neutral---default: #E4E5E7;
+  --surface--neutral---subdued: #F6F6F7;
+  --surface--neutral---hovered: #DBDDDF;
+  --surface--neutral---pressed: #C9CCD0;
+  --surface--neutral---disabled: #F1F2F3;
+  --surface--primary---selected: #F1F8F5;
+  --surface--primary---selected-hovered: #B3D0C3;
+  --surface--primary---selected-pressed: #A2BCB0;
+
+  --text---default: #222D34;
+  --text---subdued: #6D7175;
+  --text---disabled: #8C9196;
+  --text---critical: #D72C0D;
+  --text---warning: #916A00;
+  --text---success: #008060;
+  --text---highlight: #347C84;
+  --text--on---interactive: #FFFFFF;
+  --text--on---primary: #FFFFFF;
+  --text--on---critical: #FFFFFF;
+  --text--on---secondary: #D8D5EE;
+
+  --icon---default: #5C5F62;
+  --icon---subdued: #8C9196;
+  --icon---hovered: #1A1C1D;
+  --icon---pressed: #44474A;
+  --icon---disabled: #BABEC3;
+  --icon---critical: #D72C0D;
+  --icon---warning: #B98900;
+  --icon---success: #007F5F;
+  --icon---highlight: #00A0AC;
+  --icon--on---interactive: #FFFFFF;
+  --icon--on---primary: #FFFFFF;
+  --icon--on---critical: #FFFFFF;
+
+  --interactive---default: #2C6ECB;
+  --interactive---hovered: #1F5199;
+  --interactive---pressed: #103262;
+  --interactive---disabled: #BDC1CC;
+  --interactive---critical: #D82C0D;
+  --interactive---critical--hovered: #CD290C;
+  --interactive---critical--disabled: #FD938D;
+  --interactive---critical--pressed: #670F03;
+
+  --border---default: #8C9196;
+  --border---subdued: #C9CCCF;
+  --border---hovered: #999EA4;
+  --border---depressed: #575959;
+  --border---disabled: #D2D5D8;
+  --border--critical---default: #FD5749;
+  --border--critical---subdued: #E0B3B2;
+  --border--critical---disabled: #FFA7A3;
+  --border--warning---default: #B98900;
+  --border--warning---subdued: #E1B878;
+  --border--success---default: #00A47C;
+  --border--success---subdued: #95C9B4;
+  --border--highlight---default: #449DA7;
+  --border--highlight---subdued: #98C6CD;
+
+  --focused---default: #458FFF;
+
+  --action--secondary---default: #28214D;
+  --action--secondary---hovered: #F6F6F7;
+  --action--secondary---pressed: #F1F2F3;
+  --action--secondary---depressed: #6D7175;
+  --action--secondary---disabled: #FFFFFF;
+  --action--primary---default: #7F6EF0;
+  --action--primary---hovered: #6451DE;
+  --action--primary---pressed: #5140C5;
+  --action--primary---depressed: #2A1A94;
+  --action--primary---subdued: #F2F0FE;
+  --action--primary---disabled: #F1F1F1;
+  --action--critical---default: #D82C0D;
+  --action--critical---hovered: #BC2200;
+  --action--critical---pressed: #A21B00;
+  --action--critical---depressed: #6C0F00;
+  --action--critical---disabled: #F1F1F1;
+
+  --decorative---surface-one: #FFC96B;
+  --decorative---surface-two: #FFC4B0;
+  --decorative---surface-three: #92E6B5;
+  --decorative---surface-four: #91E0D6;
+  --decorative---surface-five: #FDC9D0;
+  --decorative---text-one: #3D2800;
+  --decorative---text-two: #490B1C;
+  --decorative---text-three: #002F19;
+  --decorative---text-four: #002D2D;
+  --decorative---text-five: #4F0E1F;
+  --decorative---icon-one: #7E5700;
+  --decorative---icon-two: #AF294E;
+  --decorative---icon-three: #006D41;
+  --decorative---icon-four: #006A68;
+  --decorative---icon-five: #AE2B4C;
+
+  --border-shadow---subdued: rgba(186, 191, 196, 1);
+  --border--neutral---subdued: rgba(186, 191, 195, 1);
+  --shadow---from-dim-light: rgba(0, 0, 0, 0.20);
+  --shadow---from-ambient-light: rgba(23, 24, 24, 0.05);
+  --shadow---from-direct-light: rgba(0, 0, 0, 0.15);
+  --hint---from-direct-light: rgba(0, 0, 0, 0.15);
+
+  /* Effect styles */
+  --depth--inset-01: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
+  --depth-01:  0px 1px 0px rgba(0, 0, 0, 0.05);
+  --depth-02:  0px 0px 1px rgba(0, 0, 0, 0.25), 0px 2px 1px rgba(0, 0, 0, 0.05);
+  --depth-03:  0px 2px 10px rgba(0, 0, 0, 0.1), 0px 0px 2px rgba(0, 0, 0, 0.2);
+  --depth-04:  0px 4px 20px rgba(0, 0, 0, 0.15), 0px 0px 3px rgba(0, 0, 0, 0.1);
+  --depth-05:  0px 8px 40px rgba(0, 0, 0, 0.2), 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+
+  /* Spaces Styles */
+  --space--xs: 0.4rem; //4px
+  --space--sm: 0.8rem; //8px
+  --space--msm: 1rem; //12px
+  --space--md: 1.6rem; //16px
+  --space--mmd: 2rem; //20px
+  --space--lg: 2.4rem; //24px
+  --space--mlg: 3.2rem; //32px
+  --space--xlg: 4rem; //40px
+
+  /* Corners Styles */
+  --corner--base:0; //4px
+  --corner--xs: 0.4rem; //4px
+  --corner--sm: 0.8rem; //8px
+  --corner--msm: 1.2rem; //12px
+  --corner--md: 1.6rem; //16px
+  --corner--mmd: 2rem; //20px
+  --corner--lg: 2.4rem; //24px
+  --corner--mlg: 3.2rem; //32px
+  --corner--xlg: 4rem; //40px
+
+
+}
