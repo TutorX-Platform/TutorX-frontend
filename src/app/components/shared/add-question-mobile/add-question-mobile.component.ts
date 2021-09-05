@@ -139,7 +139,7 @@ export class AddQuestionMobileComponent implements OnInit {
     return this.subOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  onNavigateBack(){
+  onNavigateBack() {
     this.location.back();
   }
 
@@ -241,7 +241,7 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.saveQuestion(question, this.questionId).then((v) => {
+    this.questionService.saveQuestion(question, this.questionId, 'qq').then((v) => {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
@@ -351,8 +351,6 @@ export class AddQuestionMobileComponent implements OnInit {
     }
     this.chatService.createChat(chatId, data);
   }
-
-
 
 
 }

@@ -11,7 +11,7 @@ import {UtilService} from "../../../services/util-service.service";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
-import {finalize, map, startWith} from 'rxjs/operators';
+import {finalize, map, startWith, take} from 'rxjs/operators';
 import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
@@ -307,16 +307,22 @@ export class AddQuestionComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
+    this.questionService.incrementQuestionNumber();
+    this.questionService.incrementQuestionCount();
 
-    this.questionService.saveQuestion(question, this.questionId).then((v) => {
-      // @ts-ignore
-      this.askedQuestions.push(this.questionId);
-      this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
-      dialogRef.close(true);
-      progressDialog.close();
-    });
-    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+    this.questionService.findQuestionNumber().valueChanges().pipe(take(1)).subscribe(
+      (res) => {
+        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.number).then((v) => {
+          // @ts-ignore
+          this.askedQuestions.push(this.questionId);
+          this.sendAknowledgementEmail(this.authService.student.email);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+          dialogRef.close(true);
+          progressDialog.close();
+        });
+        this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+      }
+    )
 
   }
 

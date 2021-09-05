@@ -69,8 +69,8 @@ export class QuestionService {
     statRef.update({'completed': increment});
   }
 
-  saveQuestion(qustion: Questions, questionId: string) {
-    // qustion.questionNumber = questionNumber;
+  saveQuestion(qustion: Questions, questionId: string, questionNumber: string) {
+    qustion.questionNumber = questionNumber;
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.doc(`${constants.collections.questions}/${questionId}`);
     return questionRef.set(qustion);
   }
