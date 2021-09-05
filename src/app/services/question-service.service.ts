@@ -51,8 +51,8 @@ export class QuestionService {
 
   findQuestionNumber() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count").valueChanges();
-    return statRef;
+    const questionRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.questions).doc('count');
+    return questionRef;
   }
 
   incrementInProgressQuestionCount() {

@@ -209,6 +209,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      questionNumber: "jweh",
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -253,7 +254,6 @@ export class AddQuestionMobileComponent implements OnInit {
         }
       )
     });
-
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {

@@ -152,8 +152,8 @@ export class AddQuestionComponent implements OnInit {
     this.questionId = this.data.id;
     // @ts-ignore
     this.attachments = this.data.attachments;
-    this.attachments.forEach((attachment)=>{
-      let file = new File([attachment.fileName],attachment.fileName,{
+    this.attachments.forEach((attachment) => {
+      let file = new File([attachment.fileName], attachment.fileName, {
         type: attachment.extension
       });
       this.files.push(file);
@@ -307,29 +307,17 @@ export class AddQuestionComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.incrementQuestionNumber();
-    this.questionService.incrementQuestionCount();
-    this.questionService.findQuestionNumber().subscribe(
-      (res) => {
-        // @ts-ignore
-        this.questionNumber = res.number;
-      }, () => {
 
-      }, () => {
-        // @ts-ignore
-        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + this.questionNumber).then((v) => {
-          console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhh");
-          // @ts-ignore
-          this.askedQuestions.push(this.questionId);
-          this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
-          dialogRef.close(true);
-          progressDialog.close();
-        });
-        this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+    this.questionService.saveQuestion(question, this.questionId).then((v) => {
+      // @ts-ignore
+      this.askedQuestions.push(this.questionId);
+      this.sendAknowledgementEmail(this.authService.student.email);
+      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+      dialogRef.close(true);
+      progressDialog.close();
+    });
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
 
-      }
-    )
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
