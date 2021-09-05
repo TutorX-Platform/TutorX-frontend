@@ -1,11 +1,15 @@
 import {trigger, transition, style, animate, state} from '@angular/animations';
 import {AfterContentChecked, AfterContentInit, Component, OnChanges, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
 import {AuthService} from "../../../services/auth.service";
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {Router} from "@angular/router";
 import * as constants from '../../../models/constants';
+import {StudentService} from "../../../services/student-service.service";
+import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
+import {SignInComponent} from "../../auth/sign-in/sign-in.component";
+import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
   selector: 'app-body',
@@ -37,10 +41,12 @@ import * as constants from '../../../models/constants';
 })
 export class BodyComponent implements OnInit {
 
+  isLoggedIn = false;
   constructor(
     public authService: AuthService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    public studentService: StudentService,
   ) {
   }
 
@@ -93,6 +99,12 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const progressDailog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    progressDailog.afterOpened().subscribe(
+      () => {
+        this.getLoggedUser(progressDailog);
+      }
+    )
     this.customOptions = {
       loop: false,
       mouseDrag: false,
@@ -316,6 +328,76 @@ export class BodyComponent implements OnInit {
             this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
           }
         }
+      }
+    )
+  }
+
+  onLogin() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    // dialogConfig.height = "650px";
+    this.dialog.open(SignInComponent, dialogConfig);
+  }
+
+  onLoginMobile() {
+    // this.page = 1;
+  }
+
+  onSignUp() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    // dialogConfig.height = "950px";
+    this.dialog.open(SignUpComponent, dialogConfig);
+  }
+
+  onSignUpMobile() {
+    // this.page = 2;
+  }
+
+  onHome() {
+    // this.page = 0;
+  }
+
+  onSignOut() {
+    this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
+    this.authService.onSignOut();
+  }
+
+  onGoogleSignIn() {
+    this.authService.googleAuth().then(
+      (r) => {
+        console.log(r);
+      }
+    );
+  }
+
+  onTutor() {
+    this.router.navigate([constants.routes.turor.concat(constants.routes.questions)], {skipLocationChange: true})
+  }
+
+  onProfile() {
+    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
+  }
+
+  getLoggedUser(progressDialog: MatDialogRef<any>) {
+    this.studentService.findStudentDetails().subscribe(
+      (res) => {
+        console.log(res);
+        if (res) {
+          // @ts-ignore
+          this.studentService.currentStudent = res;
+          if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+            console.log('2222222222222222222');
+            this.studentService.isTutor = true;
+          }
+        }
+        progressDialog.close();
+      }, () => {
+        progressDialog.close();
+      }, () => {
+        progressDialog.close();
       }
     )
   }
