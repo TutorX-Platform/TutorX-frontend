@@ -1,0 +1,11 @@
+@mixin progress-dialog-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .dialog-container-custom .mat-dialog-container {
+    background: rgba(0, 0, 0, 0.0) !important;
+    box-shadow: none !important;
+  }
+}

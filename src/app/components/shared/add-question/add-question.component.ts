@@ -66,11 +66,11 @@ export class AddQuestionComponent implements OnInit {
   subject = '';
   subjects = '';
   dueDateTime = '';
-  description = ' ';
+  description = '';
   subCategory = '';
   time: TimeApi = {status: "", time: 0};
 
-  attachments: File[] = [];
+  attachments: Attachment[] = [];
 
 
   constructor(
@@ -142,7 +142,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     this.description = this.data.description;
     // @ts-ignore
-    this.attachments = this.data.images;
+    this.attachments = this.data.attachments;
     // @ts-ignore
     this.subCategory = this.data.subCategory;
   }
@@ -151,7 +151,13 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     this.questionId = this.data.id;
     // @ts-ignore
-    this.files = this.data.images;
+    this.attachments = this.data.attachments;
+    this.attachments.forEach((attachment)=>{
+      let file = new File([attachment.fileName],attachment.fileName,{
+        type: attachment.extension
+      });
+      this.files.push(file);
+    })
     this.addQuestionForm.patchValue({
       // @ts-ignore
       questionTitle: this.data.title,
@@ -428,6 +434,7 @@ export class AddQuestionComponent implements OnInit {
         if (res === true) {
           this.acceptQuestion();
           this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
+          this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
         }
       }
     )

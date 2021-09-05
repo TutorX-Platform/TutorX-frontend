@@ -11,6 +11,7 @@ import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-tutor-questions',
@@ -28,7 +29,7 @@ export class TutorQuestionsComponent implements OnInit {
   isMaths = false;
   isManagement = false;
   isCS = false;
-  attachments = [];
+  attachments: Attachment[] = [];
 
   isAutoOpen = false;
   subjects = [
@@ -96,7 +97,7 @@ export class TutorQuestionsComponent implements OnInit {
       question.attachments.forEach(
         attachment => {
           // @ts-ignore
-          this.attachments.push(attachment.downloadUrl);
+          this.attachments.push(attachment);
         }
       )
     })

@@ -18,6 +18,7 @@
 @import "components/payment-gateway.component";
 @import "components/profile.component";
 @import "components/tutor-payments.components";
+@import "components/progress-dialog.component";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
@@ -39,5 +40,6 @@
     @include drop-zone-preview($theme);
     @include payment-gateway-component($theme);
     @include profile-component($theme);
-    @include tutor-payment-component($theme)
+    @include tutor-payment-component($theme);
+    @include progress-dialog-component($theme);
 }

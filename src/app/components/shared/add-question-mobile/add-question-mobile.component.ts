@@ -108,15 +108,6 @@ export class AddQuestionMobileComponent implements OnInit {
       startWith(''),
       map((value: string) => this._subfilter(value))
     );
-
-  }
-
-  onNavigateBack() {
-    this.location.back();
-  }
-
-  onOpen(name: string) {
-
   }
 
   private _filter(value: string): string[] {
@@ -148,6 +139,10 @@ export class AddQuestionMobileComponent implements OnInit {
     return this.subOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  onNavigateBack(){
+    this.location.back();
+  }
+
   onDone() {
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(
@@ -169,9 +164,6 @@ export class AddQuestionMobileComponent implements OnInit {
     )
   }
 
-  onCancel() {
-    // this.dialogRef.close(false);
-  }
 
   onSelect(event: any) {
     this.uploadedSize = this.uploadedSize + event.addedFiles[0].size;
@@ -217,7 +209,6 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
-      questionNumber: "sljahkc",
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -249,7 +240,6 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-
     this.questionService.saveQuestion(question, this.questionId).then((v) => {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
@@ -258,37 +248,11 @@ export class AddQuestionMobileComponent implements OnInit {
       progressDialog.close();
       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
         (option) => {
-          this.questionService.incrementQuestionNumber();
-          this.questionService.incrementQuestionCount();
+          console.log(option);
+          this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
         }
       )
     });
-    // this.questionService.findQuestionNumber().subscribe(
-    //   (res) => {
-    //     console.log('hiiiiiiiiiiiiiii');
-    //     console.log(res);
-    //     // @ts-ignore
-    //     this.questionService.saveQuestion(question, this.questionId, 'constants.uniqueIdPrefix.prefixQuestionNumber + res.number').then((v) => {
-    //       // @ts-ignore
-    //       this.askedQuestions.push(this.questionId);
-    //       this.sendAknowledgementEmail(this.authService.student.email);
-    //       this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
-    //       progressDialog.close();
-    //       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
-    //         (option) => {
-    //           this.questionService.incrementQuestionNumber();
-    //           this.questionService.incrementQuestionCount();
-    //         }
-    //       )
-    //     });
-    //   }, () => {
-    //     console.log('hiiiiiiiiiiiiiii err');
-    //
-    //   }, () => {
-    //     console.log('hiiiiiiiiiiiiiii cmp');
-    //
-    //   }
-    // )
 
   }
 
@@ -388,25 +352,7 @@ export class AddQuestionMobileComponent implements OnInit {
     this.chatService.createChat(chatId, data);
   }
 
-  acceptQuestion() {
-    // @ts-ignore
-    if (this.data.isTutor) {
-      // @ts-ignore
-      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
-      // @ts-ignore
-      if (!this.data.byLoggedUser) {
-        // @ts-ignore
-        this.chatService.getChat(this.data.id).valueChanges().subscribe(
-          (res) => {
-            console.log(res);
-            // @ts-ignore
-            this.mailService.tutorJoinedFor(this.data.studentEmail, res.studentChatLink).subscribe()
-          }
-        )
-      }
-    } else {
-      alert('you are not a tutor');
-    }
-  }
+
+
 
 }

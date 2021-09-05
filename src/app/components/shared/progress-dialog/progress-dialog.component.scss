@@ -1,0 +1,6 @@
+// Overlay-based components have a panelClass property (or similar)
+// that can be used to target the overlay pane.
+.dialog-container-custom .mat-dialog-container {
+  padding: 0;
+  background: grey;
+}
