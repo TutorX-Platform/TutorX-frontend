@@ -1,19 +1,19 @@
 :root{
-  font-size: 10px;
+  font-size: 16px;
   /* Text-size styles */
   /* base size: desktop---body (14px) */
   //font-style font-weight font-size/line-height font-family,
-  --desktop---display-x-large: normal 800 4.2rem/4.4rem Roboto, 'Poppins', sans-serif;
-  --desktop---display-large: normal 500 2.8rem/3.2rem Roboto, 'Poppins', sans-serif;
-  --desktop---display-medium: normal 400 2.6rem/3.2rem Roboto, 'Poppins', sans-serif;
-  --desktop---display-small: normal 400 2rem/2.8rem Roboto, 'Poppins', sans-serif;
-  --desktop---heading: normal 600 1.6rem/2.4rem Roboto, 'Poppins', sans-serif;
-  --desktop---subheading: normal 600 1.2rem/1.6rem Roboto, 'Poppins', sans-serif;
-  --desktop---caption: normal 400 1.2rem/1.6rem Roboto, 'Poppins', sans-serif;
-  --desktop---button: normal 500 1.4rem/2rem Roboto, 'Poppins', sans-serif;
-  --desktop---body-default: normal 400 1.6rem/2rem Roboto, 'Poppins', sans-serif;
-  --desktop---body-medium: normal 500 1.6rem/2rem Roboto, 'Poppins', sans-serif;
-  --desktop---body-bold: normal 600 1.6rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-x-large: normal 800 2.625rem/2.75rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-large: normal 500 1.75rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-medium: normal 400 1.625rem/2rem Roboto, 'Poppins', sans-serif;
+  --desktop---display-small: normal 400 1.25rem/1.75rem Roboto, 'Poppins', sans-serif;
+  --desktop---heading: normal 600 1rem/1.5rem Roboto, 'Poppins', sans-serif;
+  --desktop---subheading: normal 600 0.75rem/1rem Roboto, 'Poppins', sans-serif;
+  --desktop---caption: normal 400 0.75rem/1rem Roboto, 'Poppins', sans-serif;
+  --desktop---button: normal 500 0.875rem/1.25rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-default: normal 400 1rem/1.25rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-medium: normal 500 1rem/1.25rem Roboto, 'Poppins', sans-serif;
+  --desktop---body-bold: normal 600 1rem/1.25rem Roboto, 'Poppins', sans-serif;
 
 
   --mobile---display-x-large: 1.93rem;
@@ -180,25 +180,25 @@
 
 
   /* Spaces Styles */
-  --space--xs: 0.4rem; //4px
-  --space--sm: 0.8rem; //8px
-  --space--msm: 1rem; //12px
-  --space--md: 1.6rem; //16px
-  --space--mmd: 2rem; //20px
-  --space--lg: 2.4rem; //24px
-  --space--mlg: 3.2rem; //32px
-  --space--xlg: 4rem; //40px
+  --space--xs: 0.25rem; //4px
+  --space--sm: 0.5rem; //8px
+  --space--msm: 0.75rem; //12px
+  --space--md: 1rem; //16px
+  --space--mmd: 1.25rem; //20px
+  --space--lg: 1.5rem; //24px
+  --space--mlg: 2rem; //32px
+  --space--xlg: 2.5rem; //40px
 
   /* Corners Styles */
   --corner--base:0; //4px
-  --corner--xs: 0.4rem; //4px
-  --corner--sm: 0.8rem; //8px
-  --corner--msm: 1.2rem; //12px
-  --corner--md: 1.6rem; //16px
-  --corner--mmd: 2rem; //20px
-  --corner--lg: 2.4rem; //24px
-  --corner--mlg: 3.2rem; //32px
-  --corner--xlg: 4rem; //40px
+  --corner--xs: 0.25rem; //4px
+  --corner--sm: 0.5rem; //8px
+  --corner--msm: 0.75rem; //12px
+  --corner--md: 1rem; //16px
+  --corner--mmd: 1.25rem; //20px
+  --corner--lg: 1.5rem; //24px
+  --corner--mlg: 2rem; //32px
+  --corner--xlg: 2.5rem; //40px
 
 
 }
