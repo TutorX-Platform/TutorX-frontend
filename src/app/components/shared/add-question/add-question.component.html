@@ -19,8 +19,8 @@
             Cancel
           </button>
 <!--          [disabled]="addQuestionForm.invalid"-->
-          <button mat-flat-button *ngIf="status !== 'Inprogress'" [class.dissabled]="addQuestionForm.invalid"  class="button-done" (click)="onAccept()"type="button" >
-            Accept
+          <button mat-flat-button *ngIf="status !== 'Inprogress'" class="button-done" (click)="onAccept()"type="button" >
+            Assign to Me
           </button>
         </div>
       </div>
@@ -131,21 +131,23 @@
             </div>
           </div>
 
-          <div class="label">Description</div>
-          <div class="tutor-view-container">
+          <div class="label" *ngIf="description !== ''">Description</div>
+          <div class="tutor-view-container" *ngIf="description !== ''">
             {{description}}
           </div>
         </div>
         <div class="attachment-viewer" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="24px grid">
           <div *ngFor="let attachment of attachments; let i = index" >
-            <a fxLayout="column" class="drop-zone" href="{{attachment.toString()}}" target="_blank">
+            <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
-                <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.toString().includes('pdf')">
-                <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="!attachment.toString().includes('pdf')">
+                <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.extension.includes('pdf')">
+                <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="attachment.extension.includes('image')">
+                <img src="assets/icons/word.png" class="icon-image" *ngIf="attachment.extension.includes('.document')">
+                <img src="assets/icons/excel2.png" class="icon-image" *ngIf="attachment.extension.includes('.sheet')">
               </div>
               <div fxLayout="row" fxLayoutAlign="center center">
                 <div class="file-name" >
-                  attachmet{{i+1}}
+                  {{attachment.fileName}}
                 </div>
               </div>
             </a>

@@ -22,7 +22,7 @@
             [descriptionTitle]="q.description"
             [description]="q.description"
             [viewedByAmount]="500"
-            [images]="attachments"
+            [attachments]="q.attachments"
             [studentEmail]="q.studentEmail"
             [isPublicPool]="true"
             [isAutoOpen]="isAutoOpen"
@@ -82,6 +82,7 @@
 
     </div>
   </div>
+</div>
   <!-- <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
     <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
       <span matPrefix>

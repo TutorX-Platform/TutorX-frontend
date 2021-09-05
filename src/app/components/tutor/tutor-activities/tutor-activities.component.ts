@@ -11,6 +11,7 @@ import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {Attachment} from "../../../models/Attachment";
 
 @Component({
   selector: 'app-tutor-activities',
@@ -32,7 +33,7 @@ export class TutorActivitiesComponent implements OnInit {
   isMaths = false;
   isManagement = false;
   isCS = false;
-  attachments: string[] = [];
+  attachments: Attachment[] = [];
   subjects = [
     "Science", "English", "Maths", "Computer Science"
   ]
@@ -95,7 +96,7 @@ export class TutorActivitiesComponent implements OnInit {
 
     this.askedQuestions.forEach(question => {
       question.attachments.forEach(attachment => {
-        this.attachments.push(attachment.downloadUrl);
+        this.attachments.push(attachment);
       })
     })
   }

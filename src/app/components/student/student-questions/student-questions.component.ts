@@ -12,6 +12,7 @@ import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dia
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {Router} from "@angular/router";
+import {Attachment} from "../../../models/Attachment";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class StudentQuestionsComponent implements OnInit {
   isAssigned = false;
   isCancelled = false;
   isCompleted = false;
-  attachments: string[] = [];
+  attachments: Attachment[] = [];
 
   dummyProfPic = constants.dummy_profile_picture;
 
@@ -103,9 +104,10 @@ export class StudentQuestionsComponent implements OnInit {
 
     this.askedQuestions.forEach(question => {
       question.attachments.forEach(attachment => {
-        this.attachments.push(attachment.downloadUrl);
+        this.attachments.push(attachment);
       })
     })
+    console.log(this.attachments, 'attachments');
   }
 
   //search auto complete
