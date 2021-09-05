@@ -217,7 +217,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
-      questionNumber: "sljahk",
+      questionNumber: "sljahkc",
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
