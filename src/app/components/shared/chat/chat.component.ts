@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   task: AngularFireUploadTask;
   attachments: string[] = [];
   chat: Chat = {
+    questionNumber: "",
     questionTitle: "",
     studentProfile: "",
     tutorProfile: "",

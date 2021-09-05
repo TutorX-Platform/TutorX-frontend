@@ -310,19 +310,21 @@ export class AddQuestionComponent implements OnInit {
     this.questionService.incrementQuestionNumber();
     this.questionService.incrementQuestionCount();
 
-    this.questionService.findQuestionNumber().valueChanges().pipe(take(1)).subscribe(
+    this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
       (res) => {
+        console.log(res);
         this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.number).then((v) => {
           // @ts-ignore
           this.askedQuestions.push(this.questionId);
           this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.number);
           dialogRef.close(true);
           progressDialog.close();
         });
-        this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
       }
-    )
+    );
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+
 
   }
 
@@ -397,11 +399,12 @@ export class AddQuestionComponent implements OnInit {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionNumber: questionNumber,
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,
       tutorProfile: "",

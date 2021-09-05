@@ -7,7 +7,7 @@
              class="chat-title">{{questionService.question.questionTitle}}</div>
         <div *ngIf="questionService.question === undefined" class="chat-title">Loading</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <div class="chat-subtitle">{{chat.uniqueId}} | Created
+          <div class="chat-subtitle">{{chat.questionNumber}} | Created
             on {{questionCreatedDate * 1000 | date:'yyyy/MM/dd h:mm:ss a'}}</div>
           <!--<div *ngIf="status === 'Open'" class="c-chip c-chip&#45;&#45;neutral invert-false">Open</div>-->
           <div *ngIf="questionService.question.status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>

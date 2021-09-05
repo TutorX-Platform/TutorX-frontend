@@ -245,7 +245,7 @@ export class AddQuestionMobileComponent implements OnInit {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, 'qq');
       progressDialog.close();
       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
         (option) => {
@@ -327,11 +327,12 @@ export class AddQuestionMobileComponent implements OnInit {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionNumber: "",
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,
       tutorProfile: "",
