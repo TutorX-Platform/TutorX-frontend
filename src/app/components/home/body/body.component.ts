@@ -172,11 +172,11 @@ export class BodyComponent implements OnInit {
       description: "Responsive and easy to navigate interfaces",
       imageUrl: "../../../../assets/icons/02.svg"
     },
-    {
-      title: "Step by step explanations",
-      description: "We break it down for you",
-      imageUrl: "../../../../assets/icons/03.svg"
-    },
+    // {
+    //   title: "Step by step explanations",
+    //   description: "We break it down for you",
+    //   imageUrl: "../../../../assets/icons/03.svg"
+    // },
 
     {
       title: "Fast Response",
