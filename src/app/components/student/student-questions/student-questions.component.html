@@ -29,6 +29,7 @@
             [lastAssignedTutorName]="q.lastAssignedTutorName"
             [lastAssignedTutorImage]="q.lastAssignedTutorImage"
             [byLoggedUser]="q.byLoggedUser"
+            [questionNumber]="q.questionNumber"
           ></app-question-card>
         </div>
       </div>
@@ -70,7 +71,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">

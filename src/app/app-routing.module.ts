@@ -1,16 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from './components/admin/admin.component';
-import {SignInComponent} from './components/auth/sign-in/sign-in.component';
 import {DummyComponent} from "./components/test/dummy/dummy.component";
 import {TestChatComponent} from "./components/test/test-chat/test-chat.component";
-import {NavBarComponent} from './components/home/nav-bar/nav-bar.component';
 import {StudentComponent} from './components/student/student.component';
 import {
   AngularFireAuthGuard,
-  hasCustomClaim,
   redirectUnauthorizedTo,
-  redirectLoggedInTo
 } from '@angular/fire/auth-guard';
 import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mobile.component';
 import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
@@ -26,9 +22,10 @@ import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-prof
 import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-payments.component";
 import {BodyComponent} from './components/home/body/body.component';
 
-const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
 const routes: Routes = [
+  {path: 'home', component: BodyComponent},
   {path: '', component: BodyComponent},
   {path: 'sign-in', component: SignInMobileComponent},
   {path: 'admin', component: AdminComponent},

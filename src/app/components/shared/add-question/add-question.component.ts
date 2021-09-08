@@ -426,15 +426,9 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onAccept() {
-    this.utilService.openDialog(systemMessages.questionTitles.acceptChatConfirmation, systemMessages.questionMessages.acceptChatConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
-      (res) => {
-        if (res === true) {
-          this.acceptQuestion();
-          this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
-          this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
-        }
-      }
-    )
+    this.acceptQuestion();
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
+    this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
   }
 
   acceptQuestion() {

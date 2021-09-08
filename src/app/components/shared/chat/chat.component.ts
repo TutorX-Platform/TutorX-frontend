@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   chatForm: FormGroup;
   // @ts-ignore
   task: AngularFireUploadTask;
-  attachments: string[] = [];
+  attachments: Attachment[] = [];
   chat: Chat = {
     questionNumber: "",
     questionTitle: "",
@@ -154,7 +154,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           (res) => {
             // @ts-ignore
             this.chat = res;
-            console.log(this.chat);
+            this.attachments = [];
+            this.attachments.push(...this.chat.attachments);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
           }, () => {
@@ -240,6 +241,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.questionService.question = res;
         // @ts-ignore
         this.question = res;
+        this.attachments.push(...this.question.attachments);
         // @ts-ignore
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         console.log(res);

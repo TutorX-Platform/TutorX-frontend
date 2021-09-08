@@ -9,8 +9,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TimeApi} from "../models/time-api";
 import * as systemMessage from '../models/system-messages'
 import * as firebase from 'firebase';
-import increment = firebase.database.ServerValue.increment;
-import FieldValue = firebase.firestore.FieldValue;
 import {firestore} from "firebase/app";
 
 @Injectable({
@@ -32,7 +30,6 @@ export class QuestionService {
     // @ts-ignore
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId);
     return questionRef;
-
   }
 
   incrementQuestionCount() {

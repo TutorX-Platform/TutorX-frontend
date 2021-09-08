@@ -84,7 +84,7 @@ export const genKey = {
 }
 
 export const routes = {
-  home: "",
+  home: "/home",
   dummy: 'dummy',
   sign_in: '/sign-in',
   student_q_pool: '/student/questions',
@@ -102,7 +102,8 @@ export const routes = {
 }
 
 export const localStorageKeys = {
-  user: 'user'
+  user: 'user',
+  role: 'role',
 }
 
 export const questionStatus = {

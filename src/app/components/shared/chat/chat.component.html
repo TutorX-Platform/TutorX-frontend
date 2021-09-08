@@ -278,10 +278,12 @@
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
-        <button *ngIf="!questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button class="request-refund">
+        <button *ngIf="!questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="request-refund">
           Request refund
         </button>
-        <button *ngIf="questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button class="requested-refund">
+        <button *ngIf="questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="requested-refund">
           Requested refund
         </button>
       </div>
@@ -342,7 +344,7 @@
           <!--</div>-->
           <!--</div>-->
 
-          <div *ngFor="let attachment of chat.attachments">
+          <div *ngFor="let attachment of attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
                 <img src="assets/icons/jpeg.svg" class="icon-image">
@@ -380,7 +382,8 @@
         <img src="../../assets/images/box.svg">
         <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer"
              (click)="onDetailedView(true)">
-          <div class="q-title-toolbar">{{questionService.question !== undefined ? questionService.question.questionTitle : ''}}</div>
+          <div
+            class="q-title-toolbar">{{questionService.question !== undefined ? questionService.question.questionTitle : ''}}</div>
           <div class="last-seen">Last Seen 24h ago</div>
         </div>
       </div>
@@ -458,7 +461,7 @@
                 <!--<div class="time">Todat at 9.00 AM</div>-->
               </div>
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div  class="message-box message-box--other-user-message">
+                <div class="message-box message-box--other-user-message">
                   {{message.message}}
                 </div>
               </div>
@@ -619,7 +622,8 @@
         <div class="attachment-title">
           Attchments
         </div>
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px"><div *ngFor="let attachment of chat.attachments">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <div *ngFor="let attachment of chat.attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
                 <img src="assets/icons/jpeg.svg" class="icon-image">
