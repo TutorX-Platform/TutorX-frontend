@@ -11,7 +11,7 @@ export const environment = {
     storageBucket: "tutorx-platform.appspot.com",
     messagingSenderId: "324857557855",
     appId: "1:324857557855:web:5a08d8bb6d455e4d0ffcea",
-    measurementId: "G-9Q2PX85B31"
+    measurementId: "G-9Q2PX85B31",
   }
 };
 

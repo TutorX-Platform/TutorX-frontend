@@ -7,13 +7,11 @@ import {UtilService} from "./util-service.service";
 import 'rxjs/add/operator/switchMap';
 import {Student} from "../models/student";
 import * as constants from '../models/constants';
-import * as systemMessages from '../models/system-messages';
 import * as firebase from 'firebase';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
-import {firestore} from "firebase";
 
 @Injectable({
   providedIn: 'root'
