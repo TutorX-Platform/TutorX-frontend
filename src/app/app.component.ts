@@ -4,6 +4,8 @@ import {AuthService} from "./services/auth.service";
 import {NotificationService} from "./services/notification.service";
 import {Subscription} from "rxjs";
 import {AngularFireMessaging} from "@angular/fire/messaging";
+import {StudentService} from "./services/student-service.service";
+import {AngularFireAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-root',
@@ -22,12 +24,20 @@ export class AppComponent implements OnInit {
   notificationSub: Subscription;
   notificationTimeout: any;
 
-  constructor(private notificationService: NotificationService, private afMessaging: AngularFireMessaging,) {
+  constructor(private notificationService: NotificationService,
+              public angularFireAuth: AngularFireAuth,
+              private afMessaging: AngularFireMessaging,) {
   }
 
   ngOnInit(): void {
-    this.requestPermission();
-    this.listen();
+    this.angularFireAuth.authState.subscribe(
+      (res) => {
+        if (res?.uid) {
+          this.requestPermission(res.uid);
+          this.listen();
+        }
+      }
+    )
     this.notificationService.getNotification()
       .subscribe(n => {
         this.notification = n;
@@ -40,10 +50,14 @@ export class AppComponent implements OnInit {
   }
 
 
-  requestPermission() {
+  requestPermission(uid: string) {
     this.afMessaging.requestToken
       .subscribe(
         (token) => {
+          const data = {
+            "token": token
+          }
+          this.notificationService.saveToken(uid, data);
           console.log(token);
           // TODO: send token to server
         },

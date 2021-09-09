@@ -54,7 +54,8 @@ export const collections = {
   review: 'review',
   message: 'message',
   payments: 'payment',
-  refund: 'refund'
+  refund: 'refund',
+  tokens: 'tokens',
 }
 
 export const storage_collections = {
