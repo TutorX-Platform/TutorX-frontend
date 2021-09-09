@@ -30,25 +30,28 @@ export class NotificationService {
     return questionRef.set(data);
   }
 
-  sendNotification() {
+  sendNotification(title: string, notification: string, receiveToken: string) {
     const httpOptions = {
-      headers: new HttpHeaders({}),
-      params: new HttpParams({
-        fromObject: {
-          'Authorization': constants.firebase_notification_auth_key,
-          'Content-Type': 'application/json'
-        }
-      })
+      headers: new HttpHeaders({
+        'Authorization': constants.firebase_notification_auth_key,
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams({})
     };
     const body = {
       "notification": {
-        "title": "Hey there",
-        "body": "Pala apakaya ynna"
+        "title": title,
+        "body": notification
       },
-      "to": "fXaQQ0UKOZ0gT__S692rw2:APA91bH1WrORYaTxw9F6cXcds-SBATo5aBHS44PBn23qOno4ky9iw5-nM8cDmmv-baG7mrb-q9Zrl0IMPHqPGlbNnh7dxyaLP2uwwyeqCbGT8KVK-f_h1-3KRzARCqNzrtL-sQty-o7h"
+      "to": receiveToken
     }
-
     return this.http.post(constants.firebase_notification_url, body, httpOptions);
+  }
 
+
+  getNotificationToken(uid: string) {
+    // @ts-ignore
+    const notRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.tokens).doc(uid);
+    return notRef;
   }
 }

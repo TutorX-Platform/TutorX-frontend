@@ -15,6 +15,7 @@ export const questionTitles = {
   tutorReleaseQuestionError: "Can't release the question",
   notLoggedUserWithLoggedCredentials:"Your email already have an account",
   requestRefund:"Request a refund",
+  acceptNotification:"Please allow send notifications"
 }
 
 export const questionMessages = {
@@ -35,6 +36,8 @@ export const questionMessages = {
   notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first",
   requestRefund:"Are you sure to request a refund for this question",
   requestRefundSuccess:"Refund request success, Our admins will contact you soon !!",
+  acceptNotification:"Please allow notifications for better user experience"
+
 }
 
 export const signInTitles = {

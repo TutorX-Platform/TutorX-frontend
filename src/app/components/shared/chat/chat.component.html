@@ -177,9 +177,9 @@
         <!--<div class="time">Todat at 9.00 AM</div>-->
         <!--</div>-->
 
-        <div *ngIf="chat.isTyping && isFocused">You Typing...</div>
-        <div *ngIf="chat.isTyping && !isFocused && authService.student.role==='student'">Tutor is Typing...</div>
-        <div *ngIf="chat.isTyping && !isFocused && authService.student.role==='tutor'">Student is Typing...</div>
+        <div *ngIf="isTyping && isFocused">You Typing...</div>
+        <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">Tutor is Typing...</div>
+        <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">Student is Typing...</div>
 
       </div>
       <div class="typing-box">

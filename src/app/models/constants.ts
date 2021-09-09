@@ -60,6 +60,7 @@ export const collections = {
   payments: 'payment',
   refund: 'refund',
   tokens: 'tokens',
+  chatTyping: 'typing',
 }
 
 export const storage_collections = {

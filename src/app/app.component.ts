@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {DummyService} from "./services/dummy.service";
-import {AuthService} from "./services/auth.service";
 import {NotificationService} from "./services/notification.service";
 import {Subscription} from "rxjs";
 import {AngularFireMessaging} from "@angular/fire/messaging";
-import {StudentService} from "./services/student-service.service";
 import {AngularFireAuth} from "@angular/fire/auth";
+import {UtilService} from "./services/util-service.service";
+import * as systemMessages from '../app/models/system-messages';
+import * as constants from '../app/models/constants';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
 
   constructor(private notificationService: NotificationService,
               public angularFireAuth: AngularFireAuth,
+              private utilService: UtilService,
               private afMessaging: AngularFireMessaging,) {
   }
 
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit {
           // TODO: send token to server
         },
         (error) => {
+          this.utilService.openDialog(systemMessages.questionTitles.acceptNotification, systemMessages.questionMessages.acceptNotification, constants.messageTypes.warning).afterOpened().subscribe()
           console.error(error);
         },
       );

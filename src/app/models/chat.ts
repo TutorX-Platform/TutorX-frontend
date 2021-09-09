@@ -19,6 +19,4 @@ export interface Chat {
   tutorProfile: string;
   questionTitle: string;
   questionNumber: string;
-  isTyping: boolean;
-
 }

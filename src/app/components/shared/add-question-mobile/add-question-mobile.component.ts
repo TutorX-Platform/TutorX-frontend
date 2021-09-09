@@ -332,7 +332,6 @@ export class AddQuestionMobileComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
-      isTyping: false,
       questionNumber: "",
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,
