@@ -313,7 +313,7 @@ export class AddQuestionComponent implements OnInit {
     this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
       (res) => {
         console.log(res);
-        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.number).then((v) => {
+        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber).then((v) => {
           // @ts-ignore
           this.askedQuestions.push(this.questionId);
           this.sendAknowledgementEmail(this.authService.student.email);

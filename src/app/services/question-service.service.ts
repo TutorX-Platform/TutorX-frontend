@@ -34,36 +34,36 @@ export class QuestionService {
 
   incrementQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'count': increment});
+    statRef.update({'questionCount': increment});
   }
 
   incrementQuestionNumber() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'number': increment});
+    statRef.update({'questionNumber': increment});
   }
 
   findQuestionNumber() {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.questions).doc('count');
-    return questionRef;
+    const statRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.stat).doc('stats');
+    return statRef;
   }
 
   incrementInProgressQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'inProgress': increment});
+    statRef.update({'inprogressQuestions': increment});
   }
 
   incrementCompletedQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'completed': increment});
+    statRef.update({'completedQuestions': increment});
   }
 
   saveQuestion(qustion: Questions, questionId: string, questionNumber: string) {

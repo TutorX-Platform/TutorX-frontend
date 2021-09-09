@@ -61,6 +61,7 @@ export const collections = {
   refund: 'refund',
   tokens: 'tokens',
   chatTyping: 'typing',
+  stat: 'stats',
 }
 
 export const storage_collections = {
