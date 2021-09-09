@@ -42,7 +42,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   task: AngularFireUploadTask;
   attachments: Attachment[] = [];
+  isFocused = false;
   chat: Chat = {
+    isTyping: false,
     questionNumber: "",
     questionTitle: "",
     studentProfile: "",
@@ -419,6 +421,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       }
     )
+  }
+
+  onFocus() {
+    this.isFocused = true;
+    this.chatService.onTyping(this.chatToken, true);
+  }
+
+  onBlur() {
+    this.isFocused = false;
+    this.chatService.onTyping(this.chatToken, false);
   }
 
 }

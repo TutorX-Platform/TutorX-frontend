@@ -177,12 +177,17 @@
         <!--<div class="time">Todat at 9.00 AM</div>-->
         <!--</div>-->
 
+        <div *ngIf="chat.isTyping && isFocused">You Typing...</div>
+        <div *ngIf="chat.isTyping && !isFocused && authService.student.role==='student'">Tutor is Typing...</div>
+        <div *ngIf="chat.isTyping && !isFocused && authService.student.role==='tutor'">Student is Typing...</div>
+
       </div>
       <div class="typing-box">
         <div fxLayout="row" fxLayoutAlign="space-between center" class="typer">
           <textarea matInput type="text" placeholder="Reply"
                     oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'
-                    class="message-input" [formControl]="message" (input)="onType()"></textarea>
+                    class="message-input" [formControl]="message" (input)="onType()" (focus)="onFocus()"
+                    (blur)="onBlur()"></textarea>
           <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
                   [disabled]="isSendButtonDissabled">Send
           </button>

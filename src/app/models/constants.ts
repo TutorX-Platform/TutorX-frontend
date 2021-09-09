@@ -16,6 +16,10 @@ export const logo = 'assets/images/logo.svg';
 
 export const usedCurrency = 'USD';
 
+export const firebase_notification_url = 'https://fcm.googleapis.com/fcm/send';
+
+export const firebase_notification_auth_key = 'key=AAAAS6ME818:APA91bEkBpMvrUGgRj2rVOSxJHAVNGFHJag3q1wod_Kasj9U8RsFWgbJnsorf3WxxWyEI97QZ2CWF8bCyxQmn9Y1MIUIG1AC1cnRgLFts9HsDnYD_AcekWgKaaJLG0jSed1BPBpnPXtz'
+
 export const refundMessages = {
   dummy: "dummy refund request message"
 }

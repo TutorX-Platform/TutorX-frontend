@@ -155,5 +155,12 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
+  onTyping(chatId: string, isTyping: boolean) {
+    const data = {
+      isTyping: isTyping
+    }
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(data);
+  }
+
 
 }
