@@ -317,7 +317,7 @@ export class AddQuestionComponent implements OnInit {
           // @ts-ignore
           this.askedQuestions.push(this.questionId);
           this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.number);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber);
           dialogRef.close(true);
           progressDialog.close();
         });

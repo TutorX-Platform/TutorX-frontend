@@ -18,6 +18,8 @@ export const usedCurrency = 'USD';
 
 export const firebase_notification_url = 'https://fcm.googleapis.com/fcm/send';
 
+export const tutor_pay_percentage = 0.6;
+
 export const firebase_notification_auth_key = 'key=AAAAS6ME818:APA91bEkBpMvrUGgRj2rVOSxJHAVNGFHJag3q1wod_Kasj9U8RsFWgbJnsorf3WxxWyEI97QZ2CWF8bCyxQmn9Y1MIUIG1AC1cnRgLFts9HsDnYD_AcekWgKaaJLG0jSed1BPBpnPXtz'
 
 export const refundMessages = {
@@ -62,6 +64,8 @@ export const collections = {
   tokens: 'tokens',
   chatTyping: 'typing',
   stat: 'stats',
+  tutorEarnings: 'earnings',
+
 }
 
 export const storage_collections = {

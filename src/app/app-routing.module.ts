@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'home', component: BodyComponent},
   {path: '', component: BodyComponent},
   {path: 'sign-in', component: SignInMobileComponent},
-  {path: 'admin', component: AdminComponent},
+  // {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
   {path: 'temp', component: SuccesMessageComponent},
   {path: 'pay/:id/:amount', component: CardDetailsComponent},

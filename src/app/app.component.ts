@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
           // TODO: send token to server
         },
         (error) => {
-          this.utilService.openDialog(systemMessages.questionTitles.acceptNotification, systemMessages.questionMessages.acceptNotification, constants.messageTypes.warning).afterOpened().subscribe()
+          // this.utilService.openDialog(systemMessages.questionTitles.acceptNotification, systemMessages.questionMessages.acceptNotification, constants.messageTypes.warning).afterOpened().subscribe()
           console.error(error);
         },
       );

@@ -178,8 +178,12 @@
         <!--</div>-->
 
         <div *ngIf="isTyping && isFocused">You Typing...</div>
-        <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">Tutor is Typing...</div>
-        <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">Student is Typing...</div>
+        <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">{{question.tutorName}} is
+          Typing...
+        </div>
+        <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">{{question.studentName}} is
+          Typing...
+        </div>
 
       </div>
       <div class="typing-box">
