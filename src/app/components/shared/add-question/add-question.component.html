@@ -18,15 +18,16 @@
           <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
             Cancel
           </button>
-<!--          [disabled]="addQuestionForm.invalid"-->
-          <button mat-flat-button *ngIf="status !== 'Inprogress'" class="button-done" (click)="onAccept()"type="button" >
+          <button mat-flat-button *ngIf="status === 'Open'" class="button-done" (click)="onAccept()"type="button" >
             Assign to Me
           </button>
         </div>
       </div>
       <div fxLayout="row" class="status-container" fxLayoutGap="8px">
-        <div *ngIf="status !== 'Inprogress'" class="c-chip c-chip--neutral invert-false">Open</div>
+        <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
         <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
+        <div *ngIf="status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
+        <div *ngIf="status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
         <div class="date-container">{{date | date:'yyyy/MM/dd h:mm:ss a'}}</div>
       </div>
     </div>
