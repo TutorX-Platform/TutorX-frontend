@@ -21,6 +21,8 @@ import * as systemMessages from '../../../models/system-messages'
 import {MailService} from "../../../services/mail.service";
 import {Attachment} from "../../../models/Attachment";
 import {PaymentService} from "../../../services/payment.service";
+import {NotificationService} from "../../../services/notification.service";
+import * as notificationMsg from '../../../models/notification-messages';
 
 @Component({
   selector: 'app-chat',
@@ -41,8 +43,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   chatForm: FormGroup;
   // @ts-ignore
   task: AngularFireUploadTask;
-  attachments: string[] = [];
+  attachments: Attachment[] = [];
+  isFocused = false;
   chat: Chat = {
+    questionNumber: "",
     questionTitle: "",
     studentProfile: "",
     tutorProfile: "",
@@ -83,6 +87,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   notLoggedUserEmail = 'sandunsameera25@gmail.com';
 
   test = new Date('Sep 01 2021 00:00:00');
+  isTyping = false;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -97,6 +102,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private location: Location,
               private mailService: MailService,
               private paymentService: PaymentService,
+              private notificationService: NotificationService,
               private studentService: StudentService) {
   }
 
@@ -113,6 +119,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     );
     this.getChatDetails();
+    this.getTypingStatus();
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
@@ -136,6 +143,25 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.message.reset();
       this.isSendButtonDissabled = true;
     });
+
+    let id = '';
+    if (this.authService.student.role === constants.userTypes.student) {
+      id = this.question.tutorId;
+    }
+    if (this.authService.student.role === constants.userTypes.tutor) {
+      id = this.question.studentId;
+    }
+
+    if (id !== '') {
+      this.notificationService.getNotificationToken(id).valueChanges().subscribe(
+        (res) => {
+          console.log(res);
+          if (res !== undefined && res) {
+            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token).subscribe();
+          }
+        }
+      )
+    }
   }
 
   // scrollToBottom(): void {
@@ -153,7 +179,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           (res) => {
             // @ts-ignore
             this.chat = res;
-            console.log(this.chat);
+            this.attachments = [];
+            this.attachments.push(...this.chat.attachments);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
           }, () => {
@@ -162,9 +189,17 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         )
       }
     )
-
     // progressDailog.close()
+  }
 
+  getTypingStatus() {
+    this.chatService.getTypingStatus(this.chatToken).valueChanges().subscribe(
+      (res) => {
+        console.log(res);
+        // @ts-ignore
+        this.isTyping = res.isTyping;
+      }
+    )
   }
 
   getMessages(progressDialog: MatDialogRef<any>) {
@@ -239,6 +274,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.questionService.question = res;
         // @ts-ignore
         this.question = res;
+        this.attachments.push(...this.question.attachments);
         // @ts-ignore
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         console.log(res);
@@ -416,6 +452,17 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       }
     )
+  }
+
+  onFocus() {
+    this.isFocused = true;
+    console.log(this.isTyping);
+    this.chatService.onTyping(this.chatToken, true);
+  }
+
+  onBlur() {
+    this.isFocused = false;
+    this.chatService.onTyping(this.chatToken, false);
   }
 
 }

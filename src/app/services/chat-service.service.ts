@@ -22,9 +22,11 @@ export class ChatServiceService {
   }
 
   createChat(chatId: string, data: Chat) {
-    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).set(data).then(v => {
-      console.log(v);
-    })
+    const typing = {
+      isTyping: false
+    }
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).set(data).then();
+    this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing).then();
   }
 
   sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean) {
@@ -155,6 +157,18 @@ export class ChatServiceService {
       time: time,
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
+  }
+
+  onTyping(chatId: string, isTyping: boolean) {
+    const data = {
+      isTyping: isTyping
+    }
+    this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).update(data);
+  }
+
+  getTypingStatus(chatId: string) {
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId);
+    return typeRef;
   }
 
 

@@ -4,17 +4,19 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {NavBarComponent} from './components/home/nav-bar/nav-bar.component';
 import {AngularFireModule} from 'angularfire2'
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFirestoreModule} from 'angularfire2/firestore'
 import {AngularFireAuthModule} from 'angularfire2/auth'
 import {AngularFireStorageModule} from 'angularfire2/storage'
-  import {environment} from '../environments/environment.prod';
-  import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {environment} from '../environments/environment.prod';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxStripeModule} from "ngx-stripe";
-import { ClipboardModule } from 'ngx-clipboard';
+import {ClipboardModule} from 'ngx-clipboard';
+
 
 //Angular material imports
 import {MatButtonModule} from '@angular/material/button';
@@ -42,7 +44,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 
 import {NgxDropzoneModule} from 'ngx-dropzone';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -63,25 +65,27 @@ import {StudentQuestionsComponent} from './components/student/student-questions/
 import {WelcomeComponent} from './components/student/welcome/welcome.component';
 import {ProgressDialogComponent} from './components/shared/progress-dialog/progress-dialog.component';
 import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
-import { SignInMobileComponent } from './components/auth/sign-in-mobile/sign-in-mobile.component';
-import { SignUpMobileComponent } from './components/auth/sign-up-mobile/sign-up-mobile.component';
-import { AddQuestionMobileComponent } from './components/shared/add-question-mobile/add-question-mobile.component';
-import { TutorComponent } from './components/tutor/tutor.component';
-import { TutorQuestionsComponent } from './components/tutor/tutor-questions/tutor-questions.component';
-import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
+import {SignInMobileComponent} from './components/auth/sign-in-mobile/sign-in-mobile.component';
+import {SignUpMobileComponent} from './components/auth/sign-up-mobile/sign-up-mobile.component';
+import {AddQuestionMobileComponent} from './components/shared/add-question-mobile/add-question-mobile.component';
+import {TutorComponent} from './components/tutor/tutor.component';
+import {TutorQuestionsComponent} from './components/tutor/tutor-questions/tutor-questions.component';
+import {TutorDashboardComponent} from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { TutorActivitiesComponent } from './components/tutor/tutor-activities/tutor-activities.component';
-import { ChatComponent } from './components/shared/chat/chat.component';
-import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
-import { MessageDialogComponent } from './components/shared/message-dialog/message-dialog.component';
-import { CustomDropzonePreviewComponent } from './components/test/custom-dropzone-preview/custom-dropzone-preview.component';
-import { CountDownComponent } from './components/shared/count-down/count-down.component';
-import { SelectMethodComponent } from './components/shared/payment-gateway/select-method/select-method.component';
-import { CardDetailsComponent } from './components/shared/payment-gateway/card-details/card-details.component';
-import { SuccesMessageComponent } from './components/shared/payment-gateway/succes-message/succes-message.component';
-import { TutorProfileComponent } from './components/tutor/tutor-profile/tutor-profile.component';
-import { TutorPaymentsComponent } from './components/tutor/tutor-payments/tutor-payments.component';
+import {SlickCarouselModule} from 'ngx-slick-carousel';
+import {TutorActivitiesComponent} from './components/tutor/tutor-activities/tutor-activities.component';
+import {ChatComponent} from './components/shared/chat/chat.component';
+import {DeleteDialogComponent} from './components/shared/delete-dialog/delete-dialog.component';
+import {MessageDialogComponent} from './components/shared/message-dialog/message-dialog.component';
+import {CustomDropzonePreviewComponent} from './components/test/custom-dropzone-preview/custom-dropzone-preview.component';
+import {CountDownComponent} from './components/shared/count-down/count-down.component';
+import {SelectMethodComponent} from './components/shared/payment-gateway/select-method/select-method.component';
+import {CardDetailsComponent} from './components/shared/payment-gateway/card-details/card-details.component';
+import {SuccesMessageComponent} from './components/shared/payment-gateway/succes-message/succes-message.component';
+import {TutorProfileComponent} from './components/tutor/tutor-profile/tutor-profile.component';
+import {TutorPaymentsComponent} from './components/tutor/tutor-payments/tutor-payments.component';
+import {NotificationService} from "./services/notification.service";
+
 
 
 @NgModule({
@@ -159,9 +163,10 @@ import { TutorPaymentsComponent } from './components/tutor/tutor-payments/tutor-
     NgxMatNativeDateModule,
     MatSelectModule,
     MatDatepickerModule,
+    AngularFireMessagingModule,
     NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],
-  providers: [AuthService, AngularFireAuthGuard],
+  providers: [AuthService, AngularFireAuthGuard, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

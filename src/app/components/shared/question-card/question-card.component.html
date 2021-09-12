@@ -1,7 +1,7 @@
 <mat-card style="padding: 24px;">
   <mat-card-title fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="question-title">{{title}}</div>
+      <div class="question-title">{{questionNumber}} | {{title}}</div>
       <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
       <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
       <div *ngIf="status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>

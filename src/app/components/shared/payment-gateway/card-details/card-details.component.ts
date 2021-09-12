@@ -200,6 +200,8 @@ export class CardDetailsComponent implements OnInit {
                   console.log(res);
                   // @ts-ignore
                   if (res['status'] === 200) {
+                    // tutor payment increase
+                    this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage);
                     this.updateQuestionAsPaid();
                     this.loading = false;
                     this.submitted = false;

@@ -18,5 +18,5 @@ export interface Chat {
   studentProfile: string;
   tutorProfile: string;
   questionTitle: string;
-
+  questionNumber: string;
 }

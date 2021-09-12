@@ -15,10 +15,11 @@ export const questionTitles = {
   tutorReleaseQuestionError: "Can't release the question",
   notLoggedUserWithLoggedCredentials:"Your email already have an account",
   requestRefund:"Request a refund",
+  acceptNotification:"Please allow send notifications"
 }
 
 export const questionMessages = {
-  questionSavedSuccessfully: "Question saved successfully",
+  questionSavedSuccessfully: "Your question has been successfully submitted",
   fileUploadError: "File is not uploaded",
   fileUploadSuccess: "File Upload Successfully",
   uploadOneFileAtATime: "Please upload one file at a time",
@@ -35,6 +36,7 @@ export const questionMessages = {
   notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first",
   requestRefund:"Are you sure to request a refund for this question",
   requestRefundSuccess:"Refund request success, Our admins will contact you soon !!",
+  acceptNotification:"Please allow notifications for better user experience"
 
 }
 

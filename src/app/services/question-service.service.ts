@@ -9,8 +9,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TimeApi} from "../models/time-api";
 import * as systemMessage from '../models/system-messages'
 import * as firebase from 'firebase';
-import increment = firebase.database.ServerValue.increment;
-import FieldValue = firebase.firestore.FieldValue;
 import {firestore} from "firebase/app";
 
 @Injectable({
@@ -32,32 +30,44 @@ export class QuestionService {
     // @ts-ignore
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId);
     return questionRef;
-
   }
 
   incrementQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'count': increment});
+    statRef.update({'questionCount': increment});
+  }
+
+  incrementQuestionNumber() {
+    // @ts-ignore
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
+    const increment = firestore.FieldValue.increment(1);
+    statRef.update({'questionNumber': increment});
+  }
+
+  findQuestionNumber() {
+    // @ts-ignore
+    const statRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.stat).doc('stats');
+    return statRef;
   }
 
   incrementInProgressQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'inProgress': increment});
+    statRef.update({'inprogressQuestions': increment});
   }
 
   incrementCompletedQuestionCount() {
     // @ts-ignore
-    const statRef = this.angularFirestoreService.collection(constants.collections.questions).doc("count");
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'completed': increment});
+    statRef.update({'completedQuestions': increment});
   }
 
-  saveQuestion(qustion: Questions, questionId: string) {
-    this.incrementQuestionCount();
+  saveQuestion(qustion: Questions, questionId: string, questionNumber: string) {
+    qustion.questionNumber = questionNumber;
     const questionRef: AngularFirestoreDocument<Questions> = this.angularFirestoreService.doc(`${constants.collections.questions}/${questionId}`);
     return questionRef.set(qustion);
   }

@@ -139,7 +139,7 @@ export class AddQuestionMobileComponent implements OnInit {
     return this.subOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  onNavigateBack(){
+  onNavigateBack() {
     this.location.back();
   }
 
@@ -209,6 +209,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      questionNumber: "jweh",
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -240,11 +241,11 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.saveQuestion(question, this.questionId).then((v) => {
+    this.questionService.saveQuestion(question, this.questionId, 'qq').then((v) => {
       // @ts-ignore
       this.askedQuestions.push(this.questionId);
       this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
+      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, 'qq');
       progressDialog.close();
       this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
         (option) => {
@@ -253,7 +254,6 @@ export class AddQuestionMobileComponent implements OnInit {
         }
       )
     });
-
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
@@ -327,11 +327,12 @@ export class AddQuestionMobileComponent implements OnInit {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionNumber: "",
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,
       tutorProfile: "",
@@ -351,8 +352,6 @@ export class AddQuestionMobileComponent implements OnInit {
     }
     this.chatService.createChat(chatId, data);
   }
-
-
 
 
 }

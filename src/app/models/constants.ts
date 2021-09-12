@@ -16,6 +16,12 @@ export const logo = 'assets/images/logo.svg';
 
 export const usedCurrency = 'USD';
 
+export const firebase_notification_url = 'https://fcm.googleapis.com/fcm/send';
+
+export const tutor_pay_percentage = 0.6;
+
+export const firebase_notification_auth_key = 'key=AAAAS6ME818:APA91bEkBpMvrUGgRj2rVOSxJHAVNGFHJag3q1wod_Kasj9U8RsFWgbJnsorf3WxxWyEI97QZ2CWF8bCyxQmn9Y1MIUIG1AC1cnRgLFts9HsDnYD_AcekWgKaaJLG0jSed1BPBpnPXtz'
+
 export const refundMessages = {
   dummy: "dummy refund request message"
 }
@@ -54,7 +60,12 @@ export const collections = {
   review: 'review',
   message: 'message',
   payments: 'payment',
-  refund: 'refund'
+  refund: 'refund',
+  tokens: 'tokens',
+  chatTyping: 'typing',
+  stat: 'stats',
+  tutorEarnings: 'earnings',
+
 }
 
 export const storage_collections = {
@@ -68,6 +79,7 @@ export const uniqueIdPrefix = {
   prefixStudent: 'S',
   prefixTutor: 'T',
   prefixQuestion: 'Q',
+  prefixQuestionNumber: 'QN',
 }
 
 export const userTypes = {
@@ -83,7 +95,7 @@ export const genKey = {
 }
 
 export const routes = {
-  home: "",
+  home: "/home",
   dummy: 'dummy',
   sign_in: '/sign-in',
   student_q_pool: '/student/questions',
@@ -101,7 +113,8 @@ export const routes = {
 }
 
 export const localStorageKeys = {
-  user: 'user'
+  user: 'user',
+  role: 'role',
 }
 
 export const questionStatus = {

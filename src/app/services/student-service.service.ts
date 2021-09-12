@@ -5,6 +5,7 @@ import * as constants from "../models/constants";
 import {Student} from "../models/student";
 import {Observable} from "rxjs";
 import {Questions} from "../models/questions";
+import {firestore} from "firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,13 @@ export class StudentService {
     // @ts-ignore
     const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students, ref => ref.where('email', '==', email));
     return userRef;
+  }
+
+  incrementTutorEarning(tutorId: string, fee: number) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(fee);
+    payRef.update({'totalEarnings': increment});
   }
 
 }

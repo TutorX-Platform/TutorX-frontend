@@ -27,6 +27,7 @@
             [isPublicPool]="true"
             [isAutoOpen]="isAutoOpen"
             [byLoggedUser]="q.byLoggedUser"
+            [questionNumber]="q.questionNumber"
           ></app-question-card>
         </div>
       </div>
@@ -83,36 +84,36 @@
     </div>
   </div>
 </div>
-  <!-- <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
-    <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
-      <span matPrefix>
-        <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
-      <input matInput type="search" [formControl] ="searchControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <div fxLayout="column">
-      <div *ngFor="let q of askedQuestions">
-        <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="topic">
-            {{q.questionTitle}}
-          </div>
-          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
-            <div class="time">2 days ago</div>
-            <img src="../../../../assets/images/profile.jpg" class="avatar">
-          </div>
+<!-- <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
+  <mat-form-field appearance="outline" class="my-form-field" style="width: 100%;">
+    <span matPrefix>
+      <mat-icon>search</mat-icon> &nbsp;&nbsp;</span>
+    <input matInput type="search" [formControl] ="searchControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div fxLayout="column">
+    <div *ngFor="let q of askedQuestions">
+      <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="topic">
+          {{q.questionTitle}}
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
+          <div class="time">2 days ago</div>
+          <img src="../../../../assets/images/profile.jpg" class="avatar">
         </div>
       </div>
-      <div class="footer">
-        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (onclick)="addQuestionMobile()">
-          <mat-icon class="material-icons-outlined" style="color: white;">add</mat-icon>
-        </button>
-      </div>
     </div>
-  </div> -->
+    <div class="footer">
+      <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (onclick)="addQuestionMobile()">
+        <mat-icon class="material-icons-outlined" style="color: white;">add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div> -->
 
 
 

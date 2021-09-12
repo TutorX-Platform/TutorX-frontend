@@ -7,13 +7,11 @@ import {UtilService} from "./util-service.service";
 import 'rxjs/add/operator/switchMap';
 import {Student} from "../models/student";
 import * as constants from '../models/constants';
-import * as systemMessages from '../models/system-messages';
 import * as firebase from 'firebase';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
-import {firestore} from "firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +52,7 @@ export class AuthService {
         this.isLoggedIn = true;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+        localStorage.setItem(constants.localStorageKeys.role, this.student.role);
         this.findUser(this.student.userId);
       } else {
         this.isLoggedIn = false;
@@ -162,7 +161,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut().then(() => {
       this.isLoggedIn = false;
       localStorage.removeItem(constants.localStorageKeys.user);
-      this.router.navigate([constants.routes.sign_in], {skipLocationChange: true});
+      this.router.navigate([constants.routes.home], {skipLocationChange: true});
     })
   }
 
@@ -187,11 +186,7 @@ export class AuthService {
   }
 
   getAuthenticated() {
-    return this.angularFireAuth.authState.subscribe(
-      (res) => {
-        return res;
-      }
-    );
+    return this.angularFireAuth.authState !== null;
   }
 
   onSignOut() {
@@ -199,6 +194,7 @@ export class AuthService {
     localStorage.removeItem(constants.localStorageKeys.user);
     this.angularFireAuth.auth.signOut().then(
       (v) => {
+        this.router.navigate([constants.routes.home])
         this.angularFireAuth.auth.onAuthStateChanged(
           (user) => {
             if (user) {

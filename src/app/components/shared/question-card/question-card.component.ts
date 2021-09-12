@@ -33,6 +33,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public lastAssignedTutorName: string = '';
   @Input() public lastAssignedTutorImage: string = '';
   @Input() public byLoggedUser: boolean = false;
+  @Input() public questionNumber: string = '';
 
   isTutor = false;
 
@@ -84,7 +85,8 @@ export class QuestionCardComponent implements OnInit {
       studentEmail: this.studentEmail,
       lastAssignedTutorName: this.lastAssignedTutorName,
       lastAssignedTutorImage: this.lastAssignedTutorImage,
-      byLoggedUser: this.byLoggedUser
+      byLoggedUser: this.byLoggedUser,
+      questionNumber: this.questionNumber
     }
     dialogConfig.width = "100%";
     this.dialog.open(AddQuestionComponent, dialogConfig);

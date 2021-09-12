@@ -11,7 +11,7 @@ import {UtilService} from "../../../services/util-service.service";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {ProgressDialogComponent} from "../progress-dialog/progress-dialog.component";
-import {map, startWith} from 'rxjs/operators';
+import {finalize, map, startWith, take} from 'rxjs/operators';
 import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
@@ -46,6 +46,9 @@ export class AddQuestionComponent implements OnInit {
   studentUniqueKey = '';
   files: File[] = [];
   subjectList: string[] = [];
+  // @ts-ignore
+  uploadProgress: Observable<number>
+  questionNumber: number = 0;
 
   options = constants.subjects;
   subOptions: string[] = [];
@@ -149,8 +152,8 @@ export class AddQuestionComponent implements OnInit {
     this.questionId = this.data.id;
     // @ts-ignore
     this.attachments = this.data.attachments;
-    this.attachments.forEach((attachment)=>{
-      let file = new File([attachment.fileName],attachment.fileName,{
+    this.attachments.forEach((attachment) => {
+      let file = new File([attachment.fileName], attachment.fileName, {
         type: attachment.extension
       });
       this.files.push(file);
@@ -269,8 +272,10 @@ export class AddQuestionComponent implements OnInit {
     this.files.splice(removeItem, 1);
   }
 
+
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      questionNumber: '',
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -302,19 +307,24 @@ export class AddQuestionComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.saveQuestion(question, this.questionId).then((v) => {
-      // @ts-ignore
-      this.askedQuestions.push(this.questionId);
-      this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle);
-      dialogRef.close(true);
-      progressDialog.close();
-      this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
-        (option) => {
-          console.log(option);
-        }
-      )
-    });
+    this.questionService.incrementQuestionNumber();
+    this.questionService.incrementQuestionCount();
+
+    this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
+      (res) => {
+        console.log(res);
+        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber).then((v) => {
+          // @ts-ignore
+          this.askedQuestions.push(this.questionId);
+          this.sendAknowledgementEmail(this.authService.student.email);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber);
+          dialogRef.close(true);
+          progressDialog.close();
+        });
+      }
+    );
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+
 
   }
 
@@ -323,29 +333,29 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
     this.taskRef = this.storage.ref(path);
-    this.task = this.taskRef.put(file);
-    this.task.then(() => {
-      this.taskRef.getDownloadURL().subscribe(
-        (res) => {
-          let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
-          this.uploadedFiles.push(attachment);
-        }, () => {
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-        }, () => {
-          progressDialog.close();
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.fileUploadSuccess, constants.messageTypes.success).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-          console.log(this.uploadedFiles);
-        }
-      )
-    });
+    this.task = this.storage.upload(path, file);
+
+    this.task.percentageChanges().subscribe(
+      (res) => {
+        console.log(res);
+      }
+    )
+
+    // @ts-ignore
+    this.uploadProgress = this.task.percentageChanges();
+    this.task.snapshotChanges().pipe(finalize(() => {
+      this.taskRef.getDownloadURL().subscribe((url) => {
+        let attachment: Attachment = {extension: file.type, downloadUrl: url, fileName: file.name}
+        this.uploadedFiles.push(attachment);
+        progressDialog.close();
+      }, () => {
+        this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
+          (res) => {
+            console.log(res);
+          }
+        )
+      })
+    })).subscribe()
   }
 
   askEmail(progressDialog: MatDialogRef<any>) {
@@ -389,11 +399,12 @@ export class AddQuestionComponent implements OnInit {
     this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionNumber: questionNumber,
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,
       tutorProfile: "",
@@ -415,15 +426,9 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onAccept() {
-    this.utilService.openDialog(systemMessages.questionTitles.acceptChatConfirmation, systemMessages.questionMessages.acceptChatConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
-      (res) => {
-        if (res === true) {
-          this.acceptQuestion();
-          this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
-          this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
-        }
-      }
-    )
+    this.acceptQuestion();
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
+    this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
   }
 
   acceptQuestion() {
