@@ -1,300 +1,311 @@
-<mat-toolbar  class="top-bar__wrap">
-  <div class="container">
-    <mat-toolbar-row class="top-bar ">
-      <button
-        class="top-bar__nav-icon"
-        mat-icon-button
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <div class="top-bar__title-container">
-        <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
-      </div>
-      <div class="top-bar__actions">
-        <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
-        <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
-      </div>
 
-    </mat-toolbar-row>
-  </div>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer  mode="over">
+    asefljhakfalef
+  </mat-drawer>
 
-</mat-toolbar>
-
-<section class="">
-  <div class="container ">
-    <div class="s-hero">
-      <div class="s-hero__title-wrapper">
-        <h2  class="s-hero__title">A <span style="color: var(--action--primary---default)">Smarter</span> way to Student</h2>
-        <h4 class="s-hero__subtitle">Everything is figureoutable</h4>
-        <div class="">
-          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary">Find a tutor form me<mat-icon>arrow_forward</mat-icon></button>
+  <mat-toolbar  class="top-bar__wrap">
+    <div class="container">
+      <mat-toolbar-row class="top-bar ">
+        <button
+          class="top-bar__nav-icon"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="top-bar__title-container">
+          <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
         </div>
-      </div>
-      <img class="s-hero__image" src="assets/images/hero_image.png" alt="logo"/>
+        <div class="top-bar__actions">
+          <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
+          <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
+        </div>
+
+      </mat-toolbar-row>
     </div>
-  </div>
-</section>
-<section class="">
-  <div class="container ">
-    <div class="s-features">
-<!--      <h2>Services we provide</h2>-->
-<!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
-      <div class="row s-features__items">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
-          <div class="s-features__item">
-            <div class="s-features__media">
-              <mat-icon>home</mat-icon>
-            </div>
-            <div class="s-features__content">
-              <span class="s-features__title">{{detail.title}}</span>
-              <span class="s-features__description">{{detail.description}}</span>
-            </div>
-          </div>
+
+  </mat-toolbar>
+
+  <section class="">
+    <div class="container ">
+      <div class="s-hero">
+        <div class="s-hero__title-wrapper">
+          <h2  class="s-hero__title">A <span style="color: var(--action--primary---default)">Smarter</span> way to Student</h2>
+          <h4 class="s-hero__subtitle">Everything is figureoutable</h4>
+          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary cta-add--web">Find a tutor form me<mat-icon>arrow_forward</mat-icon></button>
+          <button mat-button class="c-button c-raised-button c-button-primary cta-add--mobile" routerLink="/add-question">
+            Find a tutor form me<mat-icon>arrow_forward</mat-icon>
+          </button>
+
         </div>
+        <img class="s-hero__image" src="assets/images/hero_image.png" alt="logo"/>
       </div>
     </div>
-  </div>
-</section>
-<section class="s-flow">
-  <div class="container ">
-    <div class="s-flow__wrapper">
-      <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
-      <div class="s-flow__content">
-        <h2>Services we provide</h2>
-        <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>
-        <div class="l-iteration">
-          <div class="l-iteration__item">
-            <div class="l-iteration__border-wrap">
-              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
-              <div class="l-iteration__border"></div>
-            </div>
-            <div class="l-iteration__content">
-              <div class="l-iteration__title">Upload your problem</div>
-              <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
-            </div>
-          </div>
-          <div class="l-iteration__item">
-            <div class="l-iteration__border-wrap">
-              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
-              <div class="l-iteration__border"></div>
-            </div>
-            <div class="l-iteration__content">
-              <div class="l-iteration__title">Talk to a tutor</div>
-              <div class="l-iteration__subtitle">Chat with one of the expert in the field</div>
-            </div>
-          </div>
-          <div class="l-iteration__item">
-            <div class="l-iteration__border-wrap">
-              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
-              <div class="l-iteration__border"></div>
-            </div>
-            <div class="l-iteration__content">
-              <div class="l-iteration__title">Get a quote</div>
-              <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
-            </div>
-          </div>
-          <div class="l-iteration__item">
-            <div class="l-iteration__border-wrap">
-              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
-              <div class="l-iteration__border"></div>
-            </div>
-            <div class="l-iteration__content">
-              <div class="l-iteration__title">Make the payment</div>
-              <div class="l-iteration__subtitle">Using your preffered payment method</div>
-            </div>
-          </div>
-          <div class="l-iteration__item">
-            <div class="l-iteration__border-wrap">
-              <mat-icon  class="l-iteration__track">check_circle</mat-icon>
-              <div class="l-iteration__border"></div>
-            </div>
-            <div class="l-iteration__content">
-              <div class="l-iteration__title">Get the assistance</div>
-              <div class="l-iteration__subtitle">Get your work done and explanations</div>
+  </section>
+  <section class="">
+    <div class="container ">
+      <div class="s-features">
+        <!--      <h2>Services we provide</h2>-->
+        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+        <div class="row s-features__items">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
+            <div class="s-features__item">
+              <div class="s-features__media">
+                <mat-icon>home</mat-icon>
+              </div>
+              <div class="s-features__content">
+                <span class="s-features__title">{{detail.title}}</span>
+                <span class="s-features__description">{{detail.description}}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
+  <section class="s-flow">
+    <div class="container ">
+      <div class="s-flow__wrapper">
+        <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
+        <div class="s-flow__content">
+          <h2>Services we provide</h2>
+          <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>
+          <div class="l-iteration">
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Upload your problem</div>
+                <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Talk to a tutor</div>
+                <div class="l-iteration__subtitle">Chat with one of the expert in the field</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Get a quote</div>
+                <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Make the payment</div>
+                <div class="l-iteration__subtitle">Using your preffered payment method</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Get the assistance</div>
+                <div class="l-iteration__subtitle">Get your work done and explanations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
-</section>
+    </div>
+  </section>
 
-<div class="home">
+  <div class="home">
 
 
-<!-- client-web-->
-<div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
-    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+    <!-- client-web-->
+    <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
+      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
         <div class="client-title-web">Our Students speak</div>
-    </div>
-    <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
+      </div>
+      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
         <div class="client-title-mobile">Our clients speak</div>
-    </div>
-    <div [ngClass.gt-xs]="'client-feedback-container-web'"
-    [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
-      <ngx-slick-carousel class="carousel"
-                          #slickModal="slick-carousel"
-                          [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
-          <div fxLayout="column" fxLayoutAlign="center center">
-            <div class="box-client b4">
-              <div class="feedback-title">{{feedback.title}}</div>
-              <div class="feedback-body">{{feedback.content}}</div>
-            </div>
-            <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-              <div>
-                <img [src]="feedback.image" alt="Avatar" class="avatar">
+      </div>
+      <div [ngClass.gt-xs]="'client-feedback-container-web'"
+           [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
+        <ngx-slick-carousel class="carousel"
+                            #slickModal="slick-carousel"
+                            [config]="slideConfig">
+          <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <div class="box-client b4">
+                <div class="feedback-title">{{feedback.title}}</div>
+                <div class="feedback-body">{{feedback.content}}</div>
               </div>
-              <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                <div class="profile-details-name">{{feedback.name}}</div>
-                <div class="profile-details-designation">{{feedback.designation}}</div>
+              <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                <div>
+                  <img [src]="feedback.image" alt="Avatar" class="avatar">
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                  <div class="profile-details-name">{{feedback.name}}</div>
+                  <div class="profile-details-designation">{{feedback.designation}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+
+    <!--Process-web-->
+    <div [ngClass.gt-xs]="'process-web'"
+         [ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
+      <div class="process-title">
+        How we roll?
+      </div>
+      <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
+        <div *ngFor="let num of process" fxFlex="20%">
+          <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
+            <div fxHide.lt-sm="true" fxShow="true">
+              <img src="../../../../assets/icons/Indication.png" width="100%">
+            </div>
+            <div fxHide.gt-xs="true" fxShow="true">
+              <img src="../../../../assets/icons/Indication-mobile.svg">
+            </div>
+            <div>
+              <div class="step-title">
+                {{num.title}}
+              </div>
+              <div class="step-sub-title">
+                {{num.subtitle}}
               </div>
             </div>
           </div>
         </div>
-      </ngx-slick-carousel>
-    </div>
-</div>
 
- <!--Process-web-->
-<div [ngClass.gt-xs]="'process-web'"
-[ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
-    <div class="process-title">
-        How we roll?
-    </div>
-    <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
-        <div *ngFor="let num of process" fxFlex="20%">
-            <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
-                <div fxHide.lt-sm="true" fxShow="true">
-                    <img src="../../../../assets/icons/Indication.png" width="100%">
-                </div>
-                <div fxHide.gt-xs="true" fxShow="true">
-                    <img src="../../../../assets/icons/Indication-mobile.svg">
-                </div>
-                <div>
-                    <div class="step-title">
-                        {{num.title}}
-                    </div>
-                    <div class="step-sub-title">
-                        {{num.subtitle}}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
+      </div>
+      <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
         <div *ngFor="let num of process">
-            <div class="step" fxLayout="row" fxLayoutGap="8px">
-                <div>
-                    <img src="../../../../assets/icons/Indication-mobile.svg">
-                </div>
-                <div>
-                    <div class="step-title">
-                        {{num.title}}
-                    </div>
-                    <div class="step-sub-title">
-                        {{num.subtitle}}
-                    </div>
-                </div>
+          <div class="step" fxLayout="row" fxLayoutGap="8px">
+            <div>
+              <img src="../../../../assets/icons/Indication-mobile.svg">
             </div>
+            <div>
+              <div class="step-title">
+                {{num.title}}
+              </div>
+              <div class="step-sub-title">
+                {{num.subtitle}}
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
- <!--tutor-feedback-web-->
-<div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-    <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
+    <!--tutor-feedback-web-->
+    <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+      <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
         <img src="../../../../assets/icons/quoteMark.svg" alt="">
         <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
           {{tutorFeedbacks[feedBackNum].description}}
         </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
         <div *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
-            <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
-                <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
-                <div *ngIf="i == feedBackNum">
-                    <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                        <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
-                        <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
-                    </div>
-                    <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                      <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
-                      <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
-                    </div>
-                    <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                      <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
-                      <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
-                    </div><div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                       <div class="avatar-name">{{tutorFeedbacks[3].name}}</div>
-                       <div class="avatar-designation">{{tutorFeedbacks[3].subject}}</div>
-                    </div><div *ngIf="feedBackNum == 4" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                      <div class="avatar-name">{{tutorFeedbacks[4].name}}</div>
-                      <div class="avatar-designation">{{tutorFeedbacks[4].subject}}</div>
-                    </div>
-                </div>
+          <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
+            <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+            <div *ngIf="i == feedBackNum">
+              <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+              </div>
+              <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
+              </div>
+              <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
+              </div><div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+              <div class="avatar-name">{{tutorFeedbacks[3].name}}</div>
+              <div class="avatar-designation">{{tutorFeedbacks[3].subject}}</div>
+            </div><div *ngIf="feedBackNum == 4" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+              <div class="avatar-name">{{tutorFeedbacks[4].name}}</div>
+              <div class="avatar-designation">{{tutorFeedbacks[4].subject}}</div>
             </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-
-<!-- tutor-feedback-mobile -->
-<div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
-    <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
-        <img src="../../../../assets/icons/quoteMark.svg" alt="">
-      <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
-        {{tutorFeedbacks[feedBackNum].description}}
       </div>
     </div>
-    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+
+    <!-- tutor-feedback-mobile -->
+    <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
+      <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
+        <img src="../../../../assets/icons/quoteMark.svg" alt="">
+        <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
+          {{tutorFeedbacks[feedBackNum].description}}
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <div *ngFor="let tutorFeedback of tutorFeedbacks2; let i = index">
-            <div class="avatar-container" fxLayout="row">
-              <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
-              <div *ngIf="i == feedBackNum">
-                <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                  <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
-                  <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
-                </div>
-                <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                  <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
-                  <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
-                </div>
-                <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                  <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
-                  <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
-                </div>
+          <div class="avatar-container" fxLayout="row">
+            <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
+            <div *ngIf="i == feedBackNum">
+              <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+              </div>
+              <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
+              </div>
+              <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
+                <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
+                <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
               </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
-    <div fxLayout="column">
+    <div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
+      <div fxLayout="column">
         <div class="banner-title">Get Instant Help</div>
         <div class="banner-sub-title">For university/college, high school and middle school students</div>
-    </div>
-    <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
+      </div>
+      <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
         Get help
         <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-    </button>
-</div>
+      </button>
+    </div>
 
-<div class="footer" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px">
-    <img src="../../../../assets/icons/logo-temp.svg" alt="">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+    <div class="footer" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px">
+      <img src="../../../../assets/icons/logo-temp.svg" alt="">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
         <div class="links">Download Now</div>
         <div class="links">License</div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
         <div class="links">About</div>
         <div class="links">Tutors</div>
         <div class="links">FAQ</div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
         <div class="copy-right">© 2021 . All rights reserved</div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
+
+</mat-drawer-container>
