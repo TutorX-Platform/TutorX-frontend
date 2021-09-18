@@ -120,7 +120,11 @@
     <div class="sub-message">
       Create questions to dummy text
     </div>
-    <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()">
+    <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestionMobile()" fxHide.gt-xs fxShow="true">
+      <img src="../../../assets/icons/plus-white.svg">
+      <div>New question</div>
+    </div>
+    <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()" fxShow="true" fxHide.lt-sm="true">
       <img src="../../../assets/icons/plus-white.svg">
       <div>New question</div>
     </div>

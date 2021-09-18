@@ -417,6 +417,13 @@
   </div>
   <div class="chat-main-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div class="chat-container">
+      <div *ngIf="isTyping && isFocused">You Typing...</div>
+      <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">{{question.tutorName}} is
+        Typing...
+      </div>
+      <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">{{question.studentName}} is
+        Typing...
+      </div>
       <div class="typing-box">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="typer">
           <button mat-flat-button style="background: #E3E6E8">
