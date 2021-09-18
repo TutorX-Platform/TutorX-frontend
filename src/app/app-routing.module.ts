@@ -21,6 +21,7 @@ import {TutorActivitiesComponent} from "./components/tutor/tutor-activities/tuto
 import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-profile.component";
 import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-payments.component";
 import {BodyComponent} from './components/home/body/body.component';
+import {HOME} from "@angular/cdk/keycodes";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
@@ -93,7 +94,7 @@ const routes: Routes = [
       }
     ]
   },
-  // {path: '**', component: NavBarComponent}
+  {path: '**', component: BodyComponent}
 ];
 
 @NgModule({

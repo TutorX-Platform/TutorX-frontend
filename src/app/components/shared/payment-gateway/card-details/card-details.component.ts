@@ -145,6 +145,7 @@ export class CardDetailsComponent implements OnInit {
                   lineHeight: '40px',
                   fontWeight: 300,
                   fontSize: '18px',
+                  className: 'custom-class-name',
                   '::placeholder': {
                     color: '#CFD7E0'
                   }

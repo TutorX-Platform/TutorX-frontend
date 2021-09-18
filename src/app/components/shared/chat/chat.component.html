@@ -27,7 +27,8 @@
       <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
-        <button *ngIf="authService.student.role==='student' && questionService.question.status==='Assigned'"
+        <button *ngIf="authService.student.role==='student' && questionService.question.status!=='Open'"
+                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' "
                 mat-menu-item (click)="onRequestNewTutor()"
                 class="drop-down" fxLayout="row"
                 fxLayoutAlign="start center"

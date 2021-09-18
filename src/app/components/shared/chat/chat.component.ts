@@ -128,39 +128,41 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
   onSend() {
-    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-      // @ts-ignore
-      this.time = res;
-      if (!this.attachementPicked) {
+    if (this.chatForm.value.message) {
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
         // @ts-ignore
-        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
-        this.onUnAuthorizedMessageSent(this.message.value);
-      } else {
-        // @ts-ignore
-        this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
-        this.uploadAttachment();
-      }
-      this.message.reset();
-      this.isSendButtonDissabled = true;
-    });
-
-    let id = '';
-    if (this.authService.student.role === constants.userTypes.student) {
-      id = this.question.tutorId;
-    }
-    if (this.authService.student.role === constants.userTypes.tutor) {
-      id = this.question.studentId;
-    }
-
-    if (id !== '') {
-      this.notificationService.getNotificationToken(id).valueChanges().subscribe(
-        (res) => {
-          console.log(res);
-          if (res !== undefined && res) {
-            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token).subscribe();
-          }
+        this.time = res;
+        if (!this.attachementPicked) {
+          // @ts-ignore
+          this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
+          this.onUnAuthorizedMessageSent(this.message.value);
+        } else {
+          // @ts-ignore
+          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
+          this.uploadAttachment();
         }
-      )
+        this.message.reset();
+        this.isSendButtonDissabled = true;
+      });
+
+      let id = '';
+      if (this.authService.student.role === constants.userTypes.student) {
+        id = this.question.tutorId;
+      }
+      if (this.authService.student.role === constants.userTypes.tutor) {
+        id = this.question.studentId;
+      }
+
+      if (id !== '') {
+        this.notificationService.getNotificationToken(id).valueChanges().subscribe(
+          (res) => {
+            console.log(res);
+            if (res !== undefined && res) {
+              this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token).subscribe();
+            }
+          }
+        )
+      }
     }
   }
 
@@ -346,7 +348,22 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onRequestNewTutor() {
-    this.utilService.openDialog("need to clarify what to do", "problem", constants.messageTypes.warning).afterOpened().subscribe();
+    if (this.questionService.question.status === constants.questionStatus.assigned) {
+      const data = {
+        tutorName: "",
+        tutorImage: null,
+        tutorId: "",
+        status: constants.questionStatus.open,
+      }
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        // @ts-ignore
+        this.time = res;
+        this.chatService.requestedNewTutor(this.chatToken, this.time.time);
+        this.questionService.releaseQuestionByTutor(this.chatToken, data);
+      })
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+    }
   }
 
   ngAfterViewChecked(): void {
@@ -388,7 +405,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.isSendButtonDissabled = true;
           this.attachementPicked = false;
           this.uploadReady = true;
-
           console.log("upload error");
         }, () => {
           progressDialog.close();
@@ -400,6 +416,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onSendQuote() {
     const data = {
       isQuoteSend: true,
+      isQuoteApproved: true,
       fee: this.quote.value
     }
     this.questionService.tutorSendQuote(this.chatToken, data);

@@ -8,6 +8,7 @@ import {ChatMsg} from "../models/chat-msg";
 import {StudentService} from "./student-service.service";
 import {UtilService} from "./util-service.service";
 import {MailService} from "./mail.service";
+import {url_sign} from "../models/constants";
 
 @Injectable({
   providedIn: 'root'
@@ -107,6 +108,35 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data).then(
       (v) => {
         this.router.navigate([constants.routes.turor], {skipLocationChange: true})
+      }
+    );
+  }
+
+  requestedNewTutor(chatId: string, time: number) {
+    let data: ChatMsg = {
+      sort: time,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} requested a new tutor to the question `,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time,
+    }
+
+    const leaveTutor = {
+      chatStatus: constants.chat_status.openForTutors,
+      tutorId: '',
+      tutorJoinedTime: time,
+      tutorsCount: 1
+    }
+
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(leaveTutor);
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data).then(
+      (v) => {
+        this.router.navigate([constants.routes.student.concat(constants.url_sign.url_separator).concat(constants.routes.questions)], {skipLocationChange: true})
       }
     );
   }
