@@ -265,6 +265,7 @@ export class CardDetailsComponent implements OnInit {
 
   recordPayment(time: number) {
     const payment: Payment = {
+      questionNumber: this.questionService.question.questionNumber,
       tutorName: this.questionService.question.tutorName,
       questionTitle: this.question.questionTitle,
       studentImage: this.question.studentImage,
