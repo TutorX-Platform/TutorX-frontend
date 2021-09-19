@@ -162,12 +162,12 @@ export class ChatServiceService {
       attachmentLink: "",
       sort: time,
       senderAvatar: senderAvatar,
-      senderName: this.studentService.currentStudent.userId,
+      senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
       isAttachment: false,
       message: `${this.studentService.currentStudent.firstName} sent the quote of ${amount} USD`,
       senderEmail: '',
-      senderId: '',
+      senderId: this.studentService.currentStudent.userId,
       sentBy: '',
       time: time
     }
