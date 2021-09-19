@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   attachments: Attachment[] = [];
   isFocused = false;
   chat: Chat = {
+    questionDescription: "",
     questionNumber: "",
     questionTitle: "",
     studentProfile: "",
@@ -142,11 +143,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.time = res;
       if (!this.attachementPicked) {
         // @ts-ignore
-        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false);
+        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false, '', '');
         this.onUnAuthorizedMessageSent(this.message.value);
       } else {
-        // @ts-ignore
-        this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true);
         this.uploadAttachment();
       }
       this.message.reset();
@@ -171,6 +170,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       )
     }
+
   }
 
   // scrollToBottom(): void {
@@ -355,7 +355,22 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onRequestNewTutor() {
-    this.utilService.openDialog("need to clarify what to do", "problem", constants.messageTypes.warning).afterOpened().subscribe();
+    if (this.questionService.question.status === constants.questionStatus.assigned) {
+      const data = {
+        tutorName: "",
+        tutorImage: null,
+        tutorId: "",
+        status: constants.questionStatus.open,
+      }
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        // @ts-ignore
+        this.time = res;
+        this.chatService.requestedNewTutor(this.chatToken, this.time.time);
+        this.questionService.releaseQuestionByTutor(this.chatToken, data);
+      })
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+    }
   }
 
   ngAfterViewChecked(): void {
@@ -384,6 +399,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.uploadReady = false;
           let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
           this.chat.attachments.push(attachment);
+          // @ts-ignore
+          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true, attachment.downloadUrl, attachment.extension);
           attachment = {
             downloadUrl: "",
             fileName: "",
@@ -397,7 +414,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.isSendButtonDissabled = true;
           this.attachementPicked = false;
           this.uploadReady = true;
-
           console.log("upload error");
         }, () => {
           progressDialog.close();
@@ -409,13 +425,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onSendQuote() {
     const data = {
       isQuoteSend: true,
+      isQuoteApproved: true,
       fee: this.quote.value
     }
     this.questionService.tutorSendQuote(this.chatToken, data);
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
       this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value);
-      this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
+      // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
 
     })
 
@@ -428,7 +445,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.studentService.findStudentById(this.chat.tutorId).subscribe(
       (res) => {
         // @ts-ignore
-        this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
+        // this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
       }
     )
 

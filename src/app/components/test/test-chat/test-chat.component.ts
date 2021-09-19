@@ -74,7 +74,7 @@ export class TestChatComponent implements OnInit {
 
   onSend() {
     // @ts-ignore
-    this.chatService.sendMessage(this.chatToken, this.chatForm.controls.message.value)
+    this.chatService.sendMessage(this.chatToken, this.chatForm.controls.message.value, "", "")
   }
 
   onJoinTutor() {

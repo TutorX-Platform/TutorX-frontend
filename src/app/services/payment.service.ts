@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {Payment} from "../models/payment";
 import {AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Refund} from "../models/refunds";
+import {firestore} from "firebase";
 
 
 @Injectable({
@@ -44,5 +45,11 @@ export class PaymentService {
     // @ts-ignore
     const paymentRef: AngularFirestoreDocument<Refund> = this.angularFirestoreService.collection(constants.collections.refund).doc(questionId);
     return paymentRef.set(refund);
+  }
+
+  incrementPayment(amount: number) {
+    const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
+    const increment = firestore.FieldValue.increment(amount);
+    statRef.update({'payments': increment});
   }
 }

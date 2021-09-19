@@ -145,6 +145,7 @@ export class CardDetailsComponent implements OnInit {
                   lineHeight: '40px',
                   fontWeight: 300,
                   fontSize: '18px',
+                  className: 'custom-class-name',
                   '::placeholder': {
                     color: '#CFD7E0'
                   }
@@ -202,6 +203,7 @@ export class CardDetailsComponent implements OnInit {
                   if (res['status'] === 200) {
                     // tutor payment increase
                     this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage);
+                    this.paymentService.incrementPayment(this.question.fee);
                     this.updateQuestionAsPaid();
                     this.loading = false;
                     this.submitted = false;
@@ -212,7 +214,7 @@ export class CardDetailsComponent implements OnInit {
                     this.studentService.findStudentById(this.questionService.question.tutorId).subscribe(
                       (res) => {
                         // @ts-ignore
-                        this.mailService.paymentSuccessMailToTutor(res.email).subscribe();
+                        // this.mailService.paymentSuccessMailToTutor(res.email).subscribe();
                       }
                     )
                     this.utilService.getTimeFromTimeAPI().subscribe((res) => {

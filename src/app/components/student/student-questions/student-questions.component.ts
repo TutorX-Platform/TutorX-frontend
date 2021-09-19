@@ -37,11 +37,13 @@ export class StudentQuestionsComponent implements OnInit {
   isCancelled = false;
   isCompleted = false;
   attachments: Attachment[] = [];
+  status: string[] = [];
+
 
   dummyProfPic = constants.dummy_profile_picture;
 
   subjects = [
-    "Science", "English", "Maths", "Computer Science"
+    "Computer Science", "Physics", "Mathematics", "Management"
   ]
 
   states = [
@@ -214,7 +216,6 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   onSubjectFilter(value: any) {
-    let ask: Questions[] = [];
     let filteredQuestions: Questions[] = [];
 
     if (value === constants.subjectCodes.mathematics) {
@@ -252,8 +253,50 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
 
-  onStageFilter(value: any) {
-    console.log(value);
+  onStageFilter(value: any, event: any) {
+    let filteredQuestions: Questions[] = [];
+    if (event.checked) {
+      this.status.push(value)
+    } else {
+      this.status.splice(this.status.indexOf(value), 1);
+    }
+    if (this.status.indexOf(constants.questionStatus.open) !== -1) {
+      this.isOpen = true;
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.status === constants.questionStatus.open));
+    } else {
+      this.isOpen = false;
+    }
+    if (this.status.indexOf(constants.questionStatus.in_progress) !== -1) {
+      this.isInprogress = true;
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.status === constants.questionStatus.in_progress));
+    } else {
+      this.isInprogress = false;
+    }
+    if (this.status.indexOf(constants.questionStatus.assigned) !== -1) {
+      this.isAssigned = true;
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.status === constants.questionStatus.assigned));
+    } else {
+      this.isAssigned = false;
+    }
+    if (this.status.indexOf(constants.questionStatus.completed) !== -1) {
+      this.isCompleted = true;
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.status === constants.questionStatus.completed));
+    } else {
+      this.isCompleted = false;
+    }
+    if (this.status.indexOf(constants.questionStatus.cancelled) !== -1) {
+      this.isCancelled = true;
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.status === constants.questionStatus.cancelled));
+    } else {
+      this.isCancelled = false;
+    }
+    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isPhysics && !this.isManagement && !this.isCS && !this.isMaths) {
+      this.askedQuestions = [];
+      this.askedQuestions.push(...this.allAskedQuestions);
+    } else {
+      this.askedQuestions = [];
+      this.askedQuestions.push(...filteredQuestions);
+    }
   }
 
   onViewChat(id: any) {

@@ -319,7 +319,7 @@ export class AddQuestionComponent implements OnInit {
           // @ts-ignore
           this.askedQuestions.push(this.questionId);
           this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber,question.description);
           dialogRef.close(true);
           progressDialog.close();
         });
@@ -400,14 +400,15 @@ export class AddQuestionComponent implements OnInit {
   }
 
   sendAknowledgementEmail(email: string) {
-    this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+    // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string,questionDesc:string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionDescription: questionDesc,
       questionNumber: questionNumber,
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,

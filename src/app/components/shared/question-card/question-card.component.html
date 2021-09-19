@@ -28,9 +28,10 @@
     <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" class="left-container">
       <img *ngIf="lastAssignedTutorImage"
            [src]="lastAssignedTutorImage" alt="Avatar" class="avatar">
-      <img *ngIf="lastAssignedTutorImage ===null || lastAssignedTutorImage ===undefined || lastAssignedTutorImage ===''"
-           src="{{defaultTutorAvatar}}" alt="Avatar" class="avatar">
-      <div class="viewed-by">Last assigned to {{lastAssignedTutorName}}</div>
+      <img
+        *ngIf="(lastAssignedTutorImage ===null || lastAssignedTutorImage ===undefined || lastAssignedTutorImage ==='') && lastAssignedTutorName !='' "
+        src="{{defaultTutorAvatar}}" alt="Avatar" class="avatar">
+      <div *ngIf="lastAssignedTutorName !==''" class="viewed-by">Last assigned to {{lastAssignedTutorName}}</div>
     </div>
     <div fxLayoutGap="8px" fxLayout="row">
       <button (click)="onViewDetails()" mat-button class="view-details">

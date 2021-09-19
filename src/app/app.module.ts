@@ -86,7 +86,7 @@ import {SuccesMessageComponent} from './components/shared/payment-gateway/succes
 import {TutorProfileComponent} from './components/tutor/tutor-profile/tutor-profile.component';
 import {TutorPaymentsComponent} from './components/tutor/tutor-payments/tutor-payments.component';
 import {NotificationService} from "./services/notification.service";
-
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 
 @NgModule({

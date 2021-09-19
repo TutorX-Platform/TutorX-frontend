@@ -8,6 +8,10 @@ export const env_url = {
   prod_url: 'https://tutetory.com'
 }
 
+export const system_name = 'Tutetory';
+
+export const system_image = '';
+
 export const dummyChatId = 'Q936d4c46-3a30-4f17-b2ce-aa53d8c3af37';
 
 export const dummy_profile_picture = 'assets/images/default_profile.png';
@@ -242,8 +246,6 @@ export const email_data = {
   failedSuccessMailSubjectToStudent: "Payment Failed",
   failedSuccessMailMessageToStudent: "Your payment was failed due to some reasons, Money is not deducted",
   questionAddMailNotLoggedUser: "Hi your questions is added to system, We will send you a link to join chat once tutor joined",
-
-
 }
 
 

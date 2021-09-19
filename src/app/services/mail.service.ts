@@ -10,19 +10,6 @@ export class MailService {
   constructor(private http: HttpClient) {
   }
 
-  if() {
-
-  }
-
-  sendEmail(email: string) {
-    const emailData = {
-      'fromEmail': constants.email_data.senderEmail,
-      'subject': constants.email_data.subject,
-      'text': constants.email_data.message,
-      'toEmail': email,
-    }
-    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
-  }
 
   sendQuestionAcknowledgementEmail(email: string) {
     const emailData = {
@@ -124,6 +111,16 @@ export class MailService {
       'subject': 'UnAuthorized chats shared in chat',
       'text': `${sender} sheared ${keyword} which is an unauthorized keyword. Please put some attention on ${questionId} question chat `,
       'toEmail': 'tharindu.prf@gmail.com',
+    }
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
+  }
+
+  sendMail(subject: string, body: string, reciever: string) {
+    const emailData = {
+      'fromEmail': constants.email_data.senderEmail,
+      'subject': subject,
+      'text': body,
+      'toEmail': reciever,
     }
     return this.http.post(constants.backend_url.concat(constants.backend_api_resource.email), emailData);
   }

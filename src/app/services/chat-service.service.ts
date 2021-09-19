@@ -8,6 +8,7 @@ import {ChatMsg} from "../models/chat-msg";
 import {StudentService} from "./student-service.service";
 import {UtilService} from "./util-service.service";
 import {MailService} from "./mail.service";
+import {url_sign} from "../models/constants";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,10 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing).then();
   }
 
-  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean) {
+  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string) {
     let data: ChatMsg = {
+      attachmentExtension: extension,
+      attachmentLink: attachmentLink,
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -42,7 +45,11 @@ export class ChatServiceService {
       sentBy: this.auth.student.firstName,
       time: sortTime
     }
-    this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    if (isAttachment) {
+      this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    } else {
+      this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    }
   }
 
   getMessages(messageId: string) {
@@ -61,6 +68,7 @@ export class ChatServiceService {
       tutorProfile: this.auth.student.profileImage
     }
     let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -70,7 +78,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: sortTime,
+      time: sortTime
     }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
@@ -84,6 +92,7 @@ export class ChatServiceService {
 
   tutorLeftChat(chatId: string, time: number) {
     let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
       sort: time,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -93,7 +102,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
 
     const leaveTutor = {
@@ -111,8 +120,40 @@ export class ChatServiceService {
     );
   }
 
+  requestedNewTutor(chatId: string, time: number) {
+    let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
+      sort: time,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} requested a new tutor to the question `,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time
+    }
+
+    const leaveTutor = {
+      chatStatus: constants.chat_status.openForTutors,
+      tutorId: '',
+      tutorJoinedTime: time,
+      tutorsCount: 1
+    }
+
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(leaveTutor);
+    this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data).then(
+      (v) => {
+        this.router.navigate([constants.routes.student.concat(constants.url_sign.url_separator).concat(constants.routes.questions)], {skipLocationChange: true})
+      }
+    );
+  }
+
   sendQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -122,13 +163,15 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
   sendApproveQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -138,13 +181,15 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
   sendPaidQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -154,7 +199,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
@@ -168,6 +213,11 @@ export class ChatServiceService {
 
   getTypingStatus(chatId: string) {
     const typeRef = this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId);
+    return typeRef;
+  }
+
+  getChatsForTutor(tutorId: string) {
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime').limit(10))
     return typeRef;
   }
 
