@@ -137,7 +137,8 @@
                   <div class="user-name">
                     {{message.senderName}}
                   </div>
-                  <div class="message-box message-box--other-user-message" fxLayout="column" fxLayoutAlign="center center">
+                  <div class="message-box message-box--other-user-message" fxLayout="column"
+                       fxLayoutAlign="center center">
                     <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon">
                     {{message.message}}
                   </div>
@@ -148,12 +149,14 @@
           <!--attachment view current user-->
           <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
             <div fxLayout="row" fxLayoutAlign="end center">
-              <a href="/assets/images/profile.jpg" class="message-box" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px">
+              <a href="/assets/images/profile.jpg" class="message-box" fxLayout="column" fxLayoutAlign="center center"
+                 fxLayoutGap="8px">
                 <!--<img src="assets/icons/excel2.png" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('.sheet')">-->
                 <!--<img src="assets/icons/pdf.svg" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('pdf')">-->
                 <!--<img src="assets/icons/word.png" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('.document')">-->
                 <!--<img src="assets/icons/jpeg.svg" class="attachment-box" *ngIf="attachment.extension.includes('image')">-->
-                {{message.message}}
+                <img [src]="message.attachmentLink">
+                {{message.attachmentExtension}}
               </a>
             </div>
           </div>
@@ -174,7 +177,8 @@
                     {{message.senderName}}
                   </div>
                   <div class="quote-box quote-box--other-user" fxLayout="column" fxLayoutAlign="center center">
-                    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid" class="amount-container amount-container--other-user">
+                    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
+                         class="amount-container amount-container--other-user">
                       <img src="../../../../assets/icons/nervo.svg">
                       <div class="quote">
                         Quote
@@ -194,7 +198,8 @@
             *ngIf=" !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
             <div fxLayout="row" fxLayoutAlign="end center">
               <div class="quote-box" fxLayout="column" fxLayoutAlign="center center">
-                <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid" class="amount-container amount-container--other-user">
+                <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
+                     class="amount-container amount-container--other-user">
                   <img src="../../../../assets/icons/nervo.svg">
                   <div class="quote">
                     Quote
@@ -273,10 +278,10 @@
       <div class="typing-box">
         <div fxLayout="row" fxLayoutAlign="space-between center" class="typer">
           <!--<textarea matInput type="text" placeholder="Reply"-->
-                    <!--oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'-->
-                    <!--class="message-input" [formControl]="message" (input)="onType()" (focus)="onFocus()"-->
-                    <!--(blur)="onBlur()" (keypress.control.enter)="triggerFunction($event); false"-->
-                    <!--(keydown.control.enter)="triggerFunction($event)"></textarea>-->
+          <!--oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'-->
+          <!--class="message-input" [formControl]="message" (input)="onType()" (focus)="onFocus()"-->
+          <!--(blur)="onBlur()" (keypress.control.enter)="triggerFunction($event); false"-->
+          <!--(keydown.control.enter)="triggerFunction($event)"></textarea>-->
           <textarea
             matInput
             id="textarea1"

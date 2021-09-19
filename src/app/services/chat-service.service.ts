@@ -30,8 +30,10 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing).then();
   }
 
-  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean) {
+  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string) {
     let data: ChatMsg = {
+      attachmentExtension: extension,
+      attachmentLink: attachmentLink,
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -43,7 +45,11 @@ export class ChatServiceService {
       sentBy: this.auth.student.firstName,
       time: sortTime
     }
-    this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    if (isAttachment) {
+      this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    } else {
+      this.angularFirestoreService.collection(constants.collections.message).doc(messageId).collection(constants.collections.chats).add(data);
+    }
   }
 
   getMessages(messageId: string) {
@@ -62,6 +68,7 @@ export class ChatServiceService {
       tutorProfile: this.auth.student.profileImage
     }
     let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -71,7 +78,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: sortTime,
+      time: sortTime
     }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
@@ -85,6 +92,7 @@ export class ChatServiceService {
 
   tutorLeftChat(chatId: string, time: number) {
     let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
       sort: time,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -94,7 +102,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
 
     const leaveTutor = {
@@ -114,6 +122,7 @@ export class ChatServiceService {
 
   requestedNewTutor(chatId: string, time: number) {
     let data: ChatMsg = {
+      attachmentExtension: "", attachmentLink: "",
       sort: time,
       senderAvatar: this.studentService.currentStudent.profileImage,
       senderName: this.studentService.currentStudent.firstName,
@@ -123,7 +132,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
 
     const leaveTutor = {
@@ -143,6 +152,8 @@ export class ChatServiceService {
 
   sendQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -152,13 +163,15 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
   sendApproveQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -168,13 +181,15 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
   sendPaidQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      attachmentExtension: "",
+      attachmentLink: "",
       sort: time,
       senderAvatar: '',
       senderName: '',
@@ -184,7 +199,7 @@ export class ChatServiceService {
       senderEmail: '',
       senderId: '',
       sentBy: '',
-      time: time,
+      time: time
     }
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
