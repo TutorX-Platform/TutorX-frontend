@@ -371,6 +371,36 @@
             height: 40px !important;
           }
         }
+
+        .quote-box{
+          margin: 8px 16px;
+          background: #7F6EF0;
+          max-width: 54%;
+          border-radius: 8px;
+          font: $body-small-default;
+          color: white;
+          &--other-user{
+            margin: 8px 0px !important;
+            background: #E3E6E8 !important;
+            width: 100% !important;
+            color: black !important;
+          }
+        }
+        .amount-container{
+          padding: 16px;
+          .quote{
+            font: $body-base-medium;
+          }
+          .amount{
+            font: $body-small-bold;
+            color: #2EA341;
+          }
+        }
+        .send-quote-button{
+          background: #2EA341;
+          color: white;
+          width: 100%;
+        }
         .audio-message-box{
 
         }
