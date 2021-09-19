@@ -127,6 +127,17 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     // this.scrollToBottom();
   }
 
+  // @ts-ignore
+  triggerFunction(event) {
+    console.log(event);
+    if (!event.shiftKey && event.key === 'Enter') {
+      event.preventDefault();
+      if (this.message.value !== null) {
+        this.onSend();
+      }
+      return true;
+    }
+  }
 
   onSend() {
     if (this.chatForm.value.message) {

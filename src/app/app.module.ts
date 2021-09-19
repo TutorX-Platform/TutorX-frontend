@@ -31,6 +31,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
@@ -164,6 +165,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     MatSelectModule,
     MatDatepickerModule,
     AngularFireMessagingModule,
+    MatProgressBarModule,
     NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],
   providers: [AuthService, AngularFireAuthGuard, NotificationService],

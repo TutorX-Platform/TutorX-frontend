@@ -57,6 +57,7 @@ export class BodyComponent implements OnInit {
 
   show = false;
   showFeedback = false;
+  page = 0;
 
   process = [
     {

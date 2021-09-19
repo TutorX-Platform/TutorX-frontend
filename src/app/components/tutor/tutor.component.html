@@ -115,51 +115,46 @@
             </div>
           </div>
 
-          <span class="example-spacer"></span>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-            <div *ngIf="authService.student.profileImage !==null">
-              <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
+            <span class="example-spacer"></span>
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+              <div *ngIf="authService.student.profileImage !==null">
+                <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
+              </div>
+              <div *ngIf="authService.student.profileImage==null">
+                <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
+                <div class="profile-title">{{authService.student.firstName}}</div>
+                <div class="profile-sub-title">{{authService.student.email}}</div>
+              </div>
+              <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onViewProfile()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                        fxLayoutGap="8px">
+                  <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+                  <div>View Profile</div>
+                </button>
+                <button mat-menu-item (click)="onSignOut()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                        fxLayoutGap="8px">
+                  <mat-icon class="material-icons-outlined">logout</mat-icon>
+                  <div>Sign Out</div>
+                </button>
+              </mat-menu>
             </div>
-            <div *ngIf="authService.student.profileImage==null">
-              <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
-            </div>
-            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
-              <div class="profile-title">{{authService.student.firstName}}</div>
-              <div class="profile-sub-title">{{authService.student.email}}</div>
-            </div>
-            <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="onViewProfile()" class="drop-down" fxLayout="row"
-                      fxLayoutAlign="start center"
-                      fxLayoutGap="8px">
-                <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-                <div>View Profile</div>
-              </button>
-              <button mat-menu-item (click)="onSignOut()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
-                      fxLayoutGap="8px">
-                <mat-icon class="material-icons-outlined">logout</mat-icon>
-                <div>Sign Out</div>
-              </button>
-            </mat-menu>
           </div>
-        </div>
-      </mat-toolbar>
-      <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
-        <div fxLayoutAlign="start center" style="color: white;">
-          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>arrow_back</mat-icon>
+        </mat-toolbar>
+        <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
+          <div fxLayoutAlign="start center" style="color: white;">
+              <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <span>Questions</span>
+          </div>
+          <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>circle</mat-icon>
           </button>
-          <span>Questions</span>
-        </div>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>circle</mat-icon>
-        </button>
-      </mat-toolbar>
-      <!--<app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>-->
-      <!--<app-tutor-dashboard *ngIf="selectedPage === 2"></app-tutor-dashboard>-->
-      <!--<app-tutor-activities *ngIf="selectedPage === 3"></app-tutor-activities>-->
-      <!--<app-chat *ngIf="selectedPage === 4"></app-chat>-->
-      <router-outlet></router-outlet>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
 
     </mat-sidenav-content>
   </mat-sidenav-container>
