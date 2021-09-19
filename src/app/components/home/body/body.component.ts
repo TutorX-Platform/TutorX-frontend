@@ -220,20 +220,7 @@ export class BodyComponent implements OnInit {
       designation: "Texas",
       image: "../../../../assets/images/default_profile.png",
     },
-    {
-      title: "Clear Explanations",
-      content: "Recommend tutetory.com to anyone who is struggling for Matlab problems. Explained the code one by when I requested. They have a genius group of tutors. I could get the help of few and all are world-class. Never hesitate to come back. Cheers!",
-      name: "Ravi M.",
-      designation: "Toronto",
-      image: "../../../../assets/images/default_profile.png",
-    },
-    {
-      title: "Affordable Prices",
-      content: "Best tutoring site I came across. I worked with Captain and Mechanic. Both were highly concerning about timely submissions.I could get all clarifications whenever i asked. No any cost ,they were always available .Really appreciate the hard work. Most trusted tutoring  site",
-      name: "Sami A.",
-      designation: "London",
-      image: "../../../../assets/images/default_profile.png",
-    },
+
   ]
 
   tutorFeedbacks = [
@@ -261,12 +248,7 @@ export class BodyComponent implements OnInit {
       name: "Businesswoman ",
       subject: "Business Management"
     },
-    {
-      description: "Let me start by saying that I believe, teaching is a noble profession which should be done with passion. I have a good academic record and great experience in teaching in the subject Chemistry through last 5 years. I have completed my Ph.D. in 2020. I’m specialized in both organic and inorganic Chemistry.",
-      image: "assets/images/h2o.jpg",
-      name: "Prof. H2O",
-      subject: "Chemistry"
-    },
+
   ]
 
   tutorFeedbacks2 = [

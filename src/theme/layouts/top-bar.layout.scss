@@ -6,9 +6,11 @@
   transition: background-color 0.2s ease-in-out;
   justify-content: space-between;
   &__wrap {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 500;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(100px) !important;
   }
   &__nav-icon {
     display: none;
