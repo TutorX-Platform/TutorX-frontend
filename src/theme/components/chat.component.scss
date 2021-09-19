@@ -364,10 +364,12 @@
           }
         }
         .attachment-box{
-          margin: 4px 16px;
           border-radius: 8px;
-          width: 54%;
-          height: 150px;
+          width: 100%;
+          &--icon{
+            width: 40px !important;
+            height: 40px !important;
+          }
         }
         .audio-message-box{
 

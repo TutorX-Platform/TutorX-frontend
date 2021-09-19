@@ -52,39 +52,7 @@
     <div class="chat-container">
       <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
         <div *ngFor="let message of chatMessages">
-          <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
-            <div fxLayout="row" fxLayoutAlign="end center">
-              <div class="message-box">
-                {{message.message}}
-              </div>
-            </div>
-          </div>
-          <div *ngIf="message.isAttachment && message.senderId !== authService.student.userId">
-            <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
-              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
-                <div
-                  *ngIf="message.senderAvatar !== null; else else_container">
-                  <img [src]="message.senderAvatar" class="avatar-x">
-                </div>
-                <ng-template #else_container>
-                  <img [src]="dummyProfPic" class="avatar-x">
-                </ng-template>
-                <div fxLayout="column" fxLayoutAlign="start start">
-                  <div class="user-name">
-                    {{message.senderName}}
-                  </div>
-                  <div class="message-box message-box--other-user-message">
-                    {{message.attachmentLink}} ----- {{message.attachmentExtension}}
-                  </div>
-                </div>
-              </div>
-              <!--            <div class="time">Todat at 9.00 AM</div>-->
-            </div>
-            <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
-            <!--            {{message.message}}-->
-            <!--          </div>-->
-          </div>
-          <div *ngIf=" !message.isAttachment &&message.isTutorJoinMessage" class="joined-message">
+          <div *ngIf=" !message.isAttachment && message.isTutorJoinMessage" class="joined-message">
             <div class="line"></div>
             <div class="user-name">{{message.message}} &nbsp;</div>
             <!--          <div class="text">joined the chat</div>-->
@@ -96,7 +64,6 @@
               <div class="message-box">
                 {{message.message}}
               </div>
-
             </div>
           </div>
           <div
@@ -123,7 +90,7 @@
           </div>
           <!--attachment view other user-->
           <div
-            *ngIf="!message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+            *ngIf="message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
             <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
               <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
                 <div
@@ -137,11 +104,14 @@
                   <div class="user-name">
                     {{message.senderName}}
                   </div>
-                  <div class="message-box message-box--other-user-message" fxLayout="column"
-                       fxLayoutAlign="center center">
-                    <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon">
+                  <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message" fxLayout="column"
+                       fxLayoutAlign="center center" fxLayoutGap="8px">
+                    <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
+                    <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
+                    <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
+                    <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
                     {{message.message}}
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -149,14 +119,13 @@
           <!--attachment view current user-->
           <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
             <div fxLayout="row" fxLayoutAlign="end center">
-              <a href="/assets/images/profile.jpg" class="message-box" fxLayout="column" fxLayoutAlign="center center"
+              <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column" fxLayoutAlign="center center"
                  fxLayoutGap="8px">
-                <!--<img src="assets/icons/excel2.png" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('.sheet')">-->
-                <!--<img src="assets/icons/pdf.svg" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('pdf')">-->
-                <!--<img src="assets/icons/word.png" class="attachment-box attachment-box&#45;&#45;icon" *ngIf="attachment.extension.includes('.document')">-->
-                <!--<img src="assets/icons/jpeg.svg" class="attachment-box" *ngIf="attachment.extension.includes('image')">-->
-                <img [src]="message.attachmentLink">
-                {{message.attachmentExtension}}
+                <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
+                <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
+                <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
+                <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                {{message.message}}
               </a>
             </div>
           </div>
@@ -545,20 +514,20 @@
         </div>
       </div>
       <div *ngFor="let message of chatMessages">
-        <div *ngIf="message.isTutorJoinMessage" class="joined-message">
+        <div *ngIf="!message.isAttachment && message.isTutorJoinMessage" class="joined-message">
           <div class="line"></div>
           <div class="user-name">{{message.message}} &nbsp;</div>
           <!--          <div class="text">joined the chat</div>-->
           <div class="line"></div>
         </div>
-        <div *ngIf="message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+        <div *ngIf="!message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="end center">
             <div class="message-box">
               {{message.message}}
             </div>
           </div>
         </div>
-        <div *ngIf="message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+        <div *ngIf="!message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="start start" class="other-user">
             <div>
               <div
@@ -587,6 +556,45 @@
           <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
           <!--            {{message.message}}-->
           <!--          </div>-->
+        </div>
+        <div *ngIf="message.isAttachment && message.senderId === authService.student.userId">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column" fxLayoutAlign="center center"
+               fxLayoutGap="8px">
+              <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
+              <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
+              <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
+              <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+              {{message.message}}
+            </a>
+          </div>
+        </div>
+        <div
+          *ngIf="message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+              <div
+                *ngIf="message.senderAvatar !== null; else else_container">
+                <img [src]="message.senderAvatar" class="avatar-x">
+              </div>
+              <ng-template #else_container>
+                <img [src]="dummyProfPic" class="avatar-x">
+              </ng-template>
+              <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%;">
+                <div class="user-name">
+                  {{message.senderName}}
+                </div>
+                <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message" fxLayout="column"
+                   fxLayoutAlign="center center" fxLayoutGap="8px">
+                  <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
+                  <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
+                  <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
+                  <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                  {{message.message}}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

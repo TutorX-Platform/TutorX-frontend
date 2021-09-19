@@ -5,9 +5,16 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    .side-nav{
+    .side-nav-home{
       background: #222D34;
       color: #ffffff;
+      padding: 32px;
+      width: 300px;
+      font: $body-base-default;
+      .list{
+        font: $body-base-default;
+        color: #ffffff;
+      }
     }
 
     .home{
