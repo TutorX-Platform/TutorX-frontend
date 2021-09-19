@@ -2,7 +2,7 @@
 <div class="question-pool">
   <div fxLayout="row" class="page-title-container">My Activities</div>
   <div class="divider-pool"></div>
-  <div fxLayout="row" class="tab-bar" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="askedQuestions.length > 0">
+  <div fxLayout="row" class="tab-bar" fxLayoutAlign="start stretch" fxLayoutGap="8px">
     <div [ngClass]="selectedStatus === 0 ? 'button-container button-container--selected' : 'button-container'"
          (click)="changeStatus()">
       <div style="margin: 0px 8px 0px 8px;" (click)="selectStatus(0)">All</div>
