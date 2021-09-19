@@ -40,8 +40,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   // @ts-ignore
   taskRef: AngularFireStorageReference;
   // @ts-ignore
-  chatForm: FormGroup;
-  // @ts-ignore
   task: AngularFireUploadTask;
   attachments: Attachment[] = [];
   isFocused = false;

@@ -20,8 +20,8 @@
       <div (click)="selectStatus(4)">Cancelled</div>
     </div>
   </div>
-  <div fxLayout="row" class="main-containerx" *ngIf="askedQuestions.length > 0" fxShow="true" fxHide.lt-sm="true">
-    <div fxLayout="column" class="left-container">
+  <div fxLayout="row" class="main-containerx" fxShow="true" fxHide.lt-sm="true">
+    <div fxLayout="column" class="left-container" *ngIf="askedQuestions.length > 0">
       <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
         <div fxLayout="column" class="column-view" fxLayoutGap="24px">
           <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-top: 8px">

@@ -18,7 +18,7 @@
 @import "components/payment-gateway.component";
 @import "components/profile.component";
 @import "components/tutor-payments.components";
-@import "../../../New folder/tutorx-admin/src/theme/components/progress-dialog.component";
+@import "components/progress-dialog.component";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);

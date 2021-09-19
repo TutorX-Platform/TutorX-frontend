@@ -5,6 +5,11 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
+    .side-nav{
+      background: #222D34;
+      color: #ffffff;
+    }
+
     .home{
         .get-helps {
             background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);

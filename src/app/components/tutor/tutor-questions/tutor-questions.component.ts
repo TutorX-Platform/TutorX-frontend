@@ -30,7 +30,8 @@ export class TutorQuestionsComponent implements OnInit {
   isManagement = false;
   isCS = false;
   attachments: Attachment[] = [];
-
+  // @ts-ignore
+  selectedValue: string;
   isAutoOpen = false;
   subjects = [
     "Science", "English", "Maths", "Computer Science"

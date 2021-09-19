@@ -2,8 +2,8 @@
 <div class="question-pool">
   <div fxLayout="row" class="page-title-container"> Public Pool</div>
   <div class="divider-pool"></div>
-  <div fxLayout="row" class="main-containerx" *ngIf="askedQuestions.length > 0" fxShow="true" fxHide.lt-sm="true">
-    <div fxLayout="column" class="left-container">
+  <div fxLayout="row" class="main-containerx" fxShow="true" fxHide.lt-sm="true">
+    <div fxLayout="column" class="left-container" *ngIf="askedQuestions.length > 0">
       <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
         <div fxLayout="column" class="column-view" fxLayoutGap="24px">
           <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -46,12 +46,13 @@
       </mat-form-field>
       <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
       <div fxLayout="row" fxLayoutAlign="start center">
-        <form [formGroup]="contactForm" class="form">
-          <select (change)="onFilterSelect($event)" formControlName="country" class="select">
-            <option [ngValue]="null" disabled>Select Filter</option>
-            <option *ngFor="let sort of sortings" [ngValue]="sort.id">{{sort.name}}</option>
-          </select>
-        </form>
+        <mat-form-field appearance="outline" class="my-form-field">
+          <mat-select [(ngModel)]="selectedValue" placeholder="Select">
+            <mat-option *ngFor="let sort of sortings" [value]="sort.id">
+              {{sort.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class="filter-results">
         Filter Results
