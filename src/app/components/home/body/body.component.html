@@ -27,7 +27,8 @@
 
   </mat-toolbar>
 
-  <section class="">
+  <section class="s-hero__section">
+    <img class="s-hero__abstract-img" src="assets/images/abstract_bg.svg" alt="">
     <div class="container ">
       <div class="s-hero">
         <div class="s-hero__title-wrapper">
@@ -43,28 +44,8 @@
       </div>
     </div>
   </section>
-  <section class="">
-    <div class="container ">
-      <div class="s-features">
-        <!--      <h2>Services we provide</h2>-->
-        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
-        <div class="row s-features__items">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
-            <div class="s-features__item">
-              <div class="s-features__media">
-                <mat-icon>home</mat-icon>
-              </div>
-              <div class="s-features__content">
-                <span class="s-features__title">{{detail.title}}</span>
-                <span class="s-features__description">{{detail.description}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <section class="s-flow">
+    <img class="s-flow__abstract-img" src="assets/images/abstract_bg.svg" alt="">
     <div class="container ">
       <div class="s-flow__wrapper">
         <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
@@ -128,89 +109,95 @@
 
     </div>
   </section>
+  <section class="p-home__section s-features">
+    <div class="container ">
+      <div class="p-home__section-header">
+        <div class="p-home__title-wrap">
+          <h1>How can we help your<br>
+            homework?</h1>
+          <div class="p-home__section-header-abstract"></div>
+        </div>
+
+      </div>
+      <div class="">
+        <!--      <h2>Services we provide</h2>-->
+        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+        <div class="row s-features__items">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
+            <div class="s-features__item">
+              <div class="s-features__media">
+                <mat-icon>home</mat-icon>
+              </div>
+              <div class="s-features__content">
+                <span class="s-features__title">{{detail.title}}</span>
+                <span class="s-features__description">{{detail.description}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="s-testimonials s-features">
+    <div class="container ">
+      <div class="p-home__section-header">
+        <div class="p-home__title-wrap">
+          <h1>What our happy <br>
+            students say.</h1>
+          <div class="p-home__section-header-abstract"></div>
+        </div>
+
+      </div>
+      <div class="">
+        <!--      <h2>Services we provide</h2>-->
+        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+        <div class="row s-testimonials__items">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 " *ngFor="let feedback of feedbacks">
+            <div class="s-testimonials__item">
+              <div class="s-features__media">
+                <div class="a-avatar a-avatar--medium">
+                  <img
+                    [src]="feedback.image"
+                    class="a-avatar__image"
+                    alt="image"
+                  />
+                </div>
+              </div>
+              <div class="s-features__content">
+                <span class="s-features__title">{{feedback.title}}</span>
+                <span class="s-features__description">{{feedback.content}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="s-tutors">
+    <img class="s-tutors__waves" src="assets/images/wave.svg" alt="">
+    <div class="s-tutors__container">
+      <div class="container ">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 " *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
+            <div class="s-testimonials__item">
+              <div class="a-avatar a-avatar--medium">
+                <img
+                  [src]="tutorFeedback.image"
+                  class="a-avatar__image"
+                  alt="image"
+                />
+              </div>
+              <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
+              <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <div class="home">
-
-
-    <!-- client-web-->
-    <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
-      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-        <div class="client-title-web">Our Students speak</div>
-      </div>
-      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
-        <div class="client-title-mobile">Our clients speak</div>
-      </div>
-      <div [ngClass.gt-xs]="'client-feedback-container-web'"
-           [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
-        <ngx-slick-carousel class="carousel"
-                            #slickModal="slick-carousel"
-                            [config]="slideConfig">
-          <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <div class="box-client b4">
-                <div class="feedback-title">{{feedback.title}}</div>
-                <div class="feedback-body">{{feedback.content}}</div>
-              </div>
-              <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                <div>
-                  <img [src]="feedback.image" alt="Avatar" class="avatar">
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                  <div class="profile-details-name">{{feedback.name}}</div>
-                  <div class="profile-details-designation">{{feedback.designation}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ngx-slick-carousel>
-      </div>
-    </div>
-
-    <!--Process-web-->
-    <div [ngClass.gt-xs]="'process-web'"
-         [ngClass.lt-sm]="{'process-mobile': true}" fxLayout="column" fxLayoutAlign="start center">
-      <div class="process-title">
-        How we roll?
-      </div>
-      <div class="steps" fxLayout="row wrap" fxLayoutAlign="center start" fxLayoutGap="30px grid" fxHide.lt-md fxShow="true">
-        <div *ngFor="let num of process" fxFlex="20%">
-          <div class="step" fxLayout.gt-xs="column" fxLayoutAlign="start start">
-            <div fxHide.lt-sm="true" fxShow="true">
-              <img src="../../../../assets/icons/Indication.png" width="100%">
-            </div>
-            <div fxHide.gt-xs="true" fxShow="true">
-              <img src="../../../../assets/icons/Indication-mobile.svg">
-            </div>
-            <div>
-              <div class="step-title">
-                {{num.title}}
-              </div>
-              <div class="step-sub-title">
-                {{num.subtitle}}
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="steps" fxLayout="column" fxLayoutAlign="center start" fxHide.gt-sm fxShow="true">
-        <div *ngFor="let num of process">
-          <div class="step" fxLayout="row" fxLayoutGap="8px">
-            <div>
-              <img src="../../../../assets/icons/Indication-mobile.svg">
-            </div>
-            <div>
-              <div class="step-title">
-                {{num.title}}
-              </div>
-              <div class="step-sub-title">
-                {{num.subtitle}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!--tutor-feedback-web-->
     <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
@@ -248,6 +235,42 @@
         </div>
       </div>
     </div>
+    <!-- client-web-->
+    <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
+      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
+        <div class="client-title-web">Our Students speak</div>
+      </div>
+      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
+        <div class="client-title-mobile">Our clients speak</div>
+      </div>
+      <div [ngClass.gt-xs]="'client-feedback-container-web'"
+           [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
+        <ngx-slick-carousel class="carousel"
+                            #slickModal="slick-carousel"
+                            [config]="slideConfig">
+          <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <div class="box-client b4">
+                <div class="feedback-title">{{feedback.title}}</div>
+                <div class="feedback-body">{{feedback.content}}</div>
+              </div>
+              <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
+                <div>
+                  <img [src]="feedback.image" alt="Avatar" class="avatar">
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
+                  <div class="profile-details-name">{{feedback.name}}</div>
+                  <div class="profile-details-designation">{{feedback.designation}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+
+
+
 
     <!-- tutor-feedback-mobile -->
     <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>

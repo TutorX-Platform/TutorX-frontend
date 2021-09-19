@@ -19,6 +19,7 @@
 @import "components/profile.component";
 @import "components/tutor-payments.components";
 @import "components/progress-dialog.component";
+@import "components/avatar.component";
 
 @mixin app-components($theme) {
     @include question-card-component($theme);
