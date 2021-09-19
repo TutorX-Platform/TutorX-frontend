@@ -72,6 +72,8 @@ export class AddQuestionComponent implements OnInit {
 
   attachments: Attachment[] = [];
 
+  uploadingProgress = 0;
+
 
   constructor(
     private dialog: MatDialog,
@@ -338,6 +340,8 @@ export class AddQuestionComponent implements OnInit {
     this.task.percentageChanges().subscribe(
       (res) => {
         console.log(res);
+        // @ts-ignore
+        this.uploadingProgress = res;
       }
     )
 
