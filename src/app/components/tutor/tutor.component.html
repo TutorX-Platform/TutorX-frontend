@@ -1,160 +1,168 @@
 <div class="admin">
-    <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav #drawer class="sidenav" fixedInViewport
-                   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                   [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                   [opened]="(isHandset$ | async) === false">
-        <div fxLayout="row" fxLayoutAlign="start center" class="name">
-          <img  routerLink=".." src="../../../assets/images/Logo.png" alt="" width="40px" height="40px" style="cursor: pointer">
-          <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="-8px">
-            <div class="log-title">TutorX</div>
-            <div class="log-sub-title">Business project</div>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) === false">
+      <div fxLayout="row" fxLayoutAlign="start center" class="name">
+        <img routerLink=".." src="../../../assets/images/Logo.png" alt="" width="40px" height="40px"
+             style="cursor: pointer">
+        <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="-8px">
+          <div class="log-title">{{systemName}}</div>
+          <div class="log-sub-title">Business project</div>
+        </div>
+      </div>
+      <mat-nav-list>
+        <a mat-list-item (click)="changePage(2)"
+           [ngClass]="selectedPage === 2 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+          <mat-icon class="material-icons-outlined"
+                    [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+            space_dashboard
+          </mat-icon>
+          <div [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
+            Dashboard
           </div>
-        </div>
-        <mat-nav-list>
-          <a mat-list-item (click)="changePage(2)"
-             [ngClass]="selectedPage === 2 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
-            <mat-icon class="material-icons-outlined"
-                      [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
-              space_dashboard
-            </mat-icon>
-            <div [ngClass]="selectedPage === 2 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
-              Dashboard
-            </div>
-          </a>
-          <a mat-list-item (click)="changePage(1)"
-             [ngClass]="selectedPage === 1 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
-            <mat-icon class="material-icons-outlined"
-                      [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
-              space_dashboard
-            </mat-icon>
-            <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
-              Public Pool
-            </div>
-          </a>
-          <a mat-list-item (click)="changePage(3)"
-             [ngClass]="selectedPage === 3 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
-            <mat-icon class="material-icons-outlined"
-                      [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
-              space_dashboard
-            </mat-icon>
-            <div [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My
-              Activities
-            </div>
-          </a>
-          <a mat-list-item (click)="changePage(4)"
-             [ngClass]="selectedPage === 4 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
-            <mat-icon class="material-icons-outlined"
-                      [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
-              space_dashboard
-            </mat-icon>
-            <div [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
-              Payments
-            </div>
-          </a>
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="selectedPage == 2" [mode]="'side'">
-        <div class="recent-chats">
-          Recent chats
-        </div>
-        <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
-          <div *ngFor="let num of [1,2,3,4,5]">
-            <div class="recent-chats-card" fxLayout="column" fxLayoutGap="24px">
-              <div fxLayout="row" fxLayoutAlign="space-between center">
-                <div class="recent-card-title">Math Assignment ?</div>
-                <div>
-                  <div *ngIf="false" class="c-chip c-chip--neutral invert-false">Open</div>
-                  <div *ngIf="true" class="c-chip c-chip--progress invert-false">In Progress</div>
-                </div>
+        </a>
+        <a mat-list-item (click)="changePage(1)"
+           [ngClass]="selectedPage === 1 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+          <mat-icon class="material-icons-outlined"
+                    [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+            space_dashboard
+          </mat-icon>
+          <div [ngClass]="selectedPage === 1 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
+            Public Pool
+          </div>
+        </a>
+        <a mat-list-item (click)="changePage(3)"
+           [ngClass]="selectedPage === 3 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+          <mat-icon class="material-icons-outlined"
+                    [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+            space_dashboard
+          </mat-icon>
+          <div [ngClass]="selectedPage === 3 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">My
+            Activities
+          </div>
+        </a>
+        <a mat-list-item (click)="changePage(4)"
+           [ngClass]="selectedPage === 4 ? 'side-nav-list_selected' : 'side-nav-list_normal'">
+          <mat-icon class="material-icons-outlined"
+                    [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-icon' : 'side-nav-list_normal'">
+            space_dashboard
+          </mat-icon>
+          <div [ngClass]="selectedPage === 4 ? 'side-nav-list_selected-color' : 'side-nav-list_normal-color'">
+            Payments
+          </div>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav class="sidenav-right" fixedInViewport position="end" [opened]="selectedPage == 2" [mode]="'side'">
+      <div class="recent-chats">
+        Recent chats
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+        <div *ngFor="let chat of chats">
+          <div class="recent-chats-card" fxLayout="column" fxLayoutGap="24px">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="recent-card-title">{{chat.questionTitle}}</div>
+              <div>
+                <div *ngIf="false" class="c-chip c-chip--neutral invert-false">Open</div>
+                <div *ngIf="true" class="c-chip c-chip--progress invert-false">{{chat.chatStatus}}</div>
               </div>
-              <div class="recent-card-description">
-                Yes,it is dummy question, good job.
-                Cheers. nothing get passed
+            </div>
+            <div class="recent-card-description">
+              {{chat.questionDescription}}
+            </div>
+            <div class="student" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+              <div
+                *ngIf="chat.studentProfile !==null && chat.studentProfile !== '' && chat.studentProfile !== undefined">
+                <img [src]="chat.studentProfile" class="student-avatar">
               </div>
-              <div class="student" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+              <div
+                *ngIf="chat.studentProfile ===null || chat.studentProfile === '' || chat.studentProfile === undefined">
                 <img src="../../../assets/images/profile.jpg" class="student-avatar">
-                <div class="student-name">
-                  Rily Green
-                </div>
+              </div>
+              <div class="student-name">
+                Rily Green
               </div>
             </div>
           </div>
         </div>
-        <div class="sidenav-footer">
-          <button mat-flat-button class="view-more">
-            View More
-          </button>
-        </div>
-      </mat-sidenav>
-      <mat-sidenav-content class="sidenav-container">
-        <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-sm fxShow="true">
-          <button
-            type="button"
-            aria-label="Toggle sidenav"
-            mat-icon-button
-            (click)="drawer.toggle()"
-            *ngIf="isHandset$ | async">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
+      </div>
+      <div class="sidenav-footer">
+        <button mat-flat-button class="view-more">
+          View More
+        </button>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content class="sidenav-container">
+      <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-sm fxShow="true">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <div fxLayout="row" fxLayoutGap="17px">
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
+            <div class="icon-container">
+              <mat-icon class="icon">chat_bubble_outline</mat-icon>
+            </div>
+            <div class="icon-container">
+              <mat-icon class="icon">notifications</mat-icon>
+            </div>
+          </div>
+
           <span class="example-spacer"></span>
-          <div fxLayout="row" fxLayoutGap="17px">
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15px">
-              <div class="icon-container">
-                <mat-icon class="icon">chat_bubble_outline</mat-icon>
-              </div>
-              <div class="icon-container">
-                <mat-icon class="icon">notifications</mat-icon>
-              </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+            <div *ngIf="authService.student.profileImage !==null">
+              <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
             </div>
-
-            <span class="example-spacer"></span>
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-              <div *ngIf="authService.student.profileImage !==null">
-                <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
-              </div>
-              <div *ngIf="authService.student.profileImage==null">
-                <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
-              </div>
-              <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
-                <div class="profile-title">{{authService.student.firstName}}</div>
-                <div class="profile-sub-title">{{authService.student.email}}</div>
-              </div>
-              <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="onViewProfile()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
-                        fxLayoutGap="8px">
-                  <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-                  <div>View Profile</div>
-                </button>
-                <button mat-menu-item (click)="onSignOut()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
-                        fxLayoutGap="8px">
-                  <mat-icon class="material-icons-outlined">logout</mat-icon>
-                  <div>Sign Out</div>
-                </button>
-              </mat-menu>
+            <div *ngIf="authService.student.profileImage==null">
+              <img src="../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
             </div>
-          </div>
-        </mat-toolbar>
-        <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
-          <div fxLayoutAlign="start center" style="color: white;">
-              <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-                <mat-icon>arrow_back</mat-icon>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="-8px">
+              <div class="profile-title">{{authService.student.firstName}}</div>
+              <div class="profile-sub-title">{{authService.student.email}}</div>
+            </div>
+            <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">expand_more</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onViewProfile()" class="drop-down" fxLayout="row"
+                      fxLayoutAlign="start center"
+                      fxLayoutGap="8px">
+                <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+                <div>View Profile</div>
               </button>
-              <span>Questions</span>
+              <button mat-menu-item (click)="onSignOut()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                      fxLayoutGap="8px">
+                <mat-icon class="material-icons-outlined">logout</mat-icon>
+                <div>Sign Out</div>
+              </button>
+            </mat-menu>
           </div>
-          <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-            <mat-icon>circle</mat-icon>
+        </div>
+      </mat-toolbar>
+      <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-xs fxShow="true">
+        <div fxLayoutAlign="start center" style="color: white;">
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>arrow_back</mat-icon>
           </button>
-        </mat-toolbar>
-        <!--<app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>-->
-        <!--<app-tutor-dashboard *ngIf="selectedPage === 2"></app-tutor-dashboard>-->
-        <!--<app-tutor-activities *ngIf="selectedPage === 3"></app-tutor-activities>-->
-        <!--<app-chat *ngIf="selectedPage === 4"></app-chat>-->
-        <router-outlet></router-outlet>
+          <span>Questions</span>
+        </div>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon>circle</mat-icon>
+        </button>
+      </mat-toolbar>
+      <!--<app-tutor-questions *ngIf="selectedPage === 1"></app-tutor-questions>-->
+      <!--<app-tutor-dashboard *ngIf="selectedPage === 2"></app-tutor-dashboard>-->
+      <!--<app-tutor-activities *ngIf="selectedPage === 3"></app-tutor-activities>-->
+      <!--<app-chat *ngIf="selectedPage === 4"></app-chat>-->
+      <router-outlet></router-outlet>
 
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
 
 

@@ -17,7 +17,7 @@ import {WelcomeComponent} from "../../student/welcome/welcome.component";
 import {StudentService} from "../../../services/student-service.service";
 import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
-import {map, startWith} from "rxjs/operators";
+import {map, startWith, take} from "rxjs/operators";
 import * as systemMessages from "../../../models/system-messages";
 import {ChatMsg} from "../../../models/chat-msg";
 import {Chat} from "../../../models/chat";
@@ -209,7 +209,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
-      questionNumber: "jweh",
+      questionNumber: '',
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
       isQuoteApproved: false,
@@ -241,19 +241,22 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.saveQuestion(question, this.questionId, 'qq').then((v) => {
-      // @ts-ignore
-      this.askedQuestions.push(this.questionId);
-      this.sendAknowledgementEmail(this.authService.student.email);
-      this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, 'qq');
-      progressDialog.close();
-      this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe(
-        (option) => {
-          console.log(option);
-          this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
-        }
-      )
-    });
+    this.questionService.incrementQuestionNumber();
+    this.questionService.incrementQuestionCount();
+
+    this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
+      (res) => {
+        console.log(res);
+        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber).then((v) => {
+          // @ts-ignore
+          this.askedQuestions.push(this.questionId);
+          this.sendAknowledgementEmail(this.authService.student.email);
+          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber, question.description);
+          progressDialog.close();
+        });
+      }
+    );
+    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
@@ -324,14 +327,15 @@ export class AddQuestionMobileComponent implements OnInit {
   }
 
   sendAknowledgementEmail(email: string) {
-    this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+    // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      questionDescription: questionDesc,
       questionNumber: "",
       questionTitle: questionTitle,
       studentProfile: this.authService.student.profileImage,

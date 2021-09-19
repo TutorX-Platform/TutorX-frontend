@@ -46,6 +46,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   attachments: Attachment[] = [];
   isFocused = false;
   chat: Chat = {
+    questionDescription: "",
     questionNumber: "",
     questionTitle: "",
     studentProfile: "",
@@ -423,7 +424,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
       this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value);
-      this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
+      // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
 
     })
 
@@ -436,7 +437,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.studentService.findStudentById(this.chat.tutorId).subscribe(
       (res) => {
         // @ts-ignore
-        this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
+        // this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
       }
     )
 

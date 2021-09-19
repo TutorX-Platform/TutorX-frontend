@@ -6,6 +6,8 @@ import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dia
 import * as constants from "../../../models/constants";
 import {Review} from "../../../models/review";
 import {ReviewService} from "../../../services/review.service";
+import {ChatServiceService} from "../../../services/chat-service.service";
+import {Chat} from "../../../models/chat";
 
 @Component({
   selector: 'app-tutor-dashboard',
@@ -15,10 +17,12 @@ import {ReviewService} from "../../../services/review.service";
 export class TutorDashboardComponent implements OnInit {
   rating = 4;
   reviews: Review[] = [];
+  chats: Chat[] = [];
 
   constructor(
     public studentService: StudentService,
     private dialog: MatDialog,
+    private chatService: ChatServiceService,
     private reviewService: ReviewService
   ) {
   }

@@ -78,7 +78,7 @@ export class AuthService {
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
         this.userData = credentials.user;
         // @ts-ignore
-        this.mailService.sendEmail(credentials.user.email).subscribe();
+        // this.mailService.sendEmail(credentials.user.email).subscribe();
         const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
         this.roleBasedRouting(credentials.user.uid, progressDialog);
         // @ts-ignore

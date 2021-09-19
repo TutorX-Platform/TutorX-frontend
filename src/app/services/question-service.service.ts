@@ -105,7 +105,7 @@ export class QuestionService {
         this.time = res;
         this.chatService.tutorJoinChat(questionId, this.time.time);
       })
-      this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
+      // this.mailService.sendQuestionAcceptMail(studentEmail).subscribe();
       dialogRef.close();
     })
   }

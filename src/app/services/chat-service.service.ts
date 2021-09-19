@@ -201,5 +201,10 @@ export class ChatServiceService {
     return typeRef;
   }
 
+  getChatsForTutor(tutorId: string) {
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime').limit(10))
+    return typeRef;
+  }
+
 
 }

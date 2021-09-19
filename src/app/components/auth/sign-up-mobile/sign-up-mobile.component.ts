@@ -6,6 +6,7 @@ import {AuthService} from 'src/app/services/auth.service';
 import {MailService} from 'src/app/services/mail.service';
 import * as constants from "../../../models/constants";
 import {ProgressDialogComponent} from '../../shared/progress-dialog/progress-dialog.component';
+import * as mails from '../../../models/mails';
 
 @Component({
   selector: 'app-sign-up-mobile',
@@ -51,7 +52,7 @@ export class SignUpMobileComponent implements OnInit {
     progressDialog.afterOpened().subscribe(
       () => {
         this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-            this.mailService.sendEmail(this.signUpForm.value.email).subscribe(
+            this.mailService.sendMail(mails.mailSubject.getStudentWelcomeMail(), mails.mailBody.getStudentWelcomeMail(this.signUpForm.value.fullName, constants.env_url.prod_url), this.signUpForm.value.email).subscribe(
               (res) => {
                 console.log(res);
               }
