@@ -156,7 +156,7 @@
                         {{questionService.question.fee}} USD
                       </div>
                     </div>
-                    <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button">Pay Now</button>
+                    <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button" (click)="onPay()">Pay Now</button>
                   </div>
                 </div>
               </div>
