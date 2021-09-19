@@ -11,4 +11,5 @@ export interface ChatMsg {
   sort: number;
   attachmentLink: string;
   attachmentExtension: string;
+  isQuote: boolean;
 }
