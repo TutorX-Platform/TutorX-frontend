@@ -155,14 +155,14 @@ export class ChatServiceService {
     );
   }
 
-  sendQuoteMessage(chatId: string, time: number, amount: number) {
+  sendQuoteMessage(chatId: string, time: number, amount: number, senderAvatar: string) {
     let data: ChatMsg = {
       isQuote: true,
       attachmentExtension: "",
       attachmentLink: "",
       sort: time,
-      senderAvatar: '',
-      senderName: '',
+      senderAvatar: senderAvatar,
+      senderName: this.studentService.currentStudent.userId,
       isTutorJoinMessage: true,
       isAttachment: false,
       message: `${this.studentService.currentStudent.firstName} sent the quote of ${amount} USD`,

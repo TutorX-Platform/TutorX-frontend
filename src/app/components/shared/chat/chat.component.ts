@@ -431,7 +431,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.questionService.tutorSendQuote(this.chatToken, data);
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
-      this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value);
+      this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
       // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
 
     })

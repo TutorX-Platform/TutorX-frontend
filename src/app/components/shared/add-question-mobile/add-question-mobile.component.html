@@ -23,7 +23,7 @@
           <div fxLayout="column" class="search-container" style="width: 100% !important;">
             <div class="label">Subject</div>
             <mat-form-field appearance="outline" class="my-form-field">
-                  <span matPrefix>
+                  <span matSuffix>
                   <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
               <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
@@ -36,7 +36,7 @@
           <div fxLayout="column" class="search-container" style="width: 100% !important;">
             <div class="label">Sub-category</div>
             <mat-form-field appearance="outline" class="my-form-field">
-                  <span matPrefix>
+                  <span matSuffix>
                   <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
               <input matInput type="text-12" formControlName="subCategory" [matAutocomplete]="auto1">
               <mat-autocomplete #auto1="matAutocomplete">
