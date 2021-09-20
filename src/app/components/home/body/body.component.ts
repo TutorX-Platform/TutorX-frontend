@@ -164,14 +164,16 @@ export class BodyComponent implements OnInit {
 
   details = [
     {
-      title: "Expert Tutors",
-      description: "With highest academic qualifications",
-      imageUrl: "../../../../assets/icons/04.svg"
+      title: "Find a tutor for you",
+      description: "We pressent you with the best tutorswith highest academic qualifications",
+      icon: "search",
+      class: 's-features__media--purple'
     },
     {
       title: "User Friendly",
       description: "Responsive and easy to navigate interfaces",
-      imageUrl: "../../../../assets/icons/02.svg"
+      icon: "dashboard",
+      class: 's-features__media--red'
     },
     // {
     //   title: "Step by step explanations",
@@ -180,14 +182,16 @@ export class BodyComponent implements OnInit {
     // },
 
     {
-      title: "Fast Response",
+      title: "Work faster",
       description: "Instant responses from the tutors 24/7",
-      imageUrl: "../../../../assets/icons/05.svg"
+      icon: "settings",
+      class: 's-features__media--yellow'
     },
     {
       title: "Affordable Service",
       description: "Reasonable quotes based on your requirements. ",
-      imageUrl: "../../../../assets/icons/01.svg"
+      icon: 'payments',
+      class: 's-features__media--green'
     }
   ]
 
@@ -225,7 +229,7 @@ export class BodyComponent implements OnInit {
 
   tutorFeedbacks = [
     {
-      description: "I’m a computer science PhD candidate and former software engineer. My expertise’s are on Databases, Algorithm, Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
+      description: "I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
       image: "assets/images/expertcs.jpg",
       name: "ExpertCSTutor",
       subject: "Computer Science"
@@ -243,7 +247,7 @@ export class BodyComponent implements OnInit {
       subject: "Electronic Engineering"
     },
     {
-      description: "I am an M.Phil post graduate in Economics.. I am currently doing my PhD in Economics and the topic of my doctoral thesis is Crypto Economics. I am very much interested in helping out students online, both with their homework and tutoring them when required. My areas of specialization are Economics, business statistics and business management subjects.",
+      description: "I am currently doing my PhD in Economics and the topic of my doctoral thesis is Crypto Economics. I am very much interested in helping out students online, both with their homework and tutoring them when required. My areas of specialization are Economics, business statistics and business management subjects.",
       image: "assets/images/hr.jpg",
       name: "Businesswoman ",
       subject: "Business Management"
@@ -253,7 +257,7 @@ export class BodyComponent implements OnInit {
 
   tutorFeedbacks2 = [
     {
-      description: "I’m a computer science PhD candidate and former software engineer. My expertise’s are on Databases, Algorithm, Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
+      description: " Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
       image: "assets/images/expertcs.jpg",
       name: "ExpertCSTutor",
       subject: "Computer Science"
