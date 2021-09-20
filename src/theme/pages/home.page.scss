@@ -38,6 +38,7 @@
   max-height: 860px;
   &__section{
     position: relative;
+    overflow: hidden;
   }
   &__abstract-img{
     position: absolute;
@@ -160,6 +161,21 @@
     top: -42%;
     left: -28%;
     z-index: -1;
+    @include for-size(phone-only) {
+      display: none;
+    }
+    @include for-size(tablet-portrait-up) {
+      display: none;
+    }
+    @include for-size(tablet-landscape-up) {
+      display: block;
+    }
+    @include for-size(desktop-up) {
+      display: block;
+    }
+    @include for-size(big-desktop-up) {
+      display: block;
+    }
 
   }
   &__wrapper{
@@ -233,7 +249,24 @@
     text-align: center;
     flex: 1;
     align-self: stretch;
-    min-height: 187px;
+    min-height:210px;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+    .s-features__media--purple{
+      background: #DDCDF2;
+      color: #7B61FF;;
+    }
+    .s-features__media--red{
+      background: #DA5151;;
+      color: #fff;;
+    }
+    .s-features__media--yellow{
+      background: #FFFACA;
+      color: #FDBF00;
+    }
+    .s-features__media--green{
+      background: #D6FBE0;
+      color: #2EA341;
+    }
   }
   &__media{
     padding: var(--space--sm);
@@ -242,6 +275,7 @@
     max-width: max-content;
     color: var(--action--primary---default);
     margin-right: var(--space--md);
+
   }
   &__content{
     flex: 1;
@@ -274,14 +308,19 @@
     padding: var(--space--lg);
     align-self: stretch;
     background: #FFFFFF;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 16px;
   }
 }
 .s-tutors{
   position: relative;
+  color: var( --surface--highlight---subdued);
 
   &__waves{
     position: relative;
-    bottom: -30px;
+    bottom: -90px;
     z-index: -1;
     width: 100%;
   }
@@ -289,6 +328,48 @@
     background: #373860;
     box-sizing: border-box;
     width: 100%;
+    padding-bottom: var(--space--xlg);
   }
-
+  &__card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space--lg);
+    background-color: var(--surface---default);
+    color: var(--text---default);
+    border: 8px solid var(--action--primary---default);
+    border-radius: 40px 4px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  &__card-content{
+    font-size: 1rem;
+    margin-bottom: var(--space--lg);
+  }
+  &__card-header{
+    display: flex;
+  }
+  &__card-name{
+    font: var(--desktop---body-bold);
+  }
+  &__card-title{
+    font: var( --desktop---caption);
+  }
+}
+.s-footer{
+  position: relative;
+  background-color: var(--text---default);
+  color: var(--surface--highlight---subdued);
+  &__wave{
+    width: 100%;
+  }
+  &__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space--xlg);
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

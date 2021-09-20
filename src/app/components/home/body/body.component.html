@@ -123,10 +123,10 @@
         <!--      <h2>Services we provide</h2>-->
         <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
         <div class="row s-features__items">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngFor="let detail of details">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 h-100" *ngFor="let detail of details">
             <div class="s-features__item">
-              <div class="s-features__media">
-                <mat-icon>home</mat-icon>
+              <div class="s-features__media {{detail.class}}">
+                <mat-icon>{{detail.icon}}</mat-icon>
               </div>
               <div class="s-features__content">
                 <span class="s-features__title">{{detail.title}}</span>
@@ -152,7 +152,7 @@
         <!--      <h2>Services we provide</h2>-->
         <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
         <div class="row s-testimonials__items">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 " *ngFor="let feedback of feedbacks">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3  m-b-16" *ngFor="let feedback of feedbacks">
             <div class="s-testimonials__item">
               <div class="s-features__media">
                 <div class="a-avatar a-avatar--medium">
@@ -164,7 +164,7 @@
                 </div>
               </div>
               <div class="s-features__content">
-                <span class="s-features__title">{{feedback.title}}</span>
+                <span class="s-features__title m-b-16">"{{feedback.title}}"</span>
                 <span class="s-features__description">{{feedback.content}}</span>
               </div>
             </div>
@@ -177,18 +177,33 @@
     <img class="s-tutors__waves" src="assets/images/wave.svg" alt="">
     <div class="s-tutors__container">
       <div class="container ">
+        <div class="p-home__section-header">
+          <div class="p-home__title-wrap">
+            <h1>Awesome people behind us.</h1>
+            <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+            <div class="p-home__section-header-abstract"></div>
+          </div>
+
+        </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 " *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
-            <div class="s-testimonials__item">
-              <div class="a-avatar a-avatar--medium">
-                <img
-                  [src]="tutorFeedback.image"
-                  class="a-avatar__image"
-                  alt="image"
-                />
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 m-b-16"  *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
+            <div class="s-tutors__card">
+              <div class="s-tutors__card-content">
+                {{tutorFeedbacks[0].description}}
               </div>
-              <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
-              <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
+              <div class="s-tutors__card-header">
+                <div class="a-avatar a-avatar--medium m-r-16" style="margin-right: 1rem">
+                  <img
+                    [src]="tutorFeedback.image"
+                    class="a-avatar__image"
+                    alt="image"
+                  />
+                </div>
+                <div class="">
+                  <div class="s-tutors__card-name">{{tutorFeedbacks[0].name}}</div>
+                  <div class="s-tutors__card-title">{{tutorFeedbacks[0].subject}}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -196,139 +211,21 @@
     </div>
 
   </section>
-
-  <div class="home">
-
-    <!--tutor-feedback-web-->
-    <div class="tutor-feedback" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-      <div class="box feedback-container" fxLayout="row" [@feedback]="feedbackStateName" fxLayoutAlign="start start" fxLayoutGap="8px">
-        <img src="../../../../assets/icons/quoteMark.svg" alt="">
-        <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
-          {{tutorFeedbacks[feedBackNum].description}}
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <div *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
-          <div class="avatar-container" fxLayout="row" fxLayoutAlign="center center">
-            <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
-            <div *ngIf="i == feedBackNum">
-              <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
-              </div>
-              <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
-              </div>
-              <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
-              </div><div *ngIf="feedBackNum == 3" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-              <div class="avatar-name">{{tutorFeedbacks[3].name}}</div>
-              <div class="avatar-designation">{{tutorFeedbacks[3].subject}}</div>
-            </div><div *ngIf="feedBackNum == 4" [@client]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-              <div class="avatar-name">{{tutorFeedbacks[4].name}}</div>
-              <div class="avatar-designation">{{tutorFeedbacks[4].subject}}</div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- client-web-->
-    <div class="client-container-web" fxLayout="column" fxLayoutAlign="start center">
-      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.lt-sm="true">
-        <div class="client-title-web">Our Students speak</div>
-      </div>
-      <div class="title-container" fxLayout="row" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs="true">
-        <div class="client-title-mobile">Our clients speak</div>
-      </div>
-      <div [ngClass.gt-xs]="'client-feedback-container-web'"
-           [ngClass.lt-sm]="{'client-feedback-container-mobile': true}">
-        <ngx-slick-carousel class="carousel"
-                            #slickModal="slick-carousel"
-                            [config]="slideConfig">
-          <div ngxSlickItem *ngFor="let feedback of feedbacks" class="slide">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <div class="box-client b4">
-                <div class="feedback-title">{{feedback.title}}</div>
-                <div class="feedback-body">{{feedback.content}}</div>
-              </div>
-              <div class="profile-details" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center">
-                <div>
-                  <img [src]="feedback.image" alt="Avatar" class="avatar">
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0px">
-                  <div class="profile-details-name">{{feedback.name}}</div>
-                  <div class="profile-details-designation">{{feedback.designation}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ngx-slick-carousel>
-      </div>
-    </div>
-
-
-
-
-    <!-- tutor-feedback-mobile -->
-    <div class="tutor-feedback-mobile" fxLayout="column" fxLayoutAlign="center center" fxShow="true" fxHide.gt-xs=true>
-      <div class="box feedback-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" [@feedback]="feedbackStateName">
-        <img src="../../../../assets/icons/quoteMark.svg" alt="">
-        <div class="text-container" style="text-align: start !important;" [@feedback]="feedbackStateName">
-          {{tutorFeedbacks[feedBackNum].description}}
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-        <div *ngFor="let tutorFeedback of tutorFeedbacks2; let i = index">
-          <div class="avatar-container" fxLayout="row">
-            <img (click)="select(i)" [src]="tutorFeedback.image" alt="Avatar" class="avatar">
-            <div *ngIf="i == feedBackNum">
-              <div *ngIf="feedBackNum == 0" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[0].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[0].subject}}</div>
-              </div>
-              <div *ngIf="feedBackNum == 1" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[1].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[1].subject}}</div>
-              </div>
-              <div *ngIf="feedBackNum == 2" [@feedback]="feedbackStateName" (@feedback.done)="changeStateFeedback()" fxLayout="column" fxLayoutAlign="center" style="margin-left: 5px;text-align: left !important;">
-                <div class="avatar-name">{{tutorFeedbacks[2].name}}</div>
-                <div class="avatar-designation">{{tutorFeedbacks[2].subject}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="get-help" fxLayout="row wrap" fxLayoutAlign="space-between center" fxShow="true" fxHide.lt-sm="true">
-      <div fxLayout="column">
-        <div class="banner-title">Get Instant Help</div>
-        <div class="banner-sub-title">For university/college, high school and middle school students</div>
-      </div>
-      <button mat-flat-button (click)="addQuestion()" class="get-helps" fxLayout="start center">
-        Get help
-        <img src="../../../../assets/icons/steps.svg" alt="" class="iconr">
-      </button>
-    </div>
-
-    <div class="footer" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px">
-      <img src="../../../../assets/icons/logo-temp.svg" alt="">
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
-        <div class="links">Download Now</div>
-        <div class="links">License</div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
-        <div class="links">About</div>
-        <div class="links">Tutors</div>
-        <div class="links">FAQ</div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayout.lt-sm="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start" fxLayoutGap.lt-sm="24px">
+  <section class="s-footer">
+    <img src="assets/images/wave_footer.svg" alt="" class="s-footer__wave">
+    <div class="container">
+      <div class="s-footer__content">
+        <div class="brd-display-x-large m-b-16">Get help</div>
+        <div class="brd-display-large m-b-40">Everything is figureoutable</div>
+        <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" >
+          Find a toutor for me
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
         <div class="copy-right">© 2021 . All rights reserved</div>
       </div>
+
+
     </div>
-  </div>
+  </section>
 
 </mat-drawer-container>
