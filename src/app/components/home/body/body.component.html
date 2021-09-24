@@ -37,11 +37,11 @@
     <div class="container ">
       <div class="s-hero">
         <div class="s-hero__title-wrapper">
-          <h2  class="s-hero__title">A <span style="color: var(--action--primary---default)">Smarter</span> way to Student</h2>
-          <h4 class="s-hero__subtitle">Everything is figureoutable</h4>
-          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary cta-add--web">Find a tutor form me<mat-icon>arrow_forward</mat-icon></button>
+          <h2  class="s-hero__title">A <span style="color: var(--action--primary---default)">Smarter</span> resolution for students </h2>
+          <h4 class="s-hero__subtitle">For students, by educators</h4>
+          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary cta-add--web">Get Help<mat-icon>arrow_forward</mat-icon></button>
           <button mat-button class="c-button c-raised-button c-button-primary cta-add--mobile" routerLink="/add-question">
-            Find a tutor form me<mat-icon>arrow_forward</mat-icon>
+            Get Help<mat-icon>arrow_forward</mat-icon>
           </button>
 
         </div>
@@ -55,8 +55,8 @@
       <div class="s-flow__wrapper">
         <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
         <div class="s-flow__content">
-          <h2>Services we provide</h2>
-          <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>
+          <h2>How we roll</h2>
+          <p class="s-features__subheading">Guidance and feedback on the subject matter regardless of your academic level. Doing homework has never been easier. Here's how you can bring your 'A' game</p>
           <div class="l-iteration">
             <div class="l-iteration__item">
               <div class="l-iteration__border-wrap">
@@ -118,8 +118,8 @@
     <div class="container ">
       <div class="p-home__section-header">
         <div class="p-home__title-wrap">
-          <h1>How can we help your<br>
-            homework?</h1>
+          <h1>Tailormade features<br>
+            for you</h1>
           <div class="p-home__section-header-abstract"></div>
         </div>
 
@@ -184,8 +184,8 @@
       <div class="container ">
         <div class="p-home__section-header">
           <div class="p-home__title-wrap">
-            <h1>Awesome people behind us.</h1>
-            <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+            <h1>Featured Tutors</h1>
+            <p>Most of the tutors on our platform hold advanced degrees in their fields, many with PhDs or the equivalent. All tutor applicants have to undergo a solid screening process to provide services on our platform.  Here are some top tutors from different disciplines.</p>
             <div class="p-home__section-header-abstract"></div>
           </div>
 
@@ -194,7 +194,7 @@
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 m-b-16"  *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
             <div class="s-tutors__card">
               <div class="s-tutors__card-content">
-                {{tutorFeedbacks[0].description}}
+                {{tutorFeedback.description}}
               </div>
               <div class="s-tutors__card-header">
                 <div class="a-avatar a-avatar--medium m-r-16" style="margin-right: 1rem">
@@ -205,8 +205,8 @@
                   />
                 </div>
                 <div class="">
-                  <div class="s-tutors__card-name">{{tutorFeedbacks[0].name}}</div>
-                  <div class="s-tutors__card-title">{{tutorFeedbacks[0].subject}}</div>
+                  <div class="s-tutors__card-name">{{tutorFeedback.name}}</div>
+                  <div class="s-tutors__card-title">{{tutorFeedback.subject}}</div>
                 </div>
               </div>
             </div>
@@ -220,10 +220,10 @@
     <img src="assets/images/wave_footer.svg" alt="" class="s-footer__wave">
     <div class="container">
       <div class="s-footer__content">
-        <div class="brd-display-x-large m-b-16">Get help</div>
-        <div class="brd-display-large m-b-40">Everything is figureoutable</div>
+        <div class="brd-display-x-large m-b-16">Work Smart Not Hard</div>
+        <div class="brd-display-large m-b-40">For students, by educators</div>
         <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" >
-          Find a toutor for me
+          Get Help
           <mat-icon>arrow_forward</mat-icon>
         </button>
         <div class="copy-right">© 2021 . All rights reserved</div>

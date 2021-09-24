@@ -164,7 +164,7 @@ export class BodyComponent implements OnInit {
 
   details = [
     {
-      title: "Find a tutor for you",
+      title: "Find a tutor",
       description: "We pressent you with the best tutorswith highest academic qualifications",
       icon: "search",
       class: 's-features__media--purple'
@@ -229,25 +229,25 @@ export class BodyComponent implements OnInit {
 
   tutorFeedbacks = [
     {
-      description: "I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
+      description: "I’m a computer science PhD candidate and former software engineer. My expertise’s are in Databases, Algorithm, Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
       image: "assets/images/expertcs.jpg",
       name: "ExpertCSTutor",
       subject: "Computer Science"
     },
     {
-      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow.................................................................",
+      description: "Master’s degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow. I have experience in working with tools such as SolidWorks, AutoCAD, Ansys and Matlab. I’m also a part time lecturer at a reputed university in Malaysia. Teaching is my passion.",
       image: "assets/images/mechanic.jpg",
       name: "Mechanic",
       subject: "Mechanical Engineering"
     },
     {
-      description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having a sound academic knowledge. Currently I am working as a IP Core Network Engineer in a leading telecommunication company. I provide tutoring on subjects such as IP Networking, Electrical and Power, Telecommunications, Digital Electronics, Mathematics and Physics.",
+      description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having sound academic knowledge. Currently, I am working as a IP core network engineer in a leading telecom company. I provide tutoring on IP Networking, Electrical and Power, Telecom, Digital Electronics, Mathematics and Physics.",
       image: "assets/images/mathmind.jpg",
       name: "MathMind",
       subject: "Electronic Engineering"
     },
     {
-      description: "I am currently doing my PhD in Economics and the topic of my doctoral thesis is Crypto Economics. I am very much interested in helping out students online, both with their homework and tutoring them when required. My areas of specialization are Economics, business statistics and business management subjects.",
+      description: "I am a PhD student in Economics, and the topic of my doctoral thesis is Crypto Economics. I am very interested in helping out students online, both with their homework and tutoring. My areas of specialization are Economics, business statistics and business management subjects.",
       image: "assets/images/hr.jpg",
       name: "Businesswoman ",
       subject: "Business Management"
@@ -257,19 +257,19 @@ export class BodyComponent implements OnInit {
 
   tutorFeedbacks2 = [
     {
-      description: " Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
+      description: "I’m a computer science PhD candidate and former software engineer. My expertise’s are in Databases, Algorithm, Machine Learning and Blockchain. I have industry experience in numerous programming languages which includes Python, C, C++, Java and JavaScript. Waiting to share my experience with you !!",
       image: "assets/images/expertcs.jpg",
       name: "ExpertCSTutor",
       subject: "Computer Science"
     },
     {
-      description: "Masters degree holder and PhD candidate in Mechanical Engineering. Specialized in Mathematics, Fluid Dynamics and Heat flow.................................................................",
-      image: "assets/images/mechanic.jpg",
-      name: "Mechanic",
-      subject: "Mechanical Engineering"
+      description: "I am a PhD student in Economics, and the topic of my doctoral thesis is Crypto Economics. I am very interested in helping out students online, both with their homework and tutoring. My areas of specialization are Economics, business statistics and business management subjects.",
+      image: "assets/images/hr.jpg",
+      name: "Businesswoman ",
+      subject: "Business Management"
     },
     {
-      description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having a sound academic knowledge. Currently I am working as a IP Core Network Engineer in a leading telecommunication company. I provide tutoring on subjects such as IP Networking, Electrical and Power, Telecommunications, Digital Electronics, Mathematics and Physics.",
+      description: "Hi, I am a passionate Electrical and Electronic Engineering graduate having sound academic knowledge. Currently, I am working as a IP core network engineer in a leading telecom company. I provide tutoring on IP Networking, Electrical and Power, Telecom, Digital Electronics, Mathematics and Physics.",
       image: "assets/images/mathmind.jpg",
       name: "MathMind",
       subject: "Electronic Engineering"
