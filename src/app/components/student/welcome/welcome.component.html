@@ -2,7 +2,7 @@
   <div class="auth" fxLayout="column">
     <div class="title" fxLayout="row" fxLayoutAlign="space-between center">
       <div>Welcome</div>
-      <img (click)="onClose()" src="../../../../assets/icons/close.svg" class="close-icon">
+      <img src="/assets/icons/close.svg" class="close-icon" (click)="onClose()">
     </div>
     <div class="note">We need your email and name to proceed.</div>
     <div class="form" fxLayout="column">
@@ -11,12 +11,12 @@
         <input [pattern]="emailPattern"  formControlName="email" matInput type="email" class="other">
       </mat-form-field>
       <div class="label">Name</div>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="my-form-field" appearance="outline">
         <input formControlName="name" matInput type="text" class="other">
       </mat-form-field>
-      <div disable="disableDone" (click)="onDone()" class="button-reg">
+      <button mat-flat-button (click)="onDone()" class="button-reg">
         Done
-      </div>
+      </button>
     </div>
   </div>
 </form>

@@ -39,4 +39,8 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
+  onClose(){
+    this.dialogRef.close();
+  }
+
 }

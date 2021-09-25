@@ -498,4 +498,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.chatService.onTyping(this.chatToken, false);
   }
 
+  @HostListener('scroll', ['$event'])
+  onScroll(event: any) {
+    // visible height + pixel scrolled >= total height
+    if (event.target.scrollTop === 0) {
+      console.log("Top");
+    }
+  }
+
 }
