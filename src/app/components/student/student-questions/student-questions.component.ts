@@ -1,5 +1,5 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
@@ -302,6 +302,15 @@ export class StudentQuestionsComponent implements OnInit {
   onViewChat(id: any) {
     console.log(id);
     this.router.navigate([constants.routes.chat, id], {skipLocationChange: true})
+  }
+
+
+  @HostListener('scroll', ['$event'])
+  onScroll(event: any) {
+    // visible height + pixel scrolled >= total height
+    if (event.target.scrollBottom === 100) {
+      console.log("jhi");
+    }
   }
 
 }

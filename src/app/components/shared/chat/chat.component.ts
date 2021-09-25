@@ -502,7 +502,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onScroll(event: any) {
     // visible height + pixel scrolled >= total height
     if (event.target.scrollTop === 0) {
-      console.log("Top");
+      this.chatService.getNextMessages(this.chatToken, this.chatMessages[0].time).valueChanges().subscribe(
+        (res) => {
+          console.log(res.length);
+          // @ts-ignore
+          this.chatMessages.unshift(...res);
+        }
+      )
     }
   }
 
