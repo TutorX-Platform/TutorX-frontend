@@ -165,7 +165,7 @@ export class BodyComponent implements OnInit {
   details = [
     {
       title: "Find a tutor",
-      description: "We pressent you with the best tutorswith highest academic qualifications",
+      description: "We pressent you with the best tutors with highest academic qualifications",
       icon: "search",
       class: 's-features__media--purple'
     },
