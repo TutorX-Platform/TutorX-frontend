@@ -458,17 +458,19 @@
           <mat-icon>arrow_back</mat-icon>
         </button>
         <img src="../../assets/images/box.svg">
-        <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer"
-             (click)="onDetailedView(true)">
+        <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer">
           <div
             class="q-title-toolbar">{{questionService.question !== undefined ? questionService.question.questionTitle : ''}}</div>
           <div class="last-seen">Last Seen 24h ago</div>
         </div>
       </div>
+      <button mat-icon-button (click)="onDetailedView(true)">
+        <mat-icon>expand_more</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
   <div fxLayout="row" fxLayoutAlign="space-between start"
-       style="padding: 16px;position: fixed; width: 100%; top: 0;color: white;background: #7F6EF0"
+       style="padding: 16px;position: fixed; width: 100%; top: 0;color: white;background: #3F51B5"
        *ngIf="isDetailedView">
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
       <img src="../../assets/images/box.svg">
