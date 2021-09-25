@@ -410,17 +410,6 @@
           Attachments
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <!--<div fxLayout="column" class="drop-zone">-->
-          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-          <!--<img src="assets/icons/pdf.svg" class="icon-image">-->
-          <!--</div>-->
-          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-          <!--<div class="file-name">-->
-          <!--&lt;!&ndash;{{this.file.name}}&ndash;&gt;-->
-          <!--attachment.pdf-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
 
           <div *ngFor="let attachment of attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
@@ -429,15 +418,11 @@
               </div>
               <div fxLayout="row" fxLayoutAlign="center center">
                 <div class="file-name">
-                  <!--{{this.file.name}}-->
                   {{attachment.fileName}}
                 </div>
               </div>
             </a>
           </div>
-          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
-          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
-          <!--<img src="../../../../assets/images/profile.jpg" class="attachment">-->
         </div>
       </div>
     </div>
