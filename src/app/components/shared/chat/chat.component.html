@@ -50,7 +50,7 @@
   <div class="divider-chat-header"></div>
   <div class="chat-main-container" fxLayout="row" fxLayoutAlign="start start">
     <div class="chat-container">
-      <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight" (scroll)="onScroll($event)">
         <div *ngFor="let message of chatMessages">
           <div *ngIf="!message.isQuote && !message.isQuote && !message.isAttachment && message.isTutorJoinMessage" class="joined-message">
             <div class="line"></div>
