@@ -110,6 +110,12 @@
                     <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
                     <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
                     <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                    <img src="assets/icons/unknown-file.png" class="attachment-box attachment-box--icon"
+                         *ngIf="
+                         !message.attachmentExtension.includes('.document') &&
+                         !message.attachmentExtension.includes('.sheet') &&
+                         !message.attachmentExtension.includes('pdf') &&
+                         !message.attachmentExtension.includes('image')">
                     {{message.message}}
                   </a>
                 </div>

@@ -65,3 +65,25 @@
 
   </div>
 </div>
+
+<div fxLayout="column" class="drop-zone"
+     *ngIf="
+     !this.file.type.toString().includes('.sheet') &&
+     !this.file.type.toString().includes('.document') &&
+     !this.file.type.toString().includes('image') &&
+     this.file.type !== 'application/pdf'">
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <mat-icon (click)="_remove($event)">
+      close
+    </mat-icon>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/icons/unknown-file.png" class="icon-image">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="file-name">
+      {{this.file.name}}
+    </div>
+
+  </div>
+</div>
