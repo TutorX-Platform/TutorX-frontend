@@ -23,12 +23,19 @@ export class PaymentService {
 
   getPaymentsForTutor(tutorId: string) {
     // @ts-ignore
-    const paymentRef: AngularFirestoreDocument<Payment> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", '==', tutorId));
+    const paymentRef: AngularFirestoreDocument<Unknown> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", "==", tutorId).limit(10));
     return paymentRef;
   }
 
-  requestRefund(questionId: string, amount: number, studentId: string, studentName: string, tutorId: string, tutorName: string, questionTitle: string) {
+  getPaymentsByMonthForTutor(tutorId: string, month: number) {
+    // @ts-ignore
+    const paymentRef: AngularFirestoreDocument<Unknown> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", "==", tutorId).where('month', '==', month).limit(10));
+    return paymentRef;
+  }
+
+  requestRefund(questionId: string, amount: number, studentId: string, studentName: string, tutorId: string, tutorName: string, questionTitle: string, time: number) {
     const refund: Refund = {
+      time: time,
       id: questionId,
       isApproved: false,
       isRefunded: false,

@@ -20,4 +20,5 @@ export interface Chat {
   questionTitle: string;
   questionNumber: string;
   questionDescription: string;
+  isPaid: boolean;
 }
