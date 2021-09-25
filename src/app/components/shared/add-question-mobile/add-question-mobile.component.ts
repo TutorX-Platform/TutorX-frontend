@@ -292,7 +292,7 @@ export class AddQuestionMobileComponent implements OnInit {
   askEmail(progressDialog: MatDialogRef<any>) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "30%";
+    dialogConfig.width = "100%";
     // dialogConfig.height = "810px";
     const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(

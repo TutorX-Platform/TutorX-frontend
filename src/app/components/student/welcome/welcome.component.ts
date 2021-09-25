@@ -31,4 +31,8 @@ export class WelcomeComponent implements OnInit {
     this.dialogRef.close(this.emailForm);
   }
 
+  onClose(){
+    this.dialogRef.close();
+  }
+
 }
