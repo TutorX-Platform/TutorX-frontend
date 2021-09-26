@@ -1,5 +1,5 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -75,6 +75,5 @@ export class StudentComponent implements OnInit {
     this.authService.onSignOut();
     this.router.navigate(['/'],{skipLocationChange: true});
   }
-
 
 }

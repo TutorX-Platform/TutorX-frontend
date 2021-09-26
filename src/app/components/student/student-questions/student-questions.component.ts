@@ -304,12 +304,11 @@ export class StudentQuestionsComponent implements OnInit {
     this.router.navigate([constants.routes.chat, id], {skipLocationChange: true})
   }
 
-
-  @HostListener('scroll', ['$event'])
-  onScroll(event: any) {
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
     // visible height + pixel scrolled >= total height
-    if (event.target.scrollBottom === 100) {
-      console.log("jhi");
+    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+      console.log("End");
     }
   }
 

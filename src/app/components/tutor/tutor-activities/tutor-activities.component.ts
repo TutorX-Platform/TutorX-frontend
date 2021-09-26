@@ -1,5 +1,5 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AddQuestionComponent} from '../../shared/add-question/add-question.component';
@@ -266,5 +266,11 @@ export class TutorActivitiesComponent implements OnInit {
     }
   }
 
-
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    // visible height + pixel scrolled >= total height
+    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+      console.log("End");
+    }
+  }
 }
