@@ -1,6 +1,6 @@
 import {Input} from '@angular/core';
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import * as constants from '../../../models/constants';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddQuestionComponent} from "../add-question/add-question.component";
@@ -39,6 +39,7 @@ export class QuestionCardComponent implements OnInit {
 
   role = '';
   defaultTutorAvatar = constants.dummy_profile_picture;
+  uid = '';
 
   constructor(private router: Router,
               private dialog: MatDialog,

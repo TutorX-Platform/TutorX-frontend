@@ -1,5 +1,5 @@
 <div class="common-profile" fxLayout="column">
-  <div class="hi">Hi! Jhon</div>
+  <div class="hi">Hi! {{tutor.firstName}}</div>
   <div class="ratings-container" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
     <div class="rating" fxLayout="row">
       <mat-icon [ngClass]="rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
@@ -10,17 +10,18 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <div>
-        24 Taks Completions
+        {{tutor.tasksCompleted}} Taks Completions
       </div>
       <img src="assets/icons/dot.svg">
       <div>
-        English teacher,  University of Hamburg
+        {{tutor.description}}
       </div>
     </div>
   </div>
   <div class="divi"></div>
   <div class="prof-picture-container" fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start center">
-    <img src="assets/images/profile.jpg" class="prof-pic">
+    <img *ngIf="tutor.profileImage ==null || tutor.profileImage ==''" src="assets/images/profile.jpg" class="prof-pic">
+    <img *ngIf="tutor.profileImage !=null && tutor.profileImage !=''" [src]=tutor.profileImage class="prof-pic">
     <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
       <button mat-flat-button class="upload-new" color="primary">
         Upload new image
@@ -36,13 +37,13 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Display Name</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Display Name" formControlName="visibleName">
+            <input matInput type="text" placeholder="Display Name" formControlName="visibleName" readonly>
           </mat-form-field>
         </div>
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Full Name</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Full Name" formControlName="fullName">
+            <input matInput type="text" placeholder="Full Name" formControlName="fullName" readonly>
           </mat-form-field>
         </div>
       </div>
@@ -50,13 +51,13 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Email</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Email" formControlName="email">
+            <input matInput type="text" placeholder="Email" formControlName="email" readonly>
           </mat-form-field>
         </div>
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Street</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Street" formControlName="street">
+            <input matInput type="text" placeholder="Street" formControlName="street" readonly>
           </mat-form-field>
         </div>
       </div>
@@ -64,13 +65,13 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">City</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="City" formControlName="city">
+            <input matInput type="text" placeholder="City" formControlName="city" readonly>
           </mat-form-field>
         </div>
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Country</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Country" formControlName="country">
+            <input matInput type="text" placeholder="Country" formControlName="country" readonly>
           </mat-form-field>
         </div>
         <!--<div fxLayout="column" fxLayoutAlign="start stretch" class="r r&#45;&#45;half">-->
@@ -88,13 +89,13 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Postal Code</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Postal Code" formControlName="postalCode">
+            <input matInput type="text" placeholder="Postal Code" formControlName="postalCode" readonly>
           </mat-form-field>
         </div>
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Contact Number</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Contact Number" formControlName="phoneNumber">
+            <input matInput type="text" placeholder="Contact Number" formControlName="phoneNumber" readonly>
           </mat-form-field>
         </div>
       </div>
@@ -112,28 +113,28 @@
         Payment Information
       </div>
       <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">-->
-        <!--<div fxLayout="column" fxLayoutAlign="start stretch" class="r r&#45;&#45;half">-->
-          <!--<div class="label">Payment Method</div>-->
-          <!--<mat-form-field appearance="outline" class="my-form-field">-->
-            <!--<mat-select>-->
-              <!--<mat-option *ngFor="let country of countries" [value]="country.id">-->
-                <!--{{country.name}}-->
-              <!--</mat-option>-->
-            <!--</mat-select>-->
-          <!--</mat-form-field>-->
-        <!--</div>-->
+      <!--<div fxLayout="column" fxLayoutAlign="start stretch" class="r r&#45;&#45;half">-->
+      <!--<div class="label">Payment Method</div>-->
+      <!--<mat-form-field appearance="outline" class="my-form-field">-->
+      <!--<mat-select>-->
+      <!--<mat-option *ngFor="let country of countries" [value]="country.id">-->
+      <!--{{country.name}}-->
+      <!--</mat-option>-->
+      <!--</mat-select>-->
+      <!--</mat-form-field>-->
+      <!--</div>-->
       <!--</div>-->
       <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Acount Number</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Acount Number">
+            <input matInput type="text" placeholder="Acount Number" readonly>
           </mat-form-field>
         </div>
         <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
           <div class="label">Bank Name</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" placeholder="Bank Name">
+            <input matInput type="text" placeholder="Bank Name" readonly>
           </mat-form-field>
         </div>
       </div>
