@@ -4,8 +4,10 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from "../../../services/auth.service";
 import {SignUpComponent} from '../sign-up/sign-up.component';
 import * as constants from '../../../models/constants';
+import * as sysMsg from '../../../models/system-messages';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {MailService} from "../../../services/mail.service";
+import {UtilService} from "../../../services/util-service.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,6 +18,7 @@ export class SignInComponent implements OnInit {
   // @ts-ignore
   signInForm: FormGroup;
   emailPattern = constants.regexp_patterns.email;
+  validations = sysMsg.validations;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +26,7 @@ export class SignInComponent implements OnInit {
     private dialogRef: MatDialogRef<SignInComponent>,
     public authService: AuthService,
     private mailService: MailService,
+    private utilService: UtilService,
   ) {
   }
 
@@ -33,7 +37,7 @@ export class SignInComponent implements OnInit {
   initializeSignInForm() {
     this.signInForm = new FormGroup({
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
 
@@ -46,12 +50,12 @@ export class SignInComponent implements OnInit {
             (res) => {
               this.dialogRef.close();
               console.log(res);
-            }
+            },
           );
         }
       )
     } else {
-      alert("please fill form");
+      this.utilService.openDialog(sysMsg.signInTitles.signInFailed, sysMsg.signInMessages.incompleteForm, constants.messageTypes.warningInfo).afterOpened().subscribe();
     }
   }
 

@@ -13,9 +13,9 @@ export const questionTitles = {
   studentQuoteApproved: "Approve success",
   tutorSendQuote: "Send Success",
   tutorReleaseQuestionError: "Can't release the question",
-  notLoggedUserWithLoggedCredentials:"Your email already have an account",
-  requestRefund:"Request a refund",
-  acceptNotification:"Please allow send notifications"
+  notLoggedUserWithLoggedCredentials: "Your email already have an account",
+  requestRefund: "Request a refund",
+  acceptNotification: "Please allow send notifications"
 }
 
 export const questionMessages = {
@@ -33,10 +33,10 @@ export const questionMessages = {
   studentQuoteApproved: "Quote is approved successfully",
   tutorSendQuote: "Sent the quote successfully",
   tutorReleaseQuestionError: "Student have paid the question so you can't leave the question",
-  notLoggedUserWithLoggedCredentials:"Your email already have an account please log in first",
-  requestRefund:"Are you sure to request a refund for this question",
-  requestRefundSuccess:"Refund request success, Our admins will contact you soon !!",
-  acceptNotification:"Please allow notifications for better user experience"
+  notLoggedUserWithLoggedCredentials: "Your email already have an account please log in first",
+  requestRefund: "Are you sure to request a refund for this question",
+  requestRefundSuccess: "Refund request success, Our admins will contact you soon !!",
+  acceptNotification: "Please allow notifications for better user experience"
 
 }
 
@@ -45,5 +45,19 @@ export const signInTitles = {
 }
 
 export const signInMessages = {
+  incompleteForm: "Please complete required fields"
+}
+
+
+export const validations = {
+  emailRequired: "Email is required",
+  passwordRequired: "Password is required",
+  passwordLengthMinRequired: "Password must be minimum 6 characters",
+  fullNameRequired: "Full name required",
+
+  questionTitleRequired: "Question title required",
+  questionSubjectRequired: "Question subject required",
+  questionCategoryRequired: "Question sub-category required",
+  questionDeadlineRequired: "Question deadline required"
 }
 

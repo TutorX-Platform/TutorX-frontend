@@ -73,6 +73,7 @@ export class AddQuestionComponent implements OnInit {
   attachments: Attachment[] = [];
 
   uploadingProgress = 0;
+  validations = systemMessages.validations;
 
 
   constructor(

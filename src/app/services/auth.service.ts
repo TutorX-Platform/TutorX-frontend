@@ -7,11 +7,13 @@ import {UtilService} from "./util-service.service";
 import 'rxjs/add/operator/switchMap';
 import {Student} from "../models/student";
 import * as constants from '../models/constants';
+import * as sysMsg from '../models/system-messages';
 import * as firebase from 'firebase';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
+
 
 @Injectable({
   providedIn: 'root'
@@ -63,12 +65,17 @@ export class AuthService {
 
   googleAuth() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
+    return this.oAuthLogin(provider).catch((err) => {
+      this.utilService.openDialog(sysMsg.signInTitles.signInFailed, err.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+    });
   }
 
   facebookAuth() {
     const provider = new firebase.auth.FacebookAuthProvider();
-    return this.oAuthLogin(provider);
+    return this.oAuthLogin(provider).catch((err) => {
+      this.utilService.openDialog(sysMsg.signInTitles.signInFailed, err.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+
+    });
   }
 
   oAuthLogin(provider: any) {
@@ -127,7 +134,7 @@ export class AuthService {
         }
       }).catch((error) => {
         progressDialog.close();
-        window.alert(error.message)
+        this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
       })
   }
 
@@ -142,9 +149,8 @@ export class AuthService {
         // @ts-ignore
         this.roleBasedRouting(result.user.uid, progressDialog);
       }).catch((error) => {
-        window.alert(error.message)
+        this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
         progressDialog.close();
-
       })
   }
 

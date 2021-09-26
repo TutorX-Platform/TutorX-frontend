@@ -21,14 +21,24 @@
         <mat-form-field class="my-form-field" appearance="outline">
           <input formControlName="fullName" matInput type="text" class="other">
         </mat-form-field>
+        <mat-error *ngIf="signUpForm.get('fullName')?.touched && signUpForm.get('fullName')?.hasError('required')" class="label">
+          {{validations.fullNameRequired}}
+        </mat-error>
         <div class="label">Email address</div>
         <mat-form-field class="my-form-field" appearance="outline">
           <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
         </mat-form-field>
+        <mat-error *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.hasError('required')" class="label">
+          {{validations.emailRequired}}
+        </mat-error>
         <div class="label">Password</div>
         <mat-form-field appearance="outline" class="my-form-field">
           <input formControlName="password" matInput type="password" class="other">
         </mat-form-field>
+        <mat-error *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.hasError('required')"
+                   class="label">
+          {{validations.passwordRequired}}
+        </mat-error>
         <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
           <mat-checkbox color="primary"></mat-checkbox>
           <div>
