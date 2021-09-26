@@ -113,7 +113,8 @@ export const routes = {
   testChat: '/test-chat',
   chat: '/chat',
   pay: '/pay',
-  paySuccess: '/pay-success'
+  paySuccess: '/pay-success',
+  add_question_mobile: '/add-question'
 }
 
 export const localStorageKeys = {

@@ -56,15 +56,16 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
         <div *ngFor="let chat of chats">
-          <div class="recent-chats-card" fxLayout="column" fxLayoutGap="24px">
-            <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="recent-chats-card" fxLayout="column" fxLayoutGap="16px">
+            <div fxLayout="row" fxLayoutAlign="space-between start">
               <div class="recent-card-title">{{chat.questionTitle}}</div>
               <div>
-                <div *ngIf="false" class="c-chip c-chip--neutral invert-false">Open</div>
-                <div *ngIf="true" class="c-chip c-chip--progress invert-false">{{chat.chatStatus}}</div>
+                <div *ngIf="chat.chatStatus === 'open'" class="c-chip c-chip--neutral invert-false">Open</div>
+                <div *ngIf="chat.chatStatus === 'ongoing'" class="c-chip c-chip--progress">On Going</div>
+                <div *ngIf="chat.chatStatus === 'closed'" class="c-chip c-chip--danger invert-false">Closed</div>
               </div>
             </div>
-            <div class="recent-card-description">
+            <div class="recent-card-description" *ngIf="chat.questionDescription !== null || chat.questionDescription !== ''">
               {{chat.questionDescription}}
             </div>
             <div class="student" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
@@ -77,7 +78,7 @@
                 <img src="../../../assets/images/profile.jpg" class="student-avatar">
               </div>
               <div class="student-name">
-                Rily Green
+                Riley Green
               </div>
             </div>
           </div>

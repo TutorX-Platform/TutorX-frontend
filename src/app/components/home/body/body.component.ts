@@ -319,6 +319,10 @@ export class BodyComponent implements OnInit {
     )
   }
 
+  addQuestionMobile(){
+    this.router.navigate([constants.routes.add_question_mobile], {skipLocationChange: true});
+  }
+
   onLogin() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;

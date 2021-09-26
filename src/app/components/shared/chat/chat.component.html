@@ -676,7 +676,7 @@
             <img src="../../../../assets/icons/info.svg">
             <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
               Remaining
-              <app-count-down [date]="test"></app-count-down>
+              <app-count-down [date]="deadLine"></app-count-down>
             </div>
           </div>
         </div>
@@ -762,7 +762,7 @@
           Pay now
         </button>
       </div>
-      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor">
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor && (questionService.question.tutorName !== null || questionService.question.tutorName !== '' || questionService.question.tutorName !== undefined)">
         <div class="assigned-to">
           Assigned to
         </div>
@@ -778,9 +778,6 @@
           <div class="bio-box">
             <div class="head">
               {{questionService.question.tutorName}}
-            </div>
-            <div class="sub">
-              Senior Front-end Developer
             </div>
           </div>
         </div>

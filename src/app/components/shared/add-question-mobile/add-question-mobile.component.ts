@@ -140,7 +140,7 @@ export class AddQuestionMobileComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
   }
 
   onDone() {
@@ -159,6 +159,7 @@ export class AddQuestionMobileComponent implements OnInit {
           }
         } else {
           progressDialog.close();
+          this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
         }
       }
     )
@@ -256,6 +257,7 @@ export class AddQuestionMobileComponent implements OnInit {
         });
       }
     );
+    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
     this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
   }
 
@@ -324,6 +326,7 @@ export class AddQuestionMobileComponent implements OnInit {
       }
     )
     progressDialog.close();
+    this.router.navigate(["/"], {skipLocationChange: true});
   }
 
   sendAknowledgementEmail(email: string) {

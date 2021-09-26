@@ -1,7 +1,5 @@
 <!-- web -->
 <!-- <div class="add-question"> -->
-<mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
-                      *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
 <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
   <div mat-dialog-title fxLayout="column" class="top-container" fxLayoutAlign="center center">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
@@ -119,6 +117,9 @@
             <custom-dropzone-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
                                      [removable]="true" (removed)="onRemove(f)">
               <!--<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>-->
+
+              <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
+                                    *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
             </custom-dropzone-preview>
           </div>
 
