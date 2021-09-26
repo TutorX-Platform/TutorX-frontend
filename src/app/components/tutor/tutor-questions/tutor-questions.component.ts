@@ -163,13 +163,14 @@ export class TutorQuestionsComponent implements OnInit {
         this.studentService.currentStudent = res;
         this.questionService.getQuestions().valueChanges().subscribe(
           (res) => {
+            console.log(res);
             // @ts-ignore
             this.askedQuestions = res;
-            this.askedQuestions = this.sortQuestion().reverse();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
-          }, () => {
+          }, (err) => {
+            console.log(err)
             progressDialog.close();
           }, () => {
             progressDialog.close();
@@ -305,7 +306,12 @@ export class TutorQuestionsComponent implements OnInit {
   onScroll() {
     // visible height + pixel scrolled >= total height
     if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      console.log("End");
+      this.questionService.getNextQuestions(this.allAskedQuestions[0].sort).valueChanges().subscribe(
+        (res) => {
+          // @ts-ignore
+          this.allAskedQuestions.unshift(...res);
+        }
+      )
     }
   }
 

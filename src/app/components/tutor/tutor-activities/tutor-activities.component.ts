@@ -86,7 +86,7 @@ export class TutorActivitiesComponent implements OnInit {
 
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(() => {
-      this.getQuestionsTutor(progressDialog);
+      this.getQuestionsTutor(progressDialog, [constants.questionStatus.open, constants.questionStatus.assigned, constants.questionStatus.in_progress, constants.questionStatus.cancelled, constants.questionStatus.completed]);
     });
     //search auto complete
     this.filteredOptions = this.searchControl.valueChanges.pipe(
@@ -113,31 +113,33 @@ export class TutorActivitiesComponent implements OnInit {
   }
 
   selectStatus(num: number) {
+    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     this.selectedStatus = num;
     this.askedQuestions = this.allAskedQuestions;
     if (num === 0) {
-      this.askedQuestions = this.allAskedQuestions;
+      progressDialog.afterOpened().subscribe(() => {
+        this.getQuestionsTutor(progressDialog, [constants.questionStatus.open, constants.questionStatus.assigned, constants.questionStatus.in_progress, constants.questionStatus.cancelled, constants.questionStatus.completed]);
+      });
     }
     if (num === 1) {
-      this.assignedQuestions = [];
-      this.assignedQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.assigned))
-      this.askedQuestions = this.assignedQuestions;
+      progressDialog.afterOpened().subscribe(() => {
+        this.getQuestionsTutor(progressDialog, [constants.questionStatus.assigned]);
+      });
     }
     if (num === 2) {
-      this.inProgressQuestions = [];
-      this.inProgressQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.in_progress))
-      console.log(this.inProgressQuestions.length)
-      this.askedQuestions = this.inProgressQuestions;
+      progressDialog.afterOpened().subscribe(() => {
+        this.getQuestionsTutor(progressDialog, [constants.questionStatus.in_progress]);
+      });
     }
     if (num === 3) {
-      this.completedQuestions = [];
-      this.completedQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.completed));
-      this.askedQuestions = this.completedQuestions;
+      progressDialog.afterOpened().subscribe(() => {
+        this.getQuestionsTutor(progressDialog, [constants.questionStatus.completed]);
+      });
     }
     if (num === 4) {
-      this.cancelledQuestions = [];
-      this.cancelledQuestions.push(...this.askedQuestions.filter(ques => ques.status === constants.questionStatus.cancelled));
-      this.askedQuestions = this.cancelledQuestions;
+      progressDialog.afterOpened().subscribe(() => {
+        this.getQuestionsTutor(progressDialog, [constants.questionStatus.cancelled]);
+      });
     }
   }
 
@@ -167,21 +169,21 @@ export class TutorActivitiesComponent implements OnInit {
   changeStatus() {
   }
 
-  getQuestionsTutor(progressDialog: MatDialogRef<any>) {
+  getQuestionsTutor(progressDialog: MatDialogRef<any>, status: string[]) {
     this.studentService.findStudentDetails().subscribe(
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestionsForTutor(this.authService.student.userId).valueChanges().subscribe(
+        this.questionService.getQuestionsForTutorByStatus(this.authService.student.userId, status).valueChanges().subscribe(
           (res) => {
             console.log(res);
             // @ts-ignore
             this.askedQuestions = res;
-            this.askedQuestions = this.sortQuestion().reverse();
             // @ts-ignore
             this.allAskedQuestions = res;
             progressDialog.close();
-          }, () => {
+          }, (err) => {
+            console.log(err);
             progressDialog.close();
           }, () => {
             progressDialog.close();
