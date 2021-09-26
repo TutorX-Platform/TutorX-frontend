@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   attachments: Attachment[] = [];
   isFocused = false;
   chat: Chat = {
+    isPaid: false,
     questionDescription: "",
     questionNumber: "",
     questionTitle: "",
@@ -469,7 +470,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.utilService.openDialog(systemMessages.questionTitles.requestRefund, systemMessages.questionMessages.requestRefund, constants.messageTypes.confirmation).afterClosed().subscribe(
       (res) => {
         if (res) {
-          this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle);
+          this.utilService.getTimeFromTimeAPI().subscribe(
+            (res1) => {
+              // @ts-ignore
+              this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle, res1.time);
+
+            }
+          )
           const data = {
             isRefundRequested: true
           }
@@ -495,7 +502,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onScroll(event: any) {
     // visible height + pixel scrolled >= total height
     if (event.target.scrollTop === 0) {
-      console.log("Top");
+      this.chatService.getNextMessages(this.chatToken, this.chatMessages[0].time).valueChanges().subscribe(
+        (res) => {
+          console.log(res.length);
+          // @ts-ignore
+          this.chatMessages.unshift(...res);
+        }
+      )
     }
   }
 

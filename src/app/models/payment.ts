@@ -12,4 +12,5 @@ export interface Payment {
   studentImage: string;
   tutorName: string;
   questionNumber: string;
+  month:number;
 }

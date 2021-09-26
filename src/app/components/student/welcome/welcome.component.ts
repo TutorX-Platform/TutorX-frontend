@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from 'src/app/services/auth.service';
+import * as constants from "../../../models/constants";
 
 @Component({
   selector: 'app-welcome',
@@ -10,6 +11,8 @@ import {AuthService} from 'src/app/services/auth.service';
 })
 export class WelcomeComponent implements OnInit {
   emailForm!: FormGroup;
+  disableDone = true;
+  emailPattern = constants.regexp_patterns.email;
 
 
   constructor(
@@ -19,8 +22,11 @@ export class WelcomeComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  onClose() {
+    this.dialogRef.close();
+  }
 
+  ngOnInit(): void {
     this.emailForm = this.formBuilder.group({
       email: ['', Validators.required],
       name: ['', Validators.required],
@@ -28,11 +34,9 @@ export class WelcomeComponent implements OnInit {
   }
 
   onDone() {
-    this.dialogRef.close(this.emailForm);
-  }
-
-  onClose(){
-    this.dialogRef.close();
+    if (this.emailForm.value.email !== '' && this.emailForm.value.name != '') {
+      this.dialogRef.close(this.emailForm);
+    }
   }
 
 }

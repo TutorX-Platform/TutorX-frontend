@@ -10,7 +10,7 @@
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
             <div fxLayout="column" fxLayoutAlign="start start">
               <div class="bold-text">
-                #001
+                {{payment.questionNumber}}
               </div>
               <div class="normal-text">
                 {{payment.paidTime | date:'dd/MM/yyyy'}}
@@ -27,7 +27,7 @@
                 </div>
               </div>
               <div class="bold-text">
-                {{payment.questionNumber}}
+<!--                {{payment.questionNumber}}-->
               </div>
             </div>
           </div>
@@ -55,8 +55,8 @@
       <div fxLayout="column" fxLayoutAlign="start stretch">
         <div class="label">Month</div>
         <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select>
-            <mat-option *ngFor="let month of months" [value]="month.code">
+          <mat-select (selectionChange)="monthFilter($event.value)">
+            <mat-option   *ngFor="let month of months" [value]="month.code">
               {{month.name}}
             </mat-option>
           </mat-select>
@@ -65,9 +65,9 @@
       <div fxLayout="column" fxLayoutAlign="start stretch">
         <div class="label">Sort</div>
         <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select>
-            <mat-option *ngFor="let month of months" [value]="month.code">
-              {{month.name}}
+          <mat-select (selectionChange)="onSortChange($event.value)">
+            <mat-option *ngFor="let status of states" [value]="status">
+              {{status}}
             </mat-option>
           </mat-select>
         </mat-form-field>

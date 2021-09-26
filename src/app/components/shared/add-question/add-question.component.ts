@@ -319,7 +319,11 @@ export class AddQuestionComponent implements OnInit {
           // @ts-ignore
           this.askedQuestions.push(this.questionId);
           this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber,question.description);
+          if (res.questionNumber) {
+            this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber, question.description);
+          } else {
+            this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+          }
           dialogRef.close(true);
           progressDialog.close();
         });
@@ -370,30 +374,35 @@ export class AddQuestionComponent implements OnInit {
     const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (result) => {
-        const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-        progressDialog.afterOpened().subscribe(
-          () => {
-            this.authService.student.firstName = result.value.name;
-            this.authService.student.email = result.value.email;
+        console.log(result);
+        if (result !== undefined) {
+          const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+          progressDialog.afterOpened().subscribe(
+            () => {
+              this.authService.student.firstName = result.value.name;
+              this.authService.student.email = result.value.email;
 
-            this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
-              (res) => {
-                if (res.length > 0) {
-                  progressDialog.close();
-                  this.utilService.openDialog(systemMessages.questionTitles.notLoggedUserWithLoggedCredentials, systemMessages.questionMessages.notLoggedUserWithLoggedCredentials, constants.messageTypes.warning).afterOpened().subscribe();
-                } else {
-                  this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-                    // @ts-ignore
-                    this.time = res;
-                    this.askQuestion(this.dialogRef, progressDialog, this.time.time, false);
-                    this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
-                  })
-                  this.sendAknowledgementEmail(this.authService.student.email);
+              this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
+                (res) => {
+                  if (res.length > 0) {
+                    progressDialog.close();
+                    this.utilService.openDialog(systemMessages.questionTitles.notLoggedUserWithLoggedCredentials, systemMessages.questionMessages.notLoggedUserWithLoggedCredentials, constants.messageTypes.warning).afterOpened().subscribe();
+                  } else {
+                    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                      // @ts-ignore
+                      this.time = res;
+                      this.askQuestion(this.dialogRef, progressDialog, this.time.time, false);
+                      this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
+                    })
+                    this.sendAknowledgementEmail(this.authService.student.email);
+                  }
                 }
-              }
-            );
-          }
-        )
+              );
+            }
+          )
+        } else {
+          progressDialog.close();
+        }
       }
     )
     progressDialog.close();
@@ -403,11 +412,12 @@ export class AddQuestionComponent implements OnInit {
     // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
   }
 
-  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string,questionDesc:string) {
+  createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
     const chatLink = this.utilService.generateChatLink(chatId, constants.userTypes.student);
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      isPaid: false,
       questionDescription: questionDesc,
       questionNumber: questionNumber,
       questionTitle: questionTitle,

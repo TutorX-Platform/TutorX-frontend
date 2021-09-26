@@ -77,11 +77,11 @@ const routes: Routes = [
     path: 'student',
     component: StudentComponent,
     canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToHome},
     children: [
       {
         path: 'questions',
-        component: StudentQuestionsComponent
+        component: StudentQuestionsComponent,
+        // data: {authGuardPipe: redirectUnauthorizedToHome},
       },
       {
         path: 'chat/:id',
@@ -90,7 +90,9 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'student/questions',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        // data: {authGuardPipe: redirectUnauthorizedToHome},
+
       }
     ]
   },
