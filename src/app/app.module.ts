@@ -47,6 +47,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 
+import { DatePipe } from '@angular/common';
+
 import {BodyComponent} from './components/home/body/body.component';
 import {AppRoutingModule} from './app-routing.module';
 import {SignInComponent} from './components/auth/sign-in/sign-in.component';
@@ -168,7 +170,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     MatProgressBarModule,
     NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
   ],
-  providers: [AuthService, AngularFireAuthGuard, NotificationService],
+  providers: [AuthService, AngularFireAuthGuard, NotificationService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

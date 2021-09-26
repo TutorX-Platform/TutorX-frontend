@@ -9,7 +9,7 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog
 import {ChatMsg} from "../../../models/chat-msg";
 import {AuthService} from "../../../services/auth.service";
 import {ClipboardService} from "ngx-clipboard";
-import {Location} from "@angular/common";
+import {DatePipe, Location} from "@angular/common";
 import {QuestionService} from "../../../services/question-service.service";
 import {StudentService} from "../../../services/student-service.service";
 import {UtilService} from "../../../services/util-service.service";
@@ -71,7 +71,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   isTutor = false;
   deadLine = new Date();
-  dueDateTime = new Date();
+  // @ts-ignore
+  dueDateTime: Date;
   dueDateTimeControll = new FormControl('');
   time: TimeApi = {status: "", time: 0};
 
@@ -103,6 +104,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private mailService: MailService,
               private paymentService: PaymentService,
               private notificationService: NotificationService,
+              private datePipe: DatePipe,
               private studentService: StudentService) {
   }
 
@@ -287,6 +289,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.attachments.push(...this.question.attachments);
         // @ts-ignore
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
+        // @ts-ignore
+        this.deadLine = this.questionService.question.dueDate.toDate();
         console.log(res);
       }
     )

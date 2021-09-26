@@ -13,7 +13,7 @@
       padding: 6px 12px;
       cursor: pointer;
     }
-    min-height: 89.7vh;
+    //min-height: 89.7vh;
     background: #F6F7FB;
     .header-wrap{
       padding: 0px 32px 16px 32px;
@@ -165,6 +165,8 @@
       }
       .chat-details-container{
         width: 35%;
+        overflow-y: auto;
+        height: 75vh;
         padding: 24px 40px 0px 10px;
         .cover-box{
           padding: 16px;

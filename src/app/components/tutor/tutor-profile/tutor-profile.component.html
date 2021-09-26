@@ -30,98 +30,125 @@
       </button>
     </div>
   </div>
-  <form class="forms" fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Name</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Name">
-        </mat-form-field>
+  <form [formGroup]="tutorAddForm">
+    <div class="forms" fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Display Name</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Display Name" formControlName="visibleName">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Full Name</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Full Name" formControlName="fullName">
+          </mat-form-field>
+        </div>
       </div>
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Email</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Email">
-        </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Email</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Street</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Street" formControlName="street">
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r">
-        <div class="label">Address</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Address">
-        </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">City</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="City" formControlName="city">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Country</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Country" formControlName="country">
+          </mat-form-field>
+        </div>
+        <!--<div fxLayout="column" fxLayoutAlign="start stretch" class="r r&#45;&#45;half">-->
+        <!--<div class="label">Country</div>-->
+        <!--<mat-form-field appearance="outline" class="my-form-field">-->
+        <!--<mat-select>-->
+        <!--<mat-option *ngFor="let country of countries" [value]="country.id">-->
+        <!--{{country.name}}-->
+        <!--</mat-option>-->
+        <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <!--</div>-->
       </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Street</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Street">
-        </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Postal Code</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Postal Code" formControlName="postalCode">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Contact Number</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Contact Number" formControlName="phoneNumber">
+          </mat-form-field>
+        </div>
       </div>
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">City</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select>
-            <mat-option *ngFor="let country of countries" [value]="country.id">
-              {{country.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Postal Code</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Postal Code">
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Contact Number</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Contact Number">
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-  <form class="forms" fxLayout="column">
-    <div class="payment-information">
-      Payment Information
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Payment Method</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select>
-            <mat-option *ngFor="let country of countries" [value]="country.id">
-              {{country.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Acount Number</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Acount Number">
-        </mat-form-field>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Bank Name</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Bank Name">
-        </mat-form-field>
+      <div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r">
+          <div class="label">Description</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
-      <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
-        <div class="label">Branch Name</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" placeholder="Branch Name">
-        </mat-form-field>
+    <div class="forms" fxLayout="column">
+      <div class="payment-information">
+        Payment Information
+      </div>
+      <!--<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">-->
+        <!--<div fxLayout="column" fxLayoutAlign="start stretch" class="r r&#45;&#45;half">-->
+          <!--<div class="label">Payment Method</div>-->
+          <!--<mat-form-field appearance="outline" class="my-form-field">-->
+            <!--<mat-select>-->
+              <!--<mat-option *ngFor="let country of countries" [value]="country.id">-->
+                <!--{{country.name}}-->
+              <!--</mat-option>-->
+            <!--</mat-select>-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Acount Number</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Acount Number">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Bank Name</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Bank Name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1%">
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="r r--half">
+          <div class="label">Branch Name</div>
+          <mat-form-field appearance="outline" class="my-form-field">
+            <input matInput type="text" placeholder="Branch Name">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="forms" fxLayout="column">
+      <div class="payment-information">
+        Subjects
       </div>
     </div>
   </form>
