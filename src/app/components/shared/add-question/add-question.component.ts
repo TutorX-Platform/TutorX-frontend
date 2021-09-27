@@ -175,10 +175,6 @@ export class AddQuestionComponent implements OnInit {
     })
   }
 
-  onOpen(name: string) {
-
-  }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     if (this.options.filter(option => option.toLowerCase().includes(filterValue)).length === 1) {

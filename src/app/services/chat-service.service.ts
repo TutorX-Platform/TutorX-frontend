@@ -232,7 +232,12 @@ export class ChatServiceService {
   }
 
   getChatsForTutor(tutorId: string) {
-    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime').limit(10))
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime', 'desc').limit(5))
+    return typeRef;
+  }
+
+  getAllChatsForTutor(tutorId: string) {
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime', 'desc'))
     return typeRef;
   }
 

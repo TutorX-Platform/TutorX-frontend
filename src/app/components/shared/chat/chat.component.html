@@ -27,8 +27,8 @@
       <button (click)="onCopyLink()" mat-flat-button color="primary" style="color: white">Copy Link</button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
-        <button *ngIf="authService.student.role==='student' && questionService.question.status!=='Open'"
-                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' "
+        <button *ngIf="authService.student.role==='student'"
+                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' || questionService.question.status!=='Open'"
                 mat-menu-item (click)="onRequestNewTutor()"
                 class="drop-down" fxLayout="row"
                 fxLayoutAlign="start center"
@@ -52,7 +52,8 @@
     <div class="chat-container">
       <div class="chat-message-area" #scrollMe [scrollTop]="scrollMe.scrollHeight" (scroll)="onScroll($event)">
         <div *ngFor="let message of chatMessages">
-          <div *ngIf="!message.isQuote && !message.isQuote && !message.isAttachment && message.isTutorJoinMessage" class="joined-message">
+          <div *ngIf="!message.isQuote && !message.isQuote && !message.isAttachment && message.isTutorJoinMessage"
+               class="joined-message">
             <div class="line"></div>
             <div class="user-name">{{message.message}} &nbsp;</div>
             <!--          <div class="text">joined the chat</div>-->
@@ -104,12 +105,17 @@
                   <div class="user-name">
                     {{message.senderName}}
                   </div>
-                  <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message" fxLayout="column"
-                       fxLayoutAlign="center center" fxLayoutGap="8px">
-                    <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
-                    <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
-                    <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
-                    <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                  <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message"
+                     fxLayout="column"
+                     fxLayoutAlign="center center" fxLayoutGap="8px">
+                    <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('.sheet')">
+                    <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('pdf')">
+                    <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('.document')">
+                    <img [src]="message.attachmentLink" class="attachment-box"
+                         *ngIf="message.attachmentExtension.includes('image')">
                     <img src="assets/icons/unknown-file.png" class="attachment-box attachment-box--icon"
                          *ngIf="
                          !message.attachmentExtension.includes('.document') &&
@@ -125,12 +131,17 @@
           <!--attachment view current user-->
           <div *ngIf="!message.isQuote && message.isAttachment && message.senderId === authService.student.userId">
             <div fxLayout="row" fxLayoutAlign="end center">
-              <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column" fxLayoutAlign="center center"
+              <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column"
+                 fxLayoutAlign="center center"
                  fxLayoutGap="8px">
-                <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
-                <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
-                <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
-                <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('.sheet')">
+                <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('pdf')">
+                <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('.document')">
+                <img [src]="message.attachmentLink" class="attachment-box"
+                     *ngIf="message.attachmentExtension.includes('image')">
                 {{message.message}}
               </a>
             </div>
@@ -162,7 +173,9 @@
                         {{questionService.question.fee}} USD
                       </div>
                     </div>
-                    <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button" (click)="onPay()">Pay Now</button>
+                    <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
+                            (click)="onPay()">Pay Now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -512,14 +525,16 @@
           <!--          <div class="text">joined the chat</div>-->
           <div class="line"></div>
         </div>
-        <div *ngIf="!message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+        <div
+          *ngIf="!message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="end center">
             <div class="message-box">
               {{message.message}}
             </div>
           </div>
         </div>
-        <div *ngIf="!message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+        <div
+          *ngIf="!message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
           <div fxLayout="row" fxLayoutAlign="start start" class="other-user">
             <div>
               <div
@@ -551,12 +566,17 @@
         </div>
         <div *ngIf="!message.isQuote && message.isAttachment && message.senderId === authService.student.userId">
           <div fxLayout="row" fxLayoutAlign="end center">
-            <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column" fxLayoutAlign="center center"
+            <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column"
+               fxLayoutAlign="center center"
                fxLayoutGap="8px">
-              <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
-              <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
-              <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
-              <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+              <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                   *ngIf="message.attachmentExtension.includes('.sheet')">
+              <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                   *ngIf="message.attachmentExtension.includes('pdf')">
+              <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                   *ngIf="message.attachmentExtension.includes('.document')">
+              <img [src]="message.attachmentLink" class="attachment-box"
+                   *ngIf="message.attachmentExtension.includes('image')">
               {{message.message}}
             </a>
           </div>
@@ -576,12 +596,17 @@
                 <div class="user-name">
                   {{message.senderName}}
                 </div>
-                <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message" fxLayout="column"
+                <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message"
+                   fxLayout="column"
                    fxLayoutAlign="center center" fxLayoutGap="8px">
-                  <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.sheet')">
-                  <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('pdf')">
-                  <img src="assets/icons/word.png" class="attachment-box attachment-box--icon" *ngIf="message.attachmentExtension.includes('.document')">
-                  <img [src]="message.attachmentLink" class="attachment-box" *ngIf="message.attachmentExtension.includes('image')">
+                  <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                       *ngIf="message.attachmentExtension.includes('.sheet')">
+                  <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                       *ngIf="message.attachmentExtension.includes('pdf')">
+                  <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                       *ngIf="message.attachmentExtension.includes('.document')">
+                  <img [src]="message.attachmentLink" class="attachment-box"
+                       *ngIf="message.attachmentExtension.includes('image')">
                   {{message.message}}
                 </a>
               </div>
@@ -762,7 +787,8 @@
           Pay now
         </button>
       </div>
-      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px" *ngIf="!isTutor && (questionService.question.tutorName !== null || questionService.question.tutorName !== '' || questionService.question.tutorName !== undefined)">
+      <div class="cover-box" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="24px"
+           *ngIf="!isTutor && (questionService.question.tutorName !== null || questionService.question.tutorName !== '' || questionService.question.tutorName !== undefined)">
         <div class="assigned-to">
           Assigned to
         </div>

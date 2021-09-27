@@ -74,13 +74,13 @@ export class QuestionService {
 
   getQuestionsForStudent(studentEmail: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "asc").limitToLast(5));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5));
     return questionRef;
   }
 
   getNextQuestionsForStudent(studentEmail: string, time: number) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "asc").limitToLast(5).endBefore(time));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5).endBefore(time));
     return questionRef;
   }
 

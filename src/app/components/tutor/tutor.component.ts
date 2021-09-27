@@ -55,8 +55,6 @@ export class TutorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.studentService.currentStudent);
-    console.log(this.authService.student);
     this.findRecentChats(this.studentService.currentStudent.userId);
   }
 

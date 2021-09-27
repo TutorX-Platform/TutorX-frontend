@@ -373,8 +373,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.chatService.requestedNewTutor(this.chatToken, this.time.time);
         this.questionService.releaseQuestionByTutor(this.chatToken, data);
       })
+    } else if (this.questionService.question.status === constants.questionStatus.assigned) {
+      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
     } else {
-      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
     }
   }
 
