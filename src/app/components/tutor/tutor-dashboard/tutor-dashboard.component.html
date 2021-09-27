@@ -50,7 +50,7 @@
             <mat-icon [ngClass]="rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
           </div>
           <div class="rating-number">
-            4.1(560)
+            {{tutor.rating}} ({{tutor.tasksCompleted}})
           </div>
         </div>
       </div>
@@ -60,20 +60,20 @@
             <div fxLayout="row" fxLayoutAlign="space-between start">
               <div fxLayout="column" fxLayoutAlign="start stretch">
                 <div class="review-title">
-                 {{review.title}}
+                  {{review.title}}
                 </div>
                 <div class="rated-by">{{review.student}}</div>
               </div>
               <div class="rating" fxLayout="row">
-                <mat-icon [ngClass]="review.rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="review.rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="review.rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="review.rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
-                <mat-icon [ngClass]="review.rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="tutor.rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="tutor.rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="tutor.rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="tutor.rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
+                <mat-icon [ngClass]="tutor.rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
               </div>
             </div>
             <div class="review-description">
-             {{review.description}}
+              {{review.description}}
             </div>
           </div>
         </div>

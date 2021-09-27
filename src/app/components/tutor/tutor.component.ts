@@ -13,6 +13,8 @@ import * as constants from "../../models/constants";
 import {Router} from "@angular/router";
 import {ChatServiceService} from "../../services/chat-service.service";
 import {Chat} from "../../models/chat";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {Tutor} from "../../models/tutor";
 
 @Component({
   selector: 'app-tutor',
@@ -31,22 +33,37 @@ export class TutorComponent implements OnInit {
   systemImage = constants.system_image;
 
   chats: Chat[] = [];
+  uid = '';
 
-  currentStudent: Student = {
+  currentStudent: Tutor = {
+    accNo: "",
+    bankName: "",
+    branchName: "",
+    city: "",
+    country: "",
+    description: 0,
+    engagedJobs: [],
+    phoneNumber: "",
+    postalCode: "",
+    rating: 0,
+    street: "",
+    subCategory: [],
+    subjects: [],
+    tasksCompleted: 0,
+    totalEarnings: 0,
+    visibleName: "",
     email: "",
     firstName: "",
-    isVerified: '',
     lastName: "",
     profileImage: "",
-    questions: [],
     uniqueKey: "",
-    userId: "",
-    role: '',
+    userId: ""
   };
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
+    private angularFireAuth: AngularFireAuth,
     public studentService: StudentService,
     private chatService: ChatServiceService,
     public authService: AuthService,
@@ -55,7 +72,14 @@ export class TutorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findRecentChats(this.studentService.currentStudent.userId);
+    this.angularFireAuth.authState.subscribe(
+      (res) => {
+        // @ts-ignore
+        this.findRecentChats(res?.uid);
+        // @ts-ignore
+        this.uid = res?.uid;
+      }
+    )
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(['(max-width: 1000px)'])
@@ -94,5 +118,15 @@ export class TutorComponent implements OnInit {
         this.chats = res;
       }
     )
+  }
+
+  onViewMore() {
+    this.chatService.getAllChatsForTutor(this.uid).valueChanges().subscribe(
+      (res) => {
+        this.chats = [];
+        // @ts-ignore
+        this.chats.push(...res);
+      }
+    );
   }
 }

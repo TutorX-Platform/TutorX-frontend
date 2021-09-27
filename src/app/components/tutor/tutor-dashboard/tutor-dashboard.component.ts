@@ -8,6 +8,7 @@ import {Review} from "../../../models/review";
 import {ReviewService} from "../../../services/review.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {Chat} from "../../../models/chat";
+import {Tutor} from "../../../models/tutor";
 
 @Component({
   selector: 'app-tutor-dashboard',
@@ -17,7 +18,31 @@ import {Chat} from "../../../models/chat";
 export class TutorDashboardComponent implements OnInit {
   rating = 4;
   reviews: Review[] = [];
-  chats: Chat[] = [];
+  chats: Chat[] = []
+  tutor:Tutor = {
+    accNo: "",
+    bankName: "",
+    branchName: "",
+    city: "",
+    country: "",
+    description: 0,
+    email: "",
+    engagedJobs: [],
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    postalCode: "",
+    profileImage: "",
+    rating: 0,
+    street: "",
+    subCategory: [],
+    subjects: [],
+    tasksCompleted: 0,
+    totalEarnings: 0,
+    uniqueKey: "",
+    userId: "",
+    visibleName: ""
+  }
 
   constructor(
     public studentService: StudentService,
