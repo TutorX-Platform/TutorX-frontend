@@ -46,7 +46,6 @@ const routes: Routes = [
         path: 'questions',
         component: TutorQuestionsComponent
       },
-
       {
         path: 'activities',
         component: TutorActivitiesComponent

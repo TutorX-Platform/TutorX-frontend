@@ -20,6 +20,7 @@ import {TimeApi} from "../../../models/time-api";
 import * as systemMessages from '../../../models/system-messages';
 import {StudentService} from "../../../services/student-service.service";
 import {Attachment} from "../../../models/Attachment";
+import {ValidationService} from "../../../services/validation.service";
 
 @Component({
   selector: 'app-add-question',
@@ -89,6 +90,7 @@ export class AddQuestionComponent implements OnInit {
     public router: Router,
     private mailService: MailService,
     private chatService: ChatServiceService,
+    private validationService: ValidationService,
     // @ts-ignore
     @Inject(MAT_DIALOG_DATA) data
   ) {
@@ -245,7 +247,16 @@ export class AddQuestionComponent implements OnInit {
             )
           } else {
             this.files.push(event.addedFiles[0]);
-            this.uploadFile(event.addedFiles[0], progressDialog);
+            if (this.authService.isLoggedIn) {
+              this.uploadFile(event.addedFiles[0], progressDialog);
+            } else {
+              this.validationService.validateCors().subscribe((res) => {
+                // @ts-ignore
+                if (res && res.status === 200) {
+                  this.uploadFile(event.addedFiles[0], progressDialog);
+                }
+              })
+            }
           }
         } else {
           progressDialog.close();
@@ -274,6 +285,8 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      studentUnReadCount: 0, tutorUnReadCount: 0,
+      studentUnReadMessages: false, tutorUnReadMessages: false,
       questionNumber: '',
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
@@ -306,29 +319,54 @@ export class AddQuestionComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.incrementQuestionNumber();
-    this.questionService.incrementQuestionCount();
-
-    this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
-      (res) => {
-        console.log(res);
-        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber).then((v) => {
-          // @ts-ignore
-          this.askedQuestions.push(this.questionId);
-          this.sendAknowledgementEmail(this.authService.student.email);
-          if (res.questionNumber) {
-            this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber, question.description);
-          } else {
-            this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+    this.questionService.incrementQuestionNumber().then(() => {
+      this.questionService.incrementQuestionCount().then(() => {
+        this.questionService.findQuestionNumber().get().subscribe(
+          (res) => {
+            // @ts-ignore
+            if (isLoggedIn) {
+              // @ts-ignore
+              this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
+                // @ts-ignore
+                this.askedQuestions.push(this.questionId);
+                this.sendAknowledgementEmail(this.authService.student.email);
+                // @ts-ignore
+                if (res.data().questionNumber) {
+                  // @ts-ignore
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                } else {
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                }
+                dialogRef.close(true);
+                progressDialog.close();
+              });
+            } else {
+              // @ts-ignore
+              question.questionNumber = res.data().questionNumber;
+              this.questionService.saveNotLoggedQuestion(question).subscribe((response) => {
+                console.log(res.data());
+                // @ts-ignore
+                if (response.staus === 200) {
+                  this.sendAknowledgementEmail(this.authService.student.email);
+                  // @ts-ignore
+                  if (res.data()['questionNumber']) {
+                    // @ts-ignore
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                  } else {
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                  }
+                  dialogRef.close(true);
+                  progressDialog.close();
+                } else {
+                  alert("invalid domain")
+                }
+              })
+            }
           }
-          dialogRef.close(true);
-          progressDialog.close();
-        });
-      }
-    );
-    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
-
-
+        );
+        this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+      });
+    })
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
@@ -414,6 +452,8 @@ export class AddQuestionComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      studentLastSeen: false,tutorLastSeen: false,
+      studentName: this.authService.student.firstName,
       isPaid: false,
       questionDescription: questionDesc,
       questionNumber: questionNumber,

@@ -32,4 +32,8 @@ export interface Questions {
   isQuoteApproved: boolean;
   byLoggedUser: boolean;
   questionNumber: string;
+  tutorUnReadMessages: boolean;
+  studentUnReadMessages: boolean;
+  studentUnReadCount:number;
+  tutorUnReadCount:number;
 }

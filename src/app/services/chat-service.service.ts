@@ -241,5 +241,9 @@ export class ChatServiceService {
     return typeRef;
   }
 
+  chatSeenUpdate(chatId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(data);
+  }
+
 
 }

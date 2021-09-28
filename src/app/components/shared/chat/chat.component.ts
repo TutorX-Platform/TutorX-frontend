@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ChatServiceService} from "../../../services/chat-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -29,7 +29,7 @@ import * as notificationMsg from '../../../models/notification-messages';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   // @ts-ignore
   // @ViewChild('scrollMe') private myScroll: ElementRef;
   message = new FormControl(null);
@@ -44,6 +44,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   attachments: Attachment[] = [];
   isFocused = false;
   chat: Chat = {
+    studentLastSeen: false,
+    tutorLastSeen: false,
+    studentName: "",
     isPaid: false,
     questionDescription: "",
     questionNumber: "",
@@ -89,6 +92,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   test = new Date('Sep 01 2021 00:00:00');
   isTyping = false;
+  sentMessageCount = 0;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -108,7 +112,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               private studentService: StudentService) {
   }
 
+
   ngOnInit(): void {
+    this.sentMessageCount = 0;
     this.activatedRoute.paramMap.subscribe(
       map => {
         // @ts-ignore
@@ -126,6 +132,42 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isTutor = true;
     }
     // this.scrollToBottom();
+  }
+
+  ngOnDestroy() {
+    this.utilService.getTimeFromTimeAPI().subscribe(
+      (res) => {
+        if (this.authService.student.role === constants.userTypes.student) {
+          const data = {
+            // @ts-ignore
+            studentLastSeen: res.time,
+          }
+          this.chatService.chatSeenUpdate(this.chatToken, data);
+
+          const read = {
+            studentUnReadMessages: false,
+            tutorUnReadCount: this.sentMessageCount,
+          }
+          this.questionService.chatSeenUpdate(this.chatToken, read);
+        }
+
+        if (this.authService.student.role === constants.userTypes.tutor) {
+          const data = {
+            // @ts-ignore
+            tutorLastSeen: res.time,
+          }
+          this.chatService.chatSeenUpdate(this.chatToken, data);
+
+          const read = {
+            tutorUnReadMessages: false,
+            studentUnReadCount: this.sentMessageCount
+          }
+          this.questionService.chatSeenUpdate(this.chatToken, read);
+        }
+      }
+    )
+    console.log(this.sentMessageCount);
+    this.sentMessageCount = 0;
   }
 
   // @ts-ignore
@@ -148,6 +190,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         // @ts-ignore
         this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false, '', '');
         this.onUnAuthorizedMessageSent(this.message.value);
+        this.sentMessageCount = this.sentMessageCount + 1;
       } else {
         this.uploadAttachment();
       }
@@ -158,9 +201,19 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     let id = '';
     if (this.authService.student.role === constants.userTypes.student) {
       id = this.question.tutorId;
+      const data = {
+        tutorUnReadMessages: true,
+        studentUnReadMessages: false
+      }
+      this.questionService.chatSeenUpdate(this.chatToken, data);
     }
     if (this.authService.student.role === constants.userTypes.tutor) {
       id = this.question.studentId;
+      const data = {
+        studentUnReadMessages: true,
+        tutorUnReadMessages: false,
+      }
+      this.questionService.chatSeenUpdate(this.chatToken, data);
     }
 
     if (id !== '') {
@@ -173,6 +226,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       )
     }
+
 
   }
 
@@ -353,6 +407,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.time = res;
         this.chatService.tutorLeftChat(this.chatToken, this.time.time);
         this.questionService.releaseQuestionByTutor(this.chatToken, data);
+        this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
       })
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()

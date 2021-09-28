@@ -39,6 +39,8 @@ export const backend_api_resource = {
   payment: '/payment/',
   email: '/email/',
   time: '/time/',
+  question: '/question',
+  validate: '/validate',
 }
 
 export const messageTypes = {
@@ -182,7 +184,6 @@ export const engineeringCodes = {
   circuit_analysis: 'Circuit Analysis',
   civil_engineering: 'Civil Engineering',
   communication_engineering: 'Communication Engineering',
-
 }
 
 export const mathematicsCodes = {
