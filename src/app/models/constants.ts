@@ -140,38 +140,38 @@ export const subjectCodes = {
 }
 
 export const computerScienceCodes = {
-  app_dev: 'App Development',
-  ai: 'Artificial Intelligence',
-  assembly_language: 'Assembly Language',
-  blockChain: 'Blockchain',
-  bi: 'Bio Informatics',
-  c_plus_plus: 'C++ Programming',
-  c_sharp: 'C# Programming',
-  cryptography: 'Cryptography',
-  dsa: 'Data Structures And Algorithms',
-  dm: 'Database management',
-  digital_electronics: 'Digital Electronics',
-  discrete_mathematics: 'Discrete Mathematics',
-  image_processing: 'Image processing',
-  is: 'Information Security',
-  information_theory: 'Information Theory',
-  java: 'Java Programming',
-  javascript: 'JavaScript Programming',
-  linux: 'Linux',
-  ml: 'Machine Learning',
-  matlab: 'MATLAB Programming',
-  dotnet: 'Microsoft .NET Framework',
-  network_management_and_data_communication: 'Network Management And Data Communication',
-  os: 'Operating System',
-  parallel_computing: 'Parallel Computing',
-  perl: 'Perl Programming',
-  python: 'Python Programming',
-  ruby: 'Ruby Programming',
-  rust: 'Rust Programming',
-  sed: 'Software Engineering and Design',
-  sta: 'Software Testing and Analysis',
-  theoritical_computer_science: 'Theoretical Computer Science',
-  web_dev: 'Web development (HTML,XML,PHP)'
+app_development: 'App Development',
+artificial_intelligence: 'Artificial Intelligence',
+assembly_language: 'Assembly Language',
+blockchain: 'Blockchain',
+cpp_programming: 'C++ Programming',
+csharp_programming: 'C# Programming',
+cryptography: 'Cryptography',
+data_structures: 'Data Structures',
+algorithms: 'Algorithms',
+database_management: 'Database Management',
+digital_electronics: 'Digital Electronics',
+discrete_math: 'Discrete Math',
+information_security: 'Information Security',
+information_theory: 'Information Theory',
+java_programming: 'Java Programming',
+javascript_programming: 'JavaScript Programming',
+linux: 'Linux',
+machine_learning: 'Machine Learning',
+matlab_programing: 'MATLAB Programing',
+microsoft_net_framework: 'Microsoft .NET Framework',
+networking_and_data_communication: 'Networking and Data Communication',
+operating_systems: 'Operating Systems',
+parallel_computing: 'Parallel Computing',
+perl_programming: 'Perl Programming',
+python_programming: 'Python Programming',
+ruby_programming: 'Ruby Programming',
+software_engineering_and_design: 'Software Engineering and Design',
+software_testing_and_analysis: 'Software Testing and Analysis',
+theoretical_computer_science: 'Theoretical Computer Science',
+web_development: 'Web Development',
+image_processing: 'Image Processing',
+natural_language_processing: 'Natural Language Processing'
 }
 
 export const engineeringCodes = {
@@ -222,7 +222,7 @@ export const managementSubjects = [
   managementCodes.accounting, managementCodes.accounting_tChart, managementCodes.business
 ]
 export const csSubjects = [
-  computerScienceCodes.ai, computerScienceCodes.app_dev, computerScienceCodes.assembly_language, computerScienceCodes.bi, computerScienceCodes.blockChain, computerScienceCodes.c_plus_plus, computerScienceCodes.c_sharp,
+  computerScienceCodes.app_development,computerScienceCodes.artificial_intelligence,computerScienceCodes.assembly_language,computerScienceCodes.blockchain,computerScienceCodes.cpp_programming,computerScienceCodes.csharp_programming,computerScienceCodes.cryptography,computerScienceCodes.data_structures,computerScienceCodes.algorithms,computerScienceCodes.database_management,computerScienceCodes.digital_electronics,computerScienceCodes.discrete_math,computerScienceCodes.information_security,computerScienceCodes.information_theory,computerScienceCodes.java_programming,computerScienceCodes.javascript_programming,computerScienceCodes.linux,computerScienceCodes.machine_learning,computerScienceCodes.matlab_programing,computerScienceCodes.microsoft_net_framework,computerScienceCodes.networking_and_data_communication,computerScienceCodes.operating_systems,computerScienceCodes.parallel_computing,computerScienceCodes.perl_programming,computerScienceCodes.python_programming,computerScienceCodes.ruby_programming,computerScienceCodes.software_engineering_and_design,computerScienceCodes.software_testing_and_analysis,computerScienceCodes.theoretical_computer_science,computerScienceCodes.web_development,computerScienceCodes.image_processing,computerScienceCodes.natural_language_processing
 ]
 
 export const regexp_patterns = {
