@@ -134,6 +134,7 @@ export const questionStatus = {
 
 export const subjectCodes = {
   computer_science: 'Computer Science',
+  engineering: 'Engineering',
   mathematics: 'Mathematics',
   physics: 'Physics',
   management: 'Management',
@@ -175,31 +176,105 @@ natural_language_processing: 'Natural Language Processing'
 }
 
 export const engineeringCodes = {
-  aerospace_engineering: 'Aerospace Engineering',
-  autoCAD: 'Auto CAD',
-  automotive_engineering: 'Automotive Engineering',
-  bio_engineering: 'BIO Engineering',
-  catia: 'Catia',
-  chemical_engineering: 'Chemical Engineering',
-  circuit_analysis: 'Circuit Analysis',
-  civil_engineering: 'Civil Engineering',
-  communication_engineering: 'Communication Engineering',
+ autocad: 'AutoCAD',
+ automotive_engineering: 'Automotive Engineering',
+ bioengineering: 'Bioengineering',
+ catia: 'Catia',
+ chemical_engineering: 'Chemical Engineering',
+ circuit_analysis: 'Circuit Analysis',
+ civil_engineering: 'Civil Engineering',
+ communication_engineering: 'Communication Engineering',
+ corrosion: 'Corrosion',
+ dynamics_controls: 'Dynamics Controls',
+ electrical_engineering: 'Electrical Engineering',
+ energy_systems_engineering: 'Energy Systems Engineering',
+ engine_engineering: 'Engine Engineering',
+ engineering_other: 'Engineering - Other',
+ environmental_engineering: 'Environmental Engineering',
+ food_engineering: 'Food Engineering',
+ hydrodynamics: 'Hydrodynamics',
+ industrial_biotechnology: 'Industrial Biotechnology',
+ industrial_engineering: 'Industrial Engineering',
+ industrial_microbiology: 'Industrial Microbiology',
+ marine_engineering: 'Marine Engineering',
+ materials_science: 'Materials Science',
+ matlab_for_engineering: 'MATLAB for Engineering',
+ mechanical_engineering: 'Mechanical Engineering',
+ metallurgy: 'Metallurgy',
+ nuclear_engineering: 'Nuclear Engineering',
+ petroleum_engineering: 'Petroleum Engineering',
+ power_system_engineering: 'Power System Engineering',
+ radar_and_antennas: 'Radar and Antennas',
+ robotics: 'Robotics',
+ solidworks: 'SolidWorks',
+ structural_engineering: 'Structural Engineering',
+ systems_engineering: 'Systems Engineering',
+ timber_engineering: 'Timber Engineering',
+ transport_phenomena: 'Transport Phenomena',
+ water_treatment: 'Water/Waste Water Treatment',
 }
 
 export const mathematicsCodes = {
   abstract_algebra: 'Abstract Algebra',
-  actuarial_science: 'Actuarial Science',
-  advanced_math: 'Advanced Math',
-  advanced_statistics: 'Advanced Statistics',
-  algebra: 'Algebra',
+ actuarial_science: 'Actuarial Science',
+ advanced_math: 'Advanced Math',
+ advanced_statistics: 'Advanced Statistics',
+ algebra: 'Algebra',
+ algebraic_geometry: 'Algebraic Geometry',
+ applied_statistics: 'Applied Statistics',
+ basic_math: 'Basic Math',
+ calculus: 'Calculus',
+ combinatorics: 'Combinatorics',
+ complex_analysis: 'Complex Analysis',
+ control_theory: 'Control Theory',
+ decision_theory: 'Decision Theory',
+ differential_equations: 'Differential Equations',
+ differential_geometry: 'Differential Geometry',
+ discrete_math: 'Discrete Math',
+ dynamical_systems: 'Dynamical Systems',
+ ergodic_theory: 'Ergodic Theory',
+ functional_analysis: 'Functional Analysis',
+ game_theory: 'Game Theory',
+ general_statistics: 'General Statistics',
+ geometry: 'Geometry',
+ integral_equations: 'Integral Equations',
+ linear_algebra: 'Linear Algebra',
+ math_logic: 'Math Logic',
+ mathematics__other: 'Mathematics - Other',
+ matlab_for_mathematics: 'MATLAB for Mathematics',
+ measure_theory: 'Measure Theory',
+ number_theory: 'Number Theory',
+ numerical_analysis: 'Numerical Analysis',
+ operations_research: 'Operations Research',
+ perturbation_methods: 'Perturbation Methods',
+ pre_calculus: 'Pre-Calculus',
+ probability: 'Probability',
+ queuing_theory: 'Queuing Theory',
+ real_analysis: 'Real Analysis',
+ set_theory: 'Set Theory',
+ signal_processing: 'Signal Processing',
+ statistics_r_programming: 'Statistics-R Programming',
+ topology: 'Topology',
+ trigonometry: 'Trigonometry'
 
 }
 export const physicsCodes = {
-  astrophysics: 'Astrophysics ',
-  chaos_theory: 'Chaos Theory',
-  classical_mechanics: 'Classical Mechanics',
-  electricity_and_magnetism: 'Electricity and Magnetism ',
-  fluid_dynamics: 'Fluid Dynamics',
+ classical_mechanics: 'Classical Mechanics',
+ electricity_and_magnetism: 'Electricity and Magnetism',
+ fluid_dynamics: 'Fluid Dynamics',
+ general_physics: 'General Physics',
+ gravitation: 'Gravitation',
+ mathematical_physics: 'Mathematical Physics',
+ matlab_for_physics: 'MATLAB for Physics',
+ nanotechnology: 'Nanotechnology',
+ nuclear_physics: 'Nuclear Physics',
+ optoelectronics: 'Optoelectronics',
+ orbital_computational_dynamics: 'Orbital Computational Dynamics',
+ physics_other: 'Physics - Other',
+ quantum_physics: 'Quantum Physics',
+ relativity: 'Relativity',
+ semiconductor_physics: 'Semiconductor Physics',
+ thermodynamics: 'Thermodynamics'
 
 }
 export const managementCodes = {
@@ -209,14 +284,18 @@ export const managementCodes = {
 }
 
 export const subjects = [
-  subjectCodes.mathematics, subjectCodes.computer_science, subjectCodes.physics, subjectCodes.management
+  subjectCodes.mathematics, subjectCodes.engineering, subjectCodes.computer_science, subjectCodes.physics, subjectCodes.management
 ];
 
 export const mathsSubjects = [
-  mathematicsCodes.abstract_algebra, mathematicsCodes.actuarial_science, mathematicsCodes.advanced_math, mathematicsCodes.advanced_statistics, mathematicsCodes.algebra
+  mathematicsCodes.abstract_algebra,mathematicsCodes.actuarial_science,mathematicsCodes.advanced_math,mathematicsCodes.advanced_statistics,mathematicsCodes.algebra,mathematicsCodes.algebraic_geometry,mathematicsCodes.applied_statistics,mathematicsCodes.basic_math,mathematicsCodes.calculus,mathematicsCodes.combinatorics,mathematicsCodes.complex_analysis,mathematicsCodes.control_theory,mathematicsCodes.decision_theory,mathematicsCodes.differential_equations,mathematicsCodes.differential_geometry,mathematicsCodes.discrete_math,mathematicsCodes.dynamical_systems,mathematicsCodes.ergodic_theory,mathematicsCodes.functional_analysis,mathematicsCodes.game_theory,mathematicsCodes.general_statistics,mathematicsCodes.geometry,mathematicsCodes.integral_equations,mathematicsCodes.linear_algebra,mathematicsCodes.math_logic,mathematicsCodes.mathematics__other,mathematicsCodes.matlab_for_mathematics,mathematicsCodes.measure_theory,mathematicsCodes.number_theory,mathematicsCodes.numerical_analysis,mathematicsCodes.operations_research,mathematicsCodes.perturbation_methods,mathematicsCodes.pre_calculus,mathematicsCodes.probability,mathematicsCodes.queuing_theory,mathematicsCodes.real_analysis,mathematicsCodes.set_theory,mathematicsCodes.signal_processing,mathematicsCodes.statistics_r_programming,mathematicsCodes.topology,mathematicsCodes.trigonometry,
 ]
+export const engineeringSubjects = [
+  engineeringCodes.autocad,engineeringCodes.automotive_engineering,engineeringCodes.bioengineering,engineeringCodes.catia,engineeringCodes.chemical_engineering,engineeringCodes.circuit_analysis,engineeringCodes.civil_engineering,engineeringCodes.communication_engineering,engineeringCodes.corrosion,engineeringCodes.dynamics_controls,engineeringCodes.electrical_engineering,engineeringCodes.energy_systems_engineering,engineeringCodes.engine_engineering,engineeringCodes.engineering_other,engineeringCodes.environmental_engineering,engineeringCodes.food_engineering,engineeringCodes.hydrodynamics,engineeringCodes.industrial_biotechnology,engineeringCodes.industrial_engineering,engineeringCodes.industrial_microbiology,engineeringCodes.marine_engineering,engineeringCodes.materials_science,engineeringCodes.matlab_for_engineering,engineeringCodes.mechanical_engineering,engineeringCodes.metallurgy,engineeringCodes.nuclear_engineering,engineeringCodes.petroleum_engineering,engineeringCodes.power_system_engineering,engineeringCodes.radar_and_antennas,engineeringCodes.robotics,engineeringCodes.solidworks,engineeringCodes.structural_engineering,engineeringCodes.systems_engineering,engineeringCodes.timber_engineering,engineeringCodes.transport_phenomena,engineeringCodes.water_treatment
+]
+
 export const physicsSubjects = [
-  physicsCodes.astrophysics, physicsCodes.chaos_theory, physicsCodes.classical_mechanics, physicsCodes.electricity_and_magnetism, physicsCodes.fluid_dynamics
+  physicsCodes.classical_mechanics,physicsCodes.electricity_and_magnetism,physicsCodes.fluid_dynamics,physicsCodes.general_physics,physicsCodes.gravitation,physicsCodes.mathematical_physics,physicsCodes.matlab_for_physics,physicsCodes.nanotechnology,physicsCodes.nuclear_physics,physicsCodes.optoelectronics,physicsCodes.orbital_computational_dynamics,physicsCodes.physics_other,physicsCodes.quantum_physics,physicsCodes.relativity,physicsCodes.semiconductor_physics,physicsCodes.thermodynamics
 ]
 export const managementSubjects = [
   managementCodes.accounting, managementCodes.accounting_tChart, managementCodes.business
