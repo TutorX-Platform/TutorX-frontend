@@ -18,6 +18,7 @@ export const questionTitles = {
   notLoggedUserWithLoggedCredentials: "Email Already Registered",
   requestRefund: "Request a refund",
   acceptNotification: "Please allow send notifications",
+  alreadySameFee: "Quote Exists !!",
 }
 
 export const questionMessages = {
@@ -42,6 +43,8 @@ export const questionMessages = {
   requestNewTutorError: "There is not tutor assigned yet",
   tutorReleaseQuestionConfirmation: "Please confirm to release this request.",
   requestNewTutorConfirmation: "Please confirm to request new a tutor.",
+  alreadySameFee: "Your quote is matched with previous quote.",
+
 
 }
 

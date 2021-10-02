@@ -114,6 +114,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   ngOnInit(): void {
+
     this.sentMessageCount = 0;
     this.activatedRoute.paramMap.subscribe(
       map => {
@@ -501,17 +502,46 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   onSendQuote() {
-    const data = {
-      isQuoteSend: true,
-      isQuoteApproved: true,
-      fee: this.quote.value
-    }
-    this.questionService.tutorSendQuote(this.chatToken, data);
-    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-      // @ts-ignore
-      this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
-      // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
-    })
+    this.paymentService.findPreviousQuote(this.chatToken).subscribe(
+      (res) => {
+        console.log(res.docs);
+        if (res.docs.length > 0) {
+          this.paymentService.invalidateLastQuote(this.chatToken, res.docs[0].id).then(() => {
+            const data = {
+              isQuoteSend: true,
+              isQuoteApproved: true,
+              fee: this.quote.value
+            }
+            if (this.question.fee !== this.quote.value) {
+              this.questionService.tutorSendQuote(this.chatToken, data);
+              this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                // @ts-ignore
+                this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
+                // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
+              })
+            } else {
+              this.utilService.openDialog(systemMessages.questionTitles.alreadySameFee, systemMessages.questionMessages.alreadySameFee, constants.messageTypes.warningInfo).afterClosed().subscribe()
+            }
+          })
+        } else {
+          const data = {
+            isQuoteSend: true,
+            isQuoteApproved: true,
+            fee: this.quote.value
+          }
+          if (this.question.fee !== this.quote.value) {
+            this.questionService.tutorSendQuote(this.chatToken, data);
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
+              // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
+            })
+          } else {
+            this.utilService.openDialog(systemMessages.questionTitles.alreadySameFee, systemMessages.questionMessages.alreadySameFee, constants.messageTypes.warningInfo).afterClosed().subscribe()
+          }
+        }
+      }
+    )
 
   }
 
@@ -599,7 +629,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               this.mailService.sendMail("Request marked as completed", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
             });
             // tutor payment increase
-            this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(()=>{
+            this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(() => {
               this.questionService.incrementCompletedQuestionCount()
             });
           })
@@ -607,5 +637,4 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       });
     });
   }
-
 }

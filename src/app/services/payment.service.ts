@@ -59,4 +59,17 @@ export class PaymentService {
     const increment = firestore.FieldValue.increment(amount);
     statRef.update({'payments': increment});
   }
+
+  findPreviousQuote(chatId: string) {
+    const quoteRef = this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats, ref => ref.where("isQuote", "==", true)).get();
+    return quoteRef;
+  }
+
+  invalidateLastQuote(chatId: string, docId: string) {
+    const data = {
+      isValidQuote: false
+    }
+    const statRef = this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).doc(docId);
+    return statRef.update(data);
+  }
 }

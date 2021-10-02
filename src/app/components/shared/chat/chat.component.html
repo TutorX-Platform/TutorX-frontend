@@ -24,21 +24,29 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-      <button *ngIf="questionService.question.status === 'Open'" mat-flat-button color="primary" style="color: white">Cancel Request</button>
-      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'" mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request</button>
-      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'" mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor</button>
-      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary" style="color: white" (click)="onMarkAsCompleted()">Mark as Complete</button>
+      <button *ngIf="questionService.question.status === 'Open'" mat-flat-button color="primary" style="color: white">
+        Cancel Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'"
+              mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'"
+              mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor
+      </button>
+      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary"
+              style="color: white" (click)="onMarkAsCompleted()">Mark as Complete
+      </button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
-<!--        <button *ngIf="authService.student.role==='student'"-->
-<!--                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' || questionService.question.status!=='Open'"-->
-<!--                mat-menu-item (click)="onRequestNewTutor()"-->
-<!--                class="drop-down" fxLayout="row"-->
-<!--                fxLayoutAlign="start center"-->
-<!--                fxLayoutGap="8px">-->
-<!--          <mat-icon class="material-icons-outlined">logout</mat-icon>-->
-<!--          <div>Request New Tutor</div>-->
-<!--        </button>-->
+        <!--        <button *ngIf="authService.student.role==='student'"-->
+        <!--                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' || questionService.question.status!=='Open'"-->
+        <!--                mat-menu-item (click)="onRequestNewTutor()"-->
+        <!--                class="drop-down" fxLayout="row"-->
+        <!--                fxLayoutAlign="start center"-->
+        <!--                fxLayoutGap="8px">-->
+        <!--          <mat-icon class="material-icons-outlined">logout</mat-icon>-->
+        <!--          <div>Request New Tutor</div>-->
+        <!--        </button>-->
         <button mat-menu-item class="drop-down" fxLayout="row"
                 fxLayoutAlign="start center"
                 (click)="onCopyLink()"
@@ -173,7 +181,7 @@
                         Quote
                       </div>
                       <div class="amount">
-                        {{questionService.question.fee}} USD
+                        {{message.message}} USD
                       </div>
                     </div>
                     <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
@@ -196,7 +204,7 @@
                     Quote
                   </div>
                   <div class="amount">
-                    {{questionService.question.fee}} USD
+                    {{message.message}} {{message.isValidQuote}} USD
                   </div>
                 </div>
               </div>
@@ -340,24 +348,24 @@
 
       <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
       <!--<button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"-->
-              <!--mat-flat-button-->
-              <!--[ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now&#45;&#45;dissabled' : 'pay-now'">-->
-        <!--Quote Not accepted yet-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now&#45;&#45;dissabled' : 'pay-now'">-->
+      <!--Quote Not accepted yet-->
       <!--</button>-->
 
       <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
       <!--<button (click)="onApproveQuote()"-->
-              <!--*ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"-->
-              <!--mat-flat-button-->
-              <!--[ngClass]=" 'pay-now'">-->
-        <!--Approve Quote of {{questionService.question.fee}} USD-->
+      <!--*ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approve Quote of {{questionService.question.fee}} USD-->
       <!--</button>-->
 
       <!--&lt;!&ndash;      if quote is accepted by student&ndash;&gt;-->
       <!--<button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"-->
-              <!--mat-flat-button-->
-              <!--[ngClass]=" 'pay-now'">-->
-        <!--Approved Quote of {{questionService.question.fee}} USD-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approved Quote of {{questionService.question.fee}} USD-->
       <!--</button>-->
 
       <!--      if quote is accepted by student-->
@@ -428,7 +436,7 @@
               {{questionService.question.tutorName}}
             </div>
             <!--<div class="sub" ng-class="{show: show}">-->
-              <!--when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.-->
+            <!--when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.-->
 
             <!--</div>-->
             <!--<button ng-click="show = true">Show text</button>-->
