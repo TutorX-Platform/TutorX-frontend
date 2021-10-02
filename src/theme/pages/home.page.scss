@@ -372,4 +372,10 @@
     width: 100%;
     box-sizing: border-box;
   }
+  &__link{
+    color: var(--surface--highlight---subdued);
+    + .s-footer__link{
+      margin-left: var(--space--md);
+    }
+  }
 }
