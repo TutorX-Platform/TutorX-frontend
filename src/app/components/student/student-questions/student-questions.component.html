@@ -30,6 +30,8 @@
             [lastAssignedTutorImage]="q.lastAssignedTutorImage"
             [byLoggedUser]="q.byLoggedUser"
             [questionNumber]="q.questionNumber"
+            [studentUnReadMessage]="q.studentUnReadMessages"
+            [studentUnReadCount]="q.studentUnReadCount"
           ></app-question-card>
         </div>
       </div>
@@ -124,7 +126,8 @@
       <img src="../../../assets/icons/plus-white.svg">
       <div>New question</div>
     </div>
-    <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()" fxShow="true" fxHide.lt-sm="true">
+    <div class="new-question" fxLayout="row" fxLayoutGap="8px" (click)="addQuestion()" fxShow="true"
+         fxHide.lt-sm="true">
       <img src="../../../assets/icons/plus-white.svg">
       <div>New question</div>
     </div>

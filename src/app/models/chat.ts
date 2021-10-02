@@ -20,5 +20,8 @@ export interface Chat {
   questionTitle: string;
   questionNumber: string;
   questionDescription: string;
+  studentName: string;
   isPaid: boolean;
+  tutorLastSeen: boolean;
+  studentLastSeen: boolean;
 }

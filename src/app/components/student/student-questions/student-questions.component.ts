@@ -52,29 +52,6 @@ export class StudentQuestionsComponent implements OnInit {
 
   sortings = constants.sortBy_functions;
 
-  questions = [
-    {
-      title: "Question Title",
-      subjects: ['Maths', 'Computer Science'],
-      dueDate: new Date(),
-      descriptionTitle: 'Hi Tutors,',
-      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
-      status: 'inProgress',
-      viewedByAmount: 400,
-      images: ['../../../../assets/images/profile.jpg', '../../../../assets/images/profile.jpg', '../../../../assets/images/profile.jpg']
-    },
-    {
-      title: "Question Title",
-      subjects: ['Maths', 'Computer Science'],
-      dueDate: new Date(),
-      descriptionTitle: 'Hi Tutors,',
-      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
-      status: 'open',
-      viewedByAmount: 400,
-      images: ['../../../../assets/images/profile.jpg', '../../../../assets/images/profile.jpg', '../../../../assets/images/profile.jpg']
-    }
-  ]
-
   constructor(
     public authService: AuthService,
     private questionService: QuestionService,
@@ -160,6 +137,7 @@ export class StudentQuestionsComponent implements OnInit {
         this.studentService.currentStudent = res;
         this.questionService.getQuestionsForStudent(this.studentService.currentStudent.email).valueChanges().subscribe(
           (res) => {
+            console.log(res);
             // @ts-ignore
             this.askedQuestions = res;
             // @ts-ignore

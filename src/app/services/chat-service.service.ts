@@ -232,8 +232,17 @@ export class ChatServiceService {
   }
 
   getChatsForTutor(tutorId: string) {
-    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime').limit(10))
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime', 'desc').limit(4))
     return typeRef;
+  }
+
+  getAllChatsForTutor(tutorId: string) {
+    const typeRef = this.angularFirestoreService.collection(constants.collections.chats, ref => ref.where('tutorId', '==', tutorId).orderBy('tutorJoinedTime', 'desc'))
+    return typeRef;
+  }
+
+  chatSeenUpdate(chatId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(data);
   }
 
 

@@ -130,6 +130,7 @@ export class TutorQuestionsComponent implements OnInit {
   }
 
   onFilterSelect(event: any) {
+    console.log(event.target.value);
     if (event.target.value === "1: 1") {
       this.askedQuestions = this.sortQuestions(constants.sortingOrders.newestFirst, constants.sortingFields.createdDate);
     }

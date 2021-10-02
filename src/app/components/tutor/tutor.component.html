@@ -78,14 +78,14 @@
                 <img src="../../../assets/images/profile.jpg" class="student-avatar">
               </div>
               <div class="student-name">
-                Riley Green
+                {{chat.studentName}}
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="sidenav-footer">
-        <button mat-flat-button class="view-more">
+        <button (click)="onViewMore()" mat-flat-button class="view-more">
           View More
         </button>
       </div>

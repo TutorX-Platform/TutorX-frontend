@@ -47,7 +47,7 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select [(ngModel)]="selectedValue" placeholder="Select">
+          <mat-select (change)="onFilterSelect($event)" [(ngModel)]="selectedValue" placeholder="Select">
             <mat-option *ngFor="let sort of sortings" [value]="sort.id">
               {{sort.name}}
             </mat-option>
@@ -68,18 +68,18 @@
             </div>
           </div>
         </div>
-<!--        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">-->
-<!--          <div class="subjects-title">Status</div>-->
-<!--          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">-->
-<!--            <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">-->
-<!--              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">-->
-<!--                <mat-checkbox (change)="onStageFilter(state,$event)" color="primary">-->
-<!--                </mat-checkbox>-->
-<!--                <div class="subjectss">{{state}}</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">-->
+        <!--          <div class="subjects-title">Status</div>-->
+        <!--          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">-->
+        <!--            <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">-->
+        <!--              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">-->
+        <!--                <mat-checkbox (change)="onStageFilter(state,$event)" color="primary">-->
+        <!--                </mat-checkbox>-->
+        <!--                <div class="subjectss">{{state}}</div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
 
     </div>

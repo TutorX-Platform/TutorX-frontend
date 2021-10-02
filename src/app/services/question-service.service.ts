@@ -10,6 +10,7 @@ import {TimeApi} from "../models/time-api";
 import * as systemMessage from '../models/system-messages'
 import * as firebase from 'firebase';
 import {firestore} from "firebase/app";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class QuestionService {
   constructor(private angularFirestoreService: AngularFirestore,
               private chatService: ChatServiceService,
               private utilService: UtilService,
+              private http: HttpClient,
               private mailService: MailService) {
   }
 
@@ -36,14 +38,14 @@ export class QuestionService {
     // @ts-ignore
     const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'questionCount': increment});
+    return statRef.update({'questionCount': increment});
   }
 
   incrementQuestionNumber() {
     // @ts-ignore
     const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
-    statRef.update({'questionNumber': increment});
+    return statRef.update({'questionNumber': increment});
   }
 
   findQuestionNumber() {
@@ -72,15 +74,19 @@ export class QuestionService {
     return questionRef.set(qustion);
   }
 
+  saveNotLoggedQuestion(data: any) {
+    return this.http.post(constants.backend_url.concat(constants.backend_api_resource.question), data);
+  }
+
   getQuestionsForStudent(studentEmail: string) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "asc").limitToLast(5));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5));
     return questionRef;
   }
 
   getNextQuestionsForStudent(studentEmail: string, time: number) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "asc").limitToLast(5).endBefore(time));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5).endBefore(time));
     return questionRef;
   }
 
@@ -154,5 +160,28 @@ export class QuestionService {
       this.utilService.openDialog(systemMessage.questionTitles.studentQuoteApproved, systemMessage.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
     })
   }
+
+  chatSeenUpdate(chatId: string, data: any) {
+    this.angularFirestoreService.collection(constants.collections.questions).doc(chatId).update(data);
+  }
+
+
+  // Thease function cost extra write.. in case of quota management this can removed
+
+  incrementStudentUnReadMessage(chatToken: string, messages: number) {
+    // @ts-ignore
+    const questionRef = this.angularFirestoreService.collection(constants.collections.questions).doc(chatToken);
+    const increment = firestore.FieldValue.increment(messages);
+    return questionRef.update({'studentUnReadCount': increment});
+  }
+
+  incrementTutorUnReadMessage(chatToken: string, messages: number) {
+    // @ts-ignore
+    const questionRef = this.angularFirestoreService.collection(constants.collections.questions).doc(chatToken);
+    const increment = firestore.FieldValue.increment(messages);
+    return questionRef.update({'tutorUnReadCount': increment});
+  }
+
+//  --------------------------------------
 
 }

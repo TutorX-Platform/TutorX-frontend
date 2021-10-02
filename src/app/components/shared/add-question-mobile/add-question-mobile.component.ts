@@ -208,8 +208,10 @@ export class AddQuestionMobileComponent implements OnInit {
     this.files.splice(removeItem, 1);
   }
 
-  askQuestion(progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
+  askQuestion(dialogRef: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      studentUnReadCount: 0, tutorUnReadCount: 0,
+      studentUnReadMessages: false, tutorUnReadMessages: false,
       questionNumber: '',
       studentImage: this.authService.student.profileImage,
       byLoggedUser: isLoggedIn,
@@ -242,23 +244,52 @@ export class AddQuestionMobileComponent implements OnInit {
       uniqueId: this.questionId,
       uniqueLink: ""
     }
-    this.questionService.incrementQuestionNumber();
-    this.questionService.incrementQuestionCount();
-
-    this.questionService.findQuestionNumber().valueChanges().pipe(take(2)).subscribe(
-      (res) => {
-        console.log(res);
-        this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber).then((v) => {
-          // @ts-ignore
-          this.askedQuestions.push(this.questionId);
-          this.sendAknowledgementEmail(this.authService.student.email);
-          this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.questionNumber, question.description);
-          progressDialog.close();
-        });
-      }
-    );
-    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
-    this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+    this.questionService.incrementQuestionNumber().then(() => {
+      this.questionService.incrementQuestionCount().then(() => {
+        this.questionService.findQuestionNumber().get().subscribe(
+          (res) => {
+            // @ts-ignore
+            if (isLoggedIn) {
+              // @ts-ignore
+              this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
+                // @ts-ignore
+                this.askedQuestions.push(this.questionId);
+                this.sendAknowledgementEmail(this.authService.student.email);
+                // @ts-ignore
+                if (res.data().questionNumber) {
+                  // @ts-ignore
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                } else {
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                }
+                dialogRef.close(true);
+              });
+            } else {
+              // @ts-ignore
+              question.questionNumber = res.data().questionNumber;
+              this.questionService.saveNotLoggedQuestion(question).subscribe((response) => {
+                console.log(res.data());
+                // @ts-ignore
+                if (response.staus === 200) {
+                  this.sendAknowledgementEmail(this.authService.student.email);
+                  // @ts-ignore
+                  if (res.data()['questionNumber']) {
+                    // @ts-ignore
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                  } else {
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                  }
+                  dialogRef.close(true);
+                } else {
+                  alert("invalid domain")
+                }
+              })
+            }
+          }
+        );
+        this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.questionSavedSuccessfully, constants.messageTypes.success).afterOpened().subscribe()
+      });
+    })
   }
 
   uploadFile(file: File, progressDialog: MatDialogRef<any>) {
@@ -338,6 +369,8 @@ export class AddQuestionMobileComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      studentLastSeen: false,  tutorLastSeen: false,
+      studentName: this.authService.student.firstName,
       isPaid: false,
       questionDescription: questionDesc,
       questionNumber: "",

@@ -13,7 +13,8 @@ export const questionTitles = {
   studentQuoteApproved: "Approve success",
   tutorSendQuote: "Send Success",
   tutorReleaseQuestionError: "Can't release the question",
-  notLoggedUserWithLoggedCredentials: "Your email already have an account",
+  requestNewTutorError: "Can't request new tutor",
+  notLoggedUserWithLoggedCredentials: "Email Already Registered",
   requestRefund: "Request a refund",
   acceptNotification: "Please allow send notifications"
 }
@@ -33,10 +34,12 @@ export const questionMessages = {
   studentQuoteApproved: "Quote is approved successfully",
   tutorSendQuote: "Sent the quote successfully",
   tutorReleaseQuestionError: "Student have paid the question so you can't leave the question",
-  notLoggedUserWithLoggedCredentials: "Your email already have an account please log in first",
+  notLoggedUserWithLoggedCredentials: "Please Sign in to submit a question",
   requestRefund: "Are you sure to request a refund for this question",
   requestRefundSuccess: "Refund request success, Our admins will contact you soon !!",
-  acceptNotification: "Please allow notifications for better user experience"
+  acceptNotification: "Please allow notifications for better user experience",
+  requestNewTutorError: "There is not tutor assigned yet",
+
 
 }
 
