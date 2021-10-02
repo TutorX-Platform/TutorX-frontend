@@ -1,13 +1,13 @@
 
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer  mode="over" class="side-nav-home" fxLayout="column">
-    <mat-nav-list>
-      <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
-      <a mat-list-item class="list">
-        Home
-      </a>
-    </mat-nav-list>
-  </mat-drawer>
+  <!--<mat-drawer #drawer  mode="over" class="side-nav-home" fxLayout="column">-->
+    <!--<mat-nav-list>-->
+      <!--<img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>-->
+      <!--<a mat-list-item class="list">-->
+        <!--Home-->
+      <!--</a>-->
+    <!--</mat-nav-list>-->
+  <!--</mat-drawer>-->
 
   <mat-toolbar  class="top-bar__wrap">
     <div class="container">
@@ -15,7 +15,6 @@
         <button
           class="top-bar__nav-icon"
           mat-icon-button
-          (click)="drawer.toggle()"
         >
           <mat-icon>menu</mat-icon>
         </button>
@@ -222,7 +221,7 @@
       <div class="s-footer__content">
         <div class="brd-display-x-large m-b-16">Work Smart Not Hard</div>
         <!-- <div class="brd-display-large m-b-40">For students, by educators</div> -->
-        <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.lt-sm="" fxShow="true">
+        <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.lt-sm fxShow="true">
           Get Help
           <mat-icon>arrow_forward</mat-icon>
         </button>

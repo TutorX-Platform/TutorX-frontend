@@ -82,12 +82,24 @@
           </button>
           <span>Questions</span>
         </div>
-        <div *ngIf="authService.student.profileImage">
+        <div *ngIf="authService.student.profileImage" [matMenuTriggerFor]="menu">
           <img [src]="authService.student.profileImage" alt="Avatar" class="avatar-mobile">
         </div>
-        <div *ngIf="authService.student.profileImage === null">
+        <div *ngIf="authService.student.profileImage === null" [matMenuTriggerFor]="menu">
           <img [src]="dummyProfPic" alt="Avatar" class="avatar-mobile">
         </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/student" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                  fxLayoutGap="8px">
+            <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+            <div>View Profile</div>
+          </button>
+          <button mat-menu-item (click)="onSignOut()" class="drop-down" fxLayout="row" fxLayoutAlign="start center"
+                  fxLayoutGap="8px">
+            <mat-icon class="material-icons-outlined">logout</mat-icon>
+            <div>Sign Out</div>
+          </button>
+        </mat-menu>
       </mat-toolbar>
       <router-outlet></router-outlet>
 
