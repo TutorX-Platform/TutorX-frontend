@@ -345,7 +345,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         // @ts-ignore
         this.deadLine = this.questionService.question.dueDate.toDate();
-        console.log(res);
+
+        if (this.question.status === constants.questionStatus.open && this.authService.student.role === constants.userTypes.tutor) {
+          //  route back the tutor..
+        }
       }
     )
   }
@@ -395,44 +398,57 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   onReleaseQuestion() {
-    if (this.questionService.question.status === constants.questionStatus.open || this.questionService.question.status === constants.questionStatus.assigned) {
-      const data = {
-        tutorName: "",
-        tutorImage: null,
-        tutorId: "",
-        status: constants.questionStatus.open,
-      }
-      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.tutorReleaseQuestionConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
         // @ts-ignore
-        this.time = res;
-        this.chatService.tutorLeftChat(this.chatToken, this.time.time);
-        this.questionService.releaseQuestionByTutor(this.chatToken, data);
-        this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
-      })
-    } else {
-      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    }
+        if (res) {
+          if (this.questionService.question.status === constants.questionStatus.open || this.questionService.question.status === constants.questionStatus.assigned) {
+            const data = {
+              tutorName: "",
+              tutorImage: null,
+              tutorId: "",
+              status: constants.questionStatus.open,
+            }
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.time = res;
+              this.chatService.tutorLeftChat(this.chatToken, this.time.time);
+              this.questionService.releaseQuestionByTutor(this.chatToken, data);
+              this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
+            })
+          } else {
+            this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          }
+        }
+      }
+    )
   }
 
   onRequestNewTutor() {
-    if (this.questionService.question.status === constants.questionStatus.assigned) {
-      const data = {
-        tutorName: "",
-        tutorImage: null,
-        tutorId: "",
-        status: constants.questionStatus.open,
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.tutorReleaseQuestionConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          if (this.questionService.question.status === constants.questionStatus.assigned) {
+            const data = {
+              tutorName: "",
+              tutorImage: null,
+              tutorId: "",
+              status: constants.questionStatus.open,
+            }
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.time = res;
+              this.chatService.requestedNewTutor(this.chatToken, this.time.time);
+              this.questionService.releaseQuestionByTutor(this.chatToken, data);
+            })
+          } else if (this.questionService.question.status === constants.questionStatus.assigned) {
+            this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          } else {
+            this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          }
+        }
       }
-      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-        // @ts-ignore
-        this.time = res;
-        this.chatService.requestedNewTutor(this.chatToken, this.time.time);
-        this.questionService.releaseQuestionByTutor(this.chatToken, data);
-      })
-    } else if (this.questionService.question.status === constants.questionStatus.assigned) {
-      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    } else {
-      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    }
+    )
   }
 
   ngAfterViewChecked(): void {
