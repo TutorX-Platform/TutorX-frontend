@@ -32,6 +32,7 @@ export class ChatServiceService {
 
   sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string) {
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: extension,
       attachmentLink: attachmentLink,
@@ -76,6 +77,7 @@ export class ChatServiceService {
       tutorProfile: this.auth.student.profileImage
     }
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: "",
       attachmentLink: "",
@@ -102,6 +104,7 @@ export class ChatServiceService {
 
   tutorLeftChat(chatId: string, time: number) {
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: "", attachmentLink: "",
       sort: time,
@@ -133,6 +136,7 @@ export class ChatServiceService {
 
   requestedNewTutor(chatId: string, time: number) {
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: "", attachmentLink: "",
       sort: time,
@@ -164,6 +168,7 @@ export class ChatServiceService {
 
   sendQuoteMessage(chatId: string, time: number, amount: number, senderAvatar: string) {
     let data: ChatMsg = {
+      isValidQuote: true,
       isQuote: true,
       attachmentExtension: "",
       attachmentLink: "",
@@ -172,7 +177,7 @@ export class ChatServiceService {
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
       isAttachment: false,
-      message: `${this.studentService.currentStudent.firstName} sent the quote of ${amount} USD`,
+      message: `${amount}`,
       senderEmail: '',
       senderId: this.studentService.currentStudent.userId,
       sentBy: '',
@@ -183,6 +188,7 @@ export class ChatServiceService {
 
   sendApproveQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: "",
       attachmentLink: "",
@@ -202,6 +208,7 @@ export class ChatServiceService {
 
   sendPaidQuoteMessage(chatId: string, time: number, amount: number) {
     let data: ChatMsg = {
+      isValidQuote: false,
       isQuote: false,
       attachmentExtension: "",
       attachmentLink: "",
@@ -243,6 +250,32 @@ export class ChatServiceService {
 
   chatSeenUpdate(chatId: string, data: any) {
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(data);
+  }
+
+  markAsCompletedMessage(question: string, time: number) {
+    const data = {
+      isQuote: false,
+      attachmentExtension: "",
+      attachmentLink: "",
+      sort: time,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} Marked as completed`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time
+    }
+    return this.angularFirestoreService.collection(constants.collections.message).doc(question).collection(constants.collections.chats).add(data);
+  }
+
+  MarkAsCompleted(chatToken: string) {
+    const chatData = {
+      status: constants.chat_status.closed,
+    }
+    return this.angularFirestoreService.collection(constants.collections.chats).doc(chatToken).update(chatData);
   }
 
 

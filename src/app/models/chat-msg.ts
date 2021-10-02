@@ -12,4 +12,5 @@ export interface ChatMsg {
   attachmentLink: string;
   attachmentExtension: string;
   isQuote: boolean;
+  isValidQuote: boolean,
 }
