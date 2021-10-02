@@ -185,6 +185,7 @@
                       </div>
                     </div>
                     <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
+                            [disabled]="!message.isValidQuote && question.isPaid"
                             (click)="onPay()">Pay Now
                     </button>
                   </div>
