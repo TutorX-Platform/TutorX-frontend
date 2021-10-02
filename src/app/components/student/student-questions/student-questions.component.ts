@@ -13,6 +13,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {Router} from "@angular/router";
 import {Attachment} from "../../../models/Attachment";
+import {NotificationService} from "../../../services/notification.service";
 
 
 @Component({
@@ -38,6 +39,7 @@ export class StudentQuestionsComponent implements OnInit {
   isCompleted = false;
   attachments: Attachment[] = [];
   status: string[] = [];
+  notifications = [];
 
 
   dummyProfPic = constants.dummy_profile_picture;
@@ -58,6 +60,7 @@ export class StudentQuestionsComponent implements OnInit {
     public studentService: StudentService,
     private breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
+    private notificationService: NotificationService,
     private dialog: MatDialog,
     private router: Router
   ) {
@@ -87,6 +90,7 @@ export class StudentQuestionsComponent implements OnInit {
       })
     })
     console.log(this.attachments, 'attachments');
+    this.getNotifications();
   }
 
   //search auto complete
@@ -294,6 +298,15 @@ export class StudentQuestionsComponent implements OnInit {
         }
       )
     }
+  }
+
+  getNotifications() {
+    this.notificationService.getNotifications(this.studentService.currentStudent.userId).valueChanges().subscribe(
+      (res) => {
+        // @ts-ignore
+        this.notifications = res;
+      }
+    )
   }
 
 }

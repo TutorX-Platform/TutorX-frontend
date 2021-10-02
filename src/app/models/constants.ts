@@ -1,6 +1,7 @@
 export const fileUploadLimit = 30000 * 1000;
 export const backend_url = "https://sandunapi.tk";
 export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
+export const adminEmail = "tharindu.prf@gmail.com"
 
 export const env_url = {
   heroku_url: 'https://sandunapi.tk/',
@@ -37,7 +38,7 @@ export const payStatus = {
 
 export const backend_api_resource = {
   payment: '/payment/',
-  email: '/email/',
+  email: '/mail/',
   time: '/time/',
   question: '/question',
   validate: '/validate',
@@ -71,6 +72,8 @@ export const collections = {
   chatTyping: 'typing',
   stat: 'stats',
   tutorEarnings: 'earnings',
+  notifications: 'notifications',
+  utils: 'utils'
 
 }
 
@@ -355,6 +358,58 @@ export const url_sign = {
 export const unAuthorizedKeywords = [
   'email', 'gmail'
 ];
+
+export const mailTemplates = {
+  suspiciousMsg: 'admin-suspisious-message.handlebars',
+  newRequest: 'new-request.handlebars',
+  questionComplete: 'question-complete.handlebars',
+  studentNewQuestion: 'student-new-question.handlebars',
+  tutorNewQuestion: 'tutor-new-request.handlebars',
+  welcome: 'welcome.handlebars',
+}
+
+export function getSuspisiousMessageReplacement(requestId: string, chatLink: string) {
+  return {
+    requestId: requestId,
+    chatLink: chatLink,
+  }
+}
+
+export function getNewRequest(requestId: string, questionTitle: string, name: string) {
+  return {
+    requestId: requestId,
+    name: name,
+    questionTitle: questionTitle,
+  }
+}
+
+export function getCompleteRequest(requestId: string, questionTitle: string, name: string) {
+  return {
+    name: name,
+  }
+}
+
+export function getStudentNewQuestion(questionLink: string, name: string) {
+  return {
+    name: name,
+    questionLink: questionLink,
+  }
+}
+
+export function getTutorNewQuestion(questionTitle: string, name: string, requestId: string) {
+  return {
+    name: name,
+    questionTitle: questionTitle,
+    requestId: requestId,
+  }
+}
+
+export function getWelcomeQuestion(name: string) {
+  return {
+    name: name,
+  }
+}
+
 
 export function getProgressDialogData() {
   return {
