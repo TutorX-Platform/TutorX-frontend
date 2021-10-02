@@ -27,7 +27,6 @@ const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
 const routes: Routes = [
   {path: 'home', component: BodyComponent},
-  {path: '', component: BodyComponent},
   {path: 'sign-in', component: SignInMobileComponent},
   // {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
@@ -92,9 +91,15 @@ const routes: Routes = [
         pathMatch: 'full',
         // data: {authGuardPipe: redirectUnauthorizedToHome},
 
+      },
+      {
+        path: '**',
+        redirectTo: 'student/questions',
+        pathMatch: 'full',
       }
     ]
   },
+  {path: '', component: BodyComponent},
   {path: '**', component: BodyComponent}
 ];
 
