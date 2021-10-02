@@ -13,10 +13,11 @@ export const questionTitles = {
   studentQuoteApproved: "Approve success",
   tutorSendQuote: "Send Success",
   tutorReleaseQuestionError: "Can't release the question",
+  tutorReleaseQuestionConfirmation: "Please confirm !!",
   requestNewTutorError: "Can't request new tutor",
   notLoggedUserWithLoggedCredentials: "Email Already Registered",
   requestRefund: "Request a refund",
-  acceptNotification: "Please allow send notifications"
+  acceptNotification: "Please allow send notifications",
 }
 
 export const questionMessages = {
@@ -39,7 +40,8 @@ export const questionMessages = {
   requestRefundSuccess: "Refund request success, Our admins will contact you soon !!",
   acceptNotification: "Please allow notifications for better user experience",
   requestNewTutorError: "There is not tutor assigned yet",
-
+  tutorReleaseQuestionConfirmation: "Please confirm to release this request.",
+  requestNewTutorConfirmation: "Please confirm to request new a tutor.",
 
 }
 

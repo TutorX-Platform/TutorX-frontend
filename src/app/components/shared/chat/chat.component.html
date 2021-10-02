@@ -25,19 +25,20 @@
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
       <button *ngIf="questionService.question.status === 'Open'" mat-flat-button color="primary" style="color: white">Cancel Request</button>
-      <button *ngIf="questionService.question.status === 'Assigned'" mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request</button>
-      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary" style="color: white">Mark as Complete</button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'" mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request</button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'" mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor</button>
+      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary" style="color: white" (click)="onMarkAsCompleted()">Mark as Complete</button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
-        <button *ngIf="authService.student.role==='student'"
-                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' || questionService.question.status!=='Open'"
-                mat-menu-item (click)="onRequestNewTutor()"
-                class="drop-down" fxLayout="row"
-                fxLayoutAlign="start center"
-                fxLayoutGap="8px">
-          <mat-icon class="material-icons-outlined">logout</mat-icon>
-          <div>Request New Tutor</div>
-        </button>
+<!--        <button *ngIf="authService.student.role==='student'"-->
+<!--                [disabled]="questionService.question.status==='Completed' || questionService.question.status==='Cancelled' || questionService.question.status!=='Open'"-->
+<!--                mat-menu-item (click)="onRequestNewTutor()"-->
+<!--                class="drop-down" fxLayout="row"-->
+<!--                fxLayoutAlign="start center"-->
+<!--                fxLayoutGap="8px">-->
+<!--          <mat-icon class="material-icons-outlined">logout</mat-icon>-->
+<!--          <div>Request New Tutor</div>-->
+<!--        </button>-->
         <button mat-menu-item class="drop-down" fxLayout="row"
                 fxLayoutAlign="start center"
                 (click)="onCopyLink()"

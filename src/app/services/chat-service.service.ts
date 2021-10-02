@@ -245,5 +245,32 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(data);
   }
 
+  markAsCompletedMessage(question: string, time: number) {
+    const data = {
+      isQuote: false,
+      attachmentExtension: "",
+      attachmentLink: "",
+      sort: time,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} Marked as completed`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: time
+    }
+    return this.angularFirestoreService.collection(constants.collections.message).doc(question).collection(constants.collections.chats).add(data);
+  }
+
+  MarkAsCompleted(chatToken: string) {
+    const chatData = {
+      status: constants.chat_status.closed,
+    }
+
+    return this.angularFirestoreService.collection(constants.collections.chats).doc(chatToken).update(chatData);
+  }
+
 
 }

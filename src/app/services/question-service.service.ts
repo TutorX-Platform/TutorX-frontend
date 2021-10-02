@@ -65,7 +65,9 @@ export class QuestionService {
     // @ts-ignore
     const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
+    const decrement = firestore.FieldValue.increment(1);
     statRef.update({'completedQuestions': increment});
+    statRef.update({'inProgressQuestions': decrement});
   }
 
   saveQuestion(qustion: Questions, questionId: string, questionNumber: string) {
@@ -135,13 +137,11 @@ export class QuestionService {
   }
 
   updateQuestion(questionId: string, data: any) {
-    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
-      console.log(v);
-    })
+    return this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).catch(err => console.log(err))
   }
 
   releaseQuestionByTutor(questionId: string, data: any) {
-    this.updateQuestion(questionId, data);
+    return this.updateQuestion(questionId, data);
   }
 
   deleteQuestionByStudent(questionId: string) {
@@ -184,4 +184,11 @@ export class QuestionService {
 
 //  --------------------------------------
 
+  markQuestionUpdate(questionId: string) {
+    const data = {
+      status: constants.questionStatus.completed
+    }
+    const questionRef = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data);
+    return questionRef;
+  }
 }
