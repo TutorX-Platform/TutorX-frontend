@@ -35,65 +35,80 @@
   <mat-dialog-content>
     <div fxLayout="column" class="bottom-container" *ngIf="role !== 'tutor'">
       <div fxLayout="column" class="form-fields">
-        <div class="label">Question Title</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input matInput type="text" formControlName="questionTitle">
-        </mat-form-field>
-        <mat-error
-          *ngIf="addQuestionForm.get('questionTitle')?.touched && addQuestionForm.get('questionTitle')?.hasError('required')"
-          class="label">
-          {{validations.questionTitleRequired}}
-        </mat-error>
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Label</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input matInput formControlName="questionTitle"  placeholder="Placeholder text" value="Value">
+            <mat-error
+              *ngIf="addQuestionForm.get('questionTitle')?.touched && addQuestionForm.get('questionTitle')?.hasError('required')"
+              class="">
+              {{validations.questionTitleRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
         <div fxLayout="row">
           <div fxLayout="column" class="search-container">
-            <div class="label">Subject</div>
-            <mat-form-field appearance="outline" class="my-form-field">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Subject</div>
+              <mat-form-field appearance="outline">
                   <span matSuffix>
                   <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
-              <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-            <mat-error
-              *ngIf="addQuestionForm.get('subject')?.touched && addQuestionForm.get('subject')?.hasError('required')"
-              class="label">
-              {{validations.questionSubjectRequired}}
-            </mat-error>
+                <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subject')?.touched && addQuestionForm.get('subject')?.hasError('required')"
+                  class="">
+                  {{validations.questionSubjectRequired}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
           </div>
           <div fxLayout="column" class="search-container" style="margin-left: 1%">
-            <div class="label">Sub-category</div>
-            <mat-form-field appearance="outline" class="my-form-field">
-                  <span matSuffix>
-                  <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
-              <input matInput type="text-12" formControlName="subCategory" [matAutocomplete]="auto1">
-              <mat-autocomplete #auto1="matAutocomplete">
-                <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
-                  {{subOption}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-            <mat-error
-              *ngIf="addQuestionForm.get('subCategory')?.touched && addQuestionForm.get('subCategory')?.hasError('required')"
-              class="label">
-              {{validations.questionCategoryRequired}}
-            </mat-error>
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Sub-category</div>
+              <mat-form-field appearance="outline" class="">
+                    <span matSuffix>
+                    <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
+                <input matInput type="text-12" formControlName="subCategory" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                  <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
+                    {{subOption}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subCategory')?.touched && addQuestionForm.get('subCategory')?.hasError('required')"
+                  class="">
+                  {{validations.questionCategoryRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
           <div fxLayout="column" class="date-container">
-            <div class="label">Due date-time</div>
-            <mat-form-field appearance="outline" class="my-form-field">
-              <input matInput [ngxMatDatetimePicker]="picker" [min]="date" placeholder="Choose a date & time"
-                     formControlName="dueDateTime">
-              <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
-            </mat-form-field>
-            <mat-error
-              *ngIf="addQuestionForm.get('dueDateTime')?.touched && addQuestionForm.get('dueDateTime')?.hasError('required')"
-              class="label">
-              {{validations.questionDeadlineRequired}}
-            </mat-error>
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Due date-time</div>
+              <mat-form-field appearance="outline" class="">
+                <input matInput [ngxMatDatetimePicker]="picker" [min]="date" placeholder="Choose a date & time"
+                       formControlName="dueDateTime">
+                <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+                <mat-error
+                  *ngIf="addQuestionForm.get('dueDateTime')?.touched && addQuestionForm.get('dueDateTime')?.hasError('required')"
+                  class="">
+                  {{validations.questionDeadlineRequired}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+
           </div>
         </div>
 

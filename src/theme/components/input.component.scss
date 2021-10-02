@@ -1,0 +1,89 @@
+.tu-text-input{
+
+  &__label{
+    display: flex;
+    font: var(--desktop---button);
+    margin-bottom: var(--space--xs);
+  }
+  &__label-item{
+    flex: 1;
+  }
+//  overrides
+  .mat-form-field{
+    width: 100%;
+  }
+  .mat-form-field-disabled{
+    .mat-form-field-outline{
+      background-color: var(--surface---hovered);
+
+    }
+    .input-type-default__addon{
+      .text-content{
+        color: var(--text---disabled) ;
+      }
+    }
+  }
+  .mat-form-field-invalid{
+    .mat-form-field-wrapper{
+      padding-bottom: 0;
+    }
+    .mat-form-field-subscript-wrapper{
+      position: relative;
+    }
+  }
+  .mat-form-field-prefix, .mat-form-field-suffix{
+    top:0 !important;
+  }
+  .mat-form-field-wrapper{
+    padding-bottom: var(--space--md);
+    margin: 0 0 !important;
+  }
+  .mat-form-field-infix{
+    border: none;
+    padding: var(--space--msm) 0;
+  }
+  .mat-form-field-flex{
+    display: flex;
+    align-items: center;
+    margin-top: 0 !important;
+  }
+  .mat-form-field-outline{
+    background-color: var(--surface---default);
+    border-radius: var(--corner--xs);
+    color:var(--divider) ;
+    top: 0 !important;
+  }
+
+  .mat-form-field-outline, .mat-form-field-flex{
+    min-height: 2.25rem;
+    top: 0;
+  }
+  .mat-select-arrow-wrapper{
+    transform: translateY(0%) !important;
+  }
+  .mat-form-field-subscript-wrapper {
+    padding: 0 0 !important;
+    margin-top: 0.3em !important;
+  }
+  .mat-error{
+    &::before {
+      direction: ltr;
+      display: inline-block;
+      font-family: 'Material Icons';
+      font-size: 14px;
+      font-style: normal;
+      font-weight: normal;
+      letter-spacing: normal;
+      line-height: 1;
+      top: 0.2em;
+      position: relative;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      content: "error";
+      margin-right: 2px;
+    }
+  }
+}
