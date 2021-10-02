@@ -234,6 +234,10 @@
             .sub{
               font: $body-base-default;
               color: #5B6469;
+              max-width: 180px;
+              height: 1.5rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }
@@ -247,6 +251,12 @@
             .sub{
               font: $body-small-bold;
               color: #5B6469;
+              height: 1.5rem;
+              overflow: hidden;
+            }
+            .show {
+              overflow: visible;
+              height: auto;
             }
           }
           .divider-details{
