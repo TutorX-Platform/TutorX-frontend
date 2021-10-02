@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
       .subscribe(
         (token) => {
           const data = {
-            "token": token
+            "token": token,
           }
           this.notificationService.saveToken(uid, data);
           console.log(token);

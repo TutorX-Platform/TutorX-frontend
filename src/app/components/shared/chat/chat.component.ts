@@ -221,7 +221,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         (res) => {
           console.log(res);
           if (res !== undefined && res) {
-            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token).subscribe();
+            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token, id).subscribe();
           }
         }
       )
@@ -285,7 +285,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               // @ts-ignore
               this.chatMessages = res;
               progressDialog.close();
-              console.log(res);
             }, () => {
               progressDialog.close();
             }
@@ -345,7 +344,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         // @ts-ignore
         this.deadLine = this.questionService.question.dueDate.toDate();
-        console.log(res);
+
+        if (this.question.status === constants.questionStatus.open && this.authService.student.role === constants.userTypes.tutor) {
+          //  route back the tutor..
+        }
       }
     )
   }
@@ -395,44 +397,58 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   onReleaseQuestion() {
-    if (this.questionService.question.status === constants.questionStatus.open || this.questionService.question.status === constants.questionStatus.assigned) {
-      const data = {
-        tutorName: "",
-        tutorImage: null,
-        tutorId: "",
-        status: constants.questionStatus.open,
-      }
-      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.tutorReleaseQuestionConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
         // @ts-ignore
-        this.time = res;
-        this.chatService.tutorLeftChat(this.chatToken, this.time.time);
-        this.questionService.releaseQuestionByTutor(this.chatToken, data);
-        this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
-      })
-    } else {
-      this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    }
+        if (res) {
+          if (this.questionService.question.status === constants.questionStatus.open || this.questionService.question.status === constants.questionStatus.assigned) {
+            const data = {
+              tutorName: "",
+              tutorImage: null,
+              tutorId: "",
+              status: constants.questionStatus.open,
+            }
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.time = res;
+              this.chatService.tutorLeftChat(this.chatToken, this.time.time);
+              this.questionService.releaseQuestionByTutor(this.chatToken, data).then(() => {
+                this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
+              });
+            });
+          } else {
+            this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          }
+        }
+      }
+    )
   }
 
   onRequestNewTutor() {
-    if (this.questionService.question.status === constants.questionStatus.assigned) {
-      const data = {
-        tutorName: "",
-        tutorImage: null,
-        tutorId: "",
-        status: constants.questionStatus.open,
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.tutorReleaseQuestionConfirmation, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          if (this.questionService.question.status === constants.questionStatus.assigned) {
+            const data = {
+              tutorName: "",
+              tutorImage: null,
+              tutorId: "",
+              status: constants.questionStatus.open,
+            }
+            this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+              // @ts-ignore
+              this.time = res;
+              this.chatService.requestedNewTutor(this.chatToken, this.time.time);
+              this.questionService.releaseQuestionByTutor(this.chatToken, data);
+            })
+          } else if (this.questionService.question.status === constants.questionStatus.assigned) {
+            this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          } else {
+            this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
+          }
+        }
       }
-      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-        // @ts-ignore
-        this.time = res;
-        this.chatService.requestedNewTutor(this.chatToken, this.time.time);
-        this.questionService.releaseQuestionByTutor(this.chatToken, data);
-      })
-    } else if (this.questionService.question.status === constants.questionStatus.assigned) {
-      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    } else {
-      this.utilService.openDialog(systemMessages.questionTitles.requestNewTutorError, systemMessages.questionMessages.requestNewTutorError, constants.messageTypes.warningInfo).afterOpened().subscribe()
-    }
+    )
   }
 
   ngAfterViewChecked(): void {
@@ -495,7 +511,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       // @ts-ignore
       this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
       // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
-
     })
 
   }
@@ -522,7 +537,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   onUnAuthorizedMessageSent(message: string) {
     constants.unAuthorizedKeywords.forEach(keyword => {
       if (message.includes(keyword)) {
-        this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, keyword).subscribe();
+        this.mailService.sendMail("Suspicious chat is identified !!", constants.adminEmail, constants.getSuspisiousMessageReplacement(this.chat.questionNumber, this.chat.tutorChatLink), constants.mailTemplates.suspiciousMsg).subscribe()
       }
     })
   }
@@ -571,6 +586,26 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
       )
     }
+  }
+
+  onMarkAsCompleted() {
+    this.questionService.markQuestionUpdate(this.question.id).then(() => {
+      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+        if (res) {
+          // @ts-ignore
+          this.chatService.MarkAsCompleted(this.question.id, res.time).then(() => {
+            // @ts-ignore
+            this.chatService.markAsCompletedMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage).then(() => {
+              this.mailService.sendMail("Request marked as completed", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
+            });
+            // tutor payment increase
+            this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(()=>{
+              this.questionService.incrementCompletedQuestionCount()
+            });
+          })
+        }
+      });
+    });
   }
 
 }

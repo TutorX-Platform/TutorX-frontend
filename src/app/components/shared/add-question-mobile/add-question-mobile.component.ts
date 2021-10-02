@@ -17,10 +17,11 @@ import {WelcomeComponent} from "../../student/welcome/welcome.component";
 import {StudentService} from "../../../services/student-service.service";
 import {MailService} from "../../../services/mail.service";
 import {ChatServiceService} from "../../../services/chat-service.service";
-import {map, startWith, take} from "rxjs/operators";
+import {finalize, map, startWith, take} from "rxjs/operators";
 import * as systemMessages from "../../../models/system-messages";
 import {ChatMsg} from "../../../models/chat-msg";
 import {Chat} from "../../../models/chat";
+import {ValidationService} from "../../../services/validation.service";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -69,6 +70,7 @@ export class AddQuestionMobileComponent implements OnInit {
   time: TimeApi = {status: "", time: 0};
 
   attachments: File[] = [];
+  uploadingProgress = 0;
 
 
   constructor(
@@ -83,6 +85,7 @@ export class AddQuestionMobileComponent implements OnInit {
     public router: Router,
     private mailService: MailService,
     private chatService: ChatServiceService,
+    private validationService: ValidationService,
     private location: Location,
   ) {
   }
@@ -169,30 +172,67 @@ export class AddQuestionMobileComponent implements OnInit {
   onSelect(event: any) {
     this.uploadedSize = this.uploadedSize + event.addedFiles[0].size;
     if (this.uploadedSize <= constants.fileUploadLimit) {
-      const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-      progressDialog.afterOpened().subscribe(() => {
-        if (event.addedFiles.length < 2) {
-          if (event.addedFiles.length > 2) {
-            progressDialog.close();
-            // alert("Please select one at a time");
-            this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
-              (res) => {
-                console.log(res);
-              }
-            )
-          } else {
-            this.files.push(event.addedFiles[0]);
-            this.uploadFile(event.addedFiles[0], progressDialog);
-          }
-        } else {
-          progressDialog.close();
+      if (event.addedFiles.length < 2) {
+        if (event.addedFiles.length > 2) {
+          // alert("Please select one at a time");
           this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
             (res) => {
               console.log(res);
             }
           )
+        } else {
+          this.files.push(event.addedFiles[0]);
+          if (this.authService.isLoggedIn) {
+            this.uploadFile(event.addedFiles[0]);
+          } else {
+            this.validationService.validateCors().subscribe((res) => {
+              // @ts-ignore
+              if (res && res.status === 200) {
+                this.uploadFile(event.addedFiles[0]);
+              }
+            })
+          }
         }
-      })
+      } else {
+        this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
+          (res) => {
+            console.log(res);
+          }
+        )
+      }
+      // const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+      // progressDialog.afterOpened().subscribe(() => {
+      //   if (event.addedFiles.length < 2) {
+      //     if (event.addedFiles.length > 2) {
+      //       progressDialog.close();
+      //       // alert("Please select one at a time");
+      //       this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
+      //         (res) => {
+      //           console.log(res);
+      //         }
+      //       )
+      //     } else {
+      //       this.files.push(event.addedFiles[0]);
+      //       if (this.authService.isLoggedIn) {
+      //         this.uploadFile(event.addedFiles[0], progressDialog);
+      //       } else {
+      //         this.validationService.validateCors().subscribe((res) => {
+      //           // @ts-ignore
+      //           if (res && res.status === 200) {
+      //             this.uploadFile(event.addedFiles[0], progressDialog);
+      //           }
+      //         })
+      //       }
+      //     }
+      //   } else {
+      //     progressDialog.close();
+      //     this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
+      //       (res) => {
+      //         console.log(res);
+      //       }
+      //     )
+      //   }
+      // })
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe(
         (res) => {
@@ -254,7 +294,7 @@ export class AddQuestionMobileComponent implements OnInit {
               this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
                 // @ts-ignore
                 this.askedQuestions.push(this.questionId);
-                this.sendAknowledgementEmail(this.authService.student.email);
+                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
@@ -271,7 +311,7 @@ export class AddQuestionMobileComponent implements OnInit {
                 console.log(res.data());
                 // @ts-ignore
                 if (response.staus === 200) {
-                  this.sendAknowledgementEmail(this.authService.student.email);
+                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
@@ -292,34 +332,35 @@ export class AddQuestionMobileComponent implements OnInit {
     })
   }
 
-  uploadFile(file: File, progressDialog: MatDialogRef<any>) {
+  uploadFile(file: File) {
     const time = new Date().getTime();
     // @ts-ignore
     const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
     this.taskRef = this.storage.ref(path);
-    this.task = this.taskRef.put(file);
-    this.task.then(() => {
-      this.taskRef.getDownloadURL().subscribe(
-        (res) => {
-          let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
-          this.uploadedFiles.push(attachment);
-        }, () => {
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-        }, () => {
-          progressDialog.close();
-          this.utilService.openDialog(systemMessages.questionTitles.fileUploadSuccess, systemMessages.questionMessages.fileUploadSuccess, constants.messageTypes.success).afterOpened().subscribe(
-            (res) => {
-              console.log(res);
-            }
-          )
-          console.log(this.uploadedFiles);
-        }
-      )
-    });
+    this.task = this.storage.upload(path, file);
+
+    this.task.percentageChanges().subscribe(
+      (res) => {
+        console.log(res);
+        // @ts-ignore
+        this.uploadingProgress = res;
+      }
+    )
+
+    // @ts-ignore
+    this.uploadProgress = this.task.percentageChanges();
+    this.task.snapshotChanges().pipe(finalize(() => {
+      this.taskRef.getDownloadURL().subscribe((url) => {
+        let attachment: Attachment = {extension: file.type, downloadUrl: url, fileName: file.name}
+        this.uploadedFiles.push(attachment);
+      }, () => {
+        this.utilService.openDialog(systemMessages.questionTitles.fileUploadError, systemMessages.questionMessages.fileUploadError, constants.messageTypes.warningInfo).afterOpened().subscribe(
+          (res) => {
+            console.log(res);
+          }
+        )
+      })
+    })).subscribe()
   }
 
   askEmail(progressDialog: MatDialogRef<any>) {
@@ -346,9 +387,7 @@ export class AddQuestionMobileComponent implements OnInit {
                     // @ts-ignore
                     this.time = res;
                     this.askQuestion(progressDialog, this.time.time, false);
-                    this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
                   })
-                  this.sendAknowledgementEmail(this.authService.student.email);
                 }
               }
             );
@@ -360,8 +399,8 @@ export class AddQuestionMobileComponent implements OnInit {
     this.router.navigate(["/"], {skipLocationChange: true});
   }
 
-  sendAknowledgementEmail(email: string) {
-    // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+  sendAknowledgementEmail(email: string, link: string) {
+    this.mailService.sendMail("Your question is recorded successfully", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
@@ -369,7 +408,7 @@ export class AddQuestionMobileComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
-      studentLastSeen: false,  tutorLastSeen: false,
+      studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,
       isPaid: false,
       questionDescription: questionDesc,

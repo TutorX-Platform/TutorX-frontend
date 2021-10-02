@@ -201,8 +201,6 @@ export class CardDetailsComponent implements OnInit {
                   console.log(res);
                   // @ts-ignore
                   if (res['status'] === 200) {
-                    // tutor payment increase
-                    this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage);
                     this.paymentService.incrementPayment(this.question.fee);
                     this.updateQuestionAsPaid();
                     this.loading = false;
@@ -210,7 +208,6 @@ export class CardDetailsComponent implements OnInit {
                     // @ts-ignore
                     this.paymentStatus = res['status'];
                     this.dialogRef.close();
-                    this.mailService.paymentSuccessMailToStudent(this.questionService.question.studentEmail).subscribe();
                     this.studentService.findStudentById(this.questionService.question.tutorId).subscribe(
                       (res) => {
                         // @ts-ignore
@@ -230,7 +227,6 @@ export class CardDetailsComponent implements OnInit {
                     console.log("err");
                     this.dialog.closeAll();
                     this.dialogRef.close();
-                    this.mailService.paymentFailedMailToStudent(this.questionService.question.studentEmail);
                     this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
                     console.log(res);
                   }
@@ -239,7 +235,6 @@ export class CardDetailsComponent implements OnInit {
                 }
               )
             } else {
-              this.mailService.paymentSuccessMailToStudent(this.questionService.question.studentEmail);
               this.dialogRef.close();
               progressDialog.close();
               // @ts-ignore

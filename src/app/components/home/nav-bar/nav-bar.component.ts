@@ -9,6 +9,7 @@ import {StudentService} from "../../../services/student-service.service";
 import * as constants from '../../../models/constants';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {Router} from '@angular/router';
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,6 +22,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
   viewPoint = false;
   isLoggedIn = false;
   page = 0;
+  notifications = [];
 
   constructor(
     private dialog: MatDialog,
@@ -28,6 +30,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private mediaObserver: MediaObserver,
     public authService: AuthService,
     public studentService: StudentService,
+    private notificationService: NotificationService,
     public router: Router
   ) {
   }
@@ -118,7 +121,6 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
           // @ts-ignore
           this.studentService.currentStudent = res;
           if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
-            console.log('2222222222222222222');
             this.studentService.isTutor = true;
           }
         }
