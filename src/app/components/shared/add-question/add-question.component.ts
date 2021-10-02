@@ -329,7 +329,7 @@ export class AddQuestionComponent implements OnInit {
               this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
                 // @ts-ignore
                 this.askedQuestions.push(this.questionId);
-                this.sendAknowledgementEmail(this.authService.student.email);
+                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
@@ -347,7 +347,7 @@ export class AddQuestionComponent implements OnInit {
                 console.log(res.data());
                 // @ts-ignore
                 if (response.staus === 200) {
-                  this.sendAknowledgementEmail(this.authService.student.email);
+                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
@@ -409,7 +409,6 @@ export class AddQuestionComponent implements OnInit {
     const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (result) => {
-        console.log(result);
         if (result !== undefined) {
           const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
           progressDialog.afterOpened().subscribe(
@@ -427,9 +426,8 @@ export class AddQuestionComponent implements OnInit {
                       // @ts-ignore
                       this.time = res;
                       this.askQuestion(this.dialogRef, progressDialog, this.time.time, false);
-                      this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
                     })
-                    this.sendAknowledgementEmail(this.authService.student.email);
+                    // this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(questionId, constants.userTypes.student));
                   }
                 }
               );
@@ -443,8 +441,8 @@ export class AddQuestionComponent implements OnInit {
     progressDialog.close();
   }
 
-  sendAknowledgementEmail(email: string) {
-    // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+  sendAknowledgementEmail(email: string, link: string) {
+    this.mailService.sendMail("Your question is recorded successfully", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
@@ -452,7 +450,7 @@ export class AddQuestionComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
-      studentLastSeen: false,tutorLastSeen: false,
+      studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,
       isPaid: false,
       questionDescription: questionDesc,

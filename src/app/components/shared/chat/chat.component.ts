@@ -221,7 +221,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         (res) => {
           console.log(res);
           if (res !== undefined && res) {
-            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token).subscribe();
+            this.notificationService.sendNotification(notificationMsg.notification_titles.new_message, notificationMsg.notification_messages.new_message, res.token, id).subscribe();
           }
         }
       )
@@ -522,7 +522,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   onUnAuthorizedMessageSent(message: string) {
     constants.unAuthorizedKeywords.forEach(keyword => {
       if (message.includes(keyword)) {
-        this.mailService.chatWarningEmail(this.chatToken, this.studentService.currentStudent.firstName, keyword).subscribe();
+        this.mailService.sendMail("Suspicious chat is identified !!", constants.adminEmail, constants.getSuspisiousMessageReplacement(this.chat.questionNumber, this.chat.tutorChatLink), constants.mailTemplates.suspiciousMsg).subscribe()
       }
     })
   }

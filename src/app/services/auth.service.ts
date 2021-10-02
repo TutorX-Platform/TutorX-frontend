@@ -84,8 +84,6 @@ export class AuthService {
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(credentials.user));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
         this.userData = credentials.user;
-        // @ts-ignore
-        // this.mailService.sendEmail(credentials.user.email).subscribe();
         const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
         this.roleBasedRouting(credentials.user.uid, progressDialog);
         // @ts-ignore
@@ -142,6 +140,8 @@ export class AuthService {
   signUp(email: string, password: string, firstName: string, progressDialog: MatDialogRef<any>) {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        // @ts-ignore
+        this.mailService.sendMail("Welcome to Tutetory", result.user?.email, constants.getWelcomeQuestion(result.user?.displayName), constants.mailTemplates.welcome).subscribe()
         this.isLoggedIn = true;
         this.SendVerificationMail();
         // @ts-ignore

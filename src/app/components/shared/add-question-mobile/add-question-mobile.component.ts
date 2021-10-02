@@ -254,7 +254,7 @@ export class AddQuestionMobileComponent implements OnInit {
               this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
                 // @ts-ignore
                 this.askedQuestions.push(this.questionId);
-                this.sendAknowledgementEmail(this.authService.student.email);
+                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
@@ -271,7 +271,7 @@ export class AddQuestionMobileComponent implements OnInit {
                 console.log(res.data());
                 // @ts-ignore
                 if (response.staus === 200) {
-                  this.sendAknowledgementEmail(this.authService.student.email);
+                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
@@ -346,9 +346,7 @@ export class AddQuestionMobileComponent implements OnInit {
                     // @ts-ignore
                     this.time = res;
                     this.askQuestion(progressDialog, this.time.time, false);
-                    this.mailService.questionAddedEmailToNotLoggedUser(this.authService.student.email).subscribe();
                   })
-                  this.sendAknowledgementEmail(this.authService.student.email);
                 }
               }
             );
@@ -360,8 +358,8 @@ export class AddQuestionMobileComponent implements OnInit {
     this.router.navigate(["/"], {skipLocationChange: true});
   }
 
-  sendAknowledgementEmail(email: string) {
-    // this.mailService.sendQuestionAcknowledgementEmail(email).subscribe();
+  sendAknowledgementEmail(email: string, link: string) {
+    this.mailService.sendMail("Your question is recorded successfully", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
@@ -369,7 +367,7 @@ export class AddQuestionMobileComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
-      studentLastSeen: false,  tutorLastSeen: false,
+      studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,
       isPaid: false,
       questionDescription: questionDesc,

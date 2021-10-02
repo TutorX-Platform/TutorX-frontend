@@ -55,10 +55,6 @@ export class SignUpComponent implements OnInit {
     progressDialog.afterOpened().subscribe(
       () => {
         this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-            this.mailService.sendMail(mails.mailSubject.getStudentWelcomeMail(), mails.mailBody.getStudentWelcomeMail(this.signUpForm.value.fullName, constants.env_url.prod_url), this.signUpForm.value.email).subscribe(
-              () => {
-              }
-            );
             this.dialogRef.close();
             this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
           }

@@ -1,7 +1,7 @@
 export const notification_titles = {
-  new_message: "New message title"
+  new_message: "New message !!"
 }
 
 export const notification_messages = {
-  new_message: "New message body"
+  new_message: "You have a new message"
 }

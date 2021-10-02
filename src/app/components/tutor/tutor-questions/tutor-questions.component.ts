@@ -12,6 +12,7 @@ import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dia
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {Attachment} from "../../../models/Attachment";
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
   selector: 'app-tutor-questions',
@@ -39,6 +40,7 @@ export class TutorQuestionsComponent implements OnInit {
   isCancelled = false;
   isCompleted = false;
   status: string[] = [];
+  notifications = [];
 
   isAutoOpen = false;
   subjects = [
@@ -81,7 +83,8 @@ export class TutorQuestionsComponent implements OnInit {
     public studentService: StudentService,
     private breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notificationService: NotificationService,
   ) {
   }
 
@@ -111,6 +114,8 @@ export class TutorQuestionsComponent implements OnInit {
         }
       )
     })
+
+    this.getNotifications();
 
   }
 
@@ -314,6 +319,16 @@ export class TutorQuestionsComponent implements OnInit {
         }
       )
     }
+  }
+
+  getNotifications() {
+    this.notificationService.getNotifications(this.studentService.currentStudent.userId).valueChanges().subscribe(
+      (res) => {
+        console.log(res);
+        // @ts-ignore
+        this.notifications = res;
+      }
+    )
   }
 
 }
