@@ -21,9 +21,12 @@
         <div class="top-bar__title-container">
           <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
         </div>
-        <div class="top-bar__actions">
+        <div class="top-bar__actions" *ngIf="!authService.isLoggedIn">
           <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
           <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
+        </div>
+        <div class="top-bar__actions" *ngIf="authService.isLoggedIn">
+          <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="moveToDashboard()">Dashboard</button>
         </div>
 
       </mat-toolbar-row>

@@ -89,6 +89,7 @@ import {TutorProfileComponent} from './components/tutor/tutor-profile/tutor-prof
 import {TutorPaymentsComponent} from './components/tutor/tutor-payments/tutor-payments.component';
 import {NotificationService} from "./services/notification.service";
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { NonAuthChatComponent } from './components/shared/non-auth-chat/non-auth-chat.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     CardDetailsComponent,
     SuccesMessageComponent,
     TutorProfileComponent,
-    TutorPaymentsComponent
+    TutorPaymentsComponent,
+    NonAuthChatComponent
   ],
   imports: [
     BrowserModule,

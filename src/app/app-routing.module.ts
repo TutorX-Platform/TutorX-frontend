@@ -22,13 +22,13 @@ import {TutorProfileComponent} from "./components/tutor/tutor-profile/tutor-prof
 import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-payments.component";
 import {BodyComponent} from './components/home/body/body.component';
 import {HOME} from "@angular/cdk/keycodes";
+import {NonAuthChatComponent} from "./components/shared/non-auth-chat/non-auth-chat.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
 const routes: Routes = [
   {path: 'home', component: BodyComponent},
   {path: 'sign-in', component: SignInMobileComponent},
-  // {path: 'admin', component: AdminComponent},
   {path: 'dummy', component: DummyComponent},
   {path: 'temp', component: SuccesMessageComponent},
   {path: 'pay/:id/:amount', component: CardDetailsComponent},
@@ -98,6 +98,17 @@ const routes: Routes = [
         pathMatch: 'full',
       }
     ]
+  },
+  {
+    path: 'non-auth', component: NonAuthChatComponent,
+    // canActivate: [AngularFireAuthGuard],
+    // data: {authGuardPipe: redirectUnauthorizedToHome},
+    children: [
+      {
+        path: 'chat/:id',
+        component: ChatComponent
+      }
+     ]
   },
   {path: '', component: BodyComponent},
   {path: '**', component: BodyComponent}

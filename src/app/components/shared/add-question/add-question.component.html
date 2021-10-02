@@ -50,7 +50,7 @@
             <mat-form-field appearance="outline" class="my-form-field">
                   <span matSuffix>
                   <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
-              <input matInput type="text" formControlName="subject" [matAutocomplete]="auto">
+              <input matInput type="text" formControlName="subject" [matAutocomplete]="auto" (blur)="changeSubCategory()">
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   {{option}}
@@ -103,6 +103,8 @@
                     oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>
         </mat-form-field>
       </div>
+      <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
+                            *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
       <div>
         <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">
           <ngx-dropzone-label>
@@ -118,8 +120,6 @@
                                      [removable]="true" (removed)="onRemove(f)">
               <!--<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>-->
 
-              <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
-                                    *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
             </custom-dropzone-preview>
           </div>
 
@@ -174,6 +174,10 @@
               <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="attachment.extension.includes('image')">
               <img src="assets/icons/word.png" class="icon-image" *ngIf="attachment.extension.includes('.document')">
               <img src="assets/icons/excel2.png" class="icon-image" *ngIf="attachment.extension.includes('.sheet')">
+              <img src="assets/icons/unknown.png" class="icon-image" *ngIf="!attachment.extension.includes('.sheet') &&
+                                                              !attachment.extension.includes('.document') &&
+                                                              !attachment.extension.includes('image') &&
+                                                              !attachment.extension.includes('pdf')">
             </div>
             <div fxLayout="row" fxLayoutAlign="center center">
               <div class="file-name">

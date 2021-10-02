@@ -432,7 +432,14 @@
           <div *ngFor="let attachment of attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
-                <img src="assets/icons/jpeg.svg" class="icon-image">
+                <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.extension.includes('pdf')">
+                <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="attachment.extension.includes('image')">
+                <img src="assets/icons/word.png" class="icon-image" *ngIf="attachment.extension.includes('.document')">
+                <img src="assets/icons/excel2.png" class="icon-image" *ngIf="attachment.extension.includes('.sheet')">
+                <img src="assets/icons/unknown.png" class="icon-image" *ngIf="!attachment.extension.includes('.sheet') &&
+                                                              !attachment.extension.includes('.document') &&
+                                                              !attachment.extension.includes('image') &&
+                                                              !attachment.extension.includes('pdf')">
               </div>
               <div fxLayout="row" fxLayoutAlign="center center">
                 <div class="file-name">
@@ -817,7 +824,14 @@
           <div *ngFor="let attachment of chat.attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
-                <img src="assets/icons/jpeg.svg" class="icon-image">
+                <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.extension.includes('pdf')">
+                <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="attachment.extension.includes('image')">
+                <img src="assets/icons/word.png" class="icon-image" *ngIf="attachment.extension.includes('.document')">
+                <img src="assets/icons/excel2.png" class="icon-image" *ngIf="attachment.extension.includes('.sheet')">
+                <img src="assets/icons/unknown.png" class="icon-image" *ngIf="!attachment.extension.includes('.sheet') &&
+                                                              !attachment.extension.includes('.document') &&
+                                                              !attachment.extension.includes('image') &&
+                                                              !attachment.extension.includes('pdf')">
               </div>
               <div fxLayout="row" fxLayoutAlign="center center">
                 <div class="file-name">
