@@ -27,7 +27,7 @@
       <button *ngIf="questionService.question.status === 'Open'" mat-flat-button color="primary" style="color: white">Cancel Request</button>
       <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'" mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request</button>
       <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'" mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor</button>
-      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary" style="color: white">Mark as Complete</button>
+      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary" style="color: white" (click)="onMarkAsCompleted()">Mark as Complete</button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>
       <mat-menu #menu="matMenu">
 <!--        <button *ngIf="authService.student.role==='student'"-->
