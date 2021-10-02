@@ -1,19 +1,16 @@
 <mat-card style="padding: 24px;">
   <mat-card-title fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="question-title">{{questionNumber}} | {{title}}</div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <div class="question-title">{{questionNumber}} | {{title}}</div>
+        <img src="../../../../assets/icons/active.svg" *ngIf="isTutor && tutorUnReadMessage">
+        <img src="../../../../assets/icons/active.svg" *ngIf="!isTutor && studentUnReadMessage">
+      </div>
       <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
       <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
       <div *ngIf="status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
       <div *ngIf="status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
     </div>
-
-    <!--    unread messages use appropriate ui elements-->
-
-    <div *ngIf="isTutor"> tutor unread messages {{tutorUnReadMessage}}</div>
-    <div *ngIf="!isTutor"> student unread messages {{studentUnReadMessage}}</div>
-    <!--    unread messages-->
-
 
     <div fxLayout="row" fxLayoutGap="8px">
       <div class="c-chip c-chip--subjects invert-false">{{subjects}}</div>

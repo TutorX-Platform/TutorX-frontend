@@ -76,6 +76,8 @@
       </div>
     </div>
   </div>
+
+  <!--Mobile View-->
   <div fxShow="true" fxHide.gt-xs *ngIf="askedQuestions.length > 0">
     <div style="width: 100%; padding: 8px 16px;" fxLayout="row" fxLayoutAlign="start center">
       <span matPrefix>
@@ -93,14 +95,18 @@
       <div *ngFor="let q of askedQuestions">
         <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center"
              (click)="onViewChat(q.id)">
-          <div class="topic">
-            {{q.questionTitle}}
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <div class="topic">
+              {{q.questionTitle}}
+            </div>
+            <!--<img src="../../../../assets/icons/active.svg" *ngIf="isTutor && q.tutorUnReadMessage">-->
+            <img src="../../../../assets/icons/active.svg" *ngIf="q.studentUnReadMessages ">
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
-            <div *ngIf="authService.student.profileImage">
-              <img [src]="authService.student.profileImage" alt="Avatar" class="avatar">
+            <div *ngIf="q.tutorImage && q.tutorId !== null && q.tutorId !== ''">
+              <img [src]="q.tutorImage" alt="Avatar" class="avatar">
             </div>
-            <div *ngIf="authService.student.profileImage === null">
+            <div *ngIf="q.tutorImage === null && q.tutorId !== null && q.tutorId !== ''">
               <img [src]="dummyProfPic" alt="Avatar" class="avatar">
             </div>
           </div>

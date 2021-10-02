@@ -91,7 +91,7 @@ export class TutorComponent implements OnInit {
   changePage(num: number) {
     this.selectedPage = num;
     if (num === 1) {
-      this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true});
+      this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: false});
     } else if (num === 2) {
       this.router.navigate([constants.routes.turor + constants.routes.dashboard], {skipLocationChange: true});
     } else if (num === 3) {

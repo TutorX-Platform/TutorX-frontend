@@ -420,7 +420,7 @@
           </div>
           <div *ngIf="!questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
             <img src="../../../../assets/images/profile.jpg" class="avatar-x">
-            <!--<img src="../../../../assets/icons/active.svg" class="active">-->
+            <img src="../../../../assets/icons/active.svg" class="active">
           </div>
           <div class="bio-box">
             <div class="head">
@@ -492,7 +492,7 @@
         <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer">
           <div
             class="q-title-toolbar">{{questionService.question !== undefined ? questionService.question.questionTitle : ''}}</div>
-          <div class="last-seen">Last Seen 24h ago</div>
+          <div class="last-seen">{{questionService.question !== undefined ? questionService.question.questionNumber : ''}}</div>
         </div>
       </div>
       <button mat-icon-button (click)="onDetailedView(true)">
@@ -839,10 +839,10 @@
 
       <div class="attachments-container" fxLayout="column" fxLayoutGap="12px">
         <div class="attachment-title">
-          Attchments
+          Attachments
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <div *ngFor="let attachment of chat.attachments">
+          <div *ngFor="let attachment of attachments">
             <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
               <div fxLayout="row" fxLayoutAlign="center center">
                 <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.extension.includes('pdf')">

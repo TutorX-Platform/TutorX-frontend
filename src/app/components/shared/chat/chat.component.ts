@@ -407,7 +407,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.time = res;
         this.chatService.tutorLeftChat(this.chatToken, this.time.time);
         this.questionService.releaseQuestionByTutor(this.chatToken, data);
-        this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
+        this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: false})
       })
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionError, systemMessages.questionMessages.tutorReleaseQuestionError, constants.messageTypes.warningInfo).afterOpened().subscribe()
