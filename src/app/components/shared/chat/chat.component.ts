@@ -84,6 +84,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   selectedPage = 1;
   fileToUpload: File | null = null;
   uploadReady = false;
+  enableChangeQuote = false;
 
   isSendQuoteDissabled = true;
   attachementPicked = false;
@@ -501,6 +502,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
+  onChangeQuote() {
+    this.enableChangeQuote = true;
+  }
+
   onSendQuote() {
     this.paymentService.findPreviousQuote(this.chatToken).subscribe(
       (res) => {
@@ -515,6 +520,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             if (this.question.fee !== this.quote.value) {
               this.questionService.tutorSendQuote(this.chatToken, data);
               this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                this.enableChangeQuote = false;
                 // @ts-ignore
                 this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
                 // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
@@ -534,6 +540,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.utilService.getTimeFromTimeAPI().subscribe((res) => {
               // @ts-ignore
               this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
+              this.enableChangeQuote = false;
               // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
             })
           } else {

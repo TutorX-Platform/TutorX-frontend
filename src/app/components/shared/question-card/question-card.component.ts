@@ -82,7 +82,7 @@ export class QuestionCardComponent implements OnInit {
       status: this.status,
       subjects: this.subjects,
       subCategory: this.subCategory,
-      dueDate: new Date(this.dueDate),
+      dueDate: this.dueDate,
       description: this.description,
       attachments: this.attachments,
       role: this.role,
