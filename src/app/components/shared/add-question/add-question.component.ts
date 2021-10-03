@@ -370,6 +370,7 @@ export class AddQuestionComponent implements OnInit {
                 }
                 dialogRef.close(true);
                 progressDialog.close();
+                this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId], {skipLocationChange: true});
               });
             } else {
               // @ts-ignore
