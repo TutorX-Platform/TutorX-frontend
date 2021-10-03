@@ -38,6 +38,7 @@ export class QuestionCardComponent implements OnInit {
   @Input() public studentUnReadMessage: boolean = false;
   @Input() public studentUnReadCount: number = 0;
   @Input() public tutorUnReadCount: number = 0;
+  @Input() public studentName: string = '';
 
   isTutor = false;
 
@@ -92,6 +93,7 @@ export class QuestionCardComponent implements OnInit {
       lastAssignedTutorImage: this.lastAssignedTutorImage,
       byLoggedUser: this.byLoggedUser,
       questionNumber: this.questionNumber,
+      studentName:this.studentName,
       // tutorUnReadMessages: this.tutorUnReadMessage,
       // studentUnReadMessages: this.studentUnReadMessage,
       // studentUnReadCount: this.studentUnReadCount,

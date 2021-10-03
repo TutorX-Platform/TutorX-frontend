@@ -587,7 +587,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             (res1) => {
               // @ts-ignore
               this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle, res1.time);
-
+              this.mailService.sendMail("A refund request has been initiated", constants.adminEmail, constants.getRefundRequest(this.question.questionNumber), constants.mailTemplates.refundRequest).subscribe();
             }
           )
           const data = {
@@ -633,7 +633,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.chatService.MarkAsCompleted(this.question.id, res.time).then(() => {
             // @ts-ignore
             this.chatService.markAsCompletedMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage).then(() => {
-              this.mailService.sendMail("Request marked as completed", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
+              this.mailService.sendMail("Your work has been completed.", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
             });
             // tutor payment increase
             this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(() => {
