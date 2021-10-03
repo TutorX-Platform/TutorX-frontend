@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   task: AngularFireUploadTask;
   attachments: Attachment[] = [];
   isFocused = false;
+  cancelledQustion = false
   chat: Chat = {
     studentLastSeen: false,
     tutorLastSeen: false,
@@ -623,6 +624,23 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
       )
     }
+  }
+
+
+  onCancelRequest() {
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.questionCancelConfirm, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          const data = {
+            status: constants.questionStatus.cancelled
+          }
+          this.questionService.updateQuestion(this.chatToken, data).then(() => {
+              this.cancelledQustion = true;
+            }
+          );
+        }
+      }
+    )
   }
 
   onMarkAsCompleted() {

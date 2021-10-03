@@ -24,8 +24,11 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-      <button *ngIf="questionService.question.status === 'Open'" mat-flat-button color="primary" style="color: white">
+      <button (click)="onCancelRequest()" *ngIf="questionService.question.status === 'Open' && !cancelledQustion" mat-flat-button color="primary" style="color: white">
         Cancel Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Open' && cancelledQustion" mat-flat-button color="primary" style="color: white">
+        Cancelled Request
       </button>
       <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'"
               mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request

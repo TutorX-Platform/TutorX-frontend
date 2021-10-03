@@ -44,6 +44,7 @@ export const questionMessages = {
   tutorReleaseQuestionConfirmation: "Please confirm to release this request.",
   requestNewTutorConfirmation: "Please confirm to request new a tutor.",
   alreadySameFee: "Your quote is matched with previous quote.",
+  questionCancelConfirm:"PLease confirm to cancel this question"
 
 
 }
