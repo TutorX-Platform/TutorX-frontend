@@ -473,7 +473,7 @@ export class AddQuestionComponent implements OnInit {
   }
 
   sendAknowledgementEmail(email: string, link: string) {
-    this.mailService.sendMail("Your question is recorded successfully", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
+    this.mailService.sendMail("You have submitted a new question", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {
@@ -519,13 +519,15 @@ export class AddQuestionComponent implements OnInit {
       // @ts-ignore
       this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
       // @ts-ignore
+      this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.firstName), constants.mailTemplates.tutorJoin).subscribe()
+      // @ts-ignore
       if (!this.data.byLoggedUser) {
         // @ts-ignore
         this.chatService.getChat(this.data.id).valueChanges().subscribe(
           (res) => {
             console.log(res);
             // @ts-ignore
-            this.mailService.tutorJoinedFor(this.data.studentEmail, res.studentChatLink).subscribe()
+            this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.firstName), constants.mailTemplates.tutorJoin).subscribe()
           }
         )
       }

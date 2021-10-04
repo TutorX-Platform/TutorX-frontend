@@ -400,7 +400,7 @@ export class AddQuestionMobileComponent implements OnInit {
   }
 
   sendAknowledgementEmail(email: string, link: string) {
-    this.mailService.sendMail("Your question is recorded successfully", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
+    this.mailService.sendMail("You have submitted a new question", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {

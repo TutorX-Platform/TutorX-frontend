@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   task: AngularFireUploadTask;
   attachments: Attachment[] = [];
   isFocused = false;
+  cancelledQustion = false
   chat: Chat = {
     studentLastSeen: false,
     tutorLastSeen: false,
@@ -84,6 +85,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   selectedPage = 1;
   fileToUpload: File | null = null;
   uploadReady = false;
+  enableChangeQuote = false;
 
   isSendQuoteDissabled = true;
   attachementPicked = false;
@@ -513,6 +515,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
+  onChangeQuote() {
+    this.enableChangeQuote = true;
+  }
+
   onSendQuote() {
     this.paymentService.findPreviousQuote(this.chatToken).subscribe(
       (res) => {
@@ -527,6 +533,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             if (this.question.fee !== this.quote.value) {
               this.questionService.tutorSendQuote(this.chatToken, data);
               this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                this.enableChangeQuote = false;
                 // @ts-ignore
                 this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
                 // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
@@ -546,6 +553,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.utilService.getTimeFromTimeAPI().subscribe((res) => {
               // @ts-ignore
               this.chatService.sendQuoteMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage);
+              this.enableChangeQuote = false;
               // this.mailService.sendQuoteMailToStudent(this.chat.studentEmail).subscribe();
             })
           } else {
@@ -592,7 +600,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             (res1) => {
               // @ts-ignore
               this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle, res1.time);
-
+              this.mailService.sendMail("A refund request has been initiated", constants.adminEmail, constants.getRefundRequest(this.question.questionNumber), constants.mailTemplates.refundRequest).subscribe();
             }
           )
           const data = {
@@ -630,6 +638,23 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
+
+  onCancelRequest() {
+    this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.questionCancelConfirm, constants.messageTypes.confirmation).afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          const data = {
+            status: constants.questionStatus.cancelled
+          }
+          this.questionService.updateQuestion(this.chatToken, data).then(() => {
+              this.cancelledQustion = true;
+            }
+          );
+        }
+      }
+    )
+  }
+
   onMarkAsCompleted() {
     this.questionService.markQuestionUpdate(this.question.id).then(() => {
       this.utilService.getTimeFromTimeAPI().subscribe((res) => {
@@ -638,7 +663,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.chatService.MarkAsCompleted(this.question.id, res.time).then(() => {
             // @ts-ignore
             this.chatService.markAsCompletedMessage(this.chatToken, res.time, this.quote.value, this.studentService.currentStudent.profileImage).then(() => {
-              this.mailService.sendMail("Request marked as completed", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
+              this.mailService.sendMail("Your work has been completed.", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
             });
             // tutor payment increase
             this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(() => {

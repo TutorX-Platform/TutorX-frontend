@@ -180,35 +180,35 @@ export const computerScienceCodes = {
 
 export const engineeringCodes = {
   autocad: 'AutoCAD',
- chemical_engineering: 'Chemical Engineering',
- circuit_analysis: 'Circuit Analysis',
- civil_engineering: 'Civil Engineering',
- communication_engineering: 'Communication Engineering',
- digital_electronics: 'Digital Electronics',
- dynamics_controls: 'Dynamics & Controls',
- electrical_engineering: 'Electrical Engineering',
- electronics: 'Electronics',
- energy_systems_engineering: 'Energy Systems Engineering',
- engineering_other: 'Engineering - Other',
- environmental_engineering: 'Environmental Engineering',
- food_engineering: 'Food Engineering',
- hydrodynamics: 'Hydrodynamics',
- image_processing: 'Image Processing',
- industrial_engineering: 'Industrial Engineering',
- marine_engineering: 'Marine Engineering',
- materials_science: 'Materials Science',
- matlab_for_engineering: 'MATLAB for Engineering',
- mechanical_engineering: 'Mechanical Engineering',
- networking_and_data_communication: 'Networking and Data Communication',
- nuclear_engineering: 'Nuclear Engineering',
- petroleum_engineering: 'Petroleum Engineering',
- power_system_engineering: 'Power System Engineering',
- radar_and_antennas: 'Radar and Antennas',
- robotics_automation: 'Robotics & Automation',
- solidworks: 'SolidWorks',
- structural_engineering: 'Structural Engineering',
- systems_engineering: 'Systems Engineering',
- thermodynamics: 'Thermodynamics'
+  chemical_engineering: 'Chemical Engineering',
+  circuit_analysis: 'Circuit Analysis',
+  civil_engineering: 'Civil Engineering',
+  communication_engineering: 'Communication Engineering',
+  digital_electronics: 'Digital Electronics',
+  dynamics_controls: 'Dynamics & Controls',
+  electrical_engineering: 'Electrical Engineering',
+  electronics: 'Electronics',
+  energy_systems_engineering: 'Energy Systems Engineering',
+  engineering_other: 'Engineering - Other',
+  environmental_engineering: 'Environmental Engineering',
+  food_engineering: 'Food Engineering',
+  hydrodynamics: 'Hydrodynamics',
+  image_processing: 'Image Processing',
+  industrial_engineering: 'Industrial Engineering',
+  marine_engineering: 'Marine Engineering',
+  materials_science: 'Materials Science',
+  matlab_for_engineering: 'MATLAB for Engineering',
+  mechanical_engineering: 'Mechanical Engineering',
+  networking_and_data_communication: 'Networking and Data Communication',
+  nuclear_engineering: 'Nuclear Engineering',
+  petroleum_engineering: 'Petroleum Engineering',
+  power_system_engineering: 'Power System Engineering',
+  radar_and_antennas: 'Radar and Antennas',
+  robotics_automation: 'Robotics & Automation',
+  solidworks: 'SolidWorks',
+  structural_engineering: 'Structural Engineering',
+  systems_engineering: 'Systems Engineering',
+  thermodynamics: 'Thermodynamics'
 }
 
 export const mathematicsCodes = {
@@ -280,19 +280,19 @@ export const managementCodes = {
   business_law_corporate_law: 'Business Law & Corporate Law',
   business_studies: 'Business Studies',
   corporate_governance_ethics: 'Corporate Governance & Ethics',
- economics: 'Economics',
- entrepreneurship: 'Entrepreneurship',
- financial_management: 'Financial Management',
- human_resource_management: 'Human Resource Management',
- information_management: 'Information Management',
- international_business: 'International Business',
- leadership: 'Leadership',
- marketing_management: 'Marketing Management',
- organizational_behaviour: 'Organizational Behaviour',
- principles_of_management: 'Principles of Management',
- project_management: 'Project Management',
- risk_management: 'Risk Management',
- strategic_management: 'Strategic Management'
+  economics: 'Economics',
+  entrepreneurship: 'Entrepreneurship',
+  financial_management: 'Financial Management',
+  human_resource_management: 'Human Resource Management',
+  information_management: 'Information Management',
+  international_business: 'International Business',
+  leadership: 'Leadership',
+  marketing_management: 'Marketing Management',
+  organizational_behaviour: 'Organizational Behaviour',
+  principles_of_management: 'Principles of Management',
+  project_management: 'Project Management',
+  risk_management: 'Risk Management',
+  strategic_management: 'Strategic Management'
 }
 
 export const subjects = [
@@ -300,20 +300,20 @@ export const subjects = [
 ];
 
 export const mathsSubjects = [
-  mathematicsCodes.abstract_algebra,mathematicsCodes.actuarial_science,mathematicsCodes.advanced_math,mathematicsCodes.advanced_statistics,mathematicsCodes.algebra,mathematicsCodes.algebraic_geometry,mathematicsCodes.applied_statistics,mathematicsCodes.basic_math,mathematicsCodes.calculus,mathematicsCodes.combinatorics,mathematicsCodes.complex_analysis,mathematicsCodes.control_theory,mathematicsCodes.decision_theory,mathematicsCodes.differential_equations,mathematicsCodes.differential_geometry,mathematicsCodes.discrete_math,mathematicsCodes.dynamical_systems,mathematicsCodes.ergodic_theory,mathematicsCodes.functional_analysis,mathematicsCodes.game_theory,mathematicsCodes.general_statistics,mathematicsCodes.geometry,mathematicsCodes.integral_equations,mathematicsCodes.linear_algebra,mathematicsCodes.math_logic,mathematicsCodes.mathematics_other,mathematicsCodes.matlab_for_mathematics,mathematicsCodes.measure_theory,mathematicsCodes.number_theory,mathematicsCodes.numerical_analysis,mathematicsCodes.operations_research,mathematicsCodes.perturbation_methods,mathematicsCodes.precalculus,mathematicsCodes.probability,mathematicsCodes.queuing_theory,mathematicsCodes.real_analysis,mathematicsCodes.set_theory,mathematicsCodes.signal_processing,mathematicsCodes.statisticsr_programming,mathematicsCodes.topology,mathematicsCodes.trigonometry,
+  mathematicsCodes.abstract_algebra, mathematicsCodes.actuarial_science, mathematicsCodes.advanced_math, mathematicsCodes.advanced_statistics, mathematicsCodes.algebra, mathematicsCodes.algebraic_geometry, mathematicsCodes.applied_statistics, mathematicsCodes.basic_math, mathematicsCodes.calculus, mathematicsCodes.combinatorics, mathematicsCodes.complex_analysis, mathematicsCodes.control_theory, mathematicsCodes.decision_theory, mathematicsCodes.differential_equations, mathematicsCodes.differential_geometry, mathematicsCodes.discrete_math, mathematicsCodes.dynamical_systems, mathematicsCodes.ergodic_theory, mathematicsCodes.functional_analysis, mathematicsCodes.game_theory, mathematicsCodes.general_statistics, mathematicsCodes.geometry, mathematicsCodes.integral_equations, mathematicsCodes.linear_algebra, mathematicsCodes.math_logic, mathematicsCodes.mathematics_other, mathematicsCodes.matlab_for_mathematics, mathematicsCodes.measure_theory, mathematicsCodes.number_theory, mathematicsCodes.numerical_analysis, mathematicsCodes.operations_research, mathematicsCodes.perturbation_methods, mathematicsCodes.precalculus, mathematicsCodes.probability, mathematicsCodes.queuing_theory, mathematicsCodes.real_analysis, mathematicsCodes.set_theory, mathematicsCodes.signal_processing, mathematicsCodes.statisticsr_programming, mathematicsCodes.topology, mathematicsCodes.trigonometry,
 ]
 export const engineeringSubjects = [
-  engineeringCodes.autocad,engineeringCodes.chemical_engineering,engineeringCodes.circuit_analysis,engineeringCodes.civil_engineering,engineeringCodes.communication_engineering,engineeringCodes.digital_electronics,engineeringCodes.dynamics_controls,engineeringCodes.electrical_engineering,engineeringCodes.electronics,engineeringCodes.energy_systems_engineering,engineeringCodes.engineering_other,engineeringCodes.environmental_engineering,engineeringCodes.food_engineering,engineeringCodes.hydrodynamics,engineeringCodes.image_processing,engineeringCodes.industrial_engineering,engineeringCodes.marine_engineering,engineeringCodes.materials_science,engineeringCodes.matlab_for_engineering,engineeringCodes.mechanical_engineering,engineeringCodes.networking_and_data_communication,engineeringCodes.nuclear_engineering,engineeringCodes.petroleum_engineering,engineeringCodes.power_system_engineering,engineeringCodes.radar_and_antennas,engineeringCodes.robotics_automation,engineeringCodes.solidworks,engineeringCodes.structural_engineering,engineeringCodes.systems_engineering,engineeringCodes.thermodynamics
+  engineeringCodes.autocad, engineeringCodes.chemical_engineering, engineeringCodes.circuit_analysis, engineeringCodes.civil_engineering, engineeringCodes.communication_engineering, engineeringCodes.digital_electronics, engineeringCodes.dynamics_controls, engineeringCodes.electrical_engineering, engineeringCodes.electronics, engineeringCodes.energy_systems_engineering, engineeringCodes.engineering_other, engineeringCodes.environmental_engineering, engineeringCodes.food_engineering, engineeringCodes.hydrodynamics, engineeringCodes.image_processing, engineeringCodes.industrial_engineering, engineeringCodes.marine_engineering, engineeringCodes.materials_science, engineeringCodes.matlab_for_engineering, engineeringCodes.mechanical_engineering, engineeringCodes.networking_and_data_communication, engineeringCodes.nuclear_engineering, engineeringCodes.petroleum_engineering, engineeringCodes.power_system_engineering, engineeringCodes.radar_and_antennas, engineeringCodes.robotics_automation, engineeringCodes.solidworks, engineeringCodes.structural_engineering, engineeringCodes.systems_engineering, engineeringCodes.thermodynamics
 ]
 
 export const physicsSubjects = [
-  physicsCodes.astrophysics,physicsCodes.chaos_theory,physicsCodes.classical_mechanics,physicsCodes.electricity_and_magnetism,physicsCodes.fluid_dynamics,physicsCodes.general_physics,physicsCodes.gravitation,physicsCodes.mathematical_physics,physicsCodes.matlab_for_physics,physicsCodes.nanotechnology,physicsCodes.nuclear_physics,physicsCodes.optoelectronics,physicsCodes.physics_other,physicsCodes.quantum_physics,physicsCodes.relativity,physicsCodes.semiconductor_physics,physicsCodes.thermodynamics,
+  physicsCodes.astrophysics, physicsCodes.chaos_theory, physicsCodes.classical_mechanics, physicsCodes.electricity_and_magnetism, physicsCodes.fluid_dynamics, physicsCodes.general_physics, physicsCodes.gravitation, physicsCodes.mathematical_physics, physicsCodes.matlab_for_physics, physicsCodes.nanotechnology, physicsCodes.nuclear_physics, physicsCodes.optoelectronics, physicsCodes.physics_other, physicsCodes.quantum_physics, physicsCodes.relativity, physicsCodes.semiconductor_physics, physicsCodes.thermodynamics,
 ]
 export const managementSubjects = [
-  managementCodes.accounting, managementCodes.business_law_corporate_law,managementCodes.business_studies,managementCodes.corporate_governance_ethics,managementCodes.economics,managementCodes.entrepreneurship,managementCodes.financial_management,managementCodes.human_resource_management,managementCodes.information_management,managementCodes.international_business,managementCodes.leadership,managementCodes.marketing_management,managementCodes.organizational_behaviour,managementCodes.principles_of_management,managementCodes.project_management,managementCodes.risk_management,managementCodes.strategic_management
+  managementCodes.accounting, managementCodes.business_law_corporate_law, managementCodes.business_studies, managementCodes.corporate_governance_ethics, managementCodes.economics, managementCodes.entrepreneurship, managementCodes.financial_management, managementCodes.human_resource_management, managementCodes.information_management, managementCodes.international_business, managementCodes.leadership, managementCodes.marketing_management, managementCodes.organizational_behaviour, managementCodes.principles_of_management, managementCodes.project_management, managementCodes.risk_management, managementCodes.strategic_management
 ]
 export const csSubjects = [
-  computerScienceCodes.app_development,computerScienceCodes.artificial_intelligence,computerScienceCodes.assembly_language,computerScienceCodes.blockchain,computerScienceCodes.cpp_programming,computerScienceCodes.csharp_programming,computerScienceCodes.cryptography,computerScienceCodes.data_structures,computerScienceCodes.algorithms,computerScienceCodes.database_management,computerScienceCodes.digital_electronics,computerScienceCodes.discrete_math,computerScienceCodes.information_security,computerScienceCodes.information_theory,computerScienceCodes.java_programming,computerScienceCodes.javascript_programming,computerScienceCodes.linux,computerScienceCodes.machine_learning,computerScienceCodes.matlab_programing,computerScienceCodes.microsoft_net_framework,computerScienceCodes.networking_and_data_communication,computerScienceCodes.operating_systems,computerScienceCodes.parallel_computing,computerScienceCodes.perl_programming,computerScienceCodes.python_programming,computerScienceCodes.ruby_programming,computerScienceCodes.software_engineering_and_design,computerScienceCodes.software_testing_and_analysis,computerScienceCodes.theoretical_computer_science,computerScienceCodes.web_development,computerScienceCodes.image_processing,computerScienceCodes.natural_language_processing
+  computerScienceCodes.app_development, computerScienceCodes.artificial_intelligence, computerScienceCodes.assembly_language, computerScienceCodes.blockchain, computerScienceCodes.cpp_programming, computerScienceCodes.csharp_programming, computerScienceCodes.cryptography, computerScienceCodes.data_structures, computerScienceCodes.algorithms, computerScienceCodes.database_management, computerScienceCodes.digital_electronics, computerScienceCodes.discrete_math, computerScienceCodes.information_security, computerScienceCodes.information_theory, computerScienceCodes.java_programming, computerScienceCodes.javascript_programming, computerScienceCodes.linux, computerScienceCodes.machine_learning, computerScienceCodes.matlab_programing, computerScienceCodes.microsoft_net_framework, computerScienceCodes.networking_and_data_communication, computerScienceCodes.operating_systems, computerScienceCodes.parallel_computing, computerScienceCodes.perl_programming, computerScienceCodes.python_programming, computerScienceCodes.ruby_programming, computerScienceCodes.software_engineering_and_design, computerScienceCodes.software_testing_and_analysis, computerScienceCodes.theoretical_computer_science, computerScienceCodes.web_development, computerScienceCodes.image_processing, computerScienceCodes.natural_language_processing
 ]
 
 export const regexp_patterns = {
@@ -375,6 +375,8 @@ export const mailTemplates = {
   studentNewQuestion: 'student-new-question.handlebars',
   tutorNewQuestion: 'tutor-new-request.handlebars',
   welcome: 'welcome.handlebars',
+  tutorJoin: 'tutor-join.handlebars',
+  refundRequest: 'refund-request.handlebars',
 }
 
 export function getSuspisiousMessageReplacement(requestId: string, chatLink: string) {
@@ -416,6 +418,19 @@ export function getTutorNewQuestion(questionTitle: string, name: string, request
 export function getWelcomeQuestion(name: string) {
   return {
     name: name,
+  }
+}
+
+export function getRefundRequest(requestId: string) {
+  return {
+    requestId: requestId,
+  }
+}
+
+export function getTutorJoinRequest(name: string,tutorName:string) {
+  return {
+    name: name,
+    tutorName: tutorName,
   }
 }
 
