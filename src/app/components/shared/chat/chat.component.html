@@ -750,42 +750,49 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isTutor && !questionService.question.isQuoteSend" class="cover-box" fxLayout="row wrap"
+      <div *ngIf="isTutor && !questionService.question.isPaid" class="cover-box" fxLayout="row wrap"
            fxLayoutAlign="space-between center">
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+        <div *ngIf="(isTutor && !questionService.question.isQuoteSend) || (isTutor && enableChangeQuote)"
+             fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
           <img src="../../../../assets/icons/nervo.svg">
           <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="number" [formControl]="quote" (input)="onTypeQuote()">
           </mat-form-field>
         </div>
         <button (click)="onSendQuote()" mat-flat-button
+                *ngIf="(isTutor && !questionService.question.isQuoteSend) || (isTutor && enableChangeQuote )"
                 [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'"
                 [disabled]="isSendQuoteDissabled">
           Send Quote
         </button>
+        <button (click)="onChangeQuote()" mat-flat-button
+                *ngIf="isTutor && questionService.question.isQuoteSend && !enableChangeQuote"
+                [ngClass]=" 'pay-now'">
+          Change Quote
+        </button>
       </div>
 
-      <!--      if quote is not accepted by student yet-->
-      <button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"
-              mat-flat-button
-              [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'">
-        Quote Not accepted yet
-      </button>
+      <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
+      <!--<button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now&#45;&#45;dissabled' : 'pay-now'">-->
+      <!--Quote Not accepted yet-->
+      <!--</button>-->
 
-      <!--      if quote is not accepted by student yet-->
-      <button (click)="onApproveQuote()"
-              *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"
-              mat-flat-button
-              [ngClass]=" 'pay-now'">
-        Approve Quote of {{questionService.question.fee}} USD
-      </button>
+      <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
+      <!--<button (click)="onApproveQuote()"-->
+      <!--*ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approve Quote of {{questionService.question.fee}} USD-->
+      <!--</button>-->
 
-      <!--      if quote is accepted by student-->
-      <button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"
-              mat-flat-button
-              [ngClass]=" 'pay-now'">
-        Approved Quote of {{questionService.question.fee}} USD
-      </button>
+      <!--&lt;!&ndash;      if quote is accepted by student&ndash;&gt;-->
+      <!--<button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approved Quote of {{questionService.question.fee}} USD-->
+      <!--</button>-->
 
       <!--      if quote is accepted by student-->
       <button *ngIf="questionService.question.isPaid && isTutor" mat-flat-button
@@ -811,8 +818,13 @@
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
-        <button (click)="onRequestRefund()" mat-flat-button class="request-refund">
+        <button *ngIf="!questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="request-refund">
           Request refund
+        </button>
+        <button *ngIf="questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="requested-refund">
+          Requested refund
         </button>
       </div>
       <div *ngIf="!questionService.question.isPaid && !isTutor && questionService.question.isQuoteApproved"
