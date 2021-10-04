@@ -425,7 +425,7 @@
         <div class="assigned-to">
           Assigned to
         </div>
-        <div class="prof" fxLayout="row" fxLayoutGap="16px">
+        <div class="prof" fxLayout="row wrap" fxLayoutGap="16px grid">
           <div *ngIf="questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
             <img [src]="questionService.question.tutorImage" class="avatar-x">
             <!--            <img src="../../../../assets/icons/active.svg" class="active">-->
@@ -438,21 +438,21 @@
             <div class="head">
               {{questionService.question.tutorName}}
             </div>
-            <!--<div class="sub" ng-class="{show: show}">-->
-            <!--when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.-->
-
-            <!--</div>-->
-            <!--<button ng-click="show = true">Show text</button>-->
-            <mat-accordion>
-              <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                  <div class="sub">
-                    This is a summary of the content
-                  </div>
-                </mat-expansion-panel-header>
-                <p>This is the primary content of the panel.</p>
-              </mat-expansion-panel>
-            </mat-accordion>
+            <div class="sub">
+              {{desc}}
+            </div>
+            <a class="show-more" (click)="showMore(0)" *ngIf="desc.length < 24">show more</a>
+            <a class="show-more" (click)="showMore(1)" *ngIf="desc.length > 23">show less</a>
+            <!--<mat-accordion>-->
+              <!--<mat-expansion-panel hideToggle>-->
+                <!--<mat-expansion-panel-header>-->
+                  <!--<div class="sub">-->
+                    <!--This is a summary of the content-->
+                  <!--</div>-->
+                <!--</mat-expansion-panel-header>-->
+                <!--<p>This is the primary content of the panel.</p>-->
+              <!--</mat-expansion-panel>-->
+            <!--</mat-accordion>-->
           </div>
         </div>
       </div>
@@ -680,7 +680,10 @@
                       {{questionService.question.fee}} USD
                     </div>
                   </div>
-                  <button mat-flat-button class="send-quote-button">Pay Now</button>
+                  <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
+                          [disabled]="!message.isValidQuote && question.isPaid"
+                          (click)="onPay()">Pay Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -746,42 +749,49 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isTutor && !questionService.question.isQuoteSend" class="cover-box" fxLayout="row wrap"
+      <div *ngIf="isTutor && !questionService.question.isPaid" class="cover-box" fxLayout="row wrap"
            fxLayoutAlign="space-between center">
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+        <div *ngIf="(isTutor && !questionService.question.isQuoteSend) || (isTutor && enableChangeQuote)"
+             fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
           <img src="../../../../assets/icons/nervo.svg">
           <mat-form-field appearance="outline" class="my-form-field">
             <input matInput type="number" [formControl]="quote" (input)="onTypeQuote()">
           </mat-form-field>
         </div>
         <button (click)="onSendQuote()" mat-flat-button
+                *ngIf="(isTutor && !questionService.question.isQuoteSend) || (isTutor && enableChangeQuote )"
                 [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'"
                 [disabled]="isSendQuoteDissabled">
           Send Quote
         </button>
+        <button (click)="onChangeQuote()" mat-flat-button
+                *ngIf="isTutor && questionService.question.isQuoteSend && !enableChangeQuote"
+                [ngClass]=" 'pay-now'">
+          Change Quote
+        </button>
       </div>
 
-      <!--      if quote is not accepted by student yet-->
-      <button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"
-              mat-flat-button
-              [ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now--dissabled' : 'pay-now'">
-        Quote Not accepted yet
-      </button>
+      <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
+      <!--<button *ngIf="!questionService.question.isQuoteApproved && isTutor && questionService.question.isQuoteSend"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" isSendQuoteDissabled ? 'pay-now pay-now&#45;&#45;dissabled' : 'pay-now'">-->
+      <!--Quote Not accepted yet-->
+      <!--</button>-->
 
-      <!--      if quote is not accepted by student yet-->
-      <button (click)="onApproveQuote()"
-              *ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"
-              mat-flat-button
-              [ngClass]=" 'pay-now'">
-        Approve Quote of {{questionService.question.fee}} USD
-      </button>
+      <!--&lt;!&ndash;      if quote is not accepted by student yet&ndash;&gt;-->
+      <!--<button (click)="onApproveQuote()"-->
+      <!--*ngIf="!questionService.question.isQuoteApproved && !isTutor && questionService.question.isQuoteSend"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approve Quote of {{questionService.question.fee}} USD-->
+      <!--</button>-->
 
-      <!--      if quote is accepted by student-->
-      <button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"
-              mat-flat-button
-              [ngClass]=" 'pay-now'">
-        Approved Quote of {{questionService.question.fee}} USD
-      </button>
+      <!--&lt;!&ndash;      if quote is accepted by student&ndash;&gt;-->
+      <!--<button *ngIf="questionService.question.isQuoteApproved && isTutor && !questionService.question.isPaid"-->
+      <!--mat-flat-button-->
+      <!--[ngClass]=" 'pay-now'">-->
+      <!--Approved Quote of {{questionService.question.fee}} USD-->
+      <!--</button>-->
 
       <!--      if quote is accepted by student-->
       <button *ngIf="questionService.question.isPaid && isTutor" mat-flat-button
@@ -807,8 +817,13 @@
           </div>
           <div class="c-chip c-chip--progress">Fully paid</div>
         </div>
-        <button (click)="onRequestRefund()" mat-flat-button class="request-refund">
+        <button *ngIf="!questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="request-refund">
           Request refund
+        </button>
+        <button *ngIf="questionService.question.isRefundRequested" (click)="onRequestRefund()" mat-flat-button
+                class="requested-refund">
+          Requested refund
         </button>
       </div>
       <div *ngIf="!questionService.question.isPaid && !isTutor && questionService.question.isQuoteApproved"
@@ -845,6 +860,11 @@
             <div class="head">
               {{questionService.question.tutorName}}
             </div>
+            <div class="sub">
+              {{desc}}
+            </div>
+            <a class="show-more" (click)="showMore(0)" *ngIf="desc.length < 24">show more</a>
+            <a class="show-more" (click)="showMore(1)" *ngIf="desc.length > 23">show less</a>
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@ import {Attachment} from "../../../models/Attachment";
 import {PaymentService} from "../../../services/payment.service";
 import {NotificationService} from "../../../services/notification.service";
 import * as notificationMsg from '../../../models/notification-messages';
+import {Tutor} from "../../../models/tutor";
 import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
@@ -96,7 +97,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   test = new Date('Sep 01 2021 00:00:00');
   isTyping = false;
   sentMessageCount = 0;
-
+  show = false;
+  // @ts-ignore
+  tutor: Tutor;
+  des = 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+  desc = '';
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
@@ -117,7 +122,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   ngOnInit(): void {
-
     this.sentMessageCount = 0;
     this.activatedRoute.paramMap.subscribe(
       map => {
@@ -135,7 +139,18 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
+    if(this.des.length > 20) {
+      this.desc = this.des.substring(0,20).concat('...');
+    }
     // this.scrollToBottom();
+  }
+
+  showMore(num: number){
+    if (num === 0){
+      this.desc = this.des;
+    } else {
+      this.desc = this.des.substring(0,20).concat('...');
+    }
   }
 
   ngOnDestroy() {
@@ -253,6 +268,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.attachments.push(...this.chat.attachments);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
+            if(this.chat.tutorId) {
+              this.getTutor(this.chat.tutorId);
+            }
           }, () => {
             progressDailog.close();
           }
@@ -260,6 +278,17 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       }
     )
     // progressDailog.close()
+  }
+
+  getTutor(id: string) {
+    this.studentService.findStudentById(id).subscribe(
+      (res) => {
+
+        // @ts-ignore
+        this.tutor = res;
+        // this.des = this.tutor.description;
+      }
+    )
   }
 
   getTypingStatus() {
