@@ -23,6 +23,7 @@ import {Attachment} from "../../../models/Attachment";
 import {PaymentService} from "../../../services/payment.service";
 import {NotificationService} from "../../../services/notification.service";
 import * as notificationMsg from '../../../models/notification-messages';
+import {Tutor} from "../../../models/tutor";
 
 @Component({
   selector: 'app-chat',
@@ -96,6 +97,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   isTyping = false;
   sentMessageCount = 0;
   show = false;
+  // @ts-ignore
+  tutor: Tutor;
   des = 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   desc = '';
   constructor(private chatService: ChatServiceService,
@@ -264,6 +267,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.attachments.push(...this.chat.attachments);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
+            if(this.chat.tutorId) {
+              this.getTutor(this.chat.tutorId);
+            }
           }, () => {
             progressDailog.close();
           }
@@ -271,6 +277,17 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       }
     )
     // progressDailog.close()
+  }
+
+  getTutor(id: string) {
+    this.studentService.findStudentById(id).subscribe(
+      (res) => {
+
+        // @ts-ignore
+        this.tutor = res;
+        // this.des = this.tutor.description;
+      }
+    )
   }
 
   getTypingStatus() {
