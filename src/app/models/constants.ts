@@ -6,7 +6,8 @@ export const adminEmail = "tharindu.prf@gmail.com"
 export const env_url = {
   heroku_url: 'https://sandunapi.tk/',
   local_url: 'http://localhost:4200/',
-  prod_url: 'https://tutetory.com'
+  prod_url: 'https://tutetory.com',
+  local_backend_url: 'http://localhost:5000'
 }
 
 export const system_name = 'Tutetory';

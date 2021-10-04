@@ -373,6 +373,7 @@ export class AddQuestionComponent implements OnInit {
                 this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId], {skipLocationChange: true});
               });
             } else {
+              console.log(question.dueDate);
               // @ts-ignore
               question.questionNumber = res.data().questionNumber;
               this.questionService.saveNotLoggedQuestion(question).subscribe((response) => {

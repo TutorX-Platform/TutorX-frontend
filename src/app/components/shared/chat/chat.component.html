@@ -16,8 +16,7 @@
           <div *ngIf="questionService.question.status === 'Assigned'" class="c-chip c-chip--subjects invert-false">
             Assigned
           </div>
-          <div *ngIf="questionService.question.status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In
-            Progress
+          <div *ngIf="questionService.question.status === 'Cancelled'" class="c-chip c-chip--danger invert-false">Cancelled
           </div>
           <!--<div class="c-chip c-chip&#45;&#45;progress">{{questionService.question.status}}</div>-->
         </div>
@@ -278,7 +277,7 @@
 
       </div>
       <div class="typing-box">
-        <div fxLayout="row" fxLayoutAlign="space-between center" class="typer">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="typer" aria-readonly="true">
           <!--<textarea matInput type="text" placeholder="Reply"-->
           <!--oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'-->
           <!--class="message-input" [formControl]="message" (input)="onType()" (focus)="onFocus()"-->

@@ -74,7 +74,7 @@ const routes: Routes = [
   {
     path: 'student',
     component: StudentComponent,
-    canActivate: [AngularFireAuthGuard],
+    // canActivate: [AngularFireAuthGuard],
     children: [
       {
         path: 'questions',

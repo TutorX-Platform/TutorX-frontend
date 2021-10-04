@@ -19,6 +19,7 @@ export const questionTitles = {
   requestRefund: "Request a refund",
   acceptNotification: "Please allow send notifications",
   alreadySameFee: "Quote Exists !!",
+  signupInfo: "Please sign up !!",
 }
 
 export const questionMessages = {
@@ -44,7 +45,9 @@ export const questionMessages = {
   tutorReleaseQuestionConfirmation: "Please confirm to release this request.",
   requestNewTutorConfirmation: "Please confirm to request new a tutor.",
   alreadySameFee: "Your quote is matched with previous quote.",
-  questionCancelConfirm:"PLease confirm to cancel this question"
+  questionCancelConfirm:"PLease confirm to cancel this question",
+  signupInfo: "Please sign up to proceed this question !!",
+
 
 
 }
