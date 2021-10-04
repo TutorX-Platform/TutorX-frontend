@@ -423,7 +423,7 @@
         <div class="assigned-to">
           Assigned to
         </div>
-        <div class="prof" fxLayout="row" fxLayoutGap="16px">
+        <div class="prof" fxLayout="row wrap" fxLayoutGap="16px grid">
           <div *ngIf="questionService.question.tutorImage" fxLayout="row" fxLayoutGap="-15px">
             <img [src]="questionService.question.tutorImage" class="avatar-x">
             <!--            <img src="../../../../assets/icons/active.svg" class="active">-->
@@ -436,21 +436,21 @@
             <div class="head">
               {{questionService.question.tutorName}}
             </div>
-            <!--<div class="sub" ng-class="{show: show}">-->
-            <!--when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.-->
-
-            <!--</div>-->
-            <!--<button ng-click="show = true">Show text</button>-->
-            <mat-accordion>
-              <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                  <div class="sub">
-                    This is a summary of the content
-                  </div>
-                </mat-expansion-panel-header>
-                <p>This is the primary content of the panel.</p>
-              </mat-expansion-panel>
-            </mat-accordion>
+            <div class="sub">
+              {{desc}}
+            </div>
+            <a class="show-more" (click)="showMore(0)" *ngIf="desc.length < 24">show more</a>
+            <a class="show-more" (click)="showMore(1)" *ngIf="desc.length > 23">show less</a>
+            <!--<mat-accordion>-->
+              <!--<mat-expansion-panel hideToggle>-->
+                <!--<mat-expansion-panel-header>-->
+                  <!--<div class="sub">-->
+                    <!--This is a summary of the content-->
+                  <!--</div>-->
+                <!--</mat-expansion-panel-header>-->
+                <!--<p>This is the primary content of the panel.</p>-->
+              <!--</mat-expansion-panel>-->
+            <!--</mat-accordion>-->
           </div>
         </div>
       </div>
@@ -678,7 +678,10 @@
                       {{questionService.question.fee}} USD
                     </div>
                   </div>
-                  <button mat-flat-button class="send-quote-button">Pay Now</button>
+                  <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
+                          [disabled]="!message.isValidQuote && question.isPaid"
+                          (click)="onPay()">Pay Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -843,6 +846,11 @@
             <div class="head">
               {{questionService.question.tutorName}}
             </div>
+            <div class="sub">
+              {{desc}}
+            </div>
+            <a class="show-more" (click)="showMore(0)" *ngIf="desc.length < 24">show more</a>
+            <a class="show-more" (click)="showMore(1)" *ngIf="desc.length > 23">show less</a>
           </div>
         </div>
       </div>

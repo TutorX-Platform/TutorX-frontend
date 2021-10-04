@@ -28,6 +28,7 @@ const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
 const routes: Routes = [
   {path: 'home', component: BodyComponent},
+  {path: 'payment', component: CardDetailsComponent},
   {path: 'sign-in', component: SignInMobileComponent},
   {path: 'dummy', component: DummyComponent},
   {path: 'temp', component: SuccesMessageComponent},
