@@ -389,7 +389,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       // @ts-ignore
       this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
     } else {
-      this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+      if (this.authService.isLoggedIn){
+        this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+      } else {
+        this.router.navigate([constants.routes.home], {skipLocationChange: true});
+      }
     }
   }
 
