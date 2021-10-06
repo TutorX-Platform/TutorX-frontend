@@ -143,7 +143,11 @@ export class AddQuestionMobileComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+    if( this.authService.isLoggedIn ){
+      this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+    } else {
+      this.router.navigate([constants.routes.home], {skipLocationChange: true});
+    }
   }
 
   onDone() {
@@ -303,6 +307,7 @@ export class AddQuestionMobileComponent implements OnInit {
                   this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
                 }
                 dialogRef.close(true);
+                this.router.navigate([constants.routes.chat, this.questionId], {skipLocationChange: true});
               });
             } else {
               // @ts-ignore
@@ -320,8 +325,10 @@ export class AddQuestionMobileComponent implements OnInit {
                     this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
                   }
                   dialogRef.close(true);
+                  this.router.navigate([constants.routes.chat, this.questionId], {skipLocationChange: true});
                 } else {
                   alert("invalid domain")
+                  this.router.navigate([constants.routes.student + constants.routes.questions], {skipLocationChange: true});
                 }
               })
             }
