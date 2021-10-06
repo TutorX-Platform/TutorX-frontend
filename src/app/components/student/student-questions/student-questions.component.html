@@ -95,12 +95,16 @@
       <div *ngFor="let q of askedQuestions">
         <div class="mobile-question-container" fxLayout="row" fxLayoutAlign="space-between center"
              (click)="onViewChat(q.id)">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-            <div class="topic">
-              {{q.questionTitle}}
+          <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <div class="topic">
+                {{q.questionTitle}}
+              </div>
+              <img src="../../../../assets/icons/active.svg" *ngIf="q.studentUnReadMessages">
             </div>
-            <!--<img src="../../../../assets/icons/active.svg" *ngIf="isTutor && q.tutorUnReadMessage">-->
-            <img src="../../../../assets/icons/active.svg" *ngIf="q.studentUnReadMessages ">
+            <div class="sub-tittle">
+              {{q.questionNumber}}
+            </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
             <div *ngIf="q.tutorImage && q.tutorId !== null && q.tutorId !== ''">

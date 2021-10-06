@@ -118,13 +118,16 @@ export class AddQuestionMobileComponent implements OnInit {
     if (this.options.filter(option => option.toLowerCase().includes(filterValue)).length === 1) {
       this.selectedSubject = this.options.filter(option => option.toLowerCase().includes(filterValue))[0];
       if (this.selectedSubject === constants.subjectCodes.mathematics) {
-        this.subOptions.push(...constants.mathsSubjects)
+        this.subOptions = constants.mathsSubjects;
       }
       if (this.selectedSubject === constants.subjectCodes.management) {
         this.subOptions = constants.managementSubjects;
       }
       if (this.selectedSubject === constants.subjectCodes.physics) {
         this.subOptions = constants.physicsSubjects;
+      }
+      if (this.selectedSubject === constants.subjectCodes.engineering) {
+        this.subOptions = constants.engineeringSubjects;
       }
       if (this.selectedSubject === constants.subjectCodes.computer_science) {
         this.subOptions = constants.csSubjects;
@@ -440,5 +443,9 @@ export class AddQuestionMobileComponent implements OnInit {
     this.chatService.createChat(chatId, data);
   }
 
+  changeSubCategory() {
+    // @ts-ignore
+    this.addQuestionForm.get('subCategory').setValue('');
+  }
 
 }

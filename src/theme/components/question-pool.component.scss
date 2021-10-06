@@ -28,6 +28,10 @@
         .topic{
           font: $body-base-medium;
         }
+        .sub-tittle{
+          font: $body-base-default;
+          color: #5B6469;
+        }
         .time{
           font: $body-caption-default;
           color: #5B6469;
@@ -35,8 +39,8 @@
         }
         .avatar {
           vertical-align: middle;
-          width: 24px;
-          height: 24px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
           }
       }
