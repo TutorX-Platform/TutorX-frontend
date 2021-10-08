@@ -65,7 +65,7 @@ export class CardDetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
-              private questionService: QuestionService,
+              public questionService: QuestionService,
               private authService: AuthService,
               private dummyService: DummyService,
               private dialog: MatDialog,
@@ -201,7 +201,7 @@ export class CardDetailsComponent implements OnInit {
                   console.log(res);
                   // @ts-ignore
                   if (res['status'] === 200) {
-                    this.paymentService.incrementPayment(this.question.fee);
+                    this.paymentService.incrementPayment(this.questionService.question.fee);
                     this.updateQuestionAsPaid();
                     this.loading = false;
                     this.submitted = false;
@@ -218,7 +218,7 @@ export class CardDetailsComponent implements OnInit {
                       // @ts-ignore
                       this.recordPayment(res.time);
                       // @ts-ignore
-                      this.chatService.sendPaidQuoteMessage(this.question.id, res.time, this.question.fee);
+                      this.chatService.sendPaidQuoteMessage(this.questionService.question.id, res.time, this.questionService.question.fee);
                       this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
                       progressDialog.close();
                     })
@@ -252,8 +252,9 @@ export class CardDetailsComponent implements OnInit {
       isPaid: true,
       status: constants.questionStatus.in_progress,
     }
-    // this.questionService.updateQuestion(this.data, data);
-    this.questionService.incrementInProgressQuestionCount();
+    this.questionService.updateQuestion(this.questionService.question.uniqueId, data).then(() => {
+      this.questionService.incrementInProgressQuestionCount();
+    });
   }
 
   onCancel() {
@@ -265,17 +266,17 @@ export class CardDetailsComponent implements OnInit {
       month: new Date().getMonth() + 1,
       questionNumber: this.questionService.question.questionNumber,
       tutorName: this.questionService.question.tutorName,
-      questionTitle: this.question.questionTitle,
-      studentImage: this.question.studentImage,
-      studentName: this.question.studentName,
-      fee: this.question.fee,
-      paidBy: this.question.studentId,
+      questionTitle: this.questionService.question.questionTitle,
+      studentImage: this.questionService.question.studentImage,
+      studentName: this.questionService.question.studentName,
+      fee: this.questionService.question.fee,
+      paidBy: this.questionService.question.studentId,
       paidCurrency: constants.usedCurrency,
       paidTime: time,
       payRefNo: "",
       payStatus: constants.payStatus.success,
-      questionId: this.question.uniqueId,
-      tutorId: this.question.tutorId
+      questionId: this.questionService.question.uniqueId,
+      tutorId: this.questionService.question.tutorId
     }
     this.paymentService.recordPayment(payment).then((v) => {
       console.log(v);

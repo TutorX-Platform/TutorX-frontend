@@ -11,7 +11,7 @@ export class MailService {
   }
 
 
-  sendMail(subject: string, reciever: string, replacement: any, fileName: string) {
+  sendMail(subject: string, reciever: any, replacement: any, fileName: string) {
     const emailData = {
       'fromEmail': constants.email_data.senderEmail,
       'subject': subject,

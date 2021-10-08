@@ -67,4 +67,8 @@ export class StudentService {
     return payRef.update({'totalEarnings': increment});
   }
 
+  getAllTutors() {
+    return this.angularFirestoreService.collection(constants.collections.students,ref=>ref.where("role","==",constants.userTypes.tutor)).get()
+  }
+
 }
