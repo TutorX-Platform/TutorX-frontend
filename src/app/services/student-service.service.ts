@@ -64,11 +64,33 @@ export class StudentService {
     // @ts-ignore
     const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
     const increment = firestore.FieldValue.increment(fee);
-    return payRef.update({'totalEarnings': increment});
+    const decrement = firestore.FieldValue.increment(-1);
+    const data = {
+      'fee': increment,
+      'inprogressCount': decrement,
+    }
+    return payRef.update(data);
   }
 
   getAllTutors() {
-    return this.angularFirestoreService.collection(constants.collections.students,ref=>ref.where("role","==",constants.userTypes.tutor)).get()
+    return this.angularFirestoreService.collection(constants.collections.students, ref => ref.where("role", "==", constants.userTypes.tutor)).get()
+  }
+
+  incrementRequestCount(tutorId: string) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(1);
+    const data = {
+      'totalRequests': increment,
+    }
+    return payRef.update(data);
+  }
+
+  incrementInprogressRequestCount(tutorId: string) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(1);
+    return payRef.update({'inprogressCount': increment});
   }
 
 }

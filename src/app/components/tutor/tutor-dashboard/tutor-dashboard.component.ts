@@ -19,13 +19,15 @@ export class TutorDashboardComponent implements OnInit {
   rating = 4;
   reviews: Review[] = [];
   chats: Chat[] = []
-  tutor:Tutor = {
+  tutor: Tutor = {
+    inprogressCount: 0,
+    totalRequests: 0,
     accNo: "",
     bankName: "",
     branchName: "",
     city: "",
     country: "",
-    description: 0,
+    description: '',
     email: "",
     engagedJobs: [],
     firstName: "",
@@ -46,6 +48,7 @@ export class TutorDashboardComponent implements OnInit {
 
   constructor(
     public studentService: StudentService,
+    private authService: AuthService,
     private dialog: MatDialog,
     private chatService: ChatServiceService,
     private reviewService: ReviewService
@@ -68,6 +71,8 @@ export class TutorDashboardComponent implements OnInit {
         if (res) {
           // @ts-ignore
           this.studentService.currentStudent = res;
+          // @ts-ignore
+          this.tutor = res;
           this.findReviews();
         }
         progressDialog.close();

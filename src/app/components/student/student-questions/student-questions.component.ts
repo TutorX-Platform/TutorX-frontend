@@ -228,7 +228,6 @@ export class StudentQuestionsComponent implements OnInit {
       filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.management))
     }
     if (this.isEngineering) {
-      console.log('hell');
       filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.engineering))
     }
     if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isPhysics && !this.isManagement && !this.isCS && !this.isMaths && !this.isEngineering) {

@@ -273,7 +273,7 @@ export class ChatServiceService {
 
   MarkAsCompleted(chatToken: string) {
     const chatData = {
-      status: constants.chat_status.closed,
+      chatStatus: constants.chat_status.closed,
     }
     return this.angularFirestoreService.collection(constants.collections.chats).doc(chatToken).update(chatData);
   }

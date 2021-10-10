@@ -36,12 +36,13 @@ export class TutorComponent implements OnInit {
   uid = '';
 
   currentStudent: Tutor = {
+    inprogressCount: 0, totalRequests: 0,
     accNo: "",
     bankName: "",
     branchName: "",
     city: "",
     country: "",
-    description: 0,
+    description: '',
     engagedJobs: [],
     phoneNumber: "",
     postalCode: "",

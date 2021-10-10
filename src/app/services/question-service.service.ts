@@ -125,7 +125,7 @@ export class QuestionService {
       tutorName: tutorName,
       tutorImage: tutorImage
     }
-    this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
+   return  this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.utilService.getTimeFromTimeAPI().subscribe((res) => {
         // @ts-ignore
         this.time = res;

@@ -361,7 +361,7 @@ export class AddQuestionComponent implements OnInit {
               this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
                 // @ts-ignore
                 this.askedQuestions.push(this.questionId);
-                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student),question.questionNumber);
+                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student), question.questionNumber);
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
@@ -381,7 +381,7 @@ export class AddQuestionComponent implements OnInit {
                 console.log(res.data());
                 // @ts-ignore
                 if (response.staus === 200) {
-                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student),question.questionNumber);
+                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student), question.questionNumber);
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
@@ -535,7 +535,9 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     if (this.data.isTutor) {
       // @ts-ignore
-      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage);
+      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage).then(() => {
+        this.studentService.incrementRequestCount(this.authService.student.userId).then();
+      });
       // @ts-ignore
       this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.firstName), constants.mailTemplates.tutorJoin).subscribe()
       // @ts-ignore
