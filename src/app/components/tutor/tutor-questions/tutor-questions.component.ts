@@ -115,7 +115,7 @@ export class TutorQuestionsComponent implements OnInit {
       )
     })
 
-    this.getNotifications();
+    // this.getNotifications();
 
   }
 
