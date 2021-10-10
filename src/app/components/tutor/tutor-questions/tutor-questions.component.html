@@ -34,27 +34,25 @@
       </div>
     </div>
     <div fxLayout="column" class="right-container">
-<!--      <mat-form-field appearance="outline" class="my-form-field">-->
-<!--        <span matPrefix>-->
-<!--          <mat-icon>search</mat-icon> &nbsp;&nbsp;-->
-<!--        </span>-->
-<!--        <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">-->
-<!--        <mat-autocomplete #auto="matAutocomplete">-->
-<!--          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">-->
-<!--            {{option}}-->
-<!--          </mat-option>-->
-<!--        </mat-autocomplete>-->
-<!--      </mat-form-field>-->
+      <!--      <mat-form-field appearance="outline" class="my-form-field">-->
+      <!--        <span matPrefix>-->
+      <!--          <mat-icon>search</mat-icon> &nbsp;&nbsp;-->
+      <!--        </span>-->
+      <!--        <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">-->
+      <!--        <mat-autocomplete #auto="matAutocomplete">-->
+      <!--          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">-->
+      <!--            {{option}}-->
+      <!--          </mat-option>-->
+      <!--        </mat-autocomplete>-->
+      <!--      </mat-form-field>-->
       <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-form-field appearance="outline" class="my-form-field">
-          <mat-select (change)="onFilterSelect($event)" [(ngModel)]="selectedValue" placeholder="Select">
-            <mat-option *ngFor="let sort of sortings" [value]="sort.id">
-              {{sort.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-select (change)="onFilterSelect($event)" [(ngModel)]="selectedValue" placeholder="Select">
+          <mat-option *ngFor="let sort of sortings" [value]="sort.id">
+            {{sort.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <div class="filter-results">
         Filter Results
         <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">

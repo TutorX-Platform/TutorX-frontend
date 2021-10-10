@@ -10,26 +10,30 @@
         <!--<input matInput placeholder="Ex. Pizza" value="Sushi">-->
         <!--</mat-form-field>-->
         <!--</div>-->
-        <div class="label">Email address</div>
-        <mat-form-field class="my-form-field" appearance="outline">
-          <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
-        </mat-form-field>
-        <mat-error *ngIf="signInForm.get('email')?.touched && signInForm.get('email')?.hasError('required')"
-                   class="label">
-          {{validations.emailRequired}}
-        </mat-error>
-        <div class="label">Password</div>
-        <mat-form-field appearance="outline" class="my-form-field">
-          <input formControlName="password" matInput type="password" class="other">
-        </mat-form-field>
-        <mat-error *ngIf="signInForm.get('password')?.touched && signInForm.get('password')?.hasError('required')"
-                   class="label">
-          {{validations.passwordRequired}}
-        </mat-error>
-        <mat-error *ngIf="signInForm.get('password')?.touched && signInForm.get('password')?.hasError('minLength')"
-                   class="label">
-          {{validations.passwordLengthMinRequired}}
-        </mat-error>
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Email address</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
+            <mat-error *ngIf="signInForm.get('email')?.touched && signInForm.get('email')?.hasError('required')"
+                       class="label">
+              {{validations.emailRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Password</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input formControlName="password" matInput type="password" class="other">
+            <mat-error *ngIf="signInForm.get('password')?.touched && signInForm.get('password')?.hasError('required')"
+                       class="label">
+              {{validations.passwordRequired}}
+            </mat-error>
+            <mat-error *ngIf="signInForm.get('password')?.touched && signInForm.get('password')?.hasError('minLength')"
+                       class="label">
+              {{validations.passwordLengthMinRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
         <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
           <div>
             <a style="color: #228CCD !important;" href="#">Forgot password</a>
