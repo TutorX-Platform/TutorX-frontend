@@ -17,7 +17,7 @@ export interface Tutor {
   rating: number;
   totalEarnings: number;
   tasksCompleted: number;
-  description: number;
+  description: string;
   visibleName: string;
   postalCode: string;
   accNo: string;

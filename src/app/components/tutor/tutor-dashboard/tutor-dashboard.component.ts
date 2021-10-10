@@ -27,7 +27,7 @@ export class TutorDashboardComponent implements OnInit {
     branchName: "",
     city: "",
     country: "",
-    description: 0,
+    description: '',
     email: "",
     engagedJobs: [],
     firstName: "",

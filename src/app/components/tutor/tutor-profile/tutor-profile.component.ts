@@ -18,7 +18,7 @@ export class TutorProfileComponent implements OnInit {
     visibleName: "",
     city: "",
     country: "",
-    description: 0,
+    description: '',
     email: "",
     engagedJobs: [],
     firstName: "",

@@ -42,7 +42,7 @@ export class TutorComponent implements OnInit {
     branchName: "",
     city: "",
     country: "",
-    description: 0,
+    description: '',
     engagedJobs: [],
     phoneNumber: "",
     postalCode: "",
