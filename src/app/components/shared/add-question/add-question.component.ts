@@ -72,6 +72,7 @@ export class AddQuestionComponent implements OnInit {
   time: TimeApi = {status: "", time: 0};
 
   attachments: Attachment[] = [];
+  emails: string[] = [];
 
   uploadingProgress = 0;
   validations = systemMessages.validations;
@@ -360,7 +361,7 @@ export class AddQuestionComponent implements OnInit {
               this.questionService.saveQuestion(question, this.questionId, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber']).then((v) => {
                 // @ts-ignore
                 this.askedQuestions.push(this.questionId);
-                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
+                this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student),question.questionNumber);
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
@@ -373,13 +374,14 @@ export class AddQuestionComponent implements OnInit {
                 this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId], {skipLocationChange: true});
               });
             } else {
+              console.log(question.dueDate);
               // @ts-ignore
               question.questionNumber = res.data().questionNumber;
               this.questionService.saveNotLoggedQuestion(question).subscribe((response) => {
                 console.log(res.data());
                 // @ts-ignore
                 if (response.staus === 200) {
-                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student));
+                  this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(question.chatId, constants.userTypes.student),question.questionNumber);
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
@@ -472,8 +474,24 @@ export class AddQuestionComponent implements OnInit {
     progressDialog.close();
   }
 
-  sendAknowledgementEmail(email: string, link: string) {
-    this.mailService.sendMail("You have submitted a new question", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe();
+  sendAknowledgementEmail(email: string, link: string, questionNumber: string) {
+    this.studentService.getAllTutors().subscribe(
+      (res1) => {
+        console.log(res1);
+        // @ts-ignore
+        res1.docs.forEach(doc => {
+          this.emails.push(doc.data()['email']);
+        })
+      }
+    );
+    this.mailService.sendMail("You have submitted a new question", this.authService.student.email, constants.getStudentNewQuestion(link, this.authService.student.firstName), constants.mailTemplates.studentNewQuestion).subscribe(
+      (res) => {
+        // @ts-ignore
+        if (res.status === 200) {
+          this.mailService.sendMail("Request Submitted", this.emails, constants.getTutorNewQuestion(this.addQuestionForm.value.questionTitle, this.authService.student.firstName, questionNumber), constants.mailTemplates.tutorNewQuestion).subscribe()
+        }
+      }
+    );
   }
 
   createChat(chatId: string, studentId: string, questionTitle: string, questionNumber: string, questionDesc: string) {

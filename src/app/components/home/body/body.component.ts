@@ -394,7 +394,7 @@ export class BodyComponent implements OnInit {
   }
 
   moveToDashboard(){
-    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+    if (this.authService.student.role === constants.userTypes.tutor) {
       this.router.navigate([constants.routes.turor.concat(constants.routes.questions)], {skipLocationChange: true})
     } else if (this.studentService.currentStudent.role === constants.userTypes.student) {
       this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})

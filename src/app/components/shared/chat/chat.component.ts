@@ -24,6 +24,7 @@ import {PaymentService} from "../../../services/payment.service";
 import {NotificationService} from "../../../services/notification.service";
 import * as notificationMsg from '../../../models/notification-messages';
 import {Tutor} from "../../../models/tutor";
+import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
   selector: 'app-chat',
@@ -352,19 +353,19 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   onPay() {
     const dialogConfig = new MatDialogConfig();
     if (this.authService.isLoggedIn) {
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "70%";
-      dialogConfig.data = this.chatToken;
-      // dialogConfig.height = "650px";
-      this.dialog.open(CardDetailsComponent, dialogConfig);
-
-      this.dialog.afterAllClosed.subscribe(
+      this.router.navigate([constants.routes.payments])
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.signupInfo, systemMessages.questionMessages.signupInfo, constants.messageTypes.confirmation).afterClosed().subscribe(
         (res) => {
-          console.log(res);
+          if (res) {
+            const dialogConfig = new MatDialogConfig();
+            dialogConfig.autoFocus = true;
+            dialogConfig.width = "433px";
+            // dialogConfig.height = "950px";
+            this.dialog.open(SignUpComponent, dialogConfig);
+          }
         }
       )
-    } else {
-      alert("please login ");
     }
   }
 

@@ -5,7 +5,7 @@
       <img [src]="logo">
       <div fxLayout="column" fxLayoutAlign="center end" class="header">
         <div class="payment">Total Payment</div>
-        <div class="amount">$ 1,200.00</div>
+        <div class="amount">{{questionService.question.fee}} USD</div>
       </div>
     </div>
     <div id="card-element" style="margin-top: 24px"></div>
@@ -55,7 +55,7 @@
       <button mat-stroked-button [ngClass.gt-sm]="'buttonz'" [ngClass.lt-md]="{'buttonz-mobile': true}">
         Cancel
       </button>
-      <button mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'" [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">
+      <button (click)="payNow()" mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'" [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">
         Pay now
       </button>
     </div>
