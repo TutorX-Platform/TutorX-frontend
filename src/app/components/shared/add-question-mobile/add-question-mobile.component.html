@@ -16,49 +16,82 @@
     <form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
       <div fxLayout="column" class="bottom-container"  style="padding: 16px 0px 16px 0px !important;">
         <div fxLayout="column" class="form-fields">
-          <div class="label">Question Title</div>
-          <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput type="text" formControlName="questionTitle" class="other">
-          </mat-form-field>
-          <div fxLayout="column" class="search-container" style="width: 100% !important;">
-            <div class="label">Subject</div>
-            <mat-form-field appearance="outline" class="my-form-field">
-                  <span matSuffix>
-                  <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
-              <input matInput type="text" formControlName="subject" [matAutocomplete]="auto" (blur)="changeSubCategory()">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
+          <div class="tu-text-input">
+            <div class="tu-text-input__label">Question Title</div>
+            <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+              <input matInput formControlName="questionTitle" placeholder="Enter Question Title" value="Value">
+              <mat-error
+                *ngIf="addQuestionForm.get('questionTitle')?.touched && addQuestionForm.get('questionTitle')?.hasError('required')"
+                class="">
+                {{validations.questionTitleRequired}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="column" class="search-container" style="width: 100% !important;">
-            <div class="label">Sub-category</div>
-            <mat-form-field appearance="outline" class="my-form-field">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Subject</div>
+              <mat-form-field appearance="outline">
                   <span matSuffix>
                   <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
-              <input matInput type="text-12" formControlName="subCategory" [matAutocomplete]="auto1">
-              <mat-autocomplete #auto1="matAutocomplete">
-                <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
-                  {{subOption}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+                <input matInput type="text" formControlName="subject" placeholder="Choose Subject" [matAutocomplete]="auto"
+                       (blur)="changeSubCategory()">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subject')?.touched && addQuestionForm.get('subject')?.hasError('required')"
+                  class="">
+                  {{validations.questionSubjectRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="column" class="search-container" style="width: 100% !important;">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Sub-category</div>
+              <mat-form-field appearance="outline" class="">
+                    <span matSuffix>
+                    <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
+                <input matInput type="text-12" formControlName="subCategory" placeholder="Choose Subcategory" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                  <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
+                    {{subOption}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subCategory')?.touched && addQuestionForm.get('subCategory')?.hasError('required')"
+                  class="">
+                  {{validations.questionCategoryRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
           <div fxLayout="column">
-            <div class="label">Due date-time</div>
-            <mat-form-field appearance="outline" class="my-form-field">
-              <input matInput [ngxMatDatetimePicker]="picker" [min]="date" placeholder="Choose a date & time" formControlName="dueDateTime">
-              <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-              <ngx-mat-datetime-picker [touchUi]="true" #picker></ngx-mat-datetime-picker>
-            </mat-form-field>
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Due date-time</div>
+              <mat-form-field appearance="outline" class="">
+                <input matInput [ngxMatDatetimePicker]="picker" [min]="date" placeholder="Choose a date & time"
+                       formControlName="dueDateTime">
+                <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+                <mat-error
+                  *ngIf="addQuestionForm.get('dueDateTime')?.touched && addQuestionForm.get('dueDateTime')?.hasError('required')"
+                  class="">
+                  {{validations.questionDeadlineRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
 
-          <div class="label">Description</div>
-          <mat-form-field appearance="outline" class="my-form-field">
-            <textarea matInput type="text" formControlName="description" oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>
-          </mat-form-field>
+          <div class="tu-text-input">
+            <div class="tu-text-input__label">Description</div>
+            <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <textarea matInput type="text" formControlName="description" placeholder="Enter Description"
+                      oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>
+            </mat-form-field>
+          </div>
         </div>
         <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
                               *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>

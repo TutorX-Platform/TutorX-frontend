@@ -93,8 +93,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   attachementPicked = false;
   isNotLoggedUser = false;
   notLoggedUserEmail = 'sandunsameera25@gmail.com';
+  currentDate = new Date();
 
-  test = new Date('Sep 01 2021 00:00:00');
   isTyping = false;
   sentMessageCount = 0;
   show = false;
@@ -124,6 +124,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   ngOnInit(): void {
+    this.currentDate = new Date();
     this.sentMessageCount = 0;
     this.activatedRoute.paramMap.subscribe(
       map => {

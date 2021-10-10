@@ -71,6 +71,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   attachments: File[] = [];
   uploadingProgress = 0;
+  validations = systemMessages.validations;
 
 
   constructor(
