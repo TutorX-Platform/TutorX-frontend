@@ -324,16 +324,19 @@
         <img src="../../../../assets/icons/flag.svg">
         <div style="width: 100%; overflow: hidden">
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"
+            <input matInput [ngxMatDatetimePicker]="picker" [value]="deadLine" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
           </mat-form-field>
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">
-            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
+            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center" *ngIf="deadLine > currentDate">
               Remaining
-              <app-count-down [date]="deadLine"></app-count-down>
+              <app-count-down *ngIf="deadLine > currentDate" [date]="deadLine"></app-count-down>
+            </div>
+            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center" *ngIf="deadLine < currentDate">
+              Time Ended
             </div>
           </div>
         </div>
@@ -765,9 +768,12 @@
           </mat-form-field>
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">
-            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center">
-              Remaining
-              <app-count-down [date]="deadLine"></app-count-down>
+            <div class="remaining-days" fxLayout="row wrap" fxLayoutGap="8px grid" fxLayoutAlign="start center" *ngIf="deadLine > currentDate">
+              <div>Remaining</div>
+              <app-count-down *ngIf="deadLine > currentDate" [date]="deadLine"></app-count-down>
+            </div>
+            <div class="remaining-days" fxLayout="row" fxLayoutAlign="start center" *ngIf="deadLine < currentDate">
+              Time Ended
             </div>
           </div>
         </div>
@@ -919,6 +925,21 @@
           </div>
         </div>
       </div>
+      <button (click)="onCancelRequest()" *ngIf="questionService.question.status === 'Open' && !cancelledQustion" mat-flat-button color="primary" style="color: white">
+        Cancel Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Open' && cancelledQustion" mat-flat-button color="primary" style="color: white">
+        Cancelled Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='tutor'"
+              mat-flat-button color="primary" style="color: white" (click)="onReleaseQuestion()">Release Request
+      </button>
+      <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'"
+              mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor
+      </button>
+      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary"
+              style="color: white" (click)="onMarkAsCompleted()">Mark as Complete
+      </button>
     </div>
   </div>
 
