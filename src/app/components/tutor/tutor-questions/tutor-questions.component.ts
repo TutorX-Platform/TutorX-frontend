@@ -311,9 +311,12 @@ export class TutorQuestionsComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     // visible height + pixel scrolled >= total height
-    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+    if (window.innerHeight + Math.ceil(window.scrollY) >= document.body.scrollHeight) {
+      console.log('Loading...')
       this.questionService.getNextQuestions(this.allAskedQuestions[0].sort).valueChanges().subscribe(
         (res) => {
+          // @ts-ignore
+          console.log(res);
           // @ts-ignore
           this.allAskedQuestions.unshift(...res);
         }
