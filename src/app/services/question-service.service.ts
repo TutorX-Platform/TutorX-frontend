@@ -100,7 +100,7 @@ export class QuestionService {
 
   getNextQuestions(time: number) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('status', '==', constants.questionStatus.open).where('tutorId', '==', '').orderBy('sort', "desc").limit(5).endBefore(time));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('status', '==', constants.questionStatus.open).where('tutorId', '==', '').orderBy('sort', "desc").limit(5).startAfter(time));
     return questionRef;
   }
 
@@ -110,10 +110,20 @@ export class QuestionService {
     return questionRef;
   }
 
-  getNextQuestionsForTutorByStatus(tutorId: string, status: string, time: number) {
+  getQuestionsForNextTutorByStatus(tutorId: string, status: string[],time:number) {
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', 'in', [status]).orderBy('sort', "desc").limit(5).endBefore(time));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', 'in', status).orderBy('sort', "desc").limit(5).startAfter(time));
     return questionRef;
+  }
+
+  getNextQuestionsForTutorByStatus(tutorId: string, status: string, time: number) {
+    if (status == '') {
+     return this.getQuestionsForNextTutorByStatus(tutorId, [constants.questionStatus.assigned,constants.questionStatus.cancelled,constants.questionStatus.completed,constants.questionStatus.in_progress],time);
+    } else {
+      // @ts-ignore
+      const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', 'in', [status]).orderBy('sort', "desc").limit(5).startAfter(time));
+      return questionRef;
+    }
   }
 
   joinTutorForQuestion(questionId: string, tutorId: string, studentEmail: string, dialogRef: MatDialogRef<any>, tutorName: string, tutorImage: string) {
@@ -125,7 +135,7 @@ export class QuestionService {
       tutorName: tutorName,
       tutorImage: tutorImage
     }
-   return  this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
+    return this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data).then((v) => {
       this.utilService.getTimeFromTimeAPI().subscribe((res) => {
         // @ts-ignore
         this.time = res;

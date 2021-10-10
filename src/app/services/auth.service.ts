@@ -85,7 +85,7 @@ export class AuthService {
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
         this.userData = credentials.user;
         const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-        this.roleBasedRouting(credentials.user.uid, progressDialog);
+        this.roleBasedRouting(credentials.user.uid, progressDialog, credentials.user);
         // @ts-ignore
         this.student.email = credentials.user?.email;
         // @ts-ignore
@@ -95,7 +95,6 @@ export class AuthService {
         // @ts-ignore
         this.student.userId = credentials.user?.uid;
         this.isStudentSet = true;
-        this.SetUserData(credentials.user, this.student.firstName);
       }
     }));
   }
@@ -128,7 +127,7 @@ export class AuthService {
           localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
           `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
           this.userData = result.user;
-          this.roleBasedRouting(result.user.uid, progressDialog);
+          this.roleBasedRouting(result.user.uid, progressDialog, result.user);
         }
       }).catch((error) => {
         progressDialog.close();
@@ -171,7 +170,7 @@ export class AuthService {
     })
   }
 
-  SetUserData(user: any, firstName: string) {
+  SetUserData(user: any, firstName: string, role: string) {
     this.userData = user;
     const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`${constants.collections.students}/${user.uid}`);
     const userData: Student = {
@@ -183,7 +182,7 @@ export class AuthService {
       questions: [],
       uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
       userId: user.uid,
-      role: constants.userTypes.student
+      role: role
     }
     this.student = userData;
     return userRef.set(userData, {
@@ -230,13 +229,20 @@ export class AuthService {
     this.student = resetUser;
   }
 
-  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>) {
+  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>, user: any) {
     this.studentService.findStudentById(uid).subscribe(
       (res) => {
         if (res) {
           // @ts-ignore
-          const student: Student = res;
+          const student: Student = res.data();
           this.student = student;
+          // @ts-ignore
+          if (!res.data().isTutor) {
+            this.SetUserData(user, this.student.firstName, constants.userTypes.student);
+          } else {
+            this.SetUserData(user, this.student.firstName, constants.userTypes.tutor);
+          }
+          // @ts-ignore
           if (student.role === constants.userTypes.student) {
             this.ngZone.run(() => {
               this.isLoggedIn = true;
@@ -245,14 +251,16 @@ export class AuthService {
               }
               this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
             });
-          } else if (student.role === constants.userTypes.tutor) {
-            this.ngZone.run(() => {
-              this.isLoggedIn = true;
-              if (progressDialog) {
-                progressDialog.close();
-              }
-              this.router.navigate([constants.routes.turor + '/questions'], {skipLocationChange: true});
-            });
+          } else { // @ts-ignore
+            if (student.role === constants.userTypes.tutor) {
+              this.ngZone.run(() => {
+                this.isLoggedIn = true;
+                if (progressDialog) {
+                  progressDialog.close();
+                }
+                this.router.navigate([constants.routes.turor + '/questions'], {skipLocationChange: true});
+              });
+            }
           }
         } else {
           progressDialog.close();
@@ -265,10 +273,9 @@ export class AuthService {
     this.studentService.findStudentById(userId).subscribe(
       (res) => {
         // @ts-ignore
-        this.student = res;
+        this.student = res.data();
         // @ts-ignore
-        this.studentService.currentStudent = res;
-        console.log(res);
+        this.studentService.currentStudent = res.data();
       }
     )
   }

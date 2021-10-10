@@ -271,8 +271,33 @@ export class TutorActivitiesComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     // visible height + pixel scrolled >= total height
-    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      console.log("End");
+    let status: string = '';
+    if (this.selectedStatus === 1) {
+      status = constants.questionStatus.assigned
+    }
+    if (this.selectedStatus === 2) {
+      status = constants.questionStatus.in_progress
+    }
+    if (this.selectedStatus === 3) {
+      status = constants.questionStatus.completed
+    }
+    if (this.selectedStatus === 4) {
+      status = constants.questionStatus.cancelled
+    }
+    if (this.selectedStatus === 0) {
+
+    }
+    if (window.innerHeight + Math.ceil(window.scrollY) >= document.body.scrollHeight) {
+      if (this.allAskedQuestions[this.allAskedQuestions.length - 1] !== undefined) {
+        this.questionService.getNextQuestionsForTutorByStatus(this.authService.student.userId, status, this.allAskedQuestions[this.allAskedQuestions.length - 1].sort).valueChanges().subscribe(
+          (res) => {
+            // @ts-ignore
+            console.log(res);
+            // @ts-ignore
+            this.allAskedQuestions.push(...res);
+          }
+        )
+      }
     }
   }
 }

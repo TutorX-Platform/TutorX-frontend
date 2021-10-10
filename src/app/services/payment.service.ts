@@ -23,7 +23,13 @@ export class PaymentService {
 
   getPaymentsForTutor(tutorId: string) {
     // @ts-ignore
-    const paymentRef: AngularFirestoreDocument<Unknown> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", "==", tutorId).limit(10));
+    const paymentRef: AngularFirestoreDocument<Unknown> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", "==", tutorId).orderBy('paidTime', "desc").limit(10));
+    return paymentRef;
+  }
+
+  getNextPaymentsForTutor(tutorId: string, time: number) {
+    // @ts-ignore
+    const paymentRef: AngularFirestoreDocument<Unknown> = this.angularFirestoreService.collection(constants.collections.payments, ref => ref.where("tutorId", "==", tutorId).orderBy('sort', "desc").limit(10).startAfter(time));
     return paymentRef;
   }
 

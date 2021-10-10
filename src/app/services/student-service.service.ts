@@ -51,7 +51,7 @@ export class StudentService {
   }
 
   findStudentById(uid: string) {
-    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).valueChanges();
+    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).get();
   }
 
   findStudentByEmail(email: string) {

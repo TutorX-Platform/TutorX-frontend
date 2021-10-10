@@ -389,6 +389,7 @@ export class AddQuestionComponent implements OnInit {
                   } else {
                     this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
                   }
+                  this.router.navigate([constants.routes.student_q_pool])
                   dialogRef.close(true);
                   progressDialog.close();
                 } else {
@@ -446,8 +447,10 @@ export class AddQuestionComponent implements OnInit {
           const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
           progressDialog.afterOpened().subscribe(
             () => {
+              this.authService.student.role = constants.userTypes.student;
               this.authService.student.firstName = result.value.name;
               this.authService.student.email = result.value.email;
+              this.studentService.currentStudent =  this.authService.student;
 
               this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
                 (res) => {

@@ -208,12 +208,6 @@ export class CardDetailsComponent implements OnInit {
                     // @ts-ignore
                     this.paymentStatus = res['status'];
                     // this.dialogRef.close();
-                    this.studentService.findStudentById(this.questionService.question.tutorId).subscribe(
-                      (res) => {
-                        // @ts-ignore
-                        // this.mailService.paymentSuccessMailToTutor(res.email).subscribe();
-                      }
-                    )
                     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
                       // @ts-ignore
                       this.recordPayment(res.time);
@@ -258,7 +252,7 @@ export class CardDetailsComponent implements OnInit {
   }
 
   onCancel() {
-    // this.getCardToken();
+    this.router.navigate([constants.routes.student_q_pool])
   }
 
   recordPayment(time: number) {
@@ -269,7 +263,7 @@ export class CardDetailsComponent implements OnInit {
       questionTitle: this.questionService.question.questionTitle,
       studentImage: this.questionService.question.studentImage,
       studentName: this.questionService.question.studentName,
-      fee: this.questionService.question.fee,
+      fee: this.questionService.question.fee * constants.tutor_pay_percentage,
       paidBy: this.questionService.question.studentId,
       paidCurrency: constants.usedCurrency,
       paidTime: time,

@@ -91,7 +91,7 @@ export class TutorProfileComponent implements OnInit {
     this.studentService.findStudentById(this.studentService.uid).subscribe(
       (res) => {
         // @ts-ignore
-        this.tutor = res;
+        this.tutor = res.data();
         this.tutorAddForm.controls.visibleName.setValue(this.tutor.visibleName);
         this.tutorAddForm.controls.fullName.setValue(this.tutor.firstName);
         this.tutorAddForm.controls.email.setValue(this.tutor.email);

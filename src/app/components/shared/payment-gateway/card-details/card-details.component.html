@@ -52,7 +52,7 @@
     <!--</div>-->
     <div class="divi"></div>
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <button mat-stroked-button [ngClass.gt-sm]="'buttonz'" [ngClass.lt-md]="{'buttonz-mobile': true}">
+      <button (click)="onCancel()" mat-stroked-button [ngClass.gt-sm]="'buttonz'" [ngClass.lt-md]="{'buttonz-mobile': true}">
         Cancel
       </button>
       <button (click)="payNow()" mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'" [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">

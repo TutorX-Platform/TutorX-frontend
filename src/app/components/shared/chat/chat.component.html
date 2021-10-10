@@ -37,7 +37,7 @@
       <button *ngIf="questionService.question.status === 'Assigned' && authService.student.role==='student'"
               mat-flat-button color="primary" style="color: white" (click)="onRequestNewTutor()">Request New Tutor
       </button>
-      <button *ngIf="questionService.question.status === 'Inprogress'" mat-flat-button color="primary"
+      <button *ngIf="questionService.question.status === 'Inprogress' && authService.student.role !== 'student'" mat-flat-button color="primary"
               style="color: white" (click)="onMarkAsCompleted()">Mark as Complete
       </button>
       <mat-icon mat-button [matMenuTriggerFor]="menu" style="cursor: pointer;">more_vert</mat-icon>

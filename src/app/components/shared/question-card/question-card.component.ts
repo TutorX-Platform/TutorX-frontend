@@ -54,10 +54,10 @@ export class QuestionCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
+    if (this.studentService.currentStudent.role !== undefined && this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
-    if (this.authService.student.role === constants.userTypes.tutor) {
+    if (this.studentService.currentStudent.role !== undefined && this.authService.student.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
     this.role = this.studentService.currentStudent.role;
@@ -93,7 +93,7 @@ export class QuestionCardComponent implements OnInit {
       lastAssignedTutorImage: this.lastAssignedTutorImage,
       byLoggedUser: this.byLoggedUser,
       questionNumber: this.questionNumber,
-      studentName:this.studentName,
+      studentName: this.studentName,
       // tutorUnReadMessages: this.tutorUnReadMessage,
       // studentUnReadMessages: this.studentUnReadMessage,
       // studentUnReadCount: this.studentUnReadCount,

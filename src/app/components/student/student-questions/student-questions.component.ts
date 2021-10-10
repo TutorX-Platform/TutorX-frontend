@@ -90,7 +90,7 @@ export class StudentQuestionsComponent implements OnInit {
       })
     })
     console.log(this.attachments, 'attachments');
-    this.getNotifications();
+    // this.getNotifications();
   }
 
   //search auto complete
@@ -139,7 +139,7 @@ export class StudentQuestionsComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.studentService.currentStudent = res;
-        this.questionService.getQuestionsForStudent(this.studentService.currentStudent.email).valueChanges().subscribe(
+        this.questionService.getQuestionsForStudent(this.authService.student.email).valueChanges().subscribe(
           (res) => {
             console.log(res);
             // @ts-ignore
@@ -307,7 +307,7 @@ export class StudentQuestionsComponent implements OnInit {
   }
 
   getNotifications() {
-    this.notificationService.getNotifications(this.studentService.currentStudent.userId).valueChanges().subscribe(
+    this.notificationService.getNotifications(this.authService.student.userId).valueChanges().subscribe(
       (res) => {
         // @ts-ignore
         this.notifications = res;

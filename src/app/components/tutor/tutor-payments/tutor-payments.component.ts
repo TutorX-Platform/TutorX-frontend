@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Payment} from 'src/app/models/payment';
 import {PaymentService} from "../../../services/payment.service";
 import {AuthService} from "../../../services/auth.service";
@@ -91,7 +91,8 @@ export class TutorPaymentsComponent implements OnInit {
               return a.paidTime - b.paidTime;
             }).reverse();
             progressDialog.close();
-          }, () => {
+          }, (err) => {
+            console.log(err)
             progressDialog.close();
           }
         )
@@ -119,5 +120,19 @@ export class TutorPaymentsComponent implements OnInit {
 
   onBlur() {
 
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    // visible height + pixel scrolled >= total height
+    if (window.innerHeight + Math.ceil(window.scrollY) >= document.body.scrollHeight) {
+      if (this.allPayments[this.allPayments.length - 1] !== undefined) {
+        this.paymentService.getNextPaymentsForTutor(this.authService.student.userId, this.allPayments[this.allPayments.length - 1].paidTime).valueChanges().subscribe(
+          (res) => {
+            this.allPayments.push(...res);
+          }
+        )
+      }
+    }
   }
 }

@@ -287,9 +287,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   getTutor(id: string) {
     this.studentService.findStudentById(id).subscribe(
       (res) => {
-
         // @ts-ignore
-        this.tutor = res;
+        this.tutor = res.data();
         // this.des = this.tutor.description;
       }
     )
@@ -605,13 +604,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     const data = {
       isQuoteApproved: true
     }
-    this.studentService.findStudentById(this.chat.tutorId).subscribe(
-      (res) => {
-        // @ts-ignore
-        // this.mailService.quoteApprovalMailToTutor(res.email).subscribe();
-      }
-    )
-
     this.utilService.getTimeFromTimeAPI().subscribe((res) => {
       // @ts-ignore
       this.chatService.sendApproveQuoteMessage(this.chatToken, res.time, this.quote.value);
