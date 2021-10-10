@@ -18,11 +18,13 @@ export interface Tutor {
   totalEarnings: number;
   tasksCompleted: number;
   description: number;
-  visibleName:string;
-  postalCode:string;
-  accNo:string;
-  bankName:string;
-  branchName:string;
+  visibleName: string;
+  postalCode: string;
+  accNo: string;
+  bankName: string;
+  branchName: string;
+  totalRequests: number;
+  inprogressCount: number;
 
 
 }

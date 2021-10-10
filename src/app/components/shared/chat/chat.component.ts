@@ -352,7 +352,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   onPay() {
     const dialogConfig = new MatDialogConfig();
     if (this.authService.isLoggedIn) {
-      this.router.navigate([constants.routes.payments])
+      this.router.navigate([constants.routes.payment])
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.signupInfo, systemMessages.questionMessages.signupInfo, constants.messageTypes.confirmation).afterClosed().subscribe(
         (res) => {

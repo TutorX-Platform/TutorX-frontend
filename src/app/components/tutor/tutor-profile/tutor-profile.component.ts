@@ -13,6 +13,7 @@ export class TutorProfileComponent implements OnInit {
 
   rating = 4;
   tutor: Tutor = {
+    inprogressCount: 0, totalRequests: 0,
     accNo: "", bankName: "", branchName: "",
     visibleName: "",
     city: "",
@@ -32,7 +33,7 @@ export class TutorProfileComponent implements OnInit {
     totalEarnings: 0,
     uniqueKey: "",
     userId: "",
-    postalCode: "",
+    postalCode: ""
 
   }
   countries = [

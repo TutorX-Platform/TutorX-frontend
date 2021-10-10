@@ -29,6 +29,7 @@ export class TutorQuestionsComponent implements OnInit {
   isPhysics = false;
   isMaths = false;
   isManagement = false;
+  isEngineering = false;
   isCS = false;
   attachments: Attachment[] = [];
   // @ts-ignore
@@ -43,9 +44,7 @@ export class TutorQuestionsComponent implements OnInit {
   notifications = [];
 
   isAutoOpen = false;
-  subjects = [
-    "Computer Science", "Physics", "Mathematics", "Management"
-  ]
+  subjects = constants.subjects;
 
   states = [
     "Open", "Inprogress", "Assigned", "Cancelled", "Completed"
@@ -239,6 +238,9 @@ export class TutorQuestionsComponent implements OnInit {
     if (value === constants.subjectCodes.computer_science) {
       this.isCS = !this.isCS;
     }
+    if (value === constants.subjectCodes.engineering) {
+      this.isEngineering = !this.isEngineering;
+    }
 
     if (this.isMaths) {
       filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.mathematics));
@@ -252,7 +254,10 @@ export class TutorQuestionsComponent implements OnInit {
     if (this.isManagement) {
       filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.management))
     }
-    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isPhysics && !this.isManagement && !this.isCS && !this.isMaths) {
+    if (this.isEngineering) {
+      filteredQuestions.push(...this.allAskedQuestions.filter(ques => ques.subjectCategory === constants.subjectCodes.engineering))
+    }
+    if (!this.isCancelled && !this.isAssigned && !this.isCompleted && !this.isInprogress && !this.isOpen && !this.isPhysics && !this.isManagement && !this.isCS && !this.isMaths && !this.isEngineering) {
       this.askedQuestions = [];
       this.askedQuestions.push(...this.allAskedQuestions);
     } else {

@@ -179,7 +179,6 @@ export class CardDetailsComponent implements OnInit {
   }
 
   payNow() {
-    console.log(this.card.StripeElement);
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(
       (res) => {
@@ -202,6 +201,7 @@ export class CardDetailsComponent implements OnInit {
                   // @ts-ignore
                   if (res['status'] === 200) {
                     this.paymentService.incrementPayment(this.questionService.question.fee);
+                    this.studentService.incrementInprogressRequestCount(this.questionService.question.tutorId).then();
                     this.updateQuestionAsPaid();
                     this.loading = false;
                     this.submitted = false;
