@@ -102,6 +102,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   tutor: Tutor;
   des = 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   desc = '';
+  isImageLoading = false;
+  uploadingProgress = 0;
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
@@ -211,6 +213,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.onUnAuthorizedMessageSent(this.message.value);
         this.sentMessageCount = this.sentMessageCount + 1;
       } else {
+        this.isImageLoading = true;
         this.uploadAttachment();
       }
       this.message.reset();
@@ -495,19 +498,26 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   uploadAttachment() {
-    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-    progressDialog.afterOpened().subscribe(() => {
+    // const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    // progressDialog.afterOpened().subscribe(() => {
       // @ts-ignore
-      this.uploadFile(this.fileToUpload, progressDialog)
-    });
+    this.uploadFile(this.fileToUpload)
+    // });
   }
 
-  uploadFile(file: File, progressDialog: MatDialogRef<any>) {
+  uploadFile(file: File) {
     const time = new Date().getTime();
     // @ts-ignore
     const path = constants.storage_collections.chat + constants.url_sign.url_separator + this.chatToken + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
     this.taskRef = this.storage.ref(path);
     this.task = this.taskRef.put(file);
+    this.task.percentageChanges().subscribe(
+      (res) => {
+        console.log(res);
+        // @ts-ignore
+        this.uploadingProgress = res;
+      }
+    )
     this.task.then(() => {
       this.taskRef.getDownloadURL().subscribe(
         (res) => {
@@ -525,13 +535,16 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.isSendButtonDissabled = true;
           this.attachementPicked = false;
           this.uploadReady = true;
+          this.isImageLoading = false;
         }, () => {
           this.isSendButtonDissabled = true;
           this.attachementPicked = false;
           this.uploadReady = true;
           console.log("upload error");
+          this.isImageLoading = false;
         }, () => {
-          progressDialog.close();
+          // progressDialog.close();
+          this.isImageLoading = false;
         }
       )
     });

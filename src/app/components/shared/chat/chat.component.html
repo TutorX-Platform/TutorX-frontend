@@ -186,8 +186,7 @@
                         {{message.message}} USD
                       </div>
                     </div>
-                    <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
-                            [disabled]="!message.isValidQuote && question.isPaid"
+                    <button *ngIf="authService.student.role === 'student' && message.isValidQuote && !question.isPaid" mat-flat-button class="send-quote-button"
                             (click)="onPay()">Pay Now
                     </button>
                   </div>
@@ -216,6 +215,17 @@
         </div>
 
 
+        <!--dummy image loading-->
+        <div>
+          <div *ngIf="isImageLoading" fxLayout="row" fxLayoutAlign="end center">
+            <div class="message-box" fxLayout="column"
+                 fxLayoutAlign="center center">
+              <!--<img src="../../../../assets/images/" class="attachment-box">-->
+              <!--<mat-spinner [diameter]="70"></mat-spinner>-->
+              <mat-progress-spinner [diameter]="70" [value]="uploadingProgress"></mat-progress-spinner>
+            </div>
+          </div>
+        </div>
         <!--Joined Message-->
         <!--<div class="joined-message">-->
         <!--<div class="line"></div>-->
@@ -680,8 +690,7 @@
                       {{questionService.question.fee}} USD
                     </div>
                   </div>
-                  <button *ngIf="authService.student.role === 'student'" mat-flat-button class="send-quote-button"
-                          [disabled]="!message.isValidQuote && question.isPaid"
+                  <button *ngIf="authService.student.role === 'student' && message.isValidQuote && !question.isPaid" mat-flat-button class="send-quote-button"
                           (click)="onPay()">Pay Now
                   </button>
                 </div>
@@ -705,6 +714,19 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--dummy image loading-->
+      <div>
+        <div *ngIf="isImageLoading" fxLayout="row" fxLayoutAlign="end center">
+          <div class="message-box" fxLayout="column"
+               fxLayoutAlign="center center">
+            <!--<img src="../../../../assets/images/" class="attachment-box">-->
+            <!--<mat-spinner [diameter]="70"></mat-spinner>-->
+            <mat-progress-spinner [diameter]="70" [value]="uploadingProgress"></mat-progress-spinner>
           </div>
         </div>
       </div>
