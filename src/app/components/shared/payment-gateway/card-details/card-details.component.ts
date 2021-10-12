@@ -179,66 +179,70 @@ export class CardDetailsComponent implements OnInit {
   }
 
   payNow() {
-    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-    progressDialog.afterOpened().subscribe(
-      (res) => {
-        this.submitted = true;
-        this.loading = true;
-        this.stripeData = this.stripeForm.value;
-        this.stripeService.createToken(this.card, this.stripeForm.value.name).subscribe(
-          (result) => {
-            if (result.token) {
-              const product = {
-                name: this.questionService.question.questionTitle,
-                price: this.questionService.question.fee,
-                email: this.authService.student.email,
-              }
-              this.stripeData['product'] = product;
-              this.stripeData['token'] = result.token;
-              this.dummyService.pay(this.stripeData).subscribe(
-                (res) => {
-                  console.log(res);
-                  // @ts-ignore
-                  if (res['status'] === 200) {
-                    this.paymentService.incrementPayment(this.questionService.question.fee);
-                    this.studentService.incrementInprogressRequestCount(this.questionService.question.tutorId).then();
-                    this.updateQuestionAsPaid();
-                    this.loading = false;
-                    this.submitted = false;
-                    // @ts-ignore
-                    this.paymentStatus = res['status'];
-                    // this.dialogRef.close();
-                    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-                      // @ts-ignore
-                      this.recordPayment(res.time);
-                      // @ts-ignore
-                      this.chatService.sendPaidQuoteMessage(this.questionService.question.id, res.time, this.questionService.question.fee);
-                      this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
-                      progressDialog.close();
-                    })
-
-                  } else {
-                    console.log("err");
-                    this.dialog.closeAll();
-                    // this.dialogRef.close();
-                    this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
-                    console.log(res);
-                  }
-                }, () => {
-                  this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionTitles.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe()
+    if (!this.questionService.question.isPaid) {
+      const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+      progressDialog.afterOpened().subscribe(
+        (res) => {
+          this.submitted = true;
+          this.loading = true;
+          this.stripeData = this.stripeForm.value;
+          this.stripeService.createToken(this.card, this.stripeForm.value.name).subscribe(
+            (result) => {
+              if (result.token) {
+                const product = {
+                  name: this.questionService.question.questionTitle,
+                  price: this.questionService.question.fee,
+                  email: this.authService.student.email,
                 }
-              )
-            } else {
-              // this.dialogRef.close();
-              progressDialog.close();
-              // @ts-ignore
-              this.utilService.openDialog(result.error?.message, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
-              console.log('result.token err');
+                this.stripeData['product'] = product;
+                this.stripeData['token'] = result.token;
+                this.dummyService.pay(this.stripeData).subscribe(
+                  (res) => {
+                    console.log(res);
+                    // @ts-ignore
+                    if (res['status'] === 200) {
+                      this.paymentService.incrementPayment(this.questionService.question.fee);
+                      this.studentService.incrementInprogressRequestCount(this.questionService.question.tutorId).then();
+                      this.updateQuestionAsPaid();
+                      this.loading = false;
+                      this.submitted = false;
+                      // @ts-ignore
+                      this.paymentStatus = res['status'];
+                      // this.dialogRef.close();
+                      this.utilService.getTimeFromTimeAPI().subscribe((res) => {
+                        // @ts-ignore
+                        this.recordPayment(res.time);
+                        // @ts-ignore
+                        this.chatService.sendPaidQuoteMessage(this.questionService.question.id, res.time, this.questionService.question.fee);
+                        this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
+                        progressDialog.close();
+                      })
+
+                    } else {
+                      console.log("err");
+                      this.dialog.closeAll();
+                      // this.dialogRef.close();
+                      this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
+                      console.log(res);
+                    }
+                  }, () => {
+                    this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionTitles.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe()
+                  }
+                )
+              } else {
+                // this.dialogRef.close();
+                progressDialog.close();
+                // @ts-ignore
+                this.utilService.openDialog(result.error?.message, systemMessage.questionMessages.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe();
+                console.log('result.token err');
+              }
             }
-          }
-        )
-      }
-    );
+          )
+        }
+      );
+    } else {
+      this.utilService.openDialog(systemMessage.questionTitles.questionAlreadyPaid,systemMessage.questionMessages.questionAlreadyPaid,constants.messageTypes.info).afterClosed().subscribe();
+    }
   }
 
   updateQuestionAsPaid() {

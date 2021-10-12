@@ -47,6 +47,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   isFocused = false;
   cancelledQustion = false
   chat: Chat = {
+    tutorEmail: "",
     studentLastSeen: false,
     tutorLastSeen: false,
     studentName: "",
@@ -104,6 +105,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   desc = '';
   isImageLoading = false;
   uploadingProgress = 0;
+
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
@@ -142,17 +144,17 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.studentService.currentStudent.role === constants.userTypes.tutor) {
       this.isTutor = true;
     }
-    if(this.des.length > 20) {
-      this.desc = this.des.substring(0,20).concat('...');
+    if (this.des.length > 20) {
+      this.desc = this.des.substring(0, 20).concat('...');
     }
     // this.scrollToBottom();
   }
 
-  showMore(num: number){
-    if (num === 0){
+  showMore(num: number) {
+    if (num === 0) {
       this.desc = this.des;
     } else {
-      this.desc = this.des.substring(0,20).concat('...');
+      this.desc = this.des.substring(0, 20).concat('...');
     }
   }
 
@@ -272,7 +274,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.attachments.push(...this.chat.attachments);
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
-            if(this.chat.tutorId) {
+            if (this.chat.tutorId) {
               this.getTutor(this.chat.tutorId);
             }
           }, () => {
@@ -380,7 +382,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.dueDateTimeControll.value = this.questionService.question.dueDate.toDate();
         // @ts-ignore
         this.deadLine = this.questionService.question.dueDate.toDate();
-
         if (this.question.status === constants.questionStatus.open && this.authService.student.role === constants.userTypes.tutor) {
           //  route back the tutor..
         }
@@ -393,7 +394,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       // @ts-ignore
       this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
     } else {
-      if (this.authService.isLoggedIn){
+      if (this.authService.isLoggedIn) {
         this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
       } else {
         this.router.navigate([constants.routes.home], {skipLocationChange: true});
@@ -500,7 +501,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   uploadAttachment() {
     // const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     // progressDialog.afterOpened().subscribe(() => {
-      // @ts-ignore
+    // @ts-ignore
     this.uploadFile(this.fileToUpload)
     // });
   }
@@ -701,5 +702,38 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
       });
     });
+  }
+
+  onDeadlineChange(deadLine: FormControl) {
+    if (this.authService.student.role === constants.userTypes.student) {
+      if (this.deadLine != deadLine.value) {
+        this.utilService.openDialog(systemMessages.questionTitles.tutorReleaseQuestionConfirmation, systemMessages.questionMessages.questionDeadlineChange, constants.messageTypes.confirmation).afterClosed().subscribe(
+          (res) => {
+            if (res) {
+              this.deadLine = deadLine.value;
+              const data = {
+                'dueDate': this.deadLine,
+              }
+              this.questionService.updateQuestion(this.chatToken, data).then(
+                () => {
+                  this.utilService.getTimeFromTimeAPI().subscribe(
+                    (res) => {
+                      // @ts-ignore
+                      this.chatService.deadLineChangedChat(this.chatToken, res.time, this.deadLine).then(
+                        () => {
+                          this.mailService.sendMail('Deadline changed', this.chat.tutorEmail, constants.getDeadlineChange(this.questionService.question.questionNumber), constants.mailTemplates.deadlineChange).subscribe()
+                        }
+                      );
+                    }
+                  )
+                }
+              )
+            }
+          }
+        )
+      }
+    } else {
+      this.utilService.openDialog(systemMessages.questionTitles.cantUpdateDeadLine, systemMessages.questionMessages.cantUpdateDeadLine, constants.messageTypes.warning).afterClosed().subscribe()
+    }
   }
 }

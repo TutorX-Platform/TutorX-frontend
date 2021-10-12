@@ -325,7 +325,7 @@
         <img src="../../../../assets/icons/flag.svg">
         <div style="width: 100%; overflow: hidden">
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput [ngxMatDatetimePicker]="picker" [value]="deadLine" placeholder="Choose a date & time"
+            <input (dateChange)="onDeadlineChange(dueDateTimeControll)" matInput [ngxMatDatetimePicker]="picker" [value]="deadLine" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>

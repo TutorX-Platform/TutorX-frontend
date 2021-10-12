@@ -20,6 +20,9 @@ export const questionTitles = {
   acceptNotification: "Please allow send notifications",
   alreadySameFee: "Quote Exists !!",
   signupInfo: "Please sign up !!",
+  questionAlreadyPaid: "Question already paid",
+  cantUpdateDeadLine:"Deadline cant change"
+
 }
 
 export const questionMessages = {
@@ -47,7 +50,9 @@ export const questionMessages = {
   alreadySameFee: "Your quote is matched with previous quote.",
   questionCancelConfirm:"PLease confirm to cancel this question",
   signupInfo: "Please sign up to proceed this question !!",
-
+  questionAlreadyPaid: "This question fee is already paid",
+  questionDeadlineChange: "Do you really want to change the deadline?",
+  cantUpdateDeadLine:"Tutor cant change a deadline please ask student to change it"
 
 
 }

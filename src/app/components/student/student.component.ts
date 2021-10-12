@@ -25,6 +25,7 @@ export class StudentComponent implements OnInit {
   isLoggedIn = false;
 
   currentStudent: Student = {
+    visibleName: "",
     email: "",
     firstName: "",
     isVerified: '',

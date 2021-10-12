@@ -34,6 +34,7 @@ export interface Questions {
   questionNumber: string;
   tutorUnReadMessages: boolean;
   studentUnReadMessages: boolean;
-  studentUnReadCount:number;
-  tutorUnReadCount:number;
+  studentUnReadCount: number;
+  tutorUnReadCount: number;
+  tutorEmail: string;
 }

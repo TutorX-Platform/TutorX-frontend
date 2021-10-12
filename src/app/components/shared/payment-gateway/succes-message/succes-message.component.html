@@ -5,21 +5,22 @@
   <div *ngIf="!isSuccess" class="message">
     Payment Unsuccessfull
   </div>
-  <div [ngClass.gt-sm]="'success-details'" [ngClass.lt-md]="{'success-details success-details--mobile': true}" *ngIf="isSuccess">
+  <div [ngClass.gt-sm]="'success-details'" [ngClass.lt-md]="{'success-details success-details--mobile': true}"
+       *ngIf="isSuccess">
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="42px">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <img src="assets/icons/printer.svg">
-        <div class="reciept">
-          Print this reciept
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <img src="assets/icons/envelope.svg">
-        <div class="reciept">
-          Print this reciept
-        </div>
-      </div>
-    </div>
+<!--      <div fxLayout="row" fxLayoutAlign="start center">-->
+<!--        <img src="assets/icons/printer.svg">-->
+<!--        <div class="reciept">-->
+<!--          Print this reciept-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div fxLayout="row" fxLayoutAlign="start center">-->
+<!--        <img src="assets/icons/envelope.svg">-->
+<!--        <div class="reciept">-->
+<!--          Print this reciept-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="received-container">
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="24px">
@@ -46,24 +47,23 @@
     </div>
     <div class="payment-details" fxLayout="column" fxLayoutAlign="start start">
       <div class="title">
-        Payment Details
+        Paid to:
       </div>
       <div class="address-name">
-        Jonas Jr. Smith
+        Tutetory Team
       </div>
       <div class="address">
-        No 3/5, 8th Lane, Kalapaluwawa
+        1 Fernhurst Villas,
       </div>
       <div class="address">
-        Rajagiriya
+        Cork, Ireland
       </div>
       <div class="address">
-        jonas@gmail.com
-      </div>
-      <div class="address">
-        +94 0 72 0000 000 000
+        admin@tutetory.com
       </div>
     </div>
   </div>
-  <button (click)="onChat()" [ngClass.gt-sm]="'go-to-chat'" [ngClass.lt-md]="{'go-to-chat go-to-chat--mobile': true}" mat-flat-button>Go to chat</button>
+  <button (click)="onChat()" [ngClass.gt-sm]="'go-to-chat'" [ngClass.lt-md]="{'go-to-chat go-to-chat--mobile': true}"
+          mat-flat-button>Go to chat
+  </button>
 </div>

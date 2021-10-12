@@ -379,6 +379,7 @@ export const mailTemplates = {
   welcome: 'welcome.handlebars',
   tutorJoin: 'tutor-join.handlebars',
   refundRequest: 'refund-request.handlebars',
+  deadlineChange: 'deadline-change.handlebars'
 }
 
 export function getSuspisiousMessageReplacement(requestId: string, chatLink: string) {
@@ -429,10 +430,16 @@ export function getRefundRequest(requestId: string) {
   }
 }
 
-export function getTutorJoinRequest(name: string,tutorName:string) {
+export function getTutorJoinRequest(name: string, tutorName: string) {
   return {
     name: name,
     tutorName: tutorName,
+  }
+}
+
+export function getDeadlineChange(requestId: string) {
+  return {
+    requestId: requestId,
   }
 }
 

@@ -74,7 +74,8 @@ export class ChatServiceService {
       tutorId: this.auth.student.userId,
       tutorJoinedTime: Date.now(),
       tutorsCount: 1,
-      tutorProfile: this.auth.student.profileImage
+      tutorProfile: this.auth.student.profileImage,
+      tutorEmail: this.studentService.currentStudent.email,
     }
     let data: ChatMsg = {
       isValidQuote: false,
@@ -95,6 +96,26 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).update(joinTutor);
     this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
 
+  }
+
+  deadLineChangedChat(chatId: string, sortTime: number, deadline: string) {
+    let data: ChatMsg = {
+      isValidQuote: false,
+      isQuote: false,
+      attachmentExtension: "",
+      attachmentLink: "",
+      sort: sortTime,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} changed the dead line to ${deadline}`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: sortTime
+    }
+    return this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
   getChat(chatId: string) {

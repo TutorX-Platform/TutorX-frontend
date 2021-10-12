@@ -8,4 +8,5 @@ export interface Student {
   questions: string[];
   isVerified: string;
   role: string;
+  visibleName: string;
 }

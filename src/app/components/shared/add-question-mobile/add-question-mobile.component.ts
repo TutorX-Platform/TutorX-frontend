@@ -258,6 +258,7 @@ export class AddQuestionMobileComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      tutorEmail: "",
       studentUnReadCount: 0, tutorUnReadCount: 0,
       studentUnReadMessages: false, tutorUnReadMessages: false,
       questionNumber: '',
@@ -419,6 +420,7 @@ export class AddQuestionMobileComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      tutorEmail: "",
       studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,
       isPaid: false,

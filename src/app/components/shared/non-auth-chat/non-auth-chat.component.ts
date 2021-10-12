@@ -24,6 +24,7 @@ export class NonAuthChatComponent implements OnInit {
   isLoggedIn = false;
 
   currentStudent: Student = {
+    visibleName: "",
     email: "",
     firstName: "",
     isVerified: '',

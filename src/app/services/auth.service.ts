@@ -23,6 +23,7 @@ export class AuthService {
   isStudentSet = false;
   isLoggedIn = false;
   student: Student = {
+    visibleName: "",
     email: "",
     firstName: "",
     isVerified: "",
@@ -31,7 +32,7 @@ export class AuthService {
     questions: [],
     uniqueKey: "",
     userId: "",
-    role: "",
+    role: ""
   };
 
   constructor(public angularFirestoreService: AngularFirestore,
@@ -100,8 +101,8 @@ export class AuthService {
   }
 
   updateStudentData(user: User) {
-    const studentRef: AngularFirestoreDocument<Student> = this.angularFirestoreService.doc(constants.collections.students + `/${user.uid}`);
-    const student: Student = {
+    const studentRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(constants.collections.students + `/${user.uid}`);
+    const student = {
       email: user.email,
       firstName: user.displayName,
       isVerified: user.emailVerified,
@@ -110,7 +111,7 @@ export class AuthService {
       questions: [],
       uniqueKey: this.generateUniqueKey(),
       userId: user.uid,
-      role: constants.userTypes.student,
+      role: constants.userTypes.student
     }
     studentRef.set(student);
   }
@@ -174,6 +175,7 @@ export class AuthService {
     this.userData = user;
     const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`${constants.collections.students}/${user.uid}`);
     const userData: Student = {
+      visibleName: "",
       email: user.email,
       firstName: firstName,
       isVerified: "",
@@ -215,6 +217,7 @@ export class AuthService {
 
   resetStudent() {
     const resetUser: Student = {
+      visibleName: "",
       email: "",
       firstName: "",
       isVerified: "",
@@ -223,7 +226,7 @@ export class AuthService {
       questions: [],
       uniqueKey: "",
       userId: "",
-      role: '',
+      role: ''
     }
 
     this.student = resetUser;

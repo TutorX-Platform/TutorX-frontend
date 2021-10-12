@@ -317,6 +317,7 @@ export class AddQuestionComponent implements OnInit {
 
   askQuestion(dialogRef: MatDialogRef<any>, progressDialog: MatDialogRef<any>, time: number, isLoggedIn: boolean) {
     const question: Questions = {
+      tutorEmail: "",
       studentUnReadCount: 0, tutorUnReadCount: 0,
       studentUnReadMessages: false, tutorUnReadMessages: false,
       questionNumber: '',
@@ -502,6 +503,7 @@ export class AddQuestionComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      tutorEmail: "",
       studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,
       isPaid: false,
@@ -542,7 +544,7 @@ export class AddQuestionComponent implements OnInit {
         this.studentService.incrementRequestCount(this.authService.student.userId).then();
       });
       // @ts-ignore
-      this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.firstName), constants.mailTemplates.tutorJoin).subscribe()
+      this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.visibleName), constants.mailTemplates.tutorJoin).subscribe()
       // @ts-ignore
       if (!this.data.byLoggedUser) {
         // @ts-ignore
@@ -550,7 +552,7 @@ export class AddQuestionComponent implements OnInit {
           (res) => {
             console.log(res);
             // @ts-ignore
-            this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.firstName), constants.mailTemplates.tutorJoin).subscribe()
+            this.mailService.sendMail("Tutor Onboard", this.data.studentEmail, constants.getTutorJoinRequest(this.data.studentName, this.authService.student.visibleName), constants.mailTemplates.tutorJoin).subscribe()
           }
         )
       }

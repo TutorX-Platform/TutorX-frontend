@@ -24,4 +24,5 @@ export interface Chat {
   isPaid: boolean;
   tutorLastSeen: boolean;
   studentLastSeen: boolean;
+  tutorEmail: string;
 }

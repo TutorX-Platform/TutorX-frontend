@@ -15,6 +15,7 @@ export class StudentService {
   abc = new Observable();
   isTutor = false;
   currentStudent: Student = {
+    visibleName: "",
     email: "",
     firstName: "",
     isVerified: '',
