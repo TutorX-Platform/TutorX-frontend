@@ -30,7 +30,7 @@ export class ChatServiceService {
     this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing).then();
   }
 
-  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string) {
+  sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string, senderName: string) {
     let data: ChatMsg = {
       isValidQuote: false,
       isQuote: false,
@@ -38,7 +38,7 @@ export class ChatServiceService {
       attachmentLink: attachmentLink,
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
-      senderName: this.studentService.currentStudent.firstName,
+      senderName: senderName,
       isTutorJoinMessage: false,
       isAttachment: isAttachment,
       message: message,
@@ -84,10 +84,10 @@ export class ChatServiceService {
       attachmentLink: "",
       sort: sortTime,
       senderAvatar: this.studentService.currentStudent.profileImage,
-      senderName: this.studentService.currentStudent.firstName,
+      senderName: this.auth.student.visibleName,
       isTutorJoinMessage: true,
       isAttachment: false,
-      message: `${this.studentService.currentStudent.firstName} joined the chat`,
+      message: `${this.auth.student.visibleName} joined the chat`,
       senderEmail: '',
       senderId: '',
       sentBy: '',
@@ -133,7 +133,7 @@ export class ChatServiceService {
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
       isAttachment: false,
-      message: `${this.studentService.currentStudent.firstName} left the chat`,
+      message: `${this.auth.student.visibleName} left the chat`,
       senderEmail: '',
       senderId: '',
       sentBy: '',
@@ -195,7 +195,7 @@ export class ChatServiceService {
       attachmentLink: "",
       sort: time,
       senderAvatar: senderAvatar,
-      senderName: this.studentService.currentStudent.firstName,
+      senderName: this.auth.student.visibleName,
       isTutorJoinMessage: true,
       isAttachment: false,
       message: `${amount}`,
@@ -283,7 +283,7 @@ export class ChatServiceService {
       senderName: this.studentService.currentStudent.firstName,
       isTutorJoinMessage: true,
       isAttachment: false,
-      message: `${this.studentService.currentStudent.firstName} Marked as completed`,
+      message: `${this.auth.student.visibleName} Marked as completed`,
       senderEmail: '',
       senderId: '',
       sentBy: '',

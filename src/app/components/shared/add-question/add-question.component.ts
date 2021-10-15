@@ -540,7 +540,7 @@ export class AddQuestionComponent implements OnInit {
     // @ts-ignore
     if (this.data.isTutor) {
       // @ts-ignore
-      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.firstName, this.authService.student.profileImage).then(() => {
+      this.questionService.joinTutorForQuestion(this.data.id, this.authService.student.userId, this.data.studentEmail, this.dialogRef, this.authService.student.visibleName, this.authService.student.profileImage).then(() => {
         this.studentService.incrementRequestCount(this.authService.student.userId).then();
       });
       // @ts-ignore
