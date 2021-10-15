@@ -214,7 +214,7 @@ export class CardDetailsComponent implements OnInit {
                         this.recordPayment(res.time);
                         // @ts-ignore
                         this.chatService.sendPaidQuoteMessage(this.questionService.question.id, res.time, this.questionService.question.fee);
-                        this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee], {skipLocationChange: true});
+                        this.router.navigate([constants.routes.paySuccess, this.questionService.question.fee]);
                         progressDialog.close();
                       })
 

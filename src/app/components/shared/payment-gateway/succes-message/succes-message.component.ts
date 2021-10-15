@@ -29,7 +29,7 @@ export class SuccesMessageComponent implements OnInit {
   }
 
   onChat() {
-    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
+    this.router.navigate([constants.routes.student_q_pool])
   }
 
 }

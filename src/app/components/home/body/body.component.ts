@@ -312,7 +312,7 @@ export class BodyComponent implements OnInit {
       (result) => {
         if (result) {
           if (this.authService.isLoggedIn) {
-            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+            this.router.navigate([constants.routes.student_q_pool]);
           }
         }
       }
@@ -320,7 +320,7 @@ export class BodyComponent implements OnInit {
   }
 
   addQuestionMobile(){
-    this.router.navigate([constants.routes.add_question_mobile], {skipLocationChange: true});
+    this.router.navigate([constants.routes.add_question_mobile]);
   }
 
   onLogin() {
@@ -365,11 +365,11 @@ export class BodyComponent implements OnInit {
   }
 
   onTutor() {
-    this.router.navigate([constants.routes.turor.concat(constants.routes.questions)], {skipLocationChange: true})
+    this.router.navigate([constants.routes.turor.concat(constants.routes.questions)])
   }
 
   onProfile() {
-    this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true})
+    this.router.navigate([constants.routes.student_q_pool])
   }
 
   getLoggedUser(progressDialog: MatDialogRef<any>) {

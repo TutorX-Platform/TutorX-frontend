@@ -60,7 +60,7 @@ export class StudentComponent implements OnInit {
 
   changePage(num: number) {
     this.selectedPage = num;
-    this.router.navigate([constants.routes.student_q_pool],{skipLocationChange: true});
+    this.router.navigate([constants.routes.student_q_pool]);
   }
 
   addQuestion() {
@@ -74,7 +74,7 @@ export class StudentComponent implements OnInit {
   onSignOut() {
     this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
     this.authService.onSignOut();
-    this.router.navigate(['/'],{skipLocationChange: true});
+    this.router.navigate(['/']);
   }
 
 }

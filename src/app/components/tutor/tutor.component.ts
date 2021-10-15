@@ -92,24 +92,24 @@ export class TutorComponent implements OnInit {
   changePage(num: number) {
     this.selectedPage = num;
     if (num === 1) {
-      this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: false});
+      this.router.navigate([constants.routes.turor + constants.routes.questions]);
     } else if (num === 2) {
-      this.router.navigate([constants.routes.turor + constants.routes.dashboard], {skipLocationChange: true});
+      this.router.navigate([constants.routes.turor + constants.routes.dashboard]);
     } else if (num === 3) {
-      this.router.navigate([constants.routes.turor + constants.routes.activities], {skipLocationChange: true});
+      this.router.navigate([constants.routes.turor + constants.routes.activities]);
     } else {
-      this.router.navigate([constants.routes.turor + constants.routes.payments], {skipLocationChange: true});
+      this.router.navigate([constants.routes.turor + constants.routes.payments]);
     }
   }
 
   onSignOut() {
     this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
     this.authService.onSignOut();
-    this.router.navigate(['/'], {skipLocationChange: true});
+    this.router.navigate(['/']);
   }
 
   onViewProfile() {
-    this.router.navigate(['/tutor/profile'], {skipLocationChange: true});
+    this.router.navigate(['/tutor/profile']);
   }
 
   findRecentChats(tutorId: string) {

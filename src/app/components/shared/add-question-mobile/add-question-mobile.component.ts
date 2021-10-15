@@ -148,9 +148,9 @@ export class AddQuestionMobileComponent implements OnInit {
 
   onNavigateBack() {
     if( this.authService.isLoggedIn ){
-      this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+      this.router.navigate([constants.routes.student_q_pool]);
     } else {
-      this.router.navigate([constants.routes.home], {skipLocationChange: true});
+      this.router.navigate([constants.routes.home]);
     }
   }
 
@@ -170,7 +170,7 @@ export class AddQuestionMobileComponent implements OnInit {
           }
         } else {
           progressDialog.close();
-          this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+          this.router.navigate([constants.routes.student_q_pool]);
         }
       }
     )
@@ -312,7 +312,7 @@ export class AddQuestionMobileComponent implements OnInit {
                   this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
                 }
                 dialogRef.close(true);
-                this.router.navigate([constants.routes.chat, this.questionId], {skipLocationChange: true});
+                this.router.navigate([constants.routes.chat, this.questionId]);
               });
             } else {
               // @ts-ignore
@@ -330,10 +330,10 @@ export class AddQuestionMobileComponent implements OnInit {
                     this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
                   }
                   dialogRef.close(true);
-                  this.router.navigate([constants.routes.chat, this.questionId], {skipLocationChange: true});
+                  this.router.navigate([constants.routes.chat, this.questionId]);
                 } else {
                   alert("invalid domain")
-                  this.router.navigate([constants.routes.student + constants.routes.questions], {skipLocationChange: true});
+                  this.router.navigate([constants.routes.student + constants.routes.questions]);
                 }
               })
             }
@@ -408,7 +408,7 @@ export class AddQuestionMobileComponent implements OnInit {
       }
     )
     progressDialog.close();
-    this.router.navigate(["/"], {skipLocationChange: true});
+    this.router.navigate(["/"]);
   }
 
   sendAknowledgementEmail(email: string, link: string) {

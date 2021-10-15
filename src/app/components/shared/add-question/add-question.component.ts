@@ -372,7 +372,7 @@ export class AddQuestionComponent implements OnInit {
                 }
                 dialogRef.close(true);
                 progressDialog.close();
-                this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId], {skipLocationChange: true});
+                this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId]);
               });
             } else {
               console.log(question.dueDate);
@@ -533,7 +533,7 @@ export class AddQuestionComponent implements OnInit {
     this.acceptQuestion();
     this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
     // @ts-ignore
-    this.router.navigate([constants.routes.turor + constants.routes.chat, this.data.id], {skipLocationChange: true});
+    this.router.navigate([constants.routes.turor + constants.routes.chat, this.data.id] );
   }
 
   acceptQuestion() {

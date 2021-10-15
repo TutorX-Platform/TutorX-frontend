@@ -402,12 +402,12 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   onNavigateBack() {
     if (this.isTutor) {
       // @ts-ignore
-      this.router.navigate([constants.routes.turor.concat(constants.routes.activities)], {skipLocationChange: true});
+      this.router.navigate([constants.routes.turor.concat(constants.routes.activities)]);
     } else {
       if (this.authService.isLoggedIn) {
-        this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+        this.router.navigate([constants.routes.student_q_pool]);
       } else {
-        this.router.navigate([constants.routes.home], {skipLocationChange: true});
+        this.router.navigate([constants.routes.home]);
       }
     }
   }
@@ -464,7 +464,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               this.time = res;
               this.chatService.tutorLeftChat(this.chatToken, this.time.time);
               this.questionService.releaseQuestionByTutor(this.chatToken, data).then(() => {
-                this.router.navigate([constants.routes.turor + constants.routes.questions], {skipLocationChange: true})
+                this.router.navigate([constants.routes.turor + constants.routes.questions])
               });
             });
           } else {

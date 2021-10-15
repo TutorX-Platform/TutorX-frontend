@@ -288,7 +288,7 @@ export class StudentQuestionsComponent implements OnInit {
 
   onViewChat(id: any) {
     console.log(id);
-    this.router.navigate([constants.routes.chat, id], {skipLocationChange: true})
+    this.router.navigate([constants.routes.chat, id])
   }
 
   @HostListener('window:scroll', ['$event'])
