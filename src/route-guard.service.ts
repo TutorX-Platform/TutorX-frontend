@@ -9,15 +9,19 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import {Student} from "./app/models/student";
+import * as constants from "./app/models/constants";
+import {AngularFireAuth} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root',
 })
 export class RouteGuardService implements CanActivate {
   // @ts-ignore
-  currentUser: Student;
+  userRole: string;
+  currentUser = null;
 
   constructor(private authService: AuthService,
+              private angularFireAuth: AngularFireAuth,
               private studentService: StudentService,
               private router: Router) {}
 
@@ -25,14 +29,14 @@ export class RouteGuardService implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    this.currentUser = this.studentService.currentStudent;
-    console.log('Route guard started');
-    console.log(this.currentUser);
+    // @ts-ignore
+    this.currentUser = this.authService.student;
     if (this.currentUser === null) {
       this.router.navigate(['/home']);
       return false;
     } else {
-      if (next.data.type.includes(this.currentUser.role)) {
+      // @ts-ignore
+      if (next.data.type.includes(localStorage.getItem(constants.localStorageKeys.role))) {
         return true;
       } else {
         this.router.navigate(['/home']);

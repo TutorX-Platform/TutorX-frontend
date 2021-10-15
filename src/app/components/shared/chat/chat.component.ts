@@ -291,6 +291,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       (res) => {
         // @ts-ignore
         this.tutor = res.data();
+        this.des = this.tutor.description;
+        if (this.des.length > 20) {
+          this.desc = this.des.substring(0, 20).concat('...');
+        }
         // this.des = this.tutor.description;
       }
     )

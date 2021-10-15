@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestor
 import {AngularFireAuth} from "@angular/fire/auth";
 import * as constants from "../models/constants";
 import {Student} from "../models/student";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {Questions} from "../models/questions";
 import {firestore} from "firebase";
 

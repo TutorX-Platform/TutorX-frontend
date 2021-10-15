@@ -23,6 +23,8 @@ import {TutorPaymentsComponent} from "./components/tutor/tutor-payments/tutor-pa
 import {BodyComponent} from './components/home/body/body.component';
 import {HOME} from "@angular/cdk/keycodes";
 import {NonAuthChatComponent} from "./components/shared/non-auth-chat/non-auth-chat.component";
+import {RouteGuardService} from "../route-guard.service";
+import * as constants from "./models/constants";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
@@ -35,8 +37,9 @@ const routes: Routes = [
   {path: 'pay/:id/:amount', component: CardDetailsComponent},
   {path: 'pay-success/:amount', component: SuccesMessageComponent},
   {
-    path: 'tutor', component: TutorComponent, canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToHome},
+    path: 'tutor', component: TutorComponent,
+    canActivate: [RouteGuardService],
+    data: {type: [constants.userTypes.tutor]},
     children: [
       {
         path: 'dashboard',
@@ -71,11 +74,16 @@ const routes: Routes = [
   },
   {path: 'add-question', component: AddQuestionMobileComponent},
   {path: 'test-chat/:id', component: TestChatComponent},
-  {path: 'chat/:id', component: ChatComponent},
+  {path: 'chat/:id',
+    component: ChatComponent,
+    canActivate: [RouteGuardService],
+    data: {type: [constants.userTypes.student]},
+  },
   {
     path: 'student',
     component: StudentComponent,
-    // canActivate: [AngularFireAuthGuard],
+    canActivate: [RouteGuardService],
+    data: {type: [constants.userTypes.student]},
     children: [
       {
         path: 'questions',

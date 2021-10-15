@@ -2,7 +2,7 @@
 <div class="card-details" fxLayout="column" fxLayoutAlign="center center">
   <form [formGroup]="form" [ngClass.gt-sm]="'input-card'" [ngClass.lt-md]="{'input-card input-card--mobile': true}" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <img [src]="logo">
+      <img [src]="logo" class="logo">
       <div fxLayout="column" fxLayoutAlign="center end" class="header">
         <div class="payment">Total Payment</div>
         <div class="amount">{{questionService.question.fee}} USD</div>

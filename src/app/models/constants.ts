@@ -18,7 +18,7 @@ export const dummyChatId = 'Q936d4c46-3a30-4f17-b2ce-aa53d8c3af37';
 
 export const dummy_profile_picture = 'assets/images/default_profile.png';
 
-export const logo = 'assets/images/logo.svg';
+export const logo = 'assets/images/tutetory_logo.svg';
 
 export const usedCurrency = 'USD';
 

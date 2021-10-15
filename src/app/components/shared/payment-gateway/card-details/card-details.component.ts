@@ -226,6 +226,7 @@ export class CardDetailsComponent implements OnInit {
                       console.log(res);
                     }
                   }, () => {
+                    progressDialog.close();
                     this.utilService.openDialog(systemMessage.questionTitles.paymentFailed, systemMessage.questionTitles.paymentFailed, constants.messageTypes.warningInfo).afterOpened().subscribe()
                   }
                 )

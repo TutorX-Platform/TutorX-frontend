@@ -55,7 +55,7 @@ export class AuthService {
         this.isLoggedIn = true;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
-        localStorage.setItem(constants.localStorageKeys.role, this.student.role);
+        // localStorage.setItem(constants.localStorageKeys.role, this.student.role);
         this.findUser(this.student.userId);
       } else {
         this.isLoggedIn = false;
@@ -199,6 +199,7 @@ export class AuthService {
   onSignOut() {
     this.isLoggedIn = false;
     localStorage.removeItem(constants.localStorageKeys.user);
+    localStorage.removeItem(constants.localStorageKeys.role);
     this.angularFireAuth.auth.signOut().then(
       (v) => {
         this.router.navigate([constants.routes.home])
@@ -239,6 +240,7 @@ export class AuthService {
           // @ts-ignore
           const student: Student = res.data();
           this.student = student;
+          localStorage.setItem(constants.localStorageKeys.role, this.student.role);
           // @ts-ignore
           if (!res.data().isTutor) {
             this.SetUserData(user, this.student.firstName, constants.userTypes.student);
@@ -252,7 +254,7 @@ export class AuthService {
               if (progressDialog) {
                 progressDialog.close();
               }
-              this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+              this.router.navigate([constants.routes.student_q_pool]);
             });
           } else { // @ts-ignore
             if (student.role === constants.userTypes.tutor) {
@@ -261,7 +263,8 @@ export class AuthService {
                 if (progressDialog) {
                   progressDialog.close();
                 }
-                this.router.navigate([constants.routes.turor + '/questions'], {skipLocationChange: true});
+                console.log('hi');
+                this.router.navigate([constants.routes.turor + '/questions']);
               });
             }
           }

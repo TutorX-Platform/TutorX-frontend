@@ -162,10 +162,17 @@
     min-height: 100vh;
     width: 100%;
   }
+  .logo{
+    height: 3.2rem;
+  }
   .card-details{
     min-height: 100vh;
     width: 100%;
     background: #E5E5E5;
+
+    .logo{
+      height: 3.2rem;
+    }
     .input-card{
       width: 60%;
       padding: 20px;
