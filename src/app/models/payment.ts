@@ -13,4 +13,5 @@ export interface Payment {
   tutorName: string;
   questionNumber: string;
   month:number;
+  tutorCredited:boolean;
 }

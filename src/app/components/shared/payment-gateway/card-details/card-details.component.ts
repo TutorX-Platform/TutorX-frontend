@@ -261,6 +261,7 @@ export class CardDetailsComponent implements OnInit {
 
   recordPayment(time: number) {
     const payment: Payment = {
+      tutorCredited: false,
       month: new Date().getMonth() + 1,
       questionNumber: this.questionService.question.questionNumber,
       tutorName: this.questionService.question.tutorName,
@@ -276,7 +277,7 @@ export class CardDetailsComponent implements OnInit {
       questionId: this.questionService.question.uniqueId,
       tutorId: this.questionService.question.tutorId
     }
-    this.paymentService.recordPayment(payment).then((v) => {
+    this.paymentService.recordPayment(payment,this.questionService.question.uniqueId).then((v) => {
       console.log(v);
     })
   }

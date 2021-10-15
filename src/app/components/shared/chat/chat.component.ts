@@ -211,8 +211,14 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       // @ts-ignore
       this.time = res;
       if (!this.attachementPicked) {
+        let sender = '';
+        if (this.isTutor) {
+          sender = this.authService.student.visibleName
+        } else {
+          sender = this.authService.student.firstName;
+        }
         // @ts-ignore
-        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false, '', '');
+        this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false, '', '', sender);
         this.onUnAuthorizedMessageSent(this.message.value);
         this.sentMessageCount = this.sentMessageCount + 1;
       } else {
@@ -525,8 +531,14 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.uploadReady = false;
           let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
           this.chat.attachments.push(attachment);
+          let sender = '';
+          if (this.isTutor) {
+            sender = this.authService.student.visibleName
+          } else {
+            sender = this.authService.student.firstName;
+          }
           // @ts-ignore
-          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true, attachment.downloadUrl, attachment.extension);
+          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true, attachment.downloadUrl, attachment.extension,sender);
           attachment = {
             downloadUrl: "",
             fileName: "",
@@ -697,6 +709,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             // tutor payment increase
             this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(() => {
               this.questionService.incrementCompletedQuestionCount()
+              this.paymentService.updatePayment(this.question.uniqueId).then();
             });
           })
         }

@@ -16,9 +16,9 @@ export class PaymentService {
   }
 
 
-  recordPayment(data: Payment) {
-    const paymentRef: AngularFirestoreCollection<Payment> = this.angularFirestoreService.collection(`${constants.collections.payments}`);
-    return paymentRef.add(data);
+  recordPayment(data: Payment, questionId: string) {
+    const paymentRef: AngularFirestoreDocument<Payment> = this.angularFirestoreService.collection(constants.collections.payments).doc(questionId);
+    return paymentRef.set(data)
   }
 
   getPaymentsForTutor(tutorId: string) {
@@ -77,5 +77,13 @@ export class PaymentService {
     }
     const statRef = this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).doc(docId);
     return statRef.update(data);
+  }
+
+  updatePayment(questionId: string) {
+    const data = {
+      tutorCredited: true
+    }
+    const statRef = this.angularFirestoreService.collection(constants.collections.payments).doc(questionId);
+    return statRef.update(data)
   }
 }

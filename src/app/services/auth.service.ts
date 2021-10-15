@@ -22,7 +22,7 @@ export class AuthService {
   userData: any;
   isStudentSet = false;
   isLoggedIn = false;
-  student: Student = {
+  student = {
     visibleName: "",
     email: "",
     firstName: "",
@@ -174,8 +174,7 @@ export class AuthService {
   SetUserData(user: any, firstName: string, role: string) {
     this.userData = user;
     const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`${constants.collections.students}/${user.uid}`);
-    const userData: Student = {
-      visibleName: "",
+    const userData = {
       email: user.email,
       firstName: firstName,
       isVerified: "",
@@ -186,6 +185,7 @@ export class AuthService {
       userId: user.uid,
       role: role
     }
+    // @ts-ignore
     this.student = userData;
     return userRef.set(userData, {
       merge: true
@@ -229,6 +229,7 @@ export class AuthService {
       role: ''
     }
 
+    // @ts-ignore
     this.student = resetUser;
   }
 
@@ -237,7 +238,8 @@ export class AuthService {
       (res) => {
         if (res) {
           // @ts-ignore
-          const student: Student = res.data();
+          const student = res.data();
+          // @ts-ignore
           this.student = student;
           // @ts-ignore
           if (!res.data().isTutor) {
