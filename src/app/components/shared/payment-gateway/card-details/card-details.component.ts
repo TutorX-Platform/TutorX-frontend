@@ -22,6 +22,7 @@ import {Payment} from "../../../../models/payment";
 
 @Component({
   selector: 'app-card-details',
+  host: { class: 'payment-page' },
   templateUrl: './card-details.component.html',
   styleUrls: ['./card-details.component.scss']
 })
