@@ -4,9 +4,9 @@
                  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) === false">
-      <div fxLayout="row" fxLayoutAlign="start center" class="name">
-        <img routerLink="/home" src="assets/images/tutetory_logo.svg" alt="logo" class="logo">
-      </div>
+      <!--<div fxLayout="row" fxLayoutAlign="start center" class="name">-->
+        <!--<img routerLink="/home" src="assets/images/tutetory_logo.svg" alt="logo" class="logo">-->
+      <!--</div>-->
       <div class="but-container" fxLayout="row">
         <div class="new-quest" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" (click)="addQuestion()">
           <img src="../../../assets/icons/plus.svg" alt="">
