@@ -21,6 +21,7 @@ import * as systemMessages from '../../../models/system-messages';
 import {StudentService} from "../../../services/student-service.service";
 import {Attachment} from "../../../models/Attachment";
 import {ValidationService} from "../../../services/validation.service";
+import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
   selector: 'app-add-question',
@@ -441,7 +442,7 @@ export class AddQuestionComponent implements OnInit {
     dialogConfig.autoFocus = true;
     // dialogConfig.width = "30%";
     // dialogConfig.height = "810px";
-    const dialogRef = this.dialog.open(WelcomeComponent, dialogConfig);
+    const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (result) => {
         if (result !== undefined) {

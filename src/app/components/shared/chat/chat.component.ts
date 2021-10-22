@@ -542,7 +542,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             sender = this.authService.student.firstName;
           }
           // @ts-ignore
-          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true, attachment.downloadUrl, attachment.extension,sender);
+          this.chatService.sendMessage(this.chatToken, this.fileToUpload?.name, this.time.time, true, attachment.downloadUrl, attachment.extension, sender);
           attachment = {
             downloadUrl: "",
             fileName: "",
@@ -711,7 +711,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               this.mailService.sendMail("Your work has been completed.", this.question.studentEmail, constants.getCompleteRequest(this.question.id, this.question.questionTitle, this.question.studentName), constants.mailTemplates.questionComplete).subscribe();
             });
             // tutor payment increase
-            this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).then(() => {
+            this.studentService.incrementTutorEarning(this.question.tutorId, this.question.fee * constants.tutor_pay_percentage).catch((err) => {
+              console.log(err);
+            }).then(() => {
               this.questionService.incrementCompletedQuestionCount()
               this.paymentService.updatePayment(this.question.uniqueId).then();
             });
