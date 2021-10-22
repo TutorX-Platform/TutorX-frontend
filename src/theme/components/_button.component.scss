@@ -1,3 +1,11 @@
+.c-button-group{
+  button:not(:first-child){
+    margin-left: var(--space--md);
+  }
+}
+.c-button-full{
+  width: 100%;
+}
 .c-button{
   padding: 4px 24px !important;
   border-radius: 8px;
