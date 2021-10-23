@@ -1,0 +1,111 @@
+<mat-toolbar  class="top-bar__wrap">
+  <div class="container">
+    <mat-toolbar-row class="top-bar ">
+      <button
+        class="top-bar__nav-icon"
+        mat-icon-button
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="top-bar__title-container">
+        <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
+      </div>
+      <div class="top-bar__actions" *ngIf="!authService.isLoggedIn">
+        <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
+        <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
+      </div>
+      <div class="top-bar__actions" *ngIf="authService.isLoggedIn">
+        <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="moveToDashboard()">Dashboard</button>
+      </div>
+
+    </mat-toolbar-row>
+  </div>
+
+</mat-toolbar>
+
+<div [ngClass.lt-sm]="'privacy-container privacy-container__small'"
+     [ngClass.gt-xs]="{'privacy-container': true}"fxLayout="column" >
+  <div class="faq-main-title">
+    Privacy policy
+  </div>
+  <div class="faq-para">
+    This Privacy Policy describes Pixitree Digital Creatives Private Limited (Herein after referred to as the “Company”) policies and procedures on the collection and use and disclosure of the Information provided by the Users and visitors of the Website (together referred to as the “Users”). The Company shall not use the User’s information in any manner except as provided under this Privacy Policy. Every User who accesses the Website agrees to be bound by the terms of this Privacy Policy.
+  </div>
+  <div class="faq-sub-title">
+    Information we collect
+  </div>
+  <div class="faq-para">
+    We collect Information through our Website to provide better services and results to our Users. Information is collected by the details provided by User and the data collected by the usage of the services. Details provided by User shall include Personal Information like name, address (residential or email), contact number, and other such data which is required for the efficient use of the services provided by the Company. In general, the user can browse the Website without revealing any Personal Information. Although once Personal Information is provided, the identity of the User is not anonymous anymore. Where possible, we indicate which fields are required and which fields are optional. Our User always has the option of not providing Information by choosing not to use a particular service or feature. Other Information collected includes device information i.e. from which device is the services being used. This shall include the hardware model, operating system, unique identification number associated with the device etc.
+  </div>
+  <div class="faq-sub-title">
+    Usage of the collected Information
+  </div>
+  <div class="faq-para">
+    The Information collected is constantly used to provide personally relevant features and improve the services for our Users. With such pool of information, it is easier for us to understand the current trends in the market, according to which we cater our services. Such information helps us to come with content that provides a better User experience, thereby creating better satisfaction and increasing the user base of our Website. User discretion is asked before using such information for any other purposes than those set out in this Policy. Although the information which is shared by the User themselves through us shall not be considered as making private information public.
+  </div>
+  <div class="faq-sub-title">
+    Sharing of Personal Information
+  </div>
+  <div class="faq-para">
+    Disclosure may be necessary to provide Users access to our Services, to comply with our legal obligations, to enforce our User Agreement, to prevent, detect, mitigate, and investigate fraudulent or illegal activities related to our Services. Such Personal Information, when shared with third parties, shall be subject to strict confidentiality agreements
+  </div>
+  <div class="faq-para">
+    We may disclose personal information if required to do so by law or in the good faith belief that such disclosure is reasonably necessary to respond to subpoenas, court orders, or other legal process. We may disclose Personal Information to law enforcement offices, third party rights owners, or others in the good faith belief that such disclosure is reasonably necessary to enforce our Terms or Privacy Policy. We and our affiliates will share / sell some or all of your personal information with another business entity should we (or our assets) plan to merge with, or be acquired by that business entity, or re-organization, amalgamation, restructuring of business. Should such a transaction occur that other business entity (or the new combined entity) will be required to follow this privacy policy with respect to your Personal Information.
+  </div>
+  <div class="faq-sub-title">
+    Securing Information
+  </div>
+  <div class="faq-para">
+    In order to secure the information provided to us by our users, we review the processing and storage practices along with the information collected to guard against unauthorized access into the data collected in our systems. Furthermore, user information is protected by subjecting our Employees and Agents who process such information to strict confidentiality agreements, where if they fail to comply with it, such non compliance shall lead to heavy penalties or legal proceedings, depending upon the gravity of the situation.
+  </div>
+  <div class="faq-sub-title">
+    Choice/Opt-Out
+  </div>
+  <div class="faq-para">
+    We provide all our users with the opportunity to opt-out of receiving promotional, marketing-related communications from us in general, after setting up an account. User may remove their personal information by unsubscribing or deleting their account from our Website.
+  </div>
+  <div class="faq-sub-title">
+    Consent
+  </div>
+  <div class="faq-para">
+    By using the Website and by providing personal information, the user consents to the collection and use of the information disclosed by them in accordance with this Privacy Policy, including but not limited to their consent for sharing their information as per this privacy policy. Our Website offers publicly accessible blogs or community forums. You should be aware that any information you provide in these areas may be read, collected, and used by others who access them.
+  </div>
+  <div class="faq-para">
+    This document is an electronic record in terms of existing and applicable Information Technology laws and the amended provisions thereto pertaining to electronic records in various allied statutes as amended pursuant to the Information Technology laws. This electronic record has been generated by a computer system and does not require any authentication. From time to time, the Company may change this internet privacy policy. The effective date of this policy, as stated below, indicates the last time this policy was revised or materially changed. Checking the effective date below allows you to determine whether there have been changes since the last time you reviewed the policy. Effective date of this policy: This policy was last updated on
+  </div>
+</div>
+
+<section class="s-footer">
+  <img src="assets/images/wave_footer.svg" alt="" class="s-footer__wave">
+  <div class="container">
+    <div class="s-footer__content">
+      <div class="brd-display-x-large m-b-16">Work Smart, Not Hard</div>
+      <!-- <div class="brd-display-large m-b-40">For students, by educators</div> -->
+      <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.lt-sm fxShow="true">
+        Get Help
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <button mat-flat-button  (click)="addQuestionMobile()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.gt-xs fxShow="true">
+        Get Help
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <div class="flex-box align-items-center justify-content-center flex-wrap-wrap m-b-32">
+        <a href=""  class="s-footer__link">About Us</a>
+        <a href="" class="s-footer__link">Contact Us</a>
+        <a href="" class="s-footer__link">FAQ</a>
+        <a href="" class="s-footer__link">Privacy Policy</a>
+        <a href="" class="s-footer__link">Terms & Conditions</a>
+
+      </div>
+
+      <!-- TrustBox widget - Review Collector -->
+      <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="61586ecb890a91001d9327fc" data-style-height="52px" data-style-width="100%">
+        <a href="https://www.trustpilot.com/review/tutetory.com" target="_blank" rel="noopener">Trustpilot</a>
+      </div>
+      <!-- End TrustBox widget -->
+      <div class="copy-right">© 2021 . All rights reserved</div>
+    </div>
+
+
+  </div>
+</section>
