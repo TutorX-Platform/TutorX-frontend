@@ -1,0 +1,66 @@
+@mixin faq-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .privacy-container {
+    margin: 100px auto;
+    width: 50%;
+    &__small {
+      width: 80% !important;
+    }
+  }
+
+  .terms-container {
+    margin: 100px auto;
+    text-align: center;
+    width: 50%;
+    &__small {
+      width: 80% !important;
+    }
+  }
+
+  .faq-container {
+    margin: 100px auto;
+    text-align: center;
+    width: 50%;
+    &__small {
+      width: 80% !important;
+    }
+  }
+
+  .faq-main-title{
+    font: $heading-desktop-h3;
+    color: #2E3849;
+  }
+
+  .faq-para{
+    font: $body-small-medium;
+    color: #2E3849;
+    margin-top: 24px;
+    &__fa{
+      margin-top: 0px !important;
+      text-align: start !important;
+    }
+  }
+
+  .faq-sub-title{
+    font: $body-base-medium;
+    color: #2E3849;
+    margin-top: 64px;
+    &__fa{
+      margin-top: 0px !important;
+      text-align: start !important;
+      cursor: pointer;
+    }
+  }
+
+  .line{
+    border: 0.1px solid #CBCFD1;
+    flex: none;
+    flex-grow: 1;
+    margin: 0px 0px;
+  }
+}

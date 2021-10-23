@@ -91,6 +91,9 @@ import {NotificationService} from "./services/notification.service";
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { NonAuthChatComponent } from './components/shared/non-auth-chat/non-auth-chat.component';
 import { ReviewComponent } from './components/shared/review/review.component';
+import { PrivacyPolicyComponent } from './components/home/privacy-policy/privacy-policy.component';
+import { TermsNConditionsComponent } from './components/home/terms-n-conditions/terms-n-conditions.component';
+import { FaqComponent } from './components/home/faq/faq.component';
 
 
 @NgModule({
@@ -131,7 +134,10 @@ import { ReviewComponent } from './components/shared/review/review.component';
     TutorProfileComponent,
     TutorPaymentsComponent,
     NonAuthChatComponent,
-    ReviewComponent
+    ReviewComponent,
+    PrivacyPolicyComponent,
+    TermsNConditionsComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

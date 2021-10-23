@@ -25,6 +25,9 @@ import {HOME} from "@angular/cdk/keycodes";
 import {NonAuthChatComponent} from "./components/shared/non-auth-chat/non-auth-chat.component";
 import {RouteGuardService} from "../route-guard.service";
 import * as constants from "./models/constants";
+import {PrivacyPolicyComponent} from "./components/home/privacy-policy/privacy-policy.component";
+import {TermsNConditionsComponent} from "./components/home/terms-n-conditions/terms-n-conditions.component";
+import {FaqComponent} from "./components/home/faq/faq.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
 
@@ -118,6 +121,15 @@ const routes: Routes = [
         component: ChatComponent
       }
      ]
+  },
+  {
+    path: 'privacy-policy', component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'terms-conditions', component: TermsNConditionsComponent,
+  },
+  {
+    path: 'faq', component: FaqComponent,
   },
   {path: '', component: BodyComponent},
   {path: '**', component: BodyComponent}
