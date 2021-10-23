@@ -90,6 +90,7 @@ import {TutorPaymentsComponent} from './components/tutor/tutor-payments/tutor-pa
 import {NotificationService} from "./services/notification.service";
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { NonAuthChatComponent } from './components/shared/non-auth-chat/non-auth-chat.component';
+import { ReviewComponent } from './components/shared/review/review.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { NonAuthChatComponent } from './components/shared/non-auth-chat/non-auth
     SuccesMessageComponent,
     TutorProfileComponent,
     TutorPaymentsComponent,
-    NonAuthChatComponent
+    NonAuthChatComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

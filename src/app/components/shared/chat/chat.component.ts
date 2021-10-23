@@ -25,6 +25,7 @@ import {NotificationService} from "../../../services/notification.service";
 import * as notificationMsg from '../../../models/notification-messages';
 import {Tutor} from "../../../models/tutor";
 import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
+import {ReviewComponent} from "../review/review.component";
 
 @Component({
   selector: 'app-chat',
@@ -105,6 +106,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   desc = '';
   isImageLoading = false;
   uploadingProgress = 0;
+  rating = 3;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -752,5 +754,18 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     } else {
       this.utilService.openDialog(systemMessages.questionTitles.cantUpdateDeadLine, systemMessages.questionMessages.cantUpdateDeadLine, constants.messageTypes.warning).afterClosed().subscribe()
     }
+  }
+
+  onRate(num: number) {
+    this.rating = num;
+  }
+
+  onWriteReview(){
+    const dialogRef = this.dialog.open(ReviewComponent,{
+      width: '600px',
+      data: {
+        rating: this.rating
+      }
+    })
   }
 }

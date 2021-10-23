@@ -1,0 +1,16 @@
+@mixin review-component($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .review {
+    .dialog-title {
+      font: $body-base-bold;
+    }
+    .dialog-message {
+      font: $body-base-default;
+      color: #5F738C;
+    }
+  }
+}

@@ -136,6 +136,32 @@
             color: black !important;
           }
         }
+        .ratings-container{
+          margin: 8px 16px;
+          background: white;
+          border-radius: 8px;
+          .rating-ui{
+            padding: 24px 36px;
+            .star{
+              cursor: pointer;
+              color: #9AA2A7;
+              &--selected{
+                color: #FFAE3D !important;
+              }
+            }
+          }
+          .review{
+            cursor: pointer;
+            padding: 24px 36px;
+            color: #7F6EF0;
+          }
+          .line{
+            border: 1px solid #CBCFD1;
+            flex: none;
+            flex-grow: 1;
+            margin: 0px 0px;
+          }
+        }
         .amount-container{
           padding: 16px;
           .quote{

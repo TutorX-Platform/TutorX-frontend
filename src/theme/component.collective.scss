@@ -19,6 +19,7 @@
 @import "components/profile.component";
 @import "components/tutor-payments.components";
 @import "components/progress-dialog.component";
+@import "components/review.component";
 @import "components/avatar.component";
 @import "abstracts/spaces-loop.mixin";
 
@@ -44,6 +45,7 @@
     @include profile-component($theme);
     @include tutor-payment-component($theme);
     @include progress-dialog-component($theme);
+    @include review-component($theme);
 }
 @include list-loop('.m-t-', 'margin-top');
 @include list-loop('.m-r-', 'margin-right');
