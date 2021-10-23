@@ -504,6 +504,7 @@ export class AddQuestionComponent implements OnInit {
     const tutorChatLink = this.utilService.generateChatLink(chatId, constants.userTypes.tutor);
     const msgs: ChatMsg[] = []
     const data: Chat = {
+      studentOnline: false, tutorOnline: false,
       tutorEmail: "",
       studentLastSeen: false, tutorLastSeen: false,
       studentName: this.authService.student.firstName,

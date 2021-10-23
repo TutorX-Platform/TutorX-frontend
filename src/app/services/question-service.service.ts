@@ -110,7 +110,7 @@ export class QuestionService {
     return questionRef;
   }
 
-  getQuestionsForNextTutorByStatus(tutorId: string, status: string[],time:number) {
+  getQuestionsForNextTutorByStatus(tutorId: string, status: string[], time: number) {
     // @ts-ignore
     const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', 'in', status).orderBy('sort', "desc").limit(5).startAfter(time));
     return questionRef;
@@ -118,7 +118,7 @@ export class QuestionService {
 
   getNextQuestionsForTutorByStatus(tutorId: string, status: string, time: number) {
     if (status == '') {
-     return this.getQuestionsForNextTutorByStatus(tutorId, [constants.questionStatus.assigned,constants.questionStatus.cancelled,constants.questionStatus.completed,constants.questionStatus.in_progress],time);
+      return this.getQuestionsForNextTutorByStatus(tutorId, [constants.questionStatus.assigned, constants.questionStatus.cancelled, constants.questionStatus.completed, constants.questionStatus.in_progress], time);
     } else {
       // @ts-ignore
       const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('tutorId', '==', tutorId).where('status', 'in', [status]).orderBy('sort', "desc").limit(5).startAfter(time));
@@ -200,5 +200,47 @@ export class QuestionService {
     }
     const questionRef = this.angularFirestoreService.collection(constants.collections.questions).doc(questionId).update(data);
     return questionRef;
+  }
+
+  findQuestion(qid: string) {
+    return this.angularFirestoreService.collection(constants.collections.questions).doc(qid).get()
+  }
+
+  createQuestionReviwe(qid: string, studentId: string, tutorId: string) {
+    const rev = {
+      rating: "",
+      review: "",
+      question: qid,
+      tutorId: tutorId,
+      studentId: studentId,
+    };
+    const reviewRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.review).doc(qid);
+    return reviewRef.set(rev);
+  }
+
+  rateQuestion(qid: string, rating: number, studentId: string, tutorId: string, review: string) {
+    const rev = {
+      rating: rating,
+      review: review,
+      question: qid,
+      tutorId: tutorId,
+      studentId: studentId,
+    };
+    const reviewRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.review).doc(qid);
+    return reviewRef.update(rev);
+  }
+
+  writeReviewQuestion(review: string, qid: string) {
+    const rev = {
+      review: review,
+    };
+    const reviewRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.review).doc(qid);
+    return reviewRef.update(rev);
+  }
+
+  getQuestionReview(questionId: string) {
+    // @ts-ignore
+    const reviewRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.review).doc(questionId);
+    return reviewRef;
   }
 }

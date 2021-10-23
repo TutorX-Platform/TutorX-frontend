@@ -6,6 +6,9 @@
         <div *ngIf="questionService.question !== undefined"
              class="chat-title">{{questionService.question.questionTitle}}
         </div>
+        <!--        Todo need to change with appropriate ui elements&ndash;&gt;-->
+        <div> parnter is online {{isPartnerOnline}}</div>
+
         <div *ngIf="questionService.question === undefined" class="chat-title">Loading</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <div class="chat-subtitle">{{chat.questionNumber}} | Created
@@ -223,26 +226,31 @@
             </div>
           </div>
           <!--Rating UI-->
-          <div fxLayout="column" fxLayoutAlign="start end">
+          <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
             <div class="ratings-container">
               <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
-                <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1" ngClass="star star--selected">star
+                <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"
+                          ngClass="star star--selected">star
                 </mat-icon>
                 <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating < 1" ngClass="star">star_border
                 </mat-icon>
-                <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating >= 2" ngClass="star star--selected">star
+                <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating >= 2"
+                          ngClass="star star--selected">star
                 </mat-icon>
                 <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating < 2" ngClass="star">star_border
                 </mat-icon>
-                <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating >= 3" ngClass="star star--selected">star
+                <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating >= 3"
+                          ngClass="star star--selected">star
                 </mat-icon>
                 <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating < 3" ngClass="star">star_border
                 </mat-icon>
-                <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating >= 4" ngClass="star star--selected">star
+                <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating >= 4"
+                          ngClass="star star--selected">star
                 </mat-icon>
                 <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating < 4" ngClass="star">star_border
                 </mat-icon>
-                <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating >= 5" ngClass="star star--selected">star
+                <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating >= 5"
+                          ngClass="star star--selected">star
                 </mat-icon>
                 <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating < 5" ngClass="star">star_border
                 </mat-icon>

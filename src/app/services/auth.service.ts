@@ -55,7 +55,6 @@ export class AuthService {
         this.isLoggedIn = true;
         localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
-        // localStorage.setItem(constants.localStorageKeys.role, this.student.role);
         this.findUser(this.student.userId);
       } else {
         this.isLoggedIn = false;
@@ -165,6 +164,7 @@ export class AuthService {
   // Sign out
   signOut() {
     return this.angularFireAuth.auth.signOut().then(() => {
+      this.studentService.updateStudentOnline(false, this.student.userId).then()
       this.isLoggedIn = false;
       localStorage.removeItem(constants.localStorageKeys.user);
       this.router.navigate([constants.routes.home], {skipLocationChange: true});
@@ -282,8 +282,10 @@ export class AuthService {
       (res) => {
         // @ts-ignore
         this.student = res.data();
+        localStorage.setItem(constants.localStorageKeys.role, this.student.role);
         // @ts-ignore
         this.studentService.currentStudent = res.data();
+        this.studentService.updateStudentOnline(true, this.studentService.currentStudent.userId).then();
       }
     )
   }

@@ -23,7 +23,7 @@ export class ReviewComponent implements OnInit {
   }
 
   onDone() {
-    console.log(this.review.value);
+    this.dialogRef.close(this.review.value);
   }
 
 }

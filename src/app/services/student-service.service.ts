@@ -94,4 +94,17 @@ export class StudentService {
     return payRef.update({'inprogressCount': increment});
   }
 
+  updateStudentOnline(isOnline: boolean, userId: string) {
+    const data = {
+      isOnline: isOnline
+    }
+    const studentRef = this.angularFirestoreService.collection(constants.collections.students).doc(userId).update(data);
+    return studentRef;
+  }
+
+  findStudent(uid:string) {
+    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).valueChanges();
+  }
+
+
 }

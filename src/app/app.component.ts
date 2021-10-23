@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {NotificationService} from "./services/notification.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {AngularFireMessaging} from "@angular/fire/messaging";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {UtilService} from "./services/util-service.service";
 import * as systemMessages from '../app/models/system-messages';
 import * as constants from '../app/models/constants';
+import {AuthService} from "./services/auth.service";
+import {ChatServiceService} from "./services/chat-service.service";
+import {StudentService} from "./services/student-service.service";
 
 @Component({
   selector: 'app-root',
@@ -24,10 +27,20 @@ export class AppComponent implements OnInit {
   notificationSub: Subscription;
   notificationTimeout: any;
 
+  // check user active or not
+  // @ts-ignore
+  userActivity;
+  userInactive: Subject<any> = new Subject();
+
   constructor(private notificationService: NotificationService,
               public angularFireAuth: AngularFireAuth,
               private utilService: UtilService,
-              private afMessaging: AngularFireMessaging,) {
+              private authService: AuthService,
+              private studentService: StudentService,
+              private chatService: ChatServiceService,
+              private afMessaging: AngularFireMessaging) {
+    this.setTimeout();
+    this.userInactive.subscribe(() => console.log('user has been inactive for 3s'));
   }
 
   ngOnInit(): void {
@@ -79,6 +92,21 @@ export class AppComponent implements OnInit {
           isVisible: true
         })
       });
+  }
+
+  setTimeout() {
+    this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);
+  }
+
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler() {
+    this.studentService.updateStudentOnline(false, this.authService.student.userId).then()
+  }
+
+  @HostListener('window:unload', ['$event'])
+  unloadHandler() {
+    this.studentService.updateStudentOnline(false, this.authService.student.userId).then()
   }
 }
 

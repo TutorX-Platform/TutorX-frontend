@@ -25,4 +25,6 @@ export interface Chat {
   tutorLastSeen: boolean;
   studentLastSeen: boolean;
   tutorEmail: string;
+  tutorOnline: boolean;
+  studentOnline: boolean;
 }

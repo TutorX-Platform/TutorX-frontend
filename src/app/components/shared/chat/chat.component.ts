@@ -16,7 +16,6 @@ import {UtilService} from "../../../services/util-service.service";
 import {TimeApi} from "../../../models/time-api";
 import {Questions} from "../../../models/questions";
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from "angularfire2/storage";
-import {CardDetailsComponent} from "../payment-gateway/card-details/card-details.component";
 import * as systemMessages from '../../../models/system-messages'
 import {MailService} from "../../../services/mail.service";
 import {Attachment} from "../../../models/Attachment";
@@ -48,6 +47,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   isFocused = false;
   cancelledQustion = false
   chat: Chat = {
+    studentOnline: false, tutorOnline: false,
     tutorEmail: "",
     studentLastSeen: false,
     tutorLastSeen: false,
@@ -106,7 +106,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   desc = '';
   isImageLoading = false;
   uploadingProgress = 0;
-  rating = 3;
+  rating = 0;
+  isPartnerOnline = false;
+  enableWriteReview = false;
 
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
@@ -134,6 +136,16 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       map => {
         // @ts-ignore
         this.chatToken = map.get('id');
+        this.questionService.findQuestion(this.chatToken).subscribe(
+          (res) => {
+            // @ts-ignore
+            this.questionService.question = res.data();
+            // @ts-ignore
+            this.question = res.data();
+            this.checkPartnerOnline(this.questionService.question);
+            this.getQuestionReview();
+          }
+        )
         if (map.get('email')) {
           this.isNotLoggedUser = true;
           // @ts-ignore
@@ -149,7 +161,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.des.length > 20) {
       this.desc = this.des.substring(0, 20).concat('...');
     }
-    // this.scrollToBottom();
   }
 
   showMore(num: number) {
@@ -223,6 +234,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.chatService.sendMessage(this.chatToken, this.message.value, this.time.time, false, '', '', sender);
         this.onUnAuthorizedMessageSent(this.message.value);
         this.sentMessageCount = this.sentMessageCount + 1;
+        if (this.isPartnerOnline) {
+          //  TODO send a email to the partner
+        }
       } else {
         this.isImageLoading = true;
         this.uploadAttachment();
@@ -717,7 +731,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               console.log(err);
             }).then(() => {
               this.questionService.incrementCompletedQuestionCount()
-              this.paymentService.updatePayment(this.question.uniqueId).then();
+              this.paymentService.updatePayment(this.question.uniqueId).then(
+                () => {
+                  this.questionService.createQuestionReviwe(this.chatToken, this.questionService.question.studentId, this.questionService.question.tutorId).then();
+                }
+              );
             });
           })
         }
@@ -760,14 +778,60 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   onRate(num: number) {
     this.rating = num;
+    if (num != 0) {
+      this.enableWriteReview = true;
+    }
+    this.questionService.rateQuestion(this.chatToken, num, this.questionService.question.studentId, this.questionService.question.tutorId, "").then(() => {
+    });
   }
 
-  onWriteReview(){
-    const dialogRef = this.dialog.open(ReviewComponent,{
+  onWriteReview() {
+    const dialogRef = this.dialog.open(ReviewComponent, {
       width: '600px',
       data: {
         rating: this.rating
       }
-    })
+    });
+
+    dialogRef.afterClosed().subscribe(
+      (res) => {
+        console.log(res);
+        this.questionService.writeReviewQuestion(res, this.chatToken).catch(err => {
+          this.utilService.openDialog(err, err, constants.messageTypes.info)
+        }).then()
+      }
+    )
+  }
+
+
+  checkPartnerOnline(question: Questions) {
+    if (question.status !== constants.questionStatus.open) {
+      if (this.isTutor) {
+        this.studentService.findStudent(question.studentId).subscribe(
+          (res) => {
+            // @ts-ignore
+            this.isPartnerOnline = res.isOnline;
+          }
+        )
+      } else {
+        this.studentService.findStudent(question.tutorId).subscribe(
+          (res) => {
+            // @ts-ignore
+            this.isPartnerOnline = res.isOnline;
+          }
+        )
+      }
+    }
+  }
+
+  getQuestionReview() {
+    if (this.questionService.question.status === constants.questionStatus.completed) {
+      this.questionService.getQuestionReview(this.chatToken).get().subscribe(
+        (res) => {
+          // @ts-ignore
+          this.rating = res.data().rating;
+        }
+      )
+    }
   }
 }
