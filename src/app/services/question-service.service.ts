@@ -66,7 +66,7 @@ export class QuestionService {
     const statRef = this.angularFirestoreService.collection(constants.collections.stat).doc("stats");
     const increment = firestore.FieldValue.increment(1);
     const decrement = firestore.FieldValue.increment(1);
-    statRef.update({'completedQuestions': increment});
+    statRef.update({'tasksCompleted': increment});
     statRef.update({'inProgressQuestions': decrement});
   }
 
