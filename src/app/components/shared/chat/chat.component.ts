@@ -731,7 +731,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               this.questionService.incrementCompletedQuestionCount()
               this.paymentService.updatePayment(this.question.uniqueId).then(
                 () => {
-                  this.questionService.createQuestionReviwe(this.chatToken, this.questionService.question.studentId, this.questionService.question.tutorId).then();
+                  this.questionService.createQuestionReviwe(this.chatToken, this.questionService.question.studentId, this.questionService.question.tutorId, this.question.questionTitle).then();
                 }
               );
             });

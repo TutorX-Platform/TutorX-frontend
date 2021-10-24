@@ -138,8 +138,6 @@ export class AddQuestionComponent implements OnInit {
         this.patchValuesToForm();
       }
     }
-
-    console.log(this.data, "daaaaaaaaaaaaaaata")
   }
 
   patchValues() {

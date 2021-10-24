@@ -25,6 +25,7 @@ export interface Tutor {
   branchName: string;
   totalRequests: number;
   inprogressCount: number;
+  fee: number;
 
 
 }

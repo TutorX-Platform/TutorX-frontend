@@ -206,13 +206,14 @@ export class QuestionService {
     return this.angularFirestoreService.collection(constants.collections.questions).doc(qid).get()
   }
 
-  createQuestionReviwe(qid: string, studentId: string, tutorId: string) {
+  createQuestionReviwe(qid: string, studentId: string, tutorId: string, questionTitle: string) {
     const rev = {
       rating: "",
       review: "",
       question: qid,
       tutorId: tutorId,
       studentId: studentId,
+      questionTitle: questionTitle
     };
     const reviewRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.review).doc(qid);
     return reviewRef.set(rev);
