@@ -50,22 +50,26 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp() {
-    console.log(this.isChecked);
     const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
     progressDialog.afterOpened().subscribe(
       () => {
         this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-            this.dialogRef.close();
+            this.dialogRef.close(true);
             this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
           }
         )
       });
   }
 
+  switchLogin() {
+    this.dialogRef.close(false);
+
+  }
+
   onGoogleAuth() {
     this.authService.googleAuth().then(
       (r) => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       }
     )
   }
@@ -73,7 +77,7 @@ export class SignUpComponent implements OnInit {
   onFacebookAuth() {
     this.authService.facebookAuth().then(
       (r) => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       }
     )
   }

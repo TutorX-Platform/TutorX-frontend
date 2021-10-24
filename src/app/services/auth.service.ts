@@ -139,14 +139,17 @@ export class AuthService {
   signUp(email: string, password: string, firstName: string, progressDialog: MatDialogRef<any>) {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        // @ts-ignore
-        this.mailService.sendMail("Welcome to Tutetory", result.user?.email, constants.getWelcomeQuestion(result.user?.displayName), constants.mailTemplates.welcome).subscribe()
-        this.isLoggedIn = true;
-        this.SendVerificationMail();
-        // @ts-ignore
-        this.SetUserData(result.user, firstName);
-        // @ts-ignore
-        this.roleBasedRouting(result.user.uid, progressDialog);
+        if (result.user !== undefined) {
+          // @ts-ignore
+          this.mailService.sendMail("Welcome to Tutetory", email, constants.getWelcomeQuestion(firstName), constants.mailTemplates.welcome).subscribe()
+          this.isLoggedIn = true;
+          this.SendVerificationMail();
+          // @ts-ignore
+          this.SetUserDataSignUp(email, null, firstName, constants.userTypes.student, result.user?.uid);
+          // @ts-ignore
+          this.roleBasedRouting(result.user.uid, progressDialog);
+          progressDialog.close();
+        }
       }).catch((error) => {
         this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
         progressDialog.close();
@@ -171,18 +174,39 @@ export class AuthService {
     })
   }
 
-  SetUserData(user: any, firstName: string, role: string) {
-    this.userData = user;
-    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(`${constants.collections.students}/${user.uid}`);
+  SetUserDataSignUp(email: string, photo: string, firstName: string, role: string, uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students).doc(uid);
     const userData = {
-      email: user.email,
+      email: email,
       firstName: firstName,
       isVerified: "",
       lastName: firstName,
-      profileImage: user.photoURL,
+      profileImage: photo,
       questions: [],
       uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
-      userId: user.uid,
+      userId: uid,
+      role: role
+    }
+    this.userData = userData;
+    // @ts-ignore
+    this.student = userData;
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
+  SetUserData(user: any, firstName: string, role: string, uid: string) {
+    this.userData = user;
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students).doc(uid);
+    const userData = {
+      email: user?.email,
+      firstName: firstName,
+      isVerified: "",
+      lastName: firstName,
+      profileImage: user?.photoURL,
+      questions: [],
+      uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
+      userId: user?.uid,
       role: role
     }
     // @ts-ignore
@@ -245,9 +269,9 @@ export class AuthService {
           localStorage.setItem(constants.localStorageKeys.role, this.student.role);
           // @ts-ignore
           if (!res.data().isTutor) {
-            this.SetUserData(user, this.student.firstName, constants.userTypes.student);
+            this.SetUserData(user, this.student.firstName, constants.userTypes.student, this.student.userId);
           } else {
-            this.SetUserData(user, this.student.firstName, constants.userTypes.tutor);
+            this.SetUserData(user, this.student.firstName, constants.userTypes.tutor, this.student.userId);
           }
           // @ts-ignore
           if (student.role === constants.userTypes.student) {

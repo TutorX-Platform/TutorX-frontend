@@ -49,7 +49,6 @@ export class SignInComponent implements OnInit {
           this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog).then(
             (res) => {
               this.dialogRef.close();
-              console.log(res);
             },
           );
         }

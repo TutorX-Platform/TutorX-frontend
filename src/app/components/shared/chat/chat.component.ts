@@ -340,8 +340,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         // @ts-ignore
         this.chat = res;
         // @ts-ignore
-        console.log(res.createdDate['seconds']);
-        // @ts-ignore
         this.questionCreatedDate = res.createdDate['seconds'];
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId || this.chat.studentEmail === this.notLoggedUserEmail) {
           this.chatService.getMessages(this.chatToken).valueChanges().subscribe(

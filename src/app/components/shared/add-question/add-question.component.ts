@@ -22,6 +22,7 @@ import {StudentService} from "../../../services/student-service.service";
 import {Attachment} from "../../../models/Attachment";
 import {ValidationService} from "../../../services/validation.service";
 import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
+import {SignInComponent} from "../../auth/sign-in/sign-in.component";
 
 @Component({
   selector: 'app-add-question',
@@ -223,7 +224,7 @@ export class AddQuestionComponent implements OnInit {
               this.askQuestion(this.dialogRef, progressDialog, this.time.time, true);
             })
           } else {
-            this.askEmail(progressDialog);
+            this.askQuestionNotLogged(progressDialog);
           }
         } else {
           progressDialog.close();
@@ -376,7 +377,6 @@ export class AddQuestionComponent implements OnInit {
                 this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId]);
               });
             } else {
-              console.log(question.dueDate);
               // @ts-ignore
               question.questionNumber = res.data().questionNumber;
               this.questionService.saveNotLoggedQuestion(question).subscribe((response) => {
@@ -437,46 +437,20 @@ export class AddQuestionComponent implements OnInit {
     })).subscribe()
   }
 
-  askEmail(progressDialog: MatDialogRef<any>) {
+  askQuestionNotLogged(progressDialog: MatDialogRef<any>) {
+    progressDialog.close();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    // dialogConfig.width = "30%";
-    // dialogConfig.height = "810px";
+    dialogConfig.width = "433px";
     const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      (result) => {
-        if (result !== undefined) {
-          const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-          progressDialog.afterOpened().subscribe(
-            () => {
-              this.authService.student.role = constants.userTypes.student;
-              this.authService.student.firstName = result.value.name;
-              this.authService.student.email = result.value.email;
-              this.studentService.currentStudent =  this.authService.student;
-
-              this.studentService.findStudentByEmail(this.authService.student.email).valueChanges().subscribe(
-                (res) => {
-                  if (res.length > 0) {
-                    progressDialog.close();
-                    this.utilService.openDialog(systemMessages.questionTitles.notLoggedUserWithLoggedCredentials, systemMessages.questionMessages.notLoggedUserWithLoggedCredentials, constants.messageTypes.warning).afterOpened().subscribe();
-                  } else {
-                    this.utilService.getTimeFromTimeAPI().subscribe((res) => {
-                      // @ts-ignore
-                      this.time = res;
-                      this.askQuestion(this.dialogRef, progressDialog, this.time.time, false);
-                    })
-                    // this.sendAknowledgementEmail(this.authService.student.email, this.utilService.generateChatLink(questionId, constants.userTypes.student));
-                  }
-                }
-              );
-            }
-          )
-        } else {
-          progressDialog.close();
+      (res) => {
+        if (!res) {
+          const dialogRef = this.dialog.open(SignInComponent, dialogConfig);
+          this.dialogRef.afterClosed().subscribe()
         }
       }
     )
-    progressDialog.close();
   }
 
   sendAknowledgementEmail(email: string, link: string, questionNumber: string) {
@@ -535,7 +509,7 @@ export class AddQuestionComponent implements OnInit {
     this.acceptQuestion();
     this.utilService.openDialog(systemMessages.questionTitles.addQuestionSuccess, systemMessages.questionMessages.acceptQuestionSuccess, constants.messageTypes.success).afterClosed().subscribe();
     // @ts-ignore
-    this.router.navigate([constants.routes.turor + constants.routes.chat, this.data.id] );
+    this.router.navigate([constants.routes.turor + constants.routes.chat, this.data.id]);
   }
 
   acceptQuestion() {
