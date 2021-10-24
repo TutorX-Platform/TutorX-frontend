@@ -331,45 +331,12 @@ export class BodyComponent implements OnInit {
     this.dialog.open(SignInComponent, dialogConfig);
   }
 
-  onLoginMobile() {
-    // this.page = 1;
-  }
-
   onSignUp() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
     // dialogConfig.height = "950px";
     this.dialog.open(SignUpComponent, dialogConfig);
-  }
-
-  onSignUpMobile() {
-    // this.page = 2;
-  }
-
-  onHome() {
-    // this.page = 0;
-  }
-
-  onSignOut() {
-    this.isLoggedIn = !!localStorage.getItem(constants.localStorageKeys.user);
-    this.authService.onSignOut();
-  }
-
-  onGoogleSignIn() {
-    this.authService.googleAuth().then(
-      (r) => {
-        console.log(r);
-      }
-    );
-  }
-
-  onTutor() {
-    this.router.navigate([constants.routes.turor.concat(constants.routes.questions)])
-  }
-
-  onProfile() {
-    this.router.navigate([constants.routes.student_q_pool])
   }
 
   getLoggedUser(progressDialog: MatDialogRef<any>) {

@@ -1,0 +1,91 @@
+<mat-toolbar  class="top-bar__wrap">
+  <div class="container">
+    <mat-toolbar-row class="top-bar ">
+      <button
+        class="top-bar__nav-icon"
+        mat-icon-button
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="top-bar__title-container">
+        <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
+      </div>
+      <div class="top-bar__actions" *ngIf="!authService.isLoggedIn">
+        <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
+        <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
+      </div>
+      <div class="top-bar__actions" *ngIf="authService.isLoggedIn">
+        <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="moveToDashboard()">Dashboard</button>
+      </div>
+
+    </mat-toolbar-row>
+  </div>
+
+</mat-toolbar>
+
+<div [ngClass.lt-sm]="'terms-container terms-container__small'"
+     [ngClass.gt-xs]="{'terms-container': true}"fxLayout="column">
+  <div class="faq-main-title">
+    Terms and conditions
+  </div>
+  <div class="faq-para" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="assets/icons/point.svg">
+    <div>
+      There is no cost/fees to enter this competition.
+    </div>
+  </div>
+  <div class="faq-para" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="assets/icons/point.svg">
+    <div>
+      There is no cost/fees to enter this competition.
+    </div>
+  </div>
+  <div class="faq-para" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="assets/icons/point.svg">
+    <div>
+      There is no cost/fees to enter this competition.
+    </div>
+  </div>
+  <div class="faq-para" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <img src="assets/icons/point.svg">
+    <div>
+      There is no cost/fees to enter this competition.
+    </div>
+  </div>
+
+</div>
+
+<section class="s-footer">
+  <img src="assets/images/wave_footer.svg" alt="" class="s-footer__wave">
+  <div class="container">
+    <div class="s-footer__content">
+      <div class="brd-display-x-large m-b-16">Work Smart, Not Hard</div>
+      <!-- <div class="brd-display-large m-b-40">For students, by educators</div> -->
+      <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.lt-sm fxShow="true">
+        Get Help
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <button mat-flat-button  (click)="addQuestionMobile()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.gt-xs fxShow="true">
+        Get Help
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <div class="flex-box align-items-center justify-content-center flex-wrap-wrap m-b-32">
+        <a href=""  class="s-footer__link">About Us</a>
+        <a href="" class="s-footer__link">Contact Us</a>
+        <a href="" class="s-footer__link">FAQ</a>
+        <a href="" class="s-footer__link">Privacy Policy</a>
+        <a href="" class="s-footer__link">Terms & Conditions</a>
+
+      </div>
+
+      <!-- TrustBox widget - Review Collector -->
+      <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="61586ecb890a91001d9327fc" data-style-height="52px" data-style-width="100%">
+        <a href="https://www.trustpilot.com/review/tutetory.com" target="_blank" rel="noopener">Trustpilot</a>
+      </div>
+      <!-- End TrustBox widget -->
+      <div class="copy-right">© 2021 . All rights reserved</div>
+    </div>
+
+
+  </div>
+</section>

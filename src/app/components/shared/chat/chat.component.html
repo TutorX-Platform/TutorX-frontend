@@ -225,44 +225,45 @@
               </div>
             </div>
           </div>
-          <!--Rating UI-->
-          <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
-            <div class="ratings-container">
-              <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
-                <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"
-                          ngClass="star star--selected">star
-                </mat-icon>
-                <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating < 1" ngClass="star">star_border
-                </mat-icon>
-                <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating >= 2"
-                          ngClass="star star--selected">star
-                </mat-icon>
-                <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating < 2" ngClass="star">star_border
-                </mat-icon>
-                <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating >= 3"
-                          ngClass="star star--selected">star
-                </mat-icon>
-                <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating < 3" ngClass="star">star_border
-                </mat-icon>
-                <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating >= 4"
-                          ngClass="star star--selected">star
-                </mat-icon>
-                <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating < 4" ngClass="star">star_border
-                </mat-icon>
-                <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating >= 5"
-                          ngClass="star star--selected">star
-                </mat-icon>
-                <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating < 5" ngClass="star">star_border
-                </mat-icon>
-              </div>
-              <div class="line"></div>
-              <div class="review" fxLayoutAlign="center center" (click)="onWriteReview()">
-                Write a review
-              </div>
+
+        </div>
+
+        <!--Rating UI-->
+        <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
+          <div class="ratings-container">
+            <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
+              <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"
+                        ngClass="star star--selected">star
+              </mat-icon>
+              <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating < 1" ngClass="star">star_border
+              </mat-icon>
+              <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating >= 2"
+                        ngClass="star star--selected">star
+              </mat-icon>
+              <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating < 2" ngClass="star">star_border
+              </mat-icon>
+              <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating >= 3"
+                        ngClass="star star--selected">star
+              </mat-icon>
+              <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating < 3" ngClass="star">star_border
+              </mat-icon>
+              <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating >= 4"
+                        ngClass="star star--selected">star
+              </mat-icon>
+              <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating < 4" ngClass="star">star_border
+              </mat-icon>
+              <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating >= 5"
+                        ngClass="star star--selected">star
+              </mat-icon>
+              <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating < 5" ngClass="star">star_border
+              </mat-icon>
+            </div>
+            <div class="line"></div>
+            <div class="review" fxLayoutAlign="center center" (click)="onWriteReview()">
+              Write a review
             </div>
           </div>
         </div>
-
 
         <!--dummy image loading-->
         <div>
@@ -734,6 +735,42 @@
             <!--<img src="../../../../assets/images/" class="attachment-box">-->
             <!--<mat-spinner [diameter]="70"></mat-spinner>-->
             <mat-progress-spinner [diameter]="70" [value]="uploadingProgress"></mat-progress-spinner>
+          </div>
+        </div>
+      </div>
+      <!--Rating UI-->
+      <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
+        <div class="ratings-container">
+          <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
+            <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"
+                      ngClass="star star--selected">star
+            </mat-icon>
+            <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating < 1" ngClass="star">star_border
+            </mat-icon>
+            <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating >= 2"
+                      ngClass="star star--selected">star
+            </mat-icon>
+            <mat-icon (click)="onRate(2)" class="material-icons-round" *ngIf="rating < 2" ngClass="star">star_border
+            </mat-icon>
+            <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating >= 3"
+                      ngClass="star star--selected">star
+            </mat-icon>
+            <mat-icon (click)="onRate(3)" class="material-icons-round" *ngIf="rating < 3" ngClass="star">star_border
+            </mat-icon>
+            <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating >= 4"
+                      ngClass="star star--selected">star
+            </mat-icon>
+            <mat-icon (click)="onRate(4)" class="material-icons-round" *ngIf="rating < 4" ngClass="star">star_border
+            </mat-icon>
+            <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating >= 5"
+                      ngClass="star star--selected">star
+            </mat-icon>
+            <mat-icon (click)="onRate(5)" class="material-icons-round" *ngIf="rating < 5" ngClass="star">star_border
+            </mat-icon>
+          </div>
+          <div class="line"></div>
+          <div class="review" fxLayoutAlign="center center" (click)="onWriteReview()">
+            Write a review
           </div>
         </div>
       </div>
