@@ -47,11 +47,15 @@
                        class="label">
               {{validations.passwordRequired}}
             </mat-error>
+            <mat-error *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.hasError('minlength')"
+                       class="label">
+              {{validations.passwordLengthMinRequired}}
+            </mat-error>
           </mat-form-field>
         </div>
 
         <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-          <mat-checkbox color="primary"></mat-checkbox>
+          <mat-checkbox (change)="onAgreement($event)" color="primary"></mat-checkbox>
           <div>
             By creating an account, you agree to the <a href="#">Free Membership Agreement</a> and <a href="#">Privacy
             Policy</a>
@@ -63,5 +67,7 @@
         </button>
       </div>
     </form>
+    <div>Already have an account?</div>
+    <button (click)="switchLogin()">click</button>
   </mat-dialog-content>
 </div>

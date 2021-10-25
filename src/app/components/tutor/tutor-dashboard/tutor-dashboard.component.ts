@@ -19,6 +19,7 @@ export class TutorDashboardComponent implements OnInit {
   rating = 4;
   reviews: Review[] = [];
   chats: Chat[] = []
+  tutorRating = 0;
   tutor: Tutor = {
     inprogressCount: 0,
     totalRequests: 0,
@@ -43,7 +44,8 @@ export class TutorDashboardComponent implements OnInit {
     totalEarnings: 0,
     uniqueKey: "",
     userId: "",
-    visibleName: ""
+    visibleName: "",
+    fee: 0
   }
 
   constructor(
@@ -89,6 +91,12 @@ export class TutorDashboardComponent implements OnInit {
       (res) => {
         // @ts-ignore
         this.reviews = res;
+        this.reviews.forEach(review => {
+          this.tutorRating = (this.tutorRating + review.rating);
+        })
+
+        this.tutorRating = this.tutorRating / this.reviews.length;
+        this.tutorRating = Math.floor(this.tutorRating);
       }
     );
   }

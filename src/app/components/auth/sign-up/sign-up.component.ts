@@ -21,6 +21,7 @@ export class SignUpComponent implements OnInit {
   isChecked = false;
   emailPattern = constants.regexp_patterns.email;
   validations = sysMsg.validations;
+  agreementDone = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,32 +41,38 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = new FormGroup({
       email: new FormControl('', Validators.required),
       fullName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
 
-  // @ts-ignore
-  onAgreement(event) {
-    console.log(event.checked);
+  onAgreement(event: any) {
+    this.agreementDone = event.checked;
+    console.log(this.agreementDone);
   }
 
   onSignUp() {
-    console.log(this.isChecked);
-    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-    progressDialog.afterOpened().subscribe(
-      () => {
-        this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-            this.dialogRef.close();
-            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
-          }
-        )
-      });
+    if (this.agreementDone) {
+      const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+      progressDialog.afterOpened().subscribe(
+        () => {
+          this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
+              this.dialogRef.close(true);
+              this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+            }
+          )
+        });
+    }
+  }
+
+  switchLogin() {
+    this.dialogRef.close(false);
+
   }
 
   onGoogleAuth() {
     this.authService.googleAuth().then(
       (r) => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       }
     )
   }
@@ -73,7 +80,7 @@ export class SignUpComponent implements OnInit {
   onFacebookAuth() {
     this.authService.facebookAuth().then(
       (r) => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       }
     )
   }

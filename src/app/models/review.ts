@@ -1,7 +1,9 @@
 export interface Review {
   rating: number;
-  title: string;
+  review: string;
   description: string;
-  student: string;
+  studentId: string;
   tutorId: string;
+  question: string;
+  questionTitle: string;
 }

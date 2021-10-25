@@ -57,13 +57,7 @@ export class TestChatComponent implements OnInit {
 
 
   putReview() {
-    const review: Review = {
-      tutorId: this.tutorId,
-      description: this.reviewDesc,
-      rating: this.rating,
-      student: this.reviewer,
-      title: this.reviewTitle
-    };
+    const review: any = {};
 
     this.reviewService.postReview(review).then(
       (v) => {

@@ -340,8 +340,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         // @ts-ignore
         this.chat = res;
         // @ts-ignore
-        console.log(res.createdDate['seconds']);
-        // @ts-ignore
         this.questionCreatedDate = res.createdDate['seconds'];
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId || this.chat.studentEmail === this.notLoggedUserEmail) {
           this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
@@ -733,7 +731,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
               this.questionService.incrementCompletedQuestionCount()
               this.paymentService.updatePayment(this.question.uniqueId).then(
                 () => {
-                  this.questionService.createQuestionReviwe(this.chatToken, this.questionService.question.studentId, this.questionService.question.tutorId).then();
+                  this.questionService.createQuestionReviwe(this.chatToken, this.questionService.question.studentId, this.questionService.question.tutorId, this.question.questionTitle).then();
                 }
               );
             });
