@@ -440,12 +440,18 @@ export class AddQuestionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
-    const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
+    const dialogRef = this.dialog.open(SignInComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (res) => {
         if (!res) {
-          const dialogRef = this.dialog.open(SignInComponent, dialogConfig);
+          const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
           this.dialogRef.afterClosed().subscribe()
+        }
+        if (res && res !== 'fail') {
+          this.authService.isLoggedIn = true;
+          this.onDone();
+        }
+        if (res === 'fail') {
         }
       }
     )

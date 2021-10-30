@@ -13,6 +13,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
+import {SignInComponent} from "../components/auth/sign-in/sign-in.component";
 
 
 @Injectable({
@@ -85,7 +86,17 @@ export class AuthService {
         `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
         this.userData = credentials.user;
         const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-        this.roleBasedRouting(credentials.user.uid, progressDialog, credentials.user);
+        if (credentials.additionalUserInfo?.isNewUser) {
+          // @ts-ignore
+          this.SetUserData(credentials.user, credentials.user.displayName, constants.userTypes.student, credentials.user.uid).then(() => {
+            // @ts-ignore
+            this.roleBasedRouting(credentials.user?.uid, progressDialog, credentials.user, true);
+            progressDialog.close()
+            return;
+          });
+        } else {
+          this.roleBasedRouting(credentials.user.uid, progressDialog, credentials.user, false);
+        }
         // @ts-ignore
         this.student.email = credentials.user?.email;
         // @ts-ignore
@@ -120,17 +131,19 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  signIn(email: string, password: string, progressDialog: MatDialogRef<any>) {
+  signIn(email: string, password: string, progressDialog: MatDialogRef<any>, dialogRef: MatDialogRef<SignInComponent>) {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         if (result.user) {
           localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
           `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
           this.userData = result.user;
-          this.roleBasedRouting(result.user.uid, progressDialog, result.user);
+          this.roleBasedRouting(result.user.uid, progressDialog, result.user, false);
+          dialogRef.close(true);
         }
       }).catch((error) => {
         progressDialog.close();
+        dialogRef.close('fail');
         this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
       })
   }
@@ -145,9 +158,11 @@ export class AuthService {
           this.isLoggedIn = true;
           this.SendVerificationMail();
           // @ts-ignore
-          this.SetUserDataSignUp(email, null, firstName, constants.userTypes.student, result.user?.uid);
-          // @ts-ignore
-          this.roleBasedRouting(result.user.uid, progressDialog);
+          this.SetUserDataSignUp(email, null, firstName, constants.userTypes.student, result.user?.uid).then(() => {
+            // @ts-ignore
+            this.roleBasedRouting(result.user.uid, progressDialog, true);
+
+          });
           progressDialog.close();
         }
       }).catch((error) => {
@@ -258,7 +273,11 @@ export class AuthService {
     this.student = resetUser;
   }
 
-  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>, user: any) {
+  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>, user: any, isNewUser: boolean) {
+    if (isNewUser) {
+      localStorage.setItem(constants.localStorageKeys.role, constants.userTypes.student);
+      return;
+    }
     this.studentService.findStudentById(uid).subscribe(
       (res) => {
         if (res) {
@@ -266,12 +285,12 @@ export class AuthService {
           const student = res.data();
           // @ts-ignore
           this.student = student;
-          localStorage.setItem(constants.localStorageKeys.role, this.student.role);
+          console.log(res.data());
           // @ts-ignore
           if (!res.data().isTutor) {
-            this.SetUserData(user, this.student.firstName, constants.userTypes.student, this.student.userId);
+            localStorage.setItem(constants.localStorageKeys.role, this.student.role);
           } else {
-            this.SetUserData(user, this.student.firstName, constants.userTypes.tutor, this.student.userId);
+            localStorage.setItem(constants.localStorageKeys.role, this.student.role);
           }
           // @ts-ignore
           if (student.role === constants.userTypes.student) {
@@ -289,7 +308,6 @@ export class AuthService {
                 if (progressDialog) {
                   progressDialog.close();
                 }
-                console.log('hi');
                 this.router.navigate([constants.routes.turor + '/questions']);
               });
             }

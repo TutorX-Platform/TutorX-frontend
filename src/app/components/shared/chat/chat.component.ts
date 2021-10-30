@@ -293,10 +293,12 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             // @ts-ignore
             this.chat = res;
             this.attachments = [];
-            this.attachments.push(...this.chat.attachments);
+            if (this.chat !== undefined) {
+              this.attachments.push(...this.chat.attachments);
+            }
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
-            if (this.chat.tutorId) {
+            if (this.chat && this.chat.tutorId) {
               this.getTutor(this.chat.tutorId);
             }
           }, () => {
@@ -340,7 +342,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         // @ts-ignore
         this.chat = res;
         // @ts-ignore
-        this.questionCreatedDate = res.createdDate['seconds'];
+        if (res && res.createdDate['seconds']) {
+          // @ts-ignore
+          this.questionCreatedDate = res.createdDate['seconds'];
+        }
         if (this.chat.tutorId === this.authService.student.userId || this.chat.studentId === this.authService.student.userId || this.chat.studentEmail === this.notLoggedUserEmail) {
           this.chatService.getMessages(this.chatToken).valueChanges().subscribe(
             res => {
