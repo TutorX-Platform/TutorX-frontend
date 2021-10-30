@@ -366,13 +366,16 @@ export class AddQuestionComponent implements OnInit {
                 // @ts-ignore
                 if (res.data().questionNumber) {
                   // @ts-ignore
-                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description).then(() => {
+                    this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId]);
+                  });
                 } else {
-                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                  this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description).then(() => {
+                    this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId]);
+                  });
                 }
                 dialogRef.close(true);
                 progressDialog.close();
-                this.router.navigate([constants.routes.student + constants.routes.chat, this.questionId]);
               });
             } else {
               // @ts-ignore
@@ -443,7 +446,7 @@ export class AddQuestionComponent implements OnInit {
     const dialogRef = this.dialog.open(SignInComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       (res) => {
-        if (!res) {
+        if (res !== undefined && !res) {
           const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
           this.dialogRef.afterClosed().subscribe()
         }
@@ -506,7 +509,7 @@ export class AddQuestionComponent implements OnInit {
       studentId: studentId,
       tutorsCount: 0
     }
-    this.chatService.createChat(chatId, data);
+    return this.chatService.createChat(chatId, data);
   }
 
   onAccept() {

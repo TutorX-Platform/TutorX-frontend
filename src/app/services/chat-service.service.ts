@@ -27,7 +27,7 @@ export class ChatServiceService {
       isTyping: false
     }
     this.angularFirestoreService.collection(constants.collections.chats).doc(chatId).set(data).then();
-    this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing).then();
+    return this.angularFirestoreService.collection(constants.collections.chatTyping).doc(chatId).set(typing)
   }
 
   sendMessage(messageId: string, message: string, sortTime: number, isAttachment: boolean, attachmentLink: string, extension: string, senderName: string) {
