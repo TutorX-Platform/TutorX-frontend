@@ -1,4 +1,4 @@
-<div fxLayout="column" class="drop-zone" *ngIf="this.file.type === 'application/pdf'">
+<div fxLayout="column" class="drop-zone" *ngIf="this.file.type === 'application/pdf'" style="z-index: 1000">
   <div fxLayout="row" fxLayoutAlign="end start">
     <mat-icon (click)="_remove($event)">
       close

@@ -115,15 +115,12 @@
                       oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>
           </mat-form-field>
         </div>
-        <!--<div class="label">Description</div>-->
-        <!--<mat-form-field appearance="outline" class="my-form-field">-->
-          <!--<textarea matInput type="text" formControlName="description"-->
-                    <!--oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>-->
-        <!--</mat-form-field>-->
       </div>
-      <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
-                            *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
+      <!--<mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"-->
+                            <!--*ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>-->
       <div>
+        <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
+                              *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
         <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">
           <ngx-dropzone-label>
             <div fxLayout="row" fxLayoutAlign="center center">
