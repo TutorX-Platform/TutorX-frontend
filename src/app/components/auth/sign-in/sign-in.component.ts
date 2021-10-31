@@ -46,9 +46,8 @@ export class SignInComponent implements OnInit {
       const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
       progressDialog.afterOpened().subscribe(
         () => {
-          this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog).then(
+          this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog,this.dialogRef).then(
             (res) => {
-              this.dialogRef.close();
             },
           );
         }
@@ -60,14 +59,18 @@ export class SignInComponent implements OnInit {
 
   onGoogleSignIn() {
     this.authService.googleAuth().then(r => {
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     });
   }
 
   onFacebookSignIn() {
     this.authService.facebookAuth().then(r => {
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     });
+  }
+
+  switchLogin() {
+    this.dialogRef.close(false);
   }
 }
 

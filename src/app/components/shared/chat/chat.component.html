@@ -739,7 +739,7 @@
         </div>
       </div>
       <!--Rating UI-->
-      <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
+      <div *ngIf="questionService.question !== undefined && questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
         <div class="ratings-container">
           <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
             <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"

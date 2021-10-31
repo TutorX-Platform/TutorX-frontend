@@ -66,8 +66,10 @@ export class StudentService {
     const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
     const increment = firestore.FieldValue.increment(fee);
     const decrement = firestore.FieldValue.increment(-1);
+    const incrementTask = firestore.FieldValue.increment(1);
     const data = {
       'fee': increment,
+      'tasksCompleted': incrementTask,
       'inprogressCount': decrement,
     }
     return payRef.update(data);

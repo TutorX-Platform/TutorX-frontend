@@ -64,11 +64,6 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  switchLogin() {
-    this.dialogRef.close(false);
-
-  }
-
   onGoogleAuth() {
     this.authService.googleAuth().then(
       (r) => {

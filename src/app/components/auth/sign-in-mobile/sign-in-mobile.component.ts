@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from 'src/app/services/auth.service';
-import { MailService } from 'src/app/services/mail.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {AuthService} from 'src/app/services/auth.service';
+import {MailService} from 'src/app/services/mail.service';
 import * as constants from '../../../models/constants';
-import { ProgressDialogComponent } from '../../shared/progress-dialog/progress-dialog.component';
+import {ProgressDialogComponent} from '../../shared/progress-dialog/progress-dialog.component';
+import {SignInComponent} from "../sign-in/sign-in.component";
 
 @Component({
   selector: 'app-sign-in-mobile',
@@ -22,6 +23,7 @@ export class SignInMobileComponent implements OnInit {
     private dialog: MatDialog,
     public authService: AuthService,
     private mailService: MailService,
+    private dialogRef:MatDialogRef<SignInComponent>
   ) {
   }
 
@@ -41,7 +43,7 @@ export class SignInMobileComponent implements OnInit {
       const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
       progressDialog.afterOpened().subscribe(
         () => {
-          this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog).then(
+          this.authService.signIn(this.signInForm.value.email, this.signInForm.value.password, progressDialog, this.dialogRef).then(
             (res) => {
               // this.dialogRef.close();
               console.log(res);
