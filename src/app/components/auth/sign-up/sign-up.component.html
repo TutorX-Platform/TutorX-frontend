@@ -62,7 +62,7 @@
           </div>
         </div>
 
-        <button mat-flat-button class="button-reg" (click)="onSignUp()">
+        <button mat-flat-button class="button-reg" [disabled]="!agreementDone" (click)="onSignUp()">
           Register
         </button>
       </div>
