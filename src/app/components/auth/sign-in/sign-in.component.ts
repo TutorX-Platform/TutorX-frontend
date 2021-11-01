@@ -80,7 +80,7 @@ export class SignInComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "433px";
-    this.dialog.open(ChangePasswordComponent, dialogConfig);
+    this.dialog.open(ForgetPasswordComponent, dialogConfig);
   }
 }
 
