@@ -447,8 +447,17 @@ export class AddQuestionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (res) => {
         if (res !== undefined && !res) {
-          const dialogRef = this.dialog.open(SignUpComponent, dialogConfig);
-          this.dialogRef.afterClosed().subscribe()
+          const dialogRefx = this.dialog.open(SignUpComponent, dialogConfig);
+          dialogRefx.afterClosed().subscribe(
+            (response) => {
+              if (response && response !== 'fail') {
+                this.authService.isLoggedIn = true;
+                this.onDone();
+              }
+              if (response === 'fail') {
+              }
+            }
+          );
         }
         if (res && res !== 'fail') {
           this.authService.isLoggedIn = true;

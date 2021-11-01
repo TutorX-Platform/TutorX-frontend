@@ -47,15 +47,15 @@ export class SignUpMobileComponent implements OnInit {
   }
 
   onSignUp() {
-    console.log(this.isChecked);
-    const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-    progressDialog.afterOpened().subscribe(
-      () => {
-        this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-            this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
-          }
-        )
-      });
+    // console.log(this.isChecked);
+    // const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+    // progressDialog.afterOpened().subscribe(
+    //   () => {
+    //     this.authService.signUp(this.forgotPasswordForm.value.email, this.forgotPasswordForm.value.password, this.forgotPasswordForm.value.fullName, progressDialog).then((e) => {
+    //         this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+    //       }
+    //     )
+    //   });
   }
 
   onGoogleAuth() {

@@ -94,6 +94,8 @@ import { ReviewComponent } from './components/shared/review/review.component';
 import { PrivacyPolicyComponent } from './components/home/privacy-policy/privacy-policy.component';
 import { TermsNConditionsComponent } from './components/home/terms-n-conditions/terms-n-conditions.component';
 import { FaqComponent } from './components/home/faq/faq.component';
+import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 
 
 @NgModule({
@@ -137,7 +139,9 @@ import { FaqComponent } from './components/home/faq/faq.component';
     ReviewComponent,
     PrivacyPolicyComponent,
     TermsNConditionsComponent,
-    FaqComponent
+    FaqComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

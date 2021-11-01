@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from "../../../services/auth.service";
 import {SignUpComponent} from '../sign-up/sign-up.component';
 import * as constants from '../../../models/constants';
@@ -8,6 +8,8 @@ import * as sysMsg from '../../../models/system-messages';
 import {ProgressDialogComponent} from "../../shared/progress-dialog/progress-dialog.component";
 import {MailService} from "../../../services/mail.service";
 import {UtilService} from "../../../services/util-service.service";
+import {ForgetPasswordComponent} from "../forget-password/forget-password.component";
+import {ChangePasswordComponent} from "../change-password/change-password.component";
 
 @Component({
   selector: 'app-sign-in',
@@ -71,6 +73,14 @@ export class SignInComponent implements OnInit {
 
   switchLogin() {
     this.dialogRef.close(false);
+  }
+
+  onForgotPassword(){
+    this.dialogRef.close();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "433px";
+    this.dialog.open(ChangePasswordComponent, dialogConfig);
   }
 }
 

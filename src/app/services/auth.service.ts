@@ -14,6 +14,7 @@ import {MailService} from "./mail.service";
 import {StudentService} from "./student-service.service";
 import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
 import {SignInComponent} from "../components/auth/sign-in/sign-in.component";
+import {SignUpComponent} from "../components/auth/sign-up/sign-up.component";
 
 
 @Injectable({
@@ -149,7 +150,7 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  signUp(email: string, password: string, firstName: string, progressDialog: MatDialogRef<any>) {
+  signUp(email: string, password: string, firstName: string, progressDialog: MatDialogRef<any>, dialogRef: MatDialogRef<SignUpComponent>) {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         if (result.user !== undefined) {
@@ -161,12 +162,13 @@ export class AuthService {
           this.SetUserDataSignUp(email, null, firstName, constants.userTypes.student, result.user?.uid).then(() => {
             // @ts-ignore
             this.roleBasedRouting(result.user.uid, progressDialog, true);
-
           });
+          dialogRef.close(true);
           progressDialog.close();
         }
       }).catch((error) => {
         this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+        dialogRef.close('fail');
         progressDialog.close();
       })
   }

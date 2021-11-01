@@ -55,9 +55,9 @@ export class SignUpComponent implements OnInit {
       const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
       progressDialog.afterOpened().subscribe(
         () => {
-          this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog).then((e) => {
-              this.dialogRef.close(true);
-              this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+          this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.fullName, progressDialog, this.dialogRef).then((e) => {
+              // this.dialogRef.close(true);
+              // this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
             }
           )
         });

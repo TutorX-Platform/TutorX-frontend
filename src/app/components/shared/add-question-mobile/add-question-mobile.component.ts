@@ -22,6 +22,8 @@ import * as systemMessages from "../../../models/system-messages";
 import {ChatMsg} from "../../../models/chat-msg";
 import {Chat} from "../../../models/chat";
 import {ValidationService} from "../../../services/validation.service";
+import {SignInComponent} from "../../auth/sign-in/sign-in.component";
+import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
   selector: 'app-add-question-mobile',
@@ -166,7 +168,7 @@ export class AddQuestionMobileComponent implements OnInit {
               this.askQuestion(progressDialog, this.time.time, true);
             })
           } else {
-            this.askEmail(progressDialog);
+            this.askQuestionNotLogged(progressDialog);
           }
         } else {
           progressDialog.close();
@@ -176,6 +178,36 @@ export class AddQuestionMobileComponent implements OnInit {
     )
   }
 
+  askQuestionNotLogged(progressDialog: MatDialogRef<any>) {
+    progressDialog.close();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    // dialogConfig.width = "433px";
+    const dialogRef = this.dialog.open(SignInComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      (res) => {
+        if (res !== undefined && !res) {
+          const dialogRefx = this.dialog.open(SignUpComponent, dialogConfig);
+          dialogRefx.afterClosed().subscribe(
+            (response) => {
+              if (response && response !== 'fail') {
+                this.authService.isLoggedIn = true;
+                this.onDone();
+              }
+              if (response === 'fail') {
+              }
+            }
+          );
+        }
+        if (res && res !== 'fail') {
+          this.authService.isLoggedIn = true;
+          this.onDone();
+        }
+        if (res === 'fail') {
+        }
+      }
+    )
+  }
 
   onSelect(event: any) {
     this.uploadedSize = this.uploadedSize + event.addedFiles[0].size;

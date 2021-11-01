@@ -149,6 +149,17 @@
             .note{
                 font: $body-base-default;
             }
+
+
+      .confirmation{
+        font: $body-base-medium;
+        padding: 0px 0px 16px;
+        .underlined {
+          text-decoration: underline;
+          color: #7F6EF0;
+          cursor: pointer;
+        }
+      }
         
         .signup-button-container{
             padding: 24px 0px 0px;
@@ -188,11 +199,6 @@
       
             .label{
               font:  400 12px/18px Roboto,'Manrope', sans-serif;        
-            }
-
-            .confirmation{
-                font: $body-base-medium;
-                padding: 0px 0px 16px;
             }
 
             .button-reg{

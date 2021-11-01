@@ -4,12 +4,6 @@
   <mat-dialog-content style="overflow-y: auto !important;">
     <form [formGroup]="signInForm">
       <div class="form" fxLayout="column">
-        <!--<div class="input-type-default">-->
-        <!--<div class="input-type-default__label">Label</div>-->
-        <!--<mat-form-field appearance="outline">-->
-        <!--<input matInput placeholder="Ex. Pizza" value="Sushi">-->
-        <!--</mat-form-field>-->
-        <!--</div>-->
         <div class="tu-text-input">
           <div class="tu-text-input__label">Email address</div>
           <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
@@ -36,7 +30,7 @@
         </div>
         <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
           <div>
-            <a style="color: #228CCD !important;" href="#">Forgot password</a>
+            <a style="color: #228CCD !important; text-decoration: underline; cursor: pointer" (click)="onForgotPassword()">Forgot password</a>
           </div>
         </div>
         <button mat-flat-button class="button-reg" (click)="onSignIn()">
@@ -57,8 +51,9 @@
         </div>
       </div>
     </form>
-    <div>Dont have an account?</div>
-    <button (click)="switchLogin()">click</button>
+    <div class="confirmation">
+      Dont have an account? <a (click)="switchLogin()" class="underlined">Click here to Sign up</a>
+    </div>
   </mat-dialog-content>
 </div>
 
