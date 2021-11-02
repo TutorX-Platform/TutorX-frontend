@@ -300,11 +300,8 @@ export class AddQuestionComponent implements OnInit {
       //   }
       // })
     } else {
-      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe(
-        (res) => {
-          console.log(res);
-        }
-      )
+      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe();
+      this.uploadedSize = 0;
     }
   }
 
@@ -388,9 +385,9 @@ export class AddQuestionComponent implements OnInit {
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
-                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description).then();
                   } else {
-                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description).then();
                   }
                   this.router.navigate([constants.routes.student_q_pool])
                   dialogRef.close(true);

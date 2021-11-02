@@ -59,10 +59,13 @@ export const questionMessages = {
 
 export const signInTitles = {
   signInFailed: "Sign In Failed",
+  pwResetSent:"Password reset email sent"
 }
 
 export const signInMessages = {
-  incompleteForm: "Please complete required fields"
+  incompleteForm: "Please complete required fields",
+  pwResetSent:"Password reset email has sent to your email. You can change a new password "
+
 }
 
 
