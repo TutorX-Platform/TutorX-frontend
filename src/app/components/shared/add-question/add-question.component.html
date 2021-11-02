@@ -11,7 +11,7 @@
           Cancel
         </button>
         <button mat-flat-button class="button-done c-button c-flat-button c-button-secondary" color="accent"
-                [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid"
+                [class.dissabled]="addQuestionForm.invalid || this.isUploading" [disabled]="addQuestionForm.invalid || this.isUploading"
                 type="submit">
           Done
         </button>
@@ -121,7 +121,7 @@
       <div>
         <mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"
                               *ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>
-        <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">
+        <div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelectFiles($event)">
           <ngx-dropzone-label>
             <div fxLayout="row" fxLayoutAlign="center center">
               <mat-icon class="material-icons-outlined">
