@@ -48,7 +48,7 @@ export class AddQuestionMobileComponent implements OnInit {
   uploadedFiles: Attachment[] = [];
   askedQuestions = [];
   studentUniqueKey = '';
-  files: File[] = [];
+  files: any[] = [];
   subjectList: string[] = [];
 
   options = constants.subjects;
@@ -377,6 +377,7 @@ export class AddQuestionMobileComponent implements OnInit {
   }
 
   uploadFile(file: File) {
+    const index = this.files.length - 1;
     const time = new Date().getTime();
     // @ts-ignore
     const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + file.name;
@@ -388,6 +389,7 @@ export class AddQuestionMobileComponent implements OnInit {
         console.log(res);
         // @ts-ignore
         this.uploadingProgress = res;
+        this.files[index].progress = res;
       }
     )
 
@@ -482,6 +484,81 @@ export class AddQuestionMobileComponent implements OnInit {
   changeSubCategory() {
     // @ts-ignore
     this.addQuestionForm.get('subCategory').setValue('');
+  }
+
+  //  new file uploader
+  /**
+   * on file drop handler
+   */
+  // @ts-ignore
+  onFileDropped($event) {
+    this.prepareFilesList($event);
+  }
+
+  /**
+   * handle file from browsing
+   */
+  // @ts-ignore
+  fileBrowseHandler(files: React.ChangeEvent<HTMLInputElement>) {
+    this.prepareFilesList(files.files);
+  }
+
+  /**
+   * Delete file from files list
+   * @param index (File index)
+   */
+  deleteFile(index: number) {
+    this.files.splice(index, 1);
+    this.uploadedFiles.splice(index, 1);
+  }
+
+  /**
+   * Simulate the upload process
+   */
+  uploadFilesSimulator(index: number) {
+    setTimeout(() => {
+      if (index === this.files.length) {
+        return;
+      } else {
+        const progressInterval = setInterval(() => {
+          if (this.files[index].progress === 100) {
+            clearInterval(progressInterval);
+            this.uploadFilesSimulator(index + 1);
+          } else {
+            this.files[index].progress += 5;
+          }
+        }, 200);
+      }
+    }, 1000);
+  }
+
+  /**
+   * Convert Files list to normal array list
+   * @param files (Files List)
+   */
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      item.progress = 0;
+      this.files.push(item);
+    }
+    this.uploadFile(files[0]);
+  }
+
+  /**
+   * format bytes
+   * @param bytes (File size in bytes)
+   * @param decimals (Decimals point)
+   */
+  // @ts-ignore
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
 }

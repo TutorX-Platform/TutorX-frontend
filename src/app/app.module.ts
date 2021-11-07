@@ -96,6 +96,8 @@ import { TermsNConditionsComponent } from './components/home/terms-n-conditions/
 import { FaqComponent } from './components/home/faq/faq.component';
 import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { DndDirective } from './directives/dnd.directive';
+import { ProgressComponent } from './components/shared/progress/progress.component';
 
 
 @NgModule({
@@ -141,7 +143,9 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
     TermsNConditionsComponent,
     FaqComponent,
     ForgetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DndDirective,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
