@@ -78,6 +78,10 @@ export class AddQuestionComponent implements OnInit {
 
   uploadingProgress = 0;
   validations = systemMessages.validations;
+  addedFiles = 0;
+  uploadedFilesCount = 0;
+  uploadPercentage = 0;
+  isUploading = false;
 
   constructor(
     private dialog: MatDialog,
@@ -265,46 +269,57 @@ export class AddQuestionComponent implements OnInit {
           }
         )
       }
-      // const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
-      // progressDialog.afterOpened().subscribe(() => {
-      //   if (event.addedFiles.length < 2) {
-      //     if (event.addedFiles.length > 2) {
-      //       progressDialog.close();
-      //       // alert("Please select one at a time");
-      //       this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
-      //         (res) => {
-      //           console.log(res);
-      //         }
-      //       )
-      //     } else {
-      //       this.files.push(event.addedFiles[0]);
-      //       if (this.authService.isLoggedIn) {
-      //         this.uploadFile(event.addedFiles[0], progressDialog);
-      //       } else {
-      //         this.validationService.validateCors().subscribe((res) => {
-      //           // @ts-ignore
-      //           if (res && res.status === 200) {
-      //             this.uploadFile(event.addedFiles[0], progressDialog);
-      //           }
-      //         })
-      //       }
-      //     }
-      //   } else {
-      //     progressDialog.close();
-      //     this.utilService.openDialog(systemMessages.questionTitles.uploadOneFileAtATime, systemMessages.questionMessages.uploadOneFileAtATime, constants.messageTypes.warningInfo).afterClosed().subscribe(
-      //       (res) => {
-      //         console.log(res);
-      //       }
-      //     )
-      //   }
-      // })
     } else {
-      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe(
-        (res) => {
-          console.log(res);
-        }
-      )
+      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe();
+      this.uploadedSize = 0;
     }
+  }
+
+  onSelectFiles(event: any) {
+    this.isUploading = true;
+    this.addedFiles = event.addedFiles.length;
+    for (let i = 0; i < event.addedFiles.length; i++) {
+      this.uploadedSize = this.uploadedSize + event.addedFiles[i].size;
+      this.files.push(event.addedFiles[i]);
+    }
+    if (this.uploadedSize > constants.fileUploadLimit) {
+      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe();
+      this.uploadedSize = 0;
+      return;
+    } else {
+      Promise.all(
+        // Array of "Promises"
+        this.files.map(item => this.putStorageItem(item))
+      )
+        .then((url) => {
+          console.log(`All success`);
+          this.isUploading = false;
+        })
+        .catch((error) => {
+          console.log(`Some failed: `, error.message);
+          this.isUploading = false;
+        });
+    }
+  }
+
+  putStorageItem(item: any) {
+    const time = new Date().getTime();
+    // @ts-ignore
+    const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + item.name;
+
+    // the return value will be a Promise
+    return this.storage.upload(path, item)
+      .then((snapshot) => {
+        this.uploadedFilesCount = this.uploadedFilesCount + 1;
+        this.uploadPercentage = (this.uploadedFilesCount / this.addedFiles) * 100;
+        console.log(this.uploadPercentage);
+        snapshot.ref.getDownloadURL().then((v) => {
+          let attachment: Attachment = {extension: item.type, downloadUrl: v, fileName: item.name}
+          this.uploadedFiles.push(attachment);
+        });
+      }).catch((error) => {
+        console.log('One failed:', item, error.message)
+      });
   }
 
   onRemove(event: any) {
@@ -387,9 +402,9 @@ export class AddQuestionComponent implements OnInit {
                   // @ts-ignore
                   if (res.data()['questionNumber']) {
                     // @ts-ignore
-                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description);
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, constants.uniqueIdPrefix.prefixQuestionNumber + res.data()['questionNumber'], question.description).then();
                   } else {
-                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description);
+                    this.createChat(this.questionId, this.authService.student.userId, question.questionTitle, '', question.description).then();
                   }
                   this.router.navigate([constants.routes.student_q_pool])
                   dialogRef.close(true);

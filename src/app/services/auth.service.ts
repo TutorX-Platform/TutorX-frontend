@@ -334,4 +334,8 @@ export class AuthService {
     )
   }
 
+  resetPassword(email: string) {
+   return  this.angularFireAuth.auth.sendPasswordResetEmail(email);
+  }
+
 }
