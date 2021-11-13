@@ -289,7 +289,7 @@ export class AddQuestionComponent implements OnInit {
     } else {
       Promise.all(
         // Array of "Promises"
-        this.files.map(item => this.putStorageItem(item))
+        this.files.map(item => this.putStorageItem(item,0))
       )
         .then((url) => {
           console.log(`All success`);
@@ -302,24 +302,25 @@ export class AddQuestionComponent implements OnInit {
     }
   }
 
-  putStorageItem(item: any) {
+  putStorageItem(item: any, index: number) {
     const time = new Date().getTime();
     // @ts-ignore
     const path = constants.storage_collections.question + constants.url_sign.url_separator + this.questionId + constants.url_sign.url_separator + time + constants.url_sign.underscore + item.name;
 
     // the return value will be a Promise
-    return this.storage.upload(path, item)
-      .then((snapshot) => {
-        this.uploadedFilesCount = this.uploadedFilesCount + 1;
-        this.uploadPercentage = (this.uploadedFilesCount / this.addedFiles) * 100;
-        console.log(this.uploadPercentage);
-        snapshot.ref.getDownloadURL().then((v) => {
-          let attachment: Attachment = {extension: item.type, downloadUrl: v, fileName: item.name}
-          this.uploadedFiles.push(attachment);
-        });
-      }).catch((error) => {
-        console.log('One failed:', item, error.message)
+    let abc = this.storage.upload(path, item);
+    abc.percentageChanges().subscribe((res) => {
+      console.log(res);
+      this.files[index].progress = res;
+    })
+    return abc.then((snapshot) => {
+      snapshot.ref.getDownloadURL().then((v) => {
+        let attachment: Attachment = {extension: item.type, downloadUrl: v, fileName: item.name}
+        this.uploadedFiles.push(attachment);
       });
+    }).catch((error) => {
+      console.log('One failed:', item, error.message)
+    });
   }
 
   onRemove(event: any) {
@@ -653,7 +654,10 @@ export class AddQuestionComponent implements OnInit {
       item.progress = 0;
       this.files.push(item);
     }
-    this.uploadFile(files[0]);
+
+    for (let i = 0; i < this.files.length; i++) {
+      this.putStorageItem(this.files[i], i);
+    }
   }
 
   /**
