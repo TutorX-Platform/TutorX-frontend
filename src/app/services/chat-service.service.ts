@@ -119,6 +119,7 @@ export class ChatServiceService {
   }
 
   getChat(chatId: string) {
+    console.log("Called");
     const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
     return chatRef;
   }

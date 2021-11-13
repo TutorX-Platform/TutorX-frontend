@@ -290,11 +290,13 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
       (res) => {
         this.chatService.getChat(this.chatToken).valueChanges().subscribe(
           (res) => {
+            this.attachments = [];
+            this.attachments.length = 0;
             // @ts-ignore
             this.chat = res;
             this.attachments = [];
             if (this.chat !== undefined) {
-              this.attachments.push(...this.chat.attachments);
+              this.attachments = this.chat.attachments;
             }
             this.getMessages(progressDailog);
             this.getQuestion(this.chatToken);
@@ -339,6 +341,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.chatService.getChat(this.chatToken).valueChanges().subscribe(
       (res) => {
         console.log(res);
+        this.attachments.length = 0;
+        this.attachments = [];
         // @ts-ignore
         this.chat = res;
         // @ts-ignore

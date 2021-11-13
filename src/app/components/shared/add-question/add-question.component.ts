@@ -289,7 +289,7 @@ export class AddQuestionComponent implements OnInit {
     } else {
       Promise.all(
         // Array of "Promises"
-        this.files.map(item => this.putStorageItem(item,0))
+        this.files.map(item => this.putStorageItem(item, 0))
       )
         .then((url) => {
           console.log(`All success`);
@@ -647,7 +647,7 @@ export class AddQuestionComponent implements OnInit {
 
   /**
    * Convert Files list to normal array list
-   * @param files (Files List)
+   * @param files (Files List)c
    */
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
@@ -655,8 +655,17 @@ export class AddQuestionComponent implements OnInit {
       this.files.push(item);
     }
 
-    for (let i = 0; i < this.files.length; i++) {
-      this.putStorageItem(this.files[i], i);
+    this.files.forEach(file => {
+      this.uploadedSize = this.uploadedSize + file.size;
+    });
+    if (this.uploadedSize > constants.fileUploadLimit) {
+      this.utilService.openDialog(systemMessages.questionTitles.uploadLimitExceedError, systemMessages.questionMessages.uploadLimitExceedError, constants.messageTypes.warning).afterClosed().subscribe();
+      this.uploadedSize = 0;
+      return;
+    } else {
+      for (let i = 0; i < this.files.length; i++) {
+        this.putStorageItem(this.files[i], i);
+      }
     }
   }
 
