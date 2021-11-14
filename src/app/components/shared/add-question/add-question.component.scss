@@ -52,44 +52,45 @@
 .files-list {
   margin-top: 1.5rem;
 
-  .single-file {
-    display: flex;
-    padding: 0.5rem;
-    justify-content: space-between;
-    align-items: center;
-    border: dashed 1px #979797;
-    margin-bottom: 1rem;
-
-    .delete {
-      display: flex;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      align-self: flex-end;
-    }
-
-
-    display: flex;
-    flex-grow: 1;
-
-    .name {
-      font-size: 14px;
-      font-weight: 500;
-      color: #353f4a;
-      margin: 0;
-    }
-
-    .size {
-      font-size: 12px;
-      font-weight: 500;
-      color: #a4a4a4;
-      margin: 0;
-      margin-bottom: 0.25rem;
-    }
-
-    .info {
-      width: 100%
-    }
-  }
+  //.single-file {
+  //  display: flex;
+  //  padding: 8px 12px;
+  //  justify-content: space-between;
+  //  align-items: center;
+  //  background: #F9FAFB;
+  //  //border: dashed 1px #979797;
+  //  //margin-bottom: 1rem;
+  //
+  //  .delete {
+  //    display: flex;
+  //    margin-left: 0.5rem;
+  //    cursor: pointer;
+  //    align-self: flex-end;
+  //  }
+  //
+  //
+  //  display: flex;
+  //  flex-grow: 1;
+  //
+  //  .name {
+  //    font-size: 14px;
+  //    font-weight: 500;
+  //    color: #353f4a;
+  //    margin: 0;
+  //  }
+  //
+  //  .size {
+  //    font-size: 12px;
+  //    font-weight: 500;
+  //    color: #a4a4a4;
+  //    margin: 0;
+  //    margin-bottom: 0.25rem;
+  //  }
+  //
+  //  .info {
+  //    width: 100%
+  //  }
+  //}
 }
 
 /* Shake animation */
@@ -139,7 +140,22 @@
   }
 }
 
-        
+.file-prev{
+  background: #F9FAFB;
+  padding: 8px 12px;
+  margin-top: 16px;
+}
 
+.upload-success{
+  font: var(--desktop---button);
+  color: #059669;
+}
 
+.close{
+  cursor: pointer;
+}
 
+.file-name{
+  font: var(--desktop---button);
+  color: #050037;
+}
