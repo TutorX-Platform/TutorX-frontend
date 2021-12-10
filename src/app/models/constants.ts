@@ -1,10 +1,10 @@
 export const fileUploadLimit = 30000 * 1000;
-export const backend_url = "https://sandunapi.tk";
+export const backend_url = "https://www.backendtutetory.live";
 export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
 export const adminEmail = "tharindu.prf@gmail.com"
 
 export const env_url = {
-  heroku_url: 'https://sandunapi.tk/',
+  heroku_url: 'https://www.backendtutetory.live',
   local_url: 'http://localhost:4200/',
   prod_url: 'https://tutetory.com',
   local_backend_url: 'http://localhost:5000'

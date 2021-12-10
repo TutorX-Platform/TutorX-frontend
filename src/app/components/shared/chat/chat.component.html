@@ -7,7 +7,7 @@
              class="chat-title">{{questionService.question.questionTitle}}
         </div>
         <!--        Todo need to change with appropriate ui elements&ndash;&gt;-->
-        <div> parnter is online {{isPartnerOnline}}</div>
+<!--        <div> parnter is online {{isPartnerOnline}}</div>-->
 
         <div *ngIf="questionService.question === undefined" class="chat-title">Loading</div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -229,7 +229,7 @@
         </div>
 
         <!--Rating UI-->
-        <div *ngIf="questionService.question.status === 'Completed'" fxLayout="column" fxLayoutAlign="start end">
+        <div *ngIf="questionService.question.status === 'Completed' && !isTutor" fxLayout="column" fxLayoutAlign="start end">
           <div class="ratings-container">
             <div class="rating-ui" fxLayout="row" fxLayoutGap="8px">
               <mat-icon (click)="onRate(1)" class="material-icons-round" *ngIf="rating >= 1"
