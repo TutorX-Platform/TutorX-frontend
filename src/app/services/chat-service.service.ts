@@ -118,6 +118,26 @@ export class ChatServiceService {
     return this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
   }
 
+  refundRequestChat(chatId: string, sortTime: number) {
+    let data: ChatMsg = {
+      isValidQuote: false,
+      isQuote: false,
+      attachmentExtension: "",
+      attachmentLink: "",
+      sort: sortTime,
+      senderAvatar: this.studentService.currentStudent.profileImage,
+      senderName: this.studentService.currentStudent.firstName,
+      isTutorJoinMessage: true,
+      isAttachment: false,
+      message: `${this.studentService.currentStudent.firstName} requested a refund for this question`,
+      senderEmail: '',
+      senderId: '',
+      sentBy: '',
+      time: sortTime
+    }
+    return this.angularFirestoreService.collection(constants.collections.message).doc(chatId).collection(constants.collections.chats).add(data);
+  }
+
   getChat(chatId: string) {
     console.log("Called");
     const chatRef = this.angularFirestoreService.collection(constants.collections.chats).doc(chatId);
