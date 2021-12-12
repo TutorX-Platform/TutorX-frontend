@@ -161,6 +161,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.des.length > 20) {
       this.desc = this.des.substring(0, 20).concat('...');
     }
+
   }
 
   showMore(num: number) {
@@ -558,6 +559,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.uploadReady = false;
           let attachment: Attachment = {extension: file.type, downloadUrl: res, fileName: file.name}
           this.chat.attachments.push(attachment);
+          this.addAttachementToQuestion(attachment);
+
           let sender = '';
           if (this.isTutor) {
             sender = this.authService.student.visibleName
@@ -588,6 +591,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
       )
     });
+  }
+
+  addAttachementToQuestion(attachment: Attachment) {
+    this.questionService.question.attachments.push(attachment)
+    this.questionService.saveQuestion(this.questionService.question, this.questionService.question.uniqueId, this.questionService.question.questionNumber).then()
   }
 
   onChangeQuote() {
@@ -667,8 +675,13 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.utilService.getTimeFromTimeAPI().subscribe(
             (res1) => {
               // @ts-ignore
-              this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle, res1.time);
-              this.mailService.sendMail("A refund request has been initiated", constants.adminEmail, constants.getRefundRequest(this.question.questionNumber), constants.mailTemplates.refundRequest).subscribe();
+              this.chatService.refundRequestChat(this.chatToken, res1.time).then(
+                () => {
+                  // @ts-ignore
+                  this.paymentService.requestRefund(this.chatToken, this.question.fee, this.question.studentId, this.question.studentName, this.question.tutorId, this.question.tutorName, this.question.questionTitle, res1.time);
+                  this.mailService.sendMail("A refund request has been initiated", constants.adminEmail, constants.getRefundRequest(this.question.questionNumber), constants.mailTemplates.refundRequest).subscribe();
+                }
+              )
             }
           )
           const data = {

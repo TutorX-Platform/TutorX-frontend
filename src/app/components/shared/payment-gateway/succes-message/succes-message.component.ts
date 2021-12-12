@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import * as constants from '../../../../models/constants';
+import {QuestionService} from "../../../../services/question-service.service";
 
 @Component({
   selector: 'app-succes-message',
@@ -15,7 +16,8 @@ export class SuccesMessageComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private questionService:QuestionService
   ) {
   }
 
@@ -29,7 +31,7 @@ export class SuccesMessageComponent implements OnInit {
   }
 
   onChat() {
-    this.router.navigate([constants.routes.student_q_pool])
+    this.router.navigate([constants.routes.student + 'chat/' + this.questionService.question.id])
   }
 
 }
