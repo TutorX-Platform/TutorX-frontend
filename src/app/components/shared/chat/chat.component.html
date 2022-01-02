@@ -294,11 +294,12 @@
           <!--(keydown.control.enter)="triggerFunction($event)"></textarea>-->
           <textarea
             matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             id="textarea1"
             [formControl]="message"
             placeholder="Reply"
             (keydown)="triggerFunction($event)"
-            oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'
             (input)="onType()"
             (focus)="onFocus()"
             (blur)="onBlur()"></textarea>
@@ -567,7 +568,8 @@
           </button>
           <textarea rows="1" matInput type="text" placeholder="Reply"
                     (keydown)="triggerFunction($event)"
-                    oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
                     class="message-input" [formControl]="message" (input)="onType()"></textarea>
           <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
                   [disabled]="isSendButtonDissabled">

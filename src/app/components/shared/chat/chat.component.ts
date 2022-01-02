@@ -781,6 +781,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
                       this.chatService.deadLineChangedChat(this.chatToken, res.time, this.deadLine).then(
                         () => {
                           this.mailService.sendMail('Deadline changed', this.chat.tutorEmail, constants.getDeadlineChange(this.questionService.question.questionNumber), constants.mailTemplates.deadlineChange).subscribe()
+
+                          window.location.reload();
                         }
                       );
                     }
