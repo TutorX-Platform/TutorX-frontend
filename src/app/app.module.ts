@@ -12,7 +12,6 @@ import {environment} from '../environments/environment.prod';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxStripeModule} from "ngx-stripe";
 import {ClipboardModule} from 'ngx-clipboard';
@@ -186,7 +185,7 @@ import { ProgressComponent } from './components/shared/progress/progress.compone
     MatDatepickerModule,
     AngularFireMessagingModule,
     MatProgressBarModule,
-    NgxStripeModule.forRoot('pk_test_51Ff6WELnesZei0Ur9cOUEz7QjLt8s0E56lYD2UZgM5YxUPuvXLtayH8Zj5r2cwATY7PwUoxMTjFdTRyhtqH5AXVV0044aFdUlC')
+    NgxStripeModule.forRoot('pk_live_51JeihABuTI5kghVldAUC7iJPhhDdwonmbFqw2jHYG2bZyynUarkzrwiD3u6oLRTwKFhsrNz6ebehMdIw34YbOMKl006Qhe9crZ')
   ],
   providers: [AuthService, AngularFireAuthGuard, NotificationService, DatePipe],
   bootstrap: [AppComponent]

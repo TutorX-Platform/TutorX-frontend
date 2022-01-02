@@ -1,5 +1,5 @@
 export const fileUploadLimit = 30000 * 1000;
-export const backend_url = "https://www.backendtutetory.live";
+export const backend_url = "http://localhost:5000";
 export const time_url = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
 export const adminEmail = "tharindu.prf@gmail.com"
 
