@@ -87,8 +87,9 @@ export class QuestionService {
   }
 
   getNextQuestionsForStudent(studentEmail: string, time: number) {
+   console.log(time);
     // @ts-ignore
-    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5).endBefore(time));
+    const questionRef: AngularFirestoreDocument<Questions[]> = this.angularFirestoreService.collection(constants.collections.questions, ref => ref.where('studentEmail', "in", [studentEmail]).orderBy("sort", "desc").limit(5).startAfter(time));
     return questionRef;
   }
 

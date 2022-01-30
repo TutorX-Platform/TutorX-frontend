@@ -126,13 +126,14 @@ export class TutorPaymentsComponent implements OnInit {
   onScroll() {
     // visible height + pixel scrolled >= total height
     if (window.innerHeight + Math.ceil(window.scrollY) >= document.body.scrollHeight) {
-      if (this.allPayments[this.allPayments.length - 1] !== undefined) {
-        this.paymentService.getNextPaymentsForTutor(this.authService.student.userId, this.allPayments[this.allPayments.length - 1].paidTime).valueChanges().subscribe(
-          (res) => {
-            this.allPayments.push(...res);
-          }
-        )
-      }
+      // if (this.allPayments[this.allPayments.length - 1] !== undefined) {
+      //   this.paymentService.getNextPaymentsForTutor(this.authService.student.userId, this.allPayments[this.allPayments.length - 1].paidTime).valueChanges().subscribe(
+      //     (res) => {
+      //       console.log(res, "response");
+      //       // this.allPayments.push(...res);
+      //     }
+      //   )
+      // }
     }
   }
 }

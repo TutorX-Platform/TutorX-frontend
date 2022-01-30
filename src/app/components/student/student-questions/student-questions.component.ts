@@ -295,10 +295,11 @@ export class StudentQuestionsComponent implements OnInit {
   onScroll() {
     // visible height + pixel scrolled >= total height
     if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      this.questionService.getNextQuestionsForStudent(this.studentService.currentStudent.email, this.allAskedQuestions[0].sort).valueChanges().subscribe(
+      this.questionService.getNextQuestionsForStudent(this.studentService.currentStudent.email, this.allAskedQuestions[this.allAskedQuestions.length - 1].sort).valueChanges().subscribe(
         (res) => {
+          console.log("abc", res);
           // @ts-ignore
-          this.allAskedQuestions.unshift(...res);
+          this.allAskedQuestions.push(...res);
         }, (err) => {
           console.log(err);
         }
