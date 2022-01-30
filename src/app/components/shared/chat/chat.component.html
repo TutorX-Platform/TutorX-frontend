@@ -505,9 +505,32 @@
 
 </div>
 
-<div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 1">
+
+<!--<section>-->
+<!--  <header>-->
+<!--    header: sized to content-->
+<!--    <br/>(but is it really?)-->
+<!--  </header>-->
+<!--  <div>-->
+<!--    main content: fills remaining space<br> x-->
+<!--    <br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>-->
+<!--    &lt;!&ndash; uncomment to see it break &ndash;&gt;-->
+<!--    x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br> x-->
+<!--    <br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br> x-->
+<!--    <br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br> x-->
+<!--    <br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>-->
+<!--    &lt;!&ndash; &ndash;&gt;-->
+<!--  </div>-->
+<!--  <footer>-->
+<!--    footer: fixed height in px-->
+<!--  </footer>-->
+<!--</section>-->
+
+
+
+<section class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 1">
   <mat-toolbar color="primary"
-               style="position: fixed; top: 0; z-index: 100000000; color: white;" *ngIf="!isDetailedView">
+               class="toolbar-container-mobile" *ngIf="!isDetailedView">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayoutAlign="start center">
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
@@ -531,7 +554,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div fxLayout="row" fxLayoutAlign="space-between start"
-       style="padding: 16px;position: fixed; width: 100%; top: 0;color: white;background: #3F51B5"
+       style="padding: 16px;width: 100%; color: white;background: #3F51B5"
        *ngIf="isDetailedView">
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
       <img src="../../assets/images/box.svg">
@@ -547,187 +570,165 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <div class="chat-main-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-    <div class="chat-container">
-      <div *ngIf="isTyping && isFocused">You Typing...</div>
-      <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">{{question.tutorName}} is
-        Typing...
-      </div>
-      <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">{{question.studentName}} is
-        Typing...
-      </div>
-      <div class="typing-box">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="typer">
-          <button mat-flat-button style="background: #E3E6E8">
-            <div>
-              <label class="custom-file-upload">
-                <img src="/assets/icons/attach.svg" style="cursor: pointer">
-                <input type="file" id="file" (change)="handleFileInput($event)" (keyup.enter)="onSend()">
-              </label>
-            </div>
-          </button>
-          <textarea rows="1" matInput type="text" placeholder="Reply"
-                    (keydown)="triggerFunction($event)"
-                    cdkTextareaAutosize
-                    cdkAutosizeMinRows="1"
-                    class="message-input" [formControl]="message" (input)="onType()"></textarea>
-          <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
-                  [disabled]="isSendButtonDissabled">
-            <mat-icon class="material-icons-outlined">send</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div *ngFor="let message of chatMessages">
-        <div *ngIf="!message.isQuote && !message.isAttachment && message.isTutorJoinMessage" class="joined-message">
-          <div class="line"></div>
-          <div class="user-name">{{message.message}} &nbsp;</div>
-          <!--          <div class="text">joined the chat</div>-->
-          <div class="line"></div>
-        </div>
-        <div
-          *ngIf="!message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
-          <div fxLayout="row" fxLayoutAlign="end center">
-            <div class="message-box">
-              {{message.message}}
-            </div>
+  <div class="chat-mobile-main" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<!--      <div *ngIf="isTyping && isFocused">You Typing...</div>-->
+<!--      <div *ngIf="isTyping && !isFocused && authService.student.role==='student'">{{question.tutorName}} is-->
+<!--        Typing...-->
+<!--      </div>-->
+<!--      <div *ngIf="isTyping && !isFocused && authService.student.role==='tutor'">{{question.studentName}} is-->
+<!--        Typing...-->
+<!--      </div>-->
+        <div *ngFor="let message of chatMessages">
+          <div *ngIf="!message.isQuote && !message.isAttachment && message.isTutorJoinMessage" class="joined-message">
+            <div class="line"></div>
+            <div class="user-name">{{message.message}} &nbsp;</div>
+            <!--          <div class="text">joined the chat</div>-->
+            <div class="line"></div>
           </div>
-        </div>
-        <div
-          *ngIf="!message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
-          <div fxLayout="row" fxLayoutAlign="start start" class="other-user">
-            <div>
-              <div
-                *ngIf="message.senderAvatar !== null; else else_container">
-                <img [src]="message.senderAvatar" class="avatar-x">
-              </div>
-              <ng-template #else_container>
-                <img [src]="dummyProfPic" class="avatar-x">
-              </ng-template>
-            </div>
-            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0px"
-                 style="width: 100%; margin-left: 8px; margin-right: 8px">
-              <div fxLayout="row" fxLayoutAlign="space-between center">
-                <div class="user-name">
-                  {{message.senderName}}
-                </div>
-                <!--<div class="time">Todat at 9.00 AM</div>-->
-              </div>
-              <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="message-box message-box--other-user-message">
-                  {{message.message}}
-                </div>
+          <div
+            *ngIf="!message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && !message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div class="message-box">
+                {{message.message}}
               </div>
             </div>
           </div>
-          <!--          <div class="message-box message-box&#45;&#45;other-user-message">-->
-          <!--            {{message.message}}-->
-          <!--          </div>-->
-        </div>
-        <div *ngIf="!message.isQuote && message.isAttachment && message.senderId === authService.student.userId">
-          <div fxLayout="row" fxLayoutAlign="end center">
-            <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column"
-               fxLayoutAlign="center center"
-               fxLayoutGap="8px">
-              <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
-                   *ngIf="message.attachmentExtension.includes('.sheet')">
-              <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
-                   *ngIf="message.attachmentExtension.includes('pdf')">
-              <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
-                   *ngIf="message.attachmentExtension.includes('.document')">
-              <img [src]="message.attachmentLink" class="attachment-box"
-                   *ngIf="message.attachmentExtension.includes('image')">
-              {{message.message}}
-            </a>
-          </div>
-        </div>
-        <div
-          *ngIf="!message.isQuote && message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
-          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
-              <div
-                *ngIf="message.senderAvatar !== null; else else_container">
-                <img [src]="message.senderAvatar" class="avatar-x">
-              </div>
-              <ng-template #else_container>
-                <img [src]="dummyProfPic" class="avatar-x">
-              </ng-template>
-              <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%;">
-                <div class="user-name">
-                  {{message.senderName}}
+          <div
+            *ngIf="!message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="start start" class="other-user">
+              <div>
+                <div
+                  *ngIf="message.senderAvatar !== null; else else_container">
+                  <img [src]="message.senderAvatar" class="avatar-x">
                 </div>
-                <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message"
-                   fxLayout="column"
-                   fxLayoutAlign="center center" fxLayoutGap="8px">
-                  <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
-                       *ngIf="message.attachmentExtension.includes('.sheet')">
-                  <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
-                       *ngIf="message.attachmentExtension.includes('pdf')">
-                  <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
-                       *ngIf="message.attachmentExtension.includes('.document')">
-                  <img [src]="message.attachmentLink" class="attachment-box"
-                       *ngIf="message.attachmentExtension.includes('image')">
-                  {{message.message}}
-                </a>
+                <ng-template #else_container>
+                  <img [src]="dummyProfPic" class="avatar-x">
+                </ng-template>
               </div>
-            </div>
-          </div>
-        </div>
-        <!--quote other user-->
-        <div
-          *ngIf="message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && message.isTutorJoinMessage">
-          <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
-              <div
-                *ngIf="message.senderAvatar !== null; else else_container">
-                <img [src]="message.senderAvatar" class="avatar-x">
-              </div>
-              <ng-template #else_container>
-                <img [src]="dummyProfPic" class="avatar-x">
-              </ng-template>
-              <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%">
-                <div class="user-name">
-                  {{message.senderName}}
-                </div>
-                <div class="quote-box quote-box--other-user" fxLayout="column" fxLayoutAlign="center center">
-                  <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
-                       class="amount-container amount-container--other-user">
-                    <img src="../../../../assets/icons/nervo.svg">
-                    <div class="quote">
-                      Quote
-                    </div>
-                    <div class="amount">
-                      {{questionService.question.fee}} USD
-                    </div>
+              <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0px"
+                   style="width: 100%; margin-left: 8px; margin-right: 8px">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="user-name">
+                    {{message.senderName}}
                   </div>
-                  <button *ngIf="authService.student.role === 'student' && message.isValidQuote && !question.isPaid"
-                          mat-flat-button class="send-quote-button"
-                          (click)="onPay()">Pay Now
-                  </button>
+                  <!--<div class="time">Todat at 9.00 AM</div>-->
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div class="message-box message-box--other-user-message">
+                    {{message.message}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--          <div class="message-box message-box--other-user-message">-->
+            <!--            {{message.message}}-->
+            <!--          </div>-->
+          </div>
+          <div *ngIf="!message.isQuote && message.isAttachment && message.senderId === authService.student.userId">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <a [href]="message.attachmentLink" target="_blank" class="message-box" fxLayout="column"
+                 fxLayoutAlign="center center"
+                 fxLayoutGap="8px">
+                <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('.sheet')">
+                <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('pdf')">
+                <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                     *ngIf="message.attachmentExtension.includes('.document')">
+                <img [src]="message.attachmentLink" class="attachment-box"
+                     *ngIf="message.attachmentExtension.includes('image')">
+                {{message.message}}
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="!message.isQuote && message.isAttachment && message.senderId !== authService.student.userId && !message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+                <div
+                  *ngIf="message.senderAvatar !== null; else else_container">
+                  <img [src]="message.senderAvatar" class="avatar-x">
+                </div>
+                <ng-template #else_container>
+                  <img [src]="dummyProfPic" class="avatar-x">
+                </ng-template>
+                <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%;">
+                  <div class="user-name">
+                    {{message.senderName}}
+                  </div>
+                  <a [href]="message.attachmentLink" target="_blank" class="message-box message-box--other-user-message"
+                     fxLayout="column"
+                     fxLayoutAlign="center center" fxLayoutGap="8px">
+                    <img src="assets/icons/excel2.png" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('.sheet')">
+                    <img src="assets/icons/pdf.svg" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('pdf')">
+                    <img src="assets/icons/word.png" class="attachment-box attachment-box--icon"
+                         *ngIf="message.attachmentExtension.includes('.document')">
+                    <img [src]="message.attachmentLink" class="attachment-box"
+                         *ngIf="message.attachmentExtension.includes('image')">
+                    {{message.message}}
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!--quote current user-->
-        <div
-          *ngIf="message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && message.isTutorJoinMessage">
-          <div fxLayout="row" fxLayoutAlign="end center">
-            <div class="quote-box" fxLayout="column" fxLayoutAlign="center center">
-              <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
-                   class="amount-container amount-container--other-user">
-                <img src="../../../../assets/icons/nervo.svg">
-                <div class="quote">
-                  Quote
+          <!--quote other user-->
+          <div
+            *ngIf="message.isQuote && !message.isAttachment && message.senderId !== authService.student.userId && message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="other-user">
+              <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" style="width: 80%">
+                <div
+                  *ngIf="message.senderAvatar !== null; else else_container">
+                  <img [src]="message.senderAvatar" class="avatar-x">
                 </div>
-                <div class="amount">
-                  {{questionService.question.fee}} USD
+                <ng-template #else_container>
+                  <img [src]="dummyProfPic" class="avatar-x">
+                </ng-template>
+                <div fxLayout="column" fxLayoutAlign="start start" style="width: 100%">
+                  <div class="user-name">
+                    {{message.senderName}}
+                  </div>
+                  <div class="quote-box quote-box--other-user" fxLayout="column" fxLayoutAlign="center center">
+                    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
+                         class="amount-container amount-container--other-user">
+                      <img src="../../../../assets/icons/nervo.svg">
+                      <div class="quote">
+                        Quote
+                      </div>
+                      <div class="amount">
+                        {{questionService.question.fee}} USD
+                      </div>
+                    </div>
+                    <button *ngIf="authService.student.role === 'student' && message.isValidQuote && !question.isPaid"
+                            mat-flat-button class="send-quote-button"
+                            (click)="onPay()">Pay Now
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <!--quote current user-->
+          <div
+            *ngIf="message.isQuote && !message.isAttachment && message.senderId === authService.student.userId && message.isTutorJoinMessage">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div class="quote-box" fxLayout="column" fxLayoutAlign="center center">
+                <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px grid"
+                     class="amount-container amount-container--other-user">
+                  <img src="../../../../assets/icons/nervo.svg">
+                  <div class="quote">
+                    Quote
+                  </div>
+                  <div class="amount">
+                    {{questionService.question.fee}} USD
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      </div>
+        </div>
 
       <!--dummy image loading-->
       <div>
@@ -776,15 +777,35 @@
           </div>
         </div>
       </div>
+  </div>
+
+  <div class="typing-box">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="typer">
+      <button mat-flat-button style="background: #E3E6E8">
+        <div>
+          <label class="custom-file-upload">
+            <img src="/assets/icons/attach.svg" style="cursor: pointer">
+            <input type="file" id="file" (change)="handleFileInput($event)" (keyup.enter)="onSend()">
+          </label>
+        </div>
+      </button>
+      <textarea rows="1" matInput type="text" placeholder="Reply"
+                (keydown)="triggerFunction($event)"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                class="message-input" [formControl]="message" (input)="onType()"></textarea>
+      <button mat-flat-button color="primary" style="color: white" (click)="onSend()"
+              [disabled]="isSendButtonDissabled">
+        <mat-icon class="material-icons-outlined">send</mat-icon>
+      </button>
     </div>
   </div>
 
-</div>
+</section>
 
 <!--other-->
 <div class="chat-mobile" fxShow="true" fxHide.gt-xs="true" *ngIf="selectedPage === 2">
-  <mat-toolbar color="primary"
-               style="position: fixed; top: 0; z-index: 100000000; color: white;">
+  <mat-toolbar color="primary">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
               (click)="onShowDetails(1)">
@@ -796,7 +817,7 @@
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  <div class="chat-main-container">
+<!--  <div class="chat-main-container">-->
     <div class="chat-details-container" fxLayout="column" fxLayoutGap="4px">
       <div class="cover-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
         <img src="../../../../assets/icons/flag.svg">
@@ -986,7 +1007,7 @@
               style="color: white" (click)="onMarkAsCompleted()">Mark as Complete
       </button>
     </div>
-  </div>
+<!--  </div>-->
 
 </div>
 
