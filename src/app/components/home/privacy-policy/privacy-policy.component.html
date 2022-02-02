@@ -1,4 +1,4 @@
-<mat-toolbar  class="top-bar__wrap">
+<mat-toolbar class="top-bar__wrap" xmlns="http://www.w3.org/1999/html">
   <div class="container">
     <mat-toolbar-row class="top-bar ">
       <button
@@ -29,50 +29,483 @@
     Privacy policy
   </div>
   <div class="faq-para">
-    This Privacy Policy describes Pixitree Digital Creatives Private Limited (Herein after referred to as the “Company”) policies and procedures on the collection and use and disclosure of the Information provided by the Users and visitors of the Website (together referred to as the “Users”). The Company shall not use the User’s information in any manner except as provided under this Privacy Policy. Every User who accesses the Website agrees to be bound by the terms of this Privacy Policy.
+    Thank you for choosing to be part of our community at Tutetory ("Company," "we," "us," or "our"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy policy or our practices with regard to your personal information, please contact us at <a href="https://admin@tutetory.com">admin@tutetory.com</a>.
+  </div>
+  <div class="faq-para">
+    This privacy policy describes how we might use your information if you:
+    <ul>
+      <li>Visit our website at <a href="https://tutetory.com">https://tutetory.com</a></li>
+    </ul>
+  </div>
+  <div class="faq-para">
+    Engage with us in other related ways ― including any sales, marketing, or events In this privacy policy, if we refer to:
+    <ul>
+      <li><span style="font-weight: bold">"Website,"</span> we are referring to any website of ours that references or links to this policy</li>
+      <li><span style="font-weight: bold">"Services,"</span> we are referring to our Website, and other related services, including any sales, marketing, or events</li>
+    </ul>
+  </div>
+  <div class="faq-para">
+    The purpose of this privacy policy is to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have in relation to it. If there are any terms in this privacy policy that you do not agree with, please discontinue use of our Services immediately.
+  </div>
+  <div class="faq-para" style="font-weight: bold">
+    Please read this privacy policy carefully, as it will help you understand what we do with the information that we collect.
+  </div>
+
+<!--  Table of Contents-->
+  <div class="faq-sub-title">
+    TABLE OF CONTENTS
+  </div>
+  <div class="faq-para">
+    <ol>
+      <li><a [routerLink] = "'.'"  [fragment]="'1'">WHAT INFORMATION DO WE COLLECT?</a></li>
+      <li><a [routerLink] = "'.'"  [fragment]="'2'">HOW DO WE USE YOUR INFORMATION?</a></li>
+      <li><a href="#">WILL YOUR INFORMATION BE SHARED WITH ANYONE?</a></li>
+      <li><a href="#">WHO WILL YOUR INFORMATION BE SHARED WITH?</a></li>
+      <li><a href="#">DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</a></li>
+      <li><a href="#">HOW DO WE HANDLE YOUR SOCIAL LOGINS?</a></li>
+      <li><a href="#">IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?</a></li>
+      <li><a href="#">HOW LONG DO WE KEEP YOUR INFORMATION?</a></li>
+      <li><a href="#">HOW DO WE KEEP YOUR INFORMATION SAFE?</a></li>
+      <li><a href="#">DO WE COLLECT INFORMATION FROM MINORS?</a></li>
+      <li><a href="#">WHAT ARE YOUR PRIVACY RIGHTS?</a></li>
+      <li><a href="#">CONTROLS FOR DO-NOT-TRACK FEATURES</a></li>
+      <li><a href="#">DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</a></li>
+      <li><a href="#">DO WE MAKE UPDATES TO THIS NOTICE?</a></li>
+      <li><a href="#">HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a></li>
+      <li><a href="#">HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</a></li>
+    </ol>
+  </div>
+<!--  End of TOC-->
+<!--1-->
+  <div class="faq-sub-title" [attr.id]="'1'">
+    1. WHAT INFORMATION DO WE COLLECT?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Personal information you disclose to us</span>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span> &nbsp; We collect personal information that you provide to us.
+  </div>
+  <div class="faq-para">
+    We collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and services when you participate in activities on the Website or otherwise when you contact us.
+  </div>
+  <div class="faq-para">
+    The personal information that we collect depends on the context of your interactions with us and the Website, the choices you make and the products and features you use. The personal information we collect may include the following:
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Personal Information Provided by You</span> . We collect names; email addresses; usernames; passwords; billing addresses; and other similar information.
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Payment Data.</span> We may collect data necessary to process your payment if you make purchases, such as your payment instrument number (such as a credit card number), and the security code associated with your payment instrument. All payment data is stored by Stripe. You may find their privacy policy link(s) here:
+    <a href="http://www.stripe.com/privacy">http://www.stripe.com/privacy.</a>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Social Media Login Data.</span>We may provide you with the option to register with us using your existing social media account details, like your Facebook, Google or other social media account. If you choose to register in this way, we will collect the information described in the section called
+    "<a [routerLink] = "'.'"  [fragment]="'2'">HOW DO WE HANDLE YOUR SOCIAL LOGINS?</a>" below.
+  </div>
+  <div class="faq-para">
+    All personal information that you provide to us must be true, complete and accurate, and you must notify us of any changes to such personal information.
+  </div>
+
+<!--  2-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    2. HOW DO WE USE YOUR INFORMATION?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span> &nbsp;
+    We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.
+  </div>
+  <div class="faq-para">
+    We use personal information collected via our Website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below.
+  </div>
+
+  <div class="faq-para">
+    We use the information we collect or receive:
+    <ul>
+      <li>
+        <span style="font-weight: bold">To facilitate account creation and login process.</span>If you choose to link your account with us to a third-party account (such as your Google or Facebook account), we use the information you allowed us to collect from those third parties to facilitate account creation and login process for the performance of the contract. See the section below headed "HOW DO WE HANDLE YOUR SOCIAL LOGINS?" for further information.
+      </li>
+      <li>
+        <span style="font-weight: bold">To post testimonials.</span> We post testimonials on our Website that may contain personal information. Prior to posting a testimonial, we will obtain your consent to use your name and the content of the testimonial. If you wish to update or delete your testimonial, please contact us at admin@tutetory.com and be sure to include your name, testimonial location, and contact information.
+      </li>
+      <li>
+        <span style="font-weight: bold">Request feedback.</span> We may use your information to request feedback and to contact you about your use of our Website
+      </li>
+      <li>
+        <span style="font-weight: bold">To enable user-to-user communications.</span> We may use your information in order to enable user-to-user communications with each user's consent.
+      </li>
+      <li>
+        <span style="font-weight: bold">To manage user accounts.</span> We may use your information for the purposes of managing our account and keeping it in working order.
+      </li>
+      <li>
+        <span style="font-weight: bold">To send administrative information to you.</span> We may use your personal information to send you new feature information and/or information about changes to our terms, conditions, and policies.
+      </li>
+      <li>
+        <span style="font-weight: bold">To protect our Services.</span> We may use your information as part of our efforts to keep our Website safe and secure (for example, for fraud monitoring and prevention).
+      </li>
+      <li>
+        <span style="font-weight: bold">To enforce our terms, conditions and policies for business purposes, to comply with legal and regulatory requirements or in connection with our contract.</span>
+      </li>
+      <li>
+        <span style="font-weight: bold">To respond to legal requests and prevent harm.</span> If we receive a subpoena or other legal request, we may need to inspect the data we hold to determine how to respond
+      </li>
+      <li>
+        <span style="font-weight: bold">Fulfill and manage your orders.</span> We may use your information to fulfill and manage your orders, payments made through the Website.
+      </li>
+      <li>
+        <span style="font-weight: bold">To deliver and facilitate the delivery of services to the user.</span> We may use your information to provide you with the requested service.
+      </li>
+      <li>
+        <span style="font-weight: bold">To respond to user inquiries/offer support to users.</span> We may use your information to respond to your inquiries and solve any potential issues you might have with the use of our Services.
+      </li>
+      <li>
+        <span style="font-weight: bold">To send you marketing and promotional communications.</span> We and/or our third-party marketing partners may use the personal information you send to us for our marketing purposes if this is in accordance with your marketing preferences. For example, when expressing an interest in obtaining information about us or our Website, subscribing to marketing or otherwise contacting us, we will collect personal information from you. You can opt out of our marketing emails at any time (see the "WHAT ARE YOUR PRIVACY RIGHTS?" below).
+      </li>
+      <li>
+        <span style="font-weight: bold">For other business purposes.</span> We may use your information for other business purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and evaluating and improving our Website, products, marketing and your experience. We may use and store this information in aggregated and anonymized form so that it is not associated with individual end-users and does not include personal information.
+      </li>
+    </ul>
+  </div>
+
+<!--  3-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations
+  </div>
+  <div class="faq-para">
+    We may process or share your data that we hold based on the following legal basis:
+    <ul>
+      <li><span style="font-weight: bold">Consent:</span>We may process your data if you have given us specific consent to use your personal information for a specific purpose.</li>
+      <li><span style="font-weight: bold">Legitimate Interests:</span>We may process your data when it is reasonably necessary to achieve our legitimate business interests</li>
+      <li><span style="font-weight: bold">Performance of a Contract:</span>Where we have entered into a contract with you, we may process your personal information to fulfill the terms of our contract.</li>
+      <li><span style="font-weight: bold">Legal Obligations:</span>We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal processes, such as in response to a court order or a subpoena (including in response to public authorities to meet national security or law enforcement requirements).</li>
+      <li><span style="font-weight: bold">Vital Interests:</span>We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved. More specifically, we may need to process your data or share your personal information in the following situations:</li>
+      <li><span style="font-weight: bold">Business Transfers:</span>We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+      <li><span style="font-weight: bold">Vendors, Consultants and Other Third-Party Service Providers:</span>We may share your data with third-party vendors, service providers, contractors or agents who perform services for us or on our behalf and require access to such information to do that work. Examples include payment processing, data analysis, email delivery, hosting services, customer service and marketing efforts. We may allow selected third parties to use tracking technology on the Website, which will enable them to collect data on our behalf about how you interact with our Website over time. This information may be used to, among other things, analyze and track data, determine the popularity of certain content, pages or features, and better understand online activity. Unless described in this notice, we do not share, sell, rent or trade any of your information with third parties for their promotional purposes. We have contracts in place with our data processors, which are designed to help safeguard your personal information. This means that they cannot do anything with your personal information unless we have instructed them to do it. They will also not share your personal information with any organization apart from us. They also commit to protecting the data they hold on our behalf and to retaining it for the period we instruct.</li>
+    </ul>
+  </div>
+<!--  4-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    4. WHO WILL YOUR INFORMATION BE SHARED WITH?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We only share information with the following categories of third parties.
+  </div>
+  <div class="faq-para">
+    We only share and disclose your information with the following categories of third parties. If we have processed your data based on your consent and you wish to revoke your consent, please contact us using the contact details provided in the section below titled "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?".
+    <ul>
+      <li>Website Hosting Service Providers</li>
+      <li>Social Networks</li>
+      <li>Sales & Marketing Tools</li>
+      <li>Payment Processors</li>
+      <li>Cloud Computing Services</li>
+    </ul>
+  </div>
+  <!--  5-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We may use cookies and other tracking technologies to collect and store your information
+  </div>
+  <div class="faq-para">
+    We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Policy.
+  </div>
+  <!--  6-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    If you choose to register or log in to our services using a social media account, we may have access to certain information about you.
+  </div>
+  <div class="faq-para">
+    Our Website offers you the ability to register and log in using your third-party social media account details (like your Facebook or Google logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, profile picture as well as other information you choose to make public on such social media platform.
+  </div>
+  <div class="faq-para">
+    We will use the information we receive only for the purposes that are described in this privacy policy or that are otherwise made clear to you on the relevant Website. Please note that we do not control, and are not responsible for, other uses of your personal information by your third-party social media provider. We recommend that you review their privacy policy to understand how they collect, use and share your personal information, and how you can set your privacy preferences on their sites and apps.
+  </div>
+  <!--  7-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    7. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We may transfer, store, and process your information in countries other than your own.
+  </div>
+  <div class="faq-para">
+    Our servers are located in the United States. If you are accessing our Website from outside the United States, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information (see "WILL YOUR INFORMATION BE SHARED WITH ANYONE?" above), in the United States, and other countries.
+  </div>
+  <div class="faq-para">
+    If you are a resident in the European Economic Area (EEA) or United Kingdom (UK), then these countries may not necessarily have data protection laws or other similar laws as comprehensive as those in your country. We will however take all necessary measures to protect your personal information in accordance with this privacy policy and applicable law.
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">
+      European Commission's Standard Contractual Clauses:
+    </span>
+  </div>
+  <div class="faq-para">
+    We have implemented measures to protect your personal information, including by using the European Commission's Standard Contractual Clauses for transfers of personal information between our group companies and between us and our third-party providers. These clauses require all recipients to protect all personal information that they process originating from the EEA or UK in accordance with European data protection laws and regulations. Our Standard Contractual Clauses can be provided upon request. We have implemented similar appropriate safeguards with our third-party service providers and partners and further details can be provided upon request.
+  </div>
+  <!--  8-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    8. HOW LONG DO WE KEEP YOUR INFORMATION?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We keep your information for as long as necessary to fulfill the purposes outlined in this privacy policy unless otherwise required by law.
+  </div>
+  <div class="faq-para">
+    We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy policy unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). No purpose in this notice will require us to keep your personal information for longer than the period of time in which users have an account with us.
+  </div>
+  <div class="faq-para">
+    When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
+  </div>
+  <!--  9-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    9. HOW DO WE KEEP YOUR INFORMATION SAFE?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We aim to protect your personal information through a system of organizational and technical security measures.
+  </div>
+  <div class="faq-para">
+    We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security, and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, the transmission of personal information to and from our Website is at your own risk. You should only access the Website within a secure environment.
+  </div>
+  <!--  10-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    10. DO WE COLLECT INFORMATION FROM MINORS?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    We do not knowingly collect data from or market to children under 13 years of age.
+  </div>
+  <div class="faq-para">
+    We do not knowingly solicit data from or market to children under 13 years of age. By using the Website, you represent that you are at least 13 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the Website. If we learn that personal information from users less than 13 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 13, please contact us at admin@tutetory.com.
+  </div>
+  <!--  11-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    11. WHAT ARE YOUR PRIVACY RIGHTS?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span>
+    In some regions, such as the European Economic Area (EEA), United Kingdom (UK) and Australia, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time.
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">For EEA and UK Citizens:</span>
+    <br>
+    In some regions (like the EEA and UK), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if applicable, to data portability. In certain circumstances, you may also have the right to object to the processing of your personal information. To make such a request, please use the contact details provided below. We will consider and act upon any request in accordance with applicable data protection laws.
+  </div>
+  <div class="faq-para">
+    If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. Please note however that this will not affect the lawfulness of the processing before its withdrawal, nor will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.
+    If you are a resident in the EEA or UK and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: <br>
+    <a href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm">https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm</a>
+  </div>
+  <div class="faq-para">
+    If you are a resident in Switzerland, the contact details for the data protection authorities are available here:
+    <a href="https://www.edoeb.admin.ch/edoeb/en/home.html">https://www.edoeb.admin.ch/edoeb/en/home.html.</a>
+  </div>
+  <div class="faq-para">
+    If you have questions or comments about your privacy rights, you may email us at
+    <a href="admin@tutetory.com">admin@tutetory.com</a>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">For Australian Citizens:</span>
+    <br>
+    If you are concerned that we have not complied with your legal rights or applicable privacy laws, you may bring a complaint internally through our complaints process or you may decide to make a formal complaint with the Office of the Australian Information
+    Commissioner (<a href="www.oaic.gov.au">www.oaic.gov.au</a>) (which is the regulator responsible for privacy in Australia).
+  </div>
+  <div class="faq-para">
+    We will deal with complaints as follows:
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Step 1: let us know</span>
+    <ul>
+      <li>If you would like to make a complaint, you should let us know by contacting our Privacy Officer (see section 15 for contact details).</li>
+    </ul>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Step 2: investigation of the complaint</span>
+    <ul>
+      <li>Your complaint will be investigated by us.</li>
+      <li>A response to your complaint will be provided in writing within a reasonable period.</li>
+    </ul>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Step 3: contact OAIC</span>
+    <ul>
+      <li>
+        We expect our procedures will deal fairly and promptly with your complaint. However, if you remain dissatisfied, you can also contact the Office of the Australian Information Commissioner as follows:
+        <br>
+        Office of the Australian Information Commissioner (OAIC)
+        <br>
+        Complaints must be made in writing.
+        <br>
+        1300 363 992
+        <br>
+        <span style="font-weight: bold">Director of Compliance</span>
+        <span style="font-weight: bold">Office of the Australian</span>
+        <span style="font-weight: bold">Information Commissioner</span>
+        <span style="font-weight: bold">GPO Box 5218</span>
+        <span style="font-weight: bold">Sydney NSW 2001</span>
+      </li>
+    </ul>
   </div>
   <div class="faq-sub-title">
-    Information we collect
+    Account Information
   </div>
   <div class="faq-para">
-    We collect Information through our Website to provide better services and results to our Users. Information is collected by the details provided by User and the data collected by the usage of the services. Details provided by User shall include Personal Information like name, address (residential or email), contact number, and other such data which is required for the efficient use of the services provided by the Company. In general, the user can browse the Website without revealing any Personal Information. Although once Personal Information is provided, the identity of the User is not anonymous anymore. Where possible, we indicate which fields are required and which fields are optional. Our User always has the option of not providing Information by choosing not to use a particular service or feature. Other Information collected includes device information i.e. from which device is the services being used. This shall include the hardware model, operating system, unique identification number associated with the device etc.
+    If you would at any time like to review or change the information in your account or terminate your account, you can:
+    <ul>
+      <li>Log in to your account settings and update your user account</li>
+      <li>Contact us using the contact information provided.</li>
+    </ul>
+  </div>
+  <div class="faq-para">
+    Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Use and/or comply with applicable legal requirements.
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Cookies and similar technologies:</span> Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Website. To opt-out of interest-based advertising by advertisers on our Website visit <a href="http://www.aboutads.info/choices/">http://www.aboutads.info/choices/.</a>
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">Opting out of email marketing:</span> You can unsubscribe from our marketing email list at any time by clicking on the unsubscribe link in the emails that we send or by contacting us using the details provided below. You will then be removed from the marketing email list — however, we may still communicate with you, for example, to send you service-related emails that are necessary for the administration and use of your account, to respond to service requests, or for other non-marketing purposes. To otherwise opt-out, you may:
+    <ul>
+      <li>Contact us using the contact information provided.</li>
+    </ul>
+  </div>
+  <!--  12-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    12. CONTROLS FOR DO-NOT-TRACK FEATURES
+  </div>
+  <div class="faq-para">
+    Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy policy.
+  </div>
+  <!--  13-->
+  <div class="faq-sub-title" [attr.id]="'2'">
+    13. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+  </div>
+  <div class="faq-para">
+    <span style="font-weight: bold">In Short:</span> Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.
+  </div>
+  <div class="faq-para">
+    California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year. If you are a California resident and would like to make such a request, please submit your request in writing to us using the contact information provided below.
+  </div>
+  <div class="faq-para">
+    If you are under 18 years of age, reside in California, and have a registered account with the Website, you have the right to request the removal of unwanted data that you publicly post on the Website. To request the removal of such data, please contact us using the contact information provided below, and include the email address associated with your account and a statement that you reside in California. We will make sure the data is not publicly displayed on the Website, but please be aware that the data may not be completely or comprehensively removed from all our systems (e.g. backups, etc.).
   </div>
   <div class="faq-sub-title">
-    Usage of the collected Information
+    CCPA Privacy Notice
   </div>
   <div class="faq-para">
-    The Information collected is constantly used to provide personally relevant features and improve the services for our Users. With such pool of information, it is easier for us to understand the current trends in the market, according to which we cater our services. Such information helps us to come with content that provides a better User experience, thereby creating better satisfaction and increasing the user base of our Website. User discretion is asked before using such information for any other purposes than those set out in this Policy. Although the information which is shared by the User themselves through us shall not be considered as making private information public.
+    The California Code of Regulations defines a "resident" as:
+    <ol>
+      <li>every individual who is in the State of California for other than a temporary or transitory purpose and</li>
+      <li>every individual who is domiciled in the State of California who is outside the State of California for a temporary or transitory purpose</li>
+    </ol>
+  </div>
+  <div class="faq-para">
+    All other individuals are defined as "non-residents."
+  </div>
+  <div class="faq-para">
+    If this definition of "resident" applies to you, we must adhere to certain rights and obligations regarding your personal information.
   </div>
   <div class="faq-sub-title">
-    Sharing of Personal Information
+    What categories of personal information do we collect?
   </div>
   <div class="faq-para">
-    Disclosure may be necessary to provide Users access to our Services, to comply with our legal obligations, to enforce our User Agreement, to prevent, detect, mitigate, and investigate fraudulent or illegal activities related to our Services. Such Personal Information, when shared with third parties, shall be subject to strict confidentiality agreements
+    We have collected the following categories of personal information in the past twelve (12) months:
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Examples</th>
+        <th>Collected</th>
+      </tr>
+      <tr>
+        <td>A. Identifiers</td>
+        <td>Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address and account name</td>
+        <td>YES</td>
+      </tr>
+      <tr>
+        <td>B. Personal information categories listed in the California Customer Records statute</td>
+        <td>Name, contact information, education, employment, employment history and financial information</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>C. Protected classification characteristics under California or federal law</td>
+        <td>Gender and date of birth</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>D. Commercial information</td>
+        <td>Transaction information, purchase history, financial details and payment information</td>
+        <td>YES</td>
+      </tr>
+      <tr>
+        <td>E. Biometric information</td>
+        <td>Fingerprints and voiceprints</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>F. Internet or other similar network activity</td>
+        <td>Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems and advertisements</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>G. Geolocation data</td>
+        <td>Device location</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>H. Audio, electronic, visual, thermal, olfactory, or similar information</td>
+        <td>Images and audio, video or call recordings created in connection with our business activities</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>I. Professional or employment-related information</td>
+        <td>Business contact details in order to provide you our services at a business level, job title as well as work history and professional qualifications if you apply as a tutor on our platform.</td>
+        <td>YES</td>
+      </tr>
+      <tr>
+        <td>J. Education Information</td>
+        <td>Student records and directory information</td>
+        <td>NO</td>
+      </tr>
+      <tr>
+        <td>K. Inferences drawn from other personal information</td>
+        <td>Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics</td>
+        <td>NO</td>
+      </tr>
+    </table>
   </div>
   <div class="faq-para">
-    We may disclose personal information if required to do so by law or in the good faith belief that such disclosure is reasonably necessary to respond to subpoenas, court orders, or other legal process. We may disclose Personal Information to law enforcement offices, third party rights owners, or others in the good faith belief that such disclosure is reasonably necessary to enforce our Terms or Privacy Policy. We and our affiliates will share / sell some or all of your personal information with another business entity should we (or our assets) plan to merge with, or be acquired by that business entity, or re-organization, amalgamation, restructuring of business. Should such a transaction occur that other business entity (or the new combined entity) will be required to follow this privacy policy with respect to your Personal Information.
+    We may also collect other personal information outside of these categories instances where you interact with us in-person, online, or by phone or mail in the context of:
+    <ul>
+      <li>Receiving help through our customer support channels;</li>
+      <li>Participation in customer surveys or contests; and</li>
+      <li>Facilitation in the delivery of our Services and to respond to your inquiries.</li>
+    </ul>
   </div>
   <div class="faq-sub-title">
-    Securing Information
+    How do we use and share your personal information?
   </div>
   <div class="faq-para">
-    In order to secure the information provided to us by our users, we review the processing and storage practices along with the information collected to guard against unauthorized access into the data collected in our systems. Furthermore, user information is protected by subjecting our Employees and Agents who process such information to strict confidentiality agreements, where if they fail to comply with it, such non compliance shall lead to heavy penalties or legal proceedings, depending upon the gravity of the situation.
+    More information about our data collection and sharing practices can be found in this privacy policy.
+  </div>
+  <div class="faq-para">
+    You may contact us by email at <a href="admin@tutetory.com">admin@tutetory.com</a>, or by referring to the contact details at the bottom of this document.
+  </div>
+  <div class="faq-para">
+    If you are using an authorized agent to exercise your right to opt-out we may deny a request if the authorized agent does not submit proof that they have been validly authorized to act on your behalf.
   </div>
   <div class="faq-sub-title">
-    Choice/Opt-Out
+    Will your information be shared with anyone else?
   </div>
-  <div class="faq-para">
-    We provide all our users with the opportunity to opt-out of receiving promotional, marketing-related communications from us in general, after setting up an account. User may remove their personal information by unsubscribing or deleting their account from our Website.
-  </div>
-  <div class="faq-sub-title">
-    Consent
-  </div>
-  <div class="faq-para">
-    By using the Website and by providing personal information, the user consents to the collection and use of the information disclosed by them in accordance with this Privacy Policy, including but not limited to their consent for sharing their information as per this privacy policy. Our Website offers publicly accessible blogs or community forums. You should be aware that any information you provide in these areas may be read, collected, and used by others who access them.
-  </div>
-  <div class="faq-para">
-    This document is an electronic record in terms of existing and applicable Information Technology laws and the amended provisions thereto pertaining to electronic records in various allied statutes as amended pursuant to the Information Technology laws. This electronic record has been generated by a computer system and does not require any authentication. From time to time, the Company may change this internet privacy policy. The effective date of this policy, as stated below, indicates the last time this policy was revised or materially changed. Checking the effective date below allows you to determine whether there have been changes since the last time you reviewed the policy. Effective date of this policy: This policy was last updated on
-  </div>
+
 </div>
 
 <section class="s-footer">
@@ -105,7 +538,6 @@
       <!-- End TrustBox widget -->
       <div class="copy-right">© 2021 . All rights reserved</div>
     </div>
-
 
   </div>
 </section>

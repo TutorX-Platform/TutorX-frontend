@@ -63,4 +63,17 @@
     flex-grow: 1;
     margin: 0px 0px;
   }
-}
+
+  li {
+    margin-top: 16px;
+  }
+
+  ul{
+    list-style: cicle inside url('../../assets/icons/point.svg');
+  }
+
+  table, th, td {
+    border:1px solid black;
+    border-collapse: collapse;
+    padding: 2px;
+  }}

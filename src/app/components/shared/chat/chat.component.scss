@@ -1,0 +1,50 @@
+//#container {
+//  position: absolute;
+//  top: 0;
+//  right: 0;
+//  left: 0;
+//  bottom: 0;
+//}
+//
+//#top_div {
+//  position: absolute;
+//  top: 0;
+//  right: 0;
+//  left: 0;
+//  bottom: 10%;
+//  background-color:#009900;
+//  text-align:center;
+//}
+//
+//#bottom_div {
+//  position: absolute;
+//  top: 90%;
+//  right: 0;
+//  left: 0;
+//  bottom: 0;
+//  background-color:#990000;
+//  text-align:center;
+//  color:#FFFFFF;
+//}
+
+//section {
+//  display: flex;
+//  flex-flow: column;
+//  height: 100vh;
+//}
+//
+//header {
+//  background: tomato;
+//  /* no flex rules, it will grow */
+//}
+//
+//div {
+//  flex: 1;  /* 1 and it will fill whole space left if no flex value are set to other children*/
+//  background: gold;
+//  overflow: auto;
+//}
+//
+//footer {
+//  background: lightgreen;
+//  min-height: 60px;  /* min-height has its purpose :) , unless you meant height*/
+//}

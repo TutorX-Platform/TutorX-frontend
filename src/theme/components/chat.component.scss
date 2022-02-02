@@ -12,7 +12,8 @@
     text-decoration: underline;
   }
   .chat{
-
+    display: flex;
+    flex-flow: column;
     input[type="file"]{
       display: none;
     }
@@ -24,34 +25,40 @@
 
     //min-height: 89.7vh;
     background: #F6F7FB;
-    .header-wrap{
-      padding: 0px 32px 16px 32px;
-      .chat-title{
-        font: $heading-desktop-h4-light;
+    .header-section{
+      .header-wrap{
+        padding: 0px 32px 16px 32px;
+        .chat-title{
+          font: $heading-desktop-h4-light;
+        }
+        .chat-subtitle{
+          font: $body-small-default;
+          color: #686D74;
+        }
       }
-      .chat-subtitle{
-        font: $body-small-default;
-        color: #686D74;
+      .divider-chat-header{
+        border: 1px solid #BDC0C4;
+        flex: none;
+        flex-grow: 0;
+        margin: 0px 16px 0px 16px;
       }
-    }
-    .divider-chat-header{
-      border: 1px solid #BDC0C4;
-      flex: none;
-      flex-grow: 0;
-      margin: 0px 16px 0px 16px;
+
     }
     .chat-main-container{
       width: 100%;
+      flex: 1;
       .chat-container{
         width: 75%;
-        height: 72.5vh;
+        height: 72vh;
+        display: flex;
+        flex-flow: column;
         padding: 24px 10px 0px 24px;
         .chat-message-area{
-          height: 50vh;
-          overflow-y: auto;
+          flex: 1;
+          overflow: auto;
         }
         .typing-box{
-          position: relative;
+          min-height: 100px;
           margin-bottom: 24px;
           width: 100%;
           background: white;
@@ -315,7 +322,7 @@
   .chat-mobile{
     display: flex;
     flex-flow: column;
-    height: 100vh !important;
+    height: 100%;
 
     .toolbar-container-mobile {
       color: white;
