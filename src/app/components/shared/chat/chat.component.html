@@ -329,7 +329,7 @@
 <!--            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>-->
 <!--            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>-->
 
-            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [value]="deadLine" placeholder="Choose a date & time"
+            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [min]="date" [value]="deadLine" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll">
             <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
           </mat-form-field>
@@ -829,7 +829,7 @@
 <!--            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>-->
 <!--            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>-->
 
-            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [value]="deadLine" placeholder="Choose a date & time"
+            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [value]="deadLine" [min]="date" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll">
             <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
           </mat-form-field>

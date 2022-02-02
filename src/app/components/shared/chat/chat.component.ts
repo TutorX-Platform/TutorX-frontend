@@ -110,6 +110,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   isPartnerOnline = false;
   enableWriteReview = false;
 
+  date!: Date;
+
   constructor(private chatService: ChatServiceService,
               private utilService: UtilService,
               private activatedRoute: ActivatedRoute,
@@ -130,6 +132,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   ngOnInit(): void {
+    this.date = new Date();
     this.currentDate = new Date();
     this.sentMessageCount = 0;
     this.activatedRoute.paramMap.subscribe(
