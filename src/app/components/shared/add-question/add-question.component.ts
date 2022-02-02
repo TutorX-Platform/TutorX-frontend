@@ -128,6 +128,7 @@ export class AddQuestionComponent implements OnInit {
       map((value: string) => this._subfilter(value))
     );
 
+
     if (this.data !== null) {
       // @ts-ignore
       this.role = this.data.role;
@@ -144,6 +145,8 @@ export class AddQuestionComponent implements OnInit {
   }
 
   patchValues() {
+    // @ts-ignore
+    console.log(this.data.subjects);
     // @ts-ignore
     this.subjects = this.data.subjects;
     // @ts-ignore

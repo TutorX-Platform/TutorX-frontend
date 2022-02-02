@@ -814,10 +814,6 @@
               (click)="onShowDetails(1)">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <div class="toolbar-q-container" fxLayout="column" fxLayoutAlign="center start" style="cursor: pointer"
-           (click)="onDetailedView(true)">
-        <div class="q-title-toolbar">Done</div>
-      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 <!--  <div class="chat-main-container">-->
@@ -827,7 +823,7 @@
         <div style="width: 100%; overflow: hidden">
           <div class="label">Due date</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"
+            <input matInput (dateChange)="onDeadlineChange(dueDateTimeControll)" [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll">
             <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
