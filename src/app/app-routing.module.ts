@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {ExtraOptions, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from './components/admin/admin.component';
 import {DummyComponent} from "./components/test/dummy/dummy.component";
 import {TestChatComponent} from "./components/test/test-chat/test-chat.component";
@@ -30,11 +30,7 @@ import {TermsNConditionsComponent} from "./components/home/terms-n-conditions/te
 import {FaqComponent} from "./components/home/faq/faq.component";
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['home']);
-const routerOptions: ExtraOptions = {
-  scrollPositionRestoration: 'enabled',
-  anchorScrolling: 'enabled',
-  scrollOffset: [0, 64],
-};
+
 const routes: Routes = [
   {path: 'home', component: BodyComponent},
   {path: 'payment', component: CardDetailsComponent},
@@ -140,7 +136,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,routerOptions)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

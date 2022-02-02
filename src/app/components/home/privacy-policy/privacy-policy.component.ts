@@ -98,9 +98,4 @@ export class PrivacyPolicyComponent implements OnInit {
     }
   }
 
-  // @ts-ignore
-  scrollToElement($element): void {
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-  }
-
 }
