@@ -99,6 +99,9 @@
                        formControlName="dueDateTime">
                 <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+
+<!--                <input matInput [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [min]="date" placeholder="Choose a date & time" formControlName="dueDateTime">-->
+<!--                <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>-->
                 <mat-error
                   *ngIf="addQuestionForm.get('dueDateTime')?.touched && addQuestionForm.get('dueDateTime')?.hasError('required')"
                   class="">

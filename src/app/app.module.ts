@@ -97,6 +97,7 @@ import { ForgetPasswordComponent } from './components/auth/forget-password/forge
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { DndDirective } from './directives/dnd.directive';
 import { ProgressComponent } from './components/shared/progress/progress.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 
 
 @NgModule({
@@ -185,6 +186,8 @@ import { ProgressComponent } from './components/shared/progress/progress.compone
     MatDatepickerModule,
     AngularFireMessagingModule,
     MatProgressBarModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     NgxStripeModule.forRoot('pk_live_51JeihABuTI5kghVldAUC7iJPhhDdwonmbFqw2jHYG2bZyynUarkzrwiD3u6oLRTwKFhsrNz6ebehMdIw34YbOMKl006Qhe9crZ')
   ],
   providers: [AuthService, AngularFireAuthGuard, NotificationService, DatePipe],

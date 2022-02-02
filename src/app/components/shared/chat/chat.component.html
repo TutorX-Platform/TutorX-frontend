@@ -326,11 +326,15 @@
         <img src="../../../../assets/icons/flag.svg">
         <div style="width: 100%; overflow: hidden">
           <mat-form-field appearance="outline" class="my-form-field">
-            <input (dateChange)="onDeadlineChange(dueDateTimeControll)" matInput [ngxMatDatetimePicker]="picker"
-                   [value]="deadLine" placeholder="Choose a date & time"
-                   [formControl]="dueDateTimeControll" readonly>
-            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+<!--            <input (dateChange)="onDeadlineChange(dueDateTimeControll)" matInput [ngxMatDatetimePicker]="picker"-->
+<!--                   [value]="deadLine" placeholder="Choose a date & time"-->
+<!--                   [formControl]="dueDateTimeControll" readonly>-->
+<!--            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>-->
+<!--            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>-->
+
+            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [value]="deadLine" placeholder="Choose a date & time"
+                   [formControl]="dueDateTimeControll">
+            <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
           </mat-form-field>
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">
@@ -823,10 +827,14 @@
         <div style="width: 100%; overflow: hidden">
           <div class="label">Due date</div>
           <mat-form-field appearance="outline" class="my-form-field">
-            <input matInput (dateChange)="onDeadlineChange(dueDateTimeControll)" [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"
+<!--            <input matInput (dateChange)="onDeadlineChange(dueDateTimeControll)" [ngxMatDatetimePicker]="picker" [value]="dueDateTime" placeholder="Choose a date & time"-->
+<!--                   [formControl]="dueDateTimeControll">-->
+<!--            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>-->
+<!--            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>-->
+
+            <input matInput (dateTimeChange)="onDeadlineChange(dueDateTimeControll)" [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" [value]="deadLine" placeholder="Choose a date & time"
                    [formControl]="dueDateTimeControll">
-            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+            <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
           </mat-form-field>
           <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
             <img src="../../../../assets/icons/info.svg">

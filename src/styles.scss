@@ -4,9 +4,11 @@
 
 @import '~animate.css/animate.min';
 
-
 @import 'theme/variables.scss';
 @import 'theme/component.collective.scss';
+
+@import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min";
+
 
 /* For use in src/lib/core/theming/_palette.scss */
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
