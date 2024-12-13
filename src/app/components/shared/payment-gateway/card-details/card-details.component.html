@@ -1,0 +1,26 @@
+
+<div class="payment-page">
+  <img [src]="logo" class="payment-page__logo logo">
+  <div class="payment-card" [ngClass.gt-sm]="'input-card'" [ngClass.lt-md]="{'input-card input-card--mobile': true}">
+    <div class="payment-card__heading">
+      <div class="brd-caption">TOTAL PAYMENT</div>
+      <div class="brd-heading">${{questionService.question.fee}}</div>
+      <div class="heading">
+<!--       -->
+      </div>
+    </div>
+    <div class="payment-card__body" >
+      <div class="payment-card__element" id="card-element"></div>
+    </div>
+    <div class="payment-card__footer ">
+
+      <button class="c-button-full m-b-12" (click)="payNow()" mat-flat-button color="primary" [ngClass.gt-sm]="'buttonz buttonz--primary'" [ngClass.lt-md]="{'buttonz-mobile buttonz-mobile--primary': true}">
+        Pay ${{questionService.question.fee}}
+      </button>
+      <button class="c-button-full" (click)="onCancel()" mat-button [ngClass.gt-sm]="'buttonz'" [ngClass.lt-md]="{'buttonz-mobile': true}">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+

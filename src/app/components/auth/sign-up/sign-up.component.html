@@ -1,0 +1,71 @@
+<div class="auth" fxLayout="column">
+  <div mat-dialog-title>
+    <div class="title">Signup</div>
+    <div class="note">And enjoy the most convenient way of Solve your homework</div>
+  </div>
+  <mat-dialog-content style="overflow-y: auto !important;">
+    <div class="signup-button-container" fxLayout="column" fxLayoutGap="16px">
+      <div class="button-container">
+        <img src="../../../../assets/icons/google.svg" alt="">
+        <div class="button-text" (click)="onGoogleAuth()">Signup with Google</div>
+      </div>
+      <div class="button-container">
+        <img src="../../../../assets/icons/facebook.svg" alt="">
+        <div class="button-text" (click)="onFacebookAuth()">Signup with Facebook</div>
+      </div>
+    </div>
+    <div class="di"></div>
+    <form [formGroup]="signUpForm">
+      <div class="form" fxLayout="column">
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Full name</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input formControlName="fullName" matInput type="text" class="other">
+            <mat-error *ngIf="signUpForm.get('fullName')?.touched && signUpForm.get('fullName')?.hasError('required')"
+                       class="label">
+              {{validations.fullNameRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Email address</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input [pattern]="emailPattern" formControlName="email" matInput type="email" class="other">
+            <mat-error *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.hasError('required')"
+                       class="label">
+              {{validations.emailRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Password</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input formControlName="password" matInput type="password" class="other">
+            <mat-error *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.hasError('required')"
+                       class="label">
+              {{validations.passwordRequired}}
+            </mat-error>
+            <mat-error *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.hasError('minlength')"
+                       class="label">
+              {{validations.passwordLengthMinRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="confirmation" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+          <mat-checkbox (change)="onAgreement($event)" color="primary"></mat-checkbox>
+          <div>
+            By creating an account, you agree to the <a href="#">Free Membership Agreement</a> and <a href="#">Privacy
+            Policy</a>
+          </div>
+        </div>
+
+        <button mat-flat-button class="button-reg" [disabled]="!agreementDone" (click)="onSignUp()">
+          Register
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

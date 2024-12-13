@@ -1,0 +1,13 @@
+@mixin drop-down-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .drop-down{
+        font: $body-base-bold;
+        padding: 16px 24px 16px 24px;
+    }
+    
+}

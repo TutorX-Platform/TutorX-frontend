@@ -1,0 +1,78 @@
+<div class="manage-tutors">
+    <div class="page-title-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="page-title">Tutors Management</div>
+        <button mat-button class="add-tutor-button">Add New Tutor</button> 
+     </div>
+     <div class="divider"></div>
+
+     <div class="main-container" fxLayout="row">
+        <div class="request-container" fxLayout="column" fxLayoutGap="24px">
+            <div *ngFor="let num of numbers">
+                <div fxLayout="row" class="request-card" fxLayoutAlign="space-between center">
+                    <div fxLayout="row">
+                        <div fxLayout="column" fxLayoutAlign="start start">
+                            <img src="../../../../assets/images/profile.jpg" alt="Avatar" class="avatar">
+                        </div>
+                        <div class="info" fxLayout="column" fxLayoutAlign="start start">
+                            <div class="title">Daria Jamey</div>
+                            <div fxLayout="row wrap" fxLayoutAlign="start center" class="sub-title" fxLayoutGap="16px grid">
+                              <div class="rating" fxLayout="row">
+                                <mat-icon [ngClass]="rating >= 1 ? 'star star--selected' : 'star'">star</mat-icon>
+                                <mat-icon [ngClass]="rating >= 2 ? 'star star--selected' : 'star'">star</mat-icon>
+                                <mat-icon [ngClass]="rating >= 3 ? 'star star--selected' : 'star'">star</mat-icon>
+                                <mat-icon [ngClass]="rating >= 4 ? 'star star--selected' : 'star'">star</mat-icon>
+                                <mat-icon [ngClass]="rating >= 5 ? 'star star--selected' : 'star'">star</mat-icon>
+                              </div>  
+                              <div class="university" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px grid">
+                                <div>24 Taks Completions</div>
+                                <div>
+                                  <mat-icon class="dot">
+                                    fiber_manual_record
+                                  </mat-icon>
+                                </div>
+                                <div>English teacher,  University of Hamburg</div>
+                              </div>
+                            </div>  
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" style="margin-top: 24px;" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center start" fxLayoutGap.lt-md="8px">
+                              <div class="c-chip c-chip--subjects invert-false">Maths</div>   
+                              <div class="c-chip c-chip--subjects invert-false">Science</div>    
+                              <div class="c-chip c-chip--subjects invert-false">Computer Science</div>                            
+                            </div>                                                        
+                        </div> 
+                    </div>
+                    <div class="refund">
+                        <div class="title">Paid Amount</div>
+                        <div class="amount"> <span style="color: #57499B;">$</span> 3240.00</div>
+                    </div>                                         
+                </div>
+                
+            </div>
+        </div>
+        <div class="filter-container" fxLayout="column">
+            <div fxLayout="row" class="filter-title">Filters</div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" class="search-container">  
+                <mat-icon>search</mat-icon>              
+                <input matInput class="search" placeholder="Search">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
+            <div fxLayout="row" fxLayoutAlign="start center">        
+              <form [formGroup]="contactForm" class="form"> 
+                <select formControlName="country" class="select">
+                  <option [ngValue]="null" disabled>Select Filter</option>
+                  <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+                </select>
+              </form>
+            </div> 
+            <div fxLayout="row" fxLayoutAlign="start center" class="label">Tutor</div>
+            <div fxLayout="row" fxLayoutAlign="start center">        
+              <form [formGroup]="contactForm" class="form"> 
+                <select formControlName="country" class="select">
+                  <option [ngValue]="null" disabled>Select Filter</option>
+                  <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+                </select>
+              </form>
+            </div>        
+        </div>        
+    </div>
+
+</div>

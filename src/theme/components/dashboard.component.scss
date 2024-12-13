@@ -1,0 +1,160 @@
+@mixin dashboard-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .admin-dashboard{
+      min-height: 90vh;
+        .main-containery{
+            width: 100%;
+            .left-container{
+                width: 65%;
+                padding: 24px 24px;
+    
+                .top-bar{
+                    padding: 0px 16px;
+    
+                    .title{
+                        font: $body-caption-bold;   
+                        color: #5B6469; 
+                    }
+        
+                    .number{
+                        font: $heading-desktop-h4;
+                    }
+                } 
+                
+                .recent-chats{
+                    padding: 16px;
+    
+                    .title{
+                        font: $body-base-bold;
+                        color: #5B6469;
+                    }
+                    .view-all{                    
+                        align-items: center;
+                        padding: 8px 16px;
+                        font: $body-caption-bold;
+                        color: #57499B;
+                        cursor: pointer;
+                    }
+    
+                    .chat-info-box-container{
+                        margin-top: 12px;
+                        padding-left: 16px;
+    
+                        .chat-info-box{
+                            font: $body-base-medium;
+                            .avatar {
+                                vertical-align: middle;
+                                width: 32px;
+                                height: 32px;
+                                border-radius: 50%;
+                            }
+                            .icon{
+                                padding-right: 14px;
+                                font-size: 16px;
+                                color: #5B6469;
+                            }
+                            .chat-name{
+                                margin-left: 26px;
+                            }
+                            .but{
+                                display: flex !important;
+                                flex-direction: column;
+                                align-items: flex-start;
+                                padding: 8px 16px;
+                                font: $body-caption-bold !important;
+                                color: #FFFFFF;
+                                background: linear-gradient(95.86deg, #26B581 -0.82%, #2FAC7F 45.11%, #27A47E 92.84%);
+                                // box-shadow: 0px 22px 40px rgba(46, 163, 65, 0.35);
+                                border-radius: 4px;
+                            }
+                        }
+                        
+                    .divider{
+                        border: 1px solid #CBCFD1;
+                        // margin: 8px 0px;
+                        width: 100%;
+                    }
+                    }
+    
+                }
+            }
+        
+            .right-container{
+                width: 35%;
+                padding: 24px 0px !important;
+    
+                .top-bar{
+                    .title{
+                        font: $body-caption-bold;   
+                        color: #5B6469; 
+                    }
+        
+                    .number{
+                        font: $heading-desktop-h4;
+                    }
+                }
+    
+                .recent-payments{
+                    margin-top: 32px;
+                    width: 90%;
+                    .title{
+                        font: $body-base-medium;
+                    }
+    
+                    .payments{
+                        width: 100%;
+                        padding: 16px;
+                        background: #FFFFFF;
+                        border-radius: 8px;
+    
+                        .avatar {
+                            vertical-align: middle;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                        }
+    
+                        .details{
+                            // display: flex;
+                            // flex-direction: column;
+                            // align-items: flex-start;
+                            // padding: 0px;
+    
+                            // flex: none;
+                            // order: 1;
+                            // flex-grow: 0;
+                            // margin: 0px 23px;
+    
+                            .from{
+                                font: $body-base-default;
+                            }
+    
+                            .to{
+                                font: $body-caption-bold;
+                                color: #57499B;
+                            }
+                        }
+                        .amount{
+                            font: $body-caption-bold;                            
+                        }
+                    }
+                    
+                    .see-all{                    
+                        align-items: center;
+                        padding: 8px 16px;
+                        font: $body-caption-bold;
+                        color: #57499B;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}    

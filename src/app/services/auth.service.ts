@@ -1,0 +1,341 @@
+import {Injectable, NgZone} from '@angular/core';
+import {AngularFireAuth} from "@angular/fire/auth";
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Router} from "@angular/router";
+import {User} from "../models/user";
+import {UtilService} from "./util-service.service";
+import 'rxjs/add/operator/switchMap';
+import {Student} from "../models/student";
+import * as constants from '../models/constants';
+import * as sysMsg from '../models/system-messages';
+import * as firebase from 'firebase';
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MailService} from "./mail.service";
+import {StudentService} from "./student-service.service";
+import {ProgressDialogComponent} from "../components/shared/progress-dialog/progress-dialog.component";
+import {SignInComponent} from "../components/auth/sign-in/sign-in.component";
+import {SignUpComponent} from "../components/auth/sign-up/sign-up.component";
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  userData: any;
+  isStudentSet = false;
+  isLoggedIn = false;
+  student = {
+    visibleName: "",
+    email: "",
+    firstName: "",
+    isVerified: "",
+    lastName: "",
+    profileImage: "",
+    questions: [],
+    uniqueKey: "",
+    userId: "",
+    role: ""
+  };
+
+  constructor(public angularFirestoreService: AngularFirestore,
+              public angularFireAuth: AngularFireAuth,
+              public router: Router,
+              public utilService: UtilService,
+              private mailService: MailService,
+              private dialog: MatDialog,
+              private studentService: StudentService,
+              public ngZone: NgZone) {
+    this.angularFireAuth.authState.subscribe(user => {
+      if (user) {
+        // @ts-ignore
+        this.student.userId = user?.uid;
+        // @ts-ignore
+        this.student.email = user?.email;
+        // @ts-ignore
+        this.student.profileImage = user?.photoURL;
+        this.userData = user;
+        this.isLoggedIn = true;
+        localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(this.userData));
+        `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+        this.findUser(this.student.userId);
+      } else {
+        this.isLoggedIn = false;
+        localStorage.removeItem(constants.localStorageKeys.user);
+      }
+    });
+  }
+
+  googleAuth() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return this.oAuthLogin(provider).catch((err) => {
+      this.utilService.openDialog(sysMsg.signInTitles.signInFailed, err.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+    });
+  }
+
+  facebookAuth() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider).catch((err) => {
+      this.utilService.openDialog(sysMsg.signInTitles.signInFailed, err.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+
+    });
+  }
+
+  oAuthLogin(provider: any) {
+    return this.angularFireAuth.auth.signInWithPopup(provider).then((credentials => {
+      if (credentials.user) {
+        localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(credentials.user));
+        `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+        this.userData = credentials.user;
+        const progressDialog = this.dialog.open(ProgressDialogComponent, constants.getProgressDialogData());
+        if (credentials.additionalUserInfo?.isNewUser) {
+          // @ts-ignore
+          this.SetUserData(credentials.user, credentials.user.displayName, constants.userTypes.student, credentials.user.uid).then(() => {
+            // @ts-ignore
+            this.roleBasedRouting(credentials.user?.uid, progressDialog, credentials.user, true);
+            progressDialog.close()
+            return;
+          });
+        } else {
+          this.roleBasedRouting(credentials.user.uid, progressDialog, credentials.user, false);
+        }
+        // @ts-ignore
+        this.student.email = credentials.user?.email;
+        // @ts-ignore
+        this.student.firstName = credentials.user?.displayName;
+        // @ts-ignore
+        this.student.profileImage = credentials.user?.photoURL;
+        // @ts-ignore
+        this.student.userId = credentials.user?.uid;
+        this.isStudentSet = true;
+      }
+    }));
+  }
+
+  updateStudentData(user: User) {
+    const studentRef: AngularFirestoreDocument<any> = this.angularFirestoreService.doc(constants.collections.students + `/${user.uid}`);
+    const student = {
+      email: user.email,
+      firstName: user.displayName,
+      isVerified: user.emailVerified,
+      lastName: user.displayName,
+      profileImage: '',
+      questions: [],
+      uniqueKey: this.generateUniqueKey(),
+      userId: user.uid,
+      role: constants.userTypes.student
+    }
+    studentRef.set(student);
+  }
+
+  generateUniqueKey() {
+    return this.utilService.generateUniqueKey(constants.genKey.student);
+  }
+
+  // Sign in with email/password
+  signIn(email: string, password: string, progressDialog: MatDialogRef<any>, dialogRef: MatDialogRef<SignInComponent>) {
+    return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        if (result.user) {
+          localStorage.setItem(constants.localStorageKeys.user, JSON.stringify(result.user));
+          `JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user));`
+          this.userData = result.user;
+          this.roleBasedRouting(result.user.uid, progressDialog, result.user, false);
+          dialogRef.close(true);
+        }
+      }).catch((error) => {
+        progressDialog.close();
+        dialogRef.close('fail');
+        this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+      })
+  }
+
+  // Sign up with email/password
+  signUp(email: string, password: string, firstName: string, progressDialog: MatDialogRef<any>, dialogRef: MatDialogRef<SignUpComponent>) {
+    return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        if (result.user !== undefined) {
+          // @ts-ignore
+          this.mailService.sendMail("Welcome to Tutetory", email, constants.getWelcomeQuestion(firstName), constants.mailTemplates.welcome).subscribe()
+          this.isLoggedIn = true;
+          this.SendVerificationMail();
+          // @ts-ignore
+          this.SetUserDataSignUp(email, null, firstName, constants.userTypes.student, result.user?.uid).then(() => {
+            // @ts-ignore
+            this.roleBasedRouting(result.user.uid, progressDialog, true);
+          });
+          dialogRef.close(true);
+          progressDialog.close();
+        }
+      }).catch((error) => {
+        this.utilService.openDialog(sysMsg.signInTitles.signInFailed, error.message, constants.messageTypes.warningInfo).afterOpened().subscribe();
+        dialogRef.close('fail');
+        progressDialog.close();
+      })
+  }
+
+  SendVerificationMail() {
+    // @ts-ignore
+    return this.angularFireAuth.auth.currentUser.sendEmailVerification()
+      .then(() => {
+        this.router.navigate([constants.routes.student_q_pool], {skipLocationChange: true});
+      })
+  }
+
+  // Sign out
+  signOut() {
+    return this.angularFireAuth.auth.signOut().then(() => {
+      this.studentService.updateStudentOnline(false, this.student.userId).then()
+      this.isLoggedIn = false;
+      localStorage.removeItem(constants.localStorageKeys.user);
+      this.router.navigate([constants.routes.home], {skipLocationChange: true});
+    })
+  }
+
+  SetUserDataSignUp(email: string, photo: string, firstName: string, role: string, uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students).doc(uid);
+    const userData = {
+      email: email,
+      firstName: firstName,
+      isVerified: "",
+      lastName: firstName,
+      profileImage: photo,
+      questions: [],
+      uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
+      userId: uid,
+      role: role
+    }
+    this.userData = userData;
+    // @ts-ignore
+    this.student = userData;
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
+  SetUserData(user: any, firstName: string, role: string, uid: string) {
+    this.userData = user;
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students).doc(uid);
+    const userData = {
+      email: user?.email,
+      firstName: firstName,
+      isVerified: "",
+      lastName: firstName,
+      profileImage: user?.photoURL,
+      questions: [],
+      uniqueKey: this.utilService.generateUniqueKey(constants.userTypes.student),
+      userId: user?.uid,
+      role: role
+    }
+    // @ts-ignore
+    this.student = userData;
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
+  getAuthenticated() {
+    return this.angularFireAuth.authState !== null;
+  }
+
+  onSignOut() {
+    this.isLoggedIn = false;
+    localStorage.removeItem(constants.localStorageKeys.user);
+    localStorage.removeItem(constants.localStorageKeys.role);
+    this.angularFireAuth.auth.signOut().then(
+      (v) => {
+        this.router.navigate([constants.routes.home])
+        this.angularFireAuth.auth.onAuthStateChanged(
+          (user) => {
+            if (user) {
+              console.log('signed In');
+            } else {
+              this.resetStudent();
+            }
+          }
+        )
+      }
+    );
+  }
+
+  resetStudent() {
+    const resetUser: Student = {
+      visibleName: "",
+      email: "",
+      firstName: "",
+      isVerified: "",
+      lastName: "",
+      profileImage: "",
+      questions: [],
+      uniqueKey: "",
+      userId: "",
+      role: ''
+    }
+
+    // @ts-ignore
+    this.student = resetUser;
+  }
+
+  roleBasedRouting(uid: string, progressDialog: MatDialogRef<any>, user: any, isNewUser: boolean) {
+    if (isNewUser) {
+      localStorage.setItem(constants.localStorageKeys.role, constants.userTypes.student);
+      return;
+    }
+    this.studentService.findStudentById(uid).subscribe(
+      (res) => {
+        if (res) {
+          // @ts-ignore
+          const student = res.data();
+          // @ts-ignore
+          this.student = student;
+          console.log(res.data());
+          // @ts-ignore
+          if (!res.data().isTutor) {
+            localStorage.setItem(constants.localStorageKeys.role, this.student.role);
+          } else {
+            localStorage.setItem(constants.localStorageKeys.role, this.student.role);
+          }
+          // @ts-ignore
+          if (student.role === constants.userTypes.student) {
+            this.ngZone.run(() => {
+              this.isLoggedIn = true;
+              if (progressDialog) {
+                progressDialog.close();
+              }
+              this.router.navigate([constants.routes.student_q_pool]);
+            });
+          } else { // @ts-ignore
+            if (student.role === constants.userTypes.tutor) {
+              this.ngZone.run(() => {
+                this.isLoggedIn = true;
+                if (progressDialog) {
+                  progressDialog.close();
+                }
+                this.router.navigate([constants.routes.turor + '/questions']);
+              });
+            }
+          }
+        } else {
+          progressDialog.close();
+        }
+      }
+    )
+  }
+
+  findUser(userId: string) {
+    this.studentService.findStudentById(userId).subscribe(
+      (res) => {
+        // @ts-ignore
+        this.student = res.data();
+        localStorage.setItem(constants.localStorageKeys.role, this.student.role);
+        // @ts-ignore
+        this.studentService.currentStudent = res.data();
+        this.studentService.updateStudentOnline(true, this.studentService.currentStudent.userId).then();
+      }
+    )
+  }
+
+  resetPassword(email: string) {
+   return  this.angularFireAuth.auth.sendPasswordResetEmail(email);
+  }
+
+}

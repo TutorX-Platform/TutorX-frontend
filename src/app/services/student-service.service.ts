@@ -1,0 +1,112 @@
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
+import {AngularFireAuth} from "@angular/fire/auth";
+import * as constants from "../models/constants";
+import {Student} from "../models/student";
+import {Observable, Subject} from "rxjs";
+import {Questions} from "../models/questions";
+import {firestore} from "firebase";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+  uid: string = '';
+  abc = new Observable();
+  isTutor = false;
+  currentStudent: Student = {
+    visibleName: "",
+    email: "",
+    firstName: "",
+    isVerified: '',
+    lastName: "",
+    profileImage: "",
+    questions: [],
+    uniqueKey: "",
+    userId: "",
+    role: ''
+  };
+
+  constructor(
+    public angularFirestoreService: AngularFirestore,
+    public angularFireAuth: AngularFireAuth) {
+    if (JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user))) {
+      this.uid = JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user)).uid;
+    }
+  }
+
+  getCurrentUserId() {
+    if (JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user))) {
+      return JSON.parse(<string>localStorage.getItem(constants.localStorageKeys.user)).uid;
+    } else {
+      return null;
+    }
+  }
+
+  findStudentDetails() {
+    if (this.getCurrentUserId() != null) {
+      return this.angularFirestoreService.collection(constants.collections.students).doc(this.getCurrentUserId()).valueChanges();
+    } else {
+      return this.angularFirestoreService.collection(constants.collections.students).doc('ehu').valueChanges();
+    }
+  }
+
+  findStudentById(uid: string) {
+    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).get();
+  }
+
+  findStudentByEmail(email: string) {
+    // @ts-ignore
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestoreService.collection(constants.collections.students, ref => ref.where('email', '==', email));
+    return userRef;
+  }
+
+  incrementTutorEarning(tutorId: string, fee: number) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(fee);
+    const decrement = firestore.FieldValue.increment(-1);
+    const incrementTask = firestore.FieldValue.increment(1);
+    const data = {
+      'fee': increment,
+      'tasksCompleted': incrementTask,
+      'inprogressCount': decrement,
+    }
+    return payRef.update(data);
+  }
+
+  getAllTutors() {
+    return this.angularFirestoreService.collection(constants.collections.students, ref => ref.where("role", "==", constants.userTypes.tutor)).get()
+  }
+
+  incrementRequestCount(tutorId: string) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(1);
+    const data = {
+      'totalRequests': increment,
+    }
+    return payRef.update(data);
+  }
+
+  incrementInprogressRequestCount(tutorId: string) {
+    // @ts-ignore
+    const payRef = this.angularFirestoreService.collection(constants.collections.students).doc(tutorId);
+    const increment = firestore.FieldValue.increment(1);
+    return payRef.update({'inprogressCount': increment});
+  }
+
+  updateStudentOnline(isOnline: boolean, userId: string) {
+    const data = {
+      isOnline: isOnline
+    }
+    const studentRef = this.angularFirestoreService.collection(constants.collections.students).doc(userId).update(data);
+    return studentRef;
+  }
+
+  findStudent(uid:string) {
+    return this.angularFirestoreService.collection(constants.collections.students).doc(uid).valueChanges();
+  }
+
+
+}

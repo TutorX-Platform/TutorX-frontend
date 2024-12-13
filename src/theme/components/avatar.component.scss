@@ -1,0 +1,70 @@
+$avatar-size: 32px !default;
+$avatar-size: 32px !default;
+$avatar-xsmall: 16px !default;
+$avatar-small: 32px !default;
+$avatar-medium: 40px !default;
+$avatar-large: 96px !default;
+$avatar-xlarge: 128px !default;
+.a-avatar {
+  padding: 0;
+  min-width: 0;
+  width: $avatar-size;
+  height: $avatar-size;
+  border-radius: var(--corner--xs);
+  box-sizing: border-box;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  background-color: var(--surface---subdued);
+  overflow: hidden;
+
+  &__image {
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  &--xsmall {
+    height: $avatar-xsmall;
+    width: $avatar-xsmall;
+    border-radius: $avatar-xsmall;
+  }
+  &--small {
+    height: $avatar-small;
+    width: $avatar-small;
+    border-radius: $avatar-small;
+  }
+  &--medium {
+    height: $avatar-medium;
+    width: $avatar-medium;
+    border-radius: $avatar-medium;
+  }
+  &--large {
+    height: $avatar-large;
+    width: $avatar-large;
+    border-radius: $avatar-large;
+  }
+  &--xlarge {
+    height: $avatar-xlarge;
+    width: $avatar-xlarge;
+    border-radius: $avatar-xlarge;
+  }
+  &--user {
+    cursor: pointer;
+    user-select: none;
+    border-radius: $avatar-size;
+    .avatar-image {
+      width: $avatar-size;
+      height: $avatar-size;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+}

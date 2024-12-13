@@ -1,0 +1,274 @@
+<!-- web -->
+<!-- <div class="add-question"> -->
+<form [formGroup]="addQuestionForm" (submit)="onDone()" class="form-container">
+  <div mat-dialog-title fxLayout="column" class="top-container" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+      <div class="header-title" *ngIf="role !== 'tutor' && subjects===''">Add Question</div>
+      <div class="header-title" *ngIf="role !== 'tutor' && subjects!==''">Edit/View Question</div>
+      <div class="header-title" *ngIf="role === 'tutor'">{{questionTitle}}</div>
+      <div fxLayout="row" fxLayoutGap="10px" class="button-container" *ngIf="role !== 'tutor'">
+        <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+        <button mat-flat-button class="button-done c-button c-flat-button c-button-secondary" color="accent"
+                [class.dissabled]="addQuestionForm.invalid" [disabled]="addQuestionForm.invalid"
+                type="submit">
+          Done
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" class="button-container" *ngIf="role === 'tutor'">
+        <button mat-stroked-button class="button-cancel" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+        <button mat-flat-button *ngIf="status === 'Open'" class="button-done" (click)="onAccept()" type="button">
+          Assign to Me
+        </button>
+      </div>
+    </div>
+    <div fxLayout="row" class="status-container" fxLayoutGap="8px">
+      <div *ngIf="status === 'Open'" class="c-chip c-chip--neutral invert-false">Open</div>
+      <div *ngIf="status === 'Inprogress'" class="c-chip c-chip--progress">In Progress</div>
+      <div *ngIf="status === 'Assigned'" class="c-chip c-chip--subjects invert-false">Assigned</div>
+      <div *ngIf="status === 'Cancelled'" class="c-chip c-chip--danger invert-false">In Progress</div>
+      <div class="date-container">{{date | date:'yyyy/MM/dd h:mm:ss a'}}</div>
+    </div>
+  </div>
+  <mat-dialog-content>
+    <div fxLayout="column" class="bottom-container" *ngIf="role !== 'tutor'">
+      <div fxLayout="column" class="form-fields">
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Question Title</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <input matInput formControlName="questionTitle" placeholder="Enter Question Title" value="Value">
+            <mat-error
+              *ngIf="addQuestionForm.get('questionTitle')?.touched && addQuestionForm.get('questionTitle')?.hasError('required')"
+              class="">
+              {{validations.questionTitleRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout="row">
+          <div fxLayout="column" class="search-container">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Subject</div>
+              <mat-form-field appearance="outline">
+                  <span matSuffix>
+                  <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
+                <input matInput type="text" formControlName="subject" placeholder="Choose Subject" [matAutocomplete]="auto"
+                       (blur)="changeSubCategory()">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subject')?.touched && addQuestionForm.get('subject')?.hasError('required')"
+                  class="">
+                  {{validations.questionSubjectRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="column" class="search-container" style="margin-left: 1%">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Sub-category</div>
+              <mat-form-field appearance="outline" class="">
+                    <span matSuffix>
+                    <mat-icon>expand_more</mat-icon> &nbsp;&nbsp;</span>
+                <input matInput type="text-12" formControlName="subCategory" placeholder="Choose Subcategory" [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                  <mat-option *ngFor="let subOption of subOptions" [value]="subOption">
+                    {{subOption}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error
+                  *ngIf="addQuestionForm.get('subCategory')?.touched && addQuestionForm.get('subCategory')?.hasError('required')"
+                  class="">
+                  {{validations.questionCategoryRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="column" class="date-container">
+            <div class="tu-text-input">
+              <div class="tu-text-input__label">Due date-time</div>
+              <mat-form-field appearance="outline" class="">
+                <input matInput [ngxMatDatetimePicker]="picker" [min]="date" placeholder="Choose a date & time"
+                       formControlName="dueDateTime">
+                <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+                <mat-error
+                  *ngIf="addQuestionForm.get('dueDateTime')?.touched && addQuestionForm.get('dueDateTime')?.hasError('required')"
+                  class="">
+                  {{validations.questionDeadlineRequired}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="tu-text-input">
+          <div class="tu-text-input__label">Description</div>
+          <mat-form-field class="" appearance="outline" [floatLabel]="'never'">
+            <textarea matInput type="text" formControlName="description" placeholder="Enter Description"
+                      oninput='this.style.height = "";this.style.height = this.scrollHeight + 3 +"px"'></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--<mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"-->
+                            <!--*ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>-->
+      <!--<div>-->
+        <!--<mat-progress-spinner class="progress-spinner" [diameter]="70" [value]="uploadingProgress"-->
+                              <!--*ngIf="uploadingProgress > 0 && uploadingProgress < 100"></mat-progress-spinner>-->
+        <!--<div class="custom-dropzone" ngx-dropzone [accept]="'*'" (change)="onSelect($event)">-->
+          <!--<ngx-dropzone-label>-->
+            <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+              <!--<mat-icon class="material-icons-outlined">-->
+                <!--file_upload-->
+              <!--</mat-icon>-->
+              <!--<div class="wording">Add Attachment</div>-->
+            <!--</div>-->
+          <!--</ngx-dropzone-label>-->
+          <!--<div fxLayout="row" fxLayoutGap="-150px">-->
+            <!--<custom-dropzone-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"-->
+                                     <!--[removable]="true" (removed)="onRemove(f)">-->
+              <!--&lt;!&ndash;<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>&ndash;&gt;-->
+
+            <!--</custom-dropzone-preview>-->
+          <!--</div>-->
+
+        <!--</div>-->
+      <!--</div>-->
+      <div class="xx" fxLayout="column" fxLayoutAlign="center stretch">
+        <div class="container" appDnd (fileDropped)="onFileDropped($event)" fxLayout="column" fxLayoutAlign="center center">
+          <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target)" />
+          <mat-icon class="material-icons-outlined">
+            file_upload
+          </mat-icon>
+          <div class="wording">Add Attachment</div>
+        </div>
+        <div class="files-list" *ngIf="files.length > 0">
+          <div *ngFor="let file of files; let i = index">
+            <div fxLayout="column">
+              <div class="file-prev" fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+                  <img src="assets/icons/file-all.svg">
+                  <div class="file-name">{{file?.name}}</div>
+                  <div *ngIf="file?.progress === 100" class="upload-success">Upload Successful</div>
+                </div>
+                <mat-icon (click)="deleteFile(i)" class="close">close</mat-icon>
+              </div>
+              <app-progress [progress]="file?.progress" *ngIf="file?.progress !== 100"></app-progress>
+            </div>
+          </div>
+          <!--<div class="single-file" *ngFor="let file of files; let i = index">-->
+            <!--<div class="file-icon" style="width: 50px">-->
+              <!--<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"-->
+				<!--x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">-->
+				<!--<polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />-->
+				<!--<g>-->
+					<!--<path style="fill:#CEC9AE;"-->
+						<!--d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />-->
+					<!--<path style="fill:#CEC9AE;"-->
+						<!--d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />-->
+					<!--<path style="fill:#CEC9AE;"-->
+						<!--d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />-->
+					<!--<path style="fill:#CEC9AE;"-->
+						<!--d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />-->
+					<!--<path style="fill:#CEC9AE;"-->
+						<!--d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />-->
+				<!--</g>-->
+				<!--<polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />-->
+			<!--</svg>-->
+            <!--</div>-->
+            <!--<div class="info">-->
+              <!--<h4 class="name">-->
+                <!--{{ file?.name }}-->
+              <!--</h4>-->
+              <!--<p class="size">-->
+                <!--{{ formatBytes(file?.size,2) }}-->
+              <!--</p>-->
+              <!--<app-progress [progress]="file?.progress"></app-progress>-->
+            <!--</div>-->
+
+            <!--<div class="delete" (click)="deleteFile(i)">-->
+              <!--<svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">-->
+                <!--<path fill="#B1B1B1" fill-rule="nonzero"-->
+                      <!--d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />-->
+              <!--</svg>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
+        <button mat-flat-button color="warn" *ngIf="role !== 'tutor'" (click)="onDeleteQuestion()">Delete this
+          question
+        </button>
+      </div>
+
+    </div>
+
+    <!--In tutor-->
+    <div fxLayout="column" class="bottom-container" *ngIf="role === 'tutor'">
+      <div fxLayout="column" class="form-fields">
+        <div class="label" style="margin-top: 0px !important;">Question Title</div>
+        <div class="tutor-view-container">
+          {{questionTitle}}
+        </div>
+        <div fxLayout="row">
+          <div fxLayout="column" class="search-container">
+            <div class="label">Subject</div>
+            <div class="tutor-view-container">
+              {{subjects}}
+            </div>
+          </div>
+          <div fxLayout="column" class="date-container">
+            <div class="label">Subject</div>
+            <div class="tutor-view-container">
+              {{subCategory}}
+            </div>
+          </div>
+          <div fxLayout="column" class="date-container">
+            <div class="label">Due date</div>
+            <div class="tutor-view-container">
+              {{dueDateTime | date:'yyyy/MM/dd h:mm:ss a' }}
+            </div>
+          </div>
+        </div>
+
+        <div class="label" *ngIf="description !== ''">Description</div>
+        <div class="tutor-view-container" *ngIf="description !== ''">
+          {{description}}
+        </div>
+      </div>
+      <div class="attachment-viewer" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="24px grid">
+        <div *ngFor="let attachment of attachments; let i = index">
+          <a fxLayout="column" class="drop-zone" href="{{attachment.downloadUrl}}" target="_blank">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <img src="assets/icons/pdf.svg" class="icon-image" *ngIf="attachment.extension.includes('pdf')">
+              <img src="assets/icons/jpeg.svg" class="icon-image" *ngIf="attachment.extension.includes('image')">
+              <img src="assets/icons/word.png" class="icon-image" *ngIf="attachment.extension.includes('.document')">
+              <img src="assets/icons/excel2.png" class="icon-image" *ngIf="attachment.extension.includes('.sheet')">
+              <img src="assets/icons/unknown.png" class="icon-image" *ngIf="!attachment.extension.includes('.sheet') &&
+                                                              !attachment.extension.includes('.document') &&
+                                                              !attachment.extension.includes('image') &&
+                                                              !attachment.extension.includes('pdf')">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <div class="file-name">
+                {{attachment.fileName}}
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 24px" *ngIf="this.data !== null">
+        <button mat-flat-button color="warn" *ngIf="role !== 'tutor'">Delete this question</button>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+</form>
+<!-- </div> -->

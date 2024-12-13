@@ -1,0 +1,93 @@
+<!-- web -->
+<div class="question-pool">
+  <div fxLayout="row" class="page-title-container"> Public Pool</div>
+  <div class="divider-pool"></div>
+  <div fxLayout="row" class="main-containerx" fxShow="true" fxHide.lt-sm="true">
+    <div fxLayout="column" class="left-container">
+      <div fxLayout="row" class="card-container" fxLayoutAlign="center center">
+        <div fxLayout="column" class="column-view" fxLayoutGap="24px">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="results">
+              {{askedQuestions.length}} results found
+            </div>
+          </div>
+          <app-question-card
+            *ngFor="let q of askedQuestions"
+            [id]=q.id
+            [title]="q.questionTitle"
+            [status]="q.status"
+            [subjects]="q.subjectCategory"
+            [subCategory]="q.subCategory"
+            [dueDate]="q.dueDate"
+            [descriptionTitle]="q.description"
+            [description]="q.description"
+            [viewedByAmount]="500"
+            [attachments]="q.attachments"
+            [studentEmail]="q.studentEmail"
+            [isPublicPool]="true"
+            [isAutoOpen]="isAutoOpen"
+            [byLoggedUser]="q.byLoggedUser"
+            [questionNumber]="q.questionNumber"
+            [studentName]="q.studentName"
+          ></app-question-card>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" class="right-container">
+      <!--      <mat-form-field appearance="outline" class="my-form-field">-->
+      <!--        <span matPrefix>-->
+      <!--          <mat-icon>search</mat-icon> &nbsp;&nbsp;-->
+      <!--        </span>-->
+      <!--        <input matInput type="search" [formControl]="searchControl" [matAutocomplete]="auto">-->
+      <!--        <mat-autocomplete #auto="matAutocomplete">-->
+      <!--          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">-->
+      <!--            {{option}}-->
+      <!--          </mat-option>-->
+      <!--        </mat-autocomplete>-->
+      <!--      </mat-form-field>-->
+      <div fxLayout="row" fxLayoutAlign="start center" class="label">Sort by</div>
+      <mat-form-field appearance="outline" class="my-form-field">
+        <mat-select (change)="onFilterSelect($event)" [(ngModel)]="selectedValue" placeholder="Select">
+          <mat-option *ngFor="let sort of sortings" [value]="sort.id">
+            {{sort.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="filter-results">
+        Filter Results
+        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">
+          <div class="subjects-title">Subjects</div>
+          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let subject of subjects">
+              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                <mat-checkbox (change)="onSubjectFilter(subject)" color="primary">
+                </mat-checkbox>
+                <div class="subjectss">{{subject}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--        <div fxLayout="column" fxLayoutAlign="start start" class="subjects-container">-->
+        <!--          <div class="subjects-title">Status</div>-->
+        <!--          <div class="subject-wrapper" fxLayout="row wrap" fxLayoutGap="8px grid">-->
+        <!--            <div fxFlex.gt-sm="50%" fxFlex.lt-md="100%" *ngFor="let state of states">-->
+        <!--              <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">-->
+        <!--                <mat-checkbox (change)="onStageFilter(state,$event)" color="primary">-->
+        <!--                </mat-checkbox>-->
+        <!--                <div class="subjectss">{{state}}</div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

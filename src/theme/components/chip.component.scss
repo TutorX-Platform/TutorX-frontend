@@ -1,0 +1,124 @@
+@mixin chip-component($theme){
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, accent);
+  $tertiary: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $chip-padding: 2px 8px 4px !default;
+  $chip-filter-padding:  4px 8px !default;
+  $chip-corners: 4px !default;
+  $chip-filter-corners: 8px !default;
+
+.c-chip {
+    outline: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $chip-padding !important;
+    border-radius:$chip-corners;
+    font: $body-xsmall-bold;
+    width: max-content;
+    height: max-content;
+    max-height: 24px;
+    &button{
+      border: none;
+    }
+    &--outline {
+      border: 1px solid map-get($foreground, divider);
+      color: map-get($foreground, text);
+      &.invert-false {
+      }
+    }
+    &--warn {
+      background: $accent-warning-foreground;
+      color: white;
+      &.invert-false {
+        background: $accent-warning-background;
+        color: $accent-warning-foreground;
+      }
+    }
+    &--neutral {
+      background:map-get($foreground, text);
+      color:map-get($background, app-bar);
+      &.invert-false {
+        background:map-get($background, app-bar);
+        color: map-get($foreground, text);
+      }
+    }
+    &--info {
+      background: $accent-info-foreground;
+      color: white;
+      &.invert-false {
+        background: $accent-info-background;
+        color: $accent-info-foreground;
+        .mat-chip-remove {
+          color: $accent-info-foreground !important;
+        }
+      }
+    }
+    &--subjects {
+      background: #7F6EF0;
+      color: white;
+      &.invert-false {
+        background: #F2F0FE;
+        color: #7F6EF0;
+      }
+    }
+    &--progress {
+      background: #D1FDE4;
+      color: #2A8D55;
+      &.invert-false {
+        background: white;
+        color: #3E59B8;
+        border: 1px solid #3E59B8;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+    }
+    &--danger {
+      background:$accent-critical-foreground;
+      color: white;
+      &.invert-false {
+        background:$accent-critical-background;
+        color: $accent-critical-foreground;
+      }
+    }
+    &--success {
+      background: $accent-Success-foreground;
+      color: white;
+      &.invert-false {
+        background: $accent-Success-background;
+        color: $accent-Success-foreground;
+      }
+    }
+
+    &__prefix{
+      margin-right: $base-space-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &svg, &.material-icons-outlined, &.mat-icon {
+        height: 20px;
+        width: 20px;
+        font-size: $base-space-md;
+      }
+    }
+    &__suffix{
+      margin-left: $base-space-xs;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg, .material-icons-outlined {
+        height: $base-space-md;
+        width: $base-space-md;
+        cursor: pointer;
+        font-size: $base-space-md;
+      }
+    }
+
+    &.mat-standard-chip {
+      min-height: unset !important;
+    }
+
+  }
+}

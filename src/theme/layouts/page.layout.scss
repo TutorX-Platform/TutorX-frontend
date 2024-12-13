@@ -1,0 +1,110 @@
+.page{
+  display: block;
+  width: 100%;
+}
+.page-header{
+  width: 100%;
+  padding-top: var(--space--md);
+  box-sizing: border-box;
+  &__row{
+    display: grid;
+    gap: .8rem 1.6rem;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "breadcrumbs actions"
+      "title title";
+
+    width: 100%;
+  }
+  &__BreadcrumbWrapper{
+    flex: 0 0 auto;
+    grid-area: breadcrumbs;
+    max-width: 100%;
+    margin-right: 1.6rem;
+  }
+  &__TitleWrapper{
+    grid-area: title;
+    margin-top: .4rem;
+    align-self: center;
+    flex: 1 1 auto;
+  }
+  &__title{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  &__subtitle{
+    margin-top: var(--space--sm);
+  }
+  &__RightAlign{
+    grid-area: actions;
+    display: flex;
+    align-content: flex-end;
+    flex: 1 1 auto;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-left: 1.6rem;
+    white-space: nowrap;
+  }
+  &__Actions{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  @include respond-to('x-small') {
+    .page-header__row{
+      display: grid;
+      gap: .8rem 1.6rem;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "breadcrumbs actions"
+        "title title";
+    }
+
+  }
+
+  @include respond-to(small) {
+    .page-header__row{
+      display: grid;
+      gap: .8rem 1.6rem;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "breadcrumbs actions"
+        "title title";
+    }
+  }
+
+  @include respond-to(medium) {
+    .page-header__row{
+      display: grid;
+      gap: .8rem 1.6rem;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "breadcrumbs actions"
+        "title title";
+    }
+  }
+
+  @include respond-to(large) {
+    .page-header__row {
+      display: flex;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+  }
+  @include respond-to(x-large) {
+    .page-header__row{
+      display: flex;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+  }
+
+}
+
+.page-content{
+  margin: 1.6rem 0;
+}

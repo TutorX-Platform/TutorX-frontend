@@ -1,0 +1,177 @@
+@mixin manage-tutors-component($theme){
+    $primary: map-get($theme, primary);
+    $secondary: map-get($theme, accent);
+    $tertiary: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .rating{
+      .star{
+        color: #9AA2A7;
+        &--selected{
+          color: #FFAE3D !important;
+        }
+      }
+    }
+
+    .manage-tutors{        
+        min-height: 90vh;
+
+        .page-title-container{
+            padding: 0px 24px 12px 24px;
+                 
+            .page-title{
+                font: normal 700 32px/44px Roboto,'Manrope', sans-serif;
+                color: #182538;
+            } 
+            .add-tutor-button{
+                padding: 8px 16px;
+                background: #644AE7;
+                border-radius: 4px;
+                font: $body-base-default;
+                color:white;
+            }  
+        }
+
+        .divider{
+            border: 1px solid #BDC0C4;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            margin: 0px 0px;
+            width: 95%;
+          }
+
+          .main-container{
+            width: 100%;
+
+            .request-container{
+                width: 70%;
+                padding: 24px 0px 0px 24px;
+
+                .request-card{
+                    background: #FFFFFF;
+                    border-radius: 8px;
+                    padding: 24px;                    
+
+                    .avatar {
+                        vertical-align: middle;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        margin-left: 0px;
+                        margin-right: 8px;
+                    }
+
+                    .info{
+                        margin: 0px 16px;
+            
+                        .title{
+                            font: $body-base-default;
+                        }
+            
+                        .sub-title{
+                            margin-top: 4px;         
+                                            
+                            .rating{
+                                .star{
+                                    color: #9AA2A7;
+                                    &--selected{
+                                        color: #FFAE3D !important;
+                                    }
+                                }
+                            }
+                            .university{
+                                font: $body-caption-default;
+                                color: #5B6469;
+    
+                                .dot{
+                                    font-size: 12px; line-height: 25px; text-align: center;
+                                }
+                            }
+                        }                        
+            
+                        
+
+                        .subjects{
+                            // margin-top: 24px;
+                        }
+                       
+                    }
+
+            
+                    .refund{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-end;
+                        padding: 0px;
+                    
+                        flex: none;
+                        order: 0;
+                        flex-grow: 0;
+                        margin: 0px 16px;
+                    
+                        .title{
+                            font: $body-caption-bold;
+                            color: #5B6469;
+                        }
+                    
+                        .amount{
+                            font: $heading-desktop-h4;
+                            color: #644AE7;
+                        }
+                    }
+            
+                        
+                }
+            }
+            .filter-container{
+                width: 30%;
+                padding: 24px 24px 0px 24px;
+                .filter-title{
+                    font: $heading-desktop-h5;
+                }
+
+                .search-container{
+                    width: 100%;
+                    height: 48px; 
+                    border-radius: 4px;
+                    background: white;
+                    border: 1px solid #BDC0C4;
+                    box-sizing: border-box;
+                    font:  500 16px/24px Roboto,'Manrope', sans-serif;
+              
+                    input:focus{
+                      outline: none;
+                    }
+              
+                    .search{
+                      border-width: 0; 
+                      width: 80%;
+                    }
+                  }
+
+                  .label{
+                    font:  400 12px/18px Roboto,'Manrope', sans-serif;     
+                    margin-top: 16px;     
+                  }
+            
+                  .form{
+                    width: 100%; 
+                    margin-top: 4px;
+            
+                    .select{
+                      align-items: center;
+                      padding: 12px 16px; 
+                      width: 100%;
+                      border: 1px solid #BDC0C4;
+                      box-sizing: border-box;
+                      border-radius: 4px;
+                      font:  500 16px/24px Roboto,'Manrope', sans-serif;
+                    }
+                  }
+            }
+        }
+    }
+}

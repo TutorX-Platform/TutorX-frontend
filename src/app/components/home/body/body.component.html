@@ -1,0 +1,256 @@
+
+<mat-drawer-container class="example-container" autosize>
+  <!--<mat-drawer #drawer  mode="over" class="side-nav-home" fxLayout="column">-->
+    <!--<mat-nav-list>-->
+      <!--<img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>-->
+      <!--<a mat-list-item class="list">-->
+        <!--Home-->
+      <!--</a>-->
+    <!--</mat-nav-list>-->
+  <!--</mat-drawer>-->
+
+  <mat-toolbar  class="top-bar__wrap">
+    <div class="container">
+      <mat-toolbar-row class="top-bar ">
+        <button
+          class="top-bar__nav-icon"
+          mat-icon-button
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="top-bar__title-container">
+          <img class="top-bar__logo" src="assets/images/tutetory_logo.svg" alt="logo"/>
+        </div>
+        <div class="top-bar__actions" *ngIf="!authService.isLoggedIn">
+          <button class="c-button  " mat-button (click)="onLogin()">Sign in</button>
+          <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="onSignUp()">Create an account</button>
+        </div>
+        <div class="top-bar__actions" *ngIf="authService.isLoggedIn">
+          <button class="c-button c-flat-button c-button-secondary" mat-flat-button (click)="moveToDashboard()">Dashboard</button>
+        </div>
+
+      </mat-toolbar-row>
+    </div>
+
+  </mat-toolbar>
+
+  <section class="s-hero__section">
+    <img class="s-hero__abstract-img" src="assets/images/abstract_bg.svg" alt="">
+    <div class="container ">
+      <div class="s-hero">
+        <div class="s-hero__title-wrapper">
+          <h2  class="s-hero__title">We assist with your <span style="color: var(--action--primary---default)">Homeworks</span> </h2>
+          <h4 class="s-hero__subtitle">Work Smart, Not Hard</h4>
+          <button (click)="addQuestion()" mat-button  class="c-button c-raised-button c-button-primary cta-add--web">Get Help<mat-icon>arrow_forward</mat-icon></button>
+          <button mat-button class="c-button c-raised-button c-button-primary cta-add--mobile" (click)="addQuestionMobile()" routerLink="/add-question">
+            Get Help<mat-icon>arrow_forward</mat-icon>
+          </button>
+
+        </div>
+        <img class="s-hero__image" src="assets/images/hero_image.png" alt="logo"/>
+      </div>
+    </div>
+  </section>
+  <section class="s-flow">
+    <img class="s-flow__abstract-img" src="assets/images/abstract_bg.svg" alt="">
+    <div class="container ">
+      <div class="s-flow__wrapper">
+        <img class="s-flow__image" src="assets/images/hero_image_2.png" alt="logo"/>
+        <div class="s-flow__content">
+          <h2>How we roll</h2>
+          <p class="s-features__subheading">Are you stuck with your homework or assignments? Don't worry! We are here to make your life easier for you.  We provide guidance and feedback on subject matters regardless of your academic level. Here's how you can get help from our expert tutors. </p>
+          <div class="l-iteration">
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Upload your problem</div>
+                <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Talk to a tutor</div>
+                <div class="l-iteration__subtitle">Chat with one of the expert in the field</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Get a quote</div>
+                <div class="l-iteration__subtitle">Get help in more than 30 subjects</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Make the payment</div>
+                <div class="l-iteration__subtitle">Using your preffered payment method</div>
+              </div>
+            </div>
+            <div class="l-iteration__item">
+              <div class="l-iteration__border-wrap">
+                <mat-icon  class="l-iteration__track">check_circle</mat-icon>
+                <div class="l-iteration__border"></div>
+              </div>
+              <div class="l-iteration__content">
+                <div class="l-iteration__title">Get the assistance</div>
+                <div class="l-iteration__subtitle">Get your work done and explanations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="p-home__section s-features">
+    <div class="container ">
+      <div class="p-home__section-header">
+        <div class="p-home__title-wrap">
+          <h1>Tailormade features<br>
+            for you</h1>
+          <div class="p-home__section-header-abstract"></div>
+        </div>
+
+      </div>
+      <div class="">
+        <!--      <h2>Services we provide</h2>-->
+        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+        <div class="row s-features__items">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 h-100" *ngFor="let detail of details">
+            <div class="s-features__item">
+              <div class="s-features__media {{detail.class}}">
+                <mat-icon>{{detail.icon}}</mat-icon>
+              </div>
+              <div class="s-features__content">
+                <span class="s-features__title">{{detail.title}}</span>
+                <span class="s-features__description">{{detail.description}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="s-testimonials s-features">
+    <div class="container ">
+      <div class="p-home__section-header">
+        <div class="p-home__title-wrap">
+          <h1>What our happy <br>
+            students say.</h1>
+          <div class="p-home__section-header-abstract"></div>
+        </div>
+
+      </div>
+      <div class="">
+        <!--      <h2>Services we provide</h2>-->
+        <!--      <p class="s-features__subheading">Guidance and feedback on subject matters regardless of your acedamic level. We offer wide range of features to make sure you always bring your A game.</p>-->
+        <div class="row s-testimonials__items">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3  m-b-16" *ngFor="let feedback of feedbacks">
+            <div class="s-testimonials__item">
+              <div class="s-features__media">
+                <div class="a-avatar a-avatar--medium">
+                  <img
+                    [src]="feedback.image"
+                    class="a-avatar__image"
+                    alt="image"
+                  />
+                </div>
+              </div>
+              <div class="s-features__content">
+                <span class="s-features__title m-b-16">"{{feedback.title}}"</span>
+                <span class="s-features__description">{{feedback.content}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="s-tutors">
+    <img class="s-tutors__waves" src="assets/images/wave.svg" alt="">
+    <div class="s-tutors__container">
+      <div class="container ">
+        <div class="p-home__section-header">
+          <div class="p-home__title-wrap">
+            <h1>Featured Tutors</h1>
+            <p>Most of the tutors on our platform hold advanced degrees in their fields, many with PhDs or the equivalent. All tutor applicants have to undergo a solid screening process to provide services on our platform.  Here are some top tutors from different disciplines.</p>
+            <div class="p-home__section-header-abstract"></div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 m-b-16"  *ngFor="let tutorFeedback of tutorFeedbacks; let i = index">
+            <div class="s-tutors__card">
+              <div class="s-tutors__card-content">
+                {{tutorFeedback.description}}
+              </div>
+              <div class="s-tutors__card-header">
+                <div class="a-avatar a-avatar--medium m-r-16" style="margin-right: 1rem">
+                  <img
+                    [src]="tutorFeedback.image"
+                    class="a-avatar__image"
+                    alt="image"
+                  />
+                </div>
+                <div class="">
+                  <div class="s-tutors__card-name">{{tutorFeedback.name}}</div>
+                  <div class="s-tutors__card-title">{{tutorFeedback.subject}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section class="s-footer">
+    <img src="assets/images/wave_footer.svg" alt="" class="s-footer__wave">
+    <div class="container">
+      <div class="s-footer__content">
+        <div class="brd-display-x-large m-b-16">Work Smart, Not Hard</div>
+        <!-- <div class="brd-display-large m-b-40">For students, by educators</div> -->
+        <button mat-flat-button  (click)="addQuestion()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.lt-sm fxShow="true">
+          Get Help
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+        <button mat-flat-button  (click)="addQuestionMobile()" class="c-button c-raised-button c-button-primary m-b-40" fxHide.gt-xs fxShow="true">
+          Get Help
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+        <div class="flex-box align-items-center justify-content-center flex-wrap-wrap m-b-32">
+          <a href=""  class="s-footer__link">About Us</a>
+          <a href="" class="s-footer__link">Contact Us</a>
+          <a href="/faq" class="s-footer__link">FAQ</a>
+          <a href="/privacy-policy" class="s-footer__link">Privacy Policy</a>
+          <a href="/terms-conditions" class="s-footer__link">Terms & Conditions</a>
+
+        </div>
+
+                  <!-- TrustBox widget - Review Collector -->
+                  <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="61586ecb890a91001d9327fc" data-style-height="52px" data-style-width="100%">
+                    <a href="https://www.trustpilot.com/review/tutetory.com" target="_blank" rel="noopener">Trustpilot</a>
+                  </div>
+                  <!-- End TrustBox widget -->
+        <div class="copy-right">© 2021 . All rights reserved</div>
+      </div>
+
+
+    </div>
+  </section>
+
+</mat-drawer-container>

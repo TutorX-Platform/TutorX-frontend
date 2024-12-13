@@ -1,0 +1,30 @@
+<div class="alert-dialogs" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <div class="dialog-title">{{title}}</div>
+    <div class="dialog-message">{{message}}</div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'success'">
+    <button mat-flat-button class="dialog-button dialog-button--success" (click)="onButtonAction('yes')">OK</button>
+<!--    <button mat-flat-button class="dialog-button dialog-button&#45;&#45;success invert" (click)="onButtonAction('yes')">OK</button>-->
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'warning-info'">
+    <button mat-flat-button class="dialog-button dialog-button--danger" (click)="onButtonAction('yes')">OK</button>
+<!--    <button mat-flat-button class="dialog-button dialog-button&#45;&#45;danger invert" (click)="onButtonAction('no')">Cancel</button>-->
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'warning'">
+    <button mat-flat-button class="dialog-button dialog-button--warning" (click)="onButtonAction('yes')">OK</button>
+<!--    <button mat-flat-button class="dialog-button dialog-button&#45;&#45;warning invert" (click)="onButtonAction('no')">Cancel</button>-->
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'info'">
+    <button mat-flat-button class="dialog-button dialog-button--info" (click)="onButtonAction('yes')">Delete</button>
+    <button mat-flat-button class="dialog-button dialog-button--info invert" (click)="onButtonAction('no')">Cancel</button>
+  </div>
+
+<!--  This is for confirmation and this is done by sandun please take nessasary ui components and implement this correctly-->
+<!--  TODO -->
+
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px" *ngIf="type === 'confirmation'">
+    <button mat-flat-button class="dialog-button dialog-button--info" (click)="onButtonAction('yes')">Yes</button>
+    <button mat-flat-button class="dialog-button dialog-button--info invert" (click)="onButtonAction('no')">No</button>
+  </div>
+</div>
